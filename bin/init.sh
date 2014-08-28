@@ -6,9 +6,9 @@ rm -rf ~/hdfs-data/hdfs/datanode/*
 yes | hdfs namenode -format
 
 # start services
-start-dfs.sh
-start-yarn.sh
-mr-jobhistory-daemon.sh start historyserver
+yes | start-dfs.sh
+yes | start-yarn.sh
+yes | mr-jobhistory-daemon.sh start historyserver
 
 # make sure home directory exists
 hdfs dfs -mkdir /user
