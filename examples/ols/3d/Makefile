@@ -20,10 +20,10 @@ directories:
 	hdfs dfs -test -e $(OUTPUT_DIR) || hdfs dfs -mkdir $(OUTPUT_DIR)
 
 input/data.dat: data.py
-	./data.py --npts=250000 > $@
+	./data.py --npts=500 > $@
 
 input/small-data.dat: data.py
-	./data.py --npts=2500 > $@
+	./data.py --npts=50 > $@
 
 inputs: directories input/data.dat
 	hdfs dfs -test -e $(INPUT_DIR)/data.dat \
