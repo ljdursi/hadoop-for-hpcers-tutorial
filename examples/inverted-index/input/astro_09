@@ -1,0 +1,948 @@
+Modeling the Phase-Space Distribution around Massive Halos
+Tsz Yan Lam,1, 2 Fabian Schmidt,3, 4 Takahiro Nishimichi,2, 5 and Masahiro Takada2
+2 1 Max Planck Institute for Astrophysics, Karl-Schwarzschild-Str. 1, 85748 Garching, Germany Kavli-IPMU (WPI), the University of Tokyo, Kashiwa-no-Ha 5-1-5, Kashiwa, Chiba 277-8583, Japan 3 Department of Astrophysical Sciences, Princeton University, Princeton, NJ 08544, USA 4 Einstein Fellow 5 Institut d'Astrophysique de Paris, 98 bis boulevard Arago, 75014 Paris, France
+
+arXiv:1305.5548v1 [astro-ph.CO] 23 May 2013
+
+The comparison between dynamical mass and lensing mass provides a targeted test for a wide range of modified gravity models. In our previous paper [1] we showed, through numerical simulations, that the measurement of the line-of-sight velocity dispersion around stacked massive clusters whose lensing masses are known allows for stringent constraints on modified gravity on scales of 2 - 15 h-1 Mpc. In this work we develop a semi-analytical approach based on the halo model to describe the phase-space distribution and the line-of-sight velocity dispersion for different tracers. The model distinguishes contributions from the halo pairwise velocity and the virial velocity within halos. We also discuss observational complications, in particular the contribution from Hubble flow, and show how our model can incorporate these complications. We then incorporate the effects of modified gravity (specifically, f (R) and braneworld models), and show that the model predictions are in excellent agreement with modified gravity simulations. More broadly, the phase-space distribution provides a sensitive test of our understanding of hierarchical structure formation when confronted with observations via this model. I. INTRODUCTION
+
+the satellite Euclid mission [75], and the LSST project [76]. It is important to test GR over a wide range of length scales and cosmology provides many opportunities for such tests, going from the linear regime to the deeply nonlinear regime, a few 10kpc	1Gpc, as stressed in [12, 13]. Clusters of galaxies, the largest virialized objects in the universe, offer a useful laboratory to test gravity, because clusters can be studied using various observation probes such as dynamical probes (velocity field of member and/or surrounding galaxies), weak/strong gravitational lensing, X-ray and Sunyaev-Zel'dovich effect (e.g., recall Bullet Cluster as for such a poster child example to test the nature of dark matter as demonstrated in Clowe et al. [14]). Based on this motivation, in Paper 1 [1] we proposed a new method of using the phase-space distribution around massive clusters to probe their dynamical potential on scales of 2-15 h-1Mpc. The phase-space distribution can be probed by stacking redshift differences of tracer objects (galaxies or secondary halos) around many massive clusters (halos). Then the measured dynamical masses can be compared to those measured from stacked weak lensing [15, 16] in order to address whether or not the dynamical and gravitational masses for the same cluster sample agree with each other. Thus the method offers a model-independent test of GR on scales that have not been fully exploited so far. In Paper 1 we demonstrated the ability of the phase-space distribution func> tion around massive clusters of  1014 M /h using N body simulations for CDM and modified gravity models (f (R) [1719] and braneworld models [20, 21]). In particular we focused on the lowest non-trivial moment of the phase space, the line-of-sight velocity dispersion, measured as a function of projected separation between halo pairs. We showed that this probe would improve
+
+The -dominated Cold Dark Matter (CDM) paradigm, built on the foundation of Einstein's theory of general relativity (GR), has proven remarkably successful to explain a broad range of cosmological observations including the recent Planck measurement of cosmic microwave background anisotropies [2]. However, the success has to be recognized as phenomenological in a sense that the model requires introducing exotic components of matter and energy, dark matter and dark energy, where the nature of the dark components has yet to be known. While the vacuum energy of quantum fields offers a natural candidate for dark energy, the predicted amplitude from field theory calculations is many orders of magnitude larger than implied from observations [3, 4]. Given this fact, there is growing interest in exploring a possible modification of GR on cosmological scales as an alternative solution to the dark energy problem or more precisely the cosmic acceleration problem. To discriminate dark energy and modified gravity scenarios as the origin of cosmic acceleration requires one to combine geometrical probes with large-scale structure probes, where the former constrains the cosmic expansion history and the latter constrains the growth of structure formation. Promising probes of large-scale structure are galaxy clustering [5, 6], the abundance of massive clusters [7, 8], and weak lensing measurements [9, 10]. Ongoing and upcoming wide-area galaxy surveys are aimed at achieving a higher-precision test of large-scale structure probes; the Baryon Oscillation Spectroscopic Survey (BOSS) [68], the HETDEX survey [69], the Extended Baryon Oscillation Spectroscopic Survey (eBOSS) [70], the BigBOSS [71], the Subaru Prime Focus Spectrograph (PFS) project [72] [11], the Subaru Hyper Suprime-Cam (HSC) Survey [73], the Dark Energy Survey (DES) [74],
+
+2 the constraint on modified gravity parameters by an order of magnitude, if we can use overlapping imaging and spectroscopic surveys for the same region of the sky that cover a few thousand square degrees, which is the case for future surveys such as the Subaru HSC and PFS surveys. The purpose of this paper is to develop a semianalytical model to describe the phase-space distribution function around massive clusters, based on the halo model approach [see 22, for a review]. Since the building blocks of our method are halo-related quantities, we develop the method in such a way that it is applicable to GR as well as modified gravity, by including the modifications of the halo abundance and dynamics in modified gravity, taking into account the non-linear screening mechanisms present in these models. We will also discuss complications arising when applying this method to actual data, in particular the line-of-velocity contribution due to Hubble flow. We test/calibrate the method by comparing the model predictions with N -body simulations for GR and modified gravity models. We point out that our method is different from methods developed in previous studies [2326]. The target range of scales for our method is roughly 2 - 15 h-1Mpc, where we primarily probe the coherent infall motion of tracer objects towards the central massive halos (in the following, we will refer to these as the primary halos ). These motions are easier to model theoretically than the random motions within galaxy clusters on smaller scales, which might be affected by tidal friction, velocity bias, and baryonic effects. On the other hand, while our model describes peculiar motions well on large scales, the upper bound on the applicability of this method is set by the modeling of the Hubble flow contribution, which dominates on scales of 15 h-1 Mpc and above. We will consider two types of tracers of the phase space: dark matter particles and intermediate-mass halos (secondary halos ). Actual galaxies can be seen as somewhat of an intermediate case between these two: while they are usually physically associated with halos, they also exhibit intrahalo motions, which is of course also the case for dark matter itself. Recently, Zu and Weinberg [27] also studied the phase-space structure around massive halos using N -body simulations for the CDM model. Our study differs from their work in that our method is primarily based on an analytical approach, intended to employ as few free fitting parameters as possible. Further, we include the extension to modified gravity models. The structure of this paper is as follows. In Section II, we briefly describe details of N -body simulations to use for testing our semi-analytical model. In Section III, we develop a semi-analytic model to describe the stacked phase-space structure around massive halos, for the halohalo pairs and halo-dark matter pairs, based on the halo model approach. In Section III C, we study, as the useful observable of our method, the stacked velocity dispersion of the tracers measured as a function of the projected radius from the primary, massive halos. In Section IV, we show the comparison of the model predictions with N -body simulation measurements, and then discuss the impacts of observational complications, especially the effect of the Hubble flow, on our method in Section V. In Section VI, we extend our method to modified gravity models, f (R) and DGP models. Section VII is devoted to discussion. All the detailed calculations and derivations of the model ingredients are given in Appendix sections.
+
+II.
+
+PHASE-SPACE DISTRIBUTION FROM SIMULATIONS
+
+We will present measurements of the phase-space distribution functions around primary halos of mass Mp > 1014 h-1 M in N -body simulations. Specifically, we will consider two tracers, dark matter particles and halos of mass Ms in the range 3  1013 h-1 M  Ms  1014 h-1 M . For the phase-space distribution of dark matter particles, we use one of the realizations described in Valageas and Nishimichi [28] since the statistics are already sufficient. This simulation was performed in a box of 1024 Mpc/h on a side with 20483 particles. The phase-space distribution of halo-halo pairs was measured from a set of 20 realizations performed in a box of 1147.72 Mpc/h on a side with 12803 particles [29], in order to improve statistics. Both sets of simulations adopt the WMAP 5-year best-fit parameters in a flat CDM cosmology. Measurements were made from the simulation output at z = 0.35 where halos are identified by the Friends-of-Friends (FoF) finder algorithm. We measure the relative line-of-sight velocity vlos of the tracers relative to each primary halo by projecting the relative velocities of tracers (dark matter particles or halos) with a line-of-sight separation less than 10 Mpc/h (20 Mpc/h) for dark matter particles (halos); see Sec. V for a discussion of this line-of-sight separation cut. The projected separation rp is the distance of the tracers from the halo center on the plane perpendicular to the line-ofsight direction. The phase-space distribution function p2D (vlos , rp ) is formed by the measured pair of (vlos , rp ) and we set the normalization of the distribution such that  ln(rp )vlos
+i j
+
+2rp,i 2 p2D (vlos,j , rp,i ) = 1.
+
+(1)
+
+In what follows we will use superscripts h and hh to distinguish the phase-space distribution functions for halodark matter particle pairs and halo-halo pairs, respectively. The result is illustrated for different primary mass ranges and tracers in Fig. 1. On small scales rp 1 h-1 Mpc, the velocity structure is dominated by virial motions within the primary halo. On larger scales, both radial infall and tangential motions contribute, as well as virial motions within secondary halos in the case of dark matter. Dark matter halos are highly aspherical objects and filament structures are sometimes associated with halos.
+
+3 The phase-space distribution measurement for an individual primary halo strongly depends on the line-of-sight direction as well as the formation/assembly history of that particular halo. This complication is alleviated by averaging (stacking) over many primary halos. The effect is illustrated in Fig. 1: the upper panel shows the dark matter phase-space distribution around the most massive halo in the simulation (Mhalo = 31015 M /h), where we averaged over projections along each of the three Cartesian directions of the simulation box. The middle panel shows the result by stacking the most massive 1995 halos (mass range from 3  1014 to 3  1015 M /h). We see that the stacking has produced a smooth distribution symmetric around vlos = 0, as expected since our measurements are made in comoving coordinates. Finally, the lower panel of Fig. 1 shows the phase-space distribution when using secondary halos as the tracers instead of dark matter (see caption for the mass ranges for the primary and secondary halos.) The main differences in comparison to the dark matter phase-space are the lack of virial motion within the primary on small scales (due to the fact that we do not identify subhalos within the primary); and a reduced dispersion at larger rp . The latter is due to the fact that the center-of-mass velocity of secondary halos is obtained by averaging over many dark matter particles, thus reducing the dispersion. Within the halo model approach, the dark matter velocities include a component due to virial motion within the secondary halos, which is absent for the halos themselves. We now describe our model for the phase-space distribution shown in Fig. 1.
+
+4000 -10 2000
+ ln ph 2D(vlos,rp)
+
+vlos [km/s]
+
+-15
+
+0
+
+-20
+
+-2000
+
+-25
+
+-4000 0 2 4 6 8 10
+
+-30
+
+rp [Mpc/h]
+
+4000 -10 2000
+ ln ph 2D(vlos,rp)
+
+vlos [km/s]
+
+-15
+
+0
+
+-20
+
+-2000
+
+-25
+
+-4000 0 2 4 6 8 10
+
+-30
+
+rp [Mpc/h]
+
+2000 -20
+
+III.
+
+HALO MODEL DESCRIPTION
+vlos [km/s]
+
+1000
+
+ln phh 2D(vlos,rp)
+5 10 15
+
+-25
+
+In this section we develop a semi-analytical model based on the halo model ansatz to describe the phasespace distribution measured in N -body simulations. The ingredients needed to calculate the full phase-space distribution are the halo-tracer correlation function, the halohalo velocity distribution and the distribution of virial motion within halos. While knowledge of the velocity distributions is essential if we want to calculate the full phase-space distribution, only moments of these distributions are needed to calculate the moments of the phasespace distribution. For example, the line-of-sight velocity dispersion discussed in Paper 1 requires only the second moments of these velocity distributions. Following the paradigm of the halo model, contributions in the phase-space distribution can be separated into 1-halo and 2-halo terms. In this work the 1-halo term describes contributions from tracers lying within the primary halo while the 2-halo term describes contributions from tracers lying outside the primary halo. We will outline the general building blocks of the calculation here and before moving on to the details in the following subsections. The phase-space distribution gives the probability of
+
+0
+
+-30
+
+-1000 -35 -2000 -40
+
+rp [Mpc/h]
+
+FIG. 1: The phase-space distribution ph 2D (vvlos , rp ) with halodark matter particles pairs (upper and middle panels). The upper panel shows the result when only one massive halo (M = 3  1015 M /h) is used while the middle panel shows the distribution when the most massive 1995 halos (3  1014  Mp /M /h < 3  1015 ) are included. Logarithmic scale of the probability is shown in the color scale and the overplotted contours are the isocontour of the logarithmic of the distribution. The bottom panel shows a similar measurement but using halo pairs and the primary and the secondary halo mass ranges are respectively 1014  Mp /M /h < 31015 and 3  1013  Ms /M /h < 1014 .
+
+4 having a line-of-sight velocity (vlos , vlos + dvlos ) at a projected separation (rp , rp + drp ), p2D (vlos , rp ) =
+Mp,max
+
+imuth position is suppressed due to spherical symmetry) given a halo of mass Mp at the origin.
+
+1 N
+
+Mp,max
+
+dMp n(Mp )
+Mp,min
+
+A.
+
+Phase-space distribution for halo-halo pairs
+
+dz (r(z, rp )|Mp )p3D (vlos |r, cos , Mp ), (2) dz drp 2rp (r(z, rp )|Mp ), (3)
+
+N =
+
+dMp n(Mp )
+Mp,min
+
+2 is the 3D separation between the where r = z 2 + rp primary halo and the tracers while z denotes the lineof-sight separation (not redshift), and cos	= z/r. Here we do not distinguish the tracers but in the following sections we will use superscript hh to denotes halo-halo pairs and h for halo-dark matter particle pairs. Note that throughout this paper we assume the distant observer or plane-parallel approximation. p3D is the line-of-sight projected velocity distribution for a primary halo-tracer pair separated by r, and an angle between the separation and the line-of-sight direction . We assume that p3D is normalized as
+
+In this subsection we consider the case where the tracers are dark matter halos. Since we do not identify subhalos in our simulations, there are no secondary halos within the primary halos. Thus, the only contribution to the phase-space distribution is the 2-halo term, and only the halo-halo velocity distribution is needed. The line-of-sight relative velocity is given by vlos = vhalo  z ^, (5)
+
+where z ^ denotes the line-of-sight direction and vhalo is the halo-halo pairwise velocity. We can decompose the halo velocity as ^t2 , ^t1 + vht,2 e (6) r + vht,1 e vhalo = vhr ^ where ^ r is the unit separation vector connecting the secondary and primary halo centers (such that vhr < 0 for ^t1,2 are orthogonal unit vectors infalling motion), and e spanning the plane orthogonal to ^ r. By spherical symmetry, vht,1 and vht,2 are statistically the same. We can ^t2 to be perpendicular to z ^t1 lies thus choose e ^, so that e in the plane spanned by the line of sight and ^ rp . Then, vht,2 does not contribute to the line-of-sight velocity vlos , and the latter is given by vlos = vhr cos  + vht sin , (7)
+
+dvlos p3D (vlos |r, cos , Mp ) = 1.
+
+(4)
+
+The first integration in Eq. (2) describes the summation (weighted by number density) over primary halo of different masses, Mp,max and Mp,min being the most and the least massive halos in consideration and n(Mp ) is the halo mass function  this represents the stacking of halos. The second integration describes weighted sum of the probability of the tracers having a relative line-of-sight vlos at various line-of-sight separations. Here (z, rp |Mp ) is the density of the tracers in cylindrical coordinate (the az-
+
+where we have designated vht,1 as vht since we will not use vht,2 in the following. Hence, the velocity probability function in the second integration in Eq. (2) is
+
+phh 3D (vlos |r, cos , Mp ) = =
+
+d3 vhalo p ~hh ^) 3D (vhalo |r, Mp , Ms ) D (vlos - vhalo  z dvhr dvht phh (vhr , vht |r, Mp , Ms )D (vlos - vhr cos  - vht sin ), (8)
+
+where the dependence of cos  is solely due to the projection onto the line-of-sight direction. In App. B we describe a heuristic approximation for phh (vhr , vht |r, Mp , Ms ), which is given by Eq. (B5). We assume that the radial and tangential components vhr , vht of the halo-halo pairwise velocity are independent, and that each is Gaussian distributed. Specifically, the variance for the radial or tangential component is
+
+given, respectively, as
+2 hr = 1+ 2 2 ht = u , ht
+
+2200 - 1 + hh
+
+100 1 + hh
+
+2 2 u hr
+
+(9) (10)
+
+where uhr and uht refer to the statistics for the linear velocity difference, and the i00 are dimensionless coefficients. Their definitions are given in Eq. (B6). Here
+
+5 we have suppressed the dependence on r and Mp , Ms for clarity. For the radial component, there is also a non-zero mean corresponding to radial infall. This is evaluated through the spherical collapse model, multiplied by a constant bias to match the prediction of the linear theory in the large-scale limit. The radial infall from the spherical collapse model around a primary halo Mp is (Eq. (B2)) vSC (r|Mp ) = - H (z ) f (z ) r c (1 + NL )1/c - 1 , (11) 1+z 3 where the integration limit is the mass range of the secondary halo. We use the Sheth-Tormen prescription [30] for the halo mass function n(M ). Further, we impose halo exclusion by setting hh = -1 if r is smaller than the sum of the virial radii of the two halos. This exclusion is performed as function of mass in integrals such as Eq. (16).
+B. Phase-space distribution from halo-dark matter pairs
+
+where H (z ) is the Hubble parameter, f (z ) is the linear growth rate, c is the critical density in the spherical collapse model while NL is the density contrast of the total enclosed mass at a distance r from the center of the primary halo. This includes both the primary halo and the associated exterior matter calculated using the halo-matter cross-correlation: M (< r)  4 3 r  m (1 + NL ) = Mp + Mshell (< r), (12) 3
+
+Within the halo model framework, dark matter particles surrounding the primary halo are categorized into two regimes: those lying within the virial radius of the primary halo (1-halo contribution) and those lying outside (2-halo contribution). Dark matter particles in the 1-halo regime acquire the virial motion of the primary halo; those in the 2-halo regime move both with the center of mass of their host halo, as described by the model above, as well as within the halo (virial motion). Thus, (1-halo) (2-halo), (17) where vvir,p and vvir,s are the virial velocities within the primary and secondary halos, respectively, and they have have implicit dependence on the host halo mass. Note that the virial velocities in general also depend on the position within the hosting halo. vlos =
+1. 1-halo regime
+
+where Mshell (< r) is the average mass contribution arising from the structure around the primary halo, defined r as Mshell (< r)  (r - rvir ) rvir 4r2 dr  m [1 + h (r )]. Here (r - rvir ) is the Heaviside step function and h is the halo-matter cross-correlation function given by h (r) = b(Mp ) (r). On the other hand, the linear theory prediction is vlin,radial = 100 u , 1 + hh hr (14) (13)
+
+vvir,p	z ^ if r  rvir,p vhalo	z ^ + vvir,s  z ^ if r > rvir,p
+
+where hh is the halo-halo correlation function and we approximate it by the product of the respective linear biases and the dark matter correlation function: hh = b(Mp )b(Ms ) (r). Note that 100 < 0 in our convention. Our model for the mean radial velocity is then given by matching to linear theory at r/rvir = r20 = 20, hence vhr (r) = vSC (r)  vlin,radial (r20 ) . vSC (r20 ) (15)
+
+The probability distribution function ph 3D (vlos |z, rp , M ) and the weighting density function are given by ph 3D,1h (vlos |r, cos , Mp ) = d3 vvir p1h (vvir |r, Mp )
+
+ D (vlos - vvir  z ^), (18) DM,1h (r|Mp ) = NFW (r|Mp ). (19) The subscript 1h denotes the 1-halo contribution and we omit the superscript h since this term does not exist for hh. The density distribution within halos is described by the NFW profile NFW (r|M ) [31]. As described in App. A, we assume a Maxwellian velocity distribution for p1h , that is a Gaussian in each velocity component with 1D dispersion related to the virial mass by DM (M, z ) = DM,15 (1 + z )3/2 M200b 1015 Msun
+
+
+Note that our prescription for the mean infall velocity is the main heuristic ingredient in the model. The spherical collapse model by itself does not provide a good description of the infall motion as it ignores the angular momentum of the infalling matter. An improved analytical model which takes the angular momentum into account and matches linear theory on large scales would be valuable in this context, but we leave this for future work. Finally, the density weighting  in the second integral of Eq. (2) is given by halo (r|Mp ) = dMs n(Ms )[1 + hh (r|Mp , Ms )], (16)
+
+,
+
+(20)
+
+where M200b is the mass of the halo enclosed in a radius containing a mean density of 200 m , and z is the redshift. Note that we make the (unrealistic) assumption that the dispersion is constant within the halo. For the secondary halos, this assumption only has a small effect. On the
+
+6 other hand, model in detail the phase-space distribution within the primary halo is not our aim in this paper. Since vvir is isotropically distributed, we let vvir denote solely the line-of-sight projection of the virial velocity in the following.
+2. 2-halo regime
+
+the density weighting is not straightforward. We thus adopt some simplifications as described below.
+
+The calculation in the 2-halo regime is more involved and the separation of the 3D velocity distribution and
+
+The velocity and density contributions at some 3D separation r (> rvir ) from the primary halo are coming from secondary halos whose centers of mass are located at r + y where |y | is the distance from the center of the secondary halo. Hence
+
+DM,2h (r|Mp )ph 3D,2h (vlos |r, cos , Mp ) =
+
+dMs n(Ms ) d3 y d3 vhalo dvvir [1 + hh (r + y|Mp , Ms )]NFW (y |Ms ) p2h (vhalo , vvir ||r + y|, Mp , Ms )D [vlos - (vhalo + vvir )  z ^], (21)
+
+where Ms is the mass of the secondary halo residing at r + y. The subscript 2h denotes the 2-halo contribution. Again, we assume that the virial velocity does not depend on the distance y from the halo center, so that p2h does not explicitly depend on y . The 2-halo term as given in Eq. (21) is computationally expensive to evaluate. Since we are interested in the scales r significantly larger than the virial radii of the primary halos, several approximations can be made to significantly simplify Eq. (21) (for a detailed description see App. C): 1. The virial motion within the secondary halo is assumed independent of the peculiar motion of the secondary halo. 2. We neglect the dependence on Ms in the halo-halo pairwise velocity distribution (see App. B). 3. We approximate r + y  r in the halo-halo clustering since y is of order the virial radius of secondary halos. 4. The virial velocity dispersion is assumed to scale as M 1/3 and the linear density power spectrum is approximated as power-law	k -1 . 5. We set b(Ms ) = 1 (see App. C for the alternative expressions without this assumption). We emphasize that we make these approximations for computational convenience, since we have found that they do not significantly degrade the accuracy of the model. With these approximations, Eq. (21) simplifies
+
+to (in analogy with Eqs. (18) and (19)) ph 3D,2h (vlos |r, cos , Mp ) = dvhr dvht dvvir,s
+
+ST phh (vhr , vht |r, Mp )qvir (vvir,s |r, Mp ) D (vlos - vhr cos  - vht sin  - vvir,s ), DM,2h (r|Mp ) = [1 + h (r|Mp )]  m , (22) ST where qvir is the mass-weighted probability density function for the virial velocity assuming a Sheth-Tormen mass function (App. C)
+
+ST qvir (v |r, Mp )
+
+ q A(p) =  eff (r, Mp )   q q |v | + |v |  K0 eff eff
+
+-p
+
+Kp
+
+q |v | eff
+
+
+
+,
+
+where A(p), p, and q are parameters in the Sheth-Tormen mass function. eff (r, Mp ) is the effective virial velocity dispersion of the secondary halo which is described in App. C 2. In order to improve the accuracy, we in fact only apply the first two simplifications in the list above to obtain eff . It is given by
+2 eff (r, Mp ) = rvir,s 1 d3 y n(Ms )NFW (y ) dMs w  0 2  [1 + hh (|r + y|, Mp , Ms )] DM (Ms ), (23)
+
+where w  is a normalization factor. This integral can be tabulated as function of r for each primary halo mass. We have found that further approximations to eff significantly sacrifice the accuracy of the model. See App. C 2 for details.
+
+7
+C. Velocity dispersion of the phase-space distribution
+2 The quantity v (rp ) was proposed as sensitive test los of modified gravity in Paper 1. Instead of evaluating Eq. (24) directly, we instead use the characteristic function of the velocity distribution Eq. (2) to compute this quantity, which is simpler and faster. We will leave the details of derivation in Appendix C and only give the results here.
+
+The previous section describes how to use the halo model to compute the phase-space distribution around massive halos. The distribution is symmetric around vlos = 0, so that all odd moments of the distribution vanish. Thus, the lowest moment that contains information is the dispersion vlos , given in terms of the phase-space distribution by
+2 v (rp ) = los 2 p2D (vlos |rp ) , dvlos vlos
+
+The line-of-sight velocity dispersion of for halo-dark matter is
+
+(24)
+2 v = los ,DM
+
+where p2D (vlos |rp ) is the normalized line-of-sight velocity distribution at projected radius rp . That, it is given by Eq. (2) but with a different normalization N	N  (rp ), N  (rp ) =
+Mp,max
+
+dMp n(Mp ) dz FDM (z, rp , Mp ) , dMp n(Mp ) dz DM (z, rp , Mp )
+
+(26)
+
+dMp n(Mp )
+Mp,min
+
+dz (r(z, rp )|Mp ) . (25)
+
+where FDM denotes the mass-weighted dark matter velocity dispersion given by
+
+FDM (z, rp , Mp ) =
+
+2 NFW (r|Mp )DM (Mp )
+
+(1-halo) + vhr ) cos  +
+2 2 2 ht
+
+ m [1 + h (r|Mp )]
+
+2 (hr
+
+sin  -
+
+2
+
+ QST vir (t
+
+= 0)
+
+(2-halo)
+
+.
+
+(27)
+
+The various terms in the last square brackets in the 2-halo term of FDM are the different contributions to the line-of-sight velocity dispersion, they are respectively the halo-halo radial velocity dispersion, the halo-halo radial infall velocity, the halo-halo tangential velocity dispersion, and the velocity dispersion due to the virial motion within secondary halos. Note that we have assumed that the halo radial and tangential velocities are statistically independent. Dropping the 1-halo term as well as the virial velocity contribution in the secondary halo, the line-of-sight velocity dispersion for halo-halo phase-space distribution is consequently
+2 v = los ,halo
+
+dMp n(Mp )
+
+2 2 dz [(hr + vhr 2 ) cos2  + ht sin2 ] dMs n(Ms )[1 + hh (r|Mp , Ms )] dMp n(Mp ) dz dMs n(Ms )[1 + hh (r|Mp , Ms )]
+
+(28)
+
+where again halo exclusion is enforced hh (r|Mp , Ms ) = -1 when r < rvir (Mp ) + rvir (Ms ).
+
+by
+
+A.
+
+Halo-dark matter distribution
+
+IV.
+
+COMPARISON WITH SIMULATIONS
+
+In this section we compare the predictions of the model described in the previous section to measurements from N -body simulations. We compare the 2D phase-space distribution, the projected line-of-sight velocity distribution, as well as its dispersion. We first present the result for halo-dark matter particle pairs and then halo-halo pairs.
+
+We first study the phase-space distribution ph 2D (vlos , rp ) of dark matter particles around primary halos with Mp  1014 h-1 M , normalized to over vlos and rp [Eqs. (2)(3)]. Fig. 2 shows such a comparison, where the simulation measurements are shown in the top panel and the model in the bottom panel. The color scale and contours correspond to the phase-space density in logarithmic scale; the scale is the same for both panels. Overall the model prediction matches the N -body measurement well. The most noticeable difference between the simulation and model occurs at the transition from 1-halo to 2-halo regime, around rp  2 Mpc/h. In our model (as in most halo model calculations) there is a sharp transition at the virial radius of the primary ha-
+
+8 two. This departure is not surprising since we have assumed Gaussian velocity distributions throughout, while dynamical processes are generally expected to produce non-Gaussian velocity distributions. 2 It is instructive to break down v into individual los contributions. This is shown in Fig. 5. The peak near rp = 2 Mpc/h which is responsible for the main discrepancy with the simulation results is caused by the mean radial infall contribution (blue dash-dotted). At scales approaching the virial radius of the main halo, the spherical collapse model is not a good approximation anymore even when matched to linear theory on large scales. This is presumably again caused by not taking into account the angular momentum, which leads to a significant overprediction of the radial velocity on small scales. We have also studied the impact of changing the density profile in the transition region, by extrapolating the NFW profile  r-3 of the primary halo instead of truncating it at the virial radius. However, this significantly worsened the model agreement for larger rp . The model also fails in the innermost region, dominated by the 1-halo contribution. This probably indicates that our treatment of constant velocity dispersion within the primary halo is not accurate. However, as pointed out above, we are not primarily interested in modeling the velocity distribution within the primary halo.
+
+4000 -10 2000
+ ln ph 2D(vlos,rp)
+
+vlos [km/s]
+
+-15
+
+0
+
+-20
+
+-2000
+
+-25
+
+-4000 0 2 4 6 8 10
+
+-30
+
+rp [Mpc/h]
+
+4000 -10 2000
+ ln ph 2D(vlos,rp)
+
+vlos [km/s]
+
+-15
+
+0
+
+-20
+
+-2000
+
+-25
+
+-4000 0 2 4 6 8 10
+
+-30
+
+rp [Mpc/h]
+
+B.
+
+Halo-halo distribution
+
+FIG. 2: The phase-space distribution ph 2d (vvlos , rp ) in logarithmic scale including all the dark matter particles surrounding halos more massive than 1  1014 Msun /h. The top panel shows the measurement from numerical simulation and the bottom panel shows the empirical model (using halofit nonlinear matter power spectrum) prediction. The contours are the isocontour of ln(p), starting from -15 with +0.5 increment inwards.
+
+los. On the other hand, the actual velocity and density distributions of dark matter particles do not show such a sudden transition. Fig. 3 shows the distribution of the line-of-sight velocity at different projected separations rp , while Fig. 4 shows the dispersion (second moment) as function of rp . For these figures, the distribution is normalized in vlos at each rp following Eq. (25). The black symbols are measurements from numerical simulations and the orange curves are predictions of the model described in the previous section. The central part of the distributions shown in Fig. 3 is generally well matched by the model apart from the transition region rp  2 h-1 Mpc. This is even more evident in Fig. 4, showing an excellent prediction for vlos for rp 2.5 h-1 Mpc. At larger separations, the tails in the vlos distribution are underpredicted by the model. This is confirmed by a comparison of the kurtosis of vlos in simulations as compared to the model, which underpredicts the kurtosis by about a factor of
+
+We now turn to the phase-space distribution of secondary halos with 3  1013  Ms /M < 1	1014 , again around primary halos with Mp  1014 h-1 M . Fig. 6 shows the distribution in the simulations (top panel) and the model prediction (lower panel). Clearly, the model describes the qualitative features of the phase-space distribution for halos as well. Note the overall smaller dispersion and the absence of the primary halo virial motions. The distribution of the line-of-sight velocity at different projected separations is shown in Fig. 7 (normalized to unity), where again black symbols show the simulation results whereas the model is shown as orange solid. The model predictions match the measured profiles well, including the double peak feature at small rp (lower left panel). The dispersion vlos is shown as a function of rp in Fig. 9 (lowest set of points, simulations, and black solid line, model), showing excellent agreement over the entire range of scales considered.
+
+V.
+
+CONNECTING TO OBSERVATIONS
+
+The comparisons in the previous section demonstrate that our halo model based approach can describe the phase-space distribution around massive primary halos for both dark matter and secondary halos. However, in order to model actual data, we need to take into account
+
+9
+700
+1  1014<Mp Msun<5  1015
+
+1  1014<Mp Msun<5  1015
+
+rp=0.51
+
+1.53
+
+-8
+
+-10
+
+-12
+
+vlos -14
+lnp(vlos)
+
+-6
+5.08 8.8
+
+400 0
+
+450
+
+500
+
+550
+
+600
+
+650
+
+2
+
+4 rp
+
+6
+
+8
+
+10
+
+-10
+
+FIG. 4: Line-of-sight velocity dispersion vlos (in km/s) as function of projected radius rp . Solid (orange) curves are predictions from the model as described in Sec. III C.
+-14
+
+-2000
+
+0
+
+2000
+
+-2000
+vlos
+
+0
+
+2000
+
+Total 1-halo 2-halo Effective secondary 2 virial <vr>2 2 vr 2 vt
+
+that peculiar velocities are not measured directly, but rather through the observed redshift which is also impacted by the Hubble flow. In this section we attempt to include this effect in the model. We will illustrate the ideas for the halo-halo pairs, since this case is more closely related to actual galaxy surveys. The redshift receives contributions both from peculiar motions and the cosmological redshift. The observationally inferred line-of-sight velocity difference between the primary halo and tracer is then given by vlos,obs = vlos + Hz, (29)
+
+1e+05 0
+
+2e+05
+
+FIG. 3: The line-of-sight velocity probability distribution at different projected radii, normalized to unity at each rp . The black symbols are N -body measurements while the solid orange curves are the model predictions following Sec. III.
+
+2 vlos
+
+3e+05
+
+4e+05
+
+2
+
+4 rp
+
+6
+
+8
+
+10
+
+where H is the Hubble parameter evaluated at the redshift of the primary halo, and z is the line-of-sight separation of primary halo and tracer as before. Here we have assumed the plane-parallel approximation and that positive vlos corresponds to motion away from the observer. Given the typical velocities in the halo phase space (Fig. 7), this effect becomes important when Hz  vlos  300 km/s , (30)
+
+FIG. 5: Different components contribution to the line-of-sight velocity dispersion squared for halo-dark matter pairs (see Eq. (27)).
+
+corresponding to z  3 h-1 Mpc. Thus, for halo pairs with line-of-sight separation greater than a few Mpc, the Hubble flow contribution cannot be neglected. Furthermore, in our analysis in Sec. III we have imposed a cut on the line-of-sight separation between primary and secondary halos, which cannot be imposed in reality.
+
+10
+
+2000 -20 1000
+
+ln phh 2D(vlos,rp)
+5 10 15
+
+vlos [km/s]
+
+-25
+
+0
+
+-30
+
+-1000 -35 -2000 -40
+
+rp [Mpc/h]
+
+2000 -20 1000
+
+ln phh 2D(vlos,rp)
+
+vlos [km/s]
+
+-25
+
+0
+
+-30
+
+-1000 -35 -2000 -40 5 10 15
+
+FIG. 7: The halo-halo line-of-sight velocity distribution at different projected radii, in analogy to Fig. 3. Black points denote the simulation measurements, orange curves are the model prediction.
+
+rp [Mpc/h]
+
+FIG. 6: The phase-space distribution phh 2d (vvlos , rp ) in logarithmic scale for halos of mass 3  1013  Ms /M < 1  1014 around primary halos with Mp	1014 h-1 M . The top panel shows the N -body measurements while the bottom panel shows the empirical model prediction, where we have used the halo-halo correlation function from simulations. The contours are the isocontour of ln(p), starting from -19 with +0.5 increment inwards. The simulation results are calculated for linear bins in rp with width rp = 1 h-1 Mpc. The first column of data corresponds to the bin 0  rp  1 h-1 Mpc and is shown at rp = 0.5 h-1 Mpc.
+
+In order to study these effects, we repeat the simulation measurements, but instead of imposing a fixed small lineof-sight separation boundary around the primary halo, we include all halo pairs within 100 h-1Mpc line-of-sight separation (safely including all pairs that contribute to the range in vlos we are interested in), and measure the relative line-of-sight velocity between halo pairs including the difference in Hubble flow. Fig. 8 illustrates these effects in terms of the line-of-sight velocity distributions at different projected radii. The black solid symbols are without the Hubble contribution, as shown in Fig. 7. The dot-dashed curves show the realistic case when including the Hubble flow and no line-of-sight separation restriction is imposed. Note the long tails of the distribution due to pairs at large line-of-sight separations leading to correspondingly large vlos,obs . At very large vlos,obs , the
+
+FIG. 8: The halo-halo line-of-sight velocity distribution at different projected radii: black points are the distributions for halo pairs selected by their line-of-sight separation and without Hubble flow contribution; red curves are distributions that includes Hubble flow; green are the distributions after subtracting a constant interloper contribution (see text).
+
+11 contribution is entirely dominated by the Hubble flow, and asymptotes to a constant as the density of tracers approaches its mean (that is when hh (r) becomes negligible). Clearly, velocity dispersion is not strictly defined in this case. Fig. 9 instead shows the dispersion measured within |vlos,obs |  2372km/s (see below) as red points. Observationally, this constant "interloper" contribution will be subtracted by measuring the constant to which the PDF asymptotes at very large values of vlos,obs , and subtracting this constant (in reality, effects such as the redshift-dependence of the selection function of the sample lead to a interloper contribution that is in fact slowly varying with vlos,obs , but we ignore this complication here). Here we implement this subtraction by taking the PDF value at high velocity |vsub | = 6000-12000 km/s and subtracting this constant from the PDF. This subtraction is done on each individual primary halo in order to reduce the sample variance. Since the peculiar velocity contributions to vlos,obs are located at much smaller values, we only consider the distribution within |vlos,obs |  vcut = 2372 km/s, and normalize the distribution within this range. The value of vcut corresponds to a Hubble flow difference for line-of-sight separation of 20 Mpc/h at z = 0.35. The resulting distribution is shown as green (dashed) curves in Fig. 8, while its dispersion as function of rp is shown in Fig. 9 (green points). Clearly, the interloper subtraction does not simply recover the distribution without Hubble flow. The error bars in Fig. 9 show the uncertainty in the simulation measurements. They are estimated using the 20 realizations of N-body simulations described in [29] by subdividing each simulation volume into 27 subvolumes (see also Fig. 1 of [1]). For reference, these correspond to the expected sample variance errors for a survey volume of 0.056 (Gpc/h)3 . The blue points in Fig. 9 show the dispersion without peculiar velocities, that is, only the Hubble flow contribution, and without subtracting the constant interloper fraction. We see that peculiar velocities act to reduce the velocity dispersion as compared to the pure Hubble flow. This is caused by the same effect responsible for the "squashing" of correlation function contours in redshift space. Note also that the sample variance error bars on the dispersion increase significantly after the subtraction of the "interlopers". The question of whether this will also be the case in the application to galaxy surveys, and whether there are more optimal ways of dealing with interlopers, is beyond the scope of this paper.
+
+FIG. 9: The line-of-sight velocity dispersion from halo-halo pairs including the Hubble flow. The different sets of curves and symbols are (from top to bottom): pure Hubble flow (no peculiar velocities; blue); Hubble flow and peculiar velocities (red); Hubble flow and peculiar velocities after subtracting a constant interloper contribution (see text); no Hubble flow and halo pairs with a fixed line-of-sight separation cut (|rlos |  20 Mpc/h, in black). In the first three cases, the dispersion is calculated for |vlos | < vcut = 2372 km/s. The dotted green curve shows the interloper-subtracted dispersion when the halofit correlation function is used instead of the one measured in the simulations.
+
+and by extending the z integration, which then leads to p2D (vlos,obs |rp )  dMp n(Mp ) dz dMs n(Ms ) dvhalo p(vhalo ) (31)
+
+ [1 + hh (r; Mp , Ms )]
+
+ D (vlos,obs - zH - vhalo  z ^) .
+
+A.
+
+Incorporating Hubble flow in the model
+
+The phase-space distribution and line-of-sight velocity dispersion derived in Sec. III neglected the Hubble flow and assumed a fixed range in line-of-sight separation between primary halo and tracers. These effects can be straightforwardly included in the model through Eq. (29)
+
+The line-of-sight velocity dispersion (Eq. (28)) then acquires two additional contributions which scale as z 2 H 2 and 2zH vhr cos . The latter term is the crosscorrelation between the Hubble flow and mean radial infall onto the primary halo. This term prevents us from applying a straightforward deconvolution to reconstruct the distribution of vlos itself. This cross-correlation is in fact responsible for the reduced total velocity dispersion compared to the pure Hubble flow dispersion (red vs blue points in Fig. 9). Instead, we employ a "forward-modeling" approach where the Hubble flow is included in the model following Eq. (31). For this we extend the line-of-sight integration out to the whole simulation box in the line-of-sight direction, zmax = 100 h-1Mpc (in fact the precise value
+
+12 of zmax does not affect the results as long as it is sufficiently large to capture the Hubble flow contribution for |vlos |	vcut ). This results in the red line shown in Fig. 9, where we have used the correlation function between primary and secondary halos in real space as measured from the simulations. We will discuss this below. As described above, we now subtract a constant term from the vlos distribution, and then repeat the measurement of the dispersion. This procedure is applied in the same way to the model predictions as done in the simulations. The result is shown as green line in Fig. 9. The agreement is very good, at approximately the same level as for the peculiar velocity dispersion when neglecting the Hubble flow contribution. This is very important, as the goal is to use the model to infer the peculiar velocity dispersion from measurements which include the Hubble flow. While we have employed the measured real-space correlation function of halos here, in reality there is no direct way of accessing this correlation function. In order to illustrate the accuracy requirements on the correlation function, we also show the result for the Hubble-flowsubtracted model prediction when using the tracer correlation function predicted by the simple halo model with exclusion employed in the model of Sec. III (dotted green line in Fig. 9). This correlation function departs from the simulation measurement by 20% on scales r 8 h-1 Mpc, with order unity deviations for r 3 h-1 Mpc. On the other hand, it leads to deviations of less than 20% in the predicted velocity dispersion. Thus, while a reasonably accurate model for the correlation function (at the  5 - 10% level) is clearly necessary to incorporate the Hubble flow properly, we expect that the desired accuracy can be met by employing a more sophisticated model along with constraints from the observed projected correlation function between primary and secondary tracers. In summary, it is clear however that the fairly simple halo model presented here captures the main properties of the phase-space distribution even when including the significant complication caused by the Hubble flow.	Virial velocity dispersion: at a given mass, halos have a higher velocity dispersion in modified gravity models which increase the gravitational strength.  Halo mass function: a change in the mass function leads to a different mean primary halo mass in a mass-selected (or abundance-selected) halo sample, which modifies the virial velocity dispersion and radial infall velocity.  Linear halo bias: the halo bias quantifies the amount of surrounding mass in our model, which is used to calculate the radial infall velocity. The first two effects are the main modified gravity effects on velocities which we are looking for, and provide the dominant modifications to the phase-space distribution. However, the effects of modified halo bias and mass function cannot be entirely neglected. In the following, we will first describe the modified gravity models considered here, f (R) and DGP, and then outline how the modifications to these quantities are calculated. The choice of these models is motivated, first, by the fact that they represent two distinct classes of modified gravity, with f (R) being a special case of a chameleon model while DGP is a representative of the Vainshtein or Galileon class. Second, self-consistent Nbody simulations have been performed for these models, which will allow us to quantitatively test our model. Studying structure formation beyond linear theory in any viable modified gravity model is complicated by the non-linear field equations for the scalar degree of freedom mediating the modified force. In the models studied here, this non-linearity is responsible for the chameleon and Vainshtein screening mechanisms which allow these models to evade Solar System tests (in certain parameter regimes). The field equations need to be solved simultaneously with the evolution of the matter density. In the following we use the results of the self-consistent N -body simulations of [32] for f (R) and [21, 33] for DGP.
+A. f (R) gravity
+
+VI.
+
+MODIFIED GRAVITY
+
+Within the halo model description of the phase-space distribution, it is straightforward to include the main modified gravity effects that affect the phase-space statistics. The following ingredients of the model described in Sec. III will be modified:  Linear matter power spectrum and growth rate: these provide the modifications which are seen in large-scale redshift-space distortions (RSD). In our case, they modify the radial and transverse velocity dispersions as well as the radial infall velocity calculated through Eq. (B2). The linear power spectrum also affects the mass profile around the primary halos.
+
+In the f (R) model (see [34, 35] and references therein), the Einstein-Hilbert action is augmented with a general function of the scalar curvature R [1719], SG =  R + f (R) d4 x -g . 16G (32)
+
+Here and throughout c = = 1. This theory is equivalent to a scalar-tensor theory (if the function f is nontrivial). The additional field given by fR  df /dR mediates an attractive force whose physical range is given by the Compton wavelength (inverse mass) C = a-1 (3dfR /dR)1/2 . On scales smaller than C , gravitational forces are increased by a factor of 4/3, enhancing the growth of structure.
+
+13 A further important property of such models is the non-linear chameleon effect which shuts down the enhanced forces in regions with deep gravitational potential wells compared with the background field value, 3  | | 2 |fR (R)| [36, 37]. This mechanism is necessary in order to pass Solar System tests which rule out the presence of a scalar field locally. Thus, Solar System tests conservatively constrain the amplitude of the background field to be less than typical cosmological potential wells today ( 10-6 - 10-5 ). In this paper, we will choose the functional form introduced by Hu & Sawicki [37]: f (R) = -2 R , R + 2 (33) smaller than rc . This model admits a homogeneous cosmological solution on the brane which obeys a modified Friedmann equation [39]: H2  H = 8G [ m + DE ]. rc (35)
+
+with two free parameters, , 2 . Note that as R	0, f (R)  0, and hence this model does not contain a cosmological constant. Nevertheless, as R	2 , the function f (R) can be approximated as f (R) = -2 - fR0 0 R , R (34)
+
+ 2 replacing  as the second paramwith fR0 = -22 /R 0 0 = R  (z = 0), so eter of the model. Here we define R  0 ), where overbars denote the quantities that fR0 = fR (R of the background spacetime. Note that fR0 < 0 implies fR < 0 always, as required for stable cosmological evolution. If |fR0 |	1, the curvature scales set by	= O(R0 ) and 2 differ widely and hence the R  2 approximation is valid today and for all times in the past. The background expansion history thus mimics CDM with  as a true cosmological constant to order fR0 . Therefore in the limit |fR0 |  10-2 , the f (R) model and CDM are essentially indistinguishable with geometric tests. Gravitational forces are unmodified on scales larger than C , while they are enhanced by a factor of 4/3 on scales below C (in regions where the chameleon mechanism is not active). For reference, for the model adopted here, C (z = 0)  23 h-1 Mpc(|fR0 |/10-4 )1/2 . Note that C is a function of redshift. Correspondingly, the linear growth rate is strongly scale-dependent on small scales, while it matches CDM on scales larger than C [37]. While we choose a specific functional form for f (R) here, it is straightforward to map constraints onto different functional forms (see [38] for details). In the following, for notational simplicity fR0 will always refer to the absolute value of the field amplitude today.
+
+The sign on the l.h.s. is determined by the choice of embedding of the brane. The negative sign is called the self-accelerating branch, since it allows for accelerated expansion even in the absence of a cosmological constant. The positive sign is called the normal branch, which does not exhibit self-acceleration. Here, we consider models of both branches (see [21, 33, 40]): a selfaccelerating model without a  term (DE = 0), sDGP, where rc  6000 Mpc is adjusted to best match CMB and expansion history constraints [41]; and normal-branch models with a dark energy component DE adjusted so that the expansion history is exactly CDM [21]. In that case, rc is a free parameter, and we chose values of 500 Mpc (nDGP1) and 3000 Mpc (nDGP2). We emphasize that while the DGP model itself is highly constrained (if one does not combine it with a tailored Dark Energy component), many recent developments in the context of massive gravity and degravitation (e.g., [42 46]) are expected to behave phenomenologically similar to DGP in the large-scale structure regime; in particular, all these models share the Vainshtein screening mechanism. On sub-horizon scales, and scales smaller than the crossover scale rc , DGP braneworld models can be accurately described as a scalar-tensor theory [47], where the brane-bending mode  mediates an additional attractive (normal branch) or repulsive (self-accelerating branch) force. Gravitational forces in DGP are governed by: 1 (36)  = N + . 2 The  field is sourced by matter overdensities similarly to the usual GR potentials, but has quadratic selfinteractions which suppress the field once density contrasts become non-linear (e.g. [48]). In the linear regime, gravitational forces are modified by a scale-independent factor 1 + (3 )-1 , where  is a redshift-dependent function of order Hrc (-Hrc for the self-accelerating branch). When the density field becomes non-linear, the derivative self-interactions of the  field become important. Analytical solutions to the full  equation do not exist in general, however the case of a spherically symmetric mass is solvable in terms of closed expressions [48, 49]. In particular, one finds that the modified force is suppressed within the Vainshtein radius r given by r =
+2 16GM rc 2 9 1/3
+
+B.
+
+DGP
+
+.
+
+(37)
+
+In the DGP braneworld scenario [20], matter and radiation live on a four-dimensional brane in five-dimensional Minkowski space. The action is constructed so that on scales larger than the crossover scale rc , gravity is fivedimensional, while it becomes four-dimensional on scales
+
+On small scales r  r , modified forces are suppressed )-1/2 , where   = (< r)/ by ( m is the average overdensity within r and  is a parameter of order unity for the models considered here [50].
+
+14
+C. Simulation measurements
+
+The simulations for f (R) gravity and the halo finding applied are described in [32, 51]. For DGP, they are described in [21, 33]. For both models, we use 6 realizations (3 in case of the nDGP models) of a L = 256 h-1Mpc simulation box run on a fixed 5123 grid. The primary halos are identified using a spherical overdensity algorithm, and have masses M300m > 1014 h-1 M (M200m > 1014 h-1 M in case of DGP). Due to the limited simulation volume and resolution, we only consider the dark matter phase space around these halos. For each model and realization, we measure the phase space as described in Sec. III, and determined the RMS peculiar velocity dispersion vlos (rp ). We then take the ratio between the modified gravity result and the GR result, and average these ratios over the six (three) realizations. The points in Fig. 10 (Fig. 11) show the results for f (R) (DGP), respectively. The error bars are bootstrap errors on the mean ratio from the realizations.
+D. 1. Halo model
+
+Here  (M ) is the variance of the linear density field convolved with a top hat of radius r that encloses M = 4r3  m /3 at the background density  2 (r) = d3 k ~ |W (kr)|2 PL (k ) , (2 )3 (40)
+
+Linear growth rate and matter power spectrum
+
+We solve the linear growth factor for both f (R) and DGP models by integrating the modified linear perturbation equations. In case of f (R), the growth factor is scale-dependent, and we use the small-scale limit (corresponding to modified forces throughout) in Eq. (B2). This approximation will overestimate the f (R) modifications to the mean radial infall somewhat. We do use the full scale-dependent growth factor for all other quantities. Further, the modified spherical collapse threshold (see below) is used in Eq. (B2).
+2. Cluster abundance and clustering
+
+The abundance of dark matter halos (mass function) and their clustering (halo bias) in the f (R) simulations was studied in [51], and correspondingly for DGP in [40]. Analytical approximations using the excursion set formalism have been studied [5255]. We use a simple model developed in these papers based on spherical collapse and the peak-background split in order to predict the cluster abundance and their linear bias. We employ the Sheth-Tormen prescription for the comoving number density of halos per logarithmic interval in the virial mass Mv , given by n(ST)  v dn	m d = f ( ) , d ln Mv Mv d ln Mv (38)
+
+where PL (k ) is the linear power spectrum (either in ~ is the Fourier CDM or in modified gravity) and W transform of the top hat window. The normalization constant A is chosen such that df ( ) = 1, and we adopt p = 0.3, q = 0.75, and c = 1.673 where the latter is obtained from a numerical spherical collapse calculation [51]. The virial mass is defined as the mass enclosed at the virial radius rv , at which the average density is v times the mean density. v is obtained from the spherical collapse calculation described in [51]. We transform the virial mass to the desired overdensity criterion	assuming a Navarro-Frenk-White [56] density profile [57], using the mass-concentration relation of [58] (see also App. A). We thus obtain the mass function of halos in the ST pre(ST) scription, n(ST) , from nv . The effects of modified gravity enter in two ways in this prescription: first, we use the linear power spectrum for the specific model in Eq. (40). Second, we assume modified spherical collapse parameters c , v . In the case of f (R), we consider two limiting cases of spherical collapse: the first does not involve any force modification (collapse parameters as in CDM), corresponding to the case where the collapsing region is always larger than the Compton wavelength C of the field. In the second case we rescale the gravitational constant by 4/3 during the collapse calculation as well as the corresponding linear growth extrapolation to obtain c . This corresponds to the case where the collapsing region is always smaller than C . For DGP on the other hand, we use the exact solution of the brane-bending mode equation for a spherical tophat to evaluate the modified force during collapse [40], and use the spherical collapse parameters obtained numerically. Note that we only use the ST prescription and spherical collapse to predict the relative enhancement of the halo abundance in modified gravity. In addition to the halo abundance, modified gravity also affects the clustering of halos. This effect comes from two sources: first, the matter power spectrum is modified. Second, the linear bias b1 (M, z ) of halos at a given mass M and redshift z is modified. For example, in f (R) and normal-branch DGP, halo bias is reduced at fixed mass for massive halos since these are less rare than in GR due to the increased mass function. In order to model the modified gravity effects on halo bias, we use the peak-background split bias derived from the ShethTormen mass function [Eq. (38)], bL (M ) = 1 + q 2 - 1 2p + , c c [1 + (q 2 )p ] (41)
+
+where the peak threshold  = c / (Mv ) and f ( ) = A 2 2 q [1 + (q 2 )-p ] exp[-q 2 /2] .  (39)
+
+where , q, p are defined after Eq. (38). Note that  is given in terms of the virial mass Mv , and thus for a given
+
+15 mass and redshift  differs in modified gravity due to both the modified spherical collapse parameters and the different linear power spectrum.
+3. Virial velocities
+
+In modified gravity, the dynamics of non-relativistic bodies (such as galaxies or dark matter) within the potential well of a body of mass M is modified from that of GR due to the presence of the additional scalar degree of freedom. As shown in [50], the mean velocity dispersion for a halo of fixed mass predicted by the virial theorem in modified gravity is related to that in GR through
+2 2  vir vir ,MG = g ,GR ,
+
+(42)
+
+where g  is a weighted integral of the force modification over the object which describes the effect on the virial equation. Assuming an NFW profile [56] for the primary halos, we have g =
+rv 0 rv 0
+
+dr r2 NFW (r) g (r) r dN /dr , dr r2 NFW (r) r dN /dr
+
+(43)
+
+where N is the Newtonian potential of the halo, found by solving (see [50] for an explicit expression) 2 N = 4GNFW , (44)
+
+FIG. 10: Ratio of the RMS line-of-sight velocity dispersion vlos in f (R) with respect to CDM. The panels show different values for the background field amplitude today. Open symbols show the results of the full simulations. The solid lines show the model prediction using modified spherical collapse parameters, while the dotted line denotes the prediction using the unmodified spherical collapse parameters.
+
+and g (r) is the force modification. In order to calculate the force modification, we have to solve the field equations for the scalar degree of freedom for an NFW halo [50]. In case of f (R), this can only be done in a computationally expensive numerical calculation. Hence we instead use a simple model which describes the exact results reasonably well [50]. Specifically, we assume that the chameleon field is only sourced by the "thin shell" of mass not screened by the chameleon effect [see Eq. (40) in [50]]. g  then interpolates between 4/3 for low-mass halos where the chameleon effect is not active, to 1 for halos which are completely screened. In case of DGP, it is possible to solve the equation for the brane-bending mode for a spherically symmetric halo analytically [Eq. (47) in [50]], and we use this result in Eq. (43).
+E. Results
+
+Fig. 10 shows the ratio of the velocity dispersion vlos in f (R) compared to CDM as function of rp . Fig. 11 shows the same for DGP (more precisely, here the modification is with respect to GR models with the same expansion history). The model predictions are shown as lines. In case of f (R), we see that the two spherical collapse cases roughly bracket the simulation results, where the unmodified collapse parameters (dotted lines) are closer to the simulation results for |fR0 |  10-5 . Some discrepancy can be seen at rp < 3 h-1 Mpc in case of the
+
+FIG. 11: Same as Fig. 10, but for DGP models. The top two panels show normal-branch models, while the lower panel shows the self-accelerating model where gravity and velocities are suppressed with respect to GR. The solid line shows the model prediction.
+
+16 intermediate field value. Large discrepancies were found around the same scale in the GR case (Sec. III). Another possible explanation is that the approximate treatment of chameleon screening of the primary halo (Sec. VI D 3) overestimates the screening effect, as already found in [50]. The weak-field case |fR0 | = 10-6 , in which the modified gravity effects are strongly suppressed further, exemplifies the chameleon mechanism. In this case, the primary halos are fully screened resulting in essentially unmodified infall velocities. The velocity dispersion of dark matter particles surrounding the primary halos is however still modified at the few percent level. For the smaller field values |fR0 |  10-5 , the prediction using the unmodified spherical collapse parameters gives a somewhat better fit to the simulation results. The spherical collapse parameters mostly affect the mass function (except for the smallest field case, where the 1% reduction of the radial infall motion when using the modified c also becomes noticeable). As found in [51], the unmodified spherical collapse parameters give a somewhat better fit to the halo mass function in f (R) for |fR0 |  10-5 , which provides a likely explanation for the results seen in Fig. 10. For DGP (Fig. 11), the model captures the simulation results well on all scales, including the transition region to the 1-halo regime. Significant 15 - 20% effects on the velocity dispersion vlos are seen even for horizon-scale cross-over scales rc 3000 Mpc; note that this corresponds to 30 - 40% effects on the variance. There is an unexpected discrepancy on large scales in the sDGP model which could be a statistical fluctuation (note that the errors are correlated and computed from only 6 realizations). In summary, the halo model appears to capture the effects of modified gravity on the line-of-sight velocity dispersion both qualitatively and quantitatively for a range of models and parameters. We thus expect that this model can be exploited to derive constraints on modified gravity from observations of the phase-space distribution in galaxy surveys. sion, and the Sunyaev-Zel'dovich effect. However, these small scales are also affected by baryonic effects, tidal friction, and non-thermal pressure support. Here, following previous work [1], we have studied the phase-space distribution around massive halos as probe of velocities in the intermediate range of scales  2 - 15 h-1Mpc, partially bridging the gap between redshift-space distortions and virial velocities. We describe an analytic model to compute the phase-space distribution of different tracers around massive clusters. This model is based on the halo model where the tracer velocities are composed of a 1-halo (virial motion within halos) and 2-halo contribution (relative center-of-mass motion of halos). Specifically, we use dark matter particles as well as intermediate-mass halos as the tracers, although the formalism can be straightforwardly generalized to model galaxy motions. For the phase-space distribution of dark matter particles around primary halos, the line-of-sight velocity has contribution from both virial velocity and halo-halo pairwise velocity. This will in general also be the case for galaxies. The phase-space distribution of secondary halos on the other hand only receives contributions from the halo-halo pairwise velocity. The basic ingredients that enter our model are the virial velocity dispersion [59] for the 1-halo term; the mean radial infall velocity; the Gaussian dispersion of the radial and tangential velocities; and the mass function and bias of halos as function of mass. For the mean radial infall, we adopt an empirical prescription which is motivated by the spherical collapse model. We apply the characteristic function approach to efficiently compute the line-of-sight velocity dispersion. The resulting phase-space distribution and the velocity dispersion match the measurement from N -body simulations very well on scales above  2.5 h-1 Mpc, for both dark matter and secondary halos. On smaller scales, the radial infall velocity is overpredicted resulting in a worsening match to simulation results. We thus expect that the most straightforward way to significantly improve the model is to develop a more realistic prescription for the radial infall motion. We also discuss the effects of the Hubble flow, i.e. the fact that in reality we can only measure redshift differences which receive contributions from both peculiar velocity and differential Hubble flow. The Hubble flow contribution dominates the peculiar velocity when the line-of-sight separation of the halo pair exceeds several h-1 Mpc. We show that our model can take these effects into account, and still matches the simulation measurements very well if the real-space correlation function between primary halos and tracers is accurate at the level of 5 - 10%. During the preparation of this work, another independent study by Zu and Weinberg [27] also investigates the modeling of the infall region on massive halos. Our approach agrees with theirs in separating the velocity contribution into virial velocity and infall velocity. However, the two studies are complementary both in methods and
+
+VII.
+
+DISCUSSION
+
+The velocities of large-scale structure tracers in principle provide rich information on the growth of structure by circumventing the issue of bias which affects the relation between tracer and matter densities. This dynamical information is of particular interest in models with modified gravity since the relation of dynamical mass and the gravitational lensing mass is generically modified in theories beyond General Relativity. On large scales above  30 h-1 Mpc, the velocities are best probed through redshift-space distortions of correlation functions and power spectra. On small scales below	2 h-1 Mpc, virial velocities within massive halos (galaxy clusters) can be probed by a wide range of observables such as galaxy velocity dispersion, X-ray emis-
+
+17 in goals. While Zu and Weinberg [27] aim to reconstruct the infall velocity in the context of the standard CDM model, our goal is to use the phase-space distribution as a probe of modified gravity models. Further, the model of [27] involves 7 fitting parameters for each primary and tracer sample. On the other hand, our approach only involves two matching scales for the entire distribution: the scales at which the infall velocity and tangential dispersion are matched to the linear theory predictions. Moreover, we have chosen both to be equal and identical for all tracer samples. While our model predictions successfully match the measurement well, there are numerous improvements that can be done. Our model description on the halohalo pairwise velocity distribution, while based upon the spherical collapse model and the linear theory prediction, is empirical. The discussion in the appendix shows that while this empirical approach can describe the peaks of both the radial and the tangential component distributions, the agreement in the high velocity tail is not as good. Furthermore the empirical model assumes the two distributions are independent Gaussian distributed (for the tangential component it is its projection onto the line-of-sight direction), which is only a crude approximation. While this approximation works well for the phase-space distribution of halo-dark matter pairs and the line-of-sight velocity dispersion of the halo-halo pairs, the discrepancies do matter when higher order moments are considered. Another improvement under investigation is including the virial velocity of galaxies in the calculation. These contributions can be minimized by selecting LRGs or BCGs which reside close to the secondary halo center. Alternatively, they can be modeled by incorporating the motions of galaxies within their halos in a halo occupation distribution approach.
+
+Acknowledgments
+
+We thank Anna Cabr e and Bhuvnesh Jain for helpful discussions. F. S. is supported by NASA through Einstein Postdoctoral Fellowship grant number PF2-130100 awarded by the Chandra X-ray Center, which is operated by the Smithsonian Astrophysical Observatory for NASA under contract NAS8-03060. T. N. is supported by Japan Society for the Promotion of Science (JSPS). M. T. is supported in part by the FIRST program "Subaru Measurements of Images and Redshifts (SuMIRe)", CSTP, Japan, World Premier International Research Center Initiative (WPI Initiative), MEXT, Japan, and by Grantin-Aid for Scientific Research from the JSPS Promotion of Science (No. 23340061).
+
+[1] T. Y. Lam, T. Nishimichi, F. Schmidt, and M. Takada, Physical Review Letters 109, 051301 (2012), 1202.4501. [2] Planck Collaboration, P. A. R. Ade, N. Aghanim, C. Armitage-Caplan, M. Arnaud, M. Ashdown, F. AtrioBarandela, J. Aumont, C. Baccigalupi, A. J. Banday, et al., ArXiv e-prints (2013), 1303.5076. [3] S. Weinberg, Reviews of Modern Physics 61, 1 (1989). [4] J. A. Frieman, M. S. Turner, and D. Huterer, Ann. Rev. Astron. Astrophys. 46, 385 (2008), 0803.0982. [5] B. A. Reid, L. Samushia, M. White, W. J. Percival, M. Manera, N. Padmanabhan, A. J. Ross, A. G. S anchez, S. Bailey, D. Bizyaev, et al., Mon. Not. R. Astron. Soc. 426, 2719 (2012), 1203.6641. [6] E. Macaulay, I. Kathrine Wehus, and H. K. Eriksen, ArXiv e-prints (2013), 1303.6583. [7] A. Vikhlinin, A. V. Kravtsov, R. A. Burenin, H. Ebeling, W. R. Forman, A. Hornstrup, C. Jones, S. S. Murray, D. Nagai, H. Quintana, et al., Astrophys. J. 692, 1060 (2009), 0812.2720. [8] Planck Collaboration, P. A. R. Ade, N. Aghanim, C. Armitage-Caplan, M. Arnaud, M. Ashdown, F. AtrioBarandela, J. Aumont, C. Baccigalupi, A. J. Banday, et al., ArXiv e-prints (2013), 1303.5080. [9] C. Heymans, E. Grocutt, A. Heavens, M. Kilbinger, T. D. Kitching, F. Simpson, J. Benjamin, T. Erben, H. Hildebrandt, H. Hoekstra, et al., ArXiv e-prints (2013), 1303.1808. [10] G. E. Addison, G. Hinshaw, and M. Halpern, ArXiv eprints (2013), 1304.6984. [11] R. Ellis, M. Takada, H. Aihara, N. Arimoto, K. Bundy,
+
+[12] [13] [14] [15] [16] [17] [18] [19]
+
+[20] [21] [22] [23] [24] [25]
+
+M. Chiba, J. Cohen, O. Dore, J. E. Greene, J. Gunn, et al., ArXiv e-prints (2012), 1206.0737. B. Jain and J. Khoury, Annals of Physics 325, 1479 (2010), 1004.3294. B. Jain, Royal Society of London Philosophical Transactions Series A 369, 5081 (2011), 1104.0415. D. Clowe, M. Brada c, A. H. Gonzalez, M. Markevitch, S. W. Randall, C. Jones, and D. Zaritsky, Astrophys. J. Lett. 648, L109 (2006), arXiv:astro-ph/0608407. M. Oguri and M. Takada, Phys. Rev. D 83, 023008 (2011), 1010.0744. N. Okabe, G. P. Smith, K. Umetsu, M. Takada, and T. Futamase, ArXiv e-prints (2013), 1302.2728. S. M. Carroll, V. Duvvuri, M. Trodden, and M. S. Turner, Phys. Rev. D70, 043528 (2004), astro-ph/0306438. S. Nojiri and S. D. Odintsov, Phys. Rev. D68, 123512 (2003), hep-th/0307288. S. Capozziello, S. Carloni, and A. Troisi, Recent Res. Dev. Astron. Astrophys. 1, 625 (2003), astroph/0303041. G. Dvali, G. Gabadadze, and M. Porrati, Physics Letters B 485, 208 (2000), arXiv:hep-th/0005016. F. Schmidt, ArXiv e-prints (2009), 0910.0235. A. Cooray and R. Sheth, Phys. Rep. 372, 1 (2002), arXiv:astro-ph/0206508. J. L. Tinker, Mon. Not. R. Astron. Soc. 374, 477 (2007), arXiv:astro-ph/0604217. R. K. Sheth and A. Diaferio, Mon. Not. R. Astron. Soc. 322, 901 (2001), arXiv:astro-ph/0009166. A. J. Cuesta, F. Prada, A. Klypin, and M. Moles, Mon.
+
+18
+Not. R. Astron. Soc. 389, 385 (2008), 0710.5520. [26] B. A. Reid and M. White, Mon. Not. R. Astron. Soc. pp. 1308+ (2011), 1105.4165. [27] Y. Zu and D. H. Weinberg, ArXiv e-prints (2012), 1211.1379. [28] P. Valageas and T. Nishimichi, Astron. Astrophys. 532, A4+ (2011), 1102.0641. [29] T. Nishimichi and A. Taruya, Phys. Rev. D 84, 043526 (2011), 1106.4562. [30] R. K. Sheth and G. Tormen, Mon. Not. R. Astron. Soc. 329, 61 (2002), arXiv:astro-ph/0105113. [31] J. F. Navarro, C. S. Frenk, and S. D. M. White, Astrophys. J. 462, 563 (1996), arXiv:astro-ph/9508025. [32] H. Oyaizu, Phys. Rev. D78, 123523 (2008), 0807.2449. [33] F. Schmidt, Phys. Rev. D 80, 043001 (2009), 0905.0858. [34] S. Nojiri and S. D. Odintsov, Int.J.Geom.Meth.Mod.Phys. 4, 06 (2006), hepth/0601213. [35] T. P. Sotiriou and V. Faraoni, Rev. Mod. Phys. 82, 451 (2010), 0805.1726. [36] J. Khoury and A. Weltman, Phys. Rev. D 69, 044026 (2004), arXiv:astro-ph/0309411. [37] W. Hu and I. Sawicki, Phys. Rev. D 76, 064004 (2007), arXiv:0705.1158. [38] S. Ferraro, F. Schmidt, and W. Hu, Phys. Rev. D 83, 063503 (2011), 1011.0992. [39] C. Deffayet, Physics Letters B 502, 199 (2001), arXiv:hep-th/0010186. [40] F. Schmidt, W. Hu, and M. Lima, Phys. Rev. D 81, 063005 (2010), 0911.5178. [41] W. Fang, S. Wang, W. Hu, Z. Haiman, L. Hui, and M. May, Phys. Rev. D 78, 103509 (2008), 0808.2208. [42] C. de Rham, S. Hofmann, J. Khoury, and A. J. Tolley, JCAP 2, 011 (2008), 0712.2821. [43] G. Dvali, S. Hofmann, and J. Khoury, Phys. Rev. D 76, 084006 (2007), arXiv:hep-th/0703027. [44] A. Nicolis, R. Rattazzi, and E. Trincherini, Phys. Rev. D 79, 064036 (2009), 0811.2197. [45] C. de Rham and G. Gabadadze, Phys. Rev. D 82, 044020 (2010), 1007.0443. [46] C. de Rham, G. Gabadadze, and A. J. Tolley, Physical Review Letters 106, 231101 (2011), 1011.1232. [47] A. Nicolis and R. Rattazzi, Journal of High Energy Physics 6, 59 (2004), arXiv:hep-th/0404159. [48] K. Koyama and F. P. Silva, Phys. Rev. D 75, 084040 (2007), arXiv:hep-th/0702169. [49] A. Lue, R. Scoccimarro, and G. D. Starkman, Phys. Rev. D 69, 124015 (2004), arXiv:astro-ph/0401515. [50] F. Schmidt, Phys. Rev. D 81, 103002 (2010), 1003.0409. [51] F. Schmidt, M. V. Lima, H. Oyaizu, and W. Hu, Phys. Rev. D79, 083518 (2009), 0812.0545. [52] B. Li and G. Efstathiou, Mon. Not. R. Astron. Soc. 421, 1431 (2012), 1110.6440. [53] B. Li and T. Y. Lam, Mon. Not. R. Astron. Soc. 425, 730 (2012), 1205.0058. [54] T. Y. Lam and B. Li, Mon. Not. R. Astron. Soc. 426, 3260 (2012), 1205.0059. [55] L. Lombriser, B. Li, K. Koyama and G. Zhao, ArXiv e-prints (2013), 1304.6395. [56] J. F. Navarro, C. S. Frenk, and S. D. M. White, Astrophys. J. 490, 493 (1997), astro-ph/9611107. [57] W. Hu and A. V. Kravtsov, Astrophys. J. 584, 702 (2003), arXiv:astro-ph/0203169. [58] J. S. Bullock, T. S. Kolatt, Y. Sigad, R. S. Somerville, A. V. Kravtsov, A. A. Klypin, J. R. Primack, and A. Dekel, Mon. Not. R. Astron. Soc. 321, 559 (2001), arXiv:astro-ph/9908159. A. E. Evrard, J. Bialek, M. Busha, M. White, S. Habib, K. Heitmann, M. Warren, E. Rasia, G. Tormen, L. Moscardini, et al., Astrophys. J. 672, 122 (2008), arXiv:astro-ph/0702241. G. L. Bryan and M. L. Norman, Astrophys. J. 495, 80 (1998), arXiv:astro-ph/9710107. F. Bernardeau, Astron. Astrophys. 291, 697 (1994), arXiv:astro-ph/9403020. R. K. Sheth, Mon. Not. R. Astron. Soc. 300, 1057 (1998), arXiv:astro-ph/9805319. T. Y. Lam and R. K. Sheth, Mon. Not. R. Astron. Soc. 389, 1249 (2008), 0805.1238. R. E. Smith, J. A. Peacock, A. Jenkins, S. D. M. White, C. S. Frenk, F. R. Pearce, P. A. Thomas, G. Efstathiou, and H. M. P. Couchman, Mon. Not. R. Astron. Soc. 341, 1311 (2003), arXiv:astro-ph/0207664. R. K. Sheth and I. Zehavi, Mon. Not. R. Astron. Soc. 394, 1459 (2009), 0812.1037. T. Hamana, I. Kayo, N. Yoshida, Y. Suto, and Y. P. Jing, Mon. Not. R. Astron. Soc. 357, 1407 (2005). T. Y. Lam, T. Nishimichi, and N. Yoshida, Mon. Not. R. Astron. Soc. 414, 289 (2011), 1008.0406. http://www.sdss3.org/surveys/boss.php http://hetdex.org http://www.sdss3.org/future/eboss.php http://bigboss.lbl.gov/ http://sumire.ipmu.jp/en/2652 http://www.naoj.org/Projects/HSC/index.html http://www.darkenergysurvey.org http://sci.esa.int/euclid http://www.lsst.org/lsst/
+
+[59]
+
+[60] [61] [62] [63] [64]
+
+[65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76]
+
+Appendix A: Virial motion
+
+Virial motion inside dark matter halos has been studied in [25, 59, 60]. In this work we will use the fitting formula provided in Evrard et al. [59] who suggested that the virial motion can be approximated by the Maxwellian distribution (which is true for isothermal sphere) and the dispersion is related to the virial mass by DM (M, z ) = DM,15 (1 + z )3/2 M200b 1015 Msun
+
+
+,
+
+(A1)
+
+where M200b is the mass of the halo enclosed in a radius containing a mean density of 200 m and z is the redshift. They found that DM,15 = 880 km/s and  = 0.355 best fit the measurements from a series of N -body simulations. The projection of the virial velocity along the line-ofsight direction is hence a Gaussian distribution with the variance given by Eq. (A1). In this work we define halo to have average density that is 178 times the background density  m . This halo mass (m178b ) definition is related to halo whose density is	times a density  through m = m178b f (x) , f (c) (A2)
+
+19 where x is the non-zero solution of x3 178 mc3 = , f (x) f (c) and f (y ) = ln(1 + y ) - y . 1+y (A4) (A3)
+
+The above fitting formulae have (, ) = (vir , crit ) and (200,	m) respectively. The concentration parameter c(m, z ) is obtained by the fitting formula [58] c(m, z ) = m 9 1 + z m (z )
+-0.13
+
+,
+
+(A5)
+
+where m (z ) is the characteristic mass scale at z .
+Appendix B: Halo-halo pairwise velocity distribution
+
+There are two contributions (for dark matter as tracers) for the 2-halo term. We assume the virial motion within the secondary halo is also described by the fitting formula in the previous section  it only depends on the mass of the secondary halo. We describe an approximation that leads to an analytic expression for the massweighted virial velocity in secondary halos in App. C. In this section we describe our model for the halo-halo pairwise velocity. The spherical collapse model relates the linear overdensity l and the evolved overdensity NL and we will use the following approximation [61, 62]: M (< r)  1 + NL =  m V D(t)l 1- c
+-c
+
+FIG. 12: Velocity infall as predicted by the spherical collapse model (Eq. (B2)). The upper set of curves is the predictions for m = 5	1015 M /h while the lower set is for m = 1014 M /h. Different curves in each set show infall velocity using different matter correlated functions: solid (linear correlation function), dashed [halo model, see 22], dot-dashed [halofit, see 64].
+
+where Mshell (< r)  (r - rvir )
+r
+
+,
+
+(B1)
+
+
+
+4r2 dr [1 + h (r ; Mhalo )] m , (B4)
+rvir
+
+where c = 1.686 in EdS universe and its value is weakly dependent on cosmology. The above expression allows one to estimate the radial infall velocity as the time derivative of the radius of the mass shell, vSC (r) = r  (see, for example, Eq. (6) in [63] with k = l /3), vSC (r) = - H (z ) f (z ) r c (1 + NL )1/c - 1 , 1+z 3 (B2)
+
+where the subscript SC stands for spherical collapse, H (z ) is the Hubble parameter at redshift z , f (z ) = d ln D/d ln a is the rate of change of the linear growth function. NL is the nonlinear density contrast that includes all the mass within the radius r. While Eq. (B1) is a fitting formula, we have checked that Eq. (B2) agrees with the numerical calculation within a few percent for CDM. Overdense regions contract (negative radial velocity) while underdense regions expand (positive radial velocity). In this study we approximate the mass shell surrounding the primary halo using the halo-matter correlation function. The total enclosed mass is then given by the sum of the primary halo mass and the mass shell: M (< r) = Mhalo + Mshell (< r), (B3)
+
+where (x) is the Heaviside step function, and we approximate the halo-matter correlation function given by Eq. (13). Fig. 12 shows the spherical collapse model predicted radial velocity as a function of scale for two different primary masses. Three different matter-matter correlation functions are used for comparison. Note that the spherical collapse model does not predict any tangential velocity or scatter in the radial velocity which depends deterministically on M (< r). Before comparing the halo pairwise radial velocity measured from the numerical simulations to the spherical collapse model prediction, we now first briefly describe the linear theory prediction for the pairwise halo-halo velocity distribution. Sheth and Zehavi [65] studied the velocity correlation function and found that including the pair weighting is important. More sophisticated empirical modelings are done in Tinker [23], Reid and White [26], Hamana et al. [66]. The linear halo-halo pairwise velocity is given by modifying equation (17) in Lam et al. [67], which describes the linear pairwise velocity for dark matter particle pairs. For a halo-pair of mass Mp and Ms separated by r,
+
+20
+
+phh (vhalo |r, Mp , Ms ) =
+
+1 + hh (r; Mp , Ms ) + H1 (hr )100 + H2 (hr )200 p0 (vhalo ), 1 + hh (r; Mp , Ms )
+
+(B5)
+
+Where p0 (u) is the linear velocity difference distribution. It is given by a product of a Gaussian distribution (with zero mean) corresponding to the radial component and a Rayleigh distribution corresponding to the quadrature sum of the two tangential components (due to symmetry we are free to choose one of the tangential components
+
+to be perpendicular to the line-of-sight direction and the other tangential component is a Gaussian distribution with zero mean as discussed in Sec. III). Further, H1 and H2 are Hermite polynomials and hr = vhr /uhr . The variances of the linear velocity difference distribution and other parameters in Eq. (B5) are
+
+2 u = hr 2 u ht
+
+100
+
+j1 (kr) W (k, Mp )2 + W (k, Ms )2 1 2 , D - 3W (k, Mp )W (k, Ms )j0 (kr) + 6W (k, Mp )W (k, Ms ) d k P ( k )  3 2 2 kr 1 2 j1 (kr) W (k, Mp )2 + W (k, Ms )2 = , (B6) D - 3W (k, Mp )W (k, Ms ) d k P ( k )  3 2 2 kr uhr h (Mp ) + uhr h (Ms ) uhr h (Mp ) uhr h (Ms ) = , 200 = , 2 uhr u hr 1  uhr h (Mp ) = uhr h (Ms ) = - 2 D dk P (k )kj1 (kr)W (k, Mp )W (k, Ms ), 2
+
+ = dD/dt = HDf is the time derivative of the where D linear growth factor. We compute the means and dispersions of the radial velocity vhr and the tangential velocity vht from the pair-weighted distribution with a weighting factor of n(Mp )n(Ms )[1 + hh (r, Mp , Ms )] to take into account the halo number density and clustering. Fig. 13 shows the mean vhr and dispersion hr of the radial halo-halo pairwise velocity. We identified halo pairs in the numerical simulations with different mass ranges for primary and secondary halos (see legends for description). The bottom panel shows the mean radial velocity (the red and the orange sets are displaced 500 km/s respectively). The cyan dash curve is the linear theory prediction for halo mass ranges represented by the solid black squares while the magenta dotted curve is the prediction from spherical collapse model (where the halofit correlation function is used). The linear theory predictions match the mean radial infall relatively well for large separation, but the predictions are wrong at small separation. On the other hand the prediction from the spherical collapse model has the correct scale dependence but the magnitude is not matching the measurement. Several reasons can contribute to this, although likely the most important factor is the assumption of zero angular momentum in the spherical collapse model. We construct an empirical model to describe the mean radial infall of halo pairs: we take the predictions from the spherical collapse model and rescale them by a con-
+
+stant factor derived by the linear theory prediction at large separation (we take r/rvir = 20). The solid curves are our empirical model predictions. They match the measurements for separation larger than 10 virial radii of the primary halos but overpredict | vhr | for smaller separations. The upper panel of Fig. 13 shows the dispersion of the radial infall. Symbols are measurements from numerical simulations with different halo mass ranges and the curves are the linear theory predictions. Linear theory can only qualitatively match the measurements and there is a 10-20% discrepancies between them (at intermediate separation). Nonetheless we will use the linear theory prediction for the radial infall dispersion. This is justified by its relatively small contribution to the lineof-sight velocity dispersion (see Fig. 5). While our model matches the lowest moments of the radial pairwise velocity, we have not yet tested whether the assumption of a Gaussian distribution is justified. Fig. 14 shows the radial velocity distribution of halos at two separations (r/rvir = 8 on the top and 12 on the bottom respectively). The primary and secondary halo mass range matches one of the sets shown in Fig. 13. The cyan and red curves show the corresponding linear theory and our empirical model predictions  both of them are Gaussian distributed with the same variance but they have different means. While the measured distributions are skewed towards infalling radial velocity (negative velocity) and have exponential wings, the empirical model
+
+21
+
+FIG. 13: Halo-halo pairwise velocity (radial component): top and bottom panels show the dispersion and mean, respectively of the radial component of the halo-halo pairwise velocity measured with different mass ranges (see legends for description). The curves in the upper panel show the linear theory prediction on the dispersion (the red and the orange sets are displaced by 80 km/s and 160 km/s respectively). In the lower panel, the cyan dashed and the magenta dotted curves are the predictions of the linear theory and the spherical collapse model, respectively, for the halo mass range represented by the solid black squares. The solid black, red, and orange lines show the rescaled spherical collapse prediction (see text; the red and orange sets are displaced by 500 km/s for clarity). FIG. 14: The distribution of radial component of the halohalo velocity. Pairs of halos whose separation are within (6, 10) and (10, 14) in the unit of r/rvir are included in the top and bottom panels respectively.
+
+is able to match the peak regions of the distributions. Thus, employing an exponential rather than Gaussian model would improve the fit to this distribution. However, from our analysis of the contributions from the different components in the line-of-sight velocity dispersion described in the main text, having an accurate description of the mean radial infall is the most important requirement to match the phase-space distribution, and our empirical model is able to reach good agreement. Fig. 15 shows the mean and the dispersion of the tangential component of the halo pairwise velocity where we define |vst | =
+2 2 . + vht,b vht,a
+
+(B7)
+
+As described in the main text we will choose a projection of |vst | when evaluating the line-of-sight component. However in this section we will perform the comparison using |vst | since it is more straightforward to measure from numerical simulations. In contrast to the radial component, the mean and the dispersion of the tangential
+
+component do not have a strong scale dependence. Notice that the spherical collapse model, by definition, does not predict any tangential component. The linear theory prediction on the mean of the tangential component is shown by the cyan dashed curve in the bottom panel (for the mass range represented by the solid black squares). The linear theory does not match the measurements on all scales. Hence, we make use of the apparent weak scale dependence of both the mean and the dispersion of the tangential component, and take the linear theory prediction for the mean at r = 20rvir as our model. Further, we assume |vst | is Rayleigh distributed with parameters |vst | =  ht 2
+2 and | vst | =
+
+4- 2 ht , 2
+
+(B8)
+
+where ht is the dispersion which in our model is given by
+
+22 not follow a Rayleigh distribution, but is closer to an exponential. Lam et al. [67] describes an analytical model based on Zel'dovich approximation that would mix initial radial component into the evolved tangential component. While the distribution profile from the measured variance (cyan solid curves) match the measurements better at high tangential velocity, we decide to adapt the empirical model using the linear theory prediction at a single separation r/rvir = 20: this can be computed analytically from the linear power spectrum (hence can be extended to modified gravity models easily), and it provides a reasonable match to the measured distribution. One important observation from Fig. 13 and Fig. 15 is that the mean and dispersion of the pairwise halo velocity depends only weakly on the mass range of the secondary halos. The only exception is in the tangential velocity distribution at small scales. The changes in the mean values of the velocity components are small over the mass ranges considered: around 10% for the radial component, and around 15-30% for the tangential component when the separation is small (a few times the virial radius of the primary halo). Similarly, decreasing the lower bound for the primary halo mass does not change the halo pairwise velocity statistics significantly, where the most noticeable change is in the mean of the radial velocity at small separations. One aspect that is missing in the empirical model is the correlation between the radial and the tangential velocity components. We have checked that while correlations between the two components do exist, they are weak (correlation coefficient < 0.3). We also checked the conditional distribution of vhr and |vst | and found that only the dispersion of the radial component hr depends very weakly on |vst |. We expect that including these correlations would not significantly impact our model predictions.
+
+FIG. 15: The tangential component of the halo-halo pair2 2 wise velocity where |vst | = vht,a + vht,b while vht,a and vht,b are two tangential components. (see Fig. 13 for mass ranges used). The mean and the dispersion are shown respectively in the bottom and the top panels. Solid curves are the predictions of our empirical model, which assumes a constant given by the linear theory prediction at r/rvir = 20. The red and orange sets are displaced by 150km/s. The cyan dash curve in the bottom panel shows the linear theory prediction for mass range represented by the solid black squares. The red and the orange sets in the upper panel are displaced by 100 km/s and 200 km/s respectively.
+
+Eq. (B6) with r = 20rvir . In other words, we assume that each component vht,a follows a Gaussian with variance 2 ht . The solid curves in the upper panel of Fig. 15 show the predictions of the empirical model using the relation in Eq. (B8)  at small to intermediate separation (a few times to 20 times the virial radii) the predictions agree with the measurements at around 10% level. Fig. 16 shows the tangential velocity distribution at two different separations. The separations and the halo mass ranges are the same as in Fig. 14. Note that our normalization requires that 2 d|vst ||vst |p(|vst |) = 1. By assuming the Rayleigh distribution we compare various ways to obtain the parameter ht at the corresponding separation: cyan (solid) curves use the mea2 sured variance | vst | from the simulation; magenta (dotdashed) curves use the measured mean |vst | ; green (dotted) curves use the linear theory prediction. The blue (dashed) curves are the empirical predictions in which we use the linear theory predicted mean at one single separation r/rvir = 20. Similar to the radial velocity, Fig. 16 shows that the distribution of the tangential velocity does
+
+Appendix C: Evaluation of the line-of-sight velocity dispersion
+
+We are interested in evaluating the line-of-sight velocity dispersion of the phase-space distribution using the characteristic function. In this appendix we illustrate this calculation using the 2-halo term of the phase-space distribution from halo-dark matter pairs as example, as the 1-halo term and the halo-halo pair cases are merely simpler versions of this calculation. The characteristic function is the Fourier transform of the probability density function and provides an easy approach to compute all moments by taking derivatives with respect to the Fourier space counterpart to vlos , which we will denote as tlos . The corresponding characteristic function of p(vlos |rp )
+
+23 where M2h (tlos ) is the normalized characteristic function of vhalo and vvir,s projected along the line-of-sight direction:
+
+M2h (tlos |Mp , Ms ) =
+
+dvhalo
+
+dvvir,s
+
+^  eitlos (vhalo +vvir )z p2h (vhalo , vvir,s |r, Mp , Ms ).
+
+For the moment we write the full vector of the virial velocity vvir .
+2 The square of the line-of-sight velocity dispersion v los  is given by -M (tlos = 0). Since the only tlos -dependent term in Eq. (C1) is M2h , the velocity dispersion is simply a weighted sum of the second order moments of the joint distribution p2h (vhalo , vvir,s ). In general there are both auto as well as cross correlation terms among different velocity components. As described in the main text, we make several simplifying approximations for computational convenience, which then lead to
+
+Mproj,2h (tlos |rp ) =
+
+dMp n(Mp ) dz  m [1 + h (r|Mp )]Mhalo (tlos )Qvir (tlos ) , dMp n(Mp ) dz  m [1 + h (r|Mp )]
+
+where Mhalo (tlos ) denotes the characteristic function for the halo pairwise velocity, Qvir is given by
+FIG. 16: The distribution of tangential component of the halo-halo velocity. The mass ranges of the primary and secondary halos are the same as Fig. 14. All curves are Rayleigh distribution (with proper normalization, see main text) with different parameter  (Eq. (B8)): cyan (solid) curves use the measured variance from simulation; green (dotted) curves use linear theory expected value at r ; magenta (dot-dashed) use the measured mean from the numerical measurement; blue (dashed) use linear theory mean at a single separation r/rvir = 20.
+
+1 Qvir (tlos ) =  - m
+
+dMs n(Ms )Ms Mvir,s (tlos |Ms ), (C2)
+
+is Mproj,2h (tlos |rp ) = = 1 N  (rp ) dvlos eitlos vlos p(vlos |rp ) dMs n(Ms ) (C1)
+
+and Mvir,s (tlos |Ms ) denotes the virial motion within secondary halos of mass Ms which is Gaussian distributed. The evaluation of Qvir depends on the halo mass function as well as the linear power spectrum and the scaling of DM (M ) with M . We derive the expression in the next subsection; the required expression is given by Eq. (C10). 2 Notice that in the following we replace  , the virial ve2 locity dispersion for M halo, in Eq. (C10) by eff in Eq. (23). The quantity Mhalo (tlos ) describes the halo pairwise velocity distribution, projected along the line-of-sight direction. We use the radial velocity vhr and the tangential velocity vht to parametrize the expression:
+
+dMp n(Mp ) dz
+
+ DM (r(z, rp )|Mp )M2h (tlos |Mp , Ms ),
+
+24
+
+Mhalo (tlos ) =
+
+dvhr dvht phh (vhr , vht |r, Mp ) exp [itlos (vhr cos  + vht sin )]
+2 2 ht hr 2 t2 t2 sin2	- vhr vht t2 los cos  - los cos  sin  + . . . , 2 2 los
+
+= exp itlos vhr cos  -
+
+(C3)
+
+where we have used the fact that vht vanishes. Note that following assumption 2 in the main text (see section III B 2), we neglect the dependence of phh on Ms . 2 2 The contributions to v are (hr + vhr 2 ) cos2  and los 2 2 ht sin	while the cross term vanishes after integrating over the line-of-sight direction (recall that cos   z ). These are given in Eqs. (9), (10), and (15). By symmetry, the first moments of vlos of all involved distributions vanish M (t = 0) = Q (t = 0) = 0. Thus, [Mhalo (tlos )Qvir (tlos )] |tlos =0 =  M halo (tlos = 0) + Qvir (tlos = 0) .
+
+
+This leads to the expression given in Eq. (26).
+
+1.
+
+The characteristic function of the virial velocity in 2-halo regime
+
+(C4)
+
+In this subsection we compute the contribution from the virial motion within secondary halos to the dark matter phase-space distribution. Note that this contribution is absent for halo tracers. The equation for this contribution is
+
+Ms,max
+
+Qvir (t) =
+
+dMs d3 y
+
+Ms,min
+
+NFW (y ; Ms )n(Ms ) [1 + hh (r + y, Mp , Ms )]Mvir (t; Ms ),   m (r, Mp )
+
+(C5)
+
+where	m (r, Mp ) denotes the normalization in the above equation for t = 0. Qvir describes the mass weighted characteristic function of the virial motion due to secondary halos. Attentive readers may notice that Eq. (C5) is different from Eq. (C2)  we will explain in the following how Eq. (C2) is an approximation of Eq. (C5). We would like to remind that the above equation assumes the first two approximations described in the main text: the virial velocity within the secondary halo is independent
+
+of the peculiar motion of the hosting halo; and the halohalo pairwise velocity distribution is weakly dependent on the mass of the secondary halo. The above integration can be computed numerically, in particular we compute the line-of-sight velocity dispersion numerically in App. C 2. We now make further approximations as listed in Sec. III. Specifically, we assume r + y  r. The above equation is then simplified to
+
+Ms,max
+
+Qvir (t; r, Mp ) =
+
+dMs
+Ms,min
+
+Ms n(Ms ) [1 + hh (r, Mp , Ms )]Mvir (t; Ms )  ~(r, Mp )
+
+(C6)
+
+where  ~(r, Mp ) denotes the normalization by setting t = 0. Notice that these normalizations represent the mean density   ~ and   m since they takes m are not equal to  into account the clustering and hence the dependence on r and Mp . Eq. (C6) can be evaluated analytically when the following assumptions are made [see, for example, 22] 1. DM (M ) scales as M 1/3 ;
+
+2. The power spectrum of the matter density contrast is a power-law  k -1 .
+
+The resulting analytical expression for the Sheth-Tormen (ST [30]) mass function is given by
+
+25
+
+QST vir =
+
+A(p) 1 + b(Mp ) (r)
+
+1 + b(Mp ) (r)(1 - 1/c ) b(Mp ) (r)/c  (r) + + b(Mp ) 2 2 1 / 2 2 2 3 / 2 c (1 +  t /q ) (1 +  t /q )  (r) + 2pb(Mp ) c 2 1 +  t2 q
+p-1/2
+
+1+
+
+2  t2 q
+
+p-3/2
+
+(3/2 - p)  2p-1  (C7)
+
+1 + 1 + b(Mp ) (r) 1 - c
+
+(1/2 - p)  2p
+
+,
+
+2 2 where  = vir (M ) denotes the virial velocity variance for a M halo and A(p) = [1 + (1/2 - p)/2p  ]-1 is the mass function normalization. In our numerical calculations, we assume values for the Sheth-Tormen mass function parameters of p = 0.3, and q = 0.75, The configuration space counterpart of QST vir involves a combination of K0 , K1 , Kp and K1-p (the modified Bessel functions of
+
+various orders). Since Kn (x)  x-1/2 exp(-x) for large x, these yield exponential wings of the virial velocity distribution which are induced by the mass weighting. Note that these exponential tails are consistent with numerical measurements found in previous studies. The corresponding variance is then given by the second derivative of the characteristic function,
+
+-QST vir (t = 0) =
+
+
+
+2 2  1 1 + b(Mp ) (r) 1 + 1 + b(Mp ) (r) q c
+
+1 - 2A(p)p
+
+(1/2 - p)  . 2p
+
+(C8)
+
+The model described in the main text makes another approximation by setting b(Ms ) = 1	this brings Eq. (C6) consistent with Eq. (C2). The effect on this approximation can be realized by setting the term b(Mp ) to zero or taking the limit of c to infinity in Eqs. (C7) and (C8): QST vir = A(p) 1+ + and -QST vir (t = 0) =
+
+
+2  t2 q
+
+-1/2
+
+(1/2 - p)  2p
+
+1+
+
+2  t2 q
+
+p-1/2
+
+, (C9)
+
+2  (1/2 - p)  1 - 2A(p)p q 2p
+
+locity distribution of dark matter tracers as compared to halo tracers (see the middle and bottom panels in Fig. 1 at large rp ). The derivation in the previous section made several assumptions listed in Sec. III so that the analytical calculation of this contribution is tractable. In this section we provide a more accurate prescription for the variance entering in Eq. (C10) by dropping some of the more drastic assumptions. First, note that the only t-dependent term in Eq. (C5) is Mvir (t; Ms ), which is the variance of the virial motion within the secondary halo. Since Mvir (t; Ms ) is the characteristic function of a Gaussian, and -M vir (t = 2 0; Ms ) = DM (Ms ) following Eq. (A1), this becomes Q vir (t = 0) =
+rvir,s 1 d3 y n(Ms ) dMs w  0  [1 + hh (|r + y|, Mp , Ms )] 2 eff (r, Mp ) ,
+
+(C10)
+
+2 2 Note that in the above results  = vir (M ) denotes the virial velocity dispersion of an M halo. Thus, when applying all approximations listed in Sec. III the virial velocity dispersion becomes independent of the primary mass. We have found that our model makes significantly more accurate predictions when retaining the functional form of QST vir (t), but replacing  with a dispersion eff calculated with less drastic approximations as described in the following section.
+
+ where
+
+2  NFW (y )DM (Ms ),
+
+(C11)
+
+rvir,s
+
+w =
+
+dMs
+0
+
+d3 y n(Ms ) (C12)
+
+2.
+
+Effective virial velocity dispersion eff in 2-halo regime
+
+ [1 + hh (|r + y|, Mp , Ms )]NFW (y )
+
+In the framework of the halo model, the virial motion within secondary halos is responsible for the broader ve-
+
+is the normalization factor, and the factor in the square brackets takes into account halo clustering. We assume an NFW profile NFW (y ) [31] truncated at the virial radius. As throughout, the halo correlation function is ap-
+
+26
+
+700
+
+1  1014<Mp Msun<5  1015
+Models described in main text Approximation Eq (C13) PS mass function *
+
+vlos
+
+FIG. 17: Direct numerical evaluation (dashed lines) of the line-of-sight projection of the virial velocity dispersion within secondary halos [Eq. (C11)], for primary halos with Mp = 1014 h-1 M . The panels show the result using different matter correlation functions (linear correlation function on the left; halo model correlation function [22] in the middle; halofit correlation function [64] on the right). The dotted curves show the approximation in Eq. (C13) while the solid curves are the M approximation eff = DM (M ).
+
+400 0
+
+450
+
+500
+
+550
+
+600
+
+650
+
+2
+
+4 rp
+
+6
+
+8
+
+10
+
+proximated by a linear bias model with halo exclusion, hh (r, Mp , Ms ) = b(Mp )b(Ms ) (r), r  rvir,p + rvir,s -1, otherwise,
+
+where  (r) is the matter correlation function. The model presented in the main text uses the full expression Eq. (C11). However, since Eq. (C11) is a 3dimensional integral (after making use of the symmetry in the azimuthal angle), this calculation is computationally demanding to perform for all possible pairs of Mp and r. We thus discuss possible approximations which speed up the calculation in the following. First, we neglect the halo exclusion effect, so that hh (r) is simply a product of bias factors and the matter correlation function. Next, given that we are interested in scales rp much larger than the virial radius of secondary halos which sets the typical value of y , we make the approximation that |y| = 0. The above approximations simplify 3d integration into a 1d integration over mass:
+rvir,s 0
+
+FIG. 18: Line-of-sight velocity dispersion as function of transverse separation, measured in simulations (black points) and predicted using different approximations for the secondary halo virial velocity treatment. Solid (orange) curves are predictions from the model described in the main text (same as Fig. 3). Blue dotted curves use the Press-Schechter mass function; green dot-dashed curves assumes r + y  r (Eq. (C13)); the magenta dashed curves use eff =  (M ).
+
+d3 y n(Ms )[1 + hh (|r + y|, Mp , Ms )]NFW (y ) (C13)
+
+ Ms n(Ms )[1 + b(Mp )b(Ms ) (r)].
+
+The normalization factor w  is modified accordingly. A further approximation ("M approximation") can be made by assuming all the secondary halos are M halos where M is the characteristic mass scale such that  (M , z ) = c . It is equivalent to adding a delta function
+
+D (Ms - M ) to the above approximation and the result2 2 ing effective velocity dispersion is eff (r, Mp ) = DM (M ) and it is scale-independent. Fig. 17 (dashed lines) shows the result of the full expression Eq. (C11) as a function of r, for primary halos with Mp = 1014 h-1 M and different matter correlation functions (see labels in the figure). The dotted and solid curves show the approximation in Eq. (C13) and the M approximation, respectively. The full calculation has a peak velocity dispersion at around a few times the virial radius. On smaller separation the halo exclusion effect suppresses the velocity dispersion by excluding progressively more massive halos. The approximation in Eq. (C13) traces the scale-dependence of the full calculation well for r 5rvir , although there is a constant bias due to the change in the normalization factor w  . The M approximation gives a constant velocity dispersion which is well below the full calculation. In order to assess the impact of these approximations on the predicted phase-space distribution, we show the
+
+27 predictions for vlos (for dark matter tracers) using different approximations in Fig. 18. The orange curve shows the default model discussed in the main text (using Sheth-Tormen mass function and Eq. (C11)). The blue (dotted) curves use the Press-Schechter mass function instead of Sheth-Tormen; green (dot-dashed) curves assume r + y  r when evaluating the effective virial velocity dispersion (Eq. (C13)); purple (long dashed) curves use  ("M approximation"). Using the Press-Schechter mass function underestimates the line-of-sight velocity dispersion deep in the 2-halo regime. Simplifying the calculation of the effective virial velocity by making the assumption r+y  r reduces the computation time at the expense of underpredicting the measured velocity dispersion, consistent with Fig. 17. Using  in the calculation yields a line-of-sight velocity dispersion which is much too small, as expected from Fig. 17.
+

@@ -1,0 +1,2765 @@
+A family of density expansions for L evy-type processes with default
+Matthew Lorig
+
+
+Stefano Pagliarani April 9, 2013
+
+
+
+Andrea Pascucci
+
+
+
+arXiv:1304.1849v1 [q-fin.CP] 6 Apr 2013
+
+Abstract We consider a defaultable asset whose risk-neutral pricing dynamics are described by an exponential L evy-type martingale subject to default. This class of models allows for local volatility, local default intensity, and a locally dependent L evy measure. Generalizing and extending the novel adjoint expansion technique of Pagliarani, Pascucci, and Riga (2013), we derive a family of asymptotic expansions for the transition density of the underlying as well as for European-style option prices and defaultable bond prices. For the density expansion, we also provide error bounds for the truncated asymptotic series. Additionally, for pure diffusion processes, we derive an asymptotic expansion for the implied volatility induced by European calls/puts. Our method is numerically efficient; approximate transition densities and European option prices are computed via Fourier transforms; approximate bond prices are computed as finite series. Additionally, as in Pagliarani et al. (2013), for models with Gaussian-type jumps, approximate option prices can be computed in closed form. Numerical examples confirming the effectiveness and versatility of our method are provided, as is sample Mathematica code.
+
+Keywords: Local volatility; L evy-type process; Asymptotic expansion; Pseudo-differential calculus; Defaultable asset
+
+1
+
+Introduction and literature review
+
+A local volatility model is a model in which the volatility t of an asset X is a function of time t and the present level of X . That is, t =  (t, Xt ). Among local volatility models, perhaps the most well-known is the constant elasticity of variance (CEV) model of Cox (1975). One advantage of local volatility models is that transition densities of the underlying  as well as European option prices  are often available in closed-form as infinite series of special functions (see Linetsky (2007) and references therein). Another advantage of local volatility models is that, for models whose transition density is not available in closed form, accurate density and option price approximations are readily available (see, Pagliarani and Pascucci (2011), for example). Finally, Dupire (1994) shows that one can always find a local volatility function  (t, x) that fits the market's implied volatility surface exactly. Thus, local volatility models are quite flexible.
+ ORFE
+
+Department, Princeton University, Princeton, USA. Work partially supported by NSF grant DMS-0739195 di Matematica, Universit` a di Padova, Padova, Italy  Dipartimento di Matematica, Universit` a di Bologna, Bologna, Italy
+ Dipartimento
+
+1
+
+Despite the above advantages, local volatility models do suffer some shortcomings. Most notably, local volatility models do not allow for the underlying to experience jumps, the need for which is well-documented in literature (see Eraker (2004) and references therein). Recently, there has been much interest in combining local volatility models and models with jumps. Andersen and Andreasen (2000), for example, discuss extensions of the implied diffusion approach of Dupire (1994) to asset processes with Poisson jumps (i.e., jumps with finite activity). And Benhamou, Gobet, and Miri (2009) derive analytically tractable option pricing approximations for models that include local volatility and a Poisson jump process. Their approach relies on asymptotic expansions around small diffusion and small jump frequency/size limits. More recently, Pagliarani, Pascucci, and Riga (2013) consider general local volatility models with independent L evy jumps (possibly infinite activity). Unlike, Benhamou et al. (2009), Pagliarani et al. (2013) make no small jump intensity/size assumption. Rather the authors construct an approximated solution by expanding the local volatility function as a power series. While all of the methods described in this paragraph allow for local volatility and independent jumps, none of these methods allow for state-dependent jumps. (2009)). A locally dependent L evy measure allows for this possibility. Recently, two different approaches have been taken to modeling assets with locally-dependent jump measures. Mendoza-Arriaga, Carr, and Linetsky (2010) time-change a local volatility model with a L evy subordinator. In addition to admitting exact optionpricing formulas, the subordination technique results in a locally-dependent L evy measure. Lorig (2012) considers another class of models that allow for state-dependent jumps. The author builds a L evy-type processes with local volatility, local default intensity, and a local L evy measure by considering state-dependent perturbations around a constant coefficient L evy process. In addition to pricing formula, the author provides an exact expansion for the induced implied volatility surface. In this paper, we consider scalar L evy-type processes with regular coefficients, which naturally includes all the models mentioned above. Generalizing and extending the methods of Pagliarani et al. (2013), we derive a family of asymptotic expansions for the transition densities of these processes, as well as for European-style derivative prices and defaultable bond prices. The key contributions of this manuscript are as follows:  We allow for a locally-dependent L evy measure and local default intensity, whereas Pagliarani et al. (2013) consider a locally independent L evy measure and do not allow for the possibility of default. A state-dependent L evy measure is an important feature because it allows for incorporating local dependence into infinite activity L evy models that have no diffusion component, such as Variance Gamma (Madan, Carr, and Chang (1998)) and CGMY/Kobol (Boyarchenko and Levendorskii (2000); Carr, Geman, Madan, and Yor (2002)).  Unlike Benhamou et al. (2009), we make no small diffusion or small jump size/intensity assumption. Our formulae are valid for any L evy type process with smooth and bounded coefficients, independent of the relative size of the coefficients.  Whereas Pagliarani et al. (2013) expand the local volatility and drift functions as a Taylor series about an arbitrary point, i.e. f (x) =
+n
+
+Stochastic jump-intensity was recently identified as an important feature of equity models (see Christoffersen, Jacobs, and O
+
+the local volatility, drift, killing rate and L evy measure in an arbitrary basis, i.e. f (x) =
+
+an (x - x )n , in order to achieve their approximation result, we expand
+n cn Bn (x).
+
+This is advantageous because the Taylor series typically converges only locally, whereas other choices 2
+
+of the basis functions Bn may provide global convergence in suitable functional spaces.  Using techniques from pseudo-differential calculus, we provide explicit formulae for the Fourier transform of every term in the transition density and option-pricing expansions. In the case of state dependent Gaussian jumps the respective inverse Fourier transforms can be explicitly computed, thus providing closed form approximations for densities and prices. In the general case, the density and pricing approximations can be computed quickly and easily as inverse Fourier transforms. Additionally, when considering defaultable bonds, approximate prices are computed as a finite sum; no numerical integration is required even in the general case.  For models with Gaussian-type jumps, we provide pointwise error estimates for transition densities. Thus, we extend the previous results of Pagliarani et al. (2013) where only the purely diffusive case is considered. Additionally, our error estimates allow for jumps with locally dependent mean, variance and intensity. Thus, for models with Gaussian-type jumps, our results also extend the results of Benhamou et al. (2009), where only the case of a constant L evy measure is considered.  For local volatility models with no jumps and no possibility of default, we provide an asymptotic expansion for implied volatilities corresponding to European calls/puts. As with approximate bond integration is required. The rest of this paper proceeds as follows. In Section, 2 we introduce a general class of exponential L evy-type models with locally-dependent volatility, default intensity and L evy measure. We also describe our modeling assumptions. Next, in Section 3, we introduce the European option-pricing problem and derive a partial integro-differential equation (PIDE) for the price of an option. In Section 4 we derive a formal asymptotic expansion (in fact, a family of asymptotic expansions) for the function that solves the option pricing PIDE (Theorem 8). Next, in Section 5, we provide rigorous error estimates for our asymptotic expansion for models with Gaussian-type jumps (Theorem 14). In Section 6 we derive an implied volatility expansion for pure diffusion models (i.e., models with no default and no jumps). This expansion involves no special functions and no integrals and can therefore be computed extremely quickly. Lastly, in Section 7, we provide numerical examples that illustrate the effectiveness and versatility of our methods. Technical proofs are provided in the Appendix. Some concluding remarks are given in Section 8. prices, approximate implied volatilities are computed as a finite sum of simple functions; no numerical
+
+2
+
+General L evy-type exponential martingales
+
+For simplicity, we assume a frictionless market, no arbitrage, zero interest rates and no dividends. Our results can easily be extended to include locally dependent interest rates and dividends. We take, as given, an equivalent martingale measure Q, chosen by the market on a complete filtered probability space represents the history of the market. All stochastic processes defined below live on this probability space and all expectations are taken with respect to Q. We consider a defaultable asset S whose risk-neutral dynamics (, F, {Ft , t  0}, Q) satisfying the usual hypothesis of completeness and right continuity. The filtration Ft
+
+3
+
+are given by St = I{>t} eXt , dXt = (t, Xt )dt +  (t, Xt )dWt +
+R
+
+dN t (t, Xt- , dz ) = dNt (t, Xt- , dz ) -  (t, Xt- , dz )dt,
+t
+
+	dN t (t, Xt- , dz )z,
+
+(1)
+
+ = inf
+
+t0:
+
+0
+
+ (s, Xs )ds  E
+
+X dependent L evy measure  (t, x, dz ). We shall denote by Ft the filtration generated by X . The random vari-
+
+Here, X is a L evy-type process with local drift function (t, x), local volatility function  (t, x)  0 and state-
+
+able E	Exp(1) has an exponential distribution and is independent of X . Note that  , which represents the
+
+default time of S , is constructed here trough the so-called canonical construction (see Bielecki and Rutkowski
+
+(2001)), and is the first arrival time of a doubly stochastic Poisson process with local intensity function  (t, x)  0. This way of modeling default is also considered in a local volatility setting in Carr and Linetsky
+X (2006); Linetsky (2006), and for exponential L evy models in Capponi et al. (2013). Since  is not Ft D measurable we introduce the filtration Ft =  ({  s) , s  t} in order to keep track of the event {  t}.
+
+X D The filtration of a market observer, then, is Ft = Ft  Ft .
+
+In the absence of arbitrage, S must be an Ft -martingale. Thus, the drift (t, x) is fixed by  (t, x),
+1
+
+ (t, x, dz ) and  (t, x) in order to satisfy the martingale condition (t, x) =	(t, x) - a(t, x) -  (t, x, dz )(ez - 1 - z ),
+
+a(t, x) :=
+
+R
+
+1 2  (t, x). 2
+
+(2)
+
+In order for equation (1) and subsequent computations to make sense, we will assume the following: 1. Smoothness. The coefficients are continuous in t and smooth in x: a(, ),	(, ),  (, , dz )  C 0, (R)
+2
+
+.
+
+2. Boundedness. The coefficients a and	are bounded. There exists a L evy measure  (dz ) := such that  (dz ) min(1, z 2 ) < ,  (dz )ez < ,  (dz )|z | < . (3) sup
+(t,x)R+ R
+
+ (t, x, dz )
+
+R
+
+|z |1
+
+|z |1
+
+Note that these conditions imply the existence of a positive constant	<  such that |(t, x)| <   for all (t, x). 3. Lipschitz Continuity. There exists a constant C such that |(t, x1 ) - (t, x2 )|2 + | (t, x1 ) -  (t, x2 )|2 + for any t  R
+1 2
+
+z2
+R
+
+ (t, x1 , dz ) -
+
+ (t, x2 , dz )
+
+2
+
+ C |x1 - x2 |2
+
++
+
+and x1 , x2  R.
+
+We provide a derivation of the martingale condition in Section 3 Remark 2 below. This notation for  means:  (, , B )  C 0, (R) for any Borel set B .
+
+4
+
+4. Existence of a density. Either a(, ) > 0 or for every x  R there exists (x)	(0, 2) such that lim inf (x)-2
+0+  -
+
+z 2  (x, dz ) > 0.
+
+These conditions guarantee that the distribution of Xt has density with respect to the Lebesgue measure (in fact, a C  density) for all t > 0. See Sato (1999) Proposition 28.3. Together, conditions 2 and 3 ensure that the SDE in (1) has a unique strong solution up to the default time  (see Oksendal and Sulem (2005), Theorem 1.19). We include Assumption 4, because, in what follows, we speak of densities. Nevertheless, the existence of the density is not strictly necessary in our analysis. Indeed, since our formulae are carried out in Fourier space, all of our computations are still formally correct even when dealing with distributions that are not absolutely continuous with respect to the Lebesgue measure. We will relax some of these Assumptions for the numerical examples provided in Section 7. Even without the above Assumptions in force, our numerical results indicate that our approximation techniques work well.
+
+3
+
+Option pricing
+
+We consider a European derivative expiring at time T with payoff H (ST ) and we denote by V its no-arbitrage price. For convenience, we introduce h(x) := H (ex ) Proposition 1. The price Vt is given by Vt = K + I{>t} E e-
+T t
+
+and
+
+K := H (0).
+
+ (s,Xs )ds
+
+(h(XT ) - K ) |Xt ,
+
+t  T.
+
+(4)
+
+The proof can be found in Section 2.2 of Linetsky (2006). Because our notation differs from that of Linetsky (2006), and because the proof is short, for the reader's convenience, we provide a derivation of Proposition 1 here. Proof. Using risk-neutral pricing, the value Vt of the derivative at time t is given by the conditional expectation of the option payoff Vt = E [H (ST )|Ft ] = E h(XT )I{>T } |Ft + K E I{ T } |Ft = E h(XT )I{>T } |Ft + K - K E I{>T } |Ft = K + I{>t} E e- = K + I{>t} E e-
+T t
+
+ (s,Xs )ds  (s,Xs )ds
+
+X (h(XT ) - K ) |Ft
+
+T t
+
+(h(XT ) - K ) |Xt ,
+
+where we have used Corollary 7.3.4.2 from Jeanblanc, Yor, and Chesney (2009)to write E (h(XT ) - K )I{>T } |Ft = I{>t} E (h(XT ) - K )e-
+T t
+
+ (s,Xs )ds
+
+X . |F t
+
+5
+
+Remark 2. By Proposition 1 with K = 0 and h(x) = ex , we have that the martingale condition St = E [ST |Ft ] is equivalent to I{>t} eXt = I{>t} E e-
+T t
+
+ (s,Xs )ds+XT
+
+|F t .
+t 0
+
+Therefore, we see that S is a martingale if and only if the process exp - setting the drift term to zero.
+
+ (s, Xs ) ds + Xt is a martingale.
+t 0
+
+The drift condition (2) follows by applying It^ o's formula to the process exp -
+
+ (s, Xs ) ds + Xt
+
+and
+
+From (4) one sees that, in order to compute the price of an option, we must evaluate functions of the form
+3
+
+v (t, x) := E e-
+
+T t
+
+ (s,Xs )ds
+
+h(XT )|Xt = x =
+
+h(y )p(t, x; T, y )dy.
+R
+
+(5)
+
+Here, p(t, x; T, y ) is a Feynman-Kac (FK) transition density, which represents the transition density of log S 4 p(t, x; T, y )dy = Q[log ST  dy | log St = x], we have
+R
+
+x, y  R,
+
+0  t  T < .
+
+Note that the FK transition density is not a probability density since (due to the possibility that ST = 0)
+
+p(t, x; T, y )dy  1.
+
+It is well-known that the function v (t, x), defined by (5), satisfies the Kolmogorov backward equation (t + A)v = 0, v (T, x) = h(x). (6)
+
+Here, the operator A is the generator of the FK semigroup Pt,T . That is, Pt,T h(x) := E h(XT )e- Af (x) = lim+
+T t
+T t
+
+ (s,Xs )ds
+
+|X t = x , (if strong limit exists) (7)
+
+2 For f  C0 (R), the limit (7) exists and the operator A is given by 2 Af (x) =  (t, x)(x f (x) - f (x)) + a(t, x)(x f (x) - x f (x))
+
+Pt,T f (x) - f (x) , T -t
+
+-
+
+R
+
+(ez - 1 - z ) (t, x, dz )x f (x) +
+
+R
+
+(f (x + z ) - f (x) - zx f (x)) (t, x, dz ).
+
+(8)
+
+From now on we define dom(A) to be all functions f such that, with A given by (8), the derivatives and integrals in Af (x) exist and are finite for all x  R. Note also that, if one sets h = y , then v (t, x) becomes the FK density p(t, x; T, y ) since y (z )p(t, x; T, z )dz = p(t, x; T, y ).
+R
+
+From the analytical point of view, p(t, x; T, y ) represents the fundamental solution of t + A.
+3 Note:
+
+we can accommodate stochastic interest rates and dividends of the form rt = r (t, Xt ) and qt = q (t, Xt ) by simply
+
+making the change:  (t, x)   (t, x) + r (t, x) and (t, x)  (t, Xt ) + r (t, Xt ) - q (t, Xt ). 4 Here with log S we denote the process X I t {>t} -  I{ t}
+
+6
+
+Remark 3. If G is the generator of a scalar Markov process and dom(G) contains S(R), the Schwartz space of rapidly decaying functions on R. Then G must have the following form:
+2 Gf (x) = - (x)f (x) + (x)x f (x) + a(x)x f (x) +
+
+R
+
+ (x, dz )(f (x + z ) - f (x) - I{|z|<R} zx f (x)), (9)
+
+one enforces on G the drift and integrability conditions (2) and (3), which are needed to ensure that S is
+
+where	0, a  0,  is a L evy measure for every x and R	[0, ] (see Hoh (1998), Proposition 2.10). If a martingale, and allow setting R = , then the operators (8) and (9) coincide (in the time-homogeneous
+
+case). Thus, the class of models we consider in this paper encompasses all non-negative scalar Markov martingales that satisfy the regularity and boundedness conditions of Section 2. Remark 4. In what follows we shall systematically make use of the language of pseudo-differential calculus. More precisely, let us denote by 1  (x) = x ( ) =  eix , 2 exponential functions. Indeed, we have A (x) = (t, x,  ) (x), where (t, x,  ) =  (t, x)(i - 1) + a(t, x)(- 2 - i ) -
+R
+
+x,   R,
+
+(10)
+
+the so-called oscillating exponential function. Then A can be characterized by its action on oscillating
+
+(11)  (t, x, dz )(eiz - 1 - iz ),
+
+ (t, x, dz )(ez - 1 - z )i +
+
+R
+
+is called the symbol of A. Noting that ezx u(x) = for any analytic function u(x), we have (u(x + z ) - u(x) - zx u(x))	(t, x, dz ) =  (t, x, dz ) ezx - 1 - zx u(x). zn n  u(x) = u(x + z ), n! x n=0
+
+
+R
+
+R
+
+Then A can be represented as A = (t, x, D), since by (11)
+2 (t, x, D) =  (t, x)(x - 1) + a(t, x)(x - x )
+
+D = -ix ,
+
+-
+
+R
+
+ (t, x, dz )(ez - 1 - z )x +
+
+R
+
+ (t, x, dz ) ezx - 1 - zx .
+
+7
+
+Moreover, if coefficients a(t),  (t),  (t, dz ) are independent of x, then we have the usual characterization of A as a multiplication by  operator in the Fourier space: A = F-1 ((t, )F) , (t, )  (t, x, ),
+
+where F and F-1 denote the (direct) Fourier and inverse Fourier transform operators respectively: ^( ) := 1 Ff ( ) = f 2 e-ix f (x)dx,
+R
+
+1 F-1 f (x) =  2
+
+eix f ( )d.
+R
+
+4
+
+Density and option price expansions (a formal description)
+
+Our goal is to construct an approximate solution of Cauchy problem (6), which we assume has a unique classical solution. Sufficient conditions for the existence and uniqueness of solutions of second order elliptic integro-differential equations are given in Theorem II.3.1 of Garroni and Menaldi (1992). To find a solution of (6), we assume that the symbol of A admits an expansion of the form (t, x,  ) = where n (t,  ) is of the form n (t,  ) = n (t)(i - 1) + an (t)(- 2 - i ) -
+R  n=0
+
+Bn (x)n (t,  ),
+
+(12)
+
+n (t, dz )(ez - 1 - z )i +
+
+R
+
+n (t, dz )(eiz - 1 - iz ).
+
+(13)
+
+and {Bn }n0 is some expansion basis with Bn being an analytic function for each n  0, and B0 = 1. Note that n (t,  ) is the symbol of an operator An := n (t, D), so that An  (x) = n (t,  ) (x). Thus, formally the generator A can be written as follows A=
+ n=0
+
+D = -ix ,
+
+(14)
+
+(15)
+
+Bn (x)An .
+
+(16)
+
+Note also that Bn (x) is the symbol of the differential operator Bn (-i ) since Bn (-i )x ( ) = Bn (x)x ( ), n	0. (17)
+
+Typically, An is the generator of a time-dependent L evy-type process (i.e., an additive process ) X (n) . In the time-independent case we have that n ( ) = n (t,  ) is the characteristic exponent of the L evy process X (n) E eiXt
+(n)
+
+= etn () .
+
+8
+
+Example 5 (Taylor series expansion). Pagliarani, Pascucci, and Riga (2013) approximate the drift and diffusion coefficients of A as a power series about an arbitrary point x	R. In our more general setting,  (t, ), as well as the L evy measure  (t, , dz ) as follows: a(t, x) =	(t, x) =  (t, x, dz ) =
+
+
+this corresponds to setting Bn (x) = (x - x )n and expanding the diffusion and killing coefficients a(t, ) and an (t, x )Bn (x), n (t, x )Bn (x), n (t, x , dz )Bn (x), 1 n an (t, x ) = x a(t, x ), n! n (t, x ) = 1 n   (t, x ), n! x
+
+n=0  n=0  n=0
+
+In this case, (12) and (16) become (respectively) (t, x,  ) =
+
+
+       1 n  n (t, x , dz ) = x	(t, x , dz ).	n! A=
+
+
+(18)
+
+n=0
+
+(x - x ) n (t,	),
+
+n
+
+n=0
+
+(x - x )n n (t, D),
+
+x  is somewhat arbitrary. However, a convenient choice that seems to work well in most applications is to
+
+where, for all n  0, the symbol n (t,  ) is given by (13) with coefficients given by (18). The choice of
+
+choose x  near Xt , the current level of X . Hereafter, to simplify notation, when discussing implementation of the Taylor-series expansion, we suppress the x -dependence: an (t, x )	an (t), n (t, x )  n (t) and n (t, x , dz )  n (t, dz ). Example 6 (Two-point Taylor series expansion). Suppose f is an analytic function with domain R and x 1 , x 2  R. Then the two-point Taylor series of f is given by f (x) = where c0 ( x1 , x 2 ) = f ( x2 ) , x 2 - x 1
+n  n=0
+
+(cn ( x1 , x 2 )(x - x 1 ) + cn ( x2 , x 1 )(x - x 2 )) (x - x 1 )n (x - x 2 )n ,
+
+(19)
+
+cn ( x1 , x 2 ) =
+k=0
+
+n-k n-k x1 ) + (-1)n+1 nx x2 ) (k + n - 1)! (-1)k kx 1 f ( 2 f ( . (20) k !n!(n - k )! ( x1 - x 2 )k+n+1
+
+For the derivation of this result we refer the reader to Estes and Lancaster (1966); Lopez and Temme (2002). Note truncating the two-point Taylor series expansion (19) at n = m results in an expansion which of f which is of order O(x2m+1 ). The advantage of using a two-point Taylor series is that, by considering the first n derivatives of a function f at two points x 1 and x 2 , one can achieve a more accurate approximation of f over a wider range of values than if one were to approximate f using 2n derivatives at a single point (i.e., the usual Taylor series approximation). If we associate expansion (19) with an expansion of the form f (x) =
+ n=0
+
+fn Bn (x) then f0 B0 (x) =
+
+expansion would not be a suitable basis in (12) since B0 (x) = 1. However, one can always introduce a constant M and define a function F (x) := f (x) - M, so that 9 f (x) = M + F (x).
+
+cn ( x1 , x 2 )(x - x 1 ) + cn ( x2 , x 1 )(x - x 2 ), which is affine in x. Thus, the terms in the two-point Taylor series
+
+(21)
+
+Then, one can express f as f (x) = M +
+ n=1
+
+(Cn-1 ( x1 , x 2 )(x - x 1 ) + Cn-1 ( x2 , x 1 )(x - x 2 )) (x - x 1 )n (x - x 2 )n-1 ,
+
+(22)
+
+where the Cn are as given in (20) with f  F . If we associate expansion (22) with an expansion of the form f (x) =
+ n=0
+
+fn Bn (x), then we see that f0 B0 (x) = M and one can choose B0 (x) = 1. Thus, as written in
+
+(22), the terms of the two-point Taylor series can be used as a suitable basis in (12). Consider the following case: suppose a(t, x),  (t, x) and  (t, x, dz ) are of the form a(t, x) = f (x)A(t), so that (t, x,  ) = f (x)(t,  ) with (t,  ) = (t)(i - 1) + A(t)(- 2 - i ) -
+R
+
+ (t, x) = f (x)(t),
+
+ (t, x, dz ) = f (x)N(t, dz ),
+
+(23)
+
+N(t, dz )(ez - 1 - z )i +
+
+R
+
+N(t, dz )(eiz - 1 - iz ).
+
+It is certainly plausible that the symbol of A would have such a form since, from a modeling perspective, it makes sense that default intensity, volatility and jump-intensity would be proportional. Indeed, the Jump-todefault CEV model (JDCEV) of Carr and Linetsky (2006); Carr and Madan (2010) has a similar restriction on the form of the drift, volatility and killing coefficients. Now, under the dynamics of (23), observe that (t, x,  ) and A can be written as in (12) and (16) respectively with B0 = 1 and Bn (x) = (Cn-1 ( x1 , x 2 )(x - x 1 ) + Cn-1 ( x2 , x 1 )(x - x 2 )) (x - x 1 )n-1 (x - x 2 )n-1 , As above Cn (capital "C") are given by (20) with f  F := f - M and 0 (t,  ) = M (t,  ), n (t,  ) = (t,	), n  1. n  1. (24)
+
+As in example 5, the choice of x 1 , x 2 and M is somewhat arbitrary. But, a choice that seems to work well is to set x 1 = Xt -  and x 2 = Xt +  where  > 0 is a constant and M = f (Xt ). It is also a good approximation of f in the region of interest. Note we assumed the form (23) only for sake of simplicity. Indeed, the general case can be accommodated by suitably extending expansion (12) to the more general form (t, x,  ) =
+ 3
+
+idea to check that, for a given choice of x 1 and x 2 , the two-point Taylor series expansion provides a good
+
+Bi,n (x)i,n (t,  ),
+
+n=0 i=1
+
+where i,n for i = 1, 2, 3 are related to the diffusion, jump and default symbols respectively. For brevity, however, we omit the details of the general case. Example 7 (Non-local approximation in wheighted L2 -spaces). If {Bn }n0 is a fixed orthonormal basis in n (t,  ) = (t, ,	), Bn () 10
+m,
+
+some (possibly weighted) L2 (R, m(x)dx) space, then in the expansion (12) we have n  0.
+
+A typical example would be to choose Hermite polynomials Hn centered at x  as basis functions, which (as normalized below) are orthonormal under a Gaussian weighting Bn (x) = Hn (x - x ), In this case, we have n (t,  ) = (t, ,  ), Bn
+m n x exp(-x2 ) ,  (2n)!!  exp(-x2 )
+
+Hn (x) :=
+
+1
+
+n  0.
+
+:=
+R
+
+(t, x,	)Bn (x)m(x)dx,
+
+m(x) := exp - (x - x )2 ,
+
+Once again, the choice of x  is arbitrary. But, it is logical to choose x  near Xt , the present level of the underlying X . In Figure 1 we compare the 2nd order two-point Taylor series, the 4th order (usual) Taylor series and the 4th order Hermite polynomial expansion for an exponential function. Now, returning to Cauchy problem (6), we suppose that v = v (t, x) can be written as follows v=
+ n=0
+
+vn .
+
+(25)
+
+Following Pagliarani et al. (2013), we insert expansions (16) and (25) into Cauchy problem (6) and find (t + A0 )v0 = 0,
+n
+
+v0 (T, x) = h(x), Bk (x)Ak vn-k , vn (T, x) = 0.
+
+(26) (27)
+
+(t + A0 )vn = -
+
+k=1
+
+We are now in a position to find the explicit expression for vn , the Fourier transform of vn in (26)-(27). Theorem 8. Suppose h  L1 (R, dx) and let h denote its Fourier transform. Suppose further than vn and
+T
+
+its Fourier transform vn exist. Then vn (t,  ) is given by v0 (t,  ) = exp
+t n T s
+
+0 (s,  )ds h( ), exp 0 (u,  )du Bk (i )k (s,  )vn-k (s,  )ds, n  1.
+
+(28) (29)
+
+vn (t,	) =
+k=1 t
+
+t
+
+Note that the operator Bk (i ) acts on everything to the right of it. Proof. See Appendix A. Remark 9. Assuming vn  L1 (R, dx), one recovers vn using vn (t, x) = 1 d  eix vn (t,  ). 2 R (30)
+
+As previously mentioned, to obtain the FK transition densities p(t, x; T, y ) one simply sets h(x) = y (x). In this case, h( ) becomes y (- ). When the coefficients (a, ,  ) are time-homogeneous, then the results of Theorem 8 simplify considerably, as we show in the following corollary. 11
+
+Corollary 10 (Time-homogeneous case). Suppose that X has time-homogeneous dynamics with the local variance, default intensity and L evy measure given by a(x),	(x) and  (x, dz ) respectively. Then the symbol n (t,  ) = n ( ) is independent of t. Define  (t) := T - t. Then, for n  0 we have where u0 (,	) = e 0 () h( ),
+n  0
+
+vn (t, x) = un ( (t), x)
+
+(31) n	1.
+
+un (,  ) =
+k=1
+
+e( -s)0 () Bk (i )k ( )un-k (s,  )ds,
+
+Proof. The proof is an algebraic computation. For brevity, we omit the details. Example 11. Consider the Taylor density expansion of Example 5. That is, Bn (x) = ( x - x)n . Then, 1  x1 ( ) + it1 ( )h ( ) + it2 h( )1 ( ) u1 (t,  ) = et0 () th( ) (32) 0 ( ) + ith( )1 ( ) , 2 1 2	t h( ) x2 2 x2 2 ( ) - it2 x 2 2 ( )h ( ) u2 (t,  ) = et0 () 1 ( ) + th( ) 1 ( )h ( ) - 2itx 2 1 1 3  2  2   2	- it3 h( ) x2 ( ) x2 0 ( ) - t 1 ( ) h ( )0 ( ) - t 2 ( )h ( )0 ( ) 1 ( )0 ( ) - it h( ) 2 2 1 1 3 3 2	2  2 - t4 h( )2 x1 ( ) 1 ( )(0 ( )) - t h( )2 ( )(0 ( )) - it h( ) 1 ( ) 8 3 2 3 1 2 2 3    2 - t2 1 ( )h ( ) x 2 ( ) 1 ( ) - t h( )1 ( )0 ( )1 ( ) - t h( )(1 ( )) - 2ith( ) 2 3 2 1 2 1 3 2	2   2  - 2th ( ) 2 ( ) - t h( )0 ( )2 ( ) - t 1 ( ) h ( ) - t2 ( )h ( ) - t h( )1 ( )0 ( ) 2 6 1 2 1   (33) - t2 h( )2 ( ) 0 ( ) - t h( )1 ( )1 ( ) - th( )2 ( ) . 2 2 Higher order terms are quite long. However, they can be computed quickly and explicitly using the Mathematica code provided in Appendix B. Remark 12. Many common payoff functions (e.g. calls and puts) are not integrable: h  / L1 (R, dx). Such h( ) := 1 dx	e-ix h(x) < , 2 R for some  = r + ii with r , i  R.
+
+explicitly, u1 (t,  ) and u2 (t,  ) are given by
+
+payoffs may sometimes be accommodated using generalized Fourier transforms. Assume
+
+Assume also that (t, x, r + ii ) is analytic as a function of r . Then the formulas appearing in Theorem payoff of a European call option with payoff function h(x) = (ex - ek )+ has a generalized Fourier transform h( ) = -ek-ik -ix x k +  e ( e - e ) = , dx 1 2 2 (i +  2 ) R 12	= r + ii , r  R, i  (-, -1). 8 and Corollary 10 are valid and integration in (30) is with respect to r (i.e., d  dr ). For example, the
+
+In any practical scenario, one can only compute a finite number of terms in (25). Thus, we define v (N ) , the N th order approximation of v by
+N
+
+v (N ) (t, x) =
+n=0
+
+vn (t, x) =
+
+1 d  eix v (n) (t,  ), 2 R
+
+N
+
+v (N ) (t,  ) :=
+n=0
+
+vn (t,	),
+
+The function u(N ) (t, x) (which we use for time-homogeneous cases) and the approximate FK transition density p(N ) (t, x; T, y ) are defined in an analogous fashion. Remark 13. As in Pagliarani et al. (2013), when considering models with Gaussian-type jumps, i.e., models with a state-dependent L evy measure  (t, x, dz ) of the form (34) below, all terms in the expansion for the transition density become explicit. Likewise, for models with Gaussian-type jumps, all terms in the expansion for the price of an option are also explicit, assuming the payoff is integrable against Gaussian functions. Indeed, as we shall see in Appendix C, the main term p(0) (t, x; T, y ) is given by a series of Gaussian densities; further approximations p(N ) (t, x; T, y ) can be represented as a suitable differential operator applied to p(0) (t, x; T, y ) acting on the variable x (see for instance Proposition 31 for the first order).
+
+5
+
+Pointwise error bounds for Gaussian models
+
+In this section we prove some pointwise error estimates for p(N ) (t, x; T, y ), the N th order approximation of the FK density of (t + A) with A as in (8). Throughout this Section, we assume Gaussian-type jumps with (t, x)-dependent mean, variance and jump intensities. Furthermore, we work specifically with the Taylor series expansion of Example 5. That is, we use basis functions Bn (x) = (x - x )n . Theorem 14. Assume that m	a(t, x)  M, 0	(t, x)	M, t  [0, T ], x  R,
+
+for some positive constants m and M , and that
+2 (t, x) - (z -(t,x)) e 22 (t,x) dz,  (t, x, dz ) = (t, x) N(t,x),2 (t,x) (dz ) :=  2 (t, x)
+
+(34)
+
+with m	 2 (t, x)  M, 0  (t, x), |(t, x)|  M, t  [0, T ], x  R.
+
+Moreover assume that a, , , ,  and their x-derivatives are bounded and Lipschitz continuous in x, and uniformly bounded with respect to t  [0, T ]. Let x  = y in (18). Then, for N  1, we have5  t, x; T, y ) + x  p(t, x; T, y ) - p(N ) (t, x; T, y )  gN (T - t) ( for any x, y  R and 0 < t  T , where gN (s) = O (s) ,
+5 Here
+
+
+
+(t, x; T, y ) ,
+
+(35)
+
+as s  0+ .
+
+
+x
+
+
+
+= max{ x
+
+
+
+, x
+
+
+
+, x
+
+ },
+
+where
+
+denotes the sup-norm on [0, T ]  R. Note that x
+
+
+
+=0
+
+if , ,	are constants.
+
+13
+
+ is the fundamental solution of the constant coefficients jump-diffusion operator Here, the function   M  t u(t, x) + (u(t, x + z ) - u(t, x)) NM, xx + M  M  (dz ), 2 R  is a suitably large constant, and  is defined as where M (t, x; T, y ) =
+ k=0
+
+ k/2 (T - t)k/2 M  t, x; T, y ),  Ck+1 ( k!
+
+and where C being the convolution operator acting as Cf (x) =
+R
+
+f (x + z )NM  (dz ).  ,M
+
+Proof. See Appendix C.	take the following form Remark 15. In the proof of Theorem 14, we see that functions Ck   t, x; T, y ) = e-M (T -t) Ck (
+
+
+ (n + k ) 2  (T - t) n x-y+M M exp -   2M (T - t + n + k ) n=0 n! 2 M (T - t + n + k )
+
+k
+
+,
+
+k  1,
+
+and therefore  can be explicitly written as (t, x; T, y ) = e
+ (T -t) -M
+
+ (n + k + 1) 2	(T - t) n+ 2 x-y+M M exp -    2M (T - t + n + k + 1) n,k=0 n! k ! 2 M (T - t + n + k + 1)
+
+
+.
+
+then clear by (35) that, with x = y fixed, the asymptotic behavior of the error, when t tends to T , changes from (T - t) to (T - t)2 depending on whether the L evy measure is locally-dependent or not. (i.e	 0) is considered. In that case an estimate analogous to (35) holds with gN (s) = O s
+N +1 2
+
+ t, x; T, y ) = O(T - t) as (T - t) tends to By Remark 15, it follows that, for any x = y fixed, we have (  t, x; T, y ), and thus also (t, x; T, y ), tends to a positive constant as (T - t) goes to 0. It is 0, whereas Ck (
+
+Theorem 14 extends the previous results in Pagliarani et al. (2013) where only the purely diffusive case as s  0+ .
+
+,
+
+Theorem 14 shows that for jump processes, increasing the order of the expansion for N greater than one, theoretically does not give any gain in the rate of convergence of the asymptotic expansion as t  T - ; this is due to the fact that the expansion is based on a local (Taylor) approximation while the PIDE contains a of constant L evy measure is considered. Thus Theorem 14 extends the latter results to state dependent Gaussian jumps using a completely different technique. Extensive numerical tests showed that the first order approximation gives extremely accurate results and the precision seems to be further improved by considering higher order approximations. For example, in Figure 2 we plot the approximate transition density p(N ) (t, x; T, y ) for different values of N for the L evy-type model considered in Section 7.1.1. We note that, for T - t  5.0 years, the transition densities p(4) (t, x; T, y ) and p(3) (t, x; T, y ) are nearly identical. This is typical in our numerical experiments. Remark 16. The proof of Theorem 14 is also interesting for theoretical purposes. Indeed, it actually represents a procedure to construct p(t, x; T, y ). Note that with p(N ) (t, x; T, y ) being known explicitly, Equation (35) provides pointwise estimations for the exact FK density as well. 14 non-local part. This estimate is in accord with the results in Benhamou et al. (2009) where only the case
+
+6
+
+Implied volatility for local volatility models
+
+For European calls and puts, it is the implied volatility induced by an option price  rather than the option price itself  that is the quantity of primary concern. In this section we derive an implied volatility expansion for time-homogeneous local volatility models (i.e., for models with no jumps and no possibility of default). Assumption 17. In this section only, we assume St = eXt , so that 0 ( ) = a0 (- 2 - i ) in (12), with a0 > 0. Remark 18. Note that in the Taylor expansion of Example 5, we have a0 = a( x). In the two-point Taylor expansion of Example 6, we have a0 = M A. And in the Hermite expansion of Example 7, we have a0 =
+R ) a(x)e-(x-x dx.
+2
+
+dXt = -a(Xt )dt +
+
+2a(Xt )dWt ,
+
+Throughout this section, we fix an initial value of the underlying X0 = x, a time to maturity t and a call option payoff h(Xt ) = (eXt - ek )+ . The price of this option u(t, x) = u(t, x; k ) can be computed (approximately) using Corollary 10. To simplify notation, throughout this section we will suppress all dependence on (t, x, k ). However, the reader should keep in mind that option prices and their corresponding implied volatilities do depend on these variables. We begin our analysis with a definition of the Black-Scholes price. Definition 19. The Black-Scholes Price uBS : R+  R+ , defined as a function of volatility  , is given by uBS ( ) := d et
+BS
+
+( ;  )
+
+h( ) (x),
+
+BS ( ;	) =
+
+1 2  (- 2 - i ). 2
+
+Thus, this is simply the Fourier representation of the usual Black-Scholes price.
+
+1 2  . Note that BS (;	) is simply the L evy exponent of a Brownian motion with volatility  and drift - 2
+
+ Remark 20. Note that, by equations (30) and (31), under Assumption 17, we have u0 = uBS ( 2a0 ). Definition 21. The implied volatility induced by option price u is the unique positive solution  of the equation uBS ( ) = u. (36)
+
+We are now in position to derive an asymptotic expansion for implied volatility. We begin by writing the option price and implied volatility as follows u=
+ n=0
+
+n u n ,
+
+ = 1,  =
+ n=1
+
+(37) n n ,
+
+ = 0 +	 ,
+
+15
+
+We introduce the constant  = 1 purely for the purposes of accounting;  plays no role in our final result. Next, we expand uBS as a power series about the point 0 . We have u
+BS    n n BS  u (0 )
+
+Now, we insert expansions (37) and (38) into (36) and collect terms of like order in  O(1) : O(k ) : u0 = uBS (0 ),
+k
+
+1  1 ( ) = u (0 +  ) = (  )n uBS (0 ) = uBS (0 ) + k k n ! n ! n=0 n=1 k=1	 n 1  n BS  = uBS (0 ) + u (0 ) ji  k	n ! n=1 k=n j1 ++jn =k i=1     n  k 1  n  BS u (0 ) ji	 = uBS (0 ) + k  n ! n=1 j1 ++jn =k i=1 k=1	k  n 1	n  BS = uBS (0 ) + k k	+ u (0 ). ji   n ! n=2 i=1
+BS  k=1 j1 ++jn =k
+
+(38)
+
+uk = k	uBS (0 ) +
+
+  where we have used u0 = uBS ( 2a0 ) to deduce that 0 = 2a0 (see Remark 20). Observe, the right hand side of (40) involves only j for j  k - 1. Thus, the {k } k=1 can be found recursively. Explicitly, up to O(4 ) we have u1 ,  u0 1 2 2 1	u0 u2 - 2! , O(2 ) : 2 =  u0 1 3 3 2 u3 - (2 1	+ 3! 1	)u0 O(3 ) : 3 = ,  u0 1 2 2 2 3 2 u4 - (3 1  +1 2 2  + 2 2 1  + O(4 ) : 4 =  u0 O() : 1 = where
+n n BS	u0 =  u ( )|=2a0 .
+
+Solving the above equations for {k } k=0 we find  O(1) : 0 = 2a0 ,   k 1 1 uk -  O(k ) : k =  uBS (0 ) n! n=2
+
+1  n ! n=2
+
+
+
+n
+
+j1 ++jn =k i=1
+
+n BS ji   u (0 ),
+
+
+
+k  1.
+
+n
+
+j1 ++jn =k i=1
+
+n BS ji   u (0 ) ,
+
+
+
+
+
+(39) k	1, (40)
+
+	1 4 4	  ) u 0 1  24  ,
+
+
+
+(41)
+
+Theoretically, one can use recursion relation (40) ad infinitum to find n for arbitrarily large n. To sum up, our nth order asymptotic approximation for implied volatility is as follows:
+n
+
+ (n) =
+k=0
+
+k ,
+
+16
+
+where the {k } are given by (39) and (40).
+n  u0 ,
+
+As written, equations (41) are not very convenient. Indeed, for each un and for all terms of the form one must be compute Fourier integrals. However, with a little more work, we can compute the {i } un = Lu0 , L=
+k 0 k 2 (x - x ), bk (t, x)x
+
+explicitly with no integrals and no special functions. The first step is to express un as
+
+where the {bk } are functions of (t, x). That is, Bn (x) = (x - x )n and n ( ) = an (- 2 - i ) with an = Assumption 22. For the remainder of Section 6, we assume Bn (x) and n ( )  n (t,  ) as in Example 5.
+1 n x). n! x a(
+
+This choice is not necessary, but
+
+simplifies the computations that follow. Similar implied volatility results can be derived for other choices of Bn (x) and n ( ). As shown in Appendix D, under Assumption 22, for u1 we have
+2 2 u1 (t, x) = t(x - x ) + 1 2 t a0 (2x - 1) a1 (x - x )u0 (t, x).
+
+(42)
+
+and for u2 we have u2 (t, x) = +
+2 3 2 2 2 t(x - x )2 + t2 (x - x )a0 (2x - 1) + 1 3 t a0 (2x - 1) + t a0 a2 (x - x )u0 (t, x) 1 2 2 t (x 2 2 1 3 -x )2 a1 (x - x ) + 2 t (x - x ) a1 (x - x )a0 (2x - 1)
+
+4 2 2 2 1 2 ) a1 (2x - 1) +1 8 t a1 (x - x )a0 (2x - 1) + 2 t (x - x 2 2 1 3 1 3 +6 - x )u0 (t, x). t a0 (2x - 1)a1 (2x - 1) + 3 t a1 (x - x )a0 a1 (x
+
+(43)
+
+Now, using equations (42)-(43), as well as
+2  uBS ( ) = t (x - x )uBS ( ),
++ m m 2 x exp x - 2 x (x - x )uBS ( ) = , 2 -  )uBS ( ) d2 (x + x exp x - 2
+
+d2
+
+where d+ =
+
+1   t
+
+2 x-k+ 1 2 t  , a straightforward (but tedious) algebraic computation shows that
+
+u1 a1 1 =  (x + k ) - x  ,  u0 2 a0 2 1 2 2 1  u0 u2 - 2! 2 =  u0 a2 =	k 2 + kx + x2 + ta0 - 3(k + x) x + 3 x2 3 2 a0 a2 1  ta0 (6 + ta0 ) + 6 k 2 + x2 - 2(k + x) x + 2 x2 - 48a0 2a0 1 =  (2) = 0 + 1 + 2 =
+
+.
+
+If we set x   x then we have the following second order approximation for implied volatility a1 a2 a2 1  2 a0 +  (k - x) +  (k - x)2 + ta0 - 6(k - x)2 + ta0 (6 + ta0 ) , (44) 2 2 a0 3 2 a0 48a0 2a0
+
+which is quadratic in (k - x) and in t. 17
+
+7
+
+Examples
+
+In this section, in order to illustrate the versatility of our asymptotic expansion, we apply our approximation technique to a variety of different L evy-type models. We consider both finite and infinite activity L evytype measures, models with and without a diffusion component, and models with and without jumps. We study not only option prices, but also implied volatilities and credit spreads. In each setting, if the exact or approximate option price/implied volatility/credit spread has been computed by a method other than our own, we compare this to the option price/implied volatility/credit spread obtained by our approximation. For cases where the exact or approximate density/option price is not analytically available, we use Monte Carlo methods to verify the accuracy of our method. Note that, some of the examples considered below do not satisfy the conditions listed in Section 2. In particular, we will consider coefficients (a, ,  ) that are not bounded. Nevertheless, the formal results of Section 4 work well in the examples considered.
+
+7.1
+
+CEV-like L evy-type processes
+
+We consider a L evy-type process of the form (1) with CEV-like volatility and jump-intensity. Specifically, the log-price dynamics are given by a(x) = 1 2 2( -1)x  e , 2  (x, dz ) = e2( -1)x N(dz ),	(x) = 0,   0,	[0, 1], (45)
+
+that, with   [0, 1), the volatility and jump-intensity increase as x  -, consistent with the leverage effect (i.e., a decrease in the value of the underlying is often accompanied by an increase in volatility/jump intensity). This characterization will yield a negative skew in the induced implied volatility surface. As the class of models described by (45) is of the form (23) with f (x) = e2( -1)x , this class naturally lends itself to the two-point Taylor series approximation of Example 6. Thus, for certain numerical examples in this Section, we use basis functions Bn given by (24). In this case we choose expansion points x 1 and x 2 in a symmetric interval around X0 and in (21) we choose M = f (X0 ) = e2( -1)X0 . For other numerical examples, we use the (usual) one-point Taylor series expansion Bn (x) = (x - x )n . In this cases, we choose x	= X0 . We will consider two different characterizations of N(dz ): Gaussian: Variance-Gamma: -(z - m)2 1 exp N(dz ) =	dz, 2 s2 2s2 e-+ z e-- |z| I{z<0} + I{z>0} dz, N(dz ) =  |z | z  = 2	2 2 +  4 2 2
+-1
+
+where N(dx) is a L evy measure. When N	0, this model reduces to the CEV model of Cox (1975). Note
+
+(46) (47)
+
+Note that the Gaussian measure is an example of a finite-activity L evy measure (i.e., N(R) < ), whereas the As far as the authors of this paper are aware, there is no closed-form expression for option prices (or the
+
+Variance-Gamma measure, due to Madan et al. (1998), is an infinite-activity L evy measure (i.e., N(R) = ).
+
+18
+
+transition density) in the setting of (45), regardless of the choice of N(dz ). As such, we will compare our pricing approximation to prices of options computed via standard Monte Carlo methods. 7.1.1 Gaussian L evy Measure
+
+In our first numerical experiment, we consider the case of Gaussian jumps. That is, N(dz ) is given by (46). We fix the following parameters  = 0.20,  = 0.25,	= 0 .3 , m = - 0 .1 , s = 0 .4 , S0 = e x = 1 .
+
+Using Corollary 10, we compute the approximate prices u(0) (t, x; K ) and u(3) (t, x; K ) of a series of European K to the arguments of u(n) to emphasize the dependence of u(n) on the strike price K ). To compute compute the price u(t, x; K ) of each put by Monte Carlo simulation. For the Monte Carlo simulation, we use a standard Euler scheme with a time-step of 10-3 years, and we simulate 106 sample paths. We denote by u(MC ) (t, x; K ) the price of a put obtained by Monte Carlo simulation. As prices are often quoted in implied volatilities, we convert prices to implied volatilities by inverting the Black-Scholes formula numerically. That is, for a given put price u(t, x; K ), we find	(t, K ) such that u(t, x; K ) = uBS (t, x; K,  (t, K )), (48) puts over a range of strikes K and with times to maturity t = {0.25, 1.00, 3.00, 5.00} (we add the parameter
+
+u(i) (t, x; K ), i = {0, 3} we use the we the usual one-point Taylor series expansion (Example 5). We also
+
+where uBS (t, x; K,  ) is the Black-Scholes price of the put as computed assuming a Black-Scholes volatility of  . For convenience, we introduce the notation IV[u(t, x; K )] :=  (t, K ) to indicate the implied volatility induced by option price u(t, x; K ). The results of our numerical experiments are plotted in Figure 3. We observe that IV[u(3) (t, x; K )] agrees almost exactly with IV[u(MC ) (t, x; K )]. The computed prices u(3) (t, x; K ) and their induced implied volatilities IV[u(3) (t, x; K )], as well as 95% confidence intervals resulting from the Monte Carlo simulations can be found in Table 1. 7.1.2 Variance Gamma L evy Measure
+
+In our second numerical experiment, we consider the case of Variance Gamma jumps. That is, N(dz ) given by (47). We fix the following parameters:  = 0 .0 ,  = 0.25,  = - 0 .3 ,  = 0 .3 ,  = 0.15, S0 = e x = 1 .
+
+Note that, by letting  = 0, we have set the diffusion component of X to zero: a(x) = 0. Thus, X is a pure-jump L evy-type process. Using Corollary 10, we compute the approximate prices u(0) (t, x; K ) and compute u(i) , i  {0, 2}, we use the two-point Taylor series expansion (Example 6). We also compute the u(2) (t, x; K ) of a series of European puts over a range of strikes and with maturities t  {0.5, 1.0}. To
+
+19
+
+put prices by Monte Carlo simulation. For the Monte Carlo simulation, we use a time-step of 10-3 years and we simulate 106 sample paths. At each time-step, we update X using the following algorithm Xt+t = Xt + b(Xt )t +  + (Xt ) -	- (Xt ), b(x) = - I (x)  log - 1 + - + log I (x) = e2( -1)x , ,   (x)  (I (x)  t/, 1/ ),
+
++ + - 1
+
+where (a, b) is a Gamma-distributed random variable with shape parameter a and scale parameter b. Note that this is equivalent to considering a VG-type process with state-dependent parameters  (x) := /I (x),  (x) := I (x),	(x) :=	I (x).
+
+These state-dependent parameters result in state-independent  (i.e.,  remain constant). Once again, since implied volatilities rather than prices are the quantity of primary interest, we convert prices to implied volatilities by inverting the Black-Scholes formula numerically. The results are plotted in Figure 4. We observe that IV[u(2) (t, x; K )] agrees almost exactly with IV[u(MC ) (t, x; K )]. Values for u(2) (t, x; K ), the associated implied volatilities IV[u(2) (t, x; K )] and the 95% confidence intervals resulting from the Monte Carlo simulation can be found in table 2.
+
+7.2
+
+Comparison with Lorig (2012)
+
+
+In Lorig (2012), the author considers a class of time-homogeneous L evy-type processes of the form: 1 2 b + b2 1  (x) , 2 0  (x) = c0 + c1  (x), a(x) =  (x, dz ) = 0 (dz ) +  (x)1 (dz ).
+
+(49)
+
+Here, (b0 , b1 , c0 , c1 , ) are non-negative constants, the function	0 is smooth and 0 and 1 are L evy options written on X u(t, x) =
+ n=0 n
+
+measures. When	(x) = e (x) := ex , the author obtains the following expression for European-style
+
+n wn (t, x), d
+R k=0
+
+(50) et-ik - -ij )
+n-1 k=0
+
+wn (t, x) = en (x)
+
+n j =k ( -ik
+
+-ik
+
+h( ) (x).
+
+where t is the time to maturity, x is the present value of X and 1 2 b - 2 - i + c0 (i - 1) - 2 0 1 - 2 - i + c1 (i - 1) -  = b 2 2 1  = 0 (dz ) ez - 1 - z i + 1 (dz ) ez - 1 - z i + 0 (dz ) eiz - 1 - iz , 1 (dz ) eiz - 1 - iz .
+
+R
+
+R
+
+R
+
+R
+
+As in Corollary 10, h( ) is the (possibly generalized) Fourier transform of the option payoff h(x), and  is as given in (10). 20
+
+Now consider the following model: a(x) = Af (x),  (x) = f (x),	(x, dz ) = f (x)N(dz ) f (x) = a0 + a1	(x), (51)
+
+The models described by (49) and (51) coincide if we choose 1 2 b = ai A, 2 i ci = a i , i (dz ) = ai N(dz ), i = {0, 1}.
+
+Furthermore, comparing equations (23) with (51), we see that (51) is precisely the form considered in Example 6. Thus, in this Section we use the two-point Taylor series approximation of Example 6 with basis functions Bn given by (24). We choose expansion points x 1 and x 2 in a symmetric interval around X0 and in (21) we choose M = f (X0 ) = eX0 . In our numerical experiment, we consider Gaussian jumps (i.e., N(dz ) given by (46)) and we fix the following parameters:  = a0 = a1 = 1 , m = - 0 .2 ,	= - 2 .0 , t = 0 .5 , 1 0.152 , 2 X 0 = 0 .0 , A=  = 0 .0 , x  1 = - 0 .3 ,  = s = 0 .2 , x 2 = 0.3.
+
+Using Corollary 10, we compute the approximate prices u(0) (t, x; K ) and u(2) (t, x; K ) of a series of European emphasize the dependence of u(n) on the strike price K ). We also compute the price u(t, x; K ) using (50). In (50), we truncate the infinite sum at n = 8. As in Section 7.1, we convert option prices to implied volatilities. The results are plotted in Figure 5. We observe a nearly exact match between the induced implied volatilities IV[u(2) (t, x; K )] and IV[u(t, x; K )], where u(t, x; K ) (with no superscript) is computed by truncating (50) at n = 8. puts with strike prices K  [0.5, 1.5] (once again, we add the parameter K to the arguments of u(n) to
+
+7.3
+
+Comparison to NIG-type processes
+
+A Normal Inverse Gaussian (NIG) (see Barndorff-Nielsen (1998)) is a L evy process with characteristic L evy exponent ( ) given by ( ) = i -  processes with symbol (x,	) = i(x) -  (x) 2 (x) - ( (x) + i )2 - 2 (x) -	2 (x) , 2 - ( + i )2 - 2 -  2 .
+
+In Chapter 14, equation 14.1 of Boyarchenko and Levendorskii (2000), that authors consider NIG-like Feller
+
+is a martingale if and only if (x, -i) = 0. Thus, the triple (, ,  ) fixes . equations following (14.27) and equation (16.40)). u(t, x) := Ex h(Xt ) =
+
+(x) - | (x)| > c and |(x)|  C . Note that if X is a NIG-type process with symbol (x,  ), then S = eX
+
+ where , , ,   Cb (R), ,  > 0, ,   R, and where there exist constants c and C such that  (x) > c,
+
+Boyarchenko and Levendorskii (2000) deduce the following asymptotic expansion for u(t, x) (see the 1 1 d  eix et(x,) 1 + t2 [ix (x,  )][ (x,  )] +    h( ), 2 2 R 21
+
+(52)
+
+and x (x,  ) (x,  ) = 1 ( ) 0 ( ). Thus, from Corollary 10 and equations (31) and (32), it is easy to see that expansion (52) is contained within the first two terms of the (one-point) Taylor expansion obtained in this paper.
+
+We note that, if one chooses basis functions Bn (x) = (x-x )n as in Example 5 with x  = x, then (x,  ) = 0 ( )
+
+7.4
+
+Yields and credit spreads in the JDCEV setting
+
+Consider a defautable bond, written on S , that pays one dollar at time T > t if no default occurs prior to maturity (i.e., ST > 0,  > T ) and pays zero dollars otherwise. Then the time t value of the bond is given by Vt = E[I{>T } |Ft ] = I{>t} v (t, Xt ; T ), v (t, Xt ; T ) = E[e-
+T t
+
+ (s,Xs )ds
+
+|X t ].
+
+We add the parameter T to the arguments of v to indicate dependence of v on the maturity date T . Note The yield Y (t, x; T ) of such a bond, on the set { > t}, is defined as Y (t, x; T ) := - log v (t, x; T ) . T -t that v (t, x; T ) is both the price of a bond and the conditional survival probability : Q( > T |Xt = x,  > t). (53)
+
+The credit spread is defined as the yield minus the risk-free rate of interest. Obviously, in the case of zero interest rates, we have: yield = credit spread. In Carr and Linetsky (2006), the authors introduce a class of unified credit-equity models known as Jump to Default Constant Elasticity of Variance or JDCEV. Specifically, in the time-homogeneous case, the underlying S is described by (1) with a(x) = 1 2 2x  e , 2  (x) = b + c  2 e2x ,  (x, dz ) = 0,
+
+this restriction makes sense, as it results in volatility and default intensity increasing as S  0+ , which is consistent with the leverage effect. Note that when c > 0, the asset S may only go to zero via a jump from a strictly positive value. That is, according to the Feller boundary classification for one-dimensional diffusions (i.e., the probability that X reaches - in finite time is zero). The survival probability v (t, x; T ) in this v (t, x; T ) = u(T - t, x) =
+
+
+where  > 0, b  0, c  0. We will restrict our attention to cases in which  < 0. From a financial perspective,
+
+(see Borodin and Salminen (2002), p.14), the endpoint - is a natural boundary for the killed diffusion X
+
+setting is computed in Mendoza-Arriaga et al. (2010), equation (8.13). We have
+
+e-(b+n)(T -t)
+
+n=0
+
+(1 + c/| |)(n + 1/(2| |)) ( + 1)(1/(2| |))n!
+1 F1 (1
+
+ A1/(2| |) ex exp -Ae-2x
+
+- n + c/| |;  + 1; Ae-2x )
+
+(54)
+
+where 1 F1 is the Kummer confluent hypergeometric function, (x) is a Gamma function and = 1 + 2c , 2 | | A= b ,  2 | |	= 2| |b.
+
+22
+
+We compute u(T - t, x) using both equation (54) (truncating the infinite series at n = 70) as well as using
+
+After computing bond prices, we then calculate the corresponding credit spreads using (53). Approximate spreads are denoted Y (n) (t, x; T ) := - log v (n) (t, x; T ) . T -t
+
+Corollary 10. We use basis functions from the Taylor series expansion of Example 5: Bn (x) = (x - x )n .
+
+The survival probabilities are and the corresponding yields are plotted in Figure 6. Values for the yields from Figure 6 can also be found in Table 3. Remark 23. To compute survival probabilities v (t, x; T ), one assumes a payoff function h(x) = 1. Note that the Fourier transform of a constant is simply a Dirac delta function: h( ) =  ( ). Thus, when computing survival probabilities and/or credit spreads, no numerical integration is required. Rather, one simply uses the following identity
+n n u( )  ( )d = (-1)n	u( )|=0 .
+
+R
+
+to compute inverse Fourier transforms. From the above identity and equations (32) - (33) one easily obtains u0 (t, x) = e-(b+ u1 (t, x) = e-(b+
+2
+
+ce2x )t ce
+2x
+
+,
+
+)t -  2 bce2x t2  + 1  4 ce4x t2  -  4 c2 e4x t2  , 2 2 -(b+ 2 ce2x )t 4 4x 2 2 -  ce t  -  2 b2 ce2x t3  2 +  4 bce4x t3  2 - 2 4 bc2 e4x t3  2 u2 (t, x) = e 3 4 1 1 6 6x 3 2 6 2 6x 3 2 -  ce t  + 2 c e t  -  6 c3 e6x t3  2 +  4 b2 c2 e4x t4  2 3 3 2 1 8 2 8x 4 2 1 8 3 8x 4 2 1 8 4 8x 4 2 1 6 2 6x 4 2 6 3 6x 4 2 -  bc e t  +  bc e t  +  c e t  -  c e t  +	c e t  . 2 8 2 2
+2
+
+7.5
+
+Implied Volatility Expansion for CEV
+
+In this Section we apply the implied volatility expansion of Section 6 to the CEV model of Cox (1975). The log-price dynamics are given by a(x) = 1 2 2( -1)x  e , 2  (x, dz ) = 0,  (x) = 0,  > 0,   [0, 1],
+
+In this setting the exact price of a call option with strike K = ek can be expressed as follows: u(t, x; K ) = ex Q(, 2 + Q(w, v, ) = = =
+ n=0 2 2- , 2) 2 - ek 1 - Q(2, 2-  , 2 ) ,
+
+(55)
+
+(/2)n e-/2 (v/2 + n, w/2) n! (v/2 + n)
+
+,
+
+ 2 (2
+
+2e(2- )k ,  2 (2 -  )2 t 23
+
+2e(2- )x , -  )2 t
+
+where (a) and (a, b) are the complete and incomplete Gamma functions respectively. For a given call option, the (almost) exact implied volatility  corresponding to the CEV model can be obtained by solving (48) numerically, with u(t, x; K ) given by (55). Hagan and Woodward (1999) derive the following implied volatility expansion for the CEV model  HW =  f 1- 1+ (1 -  )(2 +  ) 24 ex - ek f
+2
+
++
+
+(1 -  )2  2 t +  , 24 f 2(1- )
+
+f=
+
+1 x (e + ek ). (56) 2
+
+Our second order implied volatility expansion can be computed using equation (44). We compare the 2nd order implied volatility expansion to the Hagan-Woodward expansion (56) in Figures 7 and 8. Over the strikes and maturities tested, our implied volatility expansion performs favorably.
+
+8
+
+Conclusion
+
+In this paper, we consider an asset whose risk-neutral dynamics are described by an exponential L evy-type martingale subject to default. This class includes nearly all non-negative Markov processes. In this very general setting, we provide a family of approximations  one for each choice of the basis functions (i.e. Taylor, two-point Taylor, L2 basis, etc.)  for (i) the transition density of the underlying (ii) European-style option prices and their sensitivities and (iii) defaultable bond prices and their credit spreads. For the transition densities, and thus for option and bond prices as well, we establish the accuracy of our asymptotic expansion. We also derive, for local volatility models, an expansion for the implied volatility of European calls/puts. Finally, we provide extensive numerical examples illustrating both the versatility and effectiveness of our methods.
+
+A
+
+Proof of Theorem 8
+
+Proof. The formal adjoint of An is defined as the operator A n such that f, An g = A n f, g , u, v =
+R
+
+u(x) v (x)dx,
+
+u, v  S(R).
+
+The operator A n can be obtained formally by integrating by parts, which results in making the change x  -x . That is A n = n (t, -D), with n as in (12). Note also that by (15) and (17) we have
+-ix A = n (t,  )e-ix , ne
+
+D = -ix ,
+
+Bn (x)e-ix = Bn (i )e-ix .
+
+(57)
+
+In the particular case of the expansion in Example 5, we have explicitly
+2 A n = n (t)(-x - 1) + an (t)(x + x ) +
+
+R
+
+n (t, dz )(ez - 1 - z )x +
+
+R
+
+n (t, dz )(e-zx - 1 + zx ).
+
+24
+
+We Fourier transform equation (27). First, we focus on the left-hand side
+R
+
+dx 1 e-ix (t + A0 ) vn (t, x) = t 2
+
+R
+
+e-ix vn (t, x) + dx 1 2
+R
+
+R
+
+-ix 1 vn (t, x) dx A 0 2 e
+
+= t v (t,  ) + 0 (t,  )
+
+dx 1 e-ix vn (t, x) 2
+
+(by (57))
+
+= (t + 0 (t,  )) vn (t,  ). Next, for the right-hand side of (27), by (57) we have
+n
+
+-
+
+dx
+k=1 R
+
+e-ix  Bk (x) Ak vn-k (t, x) = - 2 k=1
+n
+
+n
+
+e-ix dx Bk (i )  2 R Bk (i )
+
+Ak vn-k (t, x) vn-k (t, x) (by (57))
+
+=- =- =-
+
+k=1 n
+
+e-ix dx A k  2 R
+
+Bk (i ) k (t,  )
+k=1 n
+
+e-ix dx  vn-k (t, x) 2 R
+
+k=1
+
+Bk (i ) (k (t,	)vn-k (t,  ))
+
+Thus, we have the following ODEs (in t) for vn (t,  ) (t + 0 (t,  )) v0 (t,  ) = 0,
+n
+
+v0 (T,	) = h( ), Bk (i ) (k (t,  )vn-k (t,  )) vn (T,	) = 0.
+
+(58) (59)
+
+(t + 0 (t,  )) vn (t,  ) = -
+
+k=1
+
+One can easily verify (e.g., by substitution) that the solutions of (58) and (59) are given by (28) and (29) respectively.
+
+B
+
+Mathematica Code
+n
+
+The following Mathematica code can be used to generate the un (t,  ) automatically: u ^[n , t ,  ]:=Exp [t0 []]
+k=1 t 0
+
+Exp [-s0 []]
+
+k! (-x )k-m im D [k []u[n - k, s, ], {, m}] ds; m!(k - m)! m=0
+
+k
+
+u ^[0, t ,  ] = Exp [t0 []] h[]; The function u(t, n, ) is now computed explicitly by typing u ^[n, t, ] and pressing Shift+Enter.
+
+C
+
+Proof of Theorem 14
+
+Proof. For sake of simplicity we only prove the assertion when the default intensity and mean jump size are zero  =  = 0, when the jump intensity and diffusion component are time-independent a(t, x)	a(x), 25
+
+(t, x)	(x) and when the standard deviation of the jumps is constant  (t, x)   . Thus we consider the integro-differential operator
+2 a(x) (xx - x )u(t, x) - (x) e 2 - 1 x u(t, x) 2
+
+Lu(t, x) = t u(t, x) + + (x)
+
+R
+
+u(t, x + z ) - u(t, x) 2 (dz ),
+
+with
+z2 1 2 (dz ) =	e- 22 dz. 2
+
+Our idea is to use our expansion as a parametrix. That is, our expansion will as the starting point of the classical iterative method introduced by Levi (1907) to construct the fundamental solution p(t, x; T, y ) of L. Specifically, as in Pagliarani et al. (2013), we take as a parametrix our N -th order approximation p(N ) (t, x; T, y ) with basis functions Bn = (x - x )n and with x = y . We first prove the case N = 1. By analogy with the classical approach (see, for instance, Friedman (1964) and Di Francesco and Pascucci (2005), Pascucci (2011) for the pure diffusive case, or Garroni and Menaldi (1992) for the integro-differential case), we have
+T
+
+p(t, x; T, y ) = p(1) (t, x; T, y ) +
+t R
+
+p(0) (t, x; s,	)(s,  ; T, y )dds,
+
+(60)
+
+where  is determined by imposing the condition 0 = Lp(t, x; T, y ) = Lp(1) (t, x; T, y ) +
+t T R
+
+Lp(0) (t, x; s,  )(s,  ; T, y )dds - (t, x; T, y ).
+
+Equivalently, we have (t, x; T, y ) = Lp(1) (t, x; T, y ) +
+t T R  n=0
+
+Lp(0) (t, x; s,  )(s,  ; T, y )dds,
+
+and therefore by iteration (t, x; T, y ) = where
+
+Zn (t, x; T, y ),
+
+(61)
+
+Z0 (t, x; T, y ) := Lp(1) (t, x; T, y ),
+T
+
+(62) (63)
+
+Zn+1 (t, x; T, y ) :=
+t R
+
+Lp(0) (t, x; s,  )Zn (s,  ; T, y )dds.
+
+The proof of Theorem 14 is based on several technical lemmas which provide pointwise bounds of each term Zn in (61). These bounds combined with formula (60) give the estimate of p(t, x; T, y ) - p(1) (t, x; T, y ) . For any ,  > 0 and   0, consider the integro-differential operators L,,u(t, x) = t u(t, x) +
+  (xx - x )u(t, x) -  e 2 - 1 x u(t, x) +  u(t, x + z ) - u(t, x)  (dz ), 2 R  ,, u(t, x + z ) - u(t, x)  (dz ). L u(t, x) = t u(t, x) + xx u(t, x) +  2 R
+
+26
+
+The function ,, (t, x; T, y ) := ,, (T - t, x - y ) where ,,(t, x) := e-t (t)n ,,  (t, x), n! n n=0    2 1  x - 2 + e -  t exp - 2(t + n) 2 (t + n) (t)n  ,  (t, x), n! n n=0 1 2 (t + n) exp - x2 2(t + n) ,
+
+
+2
+
+,, (t, x) := n
+
+
+
+ ,, (t, x; T, y ) :=   ,, (T - t, x - y ) where is the fundamental solution of L,,. Analogously, the function	,, (t, x) := e-t   , (t, x) :=	n is the fundamental solution of L
+,,
+
+ ,
+
+. Note that under our assumptions, at order zero we have
+2
+
+p(0) (t, x; T, y ) = a(y), We also introduce the convolution operator C defined as C f (x) = Note that, for any  > 0, we have C ,, (t, )(x) = e-t  ,, (t, )(x) = e-t C	In the rest of the section, we will always assume that m  ,   M, of the following lemmas will depend also on m and M .
+
+,(y )
+
+(t, x; T, y ).
+
+(64)
+
+z2 1 f (x + z )  e- 2 dz. 2 R
+
+(65)
+
+(t)n ,,  (t, x), n! n+1 n=0 (t)n  ,  (t, x). n! n+1 n=0
+
+
+
+
+0    M.
+
+(66)
+
+Even if not explicitly stated, all the constants appearing in the estimates (67), (68), (69), (72), (73) and (77)
+
+Lemma 24. For any T > 0 and c > 1 there exists a positive constant C such that6
+,,  cM,cM,cM (t, x), CN (t, x)	C CN cM
+
+(67)
+
+for any t  (0, T ], x  R and N	0. Proof. For any n  0 we have ,, (t, x)  n
+6 Here
+
+cM  cM,cM qn (t, x) (t, x), n m
+
+C0  denotes the identity operator.
+
+27
+
+where
+
+A direct computation shows that
+
+ qn (t, x) = exp -
+
+
+
+x-
+
+ 2
+
++ e 2 -  t
+
+
+
+2 2
+
+2(t + n)
+
++
+
+x  . 2cM (t + n)
+2
+
+
+
+qn (t, x) is bounded on (0, T ]  R, uniformly with respect to n  0 and , ,  in (66). C c,c,(t, x), (t + n)k/2 n
+
+for any t  (0, T ], n  0 and , ,  in (66). Then the thesis is a straightforward consequence of the fact that Lemma 25. For any T > 0, k  N and c > 1, there exists a positive constant C such that
+k ,, x n (t, x)
+
+  2   2 2 - 1 2   + 2 e s  T  + 2 e - 1    exp max qn (t, x) = exp    xR 8 (cM (n + s) - s - n 2 ) 8(cM - )
+
+
+
+ ,
+
+(68)
+
+for any x  R, t ]0, T ] and n  0. Proof. For any k  1 we have
+k ,, x n (t, x) =
+
+where pk is a polynomial of degree k . To prove the Lemma we will show that there exists a positive constant C , which depends only on m, M, T, c and k , such that   x-
+ 2
+
+1 ,, (t, x)pk  (t + n)k/2 n
+
+
+
+x-
+
+ t + n
+
+ 2
+
++ e 2 -  t
+
+
+
+
+
+,
+
+ t + n
+
++ e 2 -  t
+
+
+
+j
+
+Proceeding as above, we set  where qn,j (t, x) =   x-
+ 2
+
+ ,, (t, x)  C c,c, (t, x), n n j
+
+j  k.
+
+x-
+
+ t + n
+
+ 2
+
++ e 2 -  t
+
+
+
+ ,, (t, x) = c,c, (t, x)qn,j (t, x), n n x-
+ 2
+
+ t + n
+
++ e 2 -  t
+
+
+
+j
+
+, ,  in (66). Indeed the maximum of qn,j can be computed explicitly and we have lim max qn,j (t, x) = cj (c - 1)e
+j 2
+
+Then the thesis follows from the boundedness of qn,j on (0, T ]  R, uniformly with respect to n  0 and
+
+ exp  -
+
+
+
++ e 2 -  t
+
+
+
+2
+
+2(t + n)
+
++
+
+x-
+
+c 2
+
++ e 2 -  t
+
+c
+
+2
+
+2(ct + nc)
+
+
+
+ .
+
+n
+
+xR, t]0,T ]
+
+.
+
+28
+
+Lemma 26. For any T > 0 and N  N, there exists a positive constant C such that
+,, t CN (t, x)	C ,2(N +1),(t, x)
+
+(69)
+
+for any t  (0, T ] and x  R. Proof. We first prove there exists a constant C0 , which depends only on m, M, T and N , such that
+,2(N +1), ,, (t, x), n+N (t, x)  C0 n
+
+(70) (71)
+
+,, (t, x)  C0 1 N
+
+,2(N +1),
+
+(t, x),
+
+for any t ]0, T ], x  R, n  1 and , ,  in (66). To prove (70) we observe that ,, n+N (t, x)  where 1 2 (t + (n + N ))
+ 2
+
+
+exp -
+2
+
+(N +1) - t x-  2 + e 2(t + 2n(N + 1))
+
+2
+
+qn (t, x),
+
+Now it is easy to check that
+
+ qn (t, x) = exp -
+
+x-
+
++ e 2 -  t
+
+2(t + (n + N ))
+
++
+
+x- + e - t 2(t + 2n(N + 1))
+
+ 2
+
+(N +1)
+
+2
+
+ .
+
+for any t  0. Thus qn is bounded on (0, T ]  R, uniformly with respect to n  N and , ,	in (66). To see the above bound, simply observe that t + 2n(N + 1) t + (N + n)
+
+  2   2 2 (1+N ) (1+N ) 2 t  e - e - e2    e max qn (t, x) = exp    exp  xR 2(n - N + 2nN ) 2N
+
+
+
+2
+
+ t2  2	.
+
+
+
+2(N + 1).
+
+The proof of (71) is completely analogous. Finally, by (70)-(71) we have
+,, t CN (t, x) = e-t t ,, (t, x) + t e-t   N
+
+(t)n ,,  (t, x) n! n+N n=1 (t)n ,2(N +1),  (t, x) n! n n=1
+
+
+
+
+ C0
+
+e-t t 1
+
+,2(N +1),
+
+(t, x) + t e-t
+
+ C0 (1 + M T ) ,2(N +1), (t, x).
+
+Lemma 27. For any T > 0 and N  2, there exists a positive constant C such that
+,, CN (t, x)  C C2N  ,2N , (t, x)
+
+(72)
+
+for any t  (0, T ] and x  R. 29
+
+Proof. By (70)
+,, CN (t, x) = e-t
+
+(t)n ,, (t)n ,2N , n+1+(N -1) (t, x)  C e-t n+1 (t, x) = C C2N	,2N , (t, x). n ! n ! n=0 n=0
+
+
+
+
+
+Lemma 28. For any T > 0, N  1 and c > 1, there exists a positive constant C such that |x|  t + n for any x  R, t  (0, T ] and n  0. Proof. We first show that there exist three constants C1 = C1 (m, M, T, N, c), C2 = C2 (N, c) and C3 = C3 (m, M, T, N, c) such that
+x- 2   +e 2 - t 2 2(t+n)
+
+N
+
+,, (t, x)  C c,c, (t, x), n n
+
+(73)
+
+e- |x|	t + n
+N
+
+ C1 e  C2 e
+
+- -
+
+x2 2c1/3 (T +n) x2 2c2/3 (T +n)
+
+, ,
+
+(74) (75)
+
+e
+
+-
+
+x2 2c1/3 (T +n)
+
+e
+
+2 - 2/3 x 2c (T +n)
+
+x-
+
+ C3 e-
+
+2 c c +e 2 - t 2 2c(t+n)
+
+,
+
+(76)
+
+and show that
+
+for any x  R, t  (0, T ] and n	0. In order to prove (74) we consider	2   2 -  + e 2 t x - 2 x   + 1/3 qn (t, x) = exp - , 2(t + n) 2c (t + n)   2 t	  max qn (t, x) = exp  1/3   exp  xR 2(c - 1) (t + n)
+ 2
+
+
+
++ e 2 -
+
+
+
+2
+
+ 2
+
+2(c1/3 - 1)
+
++ e 2 -
+
+
+
+2
+
+(76) is completely analogous. Equation (75) comes directly by setting C2 = max a e
+a R +
+a a N - 2c1/3 + 2c2/3 2 2
+
+for any t  (0, T ]. Thus qn is bounded on (0, T ]  R, uniformly in n  0 and , ,  in (66). The proof of	c1/3 N	c1/3 - 1
+N - N
+
+ T ,
+
+=e
+
+-N 2
+
+.
+
+Now, by (74) we have |x|  t + n (by (75)) e
+-
+x2 2c2/3 (T +n)
+
+N
+
+,, (t, x)  C1 n
+
+|x|  t + n
+
+e
+
+x2 2c1/3 (T +n)
+
+2 (T + n)
+
+ C1 C2 30
+
+2 (T + n)
+
+(by (76))   C1 C2 C3 c c,c, (t, x). n
+
+Lemma 29. For any T > 0, c > 1 and j  N  {0} there exists a positive constant C such that
+,, |x|Cj (t, x)  C C2jc c,c,(t, x) + C2(j +1)c c,4c,(t, x) ,
+
+(77)
+
+for any t  (0, T ] and x  R. Proof. By Lemma 28 there is a constant C0 , only dependent on m, M, T and c, such that
+,, |x|Cj (t, x)  C0 e-t
+
+(t)n n! n=0
+
+
+
+t + (n + j )c,c, (t, x) n+j (t)n c,c, nn+j (t, x) n! n=0
+
+
+   c,c,  C0 M ( T + j )Cj (t, x) + C0 M e-t c
+
+  3 +1 c,c, c,c, (t, x) + C0 M 2 T Cj (t, x),  C0 M ( T + j )Cj c  c  from Lemma 27 for j  1.
+
+for any t  (0, T ] and x  R and , ,  in (66). Therefore, the thesis follows from Lemma 26 for j = 0 and Lemma 30. For any T > 0 and N, k  1 we have  ,, (t, x)	CN
+
+ +k  ,, k + 1 CN  (t, x),
+
+t ]0, T ], x  R.
+
+Proof. A direct computation shows that max
+xR
+
+ , (t, x)  n+N = ,   (t, x)
+n+N +k
+
+t + (n + N + k ) t + (n + N )
+
+
+
+ k + 1,
+
+for any t  T , n  0, N	1 and , ,  in (66). This concludes the proof. Proposition 31. The solution of (27) with n = 1, A1 as in (14)-(13) and h = y , takes the form v1 (t, x; T, y ) = where J is the operator J = a0 (2x - 1) - 0 e and C2 is the convolution operator defined in (65). Proof. Under the assumptions in this appendix, n in (13) takes the form n ( ) = an (- 2 - i ) - in e
+2 2 2 2
+
+(T - t)(x - y ) +
+
+(T - t)2 J A1 p(0) (t, x; T, y ), 2 - 1 +  2 x C2 ,
+
+(78)
+
+- 1 + n e-
+
+2  2 2
+
+-1 ,
+
+(79)
+
+31
+
+with an = Now, by (29) with n = 1, we have
+T
+
+ n a(y ) , n!
+
+n =
+
+ n (y ) . n!
+
+v1 (t,	; T, y ) =
+t
+
+e(s-t)0 () (i - y ) 1 ( )p(0) (s,  ; T, y ) ds
+T
+
+= (i - y )
+T
+
+e(s-t)0 () 1 ( )p(0) (s,  ; T, y )ds
+
+t
+
+-i Then, recalling that
+
+ e(s-t)0 () 1 ( )p(0) (s,  ; T, y )ds.
+
+t
+
+1 p(0) (s,  ; T, y ) =	e(T -s)0 ()-iy , 2 i(T - t)2  0 ( ) 1 ( )p(0) (t,  ; T, y ). 2
+
+we get v1 (t,  ; T, y ) = (T - t) (i - y ) -
+
+The Proposition follows by (79) and by inverse Fourier transforming from  into the original coordinate x. Proposition 32. For any c > 1 and  > 0, there exists a positive constant C , only dependent on c, , m, M, 1
+
+
+and a1
+
+,
+
+such that
+ CcM )
+
+(x - y )2-n (xx - x )vn (t, x; T, y )  C (1 + 1 for any n  {0, 1}, x, y  R and t, T  R with 0 < T - t	.
+
+ cM,cM,cM (t, x; T, y ),
+
+(80)
+
+Proof. Recalling the expression of v0 (t, x; T, y )  p(0) (t, x; T, y ) in (64), the case n = 0 directly follows from Lemmas 25, 28 and 24 with N = 0. For the case n = 1, by Proposition 31 we have (x - y )(xx - x )v1 (t, x; T, y ) = (T - t)(x - y ) (x - y )(xx - x ) + 2x - 1 A1 p(0) (t, x; T, y ) + with J as in (78) and A1 acting as A1 u(x) = a1 (xx - x )u(x) - 1 e
+2 2
+
+(T - t)2 (x - y )J (xx - x )A1 p(0) (t, x; T, y ), 2
+
+- 1 x u(x) - C2 u(x) + u(x) .
+
+In the computations that follow below, in order to shorten notation, we omit the dependence of t, x, T, y in any function. By the commutative property of the operators x and C, and by applying Lemmas 25, 26 and
+
+32
+
+28 with N = 1, there exists a positive constant C1 only dependent on c, , m, M, 1
+
+
+2
+
+and a1
+,(y )
+2
+
+
+
+such that
+
+|(T - t)(x - y ) (x - y )(xx - x ) + 2x - 1 a1 (xx - x )p(0) |	C1 ca(y),c (T - t)(x - y ) (x - y )(xx - x ) + 2x - 1 1 e
+2 2
+
+, + ca(y),4c
+2
+
+- 1 x + 1 p(0)	C1 ca(y),c
+
+,(y )
+
+,(y )
+
+,
+
+2 2 (T - t)2 |(x - y )J (xx - x )a1 (xx - x )p(0) |  C1 ca(y),c ,(y) + ca(y),4c ,(y) , 2
+
+(T - t)2 (x - y )J (xx - x )1 2
+
+e
+
+2 2
+
+- 1 x + 1 p(0)	C1 ca(y),c
+
+2
+
+,(y )
+
++ ca(y),4c
+
+2
+
+,(y )
+
+,
+
+(81) for any x, y  R and t, T  R with 0 < T - t   . Analogously, by the commutative property of x and C, and by applying Lemmas 28, 25, 29 and 27 with N = 2, there exists a positive constant C2 only dependent
+
+
+on c, , m, M, 1
+
+and a1
+
+
+
+such that
+
+
+|(T - t)(x - y ) (x - y )(xx - x ) + 2x - 1 1 C2 p(0) | 1
+
+ C2 Cc2 ca(y),c C2 Cc2 ca(y),c
+
+2
+
+,(y )
+
++ C4c2 ca(y),4c
+
+2
+
+,(y )
+
+,
+
+(T - t)2 |(x - y )J (xx - x )1 C2 p(0) |  1 2
+
+2
+
+
+
+,(y )
+
++ C4c2 ca(y),4c
+
+2
+
+,(y )
+
+,
+
+(82) for any x, y  R and t, T  R with 0 < T - t   . Then, (80) follows from (81) and (82) by applying Lemma 24 with N = 0 and N = 1 respectively. Proposition 33. For any c > 1 and  > 0, there exists a positive constant C , only dependent on c, , m, M, 1
+
+
+and a1 e
+
+,
+2 2
+
+such that (83)
+
+(x - y )2-n
+
+ cM,cM,cM (t, x; T, y ), - 1 x + C2 - 1 vn (t, x; T, y )  C (1 + CcM )
+
+for any n  {0, 1}, x, y  R and t, T  R with 0 < T - t	. Proof. For simplicity we only prove the thesis for n = 0. The proof for n = 1 is entirely analogous to that of Proposition 32. Once again, hereafter we omit the dependence of t, x, T, y in any function we consider. Recalling the expression of v0 (t, x; T, y )  p(0) (t, x; T, y ) in (64), by Lemmas 25, 28 and 29, there exists a positive constant C1 only dependent on c, , m, M such that (x - y )2 N = 1. e
+2 2
+
+- 1 x + C2 - 1 v0  C1 ca(y),4c
+
+2
+
+,(y )
+
++ (1 + C16c2 )ca(y),16c
+
+2
+
+,(y )
+
+,
+
+for any x, y  R and t, T  R with 0 < T - t   . Then, (83) follows from Lemma 24 with N = 0 and with Proposition 34. For any c > 1 and  > 0, there exists a positive constant C , only dependent on c, , m, M , 1
+,
+
+2
+
+,
+
+a1
+
+
+
+and a2
+
+,
+
+such that
+n
+
+|Zn (t, x; T, y )|
+
+C n+1 (T - t) 2  1 + 1 n! 33
+
+n+1  CcM
+
+ cM,cM,cM (t, x; T, y ),
+
+(84)
+
+for any n  0, x, y  R and t, T	R with 0 < T - t   . Proof. Let us define the operators L0 = t + A0 , L1 = t + A0 + (x - y )A1 .
+
+Let us recall that, by (26) and (27) with n = 1, we have L0 v0 = 0, Thus, by (62) we have Z0 (t, x; T, y ) = Lp(1) (t, x; T, y ) = Lv0 (t, x; T, y ) + Lv1 (t, x; T, y ) = (L - L1 )v0 (t, x; T, y ) + (L - L0 )v1 (t, x; T, y ), where (L - L0 ) and (L - L1 ) are explicitly given by (L - L0 ) = (a(x) - a(y ))(xx - x ) + ((x) - (y )) (L - L1 ) = (a(x) - a(y ) - a (y )(x - y ))(xx - x ) + ((x) - (y ) -  (y )(x - y )) e
+2 2
+
+L0 v1 = -(L1 - L0 )v0 .
+
+e
+
+2 2
+
+- 1 x + C2 - 1 ,
+
+(85)
+
+- 1 x + C2 - 1 .
+
+Thus, by the Lipschitz assumptions on a,  and their first order derivatives, we obtain |Z0 (t, x; T, y )|  a2
+ |x
+
+- y |2 |(xx - x )v0 (t, x; T, y )| + a1
+ |x  |x
+
++ 2 + 1 and, as 1
+
+
+- y |2 - y| a1
+
+e e
+
+2 2
+
+ |x
+
+- y ||(xx - x )v1 (t, x; T, y )|
+
+- 1 x + C2 - 1 v0 (t, x; T, y )
+
+2 2
+
+- 1 x + C2 - 1 v1 (t, x; T, y ) .
+,
+
+= 0 implies 2
+,
+
+= 0, by Propositions 32 and 33 there exists a positive constant C , only
+,
+
+dependent on c, , m, M , 1
+
+2
+
+and a2
+
+such that (84) holds for n = 0. To prove the
+
+general case, we proceed by induction on n. First note that, by (26) we have |Lp(0) (t, x; T, y )| = |(L - L0 )p(0) (t, x; T, y )| (and by (85) and the Lipschitz property of , )  a1
+ |x
+
+- y ||(xx - x )p(0) (t, x; T, y )| - y| e
+2 2
+
++ 1
+
+ |x
+
+- 1 x + C2 - 1 p(0) (t, x; T, y )
+
+(and by applying Lemmas 24, 25, 28 and 29 with N = 0, 1)  C0 1	+ 1 T -t
+ CcM
+
+ cM,cM,cM (t, x; T, y ),
+
+(86)
+
+34
+
+c, , m, M, 1
+
+for any x, y  R and t, T  R with 0 < T - t   , and where C0 is a positive constant only dependent on
+
+
+and a1
+
+.
+
+Assume now (84) holds for n  0. Then by (63) we obtain
+T R
+
+|Zn+1 (t, x; T, y )|
+
+t
+
+|Lp(0) (t, x; s,  )||Zn (s,  ; T, y )|dds
+
+(and by inductive hypothesis and by (86))  C n+1 C0  n!  1 + 1 Now, by the semigroup property  ,, (t, x; s,  )CN  ,, (s,  ; T, y ) d = Ck+N   ,,(t, x; T, y ), Ck     k, N  0, (87)
+T t
+
+(T - s) 2
+
+n
+
+R
+
+n+1  cM,cM,cM  (s,  ; T, y )dds.  CcM
+
+1  + 1 s-t
+
+ CcM
+
+ cM,cM,cM (t, x; s,  )
+
+R
+
+and by the fact that7
+T t
+
+ with  = 2 , we obtain |Zn+1 (t, x; T, y )|
+
+(T - s) 2  ds = s-t
+
+n
+
+ n+1  (T - t) 2 E n E 3+ 2
+
+2+n 2
+
+(T - t) 2   , n+1
+
+n+1
+
+C n+1 C0  n! C n+1 C0 +  n!
+
+(T - t) 2  n+1
+
+n+1
+
+1 + 1 1
+
+n+1  CcM
+
+ cM,cM,cM (t, x; T, y )
+n+2  CcM
+
+2(T - t) n+2
+
+n+2 2
+
+
+
+CcM + 1
+
+ cM,cM,cM (t, x; T, y ). (88)
+
+Now, by Lemma 30 we have
++1  cM,cM,cM +2  cM,cM,cM Cn (t, x; T, y )  2 Cn (t, x; T, y ), cM  cM	 n +2 cM,cM,cM cM,cM,cM   (t, x; T, y )  n + 2 CcM  CcM  (t, x; T, y ).
+
+Inserting the above results into (88) we obtain |Zn+1 (t, x; T, y )|   where C1 = 2C0  + C n+1 C0 (T - t) 2   n+1 n! C n+1 C1 (T - t) (n + 1)!
+n+1
+
+ + 2 1 1 + 1
+
+
+
++
+
+  (1 + 1
+
+)
+
++2  cM,cM,cM Cn (t, x; T, y ) cM
+
+n+1 2
+
+n+2  CcM
+
+ cM,cM,cM (t, x; T, y ),
+
+  (1 + 1
+
+)
+
+.
+
+Now, without loss of generality we can assume C1  C , and thus we obtain (84) for n + 1.
+7 Here
+
+E represents the Euler Gamma function.
+
+35
+
+We are now in position to prove Theorem 14 for N = 1. Indeed, by equations (60), (61) and Proposition 34 we have |p(t, x; T, y ) - p(1) (t, x; T, y )|	C n+1  n! n=0
+ T t
+
+(T - s) 2
+
+n
+
+p(0) (t, x; s,	) 1 + 1
+R
+
+n+1  CcM
+
+ cM,cM,cM (s,  ; T, y )dds
+
+(and by Lemma 24 with N = 0 and N = 1 respectively)  C n+1  n! n=0
+ T t
+
+(T - s) 2
+
+n
+
+ cM,cM,cM (t, x; s,  ) 1 + 1
+R
+
+n+1  CcM
+
+ cM,cM,cM (s,  ; T, y )dds
+
+(and by (87)) = 2(T - t) C n+1 (T - t) 2  1 + 1 n! n=0
+
+n
+
+n+1  CcM
+
+ cM,cM,cM (t, x; T, y ) ,
+
+for any x, y  R and t, T  R with 0 < T - t   . Since C n+1 (T - t) 2 n+1  cM,cM,cM  CcM  (t, x; T, y ) n! n=0 can be easily checked to be convergent, this concludes the proof of Theorem 14 for N = 1. The proof for the general case is based on the same arguments. However, in the general case the technical details become significantly more complicated. Therefore, for sake of simplicity, we present here only a sketch with the main steps of the proof. We repeat the same iterative construction of p(t, x; T, y ), but using our N -th order approximation as a starting point. Thus, we replace p(1) (t, x; T, y ) with p(N ) (t, x; T, y ) in (60), where  is now defined as (t, x; T, y ) = where
+N Z0 (t, x; T, y ) := Lp(N ) (t, x; T, y ), T N Zn +1 (t, x; T, y ) := t N Lp(0) (t, x; s,  )Zn (s,  ; T, y )dds. R  n=0 N Zn (t, x; T, y ),
+n
+
+Eventually, after proving the identity Lp(N ) (t, x; T, y ) =
+
+Now, proceeding by induction, one can extend Propositions 32 and Proposition 33 to a general n	N.
+N n=0
+
+(L - Ln )v (N -n) (t, x; T, y ) + (L - L0 )v (1) (t, x; T, y ),
+
+N (t, x; T, y ) , from which Theorem 14 would follow exactly one will be able to prove the estimate (84) for Zn
+
+as in the case N = 1.
+
+36
+
+D
+
+Proof of Equations (42) and (43)
+
+Below, we will use the following repeatedly
+2 n ( )eix = an (x - x )eix , ix  = ian (2x - 1)eix , n ( )e ix  = -2an eix . n ( )e
+
+with not jumps and no possibility of default. Now, using the above relations, we find 1 u1 (t, x) =  2 1 = 2 1 = 2 1 = 2 1 = 2 deix u1 (t,  )
+R t
+
+Note that the above relations hold only when n ( ) = an (- 2 - i ), as is the case when X is a diffusion
+
+d
+R 0 t
+
+dseix+(t-s)0 () (i - x )1 ( )u0 (s,  ) dseix+(t-s)0 () (i - x )1 ( )es0 () h( )
+
+d
+R 0 t
+
+d
+R 0
+
+ds1 ( )es0 () h( )(-i - x )eix+(t-s)0 ()
+
+R
+
+1 2  d t(x - x ) - 2 it 0 ( ) 1 ( )eix+t0 () h( )
+
+2 2 = t(x - x ) + 1 2 t a0 (2x - 1) a1 (x - x )u0 (t, x),
+
+37
+
+which establishes (42). Likewise, for u2 we have 1 u2 (t, x) =	deix u2 (t,  ) 2 R t 1 d dseix+(t-s)0 () (i - x )2 2 ( )u0 (s,	) =  2 R 0 t 1 dseix+(t-s)0 () (i - x )1 ( )u1 (s,  ) d + 2 R 0 t 1 =  d dseix+(t-s)0 () (i - x )2 2 ( )es0 () h( ) 2 R 0 t s 1 d ds dreix+(t-s)0 () (i - x )1 ( )e(s-r)0 () (i - x )1 ( )er0 () h( ) + 2 R 0 0 t 1 )2 eix+(t-s)0 () ds2 ( )es0 () h( )(-i - x d =  2 R 0 s t 1 + )1 ( )e(s-r)0 () (-i - x )eix+(t-s)0 () dr1 ( )er0 () h( )(-i - x ds d 2 R 0 0 1 2 ix+t0 ( ) 1 2  1 3  h( ) =  d t(x - x )2 - it2 (x - x ) 0 ( ) - 3 t (0 ( )) - 2 t 0 ( ) 2 ( )e 2 R 1 2 3  2 1 4 + d 1 )2 1 ( ) - 1 ) 1 ( ) 0 ( ) - 8 t 1 ( )(0 ( )) 2 t (x - x 2 it (x - x 2 R
+  ix+t0 ( ) 1 3  1 3 1 2 it (x - x )  h( ) -2 1 ( ) - 6 t 0 ( )1 ( ) - 6 t 1 ( )0 ( ) 1 ( )e
+
+= +
+
+2 1 3 2 t(x - x )2 + t2 (x - x )a0 (2x - 1) + 3 - x )u0 (t, x) t a0 (2x - 1)2 + t2 a0 a2 (x 1 2 2 t (x 2 2 2 2 1 3 1 4 -x )2 a1 (x - x ) + 2 t (x - x ) a1 (x - x )a0 (2x - 1) + 8 t a1 (x - x )a2 0 (2x - 1)
+
+2 2 3 2 1 3 +1 ) a1 (2x - 1) + 6 t a0 (2x - 1)a1 (2x - 1) + 1 2 t (x - x 3 t a1 (x - x )a0 a1 (x - x )u0 (t, x),
+
+which establishes (43).
+
+References
+Andersen, L. and J. Andreasen (2000). Jump-diffusion processes: Volatility smile fitting and numerical methods for option pricing. Review of Derivatives Research 4 (3), 231262. Barndorff-Nielsen, O. (1998). Processes of normal inverse Gaussian type. Finance and Stochastics 2, 4168. Benhamou, E., E. Gobet, and M. Miri (2009). Smart expansion and fast calibration for jump diffusions. Finance and Stochastics 13 (4), 563589. Bielecki, T. and M. Rutkowski (2001). Credit Risk: Modelling, Valuation and Hedging. Springer. Borodin, A. and P. Salminen (2002). Handbook of Brownian motion: facts and formulae. Birkhauser. 38
+
+Boyarchenko, S. I. and S. Z. Levendorskii (2000). Option pricing for truncated L evy processes. International Journal of Theoretical and Applied Finance 03 (03), 549552. Capponi, A., S. Pagliarani, and T. Vargiolu (2013). Pricing vulnerable claims in a L evy driven model. preprint SSRN . Carr, P., H. Geman, D. Madan, and M. Yor (2002). The fine structure of asset returns: An empirical investigation. The Journal of Business 75 (2), 305333. Carr, P. and V. Linetsky (2006). A jump to default extended CEV model: An application of Bessel processes. Finance and Stochastics 10 (3), 303330. Carr, P. and D. B. Madan (2010). Local volatility enhanced by a jump to default. SIAM J. Financial Math. 1, 215. Christoffersen, P., K. Jacobs, and Ornthanalai (2009). Exploring Time-Varying Jump Intensities: Evidence from S&P500 Returns and Options. CIRANO. Cox, J. (1975). Notes on option pricing I: Constant elasticity of diffusions. Unpublished draft, Stanford University . A revised version of the paper was published by the Journal of Portfolio Management in 1996. Di Francesco, M. and A. Pascucci (2005). On a class of degenerate parabolic equations of Kolmogorov type. AMRX Appl. Math. Res. Express 3, 77116. Dupire, B. (1994). Pricing with a smile. Risk 7 (1), 1820. Eraker, B. (2004). Do stock prices and volatility jump? Reconciling evidence from spot and option prices. The Journal of Finance 59 (3), 13671404. Estes, R. and E. Lancaster (1966). Two-point Taylor series expansions. Friedman, A. (1964). Partial differential equations of parabolic type. Englewood Cliffs, N.J.: Prentice-Hall Inc. Garroni, M. G. and J.-L. Menaldi (1992). Green functions for second order parabolic integro-differential problems, Volume 275 of Pitman Research Notes in Mathematics Series. Harlow: Longman Scientific & Technical. Hagan, P. and D. Woodward (1999). Equivalent Black volatilities. Applied Mathematical Finance 6 (3), 147157. Hoh, W. (1998). Pseudo differential operators generating Markov processes. Habilitations-schrift, Universit at Bielefeld . Jeanblanc, M., M. Yor, and M. Chesney (2009). Mathematical methods for financial markets. Springer Verlag.
+
+39
+
+Levi, E. E. (1907). Sulle equazioni lineari totalmente ellittiche alle derivate parziali. Rend. Circ. Mat. Palermo 24, 275317. Linetsky, V. (2006). Pricing equity derivatives subject to bankruptcy. Mathematical Finance 16 (2), 255282. Linetsky, V. (2007). Chapter 6 Spectral methods in derivatives pricing. In J. R. Birge and V. Linetsky (Eds.), Financial Engineering, Volume 15 of Handbooks in Operations Research and Management Science, pp. 223	299. Elsevier. Lopez, J. L. and N. M. Temme (2002). Two-point Taylor expansions of analytic functions. Studies in Applied Mathematics 109 (4), 297311. Lorig, M. (2012). Local L evy Models and their Volatility Smile. ArXiv preprint arXiv:1207.1630 . Madan, D., P. Carr, and E. Chang (1998). The variance gamma process and option pricing. European Finance Review 2 (1), 79105. Mendoza-Arriaga, R., P. Carr, and V. Linetsky (2010). Time-changed markov processes in unified creditequity modeling. Mathematical Finance 20, 527569. Oksendal, B. and A. Sulem (2005). Applied stochastic control of jump diffusions. Springer Verlag. Pagliarani, S. and A. Pascucci (2011). Analytical approximation of the transition density in a local volatility model. Central European Journal of Mathematics 10(1), 250270. Pagliarani, S., A. Pascucci, and C. Riga (2013). Adjoint expansions in local l evy models. SIAM J. Finan. Math. 4(1), 265296. Pascucci, A. (2011). PDE and martingale methods in option pricing. Bocconi&Springer Series. New York: Springer-Verlag. Sato, K. (1999). L evy processes and infinitely divisible distributions. Cambridge University Press.
+
+40
+
+30
+
+25
+
+20
+
+15
+
+10
+
+5
+
+4
+
+2
+
+2
+
+4
+
+Figure 1: A comparison of the exact (solid), 2nd order two-point Taylor series approximation (dashed), 4th order Taylor series approximation (dotted), and 4th order Hermite polynomial expansion of the function (usual) Taylor series and the Hermite polynomial approximations we expand about x  = 0. exp(-x). For the two-point Taylor series approximation, we expand about x 1 = -1 and x 2 = 1. For the
+
+41
+
+t = 1 .0 n=1
+1.5
+
+t = 3 .0 n=1
+0.8
+
+t = 5 .0 n=1
+0.6
+
+0.5 0.6 1.0 0.4 0.4
+
+0.3
+
+0.5 0.2
+
+0.2
+
+0.1
+
+0.6
+
+0.4
+
+0.2
+
+0.2
+
+0.4
+
+0.6
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+n=2
+1.5
+
+n=2
+0.8
+
+n=2
+0.6 0.5
+
+0.6 0.4 1.0 0.4 0.3
+
+0.5 0.2
+
+0.2
+
+0.1
+
+0.6
+
+0.4
+
+0.2
+
+0.2
+
+0.4
+
+0.6
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+n=3
+1.5
+
+n=3
+0.8
+
+n=3
+0.6 0.5
+
+0.6 0.4 1.0 0.4 0.3
+
+0.5 0.2
+
+0.2
+
+0.1
+
+0.6
+
+0.4
+
+0.2
+
+0.2
+
+0.4
+
+0.6
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+n=4
+1.5
+
+n=4
+0.8
+
+n=4
+0.6 0.5
+
+0.6 0.4 1.0 0.4 0.3
+
+0.5 0.2
+
+0.2
+
+0.1
+
+0.6
+
+0.4
+
+0.2
+
+0.2
+
+0.4
+
+0.6
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+Figure 2: Using the model considered in Section 7.1.1 we plot p(n) (t, x; T, y ) (solid black) and p(n-1) (t, x; T, y ) (dashed black) as a function of y for n = {1, 2, 3, 4} and t = {1.0, 3.0, 5.0} years. For all plots we use the Taylor series expansion of Example 5. Note that as n increases p(n) and p(n-1) become nearly indistinguishable. In these plots we set  = 0.7 All other parameter values are those listed in Section 7.1.1. 42
+
+t = 0.25
+0.65 0.6 0.55 0.5 0.5 0.45 0.4 0.35 0.35 0.3 0.25 0.2 -0.8 0.3 0.45 0.6
+
+t = 1.00
+
+0.55
+
+0.4
+
+-0.6
+
+-0.4
+
+-0.2
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.25 -1.5
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+t = 3.00
+0.5 0.55
+
+t = 5.00
+
+0.5 0.45 0.45 0.4
+
+0.4
+
+0.35
+
+0.35
+
+0.3 0.3 0.25
+
+0.25 -1.5
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+0.2 -2
+
+-1.5
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+1.5
+
+Figure 3: Implied volatility (IV) is plotted as a function of log-strike k := log K for the CEV-like model with Gaussian-type jumps of Section 7.1.1. The solid lines corresponds to the IV induced by u(3) (t, x), which is computed using the one-point Taylor expansion (see Example 6). The dashed lines corresponds to the IV induced by u(0) (t, x) (again, using the usual one-point Taylor series expansion). The crosses correspond to the IV induced by u(MC ) (t, x), which is the price obtained from the Monte Carlo simulation.
+
+43
+
+t
+
+k -0.6931 -0.4185
+
+u(3) 0.0006 0.0024 0.0111 0.1511 0.5028 0.0009 0.0046 0.0314 0.2781 1.0034 0.0074 0.0224 0.0776 0.3097 1.0155 0.0160 0.0439 0.1504 0.6139 2.0050
+
+u MC-95% c.i. 0.0006 - 0.0007 0.0024 - 0.0025 0.0110 - 0.0112 0.1508 - 0.1513 0.5024 - 0.5030 0.0009 - 0.0010 0.0047 - 0.0048 0.0313 - 0.0316 0.2775 - 0.2784 1.0030 - 1.0041 0.0081 - 0.0083 0.0224 - 0.0227 0.0773 - 0.0779 0.3094 - 0.3107 1.0150 - 1.0169 0.0164 - 0.0166 0.0436 - 0.0440 0.1497 - 0.1507 0.6123 - 0.6142 2.0032 - 2.0057
+
+IV[u(3) ] 0.5864 0.4563 0.2875 0.2595 0.4238 0.5115 0.4174 0.3109 0.2638 0.3358 0.4758 0.4031 0.3280 0.2690 0.2558 0.5082 0.4118 0.3203 0.2521 0.2297
+
+IV MC-95% c.i. 0.5856 - 0.5901 0.4553 - 0.4583 0.2865 - 0.2883 0.2573 - 0.2608 0.4152 - 0.4288 0.5176 - 0.5210 0.4178 - 0.4199 0.3102 - 0.3117 0.2620 - 0.2649 0.3296 - 0.3459 0.4851 - 0.4870 0.4029 - 0.4045 0.3274 - 0.3288 0.2685 - 0.2703 0.2540 - 0.2604 0.5111 - 0.5128 0.4107 - 0.4121 0.3194 - 0.3208 0.2500 - 0.2524 0.2163 - 0.2342
+
+0.2500
+
+-0.1438 0.1308 0.4055 -1.2040 -0.7297
+
+1.0000
+
+-0.2554 0.2189 0.6931 -1.3863 -0.8664
+
+3.0000
+
+-0.3466 0.1733 0.6931 -1.6094 -0.9324
+
+5.0000
+
+-0.2554 0.4216 1.0986
+
+Table 1: Prices (u) and Implied volatility (IV[u]) as a function of time to maturity t and log-strike k := log K for the CEV-like model with Gaussian-type jumps of Section 7.1.1. The approximate price u(3) is computed using the (usual) one-point Taylor expansion (see Example 5. For comparison, we provide the 95% confidence intervals for prices and implied volatilities, which we obtain from the Monte Carlo simulation.
+
+44
+
+t = 0.50
+0.5 0.5
+
+t = 1.00
+
+0.45
+
+0.45
+
+0.4 0.4 0.35 0.35 0.3 0.3
+
+0.25
+
+0.25 -0.8
+
+-0.6
+
+-0.4
+
+-0.2
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.2 -1
+
+-0.5
+
+0
+
+0.5
+
+Figure 4: Implied volatility (IV) is plotted as a function of log-strike k := log K for the CEV-like model with Variance Gamma-type jumps of Section 7.1.2. The solid lines corresponds to the IV induced by u(2) (t, x), which is computed using the two-point Taylor expansion (see Example 6). The dashed lines corresponds to the IV induced by u(0) (t, x) (again, computed using the two-point Taylor series expansion). The crosses correspond to the IV induced by u(MC ) (t, x), which is the price obtained from the Monte Carlo simulation.
+
+t
+
+k -0.6931 -0.4185
+
+u(2) 0.0014 0.0070 0.0363 0.1702 0.5011 0.0028 0.0109 0.0473 0.1970 0.6033
+
+u MC-95% c.i. 0.0014 - 0.0015 0.0070 - 0.0071 0.0362 - 0.0365 0.1697 - 0.1704 0.5004 - 0.5012 0.0027 - 0.0028 0.0109 - 0.0110 0.0472 - 0.0476 0.1965 - 0.1974 0.6025 - 0.6037
+
+IV[u(2) ] 0.4631 0.4000 0.3336 0.2727 0.2615 0.4687 0.4057 0.3434 0.2836 0.2452
+
+IV MC-95% c.i. 0.4624 - 0.4652 0.3995 - 0.4014 0.3331 - 0.3346 0.2707 - 0.2736 0.2291 - 0.2646 0.4678 - 0.4702 0.4050 - 0.4068 0.3428 - 0.3444 0.2825 - 0.2847 0.2355 - 0.2506
+
+0.5000
+
+-0.1438 0.1308 0.4055 -0.9163 -0.5697
+
+1.0000
+
+-0.2231 0.1234 0.4700
+
+Table 2: Prices (u), Implied volatilities (IV[u]) and the corresponding confidence intervals from Figure 4.
+
+45
+
+0.40
+
+0.35
+
+0.30
+
+0.25
+
+0.6
+
+0.4
+
+0.2
+
+0.2
+
+0.4
+
+Figure 5: Implied volatility (IV) is plotted as a function of log-strike k := log K for the model of Section 7.2. The dashed line corresponds to the IV induced by u(0) (t, x). The solid line corresponds to the IV induced by crosses correspond to the IV induced by the exact price, which is computed my truncating (50) at n = 8. u(2) (t, x). To compute u(i) (t, x), i	{0, 2}, we use the two-point Taylor series expansion of Example 6 The
+
+46
+
+1.1 1 0.9
+
+0.2 0.19 0.18
+
+0.8
+Survival Probability
+
+0.7 0.6 0.5 0.4
+
+Credit Spread
+
+0.17 0.16 0.15 0.14
+
+0.3 0.2 0.1 0 2 4 T-t 6 8 10 0.13 0.12
+
+0
+
+2
+
+4 T-t
+
+6
+
+8
+
+10
+
+Figure 6:
+
+the exact survival probability, computed by truncating equation (54) at n = 70. Right: the corresponding are as follows: x = log(1),  = -1/3, b = 0.01, c = 2 and a = 0.3. yields Y (n) (t, x; T ) := - log(u(n) (T - t, x))/(T - t) on a defaultable bond. The parameters used in the plot
+
+u(1) (T - t, x) and u(2) (T - t, x) respectively, all of which are computed using Corollary 10. The crosses indicate
+
+in Section 7.4. The dotted line, dashed line and solid line correspond to the approximations u(0) (T - t, x),
+
+Left: survival probabilities u(T - t, x) := Qx [ > T | > t] for the JDCEV model described
+
+T -t 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0
+
+Y 0.1835 0.1777 0.1720 0.1663 0.1605 0.1548 0.1493 0.1442 0.1394 0.1351
+
+Y - Y (0) -0.0065 -0.0123 -0.0180 -0.0237 -0.0295 -0.0352 -0.0407 -0.0458 -0.0506 -0.0549
+
+Y - Y (1) 0.0022 0.0048 0.0071 0.0089 0.0099 0.0102 0.0101 0.0095 0.0087 0.0077
+
+Y - Y (2) 0.0001 0.0003 0.0003 -0.0001 -0.0006 -0.0011 -0.0013 -0.0011 -0.0005 0.0007
+
+Table 3: The yields Y (t, x; T ) on the defaultable bond described in Section 7.4: exact (Y ) and nth order approximation (Y (n) ). We use the following parameters: x = log(1),  = -1/3, b = 0.01, c = 2 and  = 0.3.
+
+47
+
+t = 0 .5  (solid) vs
+(2)
+
+t = 1 .0
+HW
+
+(dashed) vs
+0.55 0.50 0.45 0.40
+
+(dotted)
+
+ (solid) vs
+
+(2)
+
+(dashed) vs  HW (dotted)
+0.6
+
+0.5
+
+0.4 0.35 0.30 0.25 0.2 1.5 1.0 0.5 0.5 2.0 1.5 1.0 0.5 0.5 1.0
+
+0.3
+
+(2) -
+
+(dashed) vs
+
+HW -
+0.02
+
+(dotted)
+
+(2) -
+
+(dashed) vs
+
+HW -
+
+(dotted)
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+2.0
+
+1.5
+
+1.0
+
+0.5
+
+0.5
+
+1.0
+
+0.02 0.05
+
+0.04
+
+0.10 0.06
+
+Figure 7: Top: implied volatility for the CEV model for maturities t = 0.5 and t = 1.0. The solid line is the exact implied volatility	, computed by truncating Q in equation (55) at n = 100 terms and then inverting Black-Scholes numerically. The dashed line is the 2nd order implied volatility expansion  (2) , computed using equation (44). The dotted line is the Hagan-Woodward expansion of implied volatility  HW , computed using equation (56). Bottom: relative errors of the 2nd order (dashed) and Hagan-Woodward (dotted) implied volatility expansions. In all plots we use the following parameters:  = 0.1,  = 0.3, X0 = log(1.0). Units of the horizontal axis are log-strike: log K .
+
+48
+
+t = 2 .0  (solid) vs
+(2)
+
+t = 3 .0
+HW
+
+(dashed) vs
+
+(dotted)
+
+ (solid) vs
+
+(2)
+
+(dashed) vs  HW (dotted)
+0.8 0.7 0.6 0.5 0.4 0.3 0.2
+
+0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 3 2 1 1
+
+3
+
+2
+
+1
+
+0
+
+1
+
+(2) -
+
+(dashed) vs
+
+HW -
+0.05
+
+(dotted)
+
+(2) -
+
+(dashed) vs
+
+HW -
+0.05
+
+(dotted)
+
+3
+
+2
+
+1 0.05
+
+1 3 2 1 0.05 0.10 0.10 0.15 0.15 0.20 0.20 1
+
+Figure 8: Top: implied volatility for the CEV model for maturities t = 2.0 and t = 3.0. The solid line is the exact implied volatility	, computed by truncating Q in equation (55) at n = 100 terms and then inverting Black-Scholes numerically. The dashed line is the 2nd order implied volatility expansion  (2) , computed using equation (44). The dotted line is the Hagan-Woodward expansion of implied volatility  HW , computed using equation (56). Bottom: relative errors of the 2nd order (dashed) and Hagan-Woodward (dotted) implied volatility expansions. In all plots we use the following parameters:  = 0.1,  = 0.3, X0 = log(1.0). Units of the horizontal axis are log-strike: log K .
+
+49
+

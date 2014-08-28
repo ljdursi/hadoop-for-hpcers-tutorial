@@ -1,0 +1,148 @@
+Draft version May 27, 2013
+A Preprint typeset using L TEX style emulateapj v. 5/2/11
+
+SEARCH FOR RAYLEIGH SCATTERING IN THE ATMOSPHERE OF GJ1214B
+E.J.W. de Mooij , M. Brogi 2 , R.J. de Kok3 , I.A.G Snellen2, B. Croll4,5 , R. Jayawardhana1 , H. Hoekstra2 , G.P.P.L. Otten2 , D.H. Bekkers2 , S.Y. Haffert2 , and J.J. van Houdt2
+Draft version May 27, 2013
+1
+
+arXiv:1305.5544v1 [astro-ph.EP] 23 May 2013
+
+ABSTRACT We investigate the atmosphere of GJ1214b, a transiting super-Earth planet with a low mean density, by measuring its transit depth as a function of wavelength in the blue optical portion of the spectrum. It is thought that this planet is either a mini-Neptune, consisting of a rocky core with a thick, hydrogen-rich atmosphere, or a planet with a composition dominated by water. Most observations favor a water-dominated atmosphere with a small scale-height, however, some observations indicate that GJ1214b could have an extended atmosphere with a cloud layer muting the molecular features. In an atmosphere with a large scale-height, Rayleigh scattering at blue wavelengths is likely to cause a measurable increase in the apparent size of the planet towards the blue. We observed the transit of GJ1214b in the B-band with the FOcal Reducing Spectrograph (FORS) at the Very Large Telescope (VLT) and in the g-band with both ACAM on the William Hershel Telescope (WHT) and the Wide Field Camera (WFC) at the Isaac Newton Telescope (INT). We find a planet-to-star radius ratio in the B-band of 0.11620.0017, and in the g-band 0.11800.0009 and 0.11740.0017 for the WHT & INT observations respectively. These optical data do not show significant deviations from previous measurements at longer wavelengths. In fact, a flat transmission spectrum across all wavelengths best describes the combined observations. When atmospheric models are considered a small scale-height water-dominated model fits the data best. Subject headings: techniques: photometric	stars: individual (GJ1214)  planetary systems
+1. INTRODUCTION
+
+The transiting planet GJ1214b (Charbonneau et al. 2009) is currently the best studied super-Earth. With a radius of 2.6 REarth and a mass of 6.5 MEarth its density is significantly lower than that of the Earth. Rogers & Seager (2010) explain the low density of GJ1214b in the context of three different formation models; two of these models result in a thick atmosphere with a low mean-molecular weight and a large scaleheight, while the third scenario, that GJ1214 is a water-world, predicts a small scale-height due to the large mean-molecular weight of water compared to hydrogen. Models for GJ1214b's atmosphere showed that in the case of a hydrogen-rich atmosphere, signatures of the atmosphere should be well within reach of current instrumentation (Miller-Ricci & Fortney 2010; Howe & Burrows 2012). Many observations probing the atmosphere of GJ1214 have been presented in the literature (Bean et al. 2010, 2011; Croll et al. 2011; Crossfield et al. 2011; Berta et al. 2012; de Mooij et al. 2012; Murgas et al. 2012; Narita et al. 2012; Fraine et al. 2013; Teske et al. 2013). Although most of these observations did not show the expected features for an extended atmosphere, Croll et al. (2011) found an increased radius in the K-band indicative of molecular absorption, and de Mooij et al. (2012), hereafter Paper I, reported a tentative signal from Rayleigh scattering towards blue wavelengths. In the case that the atmosphere of GJ1214b is extended, the lack
+demooij@astro.utoronto.ca 1 Department of Astronomy and Astrophysics, University of Toronto, 50 St. George Street, Toronto, ON M5S 3H4, Canada 2 Leiden Observatory, Leiden University, Postbus 9513, 2300 RA, Leiden, The Netherlands; 3 SRON Netherlands Institute for Space Research, Sorbonnelaan 2, 3584 CA Utrecht, The Netherlands; 4 Kavli Institute for Astrophysics and Space Research, Massachusetts Institute of Technology, Cambridge, MA 02139; 5 NASA Sagan Fellow
+
+of spectral features at longer wavelengths can be explained by a low abundance of methane, as well as a cloud-layer that masks the features. Here we present the results of transit observations at blue optical wavelengths in order to investigate the tentative signal of Rayleigh scattering found in Paper I. In Sec. 2 we report the observations. In Sec. 3 we describe the data-reduction, corrections for systematic effects and the transit fitting. In Sec. 4 we discuss our results in the context of atmospheric models. Finally, we present our conclusion in Sec. 5
+2. OBSERVATIONS 2.1. Transit observations with ACAM On the night of May 22, 2011, a transit of GJ1214b was observed in the g-band (c =4996) with ACAM (Benn et al. 2008) at the William Herschel Telescope. The observations started at 23:59 UT, and lasted for  4.4 hours. An exposure time of 30 seconds was used, resulting in a total of 364 frames, with an average cadence of 44 seconds. The circular field of view of ACAM is 8 arcmin in diameter, allowing the observation of several reference stars simultaneous with the target. Due to the relative faintness of GJ1214 in g-band, we did not defocus the telescope. Despite guiding, flexing between the instrument and the guider resulted in a drift of 10 pixels (2.5") during the night. Towards the end of the night the sky became non-photometric, with an extinction of up to 20%, while the median seeing was 1.2" (see Fig. 1). 2.2. Transit observations with FORS
+
+A second transit of GJ1214 was observed with the FOcal Reducing Spectrograph (FORS) on the Very Large Telescope (VLT) on July 12, 2011 in the B-high filter (c =4543). The observations, which lasted for 2h40m, started at 01:28UT. A total of 205 frames with an exposure time of 20 sec were obtained, with an average cadence of 47 seconds. As with the
+
+2
+
+De Mooij et al. Fig. 1).
+3. DATA REDUCTION & ANALYSIS
+
+The data from all telescopes were reduced in similar ways: after bias subtraction the data were flatfielded using a flatfield created from twilight flats. The atmospheric dispersion corrector (ADC) of the FORS instrument is known to introduce rotator angle dependent variations in the flatfield (Moehler et al. 2010). Therefore flatfields for the Bhigh filter at different rotator angles were obtained from the ESO archive for the period surrounding our observations. These flatfields were combined into a single master flat. Subsequently, aperture photometry was performed on GJ1214 and a set of reference stars. An aperture radius of 18, 13 and 13 pixels was used for the ACAM, FORS and WFC observations respectively (4.5, 3.75 and 4.3 arcsec). These apertures were chosen to minimise the noise in the respective light curves. The photometry from multiple reference stars was combined into a master reference light curve for each of the observations. For the INT observations 13 reference stars were used, while the limited field-of-view for the other instruments limited the number of useable reference stars to 4 and 3 for the WHT and VLT respectively. Although there are more stars inside the field of view, many of them are either saturated or show strong systematic effects (for the VLT this might be due to the rotator angle dependence of the flat field). Subsequently the light curve for GJ1214 was divided by the master reference light curve and normalised.
+3.1. Light curve fitting The normalised light curves are shown in Fig. 2. No strong systematic effects are seen in the WHT and INT light curves, while the VLT light curve shows a smooth gradient. We fit for this trend simultaneous with the transit depth using a MarkovChain Monte-Carlo (MCMC) method. The transit is modeled using the Mandel & Agol (2002) routines with the scaled semi-major axis and the impact parameters fixed to those from Bean et al. (2010) (a/R =14.9749 and b=0.2779), the limbdarkening was also kept fixed, for the VLT observations to the values from Claret (2000), while for the WHT & INT observations limb-darkening coefficients from Claret (2004) were used. We used the quadratic limb darkening coefficients for a star with Te f f =3030K and log(g)=5.0. The time of midtransit and the planet-to-star radius ratio are free parameters. We verified that when we include the impact parameter, semimajor axis, and limb-darkening as free parameters, we obtain consistent results. Three different models were used to correct the systematic effects in the baseline: a model depending on the geometric airmass, a second-order polynomial baseline model and a third-order polynomial baseline model. For each combination of light curve and baseline model we created five separate MCMC chains of 200,000 steps for which the first 20,000 steps were discarded to remove the burn-in. Subsequently these five chains were merged, after verifying that they had converged using the Gelman-Rubin statistic (Gelman & Rubin 1992). The results of these MCMC chains are given in Table 1. The impact of red-noise was assessed using the residual permutation ("Prayer-bead") method (e.g. Gillon et al. 2007) for each of the datasets. The 16% and 84% distribution of the fitted parameters are taken as the  1 confidence interval. The radius-ratios with uncertainties as determined from this
+
+Fig. 1.-- Top panel: Lightcurves of GJ1214 without the use of a reference star for the three nights of observation. Middle panel: The seeing during the three nights, the WHT, VLT and INT observations are shown with black, dark grey and light grey lines respectively. Bottom panel: The geometric airmass for the three transit observations.
+
+WHT observations, the telescope was not defocused. To increase the cadence the 2x2 binning mode was used, yielding a pixel scale of 0.25"/pixel. Although FORS consists of 2 detectors, only data from one detector was used, due to a systematic difference in the photometry between the detectors. The detector used has an unvignetted field of view of 7' by 4'. The seeing during the observations was highly variable, varying between 1" and 3" with a median of 1.4" (see Fig. 1).
+2.3. Transit observations with WFC
+
+On the night of May 6, 2012, a transit of GJ1214b was observed in the g-band (c =4962) with the Wide Field Camera (WFC) of the Isaac Newton Telescope (INT). The observations lasted 3 hours and started at 02:35UT. During this time 113 frames were obtained with an average cadence of 97 seconds and an exposure time of 60 seconds. Although the camera consists of four CCDs, each with a pixel scale of 0.33"/pixel, only the central CCD (CCD4) was used, with a field-of-view of 22.7' by 11.4'. The telescope was not defocused for these observations.The atmosphere was stable during the observations, and the median seeing was 1.4" (see
+
+Search for Rayleigh scattering in the atmosphere of GJ1214b
+
+3
+
+Fig. 2.-- Light curves & residuals for the WHT (left panels), VLT (middle panels) and INT (right panels) datasets. Overplotted are the best fitting models for a baseline based on airmass (first two rows), second order polynomial (middle two rows) and third order polynomial (bottom two rows).
+
+4
+
+De Mooij et al. literature listed above6
+4.1. Comparison with atmospheric models
+
+TABLE 1 Measurements of R p /R for the three observations and different baseline models.
+
+Baseline Airmass 2nd order 3rd order
+
+WHT g-band 0.11800.0009 0.11760.0010 0.11680.0011
+
+VLT B-band 0.11680.0012 0.11610.0017 0.11630.0017
+
+INT g-band 0.1181 0.0014 0.1181 0.0017 0.1174 0.0017
+
+TABLE 2 Measurements of R p /R for the three observations and different baseline models from the residual permutation (prayer-bead) method. The quoted R p /R is for the median of the distribution and the upper and lower uncertainties are for the 16% & 84% levels respectively. Basline Airmass 2nd order 3rd order WHT g-band +0.0005 0.1181- 0.0010 + 0.0006 0.1174-0 .0009 +0.0006 0.1165- 0.0007 VLT B-band +0.0010 0.1165- 0.0003 + 0.0006 0.1160-0 .0003 +0.0002 0.1162- 0.0003 INT g-band +0.0008 0.1180- 0.0009 +0.0008 0.1180 - 0.0009 +0.0009 0.1172- 0.0008
+
+analysis are given in Table 2. As can be seen the uncertainties from this analysis indicate that the contribution from rednoise is small. We therefore adopt the measurements from the MCMC analysis for the rest of this work. As an additional check on the robustness of the fit we determined the radius-ratio for light curves generated using individual reference stars. In Fig. 3 we show for each of the three datasets the measured radius ratios for both a reference signal based on an ensemble of light curves as well as for the individual light curves. As can be seen most of the measurements for the individual stars agree well with the measurement for the combined reference signal, except for the airmass baseline fit to the INT g-band data. For the rest of the paper we adopt the baseline with airmass only for the WHT observations, the results for the second-order polynomial for the VLT observations and the model with the third order polynomial baseline for the INT observations. The RMS of the residuals of the data with the selected baselines are 1.68 mmag, 1.89 mmag, and 1.66 mmag for the WHT, VLT and INT data respectively
+4. RESULTS & DISCUSSION
+
+We compared the observed wavelength dependent transmission spectrum with a set of models for three different scenarios for the nature of the atmosphere of GJ1214: an atmosphere with a small scale-height (a "water world"), a large scale-height atmosphere without clouds and an atmosphere with clouds and a large scale-height. The models are the same as used in Paper I. We have overplotted the models on the data in Figs. 4 and 5. As can be seen the model with the large scale-height and no clouds (green dashed-dotted line) can clearly be excluded. The water-world model (blue, dashed-triple dotted line) and the model with a large scale-height and a cloud layer (red dashed line) are both consistent with the data. Assuming that all the uncertainties on the measurements are reliable, we can calculate the formal 2 for each of the three models. For the water-world 2 =190, for the cloudless atmosphere 2 =4003 and for the atmosphere with clouds 2 =289, while a flat line gives 2 =148. From this it follows that the current available data favour a flat transmission spectrum (i.e. no atmosphere or a grey atmosphere), followed by a water dominated atmosphere. In this paper a total of 92 measurements of the radius are used. Note that assigning degrees of freedom to each of these models is not very useful, since there are many different parameters that can be adjusted (e.g. composition and temperature-pressure profile).
+4.2. Potential origins of a flat transmission spectrum As discussed above, and by various other authors, the best fit to the collective set of measurements of the transit depth is a flat line. Here we briefly discuss some physical possibilities that can create such a flat transmission spectrum. Although unlikely, a flat transmission spectrum could indicate that GJ1214b lacks an atmosphere with the density of the planet, which requires either a water-dominated planet or a planet with an extended envelope (Rogers & Seager 2010). In the case of an extended atmosphere, the presence of clouds can also result in a grey transmission spectrum. This point is mentioned by several authors in a qualitative manner (e.g. Bean et al. 2010; de Mooij et al. 2012; Howe & Burrows 2012), but it needs pointing out that such a cloud would have to meet specific requirements to produce a flat spectrum (see also Berta et al. 2012). One option is that there is an optically thick cloud, which itself has a wavelength-independent extinction, at high enough altitudes to cover any gas absorption features. Such a cloud can be vertically extended, as long as it is optically thick when seen in transmission. Because of the wavelength-independent extinction, the altitude at which the cloud becomes optically thick will also be independent of wavelength. For cloud properties to be constant with wavelength, the particles need to be larger in size than the wavelength range. Fig. 6 shows an example of the extinction cross-sections as a function of wavelength for Mg2 SiO4 particles, which has only slowly varying optical constants along these wavelengths and is not strongly absorbing. On the other hand, Fig. 7 shows the extinction cross-sections for the same particle size distributions for water droplets, which has a clear absorption feature around 3 micron. Even for the large particles, the extinction cross-section is significantly larger there
+6 Note that in the case of papers with multiple measurements with the same wavelength and instrument we use the value for the combined fit to the data.
+
+We find planet-to-star radius ratios of 0.11800.0009, 0.11620.0017 and 0.11740.0017 respectively for the WHT g-band, VLT B-band and INT g-band. These radii are consistent with radius-ratios measured at longer wavelength (e.g. from the MEarth data Charbonneau et al. 2009), and do not confirm the potential 2 deviation in g-band found in Paper I. In addition to the data above, GJ1214b has been observed by many other groups, and the available data from the literature spans wavelengths from 0.4 m to  5 m (Bean et al. 2010, 2011; D esert et al. 2011; Croll et al. 2011; Berta et al. 2012; Narita et al. 2012; Fraine et al. 2013; Teske et al. 2013, Paper I). Although most of these datasets use the same parameters for the system (from Bean et al. 2010), some (e.g. Berta et al. 2011) use a different set of parameters, which could cause an offset, making a direct comparison between the measured radius-ratios more difficult. In addition, we note that GJ1214 is an active star, and that the presence of starspots could bias the measurement of the radius measurements (see Sect. 4.3). Since the measurements from the literature were made at different dates, and therefore different levels of stellar activity, this could influence the observed transmission spectrum. In Fig. 4 we show the transmission spectrum of GJ1214b based on our measurements and those from the
+
+Search for Rayleigh scattering in the atmosphere of GJ1214b
+
+5
+
+Fig. 3.-- Measured planet-to-star radius ratios for the three datasets using three different baseline corrections. The filled stars are the values determined for the master lightcurve (the light curve of the target divided by the combined light curve of the reference stars), while the open diamonds are the radius ratios as determined when light curve of the target is correct with the individual reference stars. The three different baselines are: Airmass (AM), 2nd order polynomial (P2) and third order polynomial (P3).
+
+Fig. 4.-- Transmission spectrum of GJ1214b, including all available measurements from the literature. The filled circles are the observations from this work, the filled stars are for data from Paper I, the filled squares are for data from Croll et al. (2011), the open triangles are for data from Bean et al. (2011), the open stars are for data from Berta et al. (2012), the open circles are for data from D esert et al. (2011), the asterixes are for data from Narita et al. (2012), the crosses are for data from Fraine et al. (2013), and the open squares are for data from Teske et al. (2013). Overplotted are three models for the atmosphere of GJ1214b: a hydrogen dominated atmosphere with solar composition (green line), a hydrogen dominated atmosphere with clouds and low methane abundance (red line) and a water dominated atmosphere (blue line). The dashed curves at the bottom are the transmission curves for the different filters. Note that for clarity the filter curves for the data from Bean et al. (2011) and Berta et al. (2012) have been omited, since they are effectively flat.
+
+6
+
+De Mooij et al.
+
+Fig. 5.-- Same as Fig. 4 but now only focusing on the optical part of the spectrum.
+
+Search for Rayleigh scattering in the atmosphere of GJ1214b
+
+7
+
+104
+
+Extinction cross-section (micron2)
+
+102
+
+100
+
+10-2
+
+10-4 0
+
+1
+
+2 3 Wavelength (micron)
+
+4
+
+5
+
+Fig. 6.-- Extinction cross-section for Mg2 SiO4 particles with narrow lognormal size distributions around 5.0, 1.0 and 0.2m respectively from top to bottom.
+
+Fig. 8.-- The change in R p /R in the g-band as a function of stellar variability in the I-band. The corresponding spot coverage fraction, assuming a spot temperature of 2800K is indicated above. The stellar variability as measured by Berta et al. (2011) is 1% in the the MEarth bandpass, comparable to the I-band used here, and is indicated by a dashed line.
+
+104
+
+102
+
+100
+
+10-2
+
+10-4 0
+
+1
+
+2 3 Wavelength (micron)
+
+4
+
+5
+
+Fig. 7.-- Extinction cross-section for H2 O droplets with narrow log normal size distributions around 5.0, 1.0 and 0.2m respectively from top to bottom.
+
+In the discovery paper Charbonneau et al. (2009) noted that host-star, GJ1214, is variable with a period of tens of days, which they attribute to starspots rotating in and out of view. Berta et al. (2011) used more measurements from MEarth, and found an average variability of 1% on a period of 50 days. Unocculted starspots, whether contributing to the stellar variability or not, can, as discussed in Paper I (see also Sing et al. 2011; D esert et al. 2009), have a significant impact on the observed transmission spectrum. The WHT, INT and VLT observations were taken over the span of approximately a year, and are, most-likely, at different levels of stellar variability. This could lead to systematic differences in the measured radius ratios. Assuming a spot temperature of 2800K (200K lower than the temperature of the stellar photosphere), the 1% variability from Berta et al. (2011) corresponds to a bias in the radius ratio of 0.001 in the g-band(see Fig. 8). Since we do not have contemporary measurements of the variability for all the observations, we do not correct our measurements for this effect. As noted in Paper I, a background of unocculted starspots that does not contribute to the stellar activity, could also significantly alter the shape of the transmission spectrum.
+5. CONCLUSIONS
+
+than at other wavelengths. For both the Mg2 SiO4 and H2 O the cross-sections are calculated using a Mie code based on de Rooij & van der Stap (1984). Alternatively, if the clouds have a very sharp decrease of optical depth above the cloud tops, that could also result in a featureless transmission spectrum. If the cloud is optically thick along the slant path through the atmosphere, variations of cloud properties with wavelength are irrelevant. The cloud then still needs to be above the altitude where gas absorption is important. Note that at present we cannot constrain a pressure range of the cloud tops, since we do not know the gas abundances. For instance, Lammer et al. (2013) show that atmospheric escape can be very important for GJ 1214b, which will change the composition of the atmosphere. The pressure limits mentioned by Berta et al. (2012) are only valid for a solar composition atmosphere in chemical equilibrium. Finaly, a sharp drop of gas volume mixing ratio, for instance due to condensation, photolysis or ionization (e.g. Miller-Ricci Kempton et al. 2012), can make a transmission spectrum appear flatter across all wavelengths, although this is unlikely to yield a perfectly flat transmission spectrum.
+4.3. Stellar variability
+
+Extinction cross-section (micron2)
+
+We have observed three transits of GJ1214b at blue optical wavelengths in order to search for the signature of Rayleigh scattering in its atmosphere, which should be present if its atmosphere has a low mean molecular weight and no large cloud particles. We find planet-to-star radius ratios of 0.11800.0009, 0.11620.0017 and 0.11740.0017 in the gWHT -, Bhigh - and gINT -bands respectively, and we do not confirm the potential 2 signal of Rayleigh scattering presented in Paper I. Combining these measurements with values from the literature, and comparing the full wavelength dependent transmission spectrum with atmospheric models we find that a model with a large scale height and no cloud layer is incompatible with the available data. Both a model with a large scale height and a cloud layer and a model for an atmosphere with a small scale-height are a better fit to the data with the water model favoured over the model for an extended atmosphere with clouds. We therefore conclude that, based on the currently available data, GJ1214b probably has an atmosphere with a small scale-height, although it should be noted that a featureless transmission spectrum provides the lowest 2 . This flat spectrum could be due to clouds, as discussed in Sect. 4.2.
+
+8
+
+De Mooij et al. (287.C-5035). E.dM. is supported in part by an Ontario Postdoctoral Fellowship. This work is supported in large part by grants to R.J. from the Natural Sciences and Engineering Research Council of Canada, which also funds B.C.'s research. B.C.s work was performed under contract with the California Institute of Technology funded by NASA through the Sagan Fellowship Program.
+
+We are grateful to the staff of the Isaac Newton Group, ESO's Paranal observatory. The Isaac Newton Telescope is operated on the island of La Palma by the Isaac Newton Group in the Spanish Observatorio del Roque de los Muchachos of the Instituto de Astrof isica de Canarias. Based on observations collected at the European Southern Observatory, Chile
+
+REFERENCES Bean, J. L., Kempton, E., & Homeier, D. 2010, Nature, 468, 669 Bean, J. L., D esert, J.-M., Kabath, P., et al. 2011, ApJ, 743, 92 Benn, C., Dee, K., & Ag ocs, T. 2008, in Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series, Vol. 7014, Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series Berta, Z. K., Charbonneau, D., Bean, J., et al. 2011, ApJ, 736, 12 Berta, Z. K., Charbonneau, D., D esert, J.-M., et al. 2012, ApJ, 747, 35 Charbonneau, D., Berta, Z. K., Irwin, J., et al. 2009, Nature, 462, 891 Claret, A. 2000, A&A, 363, 1081 --. 2004, A&A, 428, 1001 Croll, B., Albert, L., Jayawardhana, R., et al. 2011, ApJ, 736, 78 Crossfield, I. J. M., Barman, T., & Hansen, B. M. S. 2011, ApJ, 736, 132 de Mooij, E. J. W., Brogi, M., de Kok, R. J., et al. 2012, A&A, 538, A46 de Rooij, W. A., & van der Stap, C. C. A. H. 1984, A&A, 131, 237 D esert, J.-M., Lecavelier des Etangs, A., H ebrard, G., et al. 2009, ApJ, 699, 478 D esert, J.-M., Bean, J., Miller-Ricci Kempton, E., et al. 2011, ApJ, 731, L40+ Fraine, J. D., Deming, D., Gillon, M., et al. 2013, ArXiv e-prints Gelman, A., & Rubin, D. B. 1992, Statistical Science, 7, 457472 Gillon, M., Demory, B., Barman, T., et al. 2007, A&A, 471, L51 Howe, A. R., & Burrows, A. S. 2012, ApJ, 756, 176 Lammer, H., Erkaev, N. V., Odert, P., et al. 2013, MNRAS, 664 Mandel, K., & Agol, E. 2002, ApJ, 580, L171 Miller-Ricci, E., & Fortney, J. J. 2010, ApJ, 716, L74 Miller-Ricci Kempton, E., Zahnle, K., & Fortney, J. J. 2012, ApJ, 745, 3 Moehler, S., Freudling, W., Mller, P., et al. 2010, PASP, 122, 93 Murgas, F., Pall e, E., Cabrera-Lavers, A., et al. 2012, A&A, 544, A41 Narita, N., Nagayama, T., Suenaga, T., et al. 2012, ArXiv e-prints Rogers, L. A., & Seager, S. 2010, ApJ, 716, 1208 Sing, D. K., Pont, F., Aigrain, S., et al. 2011, MNRAS, 416, 1443 Teske, J. K., Turner, J. D., Mueller, M., & Griffith, C. A. 2013, ArXiv e-prints
+

@@ -1,0 +1,1435 @@
+Influence of vacuum electric field on the stability of a plasma-vacuum interface
+
+arXiv:1305.5327v1 [math.AP] 23 May 2013
+
+Nikita Mandrik Novosibirsk State University, 2 Pirogova str., 630090, Novosibirsk, Russia E-mail: manikitos@gmail.com Yuri Trakhinin Sobolev Institute of Mathematics, 4 Koptyug av., 630090, Novosibirsk, Russia E-mail: trakhin@math.nsc.ru
+
+Abstract We study the free boundary problem for the plasma-vacuum interface in ideal compressible magnetohydrodynamics. Unlike the classical statement, when the vacuum magnetic field obeys the div-curl system of pre-Maxwell dynamics, we do not neglect the displacement current in the vacuum region and consider the Maxwell equations for electric and magnetic fields. We show that a sufficiently large vacuum electric field can make the planar interface violently unstable. We find and analyze a sufficient condition on the vacuum electric field that precludes violent instabilities. Under this condition satisfied at each point of the unperturbed nonplanar plasma-vacuum interface, we prove the well-posedness of the linearized problem in anisotropic weighted Sobolev spaces.
+
+1
+
+Introduction
+
+We consider the equations of ideal compressible magnetohydrodynamics (MHD): t  + div (v ) = 0, t (v ) + div (v	v - H  H ) + q = 0, t H -   (v H ) = 0,
+1 t e + 2 |H |2 + div (e + p)v + H (v H ) = 0,
+
+(1a) (1b) (1c) (1d)
+
+where  denotes density, v  R3 plasma velocity, H  R3 magnetic field, p = p(, S ) pressure,
+1 2 2 q = p+ 1 2 |H | total pressure, S entropy, e = E + 2 |v | total energy, and E = E (, S ) internal
+
+energy. With a state equation of gas,  = (p, S ), and the first principle of thermodynamics, (1) is a closed system for the unknown U = U (t, x) = (p, v, H, S ).
+
+1
+
+System (1) is supplemented by the divergence constraint div H = 0 (2)
+
+on the initial data U (0, x) = U0 (x). As is known, taking into account (2), we can easily symmetrize system (1) by rewriting it in the nonconservative form  dv   p dp + div v = 0,  - (H, )H + q = 0,   dt dt  dS   dH - (H, )v + H div v = 0, = 0, dt dt
+
+(3)
+
+where d/dt = t + (v, ) and by ( , ) we denote the scalar product. Equations (3) form the symmetric system
+3
+
+A0 (U )t U +
+j =1
+
+Aj (U )j U = 0
+
+(4)
+
+which is hyperbolic if the matrix A0 = diag 1/(a2 ), , , , 1, 1, 1, 1 is positive definite, i.e.,  > 0,
+1
+
+p > 0,
+
+(5)
+
+where a = (p )- 2 is the sound velocity and other symmetric matrices have the form	    A1 =
+v1 a2
+
+1 v1 0 0 0 H2 H3 0 0 v2 0 0 -H2 0 0 0
+
+0 0 v1 0 0 -H1 0 0 1 0 v2 0 H1 0 H3 0
+
+0 0 0 v1 0 0 -H1 0 0 0 0 v2 0 0 -H2 0
+
+0 0 0 0 v1 0 0 0 0 -H2 H1 0 v2 0 0 0
+
+0 H2 -H1 0 0 v1 0 0 0 0 0 0 0 v2 0 0
+
+0 H3 0 -H1 0 0 v1 0 0 0 H3 -H2 0 0 v2 0
+
+0 0 0 0 0 0 0 v1 0
+
+	 ,
+
+1 0 0 0 0 0 0
+
+	 A2 =
+
+v2 a2
+
+
+
+0 1 0 0 0 0 0
+
+  0    0   0  ,  0    0   0   v2
+
+2
+
+	 A3 =
+
+v3 a2
+
+0 v3 0 0 -H3 0 0 0
+
+0 0 v3 0 0 -H3 0 0
+
+1 0 0 v3 H1 H2 0 0
+
+0 -H3 0 H1 v3 0 0 0
+
+0 0 -H3 H2 0 v3 0 0
+
+0 0 0 0 0 0 v3 0
+
+0 0 0 0 0 0 0 v3
+
+	 .
+
+0 0 1 0 0 0 0
+
+Plasma-vacuum interface problems for system (1) appear in the mathematical modeling of plasma confinement by magnetic fields. This subject is very popular since the 1950's, but most of theoretical studies were devoted to finding stability criteria of equilibrium states. The typical work in this direction is the famous paper of Bernstein et. al. [2] where the plasma-vacuum interface problem was considered in its classical statement modeling the plasma confined inside a perfectly conducting rigid wall and isolated from it by a vacuum region. In this statement (see also, e.g., [4]) the plasma is described by the MHD equations (1) whereas in the vacuum region one considers the so-called pre-Maxwell dynamics   H = 0, div H = 0 (6)
+
+describing the vacuum magnetic field H	R3 . That is, one neglects the displacement current (1/c) t E not only in nonrelativistic MHD but also in the Maxwell equations in vacuum, where E  R3 is the electric field and c is the speed of the light. Then, from 1   E = - t H , c div E = 0
+
+the vacuum electric field E is a secondary variable that may be computed from the magnetic field H. Recall that the plasma electric field is a secondary variable as well because in ideal MHD 1 E + = - v  H, (7) c to distinguish between the vacuum and plasma electric fields.1
+
+where we use the notation E + by the boundary conditions
+
+The classical statement [2, 4] of the plasma-vacuum problem for systems (1) and (6) is closed dF = 0, [q ] = 0, dt (H, N ) = 0,
+
+(H, N ) = 0
+
+(8a) (8b)
+
+on the interface (t) = {F (t, x) = 0} and the initial data U (0, x) = U0 (x), H(0, x) = H0 (x),
+1
+
+x  + (0), x - (0),
+
+F (0, x) = F0 (x),
+
+x  (0),
+
+(9)
+
+Below we will drop the subscript "-" for the vacuum electric field: E := E - .
+
+3
+
+for the plasma variable U , the vacuum magnetic field H and the function F , where + (t) and - (t) are space-time domains occupied by the plasma and the vacuum respectively, N =
+1 F , and [q ] = q | - 2 |H|2 | denotes the jump of the total pressure across the interface. The
+
+first condition in (8) means that the interface moves with the velocity of plasma particles at the boundary and since F is an unknown, problem (1), (6)(9) is a free-boundary problem. Moreover, in the plasma confinement problem both the plasma and vacuum regions are bounded domains, and at the perfectly conducting rigid wall  which is the exterior boundary of the vacuum region - (t) one states the standard boundary condition (H, n) = 0 (see [20]), where n is a normal vector to . In astrophysics, the plasma-vacuum interface problem (1), (6)(9) can be used for modeling a star or the solar corona when magnetic fields are taken into account. In this case, the vacuum region surrounding a plasma body is usually assumed to be unbounded. Until recently, there were no well-posedness results for full (non-stationary) plasma-vacuum models. A basic energy a priori estimate in Sobolev spaces for the linearization of the plasmavacuum problem (1), (6)(9) was first derived in [18], provided that the stability condition stating that the magnetic fields on either side of the interface are not collinear holds for a basic state ("unperturbed flow"). The existence of solutions to the linearized problem was then proved in [14]. In [18, 14], as in [6, 17], it was assumed that the hyperbolicity conditions (5) are satisfied in + (t) up to the boundary (t), i.e., the density does not go to zero continuously, but has a jump (clearly, in the vacuum region - (t) the density is identically zero). It is noteworthy that this assumption is automatically satisfied for the uniform incompressible plasma, i.e., for the case when in problem (1), (6)(9) system (1) is replaced by the equations of ideal incompressible MHD with a uniform (constant) density. For this case the results analogous to those from [18, 14] were recently obtained in [9]. In [18, 14], for technical simplicity the moving interface (t) was assumed to have the form of a graph F = x1 - (t, x ), x = (x2 , x3 ), i.e., both the plasma and vacuum domains are unbounded. However, as was noted in the subsequent paper [15], this assumption is not suitable in a pure form for the original nonlinear free boundary problem (1), (6)(9) because in that case the vacuum region - (t) = {x1 < (t, x )} is a simply connected domain. Indeed, the elliptic problem (6), (8b) has then only the trivial solution H = 0, and the whole problem is reduced to solving the MHD equations (1) with a vanishing total pressure q on (t). The technically difficult case of non simply connected vacuum regions was postponed in [15] to a future work. Instead of this, the plasma-vacuum system was assumed in [15] to be not isolated from the outside world due to a given surface current on the fixed boundary of the vacuum region that forces oscillations. Namely, in [15] the space domain  occupied by plasma and vacuum is given by  := {x  R3 | x1  (-1, 1), x	T2 }, where T2 denotes the 2-torus, which can be thought of as the unit square with periodic boundary conditions, the interface  is given by F = x1 - (t, x ) = 0, and	(t) = {x1  (t, x )}   are the plasma and vacuum 4
+
+domains respectively. On the fixed top and bottom boundaries  := {(1, x ) , x  T2 } of the domain , one prescribed in [15] the boundary conditions v 1 = H1 = 0 on [0, T ]  + , H=J on [0, T ]	- , (10)
+
+where  = (-1, 0, 0) is the outward normal vector at - and J represents a given surface current which forces oscillations onto the plasma-vacuum system. In laboratory plasmas this external excitation may be caused by a system of coils. This model can also be exploited for the analysis of waves in astrophysical plasmas, e.g., by mimicking the effects of excitation of MHD waves by an external plasma by means of a localized set of "coils", when the response of the internal plasma is the main issue (see a more complete discussion in [4]). Basing on the results of [18, 14] for the linearized problem, under the above mentioned stability condition [18] satisfied at each point of the initial interface the existence and uniqueness of the solution to the nonlinear plasma-vacuum interface problem (1), (6)(10) in suitable anisotropic Sobolev spaces was recently proved in [15] by a suitable Nash-Moser-type iteration. In relativistic settings, the displacement current (1/c) t E cannot be neglected and we have the Maxwell equations 1 t H +   E = 0, c 1 t E -   H = 0 c (11)
+
+in the vacuum region whereas in the plasma region instead of system (1) one considers the equations of relativistic magnetohydrodynamics (RMHD). We do not include the equations div H = 0, div E = 0 (12)
+
+into the main system (11) because they are just divergence constraints on the initial data. The relativistic plasma-vacuum interface problem for the case of special relativity was first systematically studied in [19]. For technical simplicity the plasma and vacuum regions were assumed to be unbounded and given by  (t) = {x1  (t, x )} respectively. The Maxwell equations (11) and the RMHD equations are supplemented by the interface conditions (8) and suitable boundary conditions for the vacuum electric field (see [19] and also below). It should be noted that the relativistic version of the second boundary condition in (8a) has the form [19] [q ] = q | - with the relativistic total pressure q = p + is given by (7). By considering particular cases for the unperturbed flow, it was shown in [19] that, unlike the non-relativistic case, even if the non-collinearity condition (H  H)| = 0 from [18, 14, 15] on the unperturbed magnetic fields holds a sufficiently large unperturbed vacuum electric field can make the relativistic planar interface violently unstable. The main result of [19] is finding 5
+1 2
+
+1 |H|2 - |E |2 | , 2
+
+(13)
+
+|H |2 - |E + |2 , where the plasma electric field E +
+
+a sufficient stability condition which gives a (basic) energy a priori estimate in the anisotropic
+1 for the variable coefficients linearized problem for nonplanar plasmaweighted Sobolev space H
+
+vacuum interfaces (see [3, 20, 8, 13] and references therein as well as Section 3 for the definition of
+m ). Namely, it was proved in [19] that under the non-collinearity condition the planar interface H
+
+is stable if, roughly speaking, the unperturbed vacuum electric field is small enough. Moreover, if the sufficient stability condition holds at each point of the unperturbed nonplanar interface, then the linearized problem obeys the mentioned energy a priori estimate. The deduction of this a priori estimate is the first step towards the proof of a local-in-time existence and uniqueness theorem for the nonlinear problem. However, due to enormous technical complication of the RMHD equations it is very difficult to analyze (even numerically) the parametric domain described by the sufficient stability condition found in [19] and how big is it in comparison with the whole stability domain, i.e., the whole domain of the well-posedness of the constant coefficients linearized problem for a planar interface. The whole stability domain could be found by spectral analysis, but this seems technically impossible in practice (the linearized RMHD equations are rather complicated even for particular cases of the unperturbed flow). At the same time, in the analysis in [19] relativistic effects play a rather passive role whereas the crucial influence on stability is exerted by vacuum electric field. Recall that in the classical statement of the non-relativistic plasma-vacuum interface problem [2, 4, 18, 14, 15] the influence of vacuum electric field is ignored because the vacuum electric field is a secondary variable defined through the vacuum magnetic field which should satisfy the div-curl system (6). This seems reasonable at first sight (and, as we will see, this is indeed so if the vacuum electric field is small enough) because if we reduce the MHD system (3) and the Maxwell equations (11) to a dimensionless form by introducing the scaled values x ~= x , t ~= a t , v ~= v , a   ~=  ,   p ~= p ,  a 2 S S = , S
+
+H H=  , a
+
+H H=  , a
+
+E E=  , a
+
+(14)
+
+then after dropping tildes the MHD system in terms of the scaled values stays unchanged whereas the Maxwell equations take the form t H +   E = 0, t E -   H = 0 (clearly, the divergence constraints (12) stay unchanged), with = where a  , c (15a) (15b)
+
+ are constants associated with a uniform flow, is a characteristic length and  , a , S	is the entropy for this flow. Since for namely, a  is the sound speed,	 is the density and S 6
+
+non-relativistic speeds characteristic plasma velocities, in particular, the constant sound speed a  are very small compared to the speed of light, the constant  is a very small but fixed parameter. In this paper, unlike the classical statement in [2, 4, 18, 14, 15], we do not set  = 0 in (15b) and consider the full Maxwell equations in vacuum. We show that in spite of the fact that  is a very small constant a large enough vacuum electric field crucially influence on the stability of a non-relativistic plasma-vacuum interface. Thus, in our new statement the non-relativistic plasma is still described by the MHD equations (3)2 whereas the vacuum magnetic and electric fields obey the Maxwell equations (15). As in [19], for technical simplicity we consider the case of unbounded domains. Namely, we assume that the domains  (t) = {x1  (t, x )} represent the plasma and vacuum regions respectively. On the interface (t) = {F (t, x) = x1 - (t, x ) = 0} we still have the boundary conditions (8), where the jump [q ] is given by (13) and q is the total
+1 |H |2 . That is, one has pressure of non-relativistic plasma appearing in (1), i.e., q = p + 2
+
+t  = vN , q= and HN = 0, HN = 0 on (t),
+1 2
+
+(16a) on (t) (16b)
+
+|H|2 - |E |2
+
+(17a) (17b)
+
+where vN = (v, N ), HN = (H, N ), HN = (H, N ), and N = F = (1, -2 , -3 ). As for current-vortex sheets [16], conditions (17) are not real boundary conditions and should be considered as restrictions on the initial data. The boundary conditions for the vacuum electric field are just jump conditions for equations (1c) (in a dimensionless form) and (15a), i.e., for the conservation laws t (H  ) +	E  = 0 in  (t),
+
+with H + = H , H - = H, E + = -(v  H ), cf. (7), and E - = E . These jump conditions have the known form [2] N	[E ] = t  [H ] on (t),
+
+with [E ] = E|+  - E | , [H ] = H | - H| , and, taking into account (16a) and (17a), we exclude from them the velocity and the plasma magnetic field: N  E = t	H on (t). (18)
+
+The first condition in (18) is nothing else than constraint (17b) and the rest two boundary conditions in (18) read E2 = H3 t ,
+2
+
+E3 = -H2 t
+
+on (t),
+
+(19)
+
+We assume that they are already written in terms of the scaled values (14) and tildes are dropped.
+
+7
+
+with Ei = E1 i	+ Ei , i = 2, 3. In fact, if in (19) we formally set  = 1, then we get the corresponding boundary conditions for the relativistic case in [19], where the speed of the light was taken to be equal to unity. Summarizing the above, we obtain the free boundary value problem for system (4) in + (t) and system (15) in - (t) with the boundary conditions (16) and (19) on (t) and the initial data U (0, x) = U0 (x), x  + (0), V (0, x) = V0 (x), x  R2 , x  - (0), (20) (0, x ) = 0 (x ),
+
+where V = (H, E ). Moreover, exactly as in [19], we can prove that (2), (12) and (17) are restrictions on the initial data (20), i.e., if they are satisfied at the first moment t = 0, then they hold for all t > 0. System (15) is always hyperbolic and, as in [19], we assume that the hyperbolicity condition (5) is satisfied up to the boundary of the domain + (t). In this paper, we study the linearized problem associated to (4), (15), (16), (19), (20). We first obtain a non-relativistic counterpart of the sufficient stability condition from [19]. Then, our main goal is to analyze it for particular cases and compare with the spectral stability condition that was technically impossible in relativistic settings in [19]. The spectral stability condition is nothing else than the Kreiss-Lopatinski condition [5, 7] for the constant coefficients linearized problem for a planar interface. Even in our non-relativistic settings, for technical reasons we are not able to find this condition for the general case of the unperturbed flow, but we can fortunately analyze it both analytically and numerically for some particular cases.
+1 for the variable coefficients Following [19], we can derive an energy a priori estimate in H
+
+linearized problem for nonplanar plasma-vacuum interfaces, provided that the sufficient stability condition holds at each point of the unperturbed interface. Moreover, the existence of solutions
+1 was not proved in [19] and we fill this gap for our non-relativistic of the linearized problem in H
+
+version of the linearized problem. But, it is worth noting that the same arguments towards the proof of existence are still applicable in relativistic settings in [19]. The rest of the paper is organized as follows. In Section 2, we reduce the free boundary problem (4), (15), (16), (19), (20) to an initial-boundary value problem in a fixed domain and discuss properties of the reduced problem. In Section 3, we obtain the linearized problem and formulate main results for it (see Theorem 3.1 and Proposition 3.1). In Section 4, we find the mentioned sufficient stability condition for a planar interface by the energy method applied to the linearized problem in the case of constant coefficients. Moreover, in Section 4 we analyze this stability condition for the particular case from Proposition 3.1. In Section 5, by considering particular cases of the unperturbed constant solution, we prove that the planar interface can be violently unstable, and we study both analytically and numerically the spectral stability condition in the particular from Proposition 3.1. At last, Section 6 is devoted to the proof of the well-posedness of the linearized problem under the sufficient stability condition satisfied at each point of the unperturbed nonplanar plasma-vacuum interface. 8
+
+2
+
+Reduced problem in a fixed domain
+
+We straighten the interface  by using the same change of independent variables as in [16, 17, 18]. That is, the unknowns U and V being smooth in  (t) are replaced by the vector-functions U (t, x) := U (t, + (t, x), x ), which are smooth in the half-space R3 + , where  (t, x) := x1 +  (t, x),
+ (R) equals to 1 on [-1, 1], and  and	C0
+
+V (t, x) := V (t, - (t, x), x ),
+
+ (t, x) := (x1 )(t, x ).
+L (R)
+
+< 1/2. Here, we use the cut-off function
+
+ to avoid assumptions about compact support of the initial data in our (future) nonlinear existence theorem.3 The above change of variable is admissible if 1  = 0. The latter is guaranteed, namely, the inequalities 1 + > 0 and 1 - < 0 are fulfilled, if we consider solutions for which
+L ([0,T ]R2 )
+
+ 1. This holds if, without loss of generality, we consider the initial	1/2, and the time T in our existence theorem is sufficiently small.
+
+data satisfying 0
+
+L (R2 )
+
+Dropping for convenience tildes in U and V , we reduce (4), (15), (16), (19), (20) to the initial boundary value problem P(U, + ) = 0 V(V, - ) = 0 B(U, V, ) = 0 (U, V )|t=0 = (U0 , V0 ) in [0, T ]  R3 +, in [0, T ]	R3 +, (21) (22) (23) (24)
+
+on [0, T ]  {x1 = 0}  R2 , in R3 +, |t=0 = 0 in R2 ,
+
+where P(U, + ) = L(U, + )U , V(V, - ) = M (- )V , L(U, + ) = A0 (U )t + A1 (U, + )1 + A2 (U )2 + A3 (U )3 , A1 (U, + ) = 1 A1 (U ) - A0 (U )t + - A2 (U )2 + - A3 (U )3 + , 1 + M (- ) = I t + B1 (- )1 + B2 2 + B3 3 , B1 (- ) = 1 B1 - I t - - B2 2 - - B3 3 - , 1 -	03 bT j bj 03 1  = 1 + 1  , vN - t	,
+
+Bj =
+
+,
+
+j = 1, 2, 3,
+
+  1 (|H|2 - |E |2 )  q-2 B(U, V, ) =	E2 - H3 t   E3 + H2 t
+
+3
+
+In [19], for technical simplicity the cut-off function was not introduced, i.e., the simplest change of variables
+
+with   1 was used.
+
+9
+
+
+
+0
+
+0
+
+0
+
+
+
+
+
+0
+
+0 1
+
+
+
+
+
+0 -1 0 0 0
+
+
+
+  , b1 =  0 0 1   0 -1 0
+
+  , b2 =  0 0 0   -1 0 0
+
+ b3 =	1 0
+
+ 0  , 0
+
+vN = v1 - v2 2 + - v3 3 + ,
+
+Ei = E1 i - + Ei ,
+
+i = 2, 3.
+
+Regarding constraints (2), (12) and (17), following [16] and [19], we can proof the following propositions. Proposition 2.1. Let the initial data (24) satisfy div h = 0 and HN |x1 =0 = 0, where h = (HN , H2 1 + , H3 1 + ), HN = H1 - H2 2 + - H3 3 + . (26) (25)
+
+If problem (21)(24) has a solution (U, V, ), then this solution satisfies (25) and (26) for all t  [0, T ]. Proposition 2.2. Let the initial data (24) satisfy HN |x1 =0 = 0 and div h = 0, where HN = H1 - H2 2 - - H3 3 - , e = (EN , E2 1 - , E3 1 - ), h = (HN , H2 1 - , H3 1 - ), div e = 0, (28) (27)
+
+EN = E1 - E2 2 - - E3 3 - .
+
+If problem (21)(24) has a solution (U, V, ) with the property t   0, then this solution satisfies (27) and (28) for all t  [0, T ]. If problem (21)(24) with the two additional boundary conditions div h|x1 =0 = 0 has a solution (U, V, ) with the property t  > 0, then this solution again satisfies (27) and (28) for all t  [0, T ]. 10 (31) and div e|x1 =0 = 0, (30) (29)
+
+The proof of Proposition 2.1 is absolutely the same as the corresponding one in [16] for current-vortex sheets. To prove Proposition 2.2 we should just literally repeat arguments from [19] with technical modifications connected with the introduction of the cut-off function  in our change of variables. As in [19], without loss of generality, we will below consider only case (29) when the plasma expands into the vacuum.4 Moreover, we naturally assume that the "stable" counterpart t  < 0 (32)
+
+of condition (29) holds. This means that in our future local-in-time existence theorem we will consider initial data satisfying condition (32) and its fulfilment for solutions will be guaranteed by a small enough time of their existence. Under assumption (32) the boundary x1 = 0 is noncharacteristic for system (22). Indeed, all the eigenvalues of the boundary matrix  t  0 0 0 -3  2    0 t  0 3  0 1    0 0 t  -2	-1 0 B() := B1 (- )|x1 =0 =   3  -2  t	0 0  0	 -3  0 -1 0 t  0  2  1 0 0 0 t	for system (22) are non-zero: 1,2 = t  + 3,4 = t  - 1 + (2 )2 + (3 )2 , 5,6 = t .
+
+
+
+(33)
+
+1 + (2 )2 + (3 )2 ,
+
+For case (32), the eigenvalues 1,2 > 0 and k < 0, k = 3, 4, 5, 6. As in [14, 15, 18], the boundary matrix A(U|x1 =0 , ) := A1 (U, + )|x1 =0 for the MHD system (21) has one positive and one negative eigenvalue and the others are zero (see also next section). That is, the boundary x1 = 0 is characteristic for system (21), and the whole system (21), (22) for U and V has three incoming characteristics. This means that the number of boundary conditions in (23) is correct because one of them is needed for determining the function (t, x ). Remark 2.1. For case (31), when we have shrinkage of the plasma region, the number of incoming characteristics is five (for this case the eigenvalues 5,6 above are positive). It means that the correct number of boundary conditions is six and problem (21)(24) is formally underdetermined because it is missing two boundary conditions. However, we supplement (23) with the additional boundary conditions (30) which enable one to prove Proposition 2.2 for case (31). For the opposite case (32) these additional boundary conditions are unnecessary. This makes
+4
+
+As in [19], in this paper we postpone to a future work the consideration of the general mixed case when t
+
+is indefinite in sign. For this difficult case the Maxwell system (22) is of variable multiplicity, see Remark 2.1.
+
+11
+
+rather difficult the analysis of the general case when for some parts of the interface the plasma expands into the vacuum and for other parts the vacuum expands into the plasma. On the other hand, locally in space either condition (29) or (31) is satisfied on the interface and this makes reasonable the consideration of one of them.
+
+3
+3.1 Let
+
+Linearized problem and main results
+Basic state
+
+(U (t, x), V (t, x),  ^(t, x )) be a given sufficiently smooth vector-function with U = (^ p, u ^, H, S ), V = (H, E ), and (U , V ) where K > 0 is a constant, T := (-, T ]  R3 +,  T := (-, T ]  {x1 = 0}  R2 ,
+2 ( ) W T
+
+(34)
+
++ 1 (U , V )
+
+2 ( ) W T
+
++  ^
+
+3 (  ) W T
+
+ K,
+
+(35)
+
+and below all the "hat" values will be related to the basic state (34). We assume that the basic state (34) satisfies the hyperbolicity condition (5) in T , (^ p, S ) > 0, p (^ p, S ) > 0, (36)
+
+the boundary conditions in (23) except the second one on  T , v ^N |x1 =0 =  , E2 |x1 =0 =  H3 |x1 =0 , E3 |x1 =0 = - H2 |x1 =0 , (37)
+
+and the interior equations for H and H in T contained in (21) and (22): t H + 1 1 + ^ )^ (w, ^ )H - (h, v + H div u ^ = 0, 1 1 - (38)
+
+t H -  where  = t , ^
+
+t - 1 -
+
+1 H +
+
+b1 - b2 2 - - b3 3 - E = 0,
+
+(39)
+
+w ^=u ^ - (t + , 0, 0), u ^ = (^ vN , 1 + v ^2 , 1 + v ^3 ). At last, we assume that the
+
+basic state satisfies condition (32). More precisely, let   -1 < 0 on  T with a fixed constant 1 . Moreover, without loss of generality we assume that	^ 1 +  1/2,
+L ( T )
+
+(40)
+
+< 1. This implies
+
+1 -  -1/2. 12
+
+Note that (35) yields W
+2 ( ) W T
+
+ C (K ),
+
+where W := (U , 1 U , H, t,x + , t,x - ), t,x = (t , ), and C = C (K ) > 0 is a constant depending on K . Assumptions (38) and (39) on the basic state are necessary to deduce for the linearized problem equations associated to constraints (25)(28) (see [16, 19]). For the same reason we have to assume that the basic state satisfies these constraints: HN |x1 =0 = 0, ^ = 0, div h HN |x1 =0 = 0, div ^ e = 0. (41) (42)
+
+^ = 0, div h
+
+However, together with (38) and (39) it is enough to assume that (41) and (42) hold only for t = 0. Then, it follows from the proofs of Propositions 2.1 and 2.2 (see [16, 19]) that conditions (41) are true on  T and Eqs. (42) hold in T . Thus, without loss of generality for the basic state we also require the fulfillment of (41) on  T and (42) in T . At last, we note that the first conditions in (37) and (41) endow the boundary matrix diag (A(U|x1 =0 , ), B()) for the linearized problem with the same structure as for the boundary matrix for the nonlinear problem (21)(24). Concerning the second and third conditions in (37), we need them for deducing a linearized version of (27) for solutions of the linearized problem. 3.2 Linearized problem
+
+The linearized equations for (21)(23) read: P (U , + )(U,  + ) := V (V , - )(V,  - ) := d P(U , + )| d
+=0
+
+= fI
+
+in T ,
+
+d V(V , - )| =0 = fII in T , d d B (U , V ,  ^)(U, V, ) := B(U , V ,  )| =0 = g on  T , d where U = U + U , V = V + V ,  =  ^ + , and  (t, x) := (x1 ) (t, x ),  (t, x) := x1 +  (t, x),
+
+  (t, x) := (x1 )(t, x). Here we introduce the source terms f = (fI , fII ) = (f1 , . . . , f14 ) and g = (g1 , . . . , g4 ) to make the interior equations and the boundary conditions inhomogeneous. We easily compute the exact form of the linearized equations (below we drop  ): P (U , + )(U, + ) = L(U , + )U + C (U , + )U - L(U , + )+ 1 U 1 + = fI ,
+
+13
+
+V (V , - )(V, - ) = M (- )V + M (- )-
+
+1 V 1 -
+
+= fII ,
+x1 =0
+
+vN - t	- v ^2 2  - v ^3 3
+
+  q - (H, H) + (E, E )	B (U , V ,  ^)(U, V, ) =    E2 - H3 t  -  H3 + E1 2   E3 + H2 t  +  H2 + E1 3
+
+= g,
+
+where q = p + (H, H ), vN = v1 - v2 2 + - v3 3 + , Ej = E1 j - + Ej , and the matrix C (U , + ) is determined as follows: C (U , + )Y = (Y, y A0 (U ))t U + (Y, y A1 (U , + ))1 U +(Y, y A2 (U ))2 U + (Y, y A3 (U ))3 U ,
+8
+
+(Y, y A(U )) :=
+i=1
+
+yi
+
+A(Y ) yi
+
+,
+Y =U
+
+Y = (y1 , . . . , y8 ).
+
+The differential operators P (U , + ) and V (V , - ) are first-order operators in + and - respectively. As in [19], following Alinhac [1], we introduce the "good unknowns"
++  := U -  1 U , U 1 + -  := V -  1 V . V 1 -
+
+(43)
+
+Omitting detailed calculations, we rewrite the linearized interior equations in terms of the new unknowns (43):  + C (U , + )U	+ L(U , + )U  + M (- )V + 1 - 1 + 1 P(U , + ) = fI , 1 V(V , - ) = fII . (44) (45)
+
+-
+
+Dropping as in [1, 14, 15, 16, 17, 19] the zero-order terms in + and - in (44) and (45),5 we  ,V  , ): write down the final form of our linearized problem for (U  + C (U , + )U  = fI L(U , + )U  = fII M (- )V  v  N - t  - v ^2 2  - v ^3 3	+  1 v ^N     =g    in T , in T , (46) (47)
+
+   ) + (E, E  ) + [ 1 q q  - (H, H ^]	   3 + 2 (E1 )	E2 - t (H3 ) -	H    + t (H2 ) +  H  2 + 3 (E1 ) E 3
+5
+
+on  T ,
+
+(48)
+
+In the future nonlinear analysis the dropped terms in (44) and (45) should be considered as error terms at
+
+each Nash-Moser iteration step.
+
+14
+
+ ,V  , ) = 0 (U
+
+for t < 0,
+
+(49)
+
+where [1 q ^] = (1 q ^)|x1 =0 - (H, 1 H)|x1 =0 + (E, 1 E )|x1 =0 and all of the values with dots (v N , q , etc.) are determined similarly to corresponding values without dots. We used (39) taken at x1 = 0 while writing down the last two boundary conditions in (48). We assume that f and g vanish in the past and consider the case of zero initial data, which is the usual assumption.6 3.3 Function spaces
+
+Thanks to assumption (40) the boundary matrix B := B( ^) (see (33)) for system (47) is nonsingular. At the same time, in view of the first conditions in (37) and (41), the boundary matrix A := A(U|x1 =0 ,  ^) for system (46) is singular, i.e., the boundary x1 = 0 is characteristic for the linearized MHD equations (46). Indeed, let  N, H  2, H  3, S ) W = (q,  v N , v 2, v 3, H  = JW . Clearly, det J = 0. Using the first conditions in (37) and (41), after some algebra and U we obtain  ,U  ) = 2q (AU v N . It follows from (50) that      =	   0 1 0  1 0 0  0 0 0	. . . . . . . . . 0 0 0  0  (50)
+
+ ,U  ) = (J T AJ W, W ) = (E12 W, W ), (AU
+
+E12
+
+ 0    0  .  . . .   0
+
+(51)
+
+Hence, the matrix A has one positive and one negative eigenvalue, and other eigenvalues are zeros. The fact that the boundary x1 = 0 is characteristic for the MHD system implies a natural loss of control on derivatives in the normal direction. It is known that in MHD, unlike the situation in gas dynamics (see, e.g., [17]), this loss of control on derivatives cannot be compensated and
+m. the natural functional setting is provided by the anisotropic weighted Sobolev spaces H m is defined as follows (see [3, 20, 8, 13]): The functional space H m 3  k 3 H (R3 + ) := u  L2 (R+ ) |  1 u  L2 (R+ )
+
+if || + 2k  m
+
+,
+
+ = ( )1  2  3 , and  (x )  C  (R ) is a monotone increasing function where m  N,  1 1 + 2 3
+
+such that  (x1 ) = x1 in a neighborhood of the origin and  (x1 ) = 1 for x1 large enough. The
+6
+
+The case of nonzero initial data is postponed to the nonlinear analysis (construction of a so-called approximate
+
+solution; see, e.g., [16]).
+
+15
+
+m (R3 ) is normed by space H +
+
+u We also define the space
+
+2 m,
+
+=
+||+2km
+
+ k  1 u
+
+2 . L2 (R3 +)
+
+m m H (T ) = k=0 m-k H k ((-, T ], H (R3 + ))
+
+equipped with the norm
+T m
+
+[u]2 m,,T
+
+=
+-
+
+|||u(t)|||2 m, dt,
+
+where
+
+|||u(t)|||2 m,
+
+=
+j =0
+
+j t u(t)
+
+2 m-j, .
+
+m ( ) mainly for m = 1. Clearly, the norm for H 1 ( ) Within this paper we use the space H T T
+
+reads [u]2 1,,T =
+T
+
+u2 + (t u)2 + (1 u)2 + (2 u)2 + (3 u)2 dtdx.
+
+3.4
+
+Reduced linearized problem with homogeneous Maxwell equations and boundary conditions
+
+ ,V ) Following (with technical modifications) arguments in [19] we can pass from the unknown (U to such a new unknown (U , V ) that it satisfies problem (46)(49) with fII = 0, g = 0 and fI replaced by a vector-function F = (F1 , . . . , F4 , 0, 0, 0, F8 ) obeying the estimate [F ]1,,T	C [fI ]3,,T + fII
+H 3 (T )
+
++ g
+
+H 3 ( T )
+
+.
+
+(52)
+
+Here and later on C is a constant that can change from line to line, and it may depend from another constants. In particular, in (52) the constant C depends on K and T . Dropping for convenience the indices , we write down our reduced linearized problem for the new unknown (U, V ) := (U , V ) and the interface perturbation :
+3
+
+A0  t U +
+j =1
+
+Aj  j U + C U = F
+
+in T , in T ,
+
+(53) (54)
+
+t V + B1 1 V + B2 2 V + B3 3 V = 0
+
+t  = vN - v ^2 2  - v ^3 3  +  1 v ^N , q = (H, H) - (E, E ) - [1 q ^], E2 = t (H3 ) - 2 (E1 ) +  H3 , E3 = -t (H2 ) - 3 (E1 ) -  H2 16 on  T ,
+
+(55a) (55b) (55c) (55d)
+
+(U, V, ) = 0
+
+for t < 0,
+
+(56)
+
+where A := A (U ) ( = 0, 2, 3), A1 := A1 (U , + ), C := C (U , + ), and B1 := B1 (- ). Since the boundary conditions (55), equations (54) and the fifth, sixth and seventh equations in (53) are homogeneous, following arguments in [19] (with technical modifications necessary for our non-relativistic settings), we can prove that solutions to problem (53)(56) satisfy div h = 0 div h = 0, in T , in T , on  T , on  T , (57) (58) (59) (60)
+
+div e = 0
+
+HN = H2 2  + H3 3  -  1 HN HN = H2 2  + H3 3  -  1 HN where h = (HN , H2 1 + , H3 1 + ), h = (HN , H2 1 - , H3 1 - ), e = (EN , E2 1 - , E3 1 - ),
+
+HN = H1 - H2 2 + - H3 3 + , HN = H1 - H2 2 - - H3 3 - , EN = E1 - E2 2 - - E3 3 - .
+
+Moreover, again referring to [19] for detailed arguments, we can estimate solutions of problem (46)(49) through solutions of problem (53)(56):	]1,,T + V  [U
+H 1 (T )
+
+ [U ]1,,T + V
+
+H 1 (T )
+
++ C [fI ]3,,T + fII
+
+H 3 (T )
+
++ g
+
+H 3 ( T )
+
+. (61)
+
+Taking into account estimate (61), from now on we concentrate on the study of the reduced linearized problem (53)(56) keeping in mind that its well-posedness under suitable assumptions on the basic state and the regularity of the data F implies the well-posedness of problem (46) (49) for which the regularity of the data should be consistent with estimate (52). 3.5 Constant coefficients linearized problem for a planar interface
+
+If we "freeze" coefficients of problem (53)(56), drop zero-order terms, assume that 2  ^ = 3  ^= 0, and in the change of variables take   1, then we obtain a constant coefficients linear problem which is the result of the linearization of the original nonlinear free boundary value problem (4), (15), (16), (19), (20) about its exact constant solution U = U = (^ p, v ^, H, S ) = const V = V = (H, E ) = const for x1 >  t, for x1 <  t
+
+17
+
+for the planar plasma-vacuum interface x1 =  t, where  is a constant interface speed. This exact constant solution satisfies (37) and (41): v ^1 =  , H1 = H1 = 0, E2 =  H3 , E3 = - H2 . (62)
+
+Moreover, since the original nonlinear equations were already written in a dimensionless form (see (14)), without loss of generality we can suppose that  ^= 1 (then M =
+2 is the Mach number). 2+v ^3 v ^2
+
+and a ^=1
+
+(63)
+
+Taking into account (62) and (63), we have the following constant coefficients problem:
+3
+
+t U +
+j =1
+
+Aj  j U = F
+
+in T , in T ,
+
+(64) (65)
+
+t V + B1 1 V + B2 2 V + B3 3 V = 0
+
+  t  = v1 - v ^2 2  - v ^3 3 ,	      q = H2 (H2 +  E3 ) + H3 (H3 -  E2 ) - E1 E1 ,   E2 = H3 t  - E1 2  +  H3 ,       E3 = -H2 t  - E1 3  -  H2 , (U, V, ) = 0 and solutions to problem (64)(67) satisfy div H = 0, div- H = 0, div- E = 0 in T , on  T , for t < 0,
+
+(66) on  T , (67)
+
+(68) (69)
+
+H1 = H2 2  + H3 3 ,
+
+H1 = H2 2  + H3 3
+
+where div- a = -1 a1 + 2 a2 + 3 a3 for any vector a = (a1 , a2 , a3 ) and	   A1 = 	 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0	  ,		  B1 =	      0 0 0 0 0 0  0 0 0 1 0 0 0 0 0 0 0
+
+0 0 0 H2 H3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+0 H2 0 0 0 0 H3 0 0 0 0 0 0 0 0
+
+ 1     0 -1 0  ,  0  0 0   -1 0  0   0 0 0
+
+18
+
+	 A2 =			A3 =
+
+v ^2 0 1 0 0 0 0 0 v ^3 0 0 1 0 0 0 0
+
+0 v ^2 0 0 -H2 0 0 0 0 v ^3 0 0 -H3 0 0 0
+
+1 0 v ^2 0 0 0 0 0 0 v ^3 0 0 0 0
+
+0 0 0 v ^2 0 0 0 1 0 0 v ^3 0 0 0
+
+0 -H2 0 0 v ^2 0 0 0 0 -H3 0 0 v ^3 0 0 0
+
+0 0 0 0 0 v ^2 0 0 0 0 -H3 H2 0 v ^3 0 0
+
+0 0 H3 -H2 0 0 v ^2 0 0 0 0 0 0 0 v ^3 0
+
+0 0 0 0 0 0 0 v ^2 0
+
+	 ,
+
+H3 -H2
+
+-H3 H2
+
+  0    0   0  .  0    0   0   v ^3
+
+From the physical point of view, the well-posedness of problem (64)(67) can be interpreted as the stability of a planar relativistic plasma-vacuum interface (or the macroscopic stability of a corresponding nonplanar interface). 3.6 Main results
+
+We are now in a position to state the main results of this paper. Theorem 3.1. Let the basic state (34) satisfies assumptions (35)(42). Let also |H2 H3 - H3 H2 || x
+1 =0
+
+ 2 > 0,
+
+(70)
+
+ such that if the basic where 2 is a fixed constant. Then there exists a positive constant E1  on   , then problem (53)(56) has a unique solution state satisfies the condition |E1 | < E1 T 1 ( )  H 1 ( )  H 3/2 (  ) for all F  H 1 ( ) which vanish in the past. (U, V, )  H T T T T
+
+Moreover, the solution obeys the a priori estimate [U ]1,,T + V
+H 1 (T )
+
++
+
+H 3/2 ( T )
+
+ C [F ]1,,T ,
+
+(71)
+
+where C = C (K, T, 2 ) > 0 is a constant independent of the data F . Remark 3.1. In fact, we prove Theorem 3.1 for   0, i.e., including the case when the interface speed is zero somewhere (or even everywhere) on the unperturbed interface. But, we prefer to keep assumption (40) in the formulation of Theorem 3.1 for its future usage in the nonlinear analysis of the plasma-vacuum problem. 19
+
+We note that the existence of solutions of the linearized problem was not proved in [19], but our arguments towards the proof of existence in this paper are directly applicable in relativistic settings in [19] as well. In other words, we have the side result that is the well-posedness of the linearized problem for relativistic plasma-vacuum interfaces under a suitable stability condition from [19]. In view of (37), |E1 | = |E | 1 + ( 2  ^)2 + (3  ^)2 + O() on  T .
+
+That is, Theorem 3.1 says that if the unperturbed vacuum electric field on the interface is small enough, then under the non-collinearity condition (70) the linearized problem is well-posed. The natural question is whether a large enough vacuum electric field can make the linearized problem ill-posed. As in relativistic settings in [19], the answer on this question is positive, but in our non-relativistic case we can analyze the influence of the vacuum electric field on well-posedness in more detail (at least, for particular cases of the unperturbed flow). Clearly, the ill-posedness of the corresponding "frozen" coefficients linearized problem indicates the ill-posedness of the problem with variable coefficients. In other words, we may study the influence of the constant vacuum electric field on the well-posedness of the constant coefficients linearized problem (64)(67). Its ill-posedness will mean the violent (Kelvin-Helmholz) instability of a planar interface. Mathematically this means that there is a range of admissible parameters of problem (64)(67) for which the Kreiss-Lopatinski condition [5, 7] is violated. The test of the Kreiss-Lopatinski condition is equivalent to the usual normal modes analysis (spectral analysis), i.e., the construction of an Hadamard-type ill-posedness example. Unfortunately, due to principal technical difficulties a complete normal modes analysis of problem (64)(66) seems impossible (even numerically). In this paper we restrict ourselves to the following particular case of the uniform unperturbed flow for which a part of the analysis can be done analytically: v ^1 = v ^2 = 0, H2 = H3 = 0, H3 H2 = 0. (72)
+
+Strictly speaking, since v ^1 =  (see (62)), we have  = 0. However, by continuity argument this can be extended to the case | | 1. 1 for a planar interface can be essentially The (rough) sufficient stability condition |E1 |
+
+specified by a numerical analysis of the positive definiteness of some matrix of order 42 (see the next section). But, for the particular case (72) this can be even done analytically. This enables us to compare our (specified) sufficient stability condition with the spectral stability condition describing the whole stability domain. We summarize our results for the particular case (72) in the following proposition. Proposition 3.1. Let the uniform (piecewise constant) flow with the planar plasma-vacuum
+
+20
+
+interface x1 = 0 satisfies conditions (72). If the flow parameters satisfy the inequalities  2 < 1 H2 ,   E1   2 2    2   ^3  2 1+ v  E < 1,  1   H2 3
+2 2 2 2 2 H2 v ^3 ^3  2 3 + H2	4 H2 + H 3 + v	- E 1 + 2 2 E +  1 1 2 2   H2 H2 H2  3 H2 3 H2 3    2 2  ^3 1+v ^3  2 2 4 3+v  - E1 3+v ^3 +2 + 1 > 0,	2E1 2 2 H3 H3
+
+(73)
+
++ 1 > 0,
+
+then the planar interface is linearly stable and solutions to problem (64)(67) obey the energy estimate (71). For the static case v ^3 = 0 inequalities (73) are equivalent to the condition
+2 E1 < min 2H 2 1 H2 3 , 2 + H 2) 3 2(H2 3
+
+(74)
+
+and if
+2 2 E1 > H2 ,
+
+(75)
+
+then the planar interface is violently unstable. Moreover, condition (75) is sufficient for instability whereas the whole instability domain is wider than that described by (75) and can be found numerically. The whole instability domain (for the static case v ^3 = 0) is represented in Fig. 1 for certain fixed values of H3 . As we can see in Fig.1, the domain described by the sufficient stability condition (74) (domain 3) is relatively big in comparison with the whole stability domain (the union of domains 2 and 3). It is important that the sufficient stability condition (74) and its non-static counterpart (73) are found analytically for the particular case (72). But, even in the general case of the unperturbed flow a numerical analysis of the positive definiteness of some matrix of order 42 appearing in our energy method (see the next section) seems straightforward. At the same time, we are able to find the whole stability domain by a numerical realization of the normal modes analysis only for relatively simple particular cases like (72) whereas in the general case this is connected with very expensive numerical calculations. Moreover, the number of dimensionless parameters of the unperturbed flow is really big, and a complete numerical test of the Kreiss-Lopatinski condition seems unrealizable in practice. Thus, the main goal of our calculations for the particular case (72) was to show that the unshaded interlayer in Fig.1 (domain 2) between the instability domain (the union of domains 1 and 4) and the part of the whole stability domain found by the energy method is not, in a certain (loose) sense, extremely big (in comparison with domain 3). Moreover, our energy method enables one to derive the a priori estimate (71). To do the same by starting from the normal modes analysis we should construct a Kreiss-type symmetrizer [5, 7] that is really difficult and often technically impossible in MHD (especially, for the case of characteristic boundary). 21
+
+a) H3 = 1
+
+b) H3 = 2/3
+
+c) H3 = 0.5
+
+d) H3 = 0.25
+
+Figure 1: Domains 1 and 3 are the domains described by the sufficient instability condition (75) and the sufficient stability condition (74) respectively. The union of domains 2 and 3 is the whole domain of stability, and the union of domains 1 and 4 is the whole domain of instability.
+
+4
+
+Energy method for the constant coefficients problem
+
+For the derivation of the a priori estimate (71) we should make technical modifications in the relativistic case in [19] where a dissipative energy integral for a prolonged linearized system was constructed. These modifications are connected only with unimportant peculiarities of our problem in comparison with its relativistic counterpart. We could just try to explain these modifications by referring to the arguments in [19]. However, this would be, first, very inconvenient for the reader and, second, the main reason that we prefer to do not drop the process of derivation of estimate (71) is that in Section 6 we will need details of the construction of the dissipative energy integral for the proof of existence of solutions. At the same time, here, unlike [19], we prove the a priori estimate only for the case of constant coefficients. In Section 6 22
+
+we mainly concentrate on the proof of existence of solutions and drop a detailed description of the extension of the a priori estimate to the case of variable coefficients because corresponding arguments are really similar to those in [19]. For problem (64)(67) we first derive the a priori estimate (71) under the (rough) sufficient stability condition that the constant |E1 | is small enough and the vectors (H2 , H3 ) and (H2 , H3 ) are nonzero and nonparallel to each other (cf. (70)), i.e., H2 H3 - H3 H2 = 0. After that on the example of the particular case (72) we show that the rough condition |E1 | can be essentially specified and for this case we get the sufficient stability condition (73). As in [19], the crucial role in deriving the a priori estimate for the linearized problem is played by a secondary symmetrization of the Maxwell equations (15). Following [19], we equivalently rewrite the symmetric system (15),
+3
+
+(76) 1
+
+t V +
+j =1
+
+Bj j V = 0,
+
+as the new symmetric system
+3
+
+B 0  t V +
+j =1
+
+Bj j V = 0,
+
+(77)
+
+provided that the hyperbolicity condition B0 > 0 holds, where	 1 0 0 0 3 -2 1 2 3 0 0 0     0  2 -1 1 0 -3 0 1  0 0 0 -1	  0  0 1 2 -1 0  0 -1 0 1 0  , B1 =  3 B0 =	-3 2 1 0 0  0 0 1 2 3  0  0	3   0 -1 0 1 0	0 1 2 -1 0   0 -2 1 0 0 0 1 0 -1 0 3 0 -1  -2 1 2 0 0 0 0 3 -1 0 0 0 0 -1 1 0 0 0 0 2 1 0 0 0 3       ,       -3 0 2 1 0 0 1 3 0 0 0 0 1 0 -3 0 1 -1 0 0 0 -3 2 0
+
+      ,
+
+
+
+  1    0 B2 =	 0   0	1
+
+3 -2
+
+-2 1
+
+3 -2
+
+  0    1 B3 =	 0   -1  0
+
+-3 2
+
+ 0    0  ,  1	2   3
+
+and i are arbitrary functions i (t, x) satisfying the condition B0 > 0, i.e., | | < 1, with the vector-function  = (1 , 2 , 3 ). 23 (78)
+
+Using the secondary symmetrization (77) of the Maxwell equations, we rewrite system (65) as B0 t V + B1 1 V + B2 2 V + B3 3 V = 0 where B1 =  B0 - B1 , and our choice of i is the following:  = v ^ = (^ v1 , v ^2 , v ^3 ) (80) in T , (79)
+
+(^ v1 =  , see (62)). Since  is very small, the hyperbolicity condition (78) holds. By standard arguments of the energy method applied to the symmetric hyperbolic systems (64) and (79) (we multiply (79) by -1 ), we obtain
+t
+
+I (t) + 2
+ t
+
+Q dx ds  C
+
+F
+
+2 L2 (T )
+
++
+0
+
+I (s) ds ,
+
+(81)
+
+where I (t) =
+R3 +
+
+|U |2 + (B0 V, V ) dx,
+
+1 1 Q = - (A1 U, U )|x1 =0 - (B1 V, V )|x1 =0 . 2 2
+
+We write down the quadratic form Q:
+2 2 2 2 Q = - (H2 + H3 + E2 + E3 ) + H1 (^ v2 H2 + v ^3 H3 ) + E1 (^ v2 E2 + v ^3 E3 )
+
++  E1 (^ v3 H2 - v ^2 H3 ) +  H1 (^ v2 E3 - v ^3 E2 ) + (-1 +  2 )(H3 E2 - H2 E3 ) - qv1
+x1 =0
+
+.
+
+Using the boundary conditions (66) and the second condition in (69), after long calculations (which are similar to those in [19]) we get Q= ^ E1 t  + (-1 H2 +	E3 )3  - (-1 H3 -  E2 )2  where  ^ = E1 + v ^2 H3 - v ^3 H2 = E1 + O(). We rewrite Q as follows: Q = t (^ E1 |x1 =0 ) + 2  ^( E2 - -1 H3 )|x1 =0 + 3  ^(-1 H2 +  E3 )|x1 =0 + Q0 , and in view the third equation in (68), the rest Q0 = 0 because it is the left-hand side of the fourth equation in (65) considered on the boundary and multiplied by --1  ^ : Q0 = - ^ t E1 +  1 E1 + -1 3 H2 - -1 2 H3 It follows from (81) that
+t x1 =0 x1 =0
+
+,
+
+(82)
+
+= 0.
+
+I (t) + 2
+R2
+
+ ^E1 |x1 =0 dx	C 24
+
+F
+
+2 L2 (T )
+
++
+0
+
+I (s) ds ,
+
+(83)
+
+and we see that we are not able to "close" the estimate in L2 . But, if we differentiate systems (64) and (79) with respect to x2 , x3 and t, we obtain the following counterparts of (83) for the first-order tangential derivatives of U and V :
+t
+
+I (t) + 2
+R2
+
+ ^    E1 |x1 =0 dx  C [F ]2 1,T +
+0
+
+I (s) ds ,
+
+(84)
+
+where  = 0, 2, 3, I (t) = | U |2 + (B0	V,  V ) dx and 0 := t .
+
+R3 +
+
+The terms    E1 |x1 =0 appearing in the boundary integral are, in some sense, lower-order terms and below we explain how to treat them by using our important assumption (76) and passing to the volume integral. Thanks to (76), from (69) and the first boundary condition in (66) we get  0	t  = a0  1 H1 |x1 =0 + a2 H1 |x1 =0 + v1 |x1 =0 ,	 (H3 H1 - H3 H1 )|x1 =0 1 = a1 2  = 1 H1 |x1 =0 + a2 H1 |x1 =0 ,  H H - H H 2 3 3 2	 (H2 H1 - H2 H1 )|x1 =0  2  = a2  3  = - 1 H1 |x1 =0 + a2 H1 |x1 =0 , H2 H3 - H3 H2 where the constants a j can be easily written down. Then (85) implies (t  t E1 + 2	2 E1 + 3  3 E1 )|x1 =0 = v1 t E1 |x1 =0 +
+ =0,2,3  a 1 H1  E1 + a2 H1  E1 x1 =0
+
+(85)
+
+. (86)
+
+To treat the integrals of the lower-order terms like H1 k E1 |x1 =0 , k = 2, 3, contained in the right-hand side of (86) we use the same standard arguments as in [16, 17, 19], i.e., we pass to the volume integral and integrate by parts: H1 k E1 |x1 =0 dx = - 1 (H1 k E1 ) dx = {k H1 1 E1 - 1 H1 k E1 } dx.
+
+R2
+
+R3 +
+
+R3 +
+
+Concerning the terms like H1 t E1 |x1 =0 , we again pass to the volume integral, but before integration by parts we apply the third equation in (68): H1 t E1 |x1 =0 dx = - -
+R3 +
+
+R2
+
+R3 +
+
+1 (H1 t E1 ) dx = - H1 t 1 E1 dx =
+
+R3 +
+
+1 H1 t E1 dx
+
+R3 +
+
+{2 H1 t E2 + 3 H1 t E3 - 1 H1 t E1 } dx.
+
+After that the normal (x1 -) derivatives of v1 , H1 and V can be expressed through tangential derivatives by using the facts that the boundary x1 = 0 is noncharacteristic for the "vacuum" system (65) and v1 and H1 are noncharacteristic "plasma" unknowns. 25
+
+Namely, taking into account (50), (51) and the first equation in (68), we have	 1 v1	= - J T t U + A2 2 U + A3 3 U + F , (12) 1 q 1 H1 = -2 H2 - 3 H3 ,
+
+(87) (88)
+
+where {   }(12) denotes the first two components of the vector inside braces.7 As in [19], we could resolve the "vacuum" system for the normal derivative 1 V under assumption (40) guaranteeing det B1 = 0. However, this would lead to the appearance of -1 as a coefficient by tangential
+ of derivatives of V and give a more restrictive sufficient stability condition (with a constant E1
+
+order less or equal to	in Theorem 3.1). To avoid this we replace the first and fourth equations in system (65) with the second and third equations in (68) and then from the resulting system express 1 V through tangential derivatives of V :   (1 - 2  2 )(2 H2 + 3 H3 )	(t H2 + 3 E1 ) - 2 H1 - t E3	    (t H3 - 2 E1 ) - 3 H1 + t E2  1  . 1 V =  1 - 2  2	(1 - 2	2 )(2 E2 + 3 E3 )      (t E2 - 3 H1 ) - 2 E1 + t H3	(t E3 + 2 H1 ) - 3 E1 - t H2 Note that (89) is valid also for the case	= 0 (cf. Remark 3.1). Then, (86)(89) and the above calculations yield 2
+2 =0,2,3 R
+
+(89)
+
+ ^   E1 |x1 =0 dx =
+
+R3 +
+
+ ^(Q0 Z, Z )dx - 2
+
+R3 +
+
+ ^F1 t E1 dx,
+
+(90)
+
+where Q0 is a quadratic matrix of order 42 which elements can be explicitly written down if necessary and Z = (t U, t V, 2 U, 2 V, 3 U, 3 V ). Summing up inequalities (84) and taking into account (90), we obtain
+R3 +
+
+t
+
+ I (s) ds , (91)
+
+((A0 +	^Q0 )Z, Z ) dx - 2
+
+R3 +
+
+ ^F1 t E1 dx  C [F ]2 1,T +
+=0,2,3 0
+
+where A0 = diag (I, B0 , . . . , I, B0 ) is the block-diagonal positive definite matrix of order 42. Using the Young inequality and the elementary inequality F (t) following from the trivial relation d F (t) dt
+7
+
+2 L2 (R3 +)
+
+ C [F ]2 1,,t
+
+2 L2 (R3 +)
+
+=2
+R3 +
+
+(F, t F ) dx,
+
+In fact, below we use only the first row in (87).
+
+26
+
+we estimate: 2
+R3 +
+
+ ^F1 t E1 dx  C  Z (t)
+
+2 L2 (R3 +)
+
++
+
+1 F
+
+2 1,,T
+
+,
+
+(92)
+
+where  is a small positive constant, and (91) and (92) give ((A0 +  ^Q0 )Z, Z )) dx  C	Z (t)
+2 L2 (R3 +)
+
+R3 +
+
++ [ F ]2 1,T + Z
+
+2 L2 (t )
+
+.
+
+(93)
+
+If A0 +  ^Q0 > 0 or, in view of (82), if A0 + E1 Q0 > 0, then choosing	to be small enough, from inequality (93) we derive Z (t)
+2 L2 (R3 +)
+
+(94)
+
+ C [F ]2 1,T + Z
+
+2 L2 (t )
+
+.
+
+(95)
+
+We can already apply to (95) Gronwall's lemma and get an a priori estimate for tangential derivatives. After that it is easy to insert the L2 norm of the solution in this estimate and get finally an estimate in a conormal Sobolev space. However, for adapting the arguments of this section to the case of variable coefficients it is better to follow the plan of [19] and by using (95) obtain the inequality
+2 2 |||U (t)|||2 1, + |||V (t)|||H 1 (R3 ) + |||(t)|||H 3/2 (R2 )
++
+
+2  C [F ]2 1,,T + [U ]1,,t + V
+
+2 H 1 (t )
+
++
+
+2 H 3/2 ( t )
+
+. (96)
+
+We drop the arguments towards the proof of (96) because they are relatively standard and absolutely similar to those in [19]. In fact, here we improve the corresponding inequality from [19] by replacing the H 1 norm of  with its H 3/2 norm. Taking into account (85), this can be easily done because we control H 1/2 norms of the traces of the noncharacteristic unknowns v1 , H1 and H1 . Applying Gronwall's lemma, from (96) we derive the desired a priori estimate (71), provided that the sufficient stability condition (94) holds. Since the matrix A0 is positive definite, condition (94) is satisfied for |E1 | 1. Clearly, in the general case it is technically impossible to analyze the positive definiteness of the matrix A0 + E1 Q0 of order 42 analytically. Here we do this for the particular case (72). In this case the coefficients in (85) read a3 1 = 1 H3 , a2 2 = 1 H2 , a0 1 =- v ^3 H3 , a3 2 = 0, a2 1 = 0, a0 2 = 0,
+
+and, for example, (87) has the simple form 1 v1 = -t p - 2 v2 - 3 v3 - v ^3 3 p, and we have (89) with	= 0. 27 1 q = -t v1 - v ^3 3 v1 + H3 3 H1
+
+After long calculations we get that the positive definiteness of the matrix A0 + E1 Q0 is equivalent to the fact that all of the roots of the following polynomial are positive: P (x) =  (1 - x)2 - 2
+2 E1 2 (1 - x)2 - E1
+
+H2 2
+
+1+
+
+v ^2 3 H2 3 -
+2 v ^2 3 E1 2 E1
+
+2 (1 - x)2 - E1
+
+2 (1 - x)2 - 2E1
+
+2 H2 2 + H3 2 H2 2H 3
+
+H2 3
+
+(1 - x)2 - 2
+
+H2 2
+2 E1
+
+
+
+(1 - x)2
+
+2 (1 - x)2 - 2E1
+
+1+v ^2 3 H2 3
+
+2 2 - E1 (3 + v ^2 3 ) (1 - x) - 2
+
+H2 3
+
+. (97)
+
+We see that the polynomial P (x) can be considered as a polynomial of y = (1 - x)2 . Since the matrix A0 + E1 Q0 is symmetric, all of its eigenvalues are real and, hence, all of the roots of the polynomial Q(y ) := P (x) should be positive. One can show that this is indeed so and, therefore, the requirement x > 0 is equivalent to y < 1. The polynomial Q(y ) is the multiplication of four polynomials (four expressions in braces in (97)). The requirement that each of these four polynomials has only roots less than unit is equivalent to the four inequalities in (73). In the static case v ^3 = 0 this gives condition (74), and domains 3 in Fig. 1 describe this condition for different fixed values of H3 in the plane of parameters E1 and H2 . Remark 4.1. Under assumption (76) the interface symbol is elliptic, i.e., we are able to resolve the boundary conditions ((66) together with the boundary constraints (69)) for the gradient t,x  = (t , 2 , 3 ), cf. (85). This assumption is really crucial for deriving the a priori estimate. On the other hand, the interface symbol can be elliptic even if (76) is violated. Indeed, substituting the first condition in (66) into the third and fourth ones and using the second condition in (69), we obtain	^2  = -E2 |x1 =0 +  H3 v1 - v ^3 H1 +  H3 |x1 =0 ,  ^3	= -E3 |x1 =0 +	-H2 v1 + v ^2 H1 -  H2 |x1 =0 , and the substitution of (98) into the first condition in (66) gives  ^t  = E1 v1 |x1 =0 + v ^2 E2 |x1 =0 + v ^3 E3 |x1 =0 +  v ^3 H2 - v ^2 H3 |x1 =0 . (99) (98)
+
+That is, if  ^ = 0, then the interface symbol is elliptic.8 Note that without taking into account the second condition in (69) we can resolve the boundary conditions (66) for t,x  under the more restrictive condition E1  ^ = 0. Substituting (98) and (99) into (84) for corresponding  = 0, 2, 3 and repeating the arguments towards getting equality (90) (passing to volume integrals, integrating by parts, etc.), we obtain
+8
+
+If  ^ = 0, then we can get an a priori estimate for the case of constant coefficients even in L2 (cf. (83)), but
+
+for the case of variable coefficients the assumption about ellipticity of the interface symbol is really necessary for obtaining an estimate (see [19]).
+
+28
+
+a counterpart of (90), where the matrix  ^Q0 is replaced by some symmetric matrix Q0 which can be explicitly calculated. Then the quadratic form ((A0 +^ Q0 )Z, Z ) in (91) is replaced by the form ((A0 + Q0 )Z, Z ). Omitting simple calculations connected with the reduction of the boundary integrals reads - (2 E1 )2 + (3 E1 )2 + (2 E2 )2 + (3 E3 )2 + 42 E2 3 E3 . Hence, the whole quadratic form ((A0 + Q0 )Z, Z ) cannot be positive definite. We have similar situation if for finding t,x  we use (66) together with the first condition in (69) (but not the second one as above). Thus, we are not able to derive an a priori estimate by using our energy method for the case when assumption (76) is violated (or if instead of (76) we just apply other ellipticity conditions for the interface symbol). Moreover, if H2 H3 - H3 H2 = 0, then, at least for a particular case, in the next section we prove that the linearized problem is ill-posed for any E1 = 0.
+R2
+
+Ek k E1 |x1 =0 dx for k = 2, 3 to volume integrals of tangential derivatives of E , we
+
+get that the quadratic form for the vector (2 E1 , 3 E1 , 2 E2 , 3 E3 ) contained in ((A0 + Q0 )Z, Z )
+
+5
+
+Normal modes analysis for particular cases
+
+We seek exponential solutions to problem (64)(66) with F = 0 and special initial data:	exp  t + p x1 + i( , x ) , U =U  exp  t + v x1 + i( , x ) , V =V =  exp  t + i( , x ) , (100) (101) (102)
+
+ and V	are complex-valued constant vectors,  , p , v and  where U  are complex constants, and	= (2 , 3 ) with real constants 2,3 . The existence of exponentially growing solutions in form (100)(102), with	> 0, p < 0, v < 0 , (103)
+
+implies the ill-posedness of problem (64)(66) because the consequence of solutions  (U (nt, nx), V (nt, nx), (nt, nx )) exp(- n ), n = 1, 2, 3, . . . ,
+
+with U , V and	defined in (100)(102), is the Hadamard-type ill-posedness example. Since the last equation in (64) for the entropy perturbation S plays no role in the construction of an ill-posedness example, we will suppose that U = (p, u, H ). Theoretically, we can construct a 1D ill-posedness example (with	= 0) on a codimension-1 set in the parameter domain. But, this is not the case for problem (64)(66). Indeed, in 1D we have E1 = 0 and the energy inequality (83) implies well-posedness. Thus, we may assume that  = 0 and even, without loss of generality, | | = 1.
+
+29
+
+5.7
+
+Analytical study
+
+We analytically construct a 2D ill-posedness example with 3 = 0 (i.e., 2 = 1) for some particular cases of the unperturbed flow. Since the assumption 3 = 0 is a restriction, this will give us sufficient instability conditions. We will consider the unperturbed flow with v ^1 = v ^2 = H2 = 0 (104)
+
+(recall that H1 = 0, see (62)). Since v ^1 =  , we have  = 0. However, by continuity the below ill-posedness examples can be extended to the case | | 1. Substituting (100) and (101) into (64) (with F = 0) and (65) respectively, we get the dispersion relations det( I + p A1 + iA2 ) = 0 and det( I + v B1 + iB2 ) = 0,
+
+from which, omitting technical calculations, we find the unique roots p = - 1 + K 2 , with property (103), where K = 1/(1 + H 2 3 ). Consider first the particular case H2 = 0 of the unperturbed flow (104). For this case our basic assumption (76) is violated. Substituting (100)(102) into the boundary conditions (66), we obtain  =v 1 ,  3 - E1 E 1 , q  = H3 H 2 =   E H3 - i E1 , v = - 1 + 2  2 , (105)
+
+and excluding the constant   we come to the relations 1 E1 - H	3 H3 = 0,  3 H3 + E p + H From (100) and (101) we have 1   p  + p v 1 + (H 3 H3 - E1 E1 ) = 0,	 3 H3 ) = 0,  E  1 = iH  3 ,  E  2 = v H 3. v 1 + p ( p+H Then, (106) and (107) imply	 1  p - (E1 + i H3 )	p     0 1   -p (E1 + i H3 )  v	= 0.	E1 0 iE1 -  H3 - v 2 = 0. (iE1 -  H3 ) v1 +  E (106)
+
+(107)
+
+(108)
+
+, V  ) = 0, the determinant of the matrix in (108) Since we are interesting in solutions with (U should be equal to zero. Taking into account (105), this gives us the following final equation for : 2 1 + 2  2 = (E1 + i H3 )2 30 1 + K 2 . (109)
+
+If E1 = 0, then (109) has only roots with
+
+ = 0. That is, for the 2D problem (recall that
+
+3 = 0) the Kreiss-Lopatinski is satisfied, but only in a weak sense because the Lopatinski determinant has imaginary roots. At the same time, since we assume that v ^2 = 0 (see (104)), for the case when H2 = E1 = 0 the constant  ^ in (82) is zero. Then (83) implies an L2 a priori estimate for problem (64)(67), i.e., the Kreiss-Lopatinski is satisfied (in 3D) at least in a weak sense.9 If E1 = 0, then, setting formally  = 0, graphically it is easy to see that equation (109) has a root  2 > 0, i.e., we have an "unstable" root  > 0. Since  is a very small (fixed) constant, it is clear that there is an "unstable" root  with  > 0 for  = 0. Thus, we see that if assumption (76) is violated, then the linearized problem can be ill-posed (see Remark 4.1). We now consider a particular case when assumption (76) holds. Let H3 = 0 and H3 H2 = 0. In view of (104), this is nothing else than the particular case (72). Substituting (100)(102) into the boundary conditions (66), after the exclusion of constant   we obtain  3 H3 + E 1 E1 - H  2 H2 = 0, p + H It follows from (64) and (65) that 1    3 H3 ) = 0, v 1 + p ( p+H p  + p v 1 + (H 2 H2 - E1 E1 ) = 0,   2 = -v E 3 ,  E  2 = v H  3 ,  E 1 = iH 3.  H From (110) and (111) we get	 1 v H 2   2  (p +  2 ) -  E1  p	2   v 1  = 0.  H v 2  0 (  + p ) -p E1	  1  E 0 E1 - v 1 ) if System (112) has anonzero solution ( p, v 1 , E 2 or G(y ) = y
+2 2 1 + 2 y - ( E 2 1 - H2 (1 +  y )) 1 + Ky = 0, 2 > H2 , then G(0) < 0 and G(y  ) > 0, where with y =  2 . If E1 2 2 2 2 2 1 + 2  2 = (E 2 1 - H2 (1 +   )) 1 + K
+
+ 2 + iv E 1 E1 = 0,
+
+ 3 + v E 1 H2 = 0.
+
+(110)
+
+(111)
+
+(112)
+
+(113)
+
+y =
+
+2 E2 1 - H2
+
+2 H 2 2
+
+>0
+
+(recall that we consider the case H2 = 0). Hence, if (75) holds, then equation (113) has an "unstable" root  > 0, i.e., problem (64)(67) is ill-posed. If (75) is violated, taking into account that  is small enough, it is easy to see that (113) has only roots with
+9
+
+ = 0. That is,
+
+again the Kreiss-Lopatinski can be satisfied only in a weak sense (at least, in 2D).
+Our hypothesis is that in the general case the Kreiss-Lopatinski can be satisfied only in a weak sense, i.e., the uniform Kreiss-Lopatinski is is always violated for problem (64)(67), but this is hard to be proved analytically.
+
+31
+
+5.8
+
+Numerical investigation
+
+It should be noted that condition (75) is only sufficient for instability for the particular case (72) because normal modes analysis was performed under the restriction 3 = 0 on the wave vector. For finding a necessary and sufficient instability condition we have to repeat our above analysis for an arbitrary wave vector  (with | | = 1). Since it is technically impossible to do this analytically, we do numerical calculations by using MATLAB software. Just for technical simplicity we consider the static case v ^3 = 0. Repeating the arguments above, we obtain the following counterparts of (105) and the Lopatinski determinant (113) for the general case of the wave vector  = (2 , 3 ) = (cos , sin  ): p = - 1 + 4
+2 2 2 (1 + H 2 3 ) + sin  H 3
+
+,
+
+v = - 1 + 2  2 , (114)
+
+2 2 2 2 2 2 ( 2 + H 2 3 sin  )v = E 1 - H2 (  + cos  ) - 2i E1 H2 sin  p .
+
+We fix	= 10-6 and four different values of H 3 : H 3 = 1, H 3 = 2/3, H 3 = 0.5 and H 3 = 0.25. Then, we choose the partition of the interval (0, 2 ) with the step 10-2 for the angle	and for all its points numerically solve equation (114) for  . The results of these calculations in the plane of parameters E1 and H2 are presented in Fig. 1, where the union of domain 1 and 4 is the whole instability domain for case (72) with v ^3 = 0. Recall that domain 1 is the domain described by the sufficient instability condition (75) found analytically.
+
+6
+
+Well-posedness of the linearized problem
+
+For the case of variable coefficients the counterpart of the secondary symmetrization (79) for the linearized "vacuum" system reads B0 t V + B1 1 V + B2 2 V + B3 3 V = 0 where B1 = 1 1 - B1 - I t - - B2 2 - - B3 3 - . in T , (115)
+
+We can prove the equivalence of systems (54) and (115). Lemma 6.1. Assume that the functions i (t, x) satisfy the hyperbolicity condition (78) and systems (54) and (115) have common initial data satisfying constraints (58) for t = 0. Assume also that the corresponding Cauchy problems for (54) and (115) have a unique classical solution on a time interval [0, T ]. Then these solutions coincide on [0, T ]. Lemma 6.1 can be proved with minor modifications of the proof of corresponding lemma from [14], where a hyperbolic -regularization was used for the elliptic system of pre-Maxwell dynamics. We just refer the reader to [14] in this connection. 32
+
+For variable coefficients the counterpart of (85) reads t,x  = a ^1 HN |x1 =0 + a ^2 HN |x1 =0 + a ^3 vN |x1 =0 + a ^0 , (116)
+
+1 2 where the vector-functions a ^ = a (W|x1 =0 ) = (a0  , a , a ) can be easily written down, in
+
+particular, a ^3 = (1, 0, 0), a1 1 = H3 |x1 =0 (H2 H3 - H3 H2 )|x1 =0 , a1 0 = (H3 1 HN - H3 1 HN )|x1 =0 (H2 H3 - H3 H2 )|x1 =0 , etc.
+
+The boundary condition (55b) together with the result of the substitution of (116) into (55c) (55d) is written in the form M U V + b = 0 on  T , (117)
+
+where the matrix M and the vector b can be explicitly defined, in particular, the first equation in system (117) is nothing else than (55b). Lemma 6.2. Problem (53)(56) is equivalent to problem (53), (54), (117), (55a), (56). Proof. Clearly, smooth enough solutions to problem (53)(56) (if they exist) satisfy problem (53), (54), (117), (55a), (56). We just should prove the opposite. First of all, using (55a) and the equation for H contained in (54) (see (38) with dropped hats), we obtain constraint (59). After that we substitute vN |x1 =0 and HN |x1 =0 expressed from (55a) and (59) into the second and third boundary conditions in (117). Using the result of this substitution and system (54) at x1 = 0 we can derive the second constraint (60) (we omit calculations). Then (117), (59), (60) and (55a) imply the boundary conditions (55). It is worth noting that, in view of Lemma 6.1, system (54) in problem (53), (54), (117), (55a), (56) can be equivalently replaced by (115). That is, from now on we can concentrate on the proof of the well-posedness of the following problem:
+3
+
+A0  t U +
+j =1
+
+Aj  j U + C U = F
+
+in T , in T ,
+
+(118a) (118b) (118c) (118d)
+
+B0 t V + B1 1 V + B2 2 V + B3 3 V = 0 M U V + b = 0 for t < 0, on  T ,
+
+(U, V ) = 0
+
+t  = vN - v ^2 2  - v ^3 3  +  1 v ^N =0 for t < 0.
+
+on  T ,
+
+(118e) (118f)
+
+Lemma 6.3. Let the basic state satisfies the assumptions of Theorem 3.1. Then the a priori estimate (71) holds for problem (118). 33
+
+Proof. The arguments towards the extension of the a priori estimate (71) derived in Section 4 for the constant coefficients problem (64)(67) to the case of variable coefficients are similar to those in the relativistic case in [19]. Then smooth solutions to problem (53)(56) (if they exist) obey estimate (71). By virtue of Lemmata 6.1 and 6.2, we come to the conclusion of Lemma 6.3. To prove the existence of smooth solutions to problem (118) we can use the idea of [14] applied there to a hyperbolic -regularization of the linearized hyperbolic-elliptic plasma-vacuum problem. Namely, assuming that problem (118a)(118d) has a unique smooth solution (U, V ) for any given smooth enough function  vanishing in the past, we prove the existence of the solution to (118) by a fixed point argument. After that we should solve problem (118a)(118d) under the assumption that  is given.
+1 ( ) and   H 3/2 (  ) vanishing in the past problem Lemma 6.4. Let for all given F  H T T 1 ( )  H 1 ( ), with (q, v , H , V )| (118a)(118d) has a unique solution (U, V )  H x1 =0  T T N N
+
+H 1/2 ( T ), such that [U ]1,,T + V
+H 1 (T )
+
++ (q, vN , HN , V )|x1 =0
+
+H 1/2 ( T )
+
+ C [F ]1,,T +
+
+H 3/2 ( T )
+
+. (119)
+
+1 ( )  H 1 ( )	H 3/2 (  ). Then problem (118) has a unique solution (U, V, )  H T T T
+
+Proof. Let   H 3/2 ( T ) vanishes in the past. We consider problem (118) with  instead of
+1 ( )  H 1 ( ), in (118c). According to our assumption, the exist a unique solution (U, V )  H T T
+
+with (q, vN , HN , V )|x1 =0  H 1/2 ( T ) of (118a)(118d) (with  instead of ) enjoying the a priori estimate (119) with  instead of . Taking into account the boundary condition (118e) and following arguments in [14], we can prove the estimate
+H 3/2 ( T )
+
+ C [F ]1,,T +
+
+H 3/2 ( T )
+
+.
+
+(120)
+
+This defines a map    in H 3/2 ( T ). Let 1 , 2  H 3/2 ( T ), and (U 1 , V 1 ), (U 2 , V 2 ), 1 , 2 be the corresponding solutions of problem (118) with  instead of  in (118c), respectively. Thanks to the linearity of the equations we obtain, as for (120), 1 - 2
+H 3/2 ( T )
+
+ C 1 - 2
+
+H 3/2 ( T ) .
+
+Then the map	has a unique fixed point, by the contraction mapping principle. The fixed point  =  provides a unique solution of problem (118). Lemma 6.4 enables us to consider -b as a given source term g in (118c): M U V = g := -b  on  T .
+
+34
+
+Then, following the classical argument, we reduce problem (118a)(118d) to one with homogeneous boundary conditions (with g = 0) by subtracting from (U, V ) a function (U , V )  H 2 (T )  H 2 (T ) such that M U V =g on  T .
+
+That is, in view of the above lemmata, assuming that problem (118) with  = 0 in (118c) has a
+1 ( )  H 1 ( ), with (q, v , H , V )| 1/2 (  ), such that unique solution (U, V )  H x1 =0  H T T N N T
+
+[U ]1,,T + V
+
+H 1 (T )
+
++ (q, vN , HN , V )|x1 =0
+
+H 1/2 ( T )
+
+ C [F ]1,,T ,
+
+(121)
+
+we get the solution of problem (53)(56) with the regularity prescribed in Theorem 3.1. In other words, it remains to prove the existence of a unique solution (U, V ) to the problem
+3
+
+A0  t U +
+j =1
+
+Aj  j U + C U = F
+
+in T , in T ,
+
+(122a) (122b) (122c) (122d)
+
+B0 t V + B1 1 V + B2 2 V + B3 3 V = 0 M U V =0 on  T , for t < 0.
+
+(U, V ) = 0
+
+Lemma 6.5. Let the basic state satisfies the assumptions of Theorem 3.1. Then problem (122)
+1/2 (  ), obey1 ( )  H 1 ( ), with (q, v , H , V )| has a unique solution (U, V )  H x1 =0  H T T N N T
+
+ing the a priori estimate (121). Proof. In Section 4 we had constructed the dissipative energy integral which is inequality (96) and we have the same energy inequality for the case of variable coefficients. However, since integration by parts was used (see Section 4), we cannot claim that the boundary conditions for the system prolonged up to the first-order tangential derivatives are dissipative in the classical sense. Now we prove that they are indeed dissipative if we drop zero-order terms in . Setting	= 0 in (117) means that we drop the lower-order term a ^0  in (116), i.e., we substitute (116) with a ^0 = 0 into the boundary integrals 2
+R2
+
+ ^    E1 |x1 =0 dx ,
+
+cf. (84).10 For technical simplicity, let us first discuss the case of constant coefficients when, in particular,  ^ = const. The substitution of the second line in (85) into the above boundary integral with  = 2 leads to the appearance of, for example, the following integral 2
+R2
+10
+
+ ^ a1 2 H1 2 E1 |x1 =0 dx .
+
+(123)
+
+The same integrals we have for the case of variable coefficients, where  ^ =  ^(t, x) is the function defined
+
+through the basic state by formula (82).
+
+35
+
+On the one hand, we can rewrite the boundary integral in (123) by passing to the volume integral and integrating by parts: H1 2 E1 |x1 =0 dx = (2 H1 1 E1 - 1 H1 2 E1 ) dx,
+
+R2
+
+R3 +
+
+and, on the other hand, we have
+t R2
+
+H1 2 E1 |x1 =0 dx =
+0
+
+R2
+
+( H1 2 E1 - 2 H1  E1 ) |x1 =0 d dx .
+
+Hence, integral (123) disappears in (84) with  = 2 after the addition to it the identity
+t R3 +
+
+(2 H1 1 E1 - 1 H1 2 E1 ) dx -
+0 R2
+
+( H1 2 E1 - 2 H1  E1 ) |x1 =0 d dx = 0
+
+(124)
+
+multiplied by 2^ a1 2 , and the volume integral 2
+R3 +
+
+ ^ a1 2 (2 H1 1 E1 - 1 H1 2 E1 ) dx
+
+makes a corresponding contribution to the integral of the quadratic form with the matrix  ^Q in (91). We can write down a symmetric (but not hyperbolic) system for which we have the energy identity (124). Indeed, the system of evident equations -t (2 E1 ) + 2 (t E1 ) = 0, t (2 H1 ) - 2 (t H1 ) = 0, is the symmetric system B3 t X - B1 1 X + B2 2 X = 0 (125) t (1 E1 ) - 1 (t E1 ) = 0, 1 (2 E1 ) - 2 (1 E1 ) = 0, -1 (2 H1 ) + 2 (1 H1 ) = 0
+
+-t (1 H1 ) + 1 (t H1 ) = 0,
+
+for the vector X = (1 H1 , 2 H1 , t H1 , 1 E1 , 2 E1 , t E1 ) and obeys the energy identity (124), where the symmetric matrices Bj are the same as in the Maxwell equations (22). Moreover, using the divergence constraints (68), 1 H1 = 2 H2 + 3 H3 , 1 E1 = 2 E2 + 3 E3 ,
+
+we can pass in (125) from the vector X to the vector of only tangential derivatives Y = (2 H2 , 3 H3 , 2 H1 , t H1 , 2 E2 , 3 E3 , 2 E1 , t E1 ) keeping the symmetry property: (T T B3 T )t Y - (T T B1 T )1 Y + (T T B2 T )2 Y = 0, (126)
+
+where X = T Y , the rectangular matrix T can be easily written down, and the matrices T T Bj T are again symmetric. Using analogous simple arguments, we can understand that any integration by parts in Section 4 can be associated with the addition of the energy identity for some symmetric system 36
+
+for a vector which components are components of the vector Z of tangential derivative of U and V . It means that we add to the symmetric hyperbolic system
+3
+
+A0 t Z +
+j =1
+
+Aj j Z = F
+
+(127)
+
+constructed from system (122a), (122b) (here in the case of constant coefficients) a symmetric system
+3
+
+ ^Q0 t Z +
+j =1
+
+Qj j Z = Q4 F
+
+and then consider the energy identity for the resulting system
+3
+
+(A0 +  ^Q0 )t Z +
+j =1
+
+(Aj + Qj )j Z = (I + Q4 )F
+
+(128)
+
+which is hyperbolic under condition (94), where the matrices A0 and Q0 were defined in Section 4, A1 = diag(A1 , -1 B1 , . . . , A1 , -1 B1 ), Ak = diag(Ak , -1 Bk , . . . , Ak , -1 Bk ), 0 = (0, 0, 0, 0, 0, 0), k = 2, 3,
+
+F = (t F, 0, 2 F, 0, 3 F, 0),
+
+and the matrices Qi (i = 1, 4) can be explicitly written down if necessary. If we do not apply the Young inequality towards the derivation of inequality (91), we obtain the corresponding identity
+t R3 +
+
+((A0 +	^Q0 )Z, Z ) dx - 2
+
+R3 +
+
+ ^F1 t E1 dx = 2
+0
+
+(F, Z )dxd.
+R3 +
+
+(129)
+
+Instead of the usage of inequality (92) we can first express t E1 from the fourth equation in (65) by taking into account the third constraint in (68), t E1 = - (2 E2 + 3 E3 ) + -1 (3 H2 - 2 H3 ), and then we have
+t R3 +
+
+ ^F1 t E1 dx =
+0
+
+R3 +
+
+ ^  (2 F1  E2 + 3 F1  E3 ) - -1 (3 F1  H2 - 2 F1  H3 ) dxd :=
+0 t R3 +
+
+(Q4 F, Z )dxd,
+
+and (129) implies the energy identity
+t R3 +
+
+((A0 +	^Q0 )Z, Z ) dx = 2
+0
+
+R3 +
+
+((I + Q4 )F, Z )dxd.
+
+(130)
+
+37
+
+Clearly, here the matrix Q4 is the same as in system (128) for which the energy identity reads
+t R3 +
+
+((A0 +	^Q0 )Z, Z ) dx -
+0
+
+R3 +
+
+((A1 + Q1 )Z, Z )|x1 =0 dx d
+t
+
+=2
+0 R3 +
+
+((I + Q4 )F, Z )dxd.
+
+(131)
+
+Comparing (130) and (131) we conclude that the boundary conditions for system (128) are dissipative, to be exact, ((A1 + Q1 )Z, Z )|x1 =0 = 0. For the case of variable coefficients some "lower-order" terms appear in energy integrals, but again any integration by parts towards the proof of the energy inequality (96) can be associated with the addition of some symmetric system for the vector (W, Z ), with W = (U, V ) (unlike the case of constant coefficients it will contain also equations for the original unknown W ). The boundary integral will again disappear in the final energy identity, i.e., the boundary conditions for the prolonged system are dissipative. Moreover, for guaranteeing the hyperbolicity of the prolonged system for (W, Z ), together with the variable coefficients counterpart of (127) we consider the "trivial" system t W - W0 = 0 with the constant  large enough and the vector W0 containing in Z = (W0 , W2 , W3 ). The vector Z satisfies the variable coefficients counterpart of (127) obtained by the formal differentiation of system (122a), (122b) with respect to t, x2 and x3 , i.e., W2 and W3 are associated with 2 W and 3 W respectively. Since zero-order terms in  play no role in the derivation of the energy estimate for the variable coefficients problem (see [19]), problem (122) obeys the a priori estimate (121). Moreover, the same estimate takes place for 2 W and 3 W . But, since W2 and W3 satisfies the same problem as 2 W and 3 W , estimate (121) implies uniqueness, i.e., Wk = k W , k = 2, 3. Thus, we obtain a symmetric (prolonged) system by adding to (132) and the variable coefficients counterpart of (127) the symmetric system for (W, Z ) associated with integrations by parts. This system is hyperbolic under condition (94) and for the constant  large enough. Moreover, the boundary conditions for this system are dissipative. Finally, as the boundary is characteristic of constant multiplicity [10], we may apply the result of [11, 12] and we get the
+m ( ), with m  1 and the noncharacteristic unknowns having a greater degree solution from H T
+
+(132)
+
+of regularity in the normal direction. In view of (132), integrating the interior equations and the boundary conditions for W0 = t W (containing lower-order terms with W ) over the time interval [0, t] and taking into account the zero initial data, we get the solution of (122) with the prescribed regularity. Taking into account the arguments before Lemma 6.5, the proof of this lemma completes the proof of the existence of the solution of problem (53)(56). 38
+
+Achnowledgments
+This work was supported by RFBR (Russian Foundation for Basic Research) grant No. 10-0100320-a.
+
+References
+[1] Alinhac S. Existence d'ondes de rar efaction pour des syst` emes quasi-lin eaires hyperboliques multidimensionnels. Comm. Partial Differential Equations 14 (1989), 173230 [2] Bernstein I.B., Frieman E.A., Kruskal M.D., Kulsrud R.M. An energy principle for hydromagnetic stability problems. Proc. Roy. Soc. A 244 (1958), 1740 [3] Chen Shuxing. On the initial-boundary value problems for quasilinear symmetric hyperbolic system with characteristic boundary. Chinese Ann. Math. 3 (1982), 223232 [4] Goedbloed J.P., Keppens R., Poedts S. Advanced magnetohydrodynamics: with applications to laboratory and astrophysical plasmas. Cambridge University Press, Cambridge, 2010 [5] Kreiss H.-O. Initial boundary value problems for hyperbolic systems. Commun. Pure Appl. Math. 23 (1970), 277296 [6] Lindblad H. Well posedness for the motion of a compressible liquid with free surface boundary. Commun. Math. Phys. 260 (2005), 319392 [7] Majda A. Compressible Fluid Flow and Systems of Conservation Laws in Several Space Variables. Springer-Verlag, New York, 1984 [8] Morando A., Secchi P., Trebeschi P. Regularity of solutions to characteristic initialboundary value problems for symmetrizable systems. J. Hyperbolic Differ. Equ. 6 (2009), 753-808 [9] Morando A., Trakhinin Y., Trebeschi P. Well-posedness of the linearized plasma-vacuum interface problem in ideal incompressible MHD. To appear in Quar. Appl. Math. [10] Rauch J. Symmetric positive systems with boundary characteristic of constant multiplicity. Trans. Amer. Math. Soc. 291 (1985), 167187 [11] Secchi P. Linear symmetric hyperbolic systems with boundary characteristic of constant multiplicity. Math. Methods Appl. Sci. 18 (1995), 855870 [12] Secchi P. The initial boundary value problem for linear symmetric hyperbolic systems with characteristic boundary of constant multiplicity. Differential Integral Equations 9 (1996), 671700 39
+
+[13] Secchi P. Some properties of anisotropic Sobolev spaces. Arch. Math. 75 (2000), 207216 [14] Secchi P., Trakhinin Y. Well-posedness of the linearized plasma-vacuum interface problem. Preprint, 2011, arXiv:1112.3101 [15] Secchi P., Trakhinin Y. Well-posedness of the plasma-vacuum interface problem. Preprint, 2013, arXiv:1301.5238 [16] Trakhinin Y. The existence of current-vortex sheets in ideal compressible magnetohydrodynamics. Arch. Ration. Mech. Anal. 191 (2009), 245310 [17] Trakhinin Y. Local existence for the free boundary problem for nonrelativistic and relativistic compressible Euler equations with a vacuum boundary condition. Commun. Pure Appl. Math. 62 (2009), 15511594 [18] Trakhinin Y. On the well-posedness of a linearized plasma-vacuum interface problem in ideal compressible MHD. J. Differential Equations 249 (2010), 2577-2599 [19] Trakhinin Y. Stability of relativistic plasma-vacuum interfaces. J. Hyperbolic Differ. Equ. 9 (2012), 469509 [20] Yanagisawa T., Matsumura A. The fixed boundary value problems for the equations of ideal magnetohydrodynamics with a perfectly conducting wall condition. Commun. Math. Phys. 136 (1991), 119140
+
+40
+

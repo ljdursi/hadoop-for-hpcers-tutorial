@@ -1,0 +1,284 @@
+ON A SUPERQUADRATIC ELLIPTIC SYSTEM WITH STRONGLY INDEFINITE STRUCTURE
+
+arXiv:1305.5780v1 [math.AP] 24 May 2013
+
+CYRIL JOEL BATKAM
+
+Abstract. In this paper, we consider the elliptic system $ & u " g px, vq in , v " f px, uq in , % u " v " 0 on B,
+
+where  is a bounded smooth domain in RN , and f and g satisfy a general superquadratic condition. We prove the existence of infinitely many solutions. Our argument relies on the application of a generalized variant fountain theorem for strongly indefinite functionals. Previous results in the topic are improved.
+
+1. Introduction In this paper, we study the existence of multiple solutions of certain superquadratic elliptic systems of the form $ & u " g px, v q in , v " f px, uq in , (S) % u " v " 0 on B ,
+
+where  is a bounded smooth domain in RN , N  3, and the functions f, g :  ^ R  R are continuous and superlinear. Such systems describe steady state solutions of reaction-diffusion and hydrodynamical problems. The difficulties in studying (S) originate mainly in two facts. First, the associated energy functional is strongly indefinite, in the sense that it is neither bounded from above nor from below, even on a subspace of finite dimension or codimension. Therefore, the usual critical point theorems cannot be applied. Second, due to the growth conditions on f and g below, the energy functional associated with (S) is not defined on the 1 Sobolev space H0 pq. We will use fractional Sobolev spaces in order to apply variational methods. Elliptic systems leading to strongly indefinite functionals have been studied by many authors. See, for instance [1, 6, 5, 16, 3, 11, 4] and the references therein. In a recent paper [16], Szulkin and Weth considered (S) with f and g both subcritical and odd, and they assumed among others that the mappings u  f px, uq{|u| and u  g px, uq{|u| are strictly increasing in p8, 0qY p0, `8q. By developing a Nehari manifold method for strongly indefinite functionals, they obtained the existence of infinitely many solutions. We recall that if both f and g are subcritical, then the
+2010 Mathematics Subject Classification. Primary 35J60 Secondary 35J50. Key words and phrases. Indefinite functional; Variant fountain theorem; Superquadratic nonlinearity.
+1
+
+2
+
+C. J. BATKAM
+
+1 1 energy functional associated to (S) is well defined on the space E " H0 pq ^ H0 pq and has the form    1 1 J puq " }u` }2  }u }2  F px, u1 q ` Gpx, u2 q dx, 2 2
+
+where E " E ` ` E  Q u " pu1 , u2 q " u` ` u , u  P E  " tu P E ; u 2 "  u 1 u.
+
+Let the following set introduced by Pankov in [12]. ( M " w P E zE  | J 1 pwq, w " 0 and J 1 pwq, z " 0 " 0 @z P E  .
+
+The argument in [16] relies on the observation that for every u P E zE	, the set E  ` R` u intersects M at exactly one point, namely m p puq. This allows the authors to reduce the problem on the manifold M, and then on the unit sphere S ` of E ` , where they can applied a classical multiplicity critical point theorem. If u  f px, uq{|u| or u  g px, uq{|u| is not strictly increasing in p8, 0q Y p0, `8q, then m p puq need not be unique, and their argument collapses. The main goal of this paper is to extend the result of [16] by considering more general growth conditions on f and g , and by only requiring the above mappings to be increasing. Our precise assumptions on f and g are the following. pH1 q f, g P C p ^ Rq and there is a constant C  0 such that for all px, uq, where p, q  2 satisfy |f px, uq|  C p1 ` |u|p q and |g px, uq|  C p1 ` |u|q q, 2 1 1 ` 1 . p q N 1 1 2   . q 2 N
+
+Furthermore, in case N	5 we impose 1 1 2   p 2 N and
+
+pH2 q
+
+1 2 uf px, uq
+
+1  F px, uq  0 and 2 ug px, uq	Gpx, uq  0, @px, uq.
+
+pH3 q F px, uq{u2  0 and Gpx, uq{u2  0 uniformly in x as |u|  8. pH4 q u  f px, uq{|u| and u  g px, uq{|u| are increasing in p8, 0q Y p0, `8q. Before we state our main result, we recall the following definition. pH5 q f px, uq " f px, uq and g px, uq " g px, uq for all px, uq.
+
+Definition 1. We say that pu, v q is a strong solution of (S) if u P W 2,p{pp1q pq X 1,p{pp1q 1,q{pq1q W0 pq, v P W 2,q{pq1q pq X W0 pq and pu, v q satisfies " u " g px, v q a.e. in , v " f px, uq a.e. in . The main result of the paper is the following. Theorem 2. Under assumptions pH1 q  pH5 q, (S) has infinitely many pairs of strong solutions puk , vk q such that }uk }L8 pq  8 or }vk }L8 pq  8, as k  8.
+
+ON A SUPERQUADRATIC ELLIPTIC SYSTEM
+
+3
+
+In [6], Hulshof and van der Vorst obtained the existence of at least one nontrivial solution of (S) by using the Ambrosetti-Rabinowitz's superquadraticy condition: D  2 and DR  0 such that 0	F px, uq  uf px, uq and 0  Gpx, uq  ug px, uq for |u|  R. (AR) This condition was mainly used to verify that the energy functional has a linking geometry in the sense of Benci and Rabinowitz [3], and also satisfies the PalaisSmale condition. A similar result was obtained by de Figueiredo and Felmer in [5]. We recall that (AR) implies f px, uq  c|u| and g px, uq  c|u| for |u|  R, hence it is stronger than pH3 q. As far as we know, Theorem 2 is new under assumptions pH1 q  pH5 q. It will be proved by using the generalized variant fountain theorem for strongly indefinite functionals, established by the author and Colin in [2]. This theorem combines the degree theory of Kryszewski and Szulkin [8], with the idea of the monotonicity trick developed by Jeanjean [7]. It also has the advantage that it produces bounded Palais-Smale sequences of the energy functional, and is not based on any reduction method. The paper is organized as follows. Section 2 contained the variational framework for the study of (S). The proof of Theorem 2 will be given in section 3. In section 4, we state a similar result concerning an indefinite semilinear elliptic equation. 2. Variational setting Consider the Laplacian as the operator
+1  : H 2 pq X H0 pq  L2 pq  L2 pq,
+
+and let pj qj 1 a corresponding system of orthogonal and L2 pq-normalized eigenfunctions, with eigenvalues pj qj 1 . Then, writing  8  udx, aj j , with aj " u"
+j "1
+
+we set, for 0  s  2
+
+and
+
+8   ( 2 s E s :" u P L2 pq  j |aj |  8 j "1 8  s{2
+
+As puq :"
+
+j aj j ,
+
+j "1
+
+@u P DpAs q " E s .
+
+It is well known (see Lions-Magenes [9]) that the space E s is a fractional Sobolev space with the inner product  As uAs vdx. u, v s "
+
+
+We refer to the paper of Persson [13] for the proof of the following lemma. Lemma 3. E s embeds continuously in Lr pq for s  0 and r  1 satisfying 1 1 s r  2  N . Moreover, the embedding is compact in the case of strict inequality.
+
+4
+
+C. J. BATKAM
+
+By assumption pH1 q, there exist s, t  0 such that s ` t " 2 and 1 s 1 1 t 1   and   . p 2 N q 2 N We consider the functional	  As uAt vdx  F px, uq ` Gpx, v q dx, pu, v q P E s ^ E t . pu, v q :"
+
+
+(1)
+
+It follows from Lemma 3 that the inclusions E s  Lp pq and E t	Lq pq are continuous. This, together with the estimate	    As uAt vdx	|As u|2 |At u|2 " }u}s }v }t ,
+
+
+imply that the functional  above is well defined on E :" E s ^ E t . Now a standard argument shows that if assumption pH1 q holds, then the functional	is of class C 1 on E . We say that pu, v q P E s ^ E t is a weak solution of (S) if	` s t  A uA k `As hAt v dx hf px, uq`kg px, v q dx " 0, @ph, k q P E s ^E t .
+
+
+In order to recuperate from the critical points of the functional  (weak) solutions of (S), we need the following regularity result due to de Figueiredo and Felmer [5].
+
+Lemma 4. If pu, v q P E s ^ E t is a weak solution of (S), then pu, v q is a strong solution of (S). We endow E " E s ^ E t with the inner product pu, v q, p, q
+s^t
+
+" u,
+
+s
+
+` v,  t ,
+
+pu, v q, p, q P E,
+
+If we denote by P  : E	E  the orthogonal projections, then a direct calculation yields  1` (3) P  pu, v q " u	Ats v, v  Ast u , @pu, v q P E, 2 and	 1 1  2 pu, v q " }P ` pu, v q}2  } P p u, v q}  F p x, u q ` G p x, u q dx. (4) s^t s^t 2 2
+
+" pu, v q, pu, v q s^t . and the associated norm In the following we assume without loss of generality ` that s  t. One can  easily verify that E has the orthogonal decomposition with respect to ,  s^t E " E ` ` E  , where ( ( E ` :" pu, Ast uq | u P E s and E  :" pu, Ast uq | u P E s . (2)
+
+}pu, v q}2 s^t
+
+Since both E  and E ` are infinite-dimensional, the functional	is strongly indefinite, in the sense that it is neither bounded below nor above, even on subspaces of finite-dimension or finite-codimension. The study of  is therefore quite difficult, because the usual critical point theorems in [14, 17] cannot be applied directly. Now we present the generalized variant fountain theorem we will apply in order to prove our main result. Let Y be a closed subspace of a separable Hilbert space X endowed with the inner product ,  and the associated norm }  }. We denote by P : X  Y and Q : X	Z :" Y K the orthogonal projections.
+
+ON A SUPERQUADRATIC ELLIPTIC SYSTEM
+
+5
+
+We fix an orthonormal basis paj qj 0 of Y , and we consider on X " Y ` Z the  -topology introduced by Kryszewski and Szulkin in [8], that is, the topology associated with the norm 8	1 | , } Qu } , u P X. | P u, a ~u~ :" max j 2 j `1 j "0 ` Clearly  we have }Qu}  ~u~  }u}. Moreover,  has the property that see [8] or [17] : If pun q	X is a bounded sequence, then un  u  P un  P u and Qun	Qu.
+
+
+Let pej qj 0 be an orthonormal basis of Z . We adopt the following notations. Yk :" Y ` p`k Z k :" ` 8 j "0 Rej q, j "k R e j ,  Bk :" tu P Yk	||u||  k u, with k  0, k  2.  puq :" Lpuq  J puq,
+
+Theorem 5 (Variant fountain theorem, Batkam-Colin [2]). Let the family of C 1 functionals  : X	R,  P r1, 2s,
+
+such that pA1 q  maps bounded sets to bounded sets uniformly for  P r1, 2s, and  puq "	puq for every p, uq P r1, 2s ^ X . pA2 q J puq	0 for every u P X ; Lpuq  8 or J puq  8 as }u}	8. pA3 q For every  P r1, 2s,  is  -upper semicontinuous and 1	is weakly sequentially continuous. Let k pq be the class of maps  : Bk	X such that (a)  is odd and  continuous, and |BBk " id, (b) every u P intpBk q has a  neighborhood Nu in Yk such that pid   qpNu X intpBk qq is contained in a finite-dimensional subspace of X , (c)  p puqq	puq @u P Bk . If there are 0  rk  k such that bk pq :" then ck pq :" sup }un k pq}  8,
+n uPZk }u}"rk
+
+inf  puq  ak pq :" sup	puq,
+uPYk }u}"k
+
+@ P r1, 2s,
+
+ Pk pq uPBk
+
+inf
+
+Moreover, for a.e  P r1, 2s there exists a sequence pun k pqqn	X such that
+
+`  sup	 puq  bk pq,
+
+@ P r1, 2s.
+
+n n 1  puk pqq	0 and  puk pqq	ck pq as n  8.
+
+3. Proof of the main result Throughout this section we assume that pH1 q  pH5 q hold. We denote by |  |r the usual Lr pq norm. We define X " E, Y " E Z " E`, P " P and Q " P ` ,
+
+6
+
+C. J. BATKAM
+
+where E " E s ^ E t , E  and P	are define in section 2 above. The functional  in (4) then reads    1 1 2 2 F px, uq ` Gpx, uq dx, (5) pu, v q " }Qpu, v q}s^t	}P pu, v q}s^t	2 2  @pu, v q P X. ( Let the family of functionals  : X  R ;  P r1, 2s defined by   "1	i 1 2  pu, v q " }Qpu, v q}2   } P p u, v q} ` F p x, u q ` G p x, u q dx . s^t s^t 2 2  A standard argument shows that: Lemma 6. The conditions pA1 q and pA2 q of Theorem 5 are satisfied, with    1 1 2 2 Lpu, v q " }Qpu, v q}s^t , J pu, v q " }P pu, v q}s^t ` F px, uq ` Gpx, uq dx. 2 2  Moreover, 1  is given by  pu, v q, ph, k q " Qpu, v q, ph, k q s^t "	P pu, v q, ph, k q @pu, v q, ph, k q P X. We now show that condition pA3 q of Theorem 5 is satisfied. Lemma 7. For every  P r1, 2s,  is  upper semicontinous and 1  is weakly sequentially continuous. Proof. (1) Let pun , vn q  pu, v q in X and  pun , vn q	C P R. It follows from the definition of  that pQpun , vn qqn is bounded. Since F, G  0, we deduce from the inequality	pun , vn q  C that pP pun , vn qqn is also bounded. Hence, up to a subsequence pun , vn q  pu, v q in X and pun , vn q	pu, v q a.e. in . It follows from Fatou's lemma and the weakly semicontinuity of the norm that C   pu, v q. Hence,  is	upper semicontinous. (2) Assume that pun , vn q  pu, v q in X " E s ^ E t . By (1) and Lemma 3, the inclusion X  Lp pq ^ Lq pq is compact. Therefore, pun , vn q  pu, v q in Lp pq ^ Lq pq. A standard argument based on the H older inequality and Theorem A.2 in [17] shows that 1 p u , v q , p h, k q  1 n n   pu, v q, ph, k q for 1 all ph, k q P X . Hence,  is weakly sequentially continuous.	( Y " pu, Ast uq  u P E s  ( and Z " pu, Ast uq  u P E s .
+
+
+(6)
+
+` s^t
+
+   i hf px, uq ` kg px, v q dx , (7)
+
+
+We recall that
+
+Let paj qj 0 be an orthonormal basis of E s . Then pAst aj qj 0 is an orthonormal basis of E t . We define an orthonormal basis pej qj 0 of Z by setting  1 ` ej :" ? aj , Ast aj . 2 Let `  Yk " Y ` `k and Zk " `8 j "0 R e j j "k R e j .
+
+ON A SUPERQUADRATIC ELLIPTIC SYSTEM n Lemma 8. There exist pn qn0  r1, 2s and pun k , vk qn0  X zt0u such that
+
+7
+
+for k big enough.
+
+n  1,
+
+n n 1 n puk , vk q " 0
+
+and
+
+n n pun k , vk q " ck pn q
+
+Proof. pH3 q implies that for every   0 there is C  0 such that
+
+F px, uq   |u|2  C and Gpx, uq	 |u|2  C , @px, uq. (8) `  `  st st s s Let z P Yk . Then z " u, A u ` v, A v , where v P E and u P Ek :" `k j "0 Raj . By (6) we have	  2 st	 F p x, u ` v q ` G p x, A p u	v qq dx  pz q " }u}2   } v } s s    2  }u }2 F px, u ` v q ` Gpx, Ast pu  v qq dx psince   1q s  }v }s	  ` 2 st  }u }2  } v }	 |u ` v |2 pu  v q|2 s s 2 ` |A 2 ` 2C || pin view of (8)q  ` st 2 2 2	L2 pqq	}u }2 s  }v }s	C |u ` v |2 ` |u  v |2 ` 2C || psince E  ` 2 2 2 " }u }2 s  }v }s  2C |u|2 ` |u|2 ` 2C || pby the parallelogram identityq.
+2  pz q  p1  c2  q}u}2 s  }v }s  2C ||.
+
+s Since all the norms are equivalent on the finite-dimensional subspace Ek , there is a constant c1  0 such that c1 }u}s  |u|2 . Hence
+
+. Hence  pz q  8 uniformly in  P r1, 2s as }z }s^t  8, and Choose   c1 2 consequently ak pq  0 for k big enough. Let z P Zk . Then z " pu, Ast uq with u P `8 j "k Raj , and	1 st   F p x, u q ` G p x, A u q dx  pz q " }z }2 2 s^t    1  }z }2 F px, uq ` Gpx, Ast uq dx psince   2q. s^t	2 2  By pH1 q there is a constant C1  0 such that Hence |F px, uq|  C1 p1 ` |u|p q and |Gpx, Ast uq|  C1 p1 ` |Ast u|q q.
+p st q	pz q  }u}2 u|q	4C1 ||. s  2C1 |u|p  2C1 |A
+
+We define
+
+1,k :"
+
+sup
+uP`8 j " k R aj }u}s "1
+
+|u|p ,
+
+2,k :"
+
+sup
+s t a q v P`8 j j " k Rp A } v } t "1
+
+|v |q ,
+
+( and k " max 1,k ; 2,k . Then p q p q	pz q  }u}2 s  2C1 k }u}s  2C1 k }u}s  4C1 ||. We assume without loss of generality that q  p and we set 1 ` p  2p rk :" C1 pk . ? Then for }z }s^t " 2}u}s " rk we have 2pqpq i 2p " 1	1 2p r	? p  Ak 2p  4C1 ||,  pz q  b k :" Kk 4 pp 2q
+
+(9)
+
+8
+
+C. J. BATKAM
+
+where K, A  0 are constant. By using the argument in the proof of Lemma 3.8 in [17], we easily show that r 1,k	0 and 2,k  0 as k  8. This implies that b k  8 and  pz q  8 r uniformly in  P r1, 2s, as k  8, whenever }z }s^t " rk . Hence bk pq  b k  0 for k big enough. n By Theorem 5, ck pq  bk pq and for a.e.	P r1, 2s there exists zk pq " n n puk pq, vk pqq P X such that
+n sup }zk pq}s^t  8, n n  pzk pqq  ck pq n and 1  pzk pqq  0,
+
+as n  8,
+
+for k big enough. n pqqn has a convergent subsequence. Now a standard argument shows that pzk Therefore, there exists puk pq, vk pqq P X such that 1  puk pq, vk pqq " 0 and  puk pq, vk pqq " ck pq. It is then easy to conclude.
+n Next we will show that the sequence pun k , vk qn above is bounded. The following technical lemma will be very helpful.
+
+Proof. Let z " pu , v q and w " rz ` , where r	1 and  " p1 , 2 q P Y . A direct calculation gives `r	` 1 }Qz }2  pz ` wq  pq "  }}2 s^t ` r s^t 2 2 " `r i	 r ` 1 }P z }2 ` p 1 ` r q P z ,   s^t s^t 2	`   F x, p1 ` rqu ` 1  F px, u q dx    `   G x, p1 ` rqv ` 2  Gpx, v q dx. Now
+r 1  pz q, r 2
+
+Lemma 9. Let  P r1, 2s. if z  0 and 1 pz q " 0, then  pz ` wq	pz q  ( for every w P Z :" rz `  | r  1,  P Y .
+
+Hence
+
+ ` 1 z ` p1 ` rq " 0 implies " `r i   `r 2   r ` 1 } P z } ` p 1 ` r q P z ,  " r ` 1 }Qz }2   s^t s^t s^t 2  2 i "`  `  p1 ` rqu ` 1 f px, u q ` p1 ` rqv ` 2 g px, v q dx.
+
+
+`
+
+
+
+  pz ` wq  pq "  }}2 2 s^t  " `  ` i p1 ` rqu ` 1 f px, u q ` F px, u q  F x, p1 ` rqu ` 1 dx `  " `  ` i p1 ` rqv ` 2 g px, v q ` Gpx, v q  G x, p1 ` rqv ` 2 dx. `
+
+
+Following Liu [10], we define for an arbitrary	 0, f px, uq " f px, uq ` u3
+
+and g px, uq " g px, uq ` u3 ,
+
+@px, uq P  ^ R.
+
+Using pH4 q, one easily verifies that the mappings u  f px, uq{|u| and u  g px, uq{|u| are strictly increasing in Rzt0u. It then follows from Lemma 2.2 in
+
+ON A SUPERQUADRATIC ELLIPTIC SYSTEM
+
+9
+
+[15] that `  `	p1 ` rqu ` 1 f px, u q ` F px, u q  F x, p1 ` rqu ` 1  0, `  `	p1 ` rqv ` 2 g px, v q ` G px, v q  G x, p1 ` rqv ` 2  0, where F and G are the primitives of f and g respectively. Letting   0, we get `  `  p1 ` rqu ` 1 f px, u q ` F px, u q  F x, p1 ` rqu ` 1  0, `  `  p1 ` rqv ` 2 g px, v q ` G px, v q  G x, p1 ` rqv ` 2  0. This completes the proof of the lemma. ` n  n Lemma 10. The sequence zk " pun k , vk q n obtained in Lemma 8 is bounded.
+
+We then obtain, by using pH3 q and Fatou's lemma the contradiction 0  8. n n q	0 and F, G  0, we have that }Qwk }s^t  Hence wk " 0. Since n pzk n n n }P wk }s^t . It is then clear by definition of wk that we cannot have }Qwk }s^t	0, n as n  8. Hence, there is a constant   0 such that }Qwk }s^t   up to a subsequence. By Lemma 9, we have for every r  0 1 n n q  2 r2 q  n prQwk ck p2q  ck pn q " n pzk 2	 n n  n F px, rQ1 wk q ` Gpx, rQ2 wk q dx, p<q	`  n n n where Qwk " Q1 wk , Q2 wk . n Now, by Lemma 3, Qwk  0 in Lp pq ^ Lq pq, as n  8. It follows from pH1 q n n and Theorem A.2 in [17] that F px, rQ1 wk q  0 and Gpx, rQ2 wk q  0 in L1 pq. By taking the limit n  8 in p<q we obtain 1 ck p2q  2 r2 , @r  0. 2 This gives a contradiction if we fix k and let r	8. k Consequently, the sequence pzn qn is bounded. We can now prove Theorem 2.
+k k Proof of Theorem 2. We consider the sequence pzn " puk n , vn qqn above. The relation " n n n n n 1 1 pun k , vk q	n puk , vk q, ph, k q " pn  1q P puk , vk q, ph, k q s^t  `   n hf px, un ` k q ` kg px, vk q dx
+
+Proof. We argue by contradiction. n n Assume that pzk qn is unbounded. Then, up to a subsequence }zk }s^t  8, as n n n n n  8. Let wk " psn , t q " z {} z } . Up to a subsequence we may suppose k k k k s^t n n that wk  wk " psk , tk q in X and wk	wk " psk , tk q a.e.. n n n If wk  0, that is, if sk  0 or tk  0, then |sn k |}zk }s^t	8 or |tk |}zk }s^t  8 as n  8. Now for k large enough we have n q n pzk 1 1 ck pn q n 2 n 2  }Qwk }s^t	}P wk }s^t 0 n 2 " n }2 }zk }s^t }zk 2 2 s^t   n n F px, }zk }s^t q n 2 Gpx, }zk }s^t q n 2  | s | dx  |tk | dx. k n n n n 2 2	|sk }zk }s^t |	|tk }zk }s^t |
+
+10
+
+C. J. BATKAM
+
+implies that
+n8 n n n 1 lim 1 pun k , vk q " lim n puk , vk q " 0. n8
+
+Now, since pck pn qqn is nondecreasing and bounded from above, there exists k  ck p2q such that ck pn q  k as n  8. It follows from the equality  "1 `	i n n n 2 n n n n F px, un puk , vk q  n puk , vk q " pn  1q }P puk , vk q}s^t ` k q ` Gpx, vk q dx 2  that n n n lim pun k , vk q " lim n puk , vk q " lim ck pn q " k .
+n8 n8 n8
+
+By repeating the argument in the proof of Lemma 8, we see that there exists puk , vk q P X such that 1 puk , vk q " 0 and puk , vk q " k . But since k	ck p2q	`  r r bk p2q  b k  8, as k  8 where bk is defined in (9) , the proof is completed. 4. A semilinear elliptic problem In this section, we consider the semilinear elliptic problem " u  u " f px, uq, x P , u " 0, on B
+
+(10)
+
+where  is a real parameter. Let 0  1  2  3     be the eigenvalues of the problem " u " u, in , u " 0, on B . We have the following result. Theorem 11. Assume that the following conditions are satisfied. pf1 q f P C p ^ Rq and there is a constant C  0 such that |f px, uq|  C p1 `|u|p q, for some 2  p  2< , where 2< " `8 if N " 1, 2 and 2< " 2N {pN  2q if N  3. pf2 q 1 2 uf px, uq  F px, uq  0, @px, uq. pf3 q F px, uq{u2	0 uniformly in x as |u|  8. pf4 q u  f px, uq{|u| is increasing in p8, 0q Y p0, `8q. pf5 q f px, uq " f px, uq for all px, uq. If k    k`1 for some k  1, then (10) has infinitely many pairs of solutions uk such that |uk |8	8 as k	8. Proof. By pf1 q, the energy functional associated with (10) is defined on the Sobolev 1 pq by space H0   `  1 puq " |u|2  u2 dx  F px, uqdx. 2
+1 By the Poincar e inequality, H0 pq is equipped with the inner product  uvdx, u, v 0 "
+
+and the associated norm " u, u 0 . 1 Let e1 , e2 , e3 ,    be the orthogonal eigenfunctions in H0 pq corresponding to 1 , 2 , 3 ,    . 1 If k	 k`1 for some k  1, then X " H0 pq has the orthogonal decomposition X " Y ` Z , where Y " spante1 , e2 ,    , ek u and Z " Y K .
+
+}u }2 0
+
+ON A SUPERQUADRATIC ELLIPTIC SYSTEM
+
+11
+
+Clearly, we can define an equivalent inner product in X with associated norm }	} such that  `	1 1 |u|2  u2 dx " }Qu}2  }P u}2 , 2 2  where P : X  Y and Q : X  Z are the orthogonal projections. The functional  above then reads  1 1 puq " }Qu}2  }P u}2  F px, uqdx. 2 2  Let  "1 i 1 }Qu}2   }P u}2 ` F px, uqdx ,  P r1, 2s. 2 2  Evidently, we can equipped pX, }  }q with the	topology, and it is easy to check that	is  upper semicontinuous and that 1  is weakly sequentially continuous. The rest of the proof uses an argument similar to that in the proof of Theorem 2, which is now simplified since dimY  8.  puq "
+
+Remark 12. Theorem 11 extends Theorem 3.2 in [15], where the mapping u	f px, uq{|u| was supposed to be strictly increasing in Rzt0u. References
+[1] T. Bartsch, M. Clapp, Critical Point Theory for Indefinite Functionals with Symmetries, J. Funct. Anal. 138 (1996), 107-136. [2] C. J. Batkam, F. Colin, On multiple solutions of a semilinear Schr odinger equation with periodic potential, Nonlinear Anal. 84 (2013), 39-49. [3] V. Benci, P. H. Rabinowitz, Critical point theorems for indefinite functionals, Invent. Math. 52 (1979), 241-273. [4] D. G. de Figueiredo, Y. Ding, Strongly indefinite functionals and multiple solutions of elliptic systems. Trans. Amer. Math. Soc. 355 (2003), no. 7, 2973-2989. [5] D. G. de Figueiredo, P. Felmer, On superquadratic elliptic systems, Trans. Amer. Math. Soc. 343 (1994), no. 1, 99-116. [6] J. Hulshof, R. VanDer Vorst, Differential systems with strongly indefinite variational structure, J. Funct. Anal. 114, 32-58 (1993). [7] L. Jeanjean, On the existence of bounded Palais-Smale sequences and application to a Landesman-Lazer type problem set on RN , Proc. Roy. Soc. Edinburgh A 129, 787-809 (1999). [8] W. Kryszewski, A. Szulkin, Generalized linking theorem with an application to a semilinear Schr odinger equation, Advances in Differential Equation, vol. 3, no. 3 (1998) 441-472. [9] J. L. Lions, E. Magenes, Problmes aux limites non homognes et applications, Vol. I, Dunod, Paris, 1968. [10] S. Liu, On superlinear Schrdinger equations with periodic potential, Calc. Var. Partial Differential Equations 45 (2012), no. 1-2, 1-9. [11] D. Lupo, Existence and multiplicity of solutions for superquadratic noncooperative variational elliptic systems, Topol. Methods Nonlinear Anal. 12, no. 1 (1998), 27-46. [12] A. Pankov, Periodic nonlinear Schr odinger equation with application to photonic crystals, Milan J. Math. 73 (2005) 259-287. [13] A. Persson, Compact linear mappings between interpolation spaces, Ark. Mat. 5 (1964), 215-219. [14] P.H. Rabinowitz, Minimax Methods in Critical Point Theory with Applications to Differential Equations, CBMS Reg. Conf. Ser. Math., vol. 65, Amer. Math. Soc., Providence, RI, 1986. [15] A. Szulkin, T. Weth, Ground state solutions for some indefinite variational problems. J. Funct. Anal. 257 (2009), no. 12, 3802-3822. [16] A. Szulkin, T. Weth, The method of Nehari manifold, Handbook of nonconvex analysis and applications, 597-632, Int. Press, Somerville, MA, 2010. [17] Willem M., Minimax Theorems, Birkhauser, Boston (1996).
+
+12
+
+C. J. BATKAM
+
+Cyril J. Batkam ematiques, epartement de math D Universit e de Sherbrooke, Sherbrooke, (Qu ebec), J1K 2R1, CANADA. E-mail address : cyril.joel.batkam@usherbrooke.ca
+

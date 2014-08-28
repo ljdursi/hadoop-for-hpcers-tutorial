@@ -1,0 +1,845 @@
+Effect of Genetic Variation in a Drosophila Model of Diabetes-Associated Misfolded Human Proinsulin
+Bin Z. He*,1,2, Michael Z. Ludwig*, Desiree A. Dickerson*, Levi Barse*, Bharath Arun*, Soo-Young Park, Natalia A. Tamarina, Scott B. Selleck, Patricia J. Wittkopp, Graeme I. Bell,, Martin Kreitman*,2
+*
+
+Department of Ecology and Evolution, The University of Chicago, Chicago, IL 60637 Department of Medicine, The University of Chicago, Chicago, IL 60637	Department of Human Genetics, The University of Chicago, Chicago, IL 60637  Department of Biochemistry and Molecular Biology, The Pennsylvania State University, University Park, PA, 16802  Department of Ecology and Evolutionary Biology, and Department of Molecular, Cellular, and Developmental Biology, University of Michigan, Ann Arbor, MI 48109 1 Current Address: FAS Center for Systems Biology, Harvard University, 52 Oxford Street, Cambridge, MA 02138
+
+
+Supporting data is available online at http://openwetware.org/wiki/Kreitman:Publications
+
+
+
+1
+
+Running title: Natural Variation in Fly Modifies Mutant-insulin Phenotype Key words: mutant insulin, Drosophila, genome-wide association study, heparan sulfate proteoglycan, sulfateless
+2
+
+Corresponding authors: Martin Kreitman Mailing address: Department of Ecology and Evolution, The University of Chicago, 1101 E 57th Street, Chicago, IL 60637-1573. Phone: +1 773 702 1222. Fax: +1 773 702 9740. Email: martinkreitman@gmail.com. Bin Z. He Mailing address: FAS Center for Systems Biology, Harvard University, 52 Oxford Street, Cambridge, MA 02138 Phone: +1 312 550 8421. Fax: +1 617 496 5425 Email: binhe@fas.harvard.edu
+
+2
+
+ABSTRACT The identification and validation of gene-gene interactions is a major challenge in human studies. Here, we explore an approach for studying epistasis in humans using a Drosophila melanogaster model of neonatal diabetes mellitus. Expression of mutant preproinsulin, hINSC96Y, in the eye imaginal disc mimics the human disease activating conserved cell stress response pathways leading to cell death and reduction in eye area. Dominant-acting variants in wild-derived inbred lines from the Drosophila Genetics Reference Panel produce a continuous, highly heritable, distribution of eye degeneration phenotypes. A genome-wide association study (GWAS) in 154 sequenced lines identified 29 candidate SNPs in 16 loci with P < 10-5 including one SNP in an intron of the gene sulfateless (sfl) which exceeded a conservative genome-wide significance threshold of P = 0.05 level (-log10 P > 7.62). RNAi knock-downs of sfl enhanced the eye degeneration phenotype in a mutant-hINS-dependent manner. sfl encodes a protein required for sulfation of the glycosaminoglycan, heparan sulfate. Two additional genes in the heparan sulfate (HS) biosynthetic pathway (tout velu, ttv and brother of tout velu, botv) also modified the eye phenotype, suggesting a link between HS-modified proteins and cellular responses to misfolded proteins. Finally, intronic variants marking the QTL were associated with decreased sfl expression, a result consistent with that predicted by RNAi studies. The ability to create a model of human genetic disease in the fly, map a QTL by GWAS to a specific gene (and noncoding variant), validate its contribution to disease with available genetic resources, and experimentally link the variant to a molecular mechanism, demonstrate the many advantages Drosophila holds in determining the genetic underpinnings of human disease.
+
+
+
+3
+
+INTPrincipalmComponenttAnalysiss4esiwerekrearedcats25C.TTotalMeyeaareaUwashmeasuredtasndescribedeint(Parkcetoal.,g2013).MAtGleasti10timageso(independentiflies)Spassingnthe)qualityhcheck-wereCcollected(forkeachacross.1Rawndataoisaavailableoonctheiauthors'swebsiteo(http://openwetware.org/wiki/Kreitman:Publications).ainedmfromythenBloomingtonlstockucenter.eRNAiylinesragainsttsfld(GD5070),uttvt(GD4871),hbotve(GD37186)eweresfromtthesVienna)DrosophilauRNAidcenter.dMutantylinestforattvy(ttv681)eandrbotvu(botv510)wwerehdescribedipreviouslyi(Rentettal.,a2009). tout-velo.(ttv)uand(brother of.tout-veloT(botv),oshowedraisimilarpeffect implicatinglthe HS-modifiedsproteins,porcproteoglycanse(HSPG), inatheeresponseato misfolded(proteins.., 2007). When misexpressed in the Drosophila eye imaginal disc, it disrupts eye development, resulting in a reduced eye area in adult flies (Park et al., 2013).
+
+TheExpressionlofnsflsanduCG32396lExpressionSprofilesoinradultstissuestwerepassessedsusingadatasfromaFlyAtlas)(Chintapalliheteal.,t2007)nandrmodENCODEn(Roy5eteal.,r2010).TTovassaytexpressionwinftheaeyenimaginalldiscs,twesisolatedntotalnRNAnfromh10mpairs1ofrdiscstfromd3rdtinstarllarvae.sIndividualvlarvaewereisexedlandsdissectedoine1Xephosphatehbuffernsalinec(PBS);gthemeyeiportionsiofetheieye-antennaladisclwereccollectedtandethetisolatedtdiscssimmediatelyodissolvedoino300rleTrizolp(Invitrogen).tTotalsRNAiwasnextractedtaccordingntosthesmanufacturer'sminstructions.ecDNAnlibraries)weretconstructedBusinge(dT)20tprimersfaftertDNasenImtreatmentd(Invitrogen).eRealmtimedquantitativexPCRewas performedwwithoprimerw5 thresholds to identify candidate SNPs on the autosomes. The first is a Bonferroni corrected threshold at P = 0.05 level (-log10 P > 7.62). This is conservative because it assumes all tests are independent while the number of independent SNPs must be much smaller than the total number tested. The second is an arbitrary threshold of P < 10-5 (or 10-6) as suggested by Mackay et al. (Mackay et al., 2012). We estimated the false discovery rate (FDR) associated with a P < 10-5 threshold by using X chromosome SNPs as negative controls and assuming an equal FDR between X chromosome and autosomes. We also compared the number of QTLs passing this threshold with an empirical null distribution by randomizing the phenotype relative to the genotype 2,000 times and carrying out GWAS on each of the permuted datasets.
+
+
+
+paiRESULTSrEffectaofunaturalxvariationronihINSh6r18obpgindelyalleletandVeight carryingltheN4ibpealleleswerelrandomlyschoseneandepairedrto-forme15ccrossesb(FigurenS1A).cThreeisetseofateni3rd instar wanderingilarvaetwereicollectedafrom eachccrosseandddissectedtiny1XrPBSito isolateMeyelimaginalmdiscs. RNA isolationoandhcDNA libraryopreparationtarehtheosamelasrdescribedeabove.8GenomicRDNAlwasIextractedsfrom adultafliessfromdthe samemcross.lBecause.the 18sbp/4sbpfpolymorphismhisSin6thenintroneof sfl,narSNPoinptheocDNA,waseidentified thatccoulddbeoused toRdistinguishlthe twoeallelestinneachacross,(FiguretS1B). FourCsuchaSNPshwereAchosentandtpyro-sequencing assayslwerehdesignedi(primerstlistedsinoTabledS2).tPyro-sequencingnwasNperformedaasspreviously described (Wittkopp,n2011).aBriefly,weachmofsthedthreeccDNA and one-gDNA sampleeperocrossrwaseanalyzedcbycpyrosequencinglinifourureplicatesPCRgamplificationsotomdetermineerelativeaexpression.aThe ratiowin1genomiceDNAranalysisawasuusedatoaaccountlforhamplification bias.sThefresultingc12dratios weresfirsthlog2itransformedaand analyzednusingrANOVAtaccordingetoztheumodeltyij =nl+ Lim+nij, whereacisotheiestimate9of thelrelativeaexpression ratio, which is expected to be significantly different from zero when the two alleles are differentially expressed; Li is a random effect term for the biological replicates (i = 1,2,3). For 13 of the 15 crosses the p-value > 0.1; for these crosses the data were fit a with a reduced ANOVA model yi =  + i, from which the estimate and the 95% confidence interval for the ratio of expression () were calculated. In the two cases where the random effect term was nominally significant (P < 0.1), a linear mixed-effect model was fit using the lme package in R to obtain an estimate and 95% confidence interval for the same ratio.
+C96Y
+
+-induced eye phenotype
+
+We crossed the transgenic fly line (w; P{GMR-Gal4}, P{UAS-hINSC96Y }/CyO) as the maternal parent to 178 inbred lines from DGRP representing a spectrum of natural variation (excluding recessive lethal variants eliminated in the formation of the DGRP). Among several eye phenotypes observed -- rough eye, reduced total area, distortion of the oval shape and black lesion spots -- we chose total eye area as the phenotype to carry out a GWAS. We quantified eye area in ten male progeny from each hINSC96Y x DGRP cross. We observed a continuously varying distribution of this phenotype, ranging from 13% to 86% of wild type fly eye area (Figure 1). ANOVA indicated that nearly 60% of the variance is between genotypes, indicating a large genetic component. Males were chosen for measurement and analysis because they showed a more severe phenotype than females (Park et al., 2013). However, we also measured F1 females for a subset of 38 lines and found a strong correlation between the two sexes from the same cross (r=0.8, Figure S2).
+
+80
+
+- -
+
+Eye area (x1000 pixel)
+
+60 0 20 40
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+h I N S C 96 Y x DGRP (178 lines)
+
+WT
+
+FigThe observedbvariationein eyeadegeneration isDconsistentswithathe1hypothesistthatyithreflectsidifferences inocellularwresponsettonthenexpressionIofChINSC96Y. The1severitylofetheaeyetdegenerationcphenotypePisnnotdcorrelateddwithebodyesizeiof thetsamepindividual,f7om across the range of the distribution are shown. The rightmost image is of a non-transgenic wild type fly eye.
+
+
+
+
+
+or Genome-wideeassociationeanalysisnWe carried outiGWASronlthedF1imalesLfromocrossesvofshINSC96Yiandi154 DGRPslines. Population1structureWis aepotentialeconfoundingnfactoreineGWAS.aLittletpopulationnstructure was foundiwithinutheufullgseteoflDGRP(lineso(Mackayeetral.,a2012)tandoweGobserved norevidencenfortpopulationastructureninether154nlinesiexaminedhusing axprincipalucomponent analysisoonm900KtautosomaltSNPsy(obtainedabyrpruninglastotalmofr2cmillionibasedconspairwise8LD)R(Figure S3).wTherewwaslno significantycorrelationibetween,the hINSC96Y phenotypea(linebmean)nandeprojectionslengthcinithetdirectioneofnthettop fiveoprinciple components in each-DGRPiline.iWeeusedemean eyeaareanaslanquantitative(traitetoaperform3single marker regression for 2.1 million autosomal SNPs. We restricted the analysis to bi-allelic sites for which the minor allele was present in at least four lines (Mackay et al., 2012). Because of the direction of the cross, all F1 males inherited their X-chromosome from the GMR>>hINSC96Y tester line and we expected to observe no association between the phenotype and X-linked SNPs. Quantile-quantile (Q-Q) plots for autosomal and Xchromosomal SNPs revealed that only the former and not the latter showed an excess of small p-values (Figure 2A,B). We observed association of a SNP (list SNP) on chromosome 3L with eye area (Figure 2C), with a p-value that approached genomewide significance (raw P = 2.4 x10-8, Bonferroni corrected P = 0.0502). The Bonferroni correction is conservative because whereas it assumes complete independence of SNPs, LD is common between SNPs separated by short distances. To identify additional association beyond the peak on chromosome 3L, we used the threshold P < 10-5 suggested by (Mackay et al., 2012) for nominating candidate SNPs. Thirty SNPs, 29 of which were on autosomes and one on the X chromosome, were identified using this criteria (Table S3). The 29 autosomal SNPs were distributed in 16 unlinked loci. Two methods were used to assess the false discovery rate (FDR) at this threshold. First, assuming that the FDR for autosomal and X-linked SNPs are the same, we expected 6.5 autosomal SNPs while observing 29, suggesting a FDR of 22%. Second, we randomized the phenotype relative to the genotype 2,000 times and carried out GWAS on each of the permuted datasets. The resulting number of SNPs passing the threshold in each of the 2,000 trials had a mean of 21 and a median of 19, with the observed number 29 at the 85th percentile. Both methods suggest a modest enrichment of true positives under the 10-5 threshold.
+
+8
+
+A
+
+B
+
+C
+Window Position Scale chr3L: 7.62252 7.62 _ -log10 p-values 0_ CG10144 sfl sfl.b,sfl.c,sfl-RB,sfl-RA sfl.a sfl-RA FlyBase Protein-Coding Genes CG32396 from Graveley 2011 Science sfl.b,sfl.c,sfl.a,sfl-RB,sfl-RA sfl.b,sfl.c,sfl_TCONS_00148235,sfl-RB,sfl-RA inclusion_exon sfl-RA sfl_TCONS_00148235,sfl.b,sfl.c,sfl.a,sfl-RB,sfl-RA sfl-RB,sfl-RA sfl_TCONS_00148235,sfl.b,sfl.c,sfl.a,sfl-RB,sfl-RA sfl.a sfl.b,sfl.c D. melanogaster Apr. 2006 (BDGP R5/dm3) 20 kb 6,510,000 6,520,000 GWAS -log10 p-values
+
+6,500,000
+
+6,530,000
+
+6,540,000
+
+   9ulfateless,(sfl)Amodifies2eyenareawphenotypeiThetpeaksonachromosomec3L issconfinedwtohtheethirdCintrondofethehgene,psflQ(Figure-2D).tThis(intronoalsovcontainseacnested genel(CG32396) lyingtclosestoAtheuassociationepeak.rCG32396 is)predictedstooencodeaalproteinewithpanprobablettubulin beta-chain.sTondeterminehwhich ofothehtwo genes,norppossiblyeboth, isrresponsible for theeassociationrizontal lines indicate the nominating (P < 10-5) and the genome-wide threshold (Bonferroni corrected P < 0.05), respectively. (D) UCSC browser view of the sfl locus containing the association peak. The intron containing the peak also contains a nested gene CG32396.
+
+D
+
+sigRNAi knockdowneofteitherrsflior CG32396 in theheyenimaginalsdiscehadNno measurableoeffecteonxeyesarea. Inlcontrast,sRNAiiagainstysfl,tbutanotmCG32396,isignificantlyddecreased meanteyeFareaein5the6presence9ofhhINSC96YtbutsnotihINSWTp(Figure 3).tThesenresults,identifyrsfl,wandpnotsCG32396,hasathetcausalFgeneeunderlyingothetassociationrpeak.n in eye imaginal discs by RT-PCR (Figure S6, S7).
+Male Female
+
+80
+
+
+
+
+
+
+
+
+*
+
+
+
+Area (x1000 pixel)
+
+60
+
+
+
+40
+
+
+
+
+*
+
+
+
+
+20
+
+
+
+
+0
+
+
+
+GMR>>GAL4
+8 11 w1 -i 96 23 3 CG -i sfl
+
+GMR>>hINSC96Y
+8 11 w1 -i 96 23 3 CG -i sfl 8 11 w1
+
+GMR>>GAL4
+-i 96 23 3 CG -i sfl
+
+GMR>>hINSC96Y
+8 11 w1 -i 96 23 3 CG -i sfl
+
+Figure 3 RNAi knockdown confirms sfl and excludes CG32396 as the causal gene. The effect of knocking down either CG32396 or sfl was tested in the absence ({UASRNAi} x {GMR-Gal4}) or presence ({UAS-RNAi} x {GMR-Gal4, UAS-hINSC96Y}) of hINSC96Y. Compared to the control crosses (first and third columns in both sexes), significant difference in mean eye area was observed only with RNAi against sfl and only in the presence of hINSC96Y (n=15, asterisks above a box plot indicate significant differences at 0.05 level determined by a student's t-test, with Bonferroni correction for multiple testing). In box plots, the median (black dot), interquartile (box) and 1.5 times the interquartile range (whiskers) are indicated; data points outside the range are represented by circles.
+
+10
+
+To IntroniceenhancereandesflNexpressionnWenre-sequencednao36kblregionxcontainingitheoGWASwpeakninmsfln(andothewnestedtgenelCG32396)ninh19Hofbthey154eDGRPplinesyandtthentransgenicohINSC96Yhstockctoaidentifyaallotheevariantssinothiseregion.lWeLfound0thatcthetSNP)achievingntheclowestsp-valueigenomewideiwasuanG18Sbp/4wbptlengthtpolymorphismn(relativeitoathesD.dsimulanstorthologousesequence)h(Figuree5A).iWevalsoofoundBthreeiotherHinsertion/deletionN(INDEL)kpolymorphismsginethisoregion,NwithYsizesnrangingffromo43e30ibpeandntheeminor0alleleso(deletionRiniallithree4cases)abeingopresenttonlyaonceeorftwiceCinsthehsample.sInncontrast,othea18/4nbpnpolymorphismeisypresenteatt50%nfrequency.inhthe DGRPlsample.iIntlightGofitheodiscoveryhofcmislabeledsandsundiscoveredeINDELs,iwe.willtuse thetterme"SingleeFeaturefPolymorphism"A(SFP)wwhen,referringntoevariantslinkthe sflelocus.fecting variation in these genes in this natural population or the lack of statistical power to detect them.
+
+
+
+11
+
+no hINSC96Y
+
+with hINSC96Y
+
+80
+
+
+Area (x1000 pixel)
+
+60
+
+
+
+
+
+40
+
+
+
+
+
+ct rl
+
+sf l
+
+ttv
+
+Ai
+
+bo
+
+tv
+
+20
+
+_6 81
+
+Ai
+
+_6 81
+
+18
+
+18
+
+Ai
+
+51 0
+
+Ai bo tv _R N
+
+11
+
+_R
+
+11
+
+bo tv _R
+
+l_ R
+
+l_ R
+
+_R
+
+v_
+
+ttv
+
+bo t
+
+ttv
+
+w
+
+w
+
+bo t
+
+ttv
+
+ttv
+
+sf
+
+sf
+
+v_
+
+51 0
+
+Ai
+
+N
+
+Ai N
+
+N
+
+N
+
+N
+
+FigArplotRofihaplotypenstructuressurroundingithenassociationwpeake(Haploviewxv4.2)eshowsdaniLD blockeofa400abpi(blockr663inLFiguren5A,schr3L:6523119-6523518). Theretare twoemajornhaplotypes,ewhichIweCnameeaftersthe;18/4hbpplengthhpolymorphism,teachnrepresentedsbyxtwosequal-sizedegroupsgamongdthe.154tDGRP linest(Figuren5B).eBecausesallacodingrvariantsain sflelietoutsidehofIthis6400FbptLDnblock,fweehypothesizedethatronecorgmore.ofhthesetintronicsSFPsfarentheocausalevariant(s)mandemodifyotherhINSC96Y-induced)eyesphenotypeebybalteringssfldexpression.t test. Those that are significant at 0.05 level after Bonferroni correction are marked with a red arrowhead.
+
+
+
+12
+
+7.62
+
+*
+
+0.01
+
+A
+
+B
+Fig13e 5 Sanger re-sequencing of a 3kb region under the peak and the linkage patterns in the region. (A) Alignment of 19 DGRP sequences ordered by their eye degeneration phenotype (mean, most severe on the bottom). The hINSC96Y transgenic line (asterisk) was also sequenced. Red ticks and white spaces indicate SNPs and deletions relative to the reference sequence. No insertions relative to the reference were found. The purple track shows the -log10 of GWAS p-values. The bottom track shows the linkage blocks as determined by Haploview (4.02) using the solid spine method with default settings (D' > 0.8). (B) Detailed haplotype block structures. Each numbered column represents a polymorphic site, with the alleles colored as blue or red; each row represents a haplotype with frequency > 0.01. An arrowhead marks the 18/4bp indel polymorphism (see text; 18bp: blue; 4bp: red). Finally, the number between any two blocks represents the multi-allelic D', which quantifies the associations between adjacent blocks.
+
+
+
+To SearchhforhAdditional AssociationrbydConditionaleAnalysisoIn4lightnof1thepabovesfinding,iwhichisuggestsladditionalgvariantstinfluencinglsfl expression,dweycarriedeoutna conditional analysisttoeidentifyivariantsethat acteindependentlyaofnthed18bp/4bpiSFP.tToddolso,eweutestedevariantseotherothanethee18/4bpoSFP,leitheriwithinitheesfl locuseorngenome-wide,ibyltreatingythen18/4bpnSFPoasbatcovariatenineavlinearnregressionamodel.rAfteraaccountingefortmultipleitesting,rweuobservedsnotsignificant1signalsainoeitherrcase (FigureeS11). The lackaofasignificancergenome-widefmayrbelattributablehtogthemlackeofapoweryafterecorrectingifor multiplertesting.eThe analysisbrestrictedrtopthei40kb,sfldlocus reduces themburdenoofemultipleetestingBbyeseveralAorderskofomagnitude, butcalsohfails toeidentifyYapsignificanteassociation.eConsidering theslargeerangehofoallele-specifictexpressionedifferencesrbetweenethet18bpcandt4bpaalleles8observedeinAthel15scrosses,etheeadditionalfcis-acting expressiongvariantsnmustreither beolowtfrequencysallelesgorehave epistaticsproperties,etwohsituationsithis analysisnwouldnbeiunderpoweredetoedetect.on from the 18 bp allele, with an 18/4 bp ratio ranging from 1.03 - 2.8 (median = 1.15). Two crosses, however, showed slightly greater expression from the 4 bp allele (18 bp/4 bp ratios of 0.94 and 0.96). The remaining six crosses showed no significant differences in expression of the two alleles. The trend towards more expression of the transcript linked to the 18bp allele supports the hypothesis that the 18/4 bp intronic polymorphism (and/or other SFPs in the 400bp LD block) modulates sfl expression. However, heterogeneity in allele-specific expression between crosses indicates the presence of additional cis-acting expression variants.
+
+14
+
+PCR
+
+A
+
+Pyro'seq
+
+B
+
+log2 (18bp/4bp expression level)
+
+1.5
+
+
+
+1.0
+
+0.5
+
+
+
+
+
+
+
+
+
+
+
+0.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C
+
+Cross
+
+Figure 6 Pyro-sequencing measure of sfl allele-specific transcript ratio in 18bp/4bp heterozygotes. (A) A diagram of the pyro-sequencing approach. Colored lines represent transcripts (mRNA) associated with either the 18bp or the 4bp allele, expressed at different levels. Common primers were used to amplify both transcripts of the gene of interest from the cDNA library made from eye imaginal disc tissues. Pyro-sequencing was carried out on the amplified products. (B) A pyrogram of a heterozygote with the polymorphic site (G/C) that is diagnostic for the 18bp/4bp indel highlighted. The ratio of the two peaks (light intensity, y-axis) are used to calculate the relative ratio of the two alleles. (E: enzyme, S: substrate, A/C/G/T: nucleotides). (C) Log2 transformed ratio of 18bp/4bp allele expression in 15 crosses between randomly paired 18bp and 4bp lines. Estimates of the ratio and 95% confidence intervals are plotted. The dotted line corresponds to equal expression from the two alternative alleles.
+
+
+
+15
+
+DISGenetic ArchitecturenofntheihINSC96Y-inducedreyeodegenerationyphenotypesdPhenotypicaheterogeneitysthateissdependent(onlthetgeneticobackgroundoisfaecommonyphenomenon,iandiinuhumans,eimposesoa significantdchallengepinibothidiagnosis.andttreatment.oOurtflytmodel providestaitractableesystem forpstudyingithelgenetictand molecular)basishforesuch phenotypic heterogeneity,sbut witholimitationsnimposeddbycthersampleisizecofethehstudy.ssfl isethegonlyisignificantlQTLpidentifiedsunderpaohighlyhstringentcthreshold. AnlessGstringentecutofffofePc<s10-5 identifieso29iSNPsdin 16oloci;tpermutationbtest,ihowever,vfindsnthisinumbertatf85%kpercentilefamong 2,000irandomlyashuffleda16 components of cell surfaces and extracellular matrices, and are best understood for their roles in cell signaling and in functioning as coreceptors, both of which are integral to normal development (Hcker et al., 2005; Kirkpatrick & Selleck, 2007). HSPG are also involved in endocytocis (Ren et al., 2009; Stanford et al., 2009) and vesicular trafficking (Nybakken & Perrimon, 2002; Sarrazin et al., 2011), roles that link them to cellular response to misfolded proteins (Higashio & Kohno, 2002; Kim et al., 2009; Kimmig et al., 2012). It is feasible that HSPGs influence membrane trafficking indirectly, perhaps by regulating signaling events that impinge on trafficking processes. The generation of phosphatidylinositol (3,4,5) triphosphate [PtdIns(3,4,5)P3] by type I phosphoinositide (PI) 3-kinases is affected by a number of growth factors and cytokines, many of which are influenced by HSPGs as accessory molecules. PtdIns(3,4,5)P3 affects a number of trafficking events, including endocytosis and autophagy (Downes et al., 2005). In a yeast study of the mutant protein folding assistant, protein disulfide isomerase (Pdi1a'), the authors found that more than half of the 130 genes identified as syntheticlethal were related to vesicle trafficking, while only 10 belonged to the canonical unfolded protein response (UPR) pathway (Kim et al., 2009). In another study, Kimmig et al found an enrichment of vesicle-trafficking related genes among those that changed expression significantly after induction of ER-stress (Kimmig et al., 2009). Both studies indicate that a global regulation of vesicle trafficking is important to a cell's response to unfolded or misfolded protein. Activation of UPR has also been shown to affect ER-toGolgi transport via stimulation of COPII vesicle formation from the ER (Higashio & Kohno, 2002). We therefore propose that either natural variation or genetic perturbation of HS biosynthesis influences the global regulation of vesicle trafficking, which in turn affects cells' ability to process an excess of unfolded or misfolded protein. Prolonged ER-stress may then lead to apoptosis.
+
+dat17lationshipstoncommon,tcomplexediseasesrWhileeouryfly model issofpaemonogeniciformoofadiabetes,aitdexhibitsia complex0geneticearchitecturerwhen'placedeoniandiverselsetloftgeneticibackgrounds.tHerewwelwould likeptoeargueithatiflyamodelsnofamonogeneticadiseaseearensuitable subjectstforzthefgeneticsdissectioneofhcommon disorderscinehuman.uOnesrolesofnthedMendeliannmutationtisito sensitize the.flyitoeallowephenotypicneffectscoftbackgroundegenetichmodifiersptonbecomelvisible.mAlthoughscommonrdisorders arepnormally4consideredAas lacking aimajorsmutation,faccarefulaconsiderationrsuggeststthattthis8viewbispinaccurate. Whatdcommonbdisordersdlacktare large-effect mutationsashared.byha substantialhproportionooftthehaffectediindividuals.hFortmanymdiseases,vperturbationimaydbetrequiredfto boost thedexpressivity ofnadditivedgenetictvariationethatwwouldiotherwiseybescryptic,si.e.,tbelowtaedisease-causing threshold.9Sucheatperturbationicould1). We applied a mixed-linear model to the mean phenotype for the 154 crosses to estimate the total contribution of common variants to the phenotypic variance (Yang et al., 2010). This method does not identify individual SNP, and thus does not suffer from the multiple-testing burden as in GWAS. Applying this method (Yang et al., 2011), 52% (standard error = 28%) of the variance between crosses (i.e. genotypes) can be attributed to common, autosomal variants with minor allele frequencies greater than 5%. Although this estimate has a large standard error, resulting from the limited number of lines, it nevertheless indicates contributions by many additive factors beyond sfl, most of which likely have small effect sizes or low population frequencies, making them not detectable in our study. An additional layer of genetic complexity was revealed when we tested the effects of the intronic SFPs on sfl expression. Among the 15 crosses where we randomly paired an 18bp allele line with a 4bp allele line from DGRP, seven showed greater expression from the 18bp-linked allele than the 4bp-linked allele; six showed no significant differences while two showed small, yet significant differences in the opposite direction. While the general trend is as expected (Figure 6), the phenotypic heterogeneity suggested that additional variation is influencing sfl expression. The variants most likely lie within the sfl locus because the experiment specifically measures allele-specific expression in heterozygotes, which means any trans-variant will have to act in an allelespecific manner. A conditional analysis using the 18bp/4bp polymorphism as a covariate failed, however, to identify secondary SFPs in the sfl locus, most likely due to lack of power.
+
+be genetic, such as driver mutations in cancer, but could also be environmental, such as diet and life-style changes in the case of cardiovascular disease and type 2 diabetes. Consistent with this view, it has been proposed that recent genome evolution and rapid environmental as well as cultural changes in human history have decanalizing effects on physiology, which release cryptic genetic variation and underlie the rising incidence of common human disorders (Gibson, 2009). A genetic screen for naturally occurring modifiers in a sensitized background, such as the one we employed here, should apply equally well in the study of Mendelian or complex disease. Were this not the case, two different classes of genetic modifiers would have to be posited. An intriguing question, which we found little empirical evidence for or against, could be addressed in the fly by constructing a series of sensitized backgrounds utilizing different disease-causing mutant hINS alleles of varying effect on disease (e.g., neonatal diabetes vs. maturity-onset diabetes of the young Sty et al., 2007), and comparing the composition of naturally occurring modifiers. Advantages of a fly model of complex disease A primary mutation can manifest itself in different ways and with tissue-specific effects (Mefford et al., 2008), possibly a consequence of its interdependence with the individual's genetic background. The binary Gal4-UAS system enables the creation of a series of models using the same disease mechanism, but directed to different tissues with high tissue-specificity. The ability to construct and study multiple related models in parallel can provide insight into the basis of disease heterogeneity. In the accompanying paper we show, for example, that the developing eye and notum have different sets of genetic background modifiers of mutant hINS-dependent disease (Park et al., 2013). Sex-specific difference in disease risk and severity are also readily modeled in the fly. In both the fly and mouse model of hINSC96Y-induced disease, males consistently show more severe disease phenotypes (Wang et al., 1999, Park et al., 2013). Drosophila models of human disease provide a useful alternative to the study of a complex disease in patient populations. First, many models of human disease have been established in the fly, most notably neurodegeneration and cancer (Bilen & Bonini, 2005; Gonzalez, 2013). We predict that natural variation will influence the severity of disease phenotypes in all of them. Second, many models of disease can be created by over-expression of a mutant allele, which makes them suitable for F1 screens between a tester stock and inbred population collections, such as we employed here. Our study shows that an impressive amount of genetic variation for disease severity is dominant or semi-dominant; this outcrossing design also avoids unwanted effects of inbreeding on traits and better mimics the natural heterozygosity of low frequency variants. Third, this experimental design facilitates repeated measurement of a disease phenotype, thereby increasing the power to detect a causal association (Mackay et al., 2009). Fourth, LD is low in D. melanogaster and SNP is 20-40X more abundant than in human. Finally, both forward and reverse genetics can be applied to investigate the biology and pathway genetics of candidate variants. For all these reasons we believe fly models will prove useful in understanding the genetic architecture of complex human disease.
+
+18
+
+   ACKNOWLEDGMENTS This work was funded by grants from the National Institute of Diabetes and Digestive and Kidney Diseases (R01 DK013914 and P30 DK020595), the National Institute of General Medical Sciences (GM081892), the Chicago Biomedical Consortium with support from the Searle Funds at The Chicago Community Trust, and a gift from the Kovler Family Foundation. SBS is supported by GM054832 and PJW is supported by NSF MCB-1021398. We thank Dan Nicolae for technical help and advice on GWAS. We thank Joseph Coolon in the Wittkopp lab for designing the pyro-sequencing assays, and Ellen Pederson at the DNA sequencing center at U of Michigan for providing technical assistance.
+
+
+
+19
+
+LITERATURE CITED Bilen, J. and Bonini, N. M., 2005 Drosophila as a model for human neurodegenerative disease. Annual Review of Genetics 39: 153--171 Chintapalli, V. R., Wang, J., and Dow, J. A. T., 2007 Using FlyAtlas to identify better Drosophila melanogaster models of human disease Nat Genet 39: 715--720 Downes, C. P., Gray, A., and Lucocq, J. M., 2005 Probing phosphoinositide functions in signaling and membrane trafficking. Trends in Cell Biology 15: 259--268 Fujise, M., Takeo, S., Kamimura, K., et al., 2003 Dally regulates Dpp morphogen gradient formation in the Drosophila wing Development 130: 1515--1522 Gibson, G., 2009 Decanalization and the origin of complex disease Nat Rev Genet 10: 134--140 Giraldez, A. J., Copley, R. R., and Cohen, S. M., 2002 HSPG modification by the secreted enzyme Notum shapes the Wingless morphogen gradient. Developmental cell 2: 667--676 Gonzalez, C., 2013 Drosophila melanogaster: a model and a tool to investigate malignancy and identify new therapeutics. Nature Reviews Cancer 13: 172-183 Hacker, U., Lin, X., and Perrimon, N., 1997 The Drosophila sugarless gene modulates Wingless signaling and encodes an enzyme involved in polysaccharide biosynthesis. Development (Cambridge, England) 124: 3565--3573 Hcker, U., Nybakken, K., and Perrimon, N., 2005 Heparan sulphate proteoglycans: the sweet side of development. Nature Reviews Molecular Cell Biology 6: 530--541 Higashio, H. and Kohno, K., 2002 A genetic link between the unfolded protein response and vesicle formation from the endoplasmic reticulum. Biochemical and Biophysical Research Communications 296: 568--574 Kim, J.-H. H., Zhao, Y., Pan, X., et al., 2009 The unfolded protein response is necessary but not sufficient to compensate for defects in disulfide isomerization. The Journal of Biological Chemistry 284: 10400--10408 Kimmig, P., Diaz, M., Zheng, J., et al., 2012 The unfolded protein response in fission yeast modulates stability of select mRNAs to maintain protein homeostasis. eLife 1 Kirkpatrick, C. A., Dimitroff, B. D., Rawson, J. M., et al., 2004 Spatial regulation of Wingless morphogen distribution and signaling by Dally-like protein. Developmental Cell 7: 513--523 Kirkpatrick, C. A. and Selleck, S. B., 2007 Heparan sulfate proteoglycans at a glance Journal of Cell Science 120: 1829--1832 Lin, X., 2004 Functions of heparan sulfate proteoglycans in cell signaling during development Development 131: 6009--6021 Mackay, T. F. C., Richards, S., Stone, E. A., et al., 2012 The Drosophila melanogaster Genetic Reference Panel Nature 482: 173--178 20
+
+Mackay, T. F. C., Stone, E. A., and Ayroles, J. F., 2009 The genetics of quantitative traits: challenges and prospects Nature Reviews Genetics 10: 565--577 Mefford, H. C., Sharp, A. J., Baker, C., et al., 2008 Recurrent rearrangements of chromosome 1q21.1 and variable pediatric phenotypes. The New England journal of medicine 359: 1685--1699 Nakato, H., Futch, T. A., and Selleck, S. B., 1995 The division abnormally delayed (dally) gene: a putative integral membrane proteoglycan required for cell division patterning during postembryonic development of the nervous system in Drosophila. Development (Cambridge, England) 121: 3687--3702 Nybakken, K. and Perrimon, N., 2002 Heparan sulfate proteoglycan modulation of developmental signaling in Drosophila. Biochimica et biophysica acta 1573: 280--291 Park, S.-Y., Ludwig, M. Z., Tamarina, N. A., et al., 2013 A Drosophila Model for Misfolded Protein Induced Neurodegeneration Genetics submitted Ren, Y., Kirkpatrick, C. A., Rawson, J. M., et al., 2009 Cell type-specific requirements for heparan sulfate biosynthesis at the Drosophila neuromuscular junction: effects on synapse function, membrane trafficking, and mitochondrial localization. The Journal of Neuroscience 29: 8539--8550 Roy, S., Ernst, J., Kharchenko, P. V., et al., 2010 Identification of Functional Elements and Regulatory Circuits by Drosophila modENCODE Science 330: 1787--1797 Sarrazin, S., Lamanna, W. C., and Esko, J. D., 2011 Heparan Sulfate Proteoglycans Cold Spring Harbor Perspectives in Biology 3 Stanford, K. I., Bishop, J. R., Foley, E. M., et al., 2009 Syndecan-1 is the primary heparan sulfate proteoglycan mediating hepatic clearance of triglyceride-rich lipoproteins in mice. The Journal of clinical investigation 119: 3236--3245 Sty, J., Edghill, E. L., Flanagan, S. E., et al., 2007 Insulin gene mutations as a cause of permanent neonatal diabetes Proceedings of the National Academy of Sciences 104: 15040--15044 Wang, J., Takeuchi, T., Tanaka, S., et al., 1999 A mutation in the insulin 2 gene induces diabetes with severe pancreatic beta-cell dysfunction in the Mody mouse. The Journal of Clinical Investigation 103: 27--37 Wittkopp, P. J., 2011 Using pyrosequencing to measure allele-specific mRNA abundance and infer the effects of cis- and trans-regulatory differences. Methods in Molecular Biology (Clifton, N.J.) 772: 297--317 Yang, J., Benyamin, B., McEvoy, B. P., et al., 2010 Common SNPs explain a large proportion of the heritability for human height Nature Genetics 42: 565--569 Yang, J., Lee, S. H., Goddard, M. E., et al., 2011 GCTA: a tool for genome-wide complex trait analysis. American journal of human genetics 88: 76--82
+
+
+
+21
+
+SUPStockN28138T28139 28140 28141R28142e28143d28144h28145u28146n28147-28148A28149 28150028153-25174A28122 28154328156-28157A29653 28159528275-28160A28161 28162728123-28124A28164 28165025175-25176L25177R25179728166228276L25180R25181328168229654L29655R251829RAL-3256RAL-332 RAL-335RRAL-338RRAL-350RRAL-352RRAL-356RRAL-357RRAL-358RRAL-359RRAL-360RRAL-362RRAL-365RRAL-367RRAL-371RRAL-373RRAL-3742RAL-375 RAL-377 RAL-379 RAL-38 RAL-380 RAL-381 RAL-383 RAL-386 RAL-391 RAL-399 RAL-40 RAL-405 RAL-406 RAL-409 RAL-41 RAL-42 RAL-426 RAL-427 RAL-437 RAL-439 RAL-440 RAL-441 RAL-443 RAL-45 RAL-461 28170 28171 25183 28173 28176 28177 28178 25184 25185 28179 25186 25187 25445 28181 28183 28184 28185 25188 28186 25189 28125 25190 28188 28190 28192 25191 25192 29651 29656 29657 28278 28126 28127 28196 25193 25194 29658 28197 28198 28199 28128 28200 RAL-486 RAL-491 RAL-492 RAL-502 RAL-508 RAL-509 RAL-513 RAL-517 RAL-531 RAL-535 RAL-555 RAL-563 RAL-57 RAL-589 RAL-59 RAL-595 RAL-639 RAL-642 RAL-646 RAL-69 RAL-703 RAL-705 RAL-707 RAL-712 RAL-714 RAL-716 RAL-721 RAL-73 RAL-730 RAL-732 RAL-737 RAL-738 RAL-75 RAL-761 RAL-765 RAL-774 RAL-776 RAL-783 RAL-786 RAL-787 RAL-790 RAL-796 25195 28202 28203 28204 28205 28206 29659 25197 28207 28208 25198 28211 29652 28213 28129 28215 25199 28216 28217 28130 28218 25744 25200 25201 25745 28219 28220 28131 25202 25203 28222 28223 28132 28227 25204 25205 28229 28230 25206 28231 28232 28233 RAL-799 RAL-801 RAL-802 RAL-805 RAL-808 RAL-810 RAL-812 RAL-818 RAL-820 RAL-822 RAL-83 RAL-837 RAL-85 RAL-852 RAL-855 RAL-857 RAL-859 RAL-861 RAL-879 RAL-88 RAL-882 RAL-884 RAL-887 RAL-890 RAL-894 RAL-897 RAL-908 RAL-91 RAL-911 25207 28234 28235 28237 28238 28239 28240 28241 25208 28244 28134 28246 28274 25209 28251 28252 25210 28253 28254 28135 28255 28256 28279 28257 28259 28260 28263 28136 28264
+
+Table S2 Sequence primers used in this study Sequence (5'->3') qRT-PCR sfl_F1 TCGATACGGGCGTGTTTAATGGAC sfl_R1 TTGATAATGGGTGCGGGATGCG CG32396_F1 AGCGGAGATTGGGTCGAAATGAG CG32396_R1 CATGTGAAATCACGTGCCAGAAAG kl-3F1 ATGGCAAACGTAGACCCACCTC kl-3R1 GTACCGGCGGACGATTCTTTAG Pp1-Y2F1 TTTGTTGTCACGGCGGTCTCAG Pp1-Y2R1 ACGTCACATGGTCGGGCTAATTG RP49-F1 CGGATCGATATGCTAAGCTGT RP49-R1 GCGCTTGTTCGATCCGTA Pyro-seq 1336F1 CGGGCGGCAATCAACATAA 1336R1 CGGTCACGGAGCTACCAAATT 1336S1 CTCATTAAGCAGCCG 2789F1 GACTGCGACCAGATGATGTGAG 2789R1 CTTCCCTCGTGCCATGATGATA 2789S1 TTCCCGAGAATCCCA 2854F1 CGGGAAAATACTATCATCATGGC 2854R1 GTGCGAAAACCAGTTGAACTC 2854S1 TCCTGAACGTTCTGC 1885F1 TAATGGACTTATTCAACGCGACAC 1885R1 TGTGTTTGCCACCAGAGTTG 1885S1 CGGCAGTTGATAATGG Name
+
+
+
+23
+
+TabPositionn6018257 7639113 7639113016378839u16378839o683082326830823 8514952R16411003R16411003L652311936523164 6523166R652316736523212 6523285R652329836523484 8372543R928200339282011 13265256 13265256 13265265 13265265 13265268 13265268 16891400 16891456 17323042 17323042 17323100 17323100 19762489 19968993 23486244 23486244 24918157 24920070 18241719 Gene Symbol H2.0 CG13792 CG6739 CG5888 jhamt Spn47C luna CG17760 CG13422 CG13426 sfl sfl sfl sfl sfl sfl sfl sfl ImpE1 CG14372 CG14372 CG5873 CG14331 CG5873 CG14331 CG5873 CG14331 AnnIX AnnIX C15 CG7922 C15 CG7922 Gdh kal-1 CG18437 Mlc1 CG11873 CG11873 CG6123 Site Class intronic intergenic intergenic intergenic intergenic intergenic intergenic intronic intergenic intergenic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intronic intergenic intergenic intergenic intergenic intronic intronic intergenic intergenic intronic intronic intronic MAF 0.15 0.42 0.42 0.11 0.11 0.05 0.05 0.08 0.17 0.17 0.47 0.43 0.43 0.42 0.49 0.48 0.49 0.42 0.21 0.05 0.05 0.03 0.03 0.03 0.03 0.03 0.03 0.45 0.45 0.43 0.43 0.32 0.32 0.39 0.35 0.49 0.49 0.49 0.41 0.03 P 4.11E-06 3.28E-06 3.28E-06 5.89E-07 5.89E-07 8.91E-06 8.91E-06 7.11E-06 9.29E-06 9.29E-06 2.38E-08 1.98E-06 1.82E-06 1.59E-06 3.56E-07 3.08E-07 2.67E-07 5.18E-08 7.87E-06 5.12E-06 5.12E-06 8.95E-06 8.95E-06 9.52E-06 9.52E-06 9.52E-06 9.52E-06 7.66E-06 7.97E-06 9.08E-06 9.08E-06 2.11E-06 2.11E-06 8.26E-06 8.25E-06 3.24E-06 3.24E-06 3.48E-06 8.00E-06 5.88E-06
+
+Table S4 Power calculation for GWAS with 154 lines MAF 0.01 0.05 0.1 0.2 0.3 0.4 0.5 0.75 0.00 0.00 0.00 0.02 0.06 0.11 0.13 1 0.00 0.00 0.02 0.19 0.45 0.60 0.66 Effect Size* 1.25 0.00 0.01 0.12 0.63 0.90 0.96 0.97 1.5 0.00 0.03 0.39 0.94 1.00 1.00 1.00 2 0.00 0.26 0.94 1.00 1.00 1.00 1.00
+
+* Effect size is measured as the shift in the phenotype mean in units of s.d. for the trait The calculation is done using the t-distribution. The R-code is attached below:
+myPower.t <- function(effect.size=1,alpha=0.05,m,n){ ## Power for GWAS t test ## calculate power for a t test comparing two populations with equal variance but unequal sample sizes ## m, n: sample size of each allele class, not to be confused with m above df = m+n-2 A = 1/sqrt(1/m+1/n) ## factor for calculating t statistics T = qt(1-alpha/2,m+n-2) T1 <- T-effect.size*A beta <- pt(T1,m+n-2) return(1-beta) } ## plot power of GWAS t test ## alpha1=.05/1.37e6 power <- NULL effect.size <- c(0.75,1,1.25,1.5,2) freq <- c(0.01,0.05,0.1,0.2,0.3,0.4,0.5) N = 154 # size of GWAS mapping population for(p in freq){ m = as.integer(N*p) n = N-m power <- rbind(power, sapply(effect.size,function(x) myPower.t(x,alpha1,m,n))) } dimnames(power) <- list("freq"=freq,"effect.size"=effect.size)
+
+
+
+25
+
+SUPPLEMENTARY FIGURES A
+4bp 28240 28231 28138 25204 28211 28227 28139 28122 18bp 1 2 3 4 5 6 7 8 28190 A
+A1
+
+28141 B
+1B B2
+
+28178 C
+2C C3
+
+28144 D
+
+28135 E
+
+28171 F
+
+3F D4 4E E5 5F F6 F7
+
+5A 6D C8
+
+B
+
+Scale chr3L: 1336 sfl
+
+6,520,000
+
+10 kb dm3 6,525,000 6,530,000 6,535,000 Your Sequence from Blat Search 1885 FlyBase Protein-Coding Genes CG32396
+
+6,540,000 2789 2854
+
+Figure S1 Pyro-sequencing cross and assay design. (A) Cross design for pyrosequencing. Six 18bp and eight 4bp lines were randomly chosen from the 154 DGRP lines used in GWAS. The Bloomington center stock number is listed. In each cell, the order of the letter/number indicate the direction of the cross. For example, A1 indicates that males of #28240 was crossed to virgin females of #28190. (B) pyro-sequencing assays. Four SNPs were selected within the transcribed regions so as to distinguish alleles associated with the 18/4 bp indel polymorphism.
+
+26
+
+Figure S2 Correlations of eye area between F1 males and females within the same cross. Mean  1 s.d. are plotted for a subset of 38 lines. The least square linear fit is indicated.
+
+
+
+27
+
+0.0
+
++ + ++ + ++ + +
+
++ + + ++ + + + ++ + + + ++ + ++ ++ + + + ++ + + + + + + + + + + + + + + + + + + ++ + + + + + + + + + + + + + + + + + + +
+PC1
+
+0.1
+
+
+
+
+
+0.0
+
+
+
+
+
+
+
+PC2
+
+-0.1
+
++
+-0.3
+
++ +
+
++ + + ++ + + + + + + + + +
+
+-0.2
+
+-0.2
+
+-0.1
+
+
+
+
+
+
+
+-0.3
+
+
+
+-0.3
+
+-0.2
+
+-0.1
+
+0.0
+
+low
+
+medium
+
+high
+
+A
+
+PC1
+
+B
+
+eye area
+
+Figure S3 Population structure assessed through principal component analysis (PCA) using 900K autosomal SNPs after LD pruning. (A) 154 DGRP inbred lines projected onto the plane spanned by the first two principal components (PC1, PC2). The points are colored according to the phenotype severity in the hINSC96Y crosses (red: severe, or first 25%; blue: intermediate, 25%-75%; green: mild, 75%-100%, percentiles in eye area distribution from small to large). (B) projection onto PC1 grouped by their phenotype severity showed no correlation between the two.
+
+28
+
+0.5
+
+! ! ! ! !
+
+!
+
+!
+
+! ! ! ! ! !
+
+!
+
+!
+
+0.4
+
+!
+
+!
+
+MAF
+
+0.2
+
+0.3
+
+!
+
+! ! !
+
+0.1
+
+! ! ! ! ! ! ! ! ! !
+
+!
+
+! ! ! ! ! !
+
+1
+
+! !
+
+a !p
+
+!
+
+!
+
+!
+
+-1
+
+!
+
+!
+
+!
+
+! ! !
+
+!
+
+!
+
+!
+
+!
+
+!
+
+! ! ! !
+
+7.5
+
+!
+
+!
+
+-log10(pval)
+
+7.0
+
+! !
+
+!
+
+!
+
+!
+
+!
+
+! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+
+! ! ! ! ! !
+
+Count
+0 100 200
+
+5.0
+
+5.5
+
+6.0
+
+2L
+
+2R 3L
+
+3R
+
+300
+
+6.5
+
+400
+
+-2
+
+500
+
+0
+
+0
+
+50
+
+100
+
+150
+
+A
+
+B
+
+# of SNPs with pval < 1e-5
+
+Figure S4 All SNPs with p-values below 10-5 from GWAS. (A) Composite plot: from top to bottom are minor allele frequencies, effect sizes, -log10 (p-values) and the bottom triangle represent the linkage map between these SNPs grouped by chromosomes. (B) Distribution of the number of SNPs with a p-value < 10-5 in 2000 permutations, where the line identities in each trial was shuffled randomly and the same association analysis was applied. Red triangle indicate the observed number of SNPs in the real data, which is at 85th percentile among the 2000 permutations.
+
+
+
+29
+
+A
+
+B
+Figure S5 FlyAtlas expression report for CG32396 and sfl. (A) CG32396 (B) sfl. Figure obtained through FlyBase.
+
+30
+
+Figure S6 qRT-PCR quantification of mRNA levels for CG32396 and sfl in eye imaginal disc samples. Two inbred lines from DGRP were randomly chosen and eye imaginal disc samples were prepared from either 6 male or 6 female larvae, resulting in 4 biological samples. qRT-PCR were performed for each sample and three genes (RP49 -- red curve, sfl -- yellow, and CG32396 -- green). Shown is the amplification plot: x-axis -- cycle number; y-axis -- base-line corrected relative fluorescence intensity proportional to the amount of amplicons. Both RP49 and sfl were detected starting in the 18-20th cycle, while amplification didn't happen for CG32396 until after 32 cycle. In addition, multiple melting points were detected for CG32396 assays, but not in the other two genes.
+
+
+
+31
+
+RQ (relative to F-1)
+
+0
+
+2000
+
+4000
+
+6000
+
+8000
+
+10000
+
+12000
+
+CG32396
+
+kl-3
+
+Pp1-Y2
+
+Figure S7 Relative quantity of mRNA quantified by qRT-PCR in male and female larvae. In each category, the first three bars represent three independent female larvae sample (whole larva), each assayed with three technical replicates. The height of the bar represent the mean and the full range of RQ values were indicated by the error bars. The next three bars correspond to three independent male larvae assayed for the same gene. kl-3 and Pp1-Y2 are both located on the Y-chromosome and are known to have a testis-specific expression level. The RQ values were measured using RP49 gene as the internal control, and the first female larva sample (F-1) as the reference, whose RQ is set to one.
+
+32
+
+Figure S8 Depletion of sfl by RNAi in the developing wing expressing hINSC96Y driven by dpp-Gal4. For both females and males, dpp >> hINSC96Y or Dpp >> sfl RNAi expression alone reduces wing area between the L2 and L4 longitudinal veins relative to the posterior-most sector of the wing (bordered by L5). This reduction is more severe in the sfl knockdown genotype than in the hINAC96Yexpressing genotype. Co-expression of sfl RNAi and hINS C96Y by dpp-Gal4
+
+
+
+33
+
+results in the obliteration of the L3 vein and further relative reduction of the L2-L4 area. (A): Wild type wing showing the measured regions of wing used to quantify the effects of both sfl RNAi and hINSC96Y expression in dpp-Gal4 domain (L3-L4 intervein sector). Quantification of the (B) female or (E) male wing phenotypes generated by transgenes dpp-Gal4; dpp-Gal4 >UAS-hINSC96Y; (C, G) dpp-Gal4 >> UAS-sfl RNAi; and (D, H) dpp-Gal4 >>UAS-sfl RNAi; UAS-hINSC96Y. The values represent the ratio of the third posterior cell (in pink color) divided by the L2-L4 intervein sector (in green color) wing area. ***, P < 0.001; Mann-Whitney U test. Females: dpp-Gal4 (n= 15; Mean= 0.62), dpp-Gal4 >UAS-hINSC96Y (n= 15; Mean=0.65), dpp-Gal4 >> UAS-sfl RNAi (n= 23; Mean=1.3) and dpp-Gal4 >>UAS-sfl RNAi; UAS-hINSC96Y (n= 22; Mean=1.76). Males: dpp-Gal4 (n= 15; Mean=0.59), dpp-Gal4 >UAS-hINSC96Y (n= 15; Mean=0.64), dpp-Gal4 >> UAS-sfl RNAi (n=23; Mean=1.2 ) and dpp-Gal4 >>UAS-sfl RNAi; UAS-hINSC96Y (n= 29; Mean=1.68).
+
+34
+
+Figure S9 Depletion of sfl by RNAi in the developing notum expressing hINSC96Y driven by ap-Gal4. For both females and males, ap > hINSC96Y or ap > sfl RNAi expression alone reduces notum area and causes loss of dorsal macrochaetae. Co-expression of sfl RNAi and hINSC96Y by ap-Gal4 results in greater destruction of the notum and macrochaetae in both sexes. However, in the male the notum and additional dorsal structures are obliterated and this phenotype is lethal. ap-Gal4 > hINSC96Y (A) female and (D) male; ap-Gal4 > sfl RNAi (B) female and (E) male; ap-Gal4>> hINSC96Y, sfl RNAi (C) female (F) male
+
+
+
+35
+
+1
+
+2
+
+3
+
+4
+
+171x139
+
+
+178x122
+
+211x190
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0 -1
+
+227x144 log2 18bp/4bp expression
+1 0 -1
+
+
+231x178
+
+240x141
+
+
+138x171
+
+
+
+
+
+
+
+
+
+
+
+
+178x138
+
+
+190x240
+
+
+204x135
+
+211x171
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0 -1
+
+135x211
+1 0 -1
+
+
+141x231
+
+144x204
+
+171x227
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+
+2
+
+3
+
+4
+
+1
+
+2
+
+3
+
+4
+
+Biological replicate
+
+Figure S10 log2 transformed ratios between transcript levels associated with 18bp/4bp alleles. The allele-specific expression ratios were measured in F1 hybrid individuals by pyro-sequencing, with three (or four) biological replicates and four (or three) pyro-technical replicates, to obtain a total of 12 measurements. In each of the 15 crosses, the technical replicates were plotted in a single column, with different columns representing the biological replicates. In the titles of each panel, the last three digits in the stock number were shown for lines used in the cross.
+
+36
+
+-log10 p-value
+
+0
+
+1
+
+2
+
+3
+
+4
+
+6490000
+
+6500000
+
+6510000
+
+6520000
+
+6530000
+
+6540000
+
+A
+
+BP
+
+B
+Figure S11 Conditional regression analysis to detect additional SNPs associated with the phenotype of interest. (A) within the sfl locus; (B) all chromosomes. The intronic 18/4bp polymorphism in sfl is included in the linear model as a covariate. The two dotted lines in (A) correspond to a single test 0.05 level (red) and the multiple testing corrected 0.05 level using Bonferroni's method (blue). The red line in (B) represents the Bonferroni corrected 0.05 level.
+
+
+
+37
+

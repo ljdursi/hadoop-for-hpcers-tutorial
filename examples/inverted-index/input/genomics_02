@@ -1,0 +1,872 @@
+
+
+
+
+IN PRESS
+
+
+   The rise and fall of the Phytophthora infestans lineage that triggered the Irish potato famine
+The late blight pandemic that included the Irish Great Famine in the nineteenth century was caused by a single Phytohpthora infestans genotype, which is distinct but closely related to the most prevalent genotype of the twentieth century.
+Kentaro Yoshida (The Sainsbury Laboratory), Verena Schuenemann (University of Tubingen), Liliana Cano (The Sainsbury Laboratory), Marina Pais (The Sainsbury Laboratory), Bagdevi Mishra (Biodiversity and Climate Research Centre), Rahul Sharma (Biodiversity and Climate Research Centre), Christa Lanz (Max Planck Institute for Developmental Biology), Frank Martin (United States Department of Agriculture), Sophien Kamoun (The Sainsbury Laboratory), Johannes Krause (University of Tubingen), Marco Thines (Biodiversity and Climate Research Centre), Detlef Weigel (Max Planck Institute for Developmental Biology), and Hernn Burbano (Max Planck Institute for Developmental Biology)
+
+Abstract:
+
+Phytophthora infestans, the cause of potato late blight, is infamous for having triggered the Irish Great Famine in the 1840s. Until the late 1970s, P. infestans diversity outside of its Mexican center of origin was low, and one scenario held that a single strain, US-1, had dominated the global population for 150 years; this was later challenged based on DNA analysis of historical herbarium specimens. We have compared the genomes of 11 herbarium and 15 modern strains. We conclude that the nineteenth century epidemic was caused by a unique genotype, HERB-1, that persisted for over 50 years. HERB-1 is distinct from all examined modern strains, but it is a close relative of US-1, which replaced it outside of Mexico in the twentieth century. We propose that HERB-1 and US-1 emerged from a metapopulation that was established in the early 1800s outside of the species' center of diversity.
+http://dx.doi.org/10.7554/elife.00731
+
+_______________ Please address questions to media@elifesciences.org. Details on how to cite eLife articles in news stories and our media policy are available at http://www.elifesciences.org/news/for-thepress. Articles published in eLife may be read on the journal site at http://elife.elifesciences.org. To be notified of new content at eLife, sign up at http://elife.elifesciences.org.
+
+34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66
+
+Introduction
+Potato late blight's impact on humankind is rivaled by few other plant diseases. The Spanish introduced Europeans to the South American staple crop potato shortly after their conquest of the New World, but for three centuries Europe stayed free of P. infestans, the causal agent of late blight. In 1845, the oomycete P. infestans finally reached Europe, spreading rapidly from Belgium to other countries of mainland Europe and then to Great Britain and Ireland. The impact of the epidemic reached catastrophic levels in Ireland, where the population was more dependent on potato for their subsistence than in other parts of Europe (Bourke, 1964; Reader, 2009). The subsequent Great Famine killed around one million people, and an additional million were forced to leave the island (Turner, 2005). Even today, the Irish population remains less than three quarters of what it was at the beginning of the 1840s. These dramatic consequences of the P. infestans epidemic were due to the absence of chemical and genetic methods to combat it; such means became available only several decades later. Ever since triggering the Irish famine, P. infestans has continued to wreak havoc on potato fields throughout the world. Late blight remains the most destructive disease of the third largest food crop, resulting in annual losses of potatoes that would be sufficient to feed anywhere from 80 to many hundreds of millions of people (Fisher et al., 2012). Phytophthora infestans is an extraordinarily virulent and adaptable pathogen (Fry, 2008; Haas et al., 2009). In agricultural systems, sexual reproduction may trigger explosive population shifts that are driven by the emergence and migration of asexual lineages (Cooke et al., 2012; Fry et al., 2009; Fry et al., 1992). The species is thought to originate from Toluca Valley, Mexico, where it infects wild relatives of potato, frequently undergoes sexual reproduction and cooccurs with the two closely related species P. mirabilis and P. ipomoeae (Flier et al., 2003; Goodwin et al., 1994; Grnwald and Flier, 2005; Tooley et al., 1985). In its center of origin, P. infestans is characterized by high levels of genetic and phenotypic diversity (Grnwald and Flier, 2005). The genomes of a few P. infestans strains have been described (Cooke et al., 2012; Haas et al., 2009; Raffaele et al., 2010a). Compared to other species in the genus, the 240 Mb T30-4 reference genome of P. infestans is large, with three quarters of the genome consisting of repetitive DNA. A large number of genes codes for effector proteins, many of which are delivered inside plant cells to promote host colonization, for instance by suppressing plant immunity. RXLR proteins, the main class of host-translocated effectors, are encoded by about 2
+
+67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99
+
+550 genes in the P. infestans T30-4 genome. RXLR effectors that can be recognized by plant immune receptors, known as Resistance (R) proteins, are said to have "avirulence" activity. Upon introduction of a cognate R gene into the host population, such avirulence effectors become a liability for the pathogen, and natural selection favors the spread of pseudogenized or mutated alleles (Vleeshouwers et al., 2011). The detailed descriptions and drawings of Heinrich Anton de Bary and the reports of several other pioneers of plant pathology leave no doubt that the nineteenth century blight epidemic was triggered by P. infestans (Bourke, 1964; de Bary, 1876). What remains controversial is the relationship of the nineteenth century strains to modern isolates. The quest for understanding the origin of the strain that resulted in the Irish famine began with extant samples. Prior to the late 1970s, global P. infestans populations outside of South America and Mexico, the centers of diversity of the host and the pathogen, were dominated by a single clonal lineage that had the mitochondrial (mtDNA) haplotype Ib and was called US-1 (Goodwin et al., 1994). It was therefore proposed that the US-1 lineage was a direct descendant of the strain that first caused widespread late blight in North America from 1843 on, and then triggered the Irish famine beginning in 1845 (Bourke, 1964; Goodwin et al., 1994). This hypothesis was subsequently directly addressed by PCR analysis of infected nineteenth century potato leaves stored in herbaria. The conclusion from these studies was that the historic strains belonged to a mtDNA haplotype, Ia, that was distinct from that of the US-1 lineage (May and Ristaino, 2004; Ristaino et al., 2001). Because Ia was at the time not only the predominant haplotype in the Toluca Valley in Mexico (Flier et al., 2003; Gavino and Fry, 2002), but had also been found in South America (Perez et al., 2001), May and Ristaino (2004) speculated that the nineteenth century and US-1 lineages represented two independent epidemics of divergent lineages that had both originated in South America and spread from there to North America and Europe. A caveat was that these far-reaching conclusions were based on only three mtDNA SNPs (May and Ristaino, 2004; Ristaino et al., 2001). Since these first herbarium analyses, the retrieval and sequencing of DNA from museum specimens, fossil remains and archaeological samples  collectively known as ancient DNA (aDNA) (Pbo et al., 2004)  have seen impressive advances thanks to the advent of high-throughput sequencing technologies. The combined analysis of modern and ancient genomes of human pathogens has begun to solve important questions about their history and evolution (Bos et al., 2011; Bos et al., 2012). Here we show that aDNA methods
+
+3
+
+100 101 102 103 104 105 106 107 108 109 110 111 112 113
+
+hold similar promise for plant pathology and that they can improve our understanding of historically important plant pathogen epidemics. To determine how the historic P. infestans strain(s) relate to extant isolates, we shotgun-sequenced 11 herbarium samples of infected potato and tomato leaves collected from continental Europe, Great Britain, Ireland, and North America in the period from 1845 to 1896, and extracted information on P. infestans mitochondrial and nuclear genomes. To understand the subsequent evolution of the pathogen, we compared the historic P. infestans genomes to those of 15 modern twentieth century strains that span the genetic diversity of the species, and to the two sister species P. ipomoeae and P. mirabilis. Our analyses revealed that the nineteenth century epidemic was caused by a single genotype, HERB-1, that persisted for at least 50 years. While it is distinct from all examined modern strains, HERB-1 is closely related to the twentieth century US-1 genotype, suggesting that these two pandemic genotypes may have emerged from a secondary metapopulation rather than from the species' Mexican center of diversity.
+
+114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130
+
+Results
+Preservation of ancient DNA and genome statistics Nineteenth-century samples of potato and tomato leaves with P. infestans lesions were obtained from the herbaria of the Botanische Staatssammlung Mnchen and the Kew Royal Botanical Gardens (Table 1 and Figure 1). DNA was extracted under clean room conditions and two genomic libraries were prepared from each sample for Illumina sequencing. The preparations were expected to comprise P. infestans DNA, host DNA from potato or tomato as well as DNA from microbes that had colonized either the living material at the time of its collection, or the dried material during its storage in the herbaria. The first set of libraries was used for verification of aDNA-like characteristics, and the second set was used for production. In this second set we used a repair protocol that removes aDNA-associated lesions, mainly characterized by cytosine deamination to uracil (U), which is subsequently converted to and read as thymine (T) (Briggs et al., 2007; Briggs et al., 2010; Brotherton et al., 2007; Hofreiter et al., 2001). The combination of uracil-DNA-glycosylase (UDG) and endonuclease VIII, which removes uracil residues and repairs abasic sites, reduces the overall per-base error rate to as low as one twentieth of unrepaired aDNA (Briggs et al., 2010).
+
+4
+
+131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164
+
+Ancient DNA fragments are typically shorter than 100 bp (Pbo, 1989), and pairedend reads of 100 bases each will therefore substantially overlap. Forward and reverse reads from the unrepaired libraries (Table 2) were merged, requiring at least 11 base overlap. Merging of short-insert libraries considerably decreases the error-rate and also generates sequences that reflect the original molecule length (Kircher, 2012). The median length of merged reads was in the range of ~50-85 bp (Figure 2a, b). Merged sequences were mapped to the P. infestans T30-4 reference genome (Haas et al., 2009). Deamination of C to U in aDNA is highest at the first base (Briggs et al., 2007), and C-to-T was the predominant substitution at the 5'-end of molecules (Figure 2c, d). Based on mapping against the reference genome, we estimated the fraction of P. infestans DNA in the samples to be between 1 and 20% (Figure 2e). Most of the remaining reads could be mapped to the reference genomes for potato and tomato (Potato Genome Sequencing Consortium, 2011; The Tomato Genome Consortium, 2012). In addition to 11 historic samples from Ireland, Great Britain, continental Europe and North America (Figure 1 and Table 1), we shotgun sequenced 14 modern strains from Europe, the Americas and Africa (Figure 1 and Table 1). These had been selected based on preliminary mtDNA information to present a cross section of P. infestans diversity. Finally, we sequenced two strains of P. mirabilis, P7722 and PIC99114, and a single strain of P. ipomoeae, PIC99167. Both species are closely related to P. infestans and served as outgroups (Kroon et al., 2004; Raffaele et al., 2010a). We considered genomes with mean-fold coverage of at least 20 as high coverage; one historic, seven modern and both outgroup genomes fulfilled this condition (Figure 3a). We identified single nucleotide polymorphisms (SNPs) in each sample independently by comparison with the P. infestans reference T30-4 genome (Figure 3b). Thresholds for calling homozygous and heterozygous SNPs were determined from simulated data from high- and low-coverage genomes (Figure 3	figure supplement 1). We accepted SNPs from low-coverage genomes if the variants had also been called in a highcoverage genome. Inverse cumulative coverage plots indicated how many high- or lowcoverage samples were needed to cover different fractions of SNPs (Figure 3c, d). A total of 4.5 million non-redundant SNPs were called. Eighty percent of all homozygous SNPs were found in at least eight samples, and only twenty percent of all SNPs were found in fewer than ten strains. Thus, the great majority of polymorphic sites were shared by several strains and thus informative for phylogenetic analyses. A unique type I mtDNA haplotype in nineteenth century P. infestans strains 5
+
+165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198
+
+We reconstructed the mtDNA genomes from historic and modern strains using an iterative mapping assembler (Green et al., 2008) and estimated a phylogenetic tree from complete mtDNA genomes, with one of the P. mirabilis mtDNA genomes as outgroup. Previous studies have recognized four P. infestans mtDNA haplotype groups (Ia, Ib, IIa and IIb), based on a small number of restriction fragment length polymorphisms (RFLPs) (Carter et al., 1990). Surprisingly, a comparison of the complete mtDNA genomes revealed that the historic samples did not fit into any of these groups, and instead formed an independent clade, called HERB-1 from here on. Among the HERB-1 mtDNA genomes, there were very few differences, with a mean pair-wise difference of only 0.2 bp, compared to 3.9 bp for the modern haplotype I strains, and 9.0 bp for modern haplotype II strains. The origin of HERB-1 relative to haplotypes Ia and Ib could not be unequivocally resolved, and a polytomy was inferred for these three groups or support for branches were low (Figure 4, and Figure 4  figure supplement 1). The clonal lineage US-1, with the diagnostic mtDNA haplotype Ib, was the predominant genotype throughout the world until about 1980 (Goodwin et al., 1994). The two US-1 representatives in our material, DDR7602 (Germany) and LBUS5 (South Africa), clustered together with the Ib reference genome and samples P6096 (Peru) and P1362 (Mexico) (Figure 4, and Figure 4  figure supplement 1), even though these last two samples had not been classified before as US-1 isolates. Although the US-1 genotype is closely related to the herbarium strains, US-1 is not a derivative of HERB-1. Rather, HERB-1 and US-1 are sister groups that share a common ancestor. There are three private substitutions that define the US-1 clade, and two that define the HERB-1 clade. In agreement with the previous report by Ristaino and colleagues (2001), all historic samples had a T at the position diagnostic for haplotype Ib (Figure 4  figure supplement 2), which distinguishes them from the US-1 lineage, which carries instead a C at this position. In contrast to the previous report (Ristaino et al., 2001), we found no other sequence differences around this diagnostic site. Relationship between HERB-1 and modern strains and divergence times As the HERB-1 strains were sampled in the nineteenth century, their genomes should harbor fewer substitutions compared to modern strains, which have continued to evolve for over a hundred years. This can be exploited to directly calculate substitution rates and divergence times using the sampling age as tip calibration in a Bayesian framework analysis. Shorter evolutionary time usually translate into branch shortening in phylogenetic trees that include both modern and ancient pathogen strains (Bos et al., 2011).. By calculating the nucleotide 6
+
+199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232
+
+distance to the outgroup P17777, all HERB-1 strains were found to show significantly fewer mtDNA substitutions than modern strains with haplotype Ia or Ib (p = 0.0003). Sampling age of the strain and the number of mtDNA substitutions were highly correlated (r2 = 0.8; Figure 5). Given the correlation between sample age and the number of mtDNA substitutions, a multiple sequence alignment of 12 nearly complete modern and the 13 HERB-1 mtDNA genomes was used as input for a Bayesian framework analysis using algorithms implemented in the software package Beast (Drummond et al., 2012). The molecular clock hypothesis for the modern strains could not be rejected at a 5% significance level (p = 0.12). Therefore, a strict molecular clock and a birth-death tree prior (Stadler, 2010) were used for the Bayesian framework analysis. Collection dates for all herbaria samples and the isolation dates for all modern strains were used as tip calibration points, so that substitution rates per time interval could be calculated (Table 1). Three Markov Chain Monte Carlo (MCMC) runs with 147 million iterations were carried out. Stability of the estimated prior and posterior probability distributions (ESS values >5,000) and likelihood values (ESS values >9,000) were observed in the trace files throughout the merged iterations using the software Tracer (Rambaut and Drummond, 2007). From this procedure, we estimated the mtDNA substitution rate to be 2.4 x 10-6 per site and year (1.5-3.3 x 10-6, 95% HPD). This rate resulted in a mean divergence time for P. infestans and P. mirabilis of 1,318 years ago (ya) (853-1,836 ya 95% HPD) and for P. infestans type I and type II mtDNA haplotypes of 460 ya (300-643 ya 95% HPD). The origin of the nineteenth century herbarium clade was estimated to around 182 ya (168-201 ya 95% HPD) (Figure 6, and Table 3). To understand the evolutionary relationships between historical and modern strains in more detail, we also compared their nuclear genomes. We built phylogenetic trees with highcoverage genomes using maximum parsimony (Figure 7a), maximum likelihood (Figure 7b) and neighbor-joining (Figure 7  figure supplement 1) methods. We included in the analysis heterozygous biallelic SNPs by random sampling an allele from each of them. In all cases, the HERB-1 representative, M-0182896, formed a distinct, isolated clade that appeared as a robust sister group to US-1 isolates DDR7602 and LBUS5. As a caveat, the random sampling of SNPs at heterozygous positions will inflate bootstrap support. Nevertheless, a heat map (Figure 7c) highlights that the two US-1 strains are both most closely related to HERB-1 and the most distinct among modern strains. Phylogenetic analyses that included the low-coverage genomes (Figure 7  figure supplement 1) were consistent with a close relationship between the HERB-1 and US-1 lineages. 7
+
+233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 8 Ploidy increase in modern strains The independent diversification of the pandemic HERB-1 and US-1 lineages together with a very recent common ancestor are consistent with both lineages having originated from the same metapopulation. To test whether the global replacement of HERB-1 by US-1 in the twentieth century was due to adaptive mutations, we searched for positively selected genes using PAML (Yang, 2007). We did not find any evidence for genes or sites that had experienced branch-specific positive selection in any of the lineages, only a mosaic pattern with potentially positively selected genes shared across lineages. Alternative scenarios could be that inactivating mutations were more important than non-synonymous substitutions, or that higher overall diversity and re-assortment of beneficial gene variants by recombination contributed to the success of US-1. Genetic diversity can be increased by polyploidy, which has been reported in isolates of P. infestans (e.g., Catal et al., 2010; Daggett et al., 1995), and which has major evolutionary implications for asexual organisms. To estimate ploidy level in our specimens, we investigated the distribution of read counts at biallelic SNPs for high-coverage genomes. In a diploid species, the mean of read counts at heterozygous positions should have a single mode at 0.5, while there should be two modes, 0.33 and 0.67, for triploid genomes, and three modes, 0.25, 0.5 and 0.75 for tetraploid genomes. We compared the observed distributions of read counts with computational simulations of diploid, triploid and tetraploid genomes. Based on the shape and kurtosis of the distributions we concluded that the historic M-0182896 genome was apparently diploid. Of the modern genomes, only NL07434 and P17777 were diploid, whereas the majority, including the two US-1 strains DDR7602 and LBUS5 as well as P13527 and P13626 were triploid. One strain, 06_3928A, even seemed to be tetraploid (Figure 8a, b, and Figure 8  figure supplement 1). This conclusion was supported by polyploid strains having evidence for triallelic polymorphism at many more sites than M0182896 (Figure 8c). To further confirm the ploidy inferences, we classified 40,352 SNPs as derived or ancestral based on information from the outgroup species P. mirabilis and P. ipomoeae. We then compared the rate of homozygosity at derived alleles in M-0182896 and DDR7602. In agreement with the ploidy difference, M-0182896 had more than twice as many derived homozygous SNPs (8,375) than DDR7602 (3,440), regardless of annotation as synonymous, non-synonymous and non-sense (Figure 9a, b).
+
+267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300
+
+Effector genes Phytophthora infestans secretes a large repertoire of effector proteins, some of which are recognized by plant immune receptors encoded by R genes (Haas et al., 2009; Vleeshouwers et al., 2011). These R genes occur in wild potato (Solanum) species mostly originating from the pathogen center of diversity in Mexico, and have been introduced by breeding into cultivated potato since the beginning of the twentieth century (Hawkes, 1990). The analysis of effector gene sequences in HERB-1 strains should reveal the effector repertoire prior to its disruption by the selective forces imposed by resistance gene breeding. Given that nineteenth century potato cultivars in North America and Europe were fully susceptible to late blight, we presume that they did not yet contain resistance genes that are effective against HERB-1. Conversely, the first R genes for P. infestans resistance, introduced into cultivated potato only after the dates for our HERB-1 samples, should be effective against HERB-1 strains, which are predicted to carry matching avirulence effector genes. The R genes include in particular R1 to R4 from Solanum demissum (Hawkes, 1990). To date, ten avirulence effector genes, recognized by ten matching Solanum R genes, have been described in P. infestans (Vleeshouwers et al., 2011). We first estimated the presence/absence profiles of these effector genes based on the fraction of gene length that was covered by reads (`breadth of coverage') in each high-coverage genome, and by merged reads from low-coverage genomes (Table 4). We deduced the amino acid sequences of these ten effectors using both alignments of reads to the reference genome and de novo assemblies. All examined avirulence effector genes except Avr3b were present as full-length and intact coding sequences in the historic samples (Table 4), without any frame shift or nonsense mutations. The HERB-1 alleles of Avr1, Avr2, Avr3a and Avr4 were shared with those of the US-1 strain DDR7602 (Table 5 and source file 1). In conclusion, the Avr1, Avr2, Avr3a and Avr4 alleles of HERB-1 are intact, presumably functional copies that are identical to ones that can be recognized by the matching R genes R1, R2, R3a and R4 (Armstrong et al., 2005; Gilroy et al., 2011; van Poppel et al., 2008; Vleeshouwers et al., 2011). This is consistent with the expectation that the HERB-1 genotype must have been avirulent on the first potato cultivars that acquired late blight resistance. We examined in more detail Avr3a, which is recognized by Solanum demissum R3a. The two major Avr3a alleles encode secreted proteins that differ in two amino acids in their effector domains: AVR3aKI and AVR3aEM (Figure 10a, and Figure 10  figure supplement 1). Only the AVR3aKI type triggers signaling by the resistance protein R3a (Armstrong et al., 2005). The R3a gene was introduced into modern potato from S. demissum at the beginning of 9
+
+301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318
+
+the twentieth century, providing modern potato with resistance against the P. infestans strains prevalent at the time (Gebhardt and Valkonen, 2001; Hawkes, 1990; Huang et al., 2005). Strains homozygous for Avr3aEM, which avoids R3a-mediated detection of the pathogen, appeared later; US-1 isolates lack Avr3aEM (Armstrong et al., 2005). Examination of Avr3a SNPs in the historic samples only revealed the AVR3aKI allele, whereas both alleles were present in modern samples (Figure 10b). To confirm that the potato hosts of the historic strains lacked the ability to recognize AVR3aKI, we assembled de novo short reads from the historic samples and aligned them against the R3a sequence from modern potato (Huang et al., 2005). As expected, we only found R3 homologs that were distinct in sequence from R3a (Figure 10c). The absence of the Avr3b effector gene in HERB-1 could be viewed as puzzling, given that the S. demissum R3 locus was one of the first to be bred into potato. However, R3b, the matching R gene of Avr3b, is within 0.4 cM of R3a in the complex R3 locus (Li et al., 2011). Based on the absence of an Avr3b gene in HERB-1, we conclude that initial introgression of the R3 locus from S. demissum was based on the resistance phenotype conferred by the R3a gene. The R3 phenotype scored during the initial introgression must have been the recognition of Avr3a by R3a, and the presence of R3b must have been irrelevant until P. infestans strains carrying Avr3b emerged.
+
+319 320 321 322 323 324 325 326 327 328 329 330 331
+
+Discussion
+To characterize the P. infestans strain(s) that triggered the Irish potato famine, we have sequenced several mtDNA and nuclear genomes of nineteenth century P. infestans strains. Because we wanted to interpret our findings in the context of extant genetic diversity, we investigated several modern strains as well. We could reconstruct the phylogenetic relationship between historic and modern strains using dozens of variants in complete mtDNA genomes, and millions of SNPs in the nuclear genomes, compared to previous work that had to rely on three mtDNA SNPs (May and Ristaino, 2004; Ristaino et al., 2001). The topologies of mtDNA and nuclear phylogenies were very similar, with the nuclear genomes yielding additional insights into differences in heterozygosity, ploidy levels and effector gene complement between historic and modern strains. Contrary to previous inferences (May and Ristaino, 2004; Ristaino et al., 2001), the nineteenth century strains are closely related to the modern US-1 lineage, but are characterized by a single, distinct mtDNA haplotype, HERB-1.
+
+10
+
+332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365
+
+Finally, from estimates of the divergence times of the different lineages, we were able to associate key events in P. infestans evolution with historic records of human migration and late blight spread. Relationship between historical and modern strains Historic strains from different geographic locations all carried a mtDNA haplotype, HERB-1, that had not been recognized before (Figure 4). Although collected over a period of 50 years, the strains were distinguished from each other by few nuclear SNPs, indicating that the nineteenth century outbreak was a true pandemic of a rapidly spreading clonal genotype. That HERB-1 has so far not been found in any modern strain may point to its extinction after the nineteenth century pandemic, possibly associated with the onset of resistance gene breeding in the twentieth century. We cannot, however, exclude that HERB-1 still infects some localized, genetically unimproved host populations, since we have explored only a fraction of current P. infestans genetic diversity. With the diagnostic variants we have discovered, one can now probe modern populations to determine whether or not HERB-1 still persists somewhere. Historic pathogen samples are molecular fossils that can be used as tip calibration points to estimate major divergence events in the evolution of a pathogen (Bos et al., 2011). Using the collection dates of the herbarium samples and isolation dates of the modern P. infestans strains, we estimated that type I and type II mtDNA haplotypes diverged close to the beginning of the sixteenth century (Figure 6, and Table 3). This coincides with the first contact between Americans and Europeans in Mexico, which potentially fuelled P. infestans population migration and expansion outside its center of diversity. This major event in human history might thus have been responsible for wider dissemination of the P. infestans pathogen in the New World, several centuries before its introduction to Europe. In addition, the divergence estimates allowed us to date the split between P. mirabilis and P. infestans about 1,300 ya. Even though this was firmly during the period of pre-Columbian civilization, what led to their relatively recent speciation remains unknown. To test the congruence of mtDNA and nuclear phylogenies, we reconstructed phylogenies with over four million nuclear SNPs from high-quality genomes (Figure 7). This confirmed the historic sample M-0182896 as a sister group to US-1 strains, a conclusion that was supported by a broader analysis that included the low-coverage historic samples (Figure 7  figure supplement 1). The private SNPs shared by the HERB-1 lineage ruled out that US-1 isolates are, as previously proposed (Goodwin et al., 1994), direct descendants of the historic 11
+
+366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399
+
+strains. Nevertheless, US-1 is more closely related to the historic strains than to the modern strains that have come to dominate the global population in the past two decades. We therefore propose a revision of the previous scenario, which posited that a single P. infestans lineage migrated around 1842 or 1843 from Mexico to North America, from where it was soon transferred to Europe, followed by global dissemination and persistence for over hundred years (Goodwin et al., 1994). Our data make it likely that by the late 1970s, direct descendants of HERB-1 had either become rare or extinct. On the other hand, the close relationship between HERB-1 and US-1 suggests that the US-1 lineage originated from a similar source as HERB-1, with our divergence estimates indicating that the two lineages separated only in the early nineteenth century. Given the much greater genetic diversity at the species' likely origin in Mexico, it seems unlikely that HERB-1 and US-1 spread independently from this region. An alternative scenario is that a small P. infestans metapopulation was established at the periphery of its center of origin, or even outside Mexico, possibly in North America, some time before the first global P. infestans pandemic. The first lineage to spread from there was HERB-1, which persisted globally for at least half a century. Subsequently, the US-1 lineage expanded and spread, replacing HERB-1 (Figure 11). Genetic and genomic differences between historic and modern strains Host R genes that confer resistance to historic P. infestans strains, such as R3a, were bred into cultivated potato Solanum tuberosum from the wild species S. demissum at the beginning of the twentieth century, years after our youngest historic sample had been collected in 1896. In agreement with the products of these R genes being able to recognize HERB-1 effectors, HERB-1 strains seem to have only the Avr3aKI allele, which interacts with the product of the R gene R3a to trigger a host immune response (Armstrong et al., 2005; Huang et al., 2005). Moreover, de novo assembly of potato DNA did not provide evidence for the presence of R3a in the herbarium hosts, consistent with the narrative of potato breeding (Figure 10c) (Hawkes, 1990). While it is uncertain when HERB-1 was displaced by the US-1 lineage, the US-1 lineage also carries only the Avr3aKI allele (Armstrong et al., 2005). The origin of the Avr3aEM allele that emerged to high frequency after the breeding of R3a into cultivated potatoes remains unclear. A major genomic difference between the HERB-1 and US-1 lineages is the shift in ploidy, from diploid to triploid and even tetraploid (Figure 8, and figure 8  figure supplement 1). Polyploidization could have provided an opportunity for US-1 isolates to enhance allelic diversity in the absence of frequent sexual reproduction, and could thus have contributed to 12
+
+400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 419 420 421
+
+their global success. Asexual reproduction leads to an increase of deleterious mutation in the population due to a lack of meiotic recombination (Felsenstein, 1974). Therefore, if the major selection pressure that led to the replacement of HERB-1 by US-1 was the introduction of resistance gene breeding, greater variation at effector genes in polyploid US-1 strains could have contributed to the replacement of HERB-1 soon after R genes from S. demissum and other wild species had been introduced into modern potato germplasm. Conclusions We present the first genome-wide analyses of historic plant pathogen strains. The aDNA in the herbarium samples, which were about 150 years old, was remarkably well conserved, much better than most examples of aDNA from animals and humans, and only comparable with permafrost samples (Miller et al., 2008; Rasmussen et al., 2010). Our analyses not only highlight how knowledge of the genetics and geographic distribution of modern strains is insufficient to correctly infer the source of historic epidemics (Goodwin et al., 1994), but they also reveal the shortcomings of inferences that are based on a very small number of genetic markers in historic strains (May and Ristaino, 2004; Ristaino et al., 2001). With our much richer dataset, we could demonstrate that the late blight outbreaks during the nineteenth century were a pandemic caused by a single P. infestans lineage, but that this lineage was not the direct ancestor of the one that had come to dominate the global P. infestans population during much of the twentieth century. Infected plant specimens stored in herbaria around the world are thus a largely untapped source to learn about events that affected millions of people during our recent history.
+
+422 423 424 425 426 427 428 429 430
+
+Material and methods
+Herbarium sampling Plant specimens were sent to the Senckenberg Museum in Frankfurt am Main by the Botanische Staatssammlung Mnchen and the Kew Royal Botanical Gardens, where potato and tomato leaves with lesions indicative of P. infestans infection were sampled, retrieving both the lesions and healthy surrounding tissue. Sampling was carried out under sterile conditions in a laboratory with no prior exposure to P. infestans. Samples were subsequently sent to the Palaeogenetics laboratory at the University of Tbingen.
+
+13
+
+431 432 433 434 435 436 437 438 439 440 441 442 443 444 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 460 461 462 463
+
+DNA extraction and sequencing library preparation Preamplification steps of historic samples were performed in clean room facilities with no prior exposure to P. infestans DNA. Samples were extracted following the protocol of (Kistler, 2012), using 380 to 500 g of each sample. Tissue was crushed with mortal and pestle, 1.2 ml extraction buffer (1% SDS, 10 mM Tris pH 8.0, 5 mM NaCl, 50 mM DTT, 0.4 mg/mL proteinase K, 10 mM EDTA, 2.5 mM N-phenacylthiazolium bromide) was added, and samples were incubated over night at 37C with constant agitation. A modified protocol with the Qiagen Plant DNEasy Mini kit was then used to purify the extracted DNA. Two independent Illumina sequencing libraries were created for each DNA extract. In the first library, C-to-T damage caused by deamination of cytosines (Hofreiter et al., 2001) was not repaired. Twenty l of each DNA extract, extraction blank control and water library blank control were converted into sequencing libraries as described (Meyer and Kircher, 2010) with modifications for aDNA (Meyer et al., 2012). To avoid potential sequencing artifacts caused by DNA damage, a second library was made from, 30 l of each DNA extract, extraction blank control and water library blank control, and treated with uracil-DNA glycosylase (UDG) and Endonuclease VIII before conversion into sequencing libraries (Briggs et al., 2010). Each library received sample-specific double indices after preparation via amplification with two `index' PCR primers (Meyer et al., 2012). Indexed libraries were individually amplified in 100 l reactions containing 5 l library template, 2 units of AccuPrime Pfx DNA polymerase (Invitrogen), 1 unit of 10PCR Mix and 0.3 M primers spanning the index sequences of the libraries. The following thermal profile was used: 2-min initial denaturation at 95C, 2 or 3 cycles consisting of 15 sec denaturation at 95C, a 30-sec annealing at 60C and a 2-min elongation at 68C, and a 5-min final elongation at 68C. Amplified products were purified and quantified on an Agilent 2100 Bioanalyzer DNA 1000 chip. DNA extracts of the modern P. infestans samples P17721, P10650, P6096, P11633, P10127, P9464, P12204 and P13626 and P. mirabilis P7722 were obtained from the World Phytophthora and Oomycete Genetic Resource Collection, fragmented to 300 bp using a S220 Covaris instrument according to the manufacturers' protocol (Duty cycle 10%, intensity 4, cycles per burst 200, time (sec) 120), and converted into sequencing libraries following the above steps as described for the historic samples without UDG treatment (Kircher, 2012; Meyer et al., 2012). For P. mirabilis PIC99114 and P. ipomoeae PIC99167, genomic DNA used before (Cooke et al., 2012; Raffaele et al., 2010b) was converted into Illumina
+
+14
+
+464 465 466 467 468 469 470 471 472 473 474 475 476 477 478 479 480 481 482 483 484 485 486 487 488 489 490 491 492 493 494 495 496 497
+
+sequencing libraries. Genomic DNA from the other modern strains was isolated as described (Cooke et al., 2012). Libraries were sequenced on Illumina GAIIx, HiSeq 2000 or MiSeq instruments, (Table 2). To estimate the fraction of P. infestans aDNA in the herbarium samples, we performed pilot sequencing. Once the samples with the highest amount of P. infestans were identified, production runs were carried out on an Illumina HiSeq 2000 instrument. For P. infestans 06_3928A analysis, we used publicly available short reads (ENA ERP002420). Read mapping and SNP calling Reads for the herbarium samples were de-indexed as described (Kircher, 2012). Forward and reverse reads were merged after adapter trimming, requiring at least 11 nucleotides overlap (Burbano et al., 2010). Only fragments that that allowed merging of reads were used in subsequent analyses. Merged reads were mapped to the P. infestans T30-4 reference genome (Haas et al., 2009) with BWA, allowing two gaps and without seeding (Li and Durbin, 2009). PCR duplicates were identified based on read start and end alignment coordinates. For each cluster of duplicates a consensus sequence was calculated as described (Kircher, 2012). Only reads with a Phred-like mapping quality score of at least 30 were used further. Alignments were converted to BAM files (Li et al., 2009). For modern strains, single reads were mapped in a similar manner, and subsequent processing was performed as described (Cooke et al., 2012). SNPs in the herbarium samples were called by independently comparing each strain with the P. infestans T30-4 genome. Raw allele counts for each position were obtained using pileup from SAMtools (Li et al., 2009). To decide the cutoffs for SNP calling we resorted to simulations. Reads from two 50-fold and 3-fold coverage genomes were simulated using the pIRS software (Hu et al., 2012), with empirical base-calling and GC%-depth profiles trained on five modern P. infestans genomes (P13527, P13626, 06_3928A, NL07434 and P17777). Based on the simulated data we called both homo and heterozygous SNPs employing different cutoffs for SNP concordance (Figure 3  figure supplement 1). Genotypes calls were classified as high quality if coverage was at least 10. We also considered low-quality SNPs, if a high-quality SNP call had been made in a different strain, using specific coverage cutoffs for rescuing low-quality SNPs (Figure 3  figure supplement 1). We calculated sensitivity and accuracy of SNP calls for different combination of cutoffs and selected the following criteria:  Minimum coverage of 10 for high quality calls. 15
+
+498 499 500 501 502 503 504 505 506 507 508 509 510 511 512 513 514 515 516 517 518 519 520 521 522 523 524 525 526 527 528 529 530
+
+
+
+Concordance >= 80% for homozygous SNPs. Concordance between 20-80% for heterozygous SNPs. Minimum coverage of 3 to rescue low-quality SNPs.
+
+We called synonymous, nonsynonymous and nonsense polymorphisms employing snpEff (Cingolani et al., 2012). Mitochondrial DNA (mtDNA) assembly and phylogenetic analyses Fragments that could be aligned to any of the four reference haplotypes (Ia, IIa, Ib and IIb) were used to assemble mtDNA genomes. For each strain four different assemblies (one for each reference haplotype) were built using an iterative mapping assembly program (Burbano et al., 2010; Green et al., 2008). Only positions with coverage of at least 3 were included in the assemblies. The four assemblies were aligned using Kalign (Lassmann and Sonnhammer, 2005) with default parameters, and a consensus assembly was generated based on the alignment. The 1.8 kb insertion present in haplotype II was not considered for phylogenetic reconstruction. The mtDNA phylogeny was built using a maximum parsimony and a maximum likelihood tree using MEGA5 (Tamura et al., 2011). For both, positions with less than 90% site coverage were eliminated. There were a total of 24,560 positions in the final dataset, compared to the multiple sequence alignment length (37,762 bp). For the maximum likelihood reconstruction we used the Hasegawa-Kishino-Yano (HKY) model assuming that a certain fraction of sites are evolutionarily invariable. The model was selected using MEGA5 (Tamura et al., 2011). Nuclear genome phylogenetic analyses We reconstructed the nuclear phylogeny for the high-coverage samples alone and for all samples together independently, using maximum parsimony and maximum likelihood approaches. We built the neighbor-joining trees based on a genetic distance matrix calculated from both homo- and heterozygous SNPs (Xu et al., 2012). For the high-coverage genomes we used only the SNPs positions with complete information in all samples. For the lowcoverage genomes we used homo- and heterozygous SNPs, and allowing for missing data. So that we could include heterozygous SNPs in the analysis, we randomly sampled one allele at each site. The maximum parsimony trees were calculated with 100 replicates in MEGA5 using the Close-Neighbor-Interchange algorithm with search level 0, in which the initial trees
+
+16
+
+531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564
+
+were obtained with the random addition of sequences (10 replicates). All positions with less than 95% site coverage were eliminated (Tamura et al., 2011). For the high-coverage genomes-only analysis, all positions with less than 85% site coverage were eliminated. For the all-sample analysis the threshold was lowered to 80%. Maximum likelihood trees were built using RaxML 7.0.4 with 100 replicates using the rapid bootstrap algorithm (Stamatakis, 2006). Effector analyses To address presence and absence polymorphisms of effectors, we used a previously published pipeline (Raffaele et al., 2010a). We calculated the fraction of each gene that was covered by reads (`breadth of coverage') for each strain. We regarded zero breadth of coverage as absence of the gene. For herbarium and modern samples with genome-wide coverage depth less than 20x, we merged BAM files from each strain into a single BAM file, and used this to estimated breadth of coverage. We also tested for presence/absence polymorphisms of RXLR effector genes between herbarium samples and modern strains using de novo assembly of short reads. First, we extracted 140 bp fragments from M-0182896 merged reads, and assembled these with SOAPdenovo v1.05 (Luo et al., 2012). We aligned the six-frame translation of resulting contigs to a non-redundant protein database using blastx (Altschul et al., 1990). Most contigs matched proteins from either potato, Solanum tuberosum, or to microbial species P. infestans, Pantoea vagans and Pseudomonas sp. To focus on P. infestans, we aligned fragments that were at least 140 bp to the genomes of P. infestans, S. tuberosum, P. vagans, P. syringae pv. syringae, and P. fluorescens with blastn. We extracted fragments that aligned the P. infestans genomic regions encoding RXLR effector genes, but over at most 90 bp. These and unmapped fragments were de novo assembled with SOAPdenovo v1.05. A k-mer size of 67 was deemed optimal, because it resulted in the highest coverage of Avr1, Avr2 and Avr3a, and resulted in the largest number of RXLR proteins with TBLASTN hits (Figure 10  figure supplement 1). We obtained partial sequences of Avr4 and Avrblb1. We visually evaluated BWA alignments of M-0182896 in the Avr4 and Avrblb1 genomic regions and identified T304 sequences uncovered by alignments using Integrative Genomics Viewer (Robinson et al., 2011). We then identified T30-4 genomic regions with at least 99% similarity to these uncovered regions. In BWA, if reads match several genomic regions, one genomic location is randomly chosen as default (Li and Durbin, 2009). Thus, it is possible that BWA alignment distributes reads coming from the same gene across several, closely related genes in the target 17
+
+565 566 567 568 569 570 571 572 573 574 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 590 591 592 593 594 595 596 597 598
+
+genome. We assembled such reads that mapped to closely related sequences in the reference genome together with the partial sequences of Avr4 and Avrblb1 using Geneious Pro 5.6.3 to obtain full-length sequences of these Avr genes. Selection tests Homozygous SNPs from modern P. infestans strains EC3527, EC3626, NL07434, 06_3928A, DDR7602, LBUS5, P17777 and the historic strain M-0182896 were used for selection tests. Gene sequences were converted into amino acid sequences using EMBOSS tools (Rice et al., 2000), and Pla2Nal v14 (Suyama et al., 2006) was used to convert protein alignments to codon alignments. The codeml module of PAML package v4.6 (Yang, 2007) was used for positive selection studies with site models M7 (parameters NSsites = 7, fix_omega = 0, omega = 2 and kappa = 3) and M8 (NSsites = 8, fix_omega = 0, omega = 2 and kappa = 3). A 5% level of significance was established with Likelihood ratio test. Genes were considered to be under positive selection if at least one site was found to be under selection with a Bayes Empirical Bayes confidence >95%. Ploidy analyses To estimate ploidy levels, we assessed the distributions of read counts at biallelic SNPs. For diploid species, the mean frequency of reads for each allele at non-homozygous sites is 1/2, while we expect two modes for triploid genomes, at 1/3 and 2/3, and four modes for tetraploid genomes, at 1/4, 1/2 and 3/4 (Figure 8a). We simulated genomes with different ploidy levels using pIRS (Hu et al., 2012), based on two strains, P. infestans T30-4 and EC3527. The SNPs used for the construction of two simulated chromosomes were determined with SAMtools v0.1.8 mpileup and bcftools v0.1.17 (Li et al., 2009). For the diploid genome, we simulated 10x coverage reads for each of two different chromosomes. For the triploid genome, we merged simulated 5x and 15x coverage reads from two different chromosomes. For the tetraploid genome, we merged simulated 10x coverage reads from two different chromosomes (Figure 8b). Next, we aligned the simulated reads to the P. infestans T30-4 reference genome with BWA and called heterozygous SNPs under the following criteria: minimum coverage of 10 for high-quality calls, and concordance between 20-80% for heterozygous SNPs. Since tetraploid species are considered to be a mixtures of two ratio, we mixed SNPs from the 20x coverage diploid reads and the 20x coverage tetraploid reads in following ratios: 0:100, 10:90, 20:80, 30:70, 40:60, 50:50, 60:40, 70:30, 80:20, 90:10 and 100:0. Finally, we estimated frequency of reads assigning each allele at each SNP position. Based on shapes, standard 18
+
+599 600 601 602 603 604 605 606 607 608 609 610 611 612 613 614 615 616 617 618 619 620 621 622 623 624 625 626 627 628 629 630 631 632
+
+deviation, skewedness and kurtosis of the observed distributions and comparison with the simulated distributions, we classified the tested P. infestans genomes as diploid, triploid and tetraploid. Substitution rates and divergence times for P. infestans In order to test whether we can detect a temporal signal in the ancient P. infestans mtDNA sequences compared to modern strains, i.e. shorter branches in the ancient strains compared to the modern ones, we calculated the nucleotide distance as the number of substitutions between HERB-1, haplotype Ia and haplotype Ib mtDNA genomes to the outgroup P17777. The analysis involved 19 nucleotide sequences. All positions with less than 90% site coverage were eliminated, resulting in 34,174 informative positions. The samples were subsequently grouped into ancient and modern strains. The ancient and modern nucleotide distances were significantly different (Mann-Whitney U-test, p = 0.0003). We furthermore correlated the nucleotide distance of HERB-1, haplotype Ia and haplotype Ib mtDNA genomes to the outgroup P17777 with the tip age of each sample. To estimate divergence times of P. infestans strains, substitution rates were calculated in a Bayesian framework analysis using the software package BEAST 1.7.5 (Drummond et al., 2012). A multiple sequence alignment that included all 12 nearly complete modern P. infestans mtDNA sequences plus all 13 herbaria samples was used as input. In order to test if the mtDNAs evolved clock like a likelihood ratio test was performed in MEGA5 (Tamura et al., 2011) by comparing the maximum likelihood (ML) value for the given topology using only the modern strains with and without the molecular clock constraints. The null hypothesis of equal evolutionary rate throughout the tree was not rejected at a 5% significance level (P = 0.115). All positions containing gaps and missing data were eliminated resulting in a total of 22,591 positions in the final dataset. As a result a strict molecular clock and the HKY sequence evolution model were used for the Bayesian framework. For the tree prior, five different models were tested including four coalescence models: constant size, expansion growth, exponential growth, logistic growth and a epidemiology birth-death model (Stadler, 2010). For each tree prior, three MCMC runs were carried out with 10,000,000 iterations each and subsequently merged using LogCombiner 1.7.5 from the BEAST package. Resulting ESS values and overall posterior likelihoods were compared using the software Tracer (Rambaut and Drummond, 2007). The birth-death model gave the highest ESS values and posterior likelihood and was therefore chosen for the subsequent dating analysis. The collection dates for all herbaria samples as 19
+
+633 634 635 636
+
+well as the isolation dates for all modern strains were used as tip calibration points (Table 1). Three MCMC runs were carried out with 50,000,000 iterations each, sampling every 10,000 steps. The first 1,000,000 iterations were discarded as burn-in resulting in a total of 147,000,000 iterations.
+
+637 638 639 640 641 642 643 644 645 646 647 648 649 650 651 652 653 654 655 656 657 658 659 660 661 662
+
+Bibliography
+Altschul, S.F., Gish, W., Miller, W., Myers, E.W., and Lipman, D.J. (1990). Basic local alignment search tool. J. Mol. Biol. 215, 403-410. Armstrong, M.R., Whisson, S.C., Pritchard, L., Bos, J.I., Venter, E., Avrova, A.O., Rehmany, A.P., Bohme, U., Brooks, K., Cherevach, I., et al. (2005). An ancestral oomycete locus contains late blight avirulence gene Avr3a, encoding a protein that is recognized in the host cytoplasm. Proc. Natl. Acad. Sci. USA 102, 7766-7771. Bos, K.I., Schuenemann, V.J., Golding, G.B., Burbano, H.A., Waglechner, N., Coombes, B.K., McPhee, J.B., DeWitte, S.N., Meyer, M., Schmedes, S., et al. (2011). A draft genome of Yersinia pestis from victims of the Black Death. Nature 478, 506-510. Bos, K.I., Stevens, P., Nieselt, K., Poinar, H.N., Dewitte, S.N., and Krause, J. (2012). Yersinia pestis: new evidence for an old infection. PLoS ONE 7, e49803. Bourke, P.M.A. (1964). Emergence of potato blight, 1843-46. Nature 203, 805-808. Briggs, A.W., Stenzel, U., Johnson, P.L., Green, R.E., Kelso, J., Prfer, K., Meyer, M., Krause, J., Ronan, M.T., Lachmann, M., et al. (2007). Patterns of damage in genomic DNA sequences from a Neandertal. Proc. Natl. Acad. Sci. USA 104, 14616-14621. Briggs, A.W., Stenzel, U., Meyer, M., Krause, J., Kircher, M., and Pbo, S. (2010). Removal of deaminated cytosines and detection of in vivo methylation in ancient DNA. Nucleic Acids Res. 38, e87. Brotherton, P., Endicott, P., Sanchez, J.J., Beaumont, M., Barnett, R., Austin, J., and Cooper, A. (2007). Novel high-resolution characterization of ancient DNA reveals C > U-type base modification events as the sole cause of post mortem miscoding lesions. Nucleic Acids Res. 35, 5717-5728. Burbano, H.A., Hodges, E., Green, R.E., Briggs, A.W., Krause, J., Meyer, M., Good, J.M., Maricic, T., Johnson, P.L., Xuan, Z., et al. (2010). Targeted investigation of the Neandertal genome by array-based sequence capture. Science 328, 723-725.
+
+20
+
+663 664 665 666 667 668 669 670 671 672 673 674 675 676 677 678 679 680 681 682 683 684 685 686 687 688 689 690 691 692 693 694 695 696
+
+Carter, D.A., Archer, S.A., Buck, K.W., Shaw, D.S., and Shattock, R.C. (1990). Restriction fragment length polymorphisms of mitochondrial DNA of Phytophthora infestans. Mycol. Res. 94, 1123-1128. Catal, M., King, L., Tumbalam, P., Wiriyajitsomboon, P., Kirk, W.W., and Adams, G.C. (2010). Heterokaryotic nuclear conditions and a heterogeneous nuclear population are observed by flow cytometry in Phytophthora infestans. Cytometry. Part A : the journal of the International Society for Analytical Cytology 77, 769-775. Cingolani, P., Platts, A., Wang le, L., Coon, M., Nguyen, T., Wang, L., Land, S.J., Lu, X., and Ruden, D.M. (2012). A program for annotating and predicting the effects of single nucleotide polymorphisms, SnpEff: SNPs in the genome of Drosophila melanogaster strain w1118; iso-2; iso-3. Fly 6, 80-92. Cooke, D.E., Cano, L.M., Raffaele, S., Bain, R.A., Cooke, L.R., Etherington, G.J., Deahl, K.L., Farrer, R.A., Gilroy, E.M., Goss, E.M., et al. (2012). Genome analyses of an aggressive and invasive lineage of the Irish potato famine pathogen. PLoS Pathog. 8, e1002940. Daggett, S.S., Knighton, J.E., and Therrien, C.D. (1995). Polyploidy among isolates of Phytophthora infestans from Eastern Germany. J. Phytopathol. 143, 419-422. de Bary, H.A. (1876). Researches into the nature of the potato fungus, Phytophthora infestans. J. Roy. Agric. Soc. Engl. Ser. 2 12, 239-269. Drummond, A.J., Suchard, M.A., Xie, D., and Rambaut, A. (2012). Bayesian phylogenetics with BEAUti and the BEAST 1.7. Mol. Biol. Evol. 29, 1969-1973. Felsenstein, J. (1974). The evolutionary advantage of recombination. Genetics 78, 737-756. Fisher, M.C., Henk, D.A., Briggs, C.J., Brownstein, J.S., Madoff, L.C., McCraw, S.L., and Gurr, S.J. (2012). Emerging fungal threats to animal, plant and ecosystem health. Nature 484, 186-194. Flier, W.G., Grunwald, N.J., Kroon, L.P., Sturbaum, A.K., van den Bosch, T.B., GaraySerrano, E., Lozoya-Saldana, H., Fry, W.E., and Turkensteen, L.J. (2003). The population structure of Phytophthora infestans from the Toluca Valley of Central Mexico suggests genetic differentiation between populations from cultivated potato and wild Solanum species. Phytopathology 93, 382-390. Fry, W. (2008). Phytophthora infestans: the plant (and R gene) destroyer. Mol. Plant Pathol. 9, 385-402. Fry, W., Grnwald, N., D, C., A, M., G, F., and K, C. (2009). Population genetics and population diversity of Phytophthora infestans. In Oomycete Genetics and Genomics: 21
+
+697 698 699 700 701 702 703 704 705 706 707 708 709 710 711 712 713 714 715 716 717 718 719 720 721 722 723 724 725 726 727 728 729 730
+
+Diversity, Interactions, and Research Tools, K. Lamour, and S. Kamoun, eds. (Hoboken, NJ, Wiley-Blackwell), pp. 139-164. Fry, W.E., Goodwin, S.B., Matuszak, J.M., Spielman, L.J., Milgroom, M.G., and Drenth, A. (1992). Population genetics and intercontinental migrations of Phytophthora infestans. Annu. Rev. Phytopathol. 30, 107-129. Gavino, P.D., and Fry, W.E. (2002). Diversity in and evidence for selection on the mitochondrial genome of Phytophthora infestans. Mycologia 94, 781-793. Gebhardt, C., and Valkonen, J.P. (2001). Organization of genes controlling disease resistance in the potato genome. Annu. Rev. Phytopathol. 39, 79-102. Gilroy, E.M., Breen, S., Whisson, S.C., Squires, J., Hein, I., Kaczmarek, M., Turnbull, D., Boevink, P.C., Lokossou, A., Cano, L.M., et al. (2011). Presence/absence, differential expression and sequence polymorphisms between PiAVR2 and PiAVR2-like in Phytophthora infestans determine virulence on R2 plants. New Phytol. 191, 763-776. Goodwin, S.B., Cohen, B.A., and Fry, W.E. (1994). Panglobal distribution of a single clonal lineage of the Irish potato famine fungus. Proc. Natl. Acad. Sci. USA 91, 11591-11595. Green, R.E., Malaspinas, A.S., Krause, J., Briggs, A.W., Johnson, P.L., Uhler, C., Meyer, M., Good, J.M., Maricic, T., Stenzel, U., et al. (2008). A complete Neandertal mitochondrial genome sequence determined by high-throughput sequencing. Cell 134, 416-426. Grnwald, N.J., and Flier, W.G. (2005). The biology of Phytophthora infestans at its center of origin. Annu. Rev. Phytopathol. 43, 171-190. Haas, B.J., Kamoun, S., Zody, M.C., Jiang, R.H., Handsaker, R.E., Cano, L.M., Grabherr, M., Kodira, C.D., Raffaele, S., Torto-Alalibo, T., et al. (2009). Genome sequence and analysis of the Irish potato famine pathogen Phytophthora infestans. Nature 461, 393-398. Hawkes, J.G. (1990). The Potato: Evolution, Biodiversity and Genetic Resources (Washington, D.C., Smithsonian Institution Press). Hofreiter, M., Jaenicke, V., Serre, D., Haeseler Av, A., and Pbo, S. (2001). DNA sequences from multiple amplifications reveal artifacts induced by cytosine deamination in ancient DNA. Nucleic Acids Res. 29, 4793-4799. Hu, X., Yuan, J., Shi, Y., Lu, J., Liu, B., Li, Z., Chen, Y., Mu, D., Zhang, H., Li, N., et al. (2012). pIRS: Profile-based Illumina pair-end reads simulator. Bioinformatics 28, 15331535. Huang, S., van der Vossen, E.A., Kuang, H., Vleeshouwers, V.G., Zhang, N., Borm, T.J., van Eck, H.J., Baker, B., Jacobsen, E., and Visser, R.G. (2005). Comparative genomics enabled the isolation of the R3a late blight resistance gene in potato. Plant J. 42, 251-261. 22
+
+731 732 733 734 735 736 737 738 739 740 741 742 743 744 745 746 747 748 749 750 751 752 753 754 755 756 757 758 759 760 761 762 763
+
+Kamoun, S., Hraber, P., Sobral, B., Nuss, D., and Govers, F. (1999). Initial assessment of gene diversity for the oomycete pathogen Phytophthora infestans based on expressed sequences. Fungal Genet. Biol. 28, 94-106. Kircher, M. (2012). Analysis of high-throughput ancient DNA sequencing data. Methods Mol. Biol. 840, 197-228. Kistler, L. (2012). Ancient DNA extraction from plants. Methods Mol. Biol. 840, 71-79. Kroon, L.P., Bakker, F.T., van den Bosch, G.B., Bonants, P.J., and Flier, W.G. (2004). Phylogenetic analysis of Phytophthora species based on mitochondrial and nuclear DNA sequences. Fungal Genet. Biol. 41, 766-782. Lassmann, T., and Sonnhammer, E.L. (2005). Kalign--an accurate and fast multiple sequence alignment algorithm. BMC Bioinformatics 6, 298. Li, G., Huang, S., Guo, X., Li, Y., Yang, Y., Guo, Z., Kuang, H., Rietman, H., Bergervoet, M., Vleeshouwers, V.G., et al. (2011). Cloning and characterization of R3b; members of the R3 superfamily of late blight resistance genes show sequence and functional divergence. Mol. Plant Microbe Interact. 24, 1132-1142. Li, H., and Durbin, R. (2009). Fast and accurate short read alignment with Burrows-Wheeler transform. Bioinformatics 25, 1754-1760. Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., Marth, G., Abecasis, G., and Durbin, R. (2009). The Sequence Alignment/Map format and SAMtools. Bioinformatics 25, 2078-2079. Luo, R., Liu, B., Xie, Y., Li, Z., Huang, W., Yuan, J., He, G., Chen, Y., Pan, Q., Liu, Y., et al. (2012). SOAPdenovo2: an empirically improved memory-efficient short-read de novo assembler. GigaScience 1, 18. May, K.J., and Ristaino, J.B. (2004). Identity of the mtDNA haplotype(s) of Phytophthora infestans in historical specimens from the Irish potato famine. Mycol. Res. 108, 471-479. Meyer, M., and Kircher, M. (2010). Illumina sequencing library preparation for highly multiplexed target capture and sequencing. Cold Spring Harb. Protoc. 2010, pdb prot5448. Meyer, M., Kircher, M., Gansauge, M.T., Li, H., Racimo, F., Mallick, S., Schraiber, J.G., Jay, F., Prufer, K., de Filippo, C., et al. (2012). A high-coverage genome sequence from an archaic Denisovan individual. Science 338, 222-226. Miller, W., Drautz, D.I., Ratan, A., Pusey, B., Qi, J., Lesk, A.M., Tomsho, L.P., Packard, M.D., Zhao, F., Sher, A., et al. (2008). Sequencing the nuclear genome of the extinct woolly mammoth. Nature 456, 387-390.
+
+23
+
+764 765 766 767 768 769 770 771 772 773 774 775 776 777 778 779 780 781 782 783 784 785 786 787 788 789 790 791 792 793 794 795 796 797
+
+Pbo, S. (1989). Ancient DNA: extraction, characterization, molecular cloning, and enzymatic amplification. Proc. Natl. Acad. Sci. USA 86, 1939-1943. Pbo, S., Poinar, H., Serre, D., Jaenicke-Despres, V., Hebler, J., Rohland, N., Kuch, M., Krause, J., Vigilant, L., and Hofreiter, M. (2004). Genetic analyses from ancient DNA. Annu. Rev. Genet. 38, 645-679. Perez, W.G., Gamboa, J.S., Falcon, Y.V., Coca, M., Raymundo, R.M., and Nelson, R.J. (2001). Genetic structure of peruvian populations of Phytophthora infestans. Phytopathology 91, 956-965. Potato Genome Sequencing Consortium (2011). Genome sequence and analysis of the tuber crop potato. Nature 475, 189-195. Raffaele, S., Farrer, R.A., Cano, L.M., Studholme, D.J., MacLean, D., Thines, M., Jiang, R.H., Zody, M.C., Kunjeti, S.G., Donofrio, N.M., et al. (2010a). Genome evolution following host jumps in the Irish potato famine pathogen lineage. Science 330, 1540-1543. Raffaele, S., Win, J., Cano, L.M., and Kamoun, S. (2010b). Analyses of genome architecture and gene expression reveal novel candidate virulence factors in the secretome of Phytophthora infestans. BMC Genomics 11, 637. Rambaut, A., and Drummond, A. (2007). Tracer v1.4. http://beast.bio.ed.ac.uk/Tracer Rasmussen, M., Li, Y., Lindgreen, S., Pedersen, J.S., Albrechtsen, A., Moltke, I., Metspalu, M., Metspalu, E., Kivisild, T., Gupta, R., et al. (2010). Ancient human genome sequence of an extinct Palaeo-Eskimo. Nature 463, 757-762. Reader, J. (2009). Potato: A History of the Propitious Esculent (New Haven, Yale University Press). Rice, P., Longden, I., and Bleasby, A. (2000). EMBOSS: the European Molecular Biology Open Software Suite. Trends Genet. 16, 276-277. Ristaino, J.B., Groves, C.T., and Parra, G.R. (2001). PCR amplification of the Irish potato famine pathogen from historic specimens. Nature 411, 695-697. Robinson, J.T., Thorvaldsdottir, H., Winckler, W., Guttman, M., Lander, E.S., Getz, G., and Mesirov, J.P. (2011). Integrative genomics viewer. Nat. Biotechnol. 29, 24-26. Stadler, T. (2010). Sampling-through-time in birth-death trees. J Theor Biol 267, 396-404. Stamatakis, A. (2006). RAxML-VI-HPC: maximum likelihood-based phylogenetic analyses with thousands of taxa and mixed models. Bioinformatics 22, 2688-2690. Suyama, M., Torrents, D., and Bork, P. (2006). PAL2NAL: robust conversion of protein sequence alignments into the corresponding codon alignments. Nucleic Acids Res. 34, W609-612. 24
+
+798 799 800 801 802 803 804 805 806 807 808 809 810 811 812 813 814 815 816 817 818 819
+
+Tamura, K., Peterson, D., Peterson, N., Stecher, G., Nei, M., and Kumar, S. (2011). MEGA5: molecular evolutionary genetics analysis using maximum likelihood, evolutionary distance, and maximum parsimony methods. Mol. Biol. Evol. 28, 2731-2739. The Tomato Genome Consortium (2012). The tomato genome sequence provides insights into fleshy fruit evolution. Nature 485, 635-641. Tooley, P.W., Fry, W.E., and Gonzalez, M.J.V. (1985). Isozyme characterization of sexual and asexual Phytophthora infestans populations. J. Hered. 76, 431-435. Turner, R.S. (2005). After the famine: Plant pathology, Phytophthora infestans, and the late blight of potatoes, 1845-1960. Hist. Stud. Phys. Biol. Sci. 35, 341-370. van Poppel, P.M., Guo, J., van de Vondervoort, P.J., Jung, M.W., Birch, P.R., Whisson, S.C., and Govers, F. (2008). The Phytophthora infestans avirulence gene Avr4 encodes an RXLR-dEER effector. Mol. Plant Microbe Interact. 21, 1460-1470. Vleeshouwers, V.G., Raffaele, S., Vossen, J.H., Champouret, N., Oliva, R., Segretin, M.E., Rietman, H., Cano, L.M., Lokossou, A., Kessel, G., et al. (2011). Understanding and exploiting late blight resistance in the age of effectors. Annu. Rev. Phytopathol. 49, 507531. Xu, X., Liu, X., Ge, S., Jensen, J.D., Hu, F., Li, X., Dong, Y., Gutenkunst, R.N., Fang, L., Huang, L., et al. (2012). Resequencing 50 accessions of cultivated and wild rice yields markers for identifying agronomically important genes. Nat. Biotechnol. 30, 105-111. Yang, Z. (2007). PAML 4: phylogenetic analysis by maximum likelihood. Mol. Biol. Evol. 24, 1586-1591.
+
+820 821 822 823 824 825 826 827
+
+Acknowledgments
+We are indebted to Bryn Dentinger, curator of the herbarium of the Kew Royal Botanical Gardens, and to Dagmar Triebel, curator of the herbarium of the Botanische Staatssammlung Mnchen, for providing the historic specimens used in this study. We are grateful to Mike Coffey for discussion of strain selection for genome analyses and providing genomic DNA preparations, Tahir Ali for help with phylogenetic tests, Jodie Pike for sequencing support, and Mike Coffey, David Cooke, Geert Kessel, Adele McLeod, Ricardo Oliva and Vivianne Vlesshouwers for Phytophthora strains. We thank Axel Knstner, Dan Koenig, Jorge
+
+25
+
+828 829 830 831 832 833
+
+Quintana and Ignacio Rubio-Somoza for discussion on data analysis and Eunyoung Chae and Rebecca Schwab for comments on the manuscript.
+
+26
+
+834 835
+
+Tables
+Table 1. Provenance of P. infestans samples. ID Country of Collection origin year KM177500 England 1845 KM177513 Ireland 1846 KM177502 England 1846 KM177497 England 1846 KM177514 Ireland 1847 KM177548 England 1847 KM177507 England 1856 M-0182898 Germany Before 1863 KM177509 England 1865 M-0182900 Germany 1873 M-0182907 Germany 1875 KM177517 Wales 1875 M-0182897 USA 1876 M-0182906 Germany 1877 M-0182896 Germany 1877 M-0182904 Austria 1879 M-0182903 Canada 1896 KM177512 England NA 06_3928A England 2006 DDR7602 Germany 1976 P1362 Mexico 1979 P6096 Peru 1984 P7722 (P. mirabilis) USA 1992 P9464 USA 1996 P12204 Scotland 1996 P13527 Ecuador 2002 P10127 USA 2002 P13626 Ecuador 2003 P10650 Mexico 2004 LBUS5 South Africa 2005 P11633 Hungary 2005 NL07434 Netherlands 2007 P17777 USA 2009 P17721 USA 2009 Modern samples Herbarium samples
+
+Host species Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Petunia hybrida Solanum tuberosum Solanum tuberosum Solanum lycopersicum Solanum tuberosum Solanum tuberosum Solanum lycopersicum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum tuberosum Solanum lycopersicum Solanum tuberosum Solanum tuberosum Solanum andreanum Solanum lycopersicum Solanum tuberosum Solanum tuberosum Petunia hybrida Solanum lycopersicum Solanum tuberosum Solanum lycopersicum Solanum tuberosum
+
+Reference* 1 1 1 1 1 1 1 2 1 2 1 1 2 2 2 2 2 1 3 4 5 5 5 5 5 5 5 5 5 6 5 3 5 5
+
+837 838 839 840 841
+
+*1, Kew Royal Botanical Gardens; 2, Botanische Staatssammlung Mnchen; 3, (Cooke et al., 2012); 4, (Kamoun et al., 1999); 5, World Oomycete Genetic Resource Collection at UC Riverside, CA; 6, Dr. Adele McLeod, Univ. of Stellenbosch, South Africa
+
+27
+
+842
+
+Table 2. Sequencing strategy. ID M-0182896 M-0182897 M-0182898 M-0182900 M-0182903 M-0182904 M-0182906 M-0182907 KM177497 KM177500 KM177502A KM177507 KM177509 KM177512 KM177513 KM177514 KM177517 KM177548 06_3928A DDR7602 LBUS5 NL07434 P10127 P10650 P12204 P13527 P1362 P13626 P11633 P17721 P17777 P6096 P7722 P9464 PIC99114 PIC99167 Instrument and read type HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) MiSeq (2x150 bp) MiSeq (2x150 bp) MiSeq (2x150 bp) MiSeq (2x150 bp) MiSeq (2x150 bp) & HiSeq 2000 (2x101 bp) MiSeq (2x150 bp) & HiSeq 2000 (2x101 bp) MiSeq (2x150 bp) & HiSeq 2000 (2x101 bp) MiSeq (2x150 bp) & HiSeq 2000 (2x101 bp) MiSeq (2x150 bp) & HiSeq 2000 (2x101 bp) MiSeq (2x150 bp) & HiSeq 2000 (2x101 bp) GAIIX (2x76 bp) GAIIX (2x76 bp) GAIIX (2x76 bp) GAIIX (2x76 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) GAIIX (2x76 bp) HiSeq 2000 (2x101 bp) GAIIX (2x76 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) GAIIX (2x76 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) HiSeq 2000 (2x101 bp) GAIIX (2x76 bp) GAIIX (2x76 bp) Sequencing center MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI MPI TSL TSL TSL TSL MPI MPI MPI TSL MPI TSL MPI MPI TSL MPI MPI MPI TSL TSL Coverage High Low1 Low Low2 Low Low1 Low2 Low Low Low1 Low1 Low1 Low Low Low Low Low Low High High High High Low Low Low High Low High Low Low High Low Low Low1 High High
+
+843 844 845
+1 2
+
+Samples not included in any analysis due to extremely low coverage Samples used only in mtDNA analysis.
+
+28
+
+846
+
+Table 3. Inferred time to most recent common ancestor (TMRCA) for different splits in the mtDNA tree. Node I/HERB-1, II Ia/Ib, HERB-1 HERB-1 strains IIa, IIb TMRCA (ya) Lower 2.5% 300 187 168 78
+
+Best estimate 460 234 182 142
+
+Upper 2.5% 643 290 201 214
+
+847 848 849 850 851 852 853 854 855 856 857
+
+29
+
+858 859
+
+Table 4. Presence or absence of avirulence effector genes in historic and modern samples, expressed as percentages of effector genes covered by reads. Sequences and polymorphisms are shown in Table 5 and Table 5  Source data 1.
+Avr gene R gene HERB-1 US-1 EC3527 Avr1 Avr2 Avr3a Avr3b Avr4 Avrblb1 Avrblb2 Avrvnt1 AvrSmira1 AvrSmira2 R1 R2 R3a R3b R4 Rpi-blb1 Rpi-blb2 Rpi-vnt1 Rpi-Smira1 Rpi-Smira2 100 100 100 0 100 100 100 100 100 100 100 100 100 0 100 100 100 100 100 100 100 100 100 0 100 100 100 100 100 100 20th century non-US-1 EC3626 P17777 06_3928A NL07434 0 100 100 0 100 100 100 100 100 100 100 100 100 100 95 100 92 100 100 100 0 81 100 0 89 100 100 100 100 100 0 100 100 0 100 100 100 100 100 100 Outgroups Merged 100 77 100 100 99 100 89 100 100 100 Pm PIC99114 98 97 0 100 85 0 88 100 97 100 Pip PIC99167 100 100 28 100 92 0 0 100 100 0
+
+860 861 862 863 864 865 866
+
+ Same sequences obtained for M-0182896 and merged sequences. * Same sequences obtained for DDR7602 and LBUS5.
+
+30
+
+867 868 869 870 871 872
+
+Table 5. Amino acid differences in the avirulence effectors AVR1, AVR2, AVR3a and AVR4 encoded by the T30-4 reference genome, HERB-1 and DDR7602 (US-1). IDs in parentheses refer to gene models in reference genome. Full-length sequences of deduced amino acid sequences of HERB-1 AVR1, AVR2, AVR3a and AVR4 are provided in Table5  Source data 1.
+Position Substitution T30-4 HERB1 DDR7602 AVR1 (PITG_16663) T T T, S I I, T T V V, A A I I I, V AVR2 (PITG_22870) N K K AVR3a (PITG_14371) S C C E K K M I I M L L AVR4 (PITG_07387) T T, I T L S L, S L V L, V V F V, F Note
+
+80 142 154 185 31 19 80 103 139 19 139 221 271
+
+HERB-1 polymorphisms shared with T30-4 and DDR7602. HERB-1 identical to DDR7602. HERB-1 identical to DDR7602; both correspond to AVR3aKI isoform.
+
+HERB-1 polymorphisms shared with T30-4 and DDR7602.
+
+873 874 875 876 877 878 879 880 881 882 883 884 885 886 887 888 889
+
+Table 5  Source data 1. Full-length sequences of deduced amino acid sequences of HERB-1 AVR1, AVR2, AVR3a and AVR4.
+
+Figure 1. Countries of origin of samples used in whole-genome, mtDNA genome or both analyses. Red indicates number of historic and blue of modern samples. More information on the samples is given in Table 1 and Table 2. Figure 2. Ancient DNA-like characteristic of historic samples. (A) Lengths of merged reads from historic sample M-0182898. (B) Mean lengths of merged reads from historic samples. (C) Nucleotide mis-incorporation in reads from the historic sample M-0182898. (D) Deamination at first 5' end base in historic samples. (E) Percentage of merged reads that mapped to the P. infestans reference genome.
+
+31
+
+890 891 892 893 894 895 896 897 898 899 900 901 902 903 904 905 906 907 908 909 910 911 912 913 914 915 916 917 918 919 920 921 922
+
+Figure 3. Coverage and SNP statistics. (A) Mean nuclear genome coverage from historic (red) and modern (blue) samples. (B) Homo- and heterozygous SNPs in each sample. (C) Inverse cumulative coverage for all homozygous SNPs across all samples. (D) Same as (C) for homo- and heterozygous SNPs. Figure 3  figure supplement 1. Accuracy and sensitivity of SNP calling at different cutoffs for SNP concordance based on 3- and 50-fold coverage of simulated data. Rescue cov.  minimum coverage required to accept SNP calls in low-coverage genomes based on these SNPs having been found in high-coverage genomes. The cutoffs enclosed in orange rectangles were used for the final analysis. Figure 4. Maximum-parsimony phylogenetic tree of complete mtDNA genomes. Sites with less than 90% information were not considered, leaving 24,560 sites in the final dataset. Numbers at branches indicate bootstrap support (100 replicates), and scale indicates changes. Figure 4  figure supplement 1. Maximum-likelihood phylogenetic tree of complete mtDNA genomes. Sites with less than 90% information were not considered, leaving 24,560 sites in the final dataset. Numbers at branches indicate bootstrap support (100 replicates). Figure 4  figure supplement 2. mtDNA sequences around diagnostic Msp1 restriction site (grey) for reference haplotype modern strains (blue) and historic strains (red). The Msp1 (CCGG) restriction site is only present in the Ib haplotype; all other strains have a C-toT substitution (CTGG). Figure 5. Correlation between nucleotide distance of mtDNA genomes of HERB1/haplotype Ia/haplotype Ib clade to the outgroup P17777 and sample age in calendar years before present. Figure 6. Divergence estimates of mtDNA genomes. Bayesian consensus tree from 147,000 inferred trees. Posterior probability support above 50% is shown next to each node. Blue horizontal bars represent the 95% HPD interval for the node height. Light yellow bars indicate major historical events discussed in the text. See Figure 5  Table 3 for detailed estimates at the four main nodes in P. infestans.
+
+32
+
+923 924 925 926 927 928 929 930 931 932 933 934 935 936 937 938 939 940 941 942 943 944 945 946 947 948 949 950 951 952 953 954 955 Figure 9. Read allele frequencies of historic genome M-0182896 and US-1 isolate DDR7602. Alleles were classified as ancestral or derived using outgroup species P. mirabilis and P. ipomoeae. There were 40,532 segregating sites. (A) Distributions of derived alleles at Figure 8  figure supplement 1. Reference read frequency at biallelic SNPs in gene dense regions (GDRs) for five modern high-coverage samples. Figure 8. Ploidy analysis. (A) Diagram of expected read frequencies of reads at biallelic SNPs for diploid, triploid and tetraploid genomes. (B) Reference read frequency at biallelic SNPs in gene dense regions (GDRs) for the historic sample M-0182896, two modern samples, and simulated diploid, triploid and tetraploid genomes. The simulated tetraploid genome is assumed to have 20 % of pattern 1 and 80 % of pattern 3 shown in (A). The shape and kurtosis of the observed distributions are similar to the corresponding simulated ones. (C) Polymorphic positions with more than one allele in the GDR. Figure 7  figure supplement 1. Phylogenetic trees of high- and low-coverage nuclear genomes. (A) Neighbor-joining tree of high-coverage genomes using 4,595,012 homo- and heterozygous SNPs. Numbers at branches indicate bootstrap support (100 replicates), and scale indicates genetic distance. (B) Neighbor-joining tree of high- and low-coverage genomes using 2,101,039 homozygous and heterozygous SNPs. Numbers at branches indicate bootstrap support above 50, from 100 replicates) Scale indicates genetic distance. (C) Maximum parsimony tree of high- and low-coverage genomes using 315,394 SNPs homozygous and heterozygous SNPs (using only sites with at least 80% information). Figure 7. Phylogenetic trees of high-coverage nuclear genomes using both homozygous and heterozygous SNPs. (A) Maximum-parsimony tree, considering only sites with at least 95% information, leaving 4,498,351 sites in the final dataset. Numbers at branches indicate bootstrap support (100 replicates), and scale indicates genetic distance. (B) Maximumlikelihood tree. (C) Heat map of genetic differentiation (color scale indicates SNP differences). US-1 strains DDR7062 and LBUS5 have the genomes sequences closest to M0182896 (asterisks). The two US-1 isolates in turn are outliers compared to all other modern strains (highlighted by a gray box).
+
+33
+
+956 957 958 959 960 961 962 963 964 965 966 967 968 969 970 971 972 973 974
+
+sites segregating between M-0182896 and DDR7602. (B) Annotation of the different site classes. Figure 10. The effector gene Avr3a and its cognate resistance gene R3a. (A) Diagram of AVR3A effector protein. (B) Frequency of Avr3a alleles in historic and modern P. infestans strains. (C) Neighbor-joining tree of R3a homologs from potato, based on 0.67 kb partial nucleotide sequences of S. tuberosum R3a (blue, accession number AY849382.1) and homologs (dark grey) in GenBank, and de novo assembled contigs from M-0182896 (red). Numbers at branches indicate bootstrap support with 500 replicates. Scale indicates changes. Figure 10	figure supplement 1. Summary of de novo assembly of RXLR effector genes. TBLASTN query was performed with 549 RXLR proteins as a query and contigs as a database. When the High-scoring Segment Pair (HSP) and matched amino acids both covered 99% of the query length, we recorded a hit. Results with the optimal k-mer size are highlighted. Figure 11. Suggested paths of migration and diversification of P. infestans lineages HERB-1 and US-1. The location of the metapopulation that gave rise to HERB-1 and US-1 remains uncertain; here it is proposed to have been in North America.
+
+34
+
+2 1
+
+1
+5/2 5/1 1
+
+4 2 2 1 1
+
+C A B
+nucleotide misincorporations 0.1 0.2 0.3 0.4 50 0 bp 60 70 80 90 0.0 0 50 samples 100 150 fragment length 1.0 2.0 % 3.0 length (mean) merged reads (millions)
+
+0 C to T Other 200 bp
+
+5
+
+10
+
+position along DNA fragment
+
+15
+
+M-0182898 M-0182897 M-0182906 M-0182907 M-0182896 M-0182903 M-0182904 M-0182900 KM177509 KM177514 KM177507 KM177500 KM177512 KM177513 KM177502 KM177497 KM177548 KM177517
+
+D
+
+E
+reads mapped to reference 0 1 10 15 20 % 25 0 5 2
+
+deamination at first base % 6 3 4 5
+
+samples
+
+samples
+
+M-0182898 M-0182897 M-0182906 M-0182907 M-0182896 M-0182903 M-0182904 M-0182900 KM177509 KM177514 KM177507 KM177500 KM177512 KM177513 KM177502 KM177497 KM177548 KM177517
+
+M-0182898 M-0182897 M-0182906 M-0182907 M-0182896 M-0182903 M-0182904 M-0182900 KM177509 KM177514 KM177507 KM177500 KM177512 KM177513 KM177502 KM177497 KM177548 KM177517
+
+A
+
+C
+mean coverage 100 20 40 60 80 0
+
+samples 10 15 20 25 1 0 20 40 sample ID 60 80 100 %
+M-0182898 M-0182907 M-0182896 M-0182903 KM177509 KM177514 KM177500 KM177512 KM177513 KM177548 KM177517 P17721 P10650 P6096 P11633 P10127 P12204 P1362 P13527 P13626 P17777 06_3928A NL07434 LBUS5 DDR7602 PmP7722 Pm99114 Pip99167
+
+5
+
+cumulative fraction [all homozygous SNPs]
+
+D
+
+B
+
+samples 0 10 15 20 25 1 0 20 40 60 80 100 % sample ID
+M-0182898 M-0182907 M-0182896 M-0182903 KM177509 KM177514 KM177500 KM177512 KM177513 KM177548 KM177517 P13527 P13626 NL07434 06_3928A P17777 DDR7602 LBUS5 P11633 P10650 P6096 P12204 P17721 P10127 P1362 PmP7722 Pm99114 Pip99167
+
+number of SNPs (x1,000,000) 2 4 6
+
+8
+
+5
+
+homozygous heterozygous
+
+cumulative fraction [all homo- & heteroz. SNPs]
+
+M-0182896 KM177509 KM177512 M-0182900 M-0182898 84 M-0182903 KM177517 KM177500 M-0182906 20 KM177548 KM177513 M-0182907 92 KM177514 DDR7602 Ib 95 99 P6096 P1362 LBUS5 P12204 06_3928A 82 Ia P10650 P17721 95 P17777 99 IIb P10127 P13626 99 89 IIa P11633 NL07434 P13527 PmP7722 US-1 HERB-1
+
+160 sample age (years) 120 80 40 0 7 8 9
+
+y= 38.7x + 458 r 2 = 0.80
+
+10 11 6(nt) P17777
+
+12
+
+13
+
+14
+
+Spanish Conquest
+
+Irish Famine P17777 LBUS5 Ib 94 DDR7602 100 100 06_3928A Ia KM177500 KM177512 100 KM177513 M-0182900 M-0182906 M-0182896 KM177517 100 M-0182903 M-0182907 KM177509 M-0182898 KM177514 KM177548 P13626 100 IIa NL07434 100 P13527 IIb PmP7722 70 100
+
+100
+
+100
+
+750
+
+1000
+
+1250
+
+1500
+
+1750
+
+2000 CE
+
+A
+100 100 200,000 100 100 100 100 100
+
+DDR7602 LBUS5 M-0182896 P13527 P13626 NL07434 06_3928A P17777 Pip99167 Pm99114
+
+B
+100 100 0.02 100 100 100 100
+
+DDR7602 LBUS5 M-0182896 P13527 P13626 NL07434 06_3928A P17777 Pip99167 Pm99114
+
+C
+P17777 06_3928A NL07434 P13626 P13527 LBUS5 DDR7602
+
+360k 340k 320k 300k 280k 260k 240k
+
+M-0182896 M-0182896
+
+* *
+LBUS5 P13527 P13626 NL07434 06_3928A DDR7602 P17777
+
+A
+reference 1 ratio ~ 0.5 : 0.5 reference 2 ratio ~ 0.67 : 0.33 reference 3
+
+B
+count (x1,000) 6 4 2 0
+
+M-0182896 100 80 60 40 20 0 0.2 0.8 sd = 0.10 sk = -0.002 kurt = 0.07 DDR7602 6 4 2 0 0.2 0.8 sd = 0.17 sk = 0.003 kurt = -1.33 06_3928A 6 4 2 0 0.2 0.8 sd = 0.19 sk = 0.005 kurt = -1.44 frequency 30 20 10 0 0.2 50 40 30 20 10 0 0.2 0.2
+
+diploid
+
+0.8 sd = 0.11 sk = 0.000 kurt = -0.21 triploid
+
+ratio ~ 0.75 : 0.25
+diplod = 1 tripoid = 2 tetraploid = 1 & 3
+
+count (x1,000)
+
+C
+
+0.8 sd = 0.17 sk = 0.002 kurt = -1.30 tetraploid
+
+% 100 99.98 frequency 99.96 99.94
+
+Two alleles Three alleles 1 count (x1,000) 33 29
+
+36,824
+
+54,235
+
+99.92 99.90 0
+
+54,984
+
+M-0182896
+
+06_3928A
+
+DDR7602
+
+0.8 sd = 0.20 sk = 0.005 kurt = -1.52
+
+A
+15 sites (x1,000) AA
+
+M-0182896 AD DD
+
+DDR7602 AAA AAD ADD DDD
+
+10
+
+5
+
+0 0.0 0.2 0.4 0.6 0.8 1.0 frequency 0.0 0.2 0.4 0.6 0.8 1.0 frequency
+
+B
+nonsynonymous M-0182896 (1,271) DDR7602 synonymous M-0182896 (926) DDR7602 nonsense M-0182896 (28) DDR7602 0 20 40 60 frequency 80 100 %
+
+A
+
+signal peptide 1 21
+
+RXLRdEER 44 59
+
+effector domains 149
+
+E/K
+
+M/I
+
+B
+% 100 80 frequecny 60 40 20 0 EM EM/KI KI EM EM/KI Avr3a allele KI 19th century 20th century
+
+C
+
+AY849383.1 R3a JF907681.1 92 contig453 100 AY849385.1 JF896480.1 87 AY849384.1 85 contig437 contig443 71 contig441 84 100 EF638454.1 EF638451.1 EF638465.1 EF638462.1 100 73 EF638458.1 56 EF638463.1 EF638457.1 97 EF638456.1 EF638455.1 81 EF638450.1 100 100
+
+0.02
+
+ERB-1) 5 (H 184
+early 1
+
+s 800
+
+early 1900s (U
+
+S-1)
+
+P. infestans origin
+
+potato origin
+
+3-fold genome coverage 50-fold genome coverage Concord. Concord. homozyg. heterozyg. 80% 20-80 % Min. cov. 10 Max. cov. 150 Rescue cov. 5 2 Homozygous SNPs Heterozygous SNPs Homozygous SNPs Heterozygous SNPs
+
+80%
+
+80%
+
+80%
+
+80%
+
+90%
+
+90%
+
+90%
+
+90%
+
+80%
+
+80%
+
+80%
+
+80%
+
+80%
+
+80%
+
+80%
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+10-90 %
+
+10-90 %
+
+10-90 %
+
+10-90 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+100 -
+
+100
+
+100
+
+100
+
+150
+
+150
+
+150
+
+3
+
+3 1 2
+
+5
+
+1
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+2 1
+
+3
+
+5
+
+1
+
+2
+
+3
+
+5
+
+70
+
+75
+
+80
+
+85 90 accuracy
+
+95
+
+100 (%)
+
+80%
+
+80%
+
+80%
+
+80%
+
+90% 90%
+
+90%
+
+90%
+
+80%
+
+80%
+
+80%
+
+80%
+
+80%
+
+80%
+
+80%
+
+80%
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+10-90 % 10-90 %
+
+10-90 %
+
+10-90 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+20-80 %
+
+10
+
+10
+
+10
+
+10
+
+10 10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+10
+
+100 -
+
+100
+
+100
+
+100
+
+150
+
+150
+
+150
+
+150
+
+3
+
+5 2
+
+3 1 2
+
+5
+
+1
+
+-
+
+-
+
+-
+
+-
+
+-
+
+2 1
+
+3
+
+5
+
+2 1
+
+3
+
+5
+
+0
+
+20
+
+40
+
+sensitivity
+
+60
+
+80
+
+100 %
+
+80
+
+76
+
+89
+
+62 85 87 100 100 81
+
+M-0182903 KM177509 M-0182907 M-0182898 M177514 M-0182906 M-0182896 KM177512 KM177548 KM177548 KM177513 M-0182900 KM177500 LBUS5 DDR7602 Ib P6096 P10650 06_3928A Ia P12204 P17721 P17777 P1362 IIb P10127 IIa P13527 P11633 NL07434 P13626 PmP7722
+
+HERB-1 US-1
+
+Ia Ib IIa IIb M-0182898 M-0182906 M-0182907 M-0182896 M-0182903 M-0182900 KM177513 KM177509 KM177514 KM177500 KM177512 KM177548 KM177517
+
+AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCCGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA AATTTCTCCAACAAAACTACTTGAACCTGGAATAGACATATTTGCTAATACATAAATAAA
+
+A
+0.05
+
+100
+
+M-0182896 LBUS5 100 DDR7602 100 P17777 06_3928A 100 NL07434 100 100 P13626 P13527 100 Pm99114 Pip99167 100
+
+C
+
+62
+
+M-0182907 M-0182896 KM177517 KM177513 M-0182898 KM177500 KM177514 KM177512 KM177509 KM177548 M-0182903 LBUS5 DDR7602 P6096 P1362
+
+100
+
+B
+
+0.05
+
+100
+
+KM177548 KM177513 M-0182903 M-0182896 KM177517 KM177512 M-0182898 72 KM177514 79 M-0182907 KM177509 51 KM177500 P6096 P13626 LBUS5 87 100 DDR7602 P13527 100 P13626 100 P12204 NL07434 06_3928A P17777 P10650 P11633 P17721 Pp10127 100 PmP7722 PmPIC99114 PipPIC99167
+
+100 100 61 100 88 100
+
+P11633 NL07434 06_3928A P10650 P12204 P13626 P13527 85 100 20,000 100
+
+68 92 100 100 91
+
+P17721 P10127 P17777 PmPIC99114 100 PmP7722 PipPIC99167
+
+12 10 8 6 4 2 0
+
+P13527
+
+P13626
+
+LBUS5
+
+NL07434
+
+P17777
+
+count (x1,000)
+
+0.2
+
+sd = 0.17 sk = 0.004 kurt = -1.31
+
+0.8
+
+0.2
+
+sd = 0.10 sk = 0.003 kurt = -1.43
+
+0.8 0.2
+
+0.8 0.2 0.8 0.2 0.8 sd = 0.17 sd = 0.10 sd = 0.11 sk = 0.004 sk = -0.023 sk = -0.023 kurt = -1.30 kurt = 1.00 kurt = 0.56 frequency
+
+RXLR proteins with TBLASTN hit
+
+Longest Contig (bp)
+
+AVR3aEM 37 46 84 84 84 97 97 97 97 90 90 69 51
+
+N50 (bp)
+
+AVR1
+
+AVR2
+
+41 51 61 63 65 67 69 71 81 91 101 111 121
+
+160 169 191 219 241 248
+
+2,686 4,616 8,487 9,428 9,430 9,509
+
+25 61 89 90 92 90 88 76 76 48 19 15 6
+
+48 39 100 77 100 100 100 100 100 75 75 75 7
+
+81 100 100 100 99 99 99 91 99 79 79 65 8
+
+257 15,874 259 14,583 312 36,586 362 73,532 393 68,999 429 68,999 473 25,791
+
+Matched aa / AVR length (%) 0 50 100
+
+AVR4 66 78 87 87 87 79 79 45 45 44 7 7 7
+
+kmer
+

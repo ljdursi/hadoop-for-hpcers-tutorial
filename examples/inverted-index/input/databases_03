@@ -1,0 +1,910 @@
+The First-order Logical Environment
+Robert E. Kent
+Ontologos
+
+arXiv:1305.5240v1 [cs.LO] 22 May 2013
+
+Abstract. This paper describes the first-order logical environment FOLE. Institutions in general (Goguen and Burstall [4]), and logical environments in particular, give equivalent heterogeneous and homogeneous representations for logical systems. As such, they offer a rigorous and principled approach to distributed interoperable information systems via system consequence (Kent [6]). Since FOLE is a particular logical environment, this provides a rigorous and principled approach to distributed interoperable first-order information systems. The FOLE represents the formalism and semantics of first-order logic in a classification form. By using an interpretation form, a companion approach (Kent [7]) defines the formalism and semantics of first-order logical/relational database systems. In a strict sense, the two forms have transformational passages (generalized inverses) between one another. The classification form of first-order logic in the FOLE corresponds to ideas discussed in the Information Flow Framework (IFF [12]). The FOLE representation follows a conceptual structures approach, that is completely compatible with formal concept analysis (Ganter and Wille [2]) and information flow (Barwise and Seligman [1]). Keywords: schema, specification, structure, logical environment.
+
+1
+
+Introduction
+
+The paper "System Consequence" (Kent [6]) gave a general and abstract solution to the interoperation of information systems via the channel theory of information flow (Barwise and Seligman [1]). These can be expressed either formally, semantically or in a combined form. This general solution closely follows the theories of institutions (Goguen and Burstall [4]), 1 information flow and formal concept analysis (Ganter and Wille [2]). By following the approach of the "System Consequence" paper, this paper offers a solution to the interoperation of distributed systems expressed in terms of the formalism and semantics of firstorder logic. It does this be defining FOLE, the first-order logical environment. 2 Since this paper develops a classification form of first order logic as a logical environment, the interaction of information systems expressed in first order logic
+1
+
+2
+
+The technical aspect of this paper is described in the spirit of Goguen's categorical manifesto [3] by using the terminology of mathematical context, passage and bridge in place of category, functor and natural transformation. A logical environment is a special and more structurally pleasing case of an institution, where the semantics is completely compatible with satisfaction.
+
+2
+
+Robert E. Kent
+
+have a firm foundation. Section 2 surveys the architecture of the first-order logical environment FOLE. Section 3 discusses the linguistic/formal and semantic components of FOLE; detailed discussions of the functional base and relational superstructure are given in Appendix A.1 and Appendix A.2, respectively. Section 4 explains how FOLE is a logical environment; a proof of this fact is given in Appendix A.4. Section 5 discusses FOLE information systems. Finally, section 6 summarizes and states future plans for work on these topics.
+
+2
+
+Architecture
+
+Log   spec    struc	Spec	 Struc	   lang   lang	    alg     rel     relational	    Lang      superstructure	 Alg	Rel   sch    oper		fmla	       oper	sch    Oper	  Sch functional Cls	      base   fmla      term	       Set semantics linguistics/formalism
+
+Fig. 1. FOLE Fibered Architecture
+
+Figure 1 is a 3-dimensional visualization of the fibered architecture of the first-order logical environment FOLE. Each node of this figure is a mathematical context, whereas each edge is a passage between two contexts. There is a projection from the 2-D prism below Struc representing the relational superstructure (subsec. A.2) to the 2-D prism below Alg representing the functional base (subsec. A.1). The front diamond below Lang represents the linguistics/formalism, whereas the back diamond below Struc represents the semantics. The projective passages from semantics to linguistics/formalism represent the fibration left-toright and the indexing right-to-left. The vee-shape at the top of each diamond states that the top mathematical context is a product of the side contexts modulo the bottom context. The mathematical contexts on the left side of each diamond form the relational aspect, whereas the mathematical contexts on the right side form the functional aspect that lifts the relational to the (first-order) logical aspect. The 2-D prism below Log represents the institutional architecture.
+
+FOL
+
+3
+
+3
+
+Components
+
+The architectural components (Fig.1) divide up according to kind and aspect. The outer level describes the kind of component. The indexing kind is a language (type set, relational schema, operator domain, etc.) (front diamond Fig.1), whereas the indexed kind is either a formalism or a semantics (classification, relational structure, algebra, etc.) (back diamond Fig.1). The inner level describes the aspect of component. There are basic, relational, functional and logical aspects (bottom, left, right or top node in either Fig.1 diamond).
+
+		       proposition intention form    nexus actuality prehension
+top-level categories
+
+						   independent	relative  mediating	   abstract   physical
+
+instance
+
+		relation  entity   signature type     entity  -   type	List(X )  R
+Y X List(Y )
+tuple
+
+	M				 ,	      List   ( E )  E	 R    type     instance
+
+ -
+
+
+K
+
+key
+
+FOLE components
+
+Fig. 2. Analogy Fig.2 illustrates an analogy between the top-level ontological categories discussed in (Sowa [9]) and the components of the first-order logical environment FOLE (the relational aspect or 2-D prism below Rel). The pair `physical-abstract', which corresponds to the Heraclitus distinction physis-logos, is represented in the FOLE by a classification between instances and types of various kinds. The triples (triads) `actuality-prehension-nexus' and `form-proposition-intention' correspond to Whitehead's categories of existence. The latter triple, which is analogous to the `entity type-signature-relation type' triple, is represented in the FOLE by a relational language (schema) S = R, , X (Appendix A.2.1). The former triple, which is analogous to the `entity instance-tuple-relation instance' triple,  is represented in the FOLE by the tuple function K -  List(Y ) (part of a FOLE structure). The firstness category of `independent(actuality,form)' is represented in the FOLE by an entity classification E = X, Y, |=E (Appendix A.2.2). The thirdness category of `mediating(nexus,intention)' is represented in the FOLE by a relation classification R = R, K, |=R between relational instances (keys) and relational types (or a classification between relational instances and logical formula, more generally) (Appendix A.2.2). The secondness category of `relative(prehension,proposition)' is represented in the FOLE by the list construction of an entity classification List(E ) = List(X ), List(Y ), |=List(E ) between tuples and signatures (Appendix A.2.2). Finally, the entire graph of the top-level
+
+4
+
+Robert E. Kent
+
+ontological categories is represented in the FOLE by a (model-theoretic) structure (classification form) M = R, ,  , E , where the relation R and entity E classifications are connected by a list designation ,  : R  List(E ) (Appendix A.2.2). This is appropriate, since a (model-theoretic) structure represents the knowledge in the local world of a community of discourse.
+
+4
+
+Logical Environment
+
+The FOLE institution (logical system) (Kent [6]) has at its core the mathematical context of first-order logic (FOL) languages Lang. For any language L = S , O , there is a set of constraints fmla (L) representing the formalism at location L, and there is a mathematical context of structures struc (L) representing the semantics at location L. For any first-order logic (FOL) language morphism L2 = S2 , O2 - - - -  S1 , O1 = L1 , there is a constraint function fmla (L2 ) - - - - - - -  fmla (L1 ) (Appendix A.2.1) representing flow of formalism in the forward direction, and there is a structure passage struc (L2 )  - - - - - - - struc (L1 ) (Appendix A.2.2) representing flow of semantics in the reverse direction. This structure passage has a relational component Rel(S2 )  - - - - Rel(S2 ) and a functional (algebraic) component Alg(O2 )  - - - - - Alg(O1 ). FOLE is an institution, since the satisfaction relation is preserved during information flow along any first-order logic (FOL) language morphism L2 =
+2    I2 , s2 , 2 ) , s S2 , O2 - - - -	S1 , O1 = L1 : struc (r, f,  )(M1 ) |=L2 ( I2 2 , 2 -
+
+r,f,
+
+fmla (r,f, )
+
+struc (r,f, )
+
+rel
+
+r,f
+
+alg
+
+f,
+
+r,f,
+
+h
+
+   I2 , s2 , 2 ). In short, "satisfaction is invariant , s iff M1 |=L1 fmla ( I2 2 , 2 - under change of notation". The institution FOLE is a logical environment, since
+
+h2
+
+for any language L = S , O = R, , X,  , if M2 - - - -  M1 is a lang -vertical structure morphism over L, then we have the intent order M2 L M1 ; that is, M2 |=L (   ) implies M1 |=L (   ) for any S -sequent (   ). In short, "satisfaction respects structure morphisms". (See Appendix A.4 for a proof of this in the relational aspect.)
+
+k,g,h
+
+5
+
+Information Systems
+
+Following the theory of general systems, an information system consists of a collection of interconnected parts called information resources and a collection of part-part relationships between pairs of information resources called constraints. Semantic information systems have logics 3 as their information resources. Just as every logic has an underlying structure, so also every information system has
+3
+
+A first-order logic L = M, T in FOLE consists of a first-order structure M and a first-order specification T that share a common first-order language lang (M) = lang (T ). A logic enriches a first-order structure with a specification. The logic is sound when the structure M satisfies every constraint in the specification T .
+
+FOL
+
+5
+
+an underlying distributed system. As such, distributed systems have structures for their component parts. A FOLE distributed system is a passage M : I	Struc pictured as a diagram of shape I within the ambient mathematical context of first-order structures. As such, it consists of an indexed family {Mi | i  |I|} of structures together with me -  Mj | (e : i  j )  I} of structure morphisms. an indexed family {Mi - A FOLE (semantic) information system is a diagram L : I  Log within the mathematical context of first-order logics. This consists of an indexed family of le  Lj | (e : logics {Li : i  |I|} and an indexed family of logic morphisms {Li - i	j )  I}. An information system L has an underlying distributed system M = L  struc of the same shape with Mi = struc (Li ) for all i  |I|. An i  information channel  : M  (C ), C consists of an indexed family {Mi - C | i  |I|} of structure morphisms with a common target structure C called the core of the channel. Information flows along channels. We are mainly interested in channels that cover a distributed system M : I  Struc, where the part-whole relationships respect the system constraints (are consistent with the part-part relationships). In this case, there exist optimal channels. An optimal core is called the sum of the distributed system, and the optimal channel components (structure morphisms) are flow links. System interoperability is defined by moving formalism over semantics. The fusion (unification) L of the information system L represents the whole system in a centralized fashion. The fusion logic is defined by direct system flow: (i) direct logic flow of the component parts of the information system along the optimal channel over the underlying distributed system to a centralized location (the mathematical context of structures at the optimal channel core), and (ii) product combining the contributions of the parts into a whole. The consequence L of the information system L represents the whole system in a distributed fashion. This is an information system defined by inverse system flow: (i) consequence of the fusion logic, and (ii) inverse logic flow of this consequence back along the same optimal channel, transfering the constraints of the whole system (the fusion logic) to the distributed locations (structures) of the component parts. See Kent [6] for further details. 4
+
+6
+
+Summary and Future Work
+
+In this paper we have described the first-order logical environment FOLE in classification form. This gives a holistic treatment of first-order logic, by the use of several novel elements: the use of signatures (type lists) for relational arities, in place of ordinal numbers; the use of abstract tuples (relational instances, keys), thus making FOLE compatible with relational databases; the use of classifications for
+4
+
+In light of the transformation described in Appendix A.5.2, an information system of sound logics can be regarded as a system of logical/relational databases. The system consequence of such systems represents database interoperabilty. Kent [6] has more details about the information flow of sound logics in an arbitrary logical environment.
+
+6
+
+Robert E. Kent
+
+both entities and relations; and the use of relational constraints for the sentences of the FOLE institution. FOLE also has an interpretation form (Kent [7]) that represents the formalism and semantics of logical/relational databases, including relational algebra. There are transformational passages between the classification form and a strict version of the interpretation form. Appendix A.5.2 briefly discusses the transformation from sound logics to logical/relational databases. FOLE has advantages over other approaches to first-order logic: in FOLE the formalism is completely integrated into the semantics; the classification form of FOLE has a natural extension to relational/logical databases, as represented by the interpretation form of FOLE; and FOLE is a logical environment, thus allowing practitioners a rigorously defined approach towards the interoperation of online semantic systems of information resources that include relational databases. Future work includes: finishing work on the interpretation form of FOLE; further work on defining the transformational passages between the classification and interpretation forms; developing a linearization process from FOLE to sketchlike forms of logic such as Ologs (Spivak and Kent [11]); and linking FOLE with the Common Logic standard.
+
+References
+1. Barwise, J., Seligman, J.: Information Flow: The Logic of Distributed Systems. Cambridge University Press, Cambridge (1997). 2. Ganter, B., Wille, R.: Formal Concept Analysis: Mathematical Foundations. Springer, New York (1999). 3. Goguen, J.: A categorical manifesto. Mathematical Structures in Computer Science 1, 4967 (1991). 4. Goguen, J., Burstall, R.: "Institutions: Abstract Model Theory for Specification and Programming". J. Assoc. Comp. Mach. vol. 39, pp. 95146 (1992). 5. M. Johnson, R. Rosebrugh, and R. Wood. "Entity Relationship Attribute Designs and Sketches". Theory and Application of Categories 10, 3, 94112 (2002). 6. Kent, R.E.: "System Consequence". In: Rudolph, S., Dau, F., Kuznetsov, S.O. (eds.) LNCS vol. 5662, pp. 201218. Springer, Heidelberg (2009). 7. Kent, R.E.: "Database Semantics". (2011). Available online: http://arxiv.org/abs/1209.3054 . 8. Kent, R.E., Spivak, D.I.: Email discussion (2011). 9. Sowa, J.F.: Knowledge Representation: Logical, Philosophical, and Computational Foundations. Brookes/Coles (2000). 10. Sowa, John F.: "ISO Standard for Conceptual Graphs", (2001-04-02). Available online: http://users.bestweb.net/~ sowa/cg/cgstand.htm . 11. Spivak, D.I., Kent, R.E.: "Ologs: a categorical framework for knowledge representation". PLoS ONE 7(1): e24274. doi:10.1371/journal.pone.0024274. (2012). Available online: http://arxiv.org/abs/1102.1889 . 12. The Information Flow Framework (IFF). Available online: http://suo.ieee.org/IFF/ .
+
+FOL
+
+7
+
+A
+A.1
+
+Appendix
+Functional Base. Linguistics/Formalism.
+
+A.1.1
+
+Base Linguistics: Set. A set (of entity types) X defines a mathematical context of type lists (signatures) List(X ) = (SetX ). The FOLE uses type lists for relational arities, instead of ordinal numbers. The first subcomponent of any linguistic component is a set of entity types (sorts) X . Examples of entity types are `human' representing the set of all human beings, `blue' representing the set of all objects of color blue, etc. A type list s (signature) I, s consists of an arity set I and a type map I -	X mapping elements of the arity to entity types. This can be denoted by the list notation (. . . si . . .) or the type declaration notation (. . . i :si . . .) for i  I and si  X . For example, the type list `(make:String,model:String,year:Number,color:Color)' is a type list for cars with valence 4, arity set {make, model, year, color}, and type h map {make  String,    }. A type list morphism I2 , s2 -  I1 , s1 is an arity  I1 that satisfies the commutative diagram h  s1 = s2 . We say that function I2 - s2 is at least as general as s1 . Given the natural numbers  = {0, 1,    }, let  denote the mathematical context of finite ordinals (number sets) n = {0, 1,    , n-1} and functions between them. This is the skeleton of the mathematical context Fin of finite sets and functions. Both represent the single-sorted case where X = 1. We have the following inclusion of base language mathematical contexts. 5
+
+
+  oper	   cls	      Oper    term Cls	   set	   set
+Alg Set
+
+functional base
+
+h
+
+
+
+
+
+Fin
+single-sorted
+
+
+
+List(X )
+many-sorted
+
+skeleton
+
+Traditional first-order systems use the natural numbers  for indexing relations. More flexible first-order systems, such as FOLE or relational database systems, use finite sets when single-sorted or type lists when many-sorted. Algebraic Linguistics: Oper - -  Set. A functional language (operator domain) is a pair X,	, where X is a set of entity types (sorts) and	is an X -sorted
+
+
+set
+
+operator domain; that is,  = {x, I,s | x  X, I, s  List(X )} is a collection of sets of function (operator) symbols, where e  x, I,s is a function symbol e of entity type (sort) x and finite arity I, s , 6 symbolized by x -  I, s . An element c  x, ,0X is called a constant symbol of sort x. Any operator domain X,  defines a mathematical context of terms Term X, , whose objects are X -signatures I, s and whose morphisms are term vectors I  , s -  I, s , where
+5 6
+
+
+t
+
+We use the mathematical context List(X ) = (FinX ) for type lists of finite arity. This is a slight misnomer, since I, s is actually the signature of the function symbol. whereas the arity of e is the indexing set I and the valence of e is the cardinality |I |.
+
+8
+
+Robert E. Kent
+t
+
+
+i t = {s i -  I, s | i	I  } is an indexed collection (vector) of I, s -ary terms. Terms and term vectors are defined by mutual induction.
+
+A morphism of functional languages is a pair X2 , 2 - - -  X1 , 1 , where  X1 is a function of entity types (sorts) and  : 2  1 is a collection X2 - {(2 )x2 ,
+I2 ,s2
+2 2 2 - - - - - - -  (1 )f (x2 ),
+
+f,
+
+f
+
+x
+
+, I ,s
+
+
+
+f (I2 ,s2 )
+
+| x2  X2 , I2 , s2  List(X2 )} of
+e
+
+ I2 , s2 maps between function symbol sets:  maps a function symbol x2 - in 2 to a function symbol f (x2 ) - - -  any morphism of functional languages
+term
+f,
+
+ (e)
+
+f (I2 , s2 ) = f, X2 , 2 - - -
+
+I2 , s2  f in 1 . Given X1 , 1 , there is a term
+
+passage Term X2 ,2 - - - - - -	Term X1 ,1 defined by induction. Let Oper denote the mathematical context of functional languages (operator domains). Algebraic Formalism. Let O = X,  be an operator domain. An O-equation is a parallel pair of term vectors I  , s - -  I, s . We represent an equation using the traditional notation (t = t ). An equational presentation X, , E consists of an operator domain O = X,  and a set of O-equations E . A congruence is any equational presentation closed under left and right term composition. Any equational presentation X, , E generates a congruence X, , E  , which defines a quotient mathematical context of terms Term X,,E with a morphism I  , s -  I, s being an equivalence class of terms. There is a canonical passage Term
+f, [t] t,t
+
+tions X2 , 2 , E2 - - -  X1 , 1 , E1 is a morphism of functional languages
+2  X2 , 2 - - -  X1 , 1 that preserves equations: an O2 -equation I2 , s - -  2 -
+
+X, f,
+
+-  Term
+
+[]
+
+X,,E
+
+. A morphism of equational presentat2 ,t
+
+I2 , s2 in E2 is mapped to an O1 -equation
+
+
+  (t),	(t )   - - - - - - -  f (I2 , s2 ) -
+
+the congruence E1 . Hence, there is a term passage Term Term X1 ,1 ,E1 that commutes with canons. A.1.2 Semantics.
+typ
+
+f (I2 , s2 ) in term f,
+
+X2 ,2 ,E2
+
+- - - - - -
+
+-  Set. For any entity classification E = X, Y, |=E , Base Semantics: Cls -
+E there is a tuple passage List(X )op - - -  Set defined as the extent of the list classification List(E ). It maps a type list (signature) I, s  List(X ) to its extent tup E (I, s) = ext List(E ) (I, s)  List(Y ). An entity infomorphism f, g :
+
+tup
+
+E2  E1 defines a bridge tup E2 = ( f )op  tup E1 between tuple passages. For any source signature I2 , s2  (SetX2 ), the tuple function  f,g (I2 , s2 ) = (-)  g : tup E1 ( f (I2 , s2 ))  tup E2 (I2 , s2 ) is define by composition. Algebraic Semantics: Cls  - - Alg - - -	Oper. A many-sorted algebra A = E , O, A,  consists of an entity classification E = X, Y, |=E , an operator domain O = X,  , and an O-algebra A,  compatible with E , where A = {Ax |
+cls oper
+
+
+
+f,g
+
+FOL Termop X2 ,
+term op id term op f,0 op  )op ( f )
+f,g
+
+9
+
+= List(X2
+X2 ,0
+
+List(X1 )op = Termop X1 ,
+inc op = term op id
+
+= inc op
+
+tup E2
+
+Termop X2 ,2
+
+
+
+term
+
+op =
+f,
+
+ Termop X
+
+
+2 ,2
+
+X1 ,0
+
+   =   A1 A2
+
+tup E1
+
+Set
+
+Fig. 3. Functional Base Interpretation
+
+x  X } is an X -sorted set and	assigns an I, s -ary x-sorted function (operae - A I,s to each function symbol x -  I, s with A I,s = iI Asi tion) Ax  the product set. A many-sorted algebra A = E , O, A,  defines (by induction)
+
+
+
+e
+
+an algebraic interpretation passage Termop -  Set, which extends the tuple X, - passage tup E = inc op	A by compatibility. An algebra A satisfies an equation (t = t ), symbolized by A |= (t = t ), when the interpretation maps the terms to the same function A (t) = A (t ). A many-sorted algebraic homomorphism A2 = E2 , O2 , A2 , 2 - - - - - -  E1 , O1 , A1 , 1 = A1 consists of an entity infomorphism f, g : E2  E1 , a morphism of many-sorted operator domains f,  : O2	O1 , and an O2 -algebra morphism A2 , 2  - alg
+h f, f,g,,h
+
+A
+
+(A1 , 1 ) comf,g,,h
+
+patible with f, g . A many-sorted algebraic homomorphism A2 - - - - - -  A1  op  defines an algebraic bridge A	= term	A between algebraic interf, 2 1 pretations, which extends the tuple bridge  f,g = inc op   by compatibility. Let Alg denote the mathematical context of many-sorted algebras. (The base semantics embeds into the functional semantics Fig. 3.) A.2 A.2.1 Relational Superstructure. Linguistics/Formalism.
+relational superstructure
+
+
+
+Relational Linguistics: Sch.
+
+ Lang	  Rel	  sch	  sch	    fmla   Sch	  fmla
+
+Struc  lang  rel
+
+Schemas. A relational language (schema) S = R, , X has two components: a base and a superstructure built upon the base. The base consists of a set of entity types (sorts) X , which defines the type list mathematical context List(X ). The superstructure consists of a set of relation types (symbols) R and a (discrete)  type list passage R -  List(X ) mapping a relation symbol r  R to its type list	(r) = I, s . A relational language (schema) morphism S2 = R2 , 2 , X2 = R1 , 1 , X1 = S1 also has two components: a base and a superstructure built
+r,f
+
+10
+
+Robert E. Kent
+
+upon the base. The base consists of an entity type (sort) function f : X2  X1 , -  List(X1 ) mapping a type which defines the type list passage List(X2 ) - list (. . . si2 . . .) to the type list (. . . f (si2 ) . . .). The superstructure consists of a relation type function r : R2  R1 which preserves type lists, satisfying the condition r  1 = 2  f . Let Sch symbolize the mathematical context of relational languages (schemas) with type set projection passage Sch - -  Set. Formulas. For any type list I, s , let R(I, s)  R denote the set of all relation types with this type list. These are called I, s -ary relation symbols. Formulas form a schema fmla (S ) = R, , X that extends S : with inductive definitions, the set of relation types is extended to a set of logical formulas R and the  relational type list function is extended to a type list function R -  List(X ). For any type list I, s , let R(I, s)  R denote the set of all formulas with this type list. These are called I, s -ary formulas. Formulas are constructed by using logical connectives within a fiber and logical flow between fibers.
+fiber: Let I, s be any type list. Any I, s -ary relation symbol is an (atomic) I, s -ary formula; that is, R(I, s)  R(I, s). For any pair of I, s -ary formulas  and  , there are the following I, s -ary formulas: meet (   ), join (	 ), implication (  ) and difference ( \  ). For any I, s -ary formula , there is an I, s -ary negation formula (). flow: Let I	, s -  I, s be any type list morphism. For any I, s -ary formula , there are I	, s -ary existentially/universally quantified formulas t () and t (). For any I  , s -ary formula  , there is a I, s -ary substitution formula t ( ) =	(t).
+h
+f
+
+set
+
+Formula Fiber Passage. A schema morphism S2 = S1 can be extended to a formula schema morphism fmla (r, f ) = r ^, f : fmla (S2 ) = R2 ,  ^2 , X2 = R1 ,  ^1 , X1 = fmla (S1 ). The formula function r ^ : R2  R1 , which satisfies the ^ = r  incS1 , is recursively defined in Table 2. condition incS2  r Proposition 1. There is an idempotent formula passage fmla : Sch  Sch that forms a monad Sch, , fmla with embedding. Relational Formalism: Fmla. Constraints. Let S = R, , X be a relational schema. A (binary) S -sequent is a pair of formulas ,	 R with the same type list  () = I, s =  ( ). 7 We represent a sequent using the turnstyle notation    , since we want a sequent to assert logical entailment. A sequent expresses interpretation widening, with the interpretation of	required to be within the interpretation of  . We require entailment to be a preorder, satisfying reflexivity and transitivity (Table 3). Hence,
+7
+
+r,f
+
+We regard the formulas R to be a set of types. Since conjunction and disjunction are used in formulas, we can restrict attention to binary sequents.
+
+FOL
+
+11
+
+formula flow logical aspect
+
+
+
+term vector operation inverse image quantification
+
+
+I  , s
+
+
+-
+A (t) t
+
+t
+
+I, s
+
+in Term
+
+X,
+
+A (I , s )  - - - - A (I, s) RelA (I  , s ) RelA (I  , s ) - - -
+t  - - - t
+
+RelA (I, s) RelA (I, s) functional aspect I, s in List(X ) = Term
+
+
+formula flow relational aspect
+
+
+
+type list morphism tuple map inverse image quantification
+
+I  , s
+
+
+-
+tup E (h)
+
+h
+
+X,
+
+tup E (I , s )	- - - - - tup E (I, s) RelE (I	, s ) RelE (I  , s ) - - -
+h  - - - h  h
+
+RelE (I, s) RelE (I, s)
+
+When the relational aspect is lifted along the functional aspect to the first-order aspect (Fig. 1 of Section 2), formula flow is lifted from being along type list morphisms I  , s -	I, s to being along term vectors I  , s -  I, s . This holds for formula definition (above), formula function definition (Table 2), formula axiomatization (Table 3), formula classification definition (Table 4), satisfaction (Table 5), transformation to databases (Appendix A.5), etc.
+h t
+
+Table 1. Lifting Flow
+
+fiber: type list I2 , s2 operator relation r ^(r2 ) meet r ^(2	join negation implication difference r ^(2  r ^( r ^( r ^( \
+
+I2 ,s2 I2 ,s2
+
+2 ) 2 ) ) )
+h
+
+= = = = = =
+
+r (r 2 ) (^ r ( 2 )  (^ r ( 2 )   r ^() r ^() \
+
+f (I2 ,s2 ) f (I2 ,s2 )
+
+r ^(2 )) r ^(2 ))
+
+I2 ,s2
+
+)
+
+f (I2 ,s2 )
+
+r ^() r ^( ) r ^( )
+
+I2 ,s2 I2 ,s2
+
+f (I2 ,s2 ) f (I2 ,s2 )
+
+ flow: type list morphism I2 , s  I2 , s2 2 - operator existential r ^( h (2 )) = r (2 )) h (^ universal r ^( h (2 )) = r (2 )) h (^ substitution r ^(h ( = h (^ r (  2 )) 2 ))
+
+Table 2. Formula Function
+
+12
+
+Robert E. Kent
+
+for each type list I, s there is a fiber preorder FmlaS (I, s) = R,  consisting of all S -formulas with this type list. In first-order logic, we further require satisfaction of sufficient conditions (Table 3) to described the various logical operations (connectives, quantifiers, etc.) used to build formulas. An indexed S -formula I, s,  consists of a type list I, s and a formula  with signature I, s . An S -constraint I  , s ,	-  I, s,  consists of a type list morphism h I	, s -  I, s and a binary sequent ( h ()   ), or equivalently a binary sequent (  h ( )). The mathematical context Fmla(S ) has indexed S -formula as objects and S -constraints as morphisms. 8 Let S2 = S1 be a schema morr  R1 is monotonic (Table 3). phism. We assume that the function map R2 - Hence, there is a fibered formula passage Fmla(S2 ) - - - - - -  Fmla(S1 ) that commutes with the type list projections (Figure 4).  List(X1 )	 fmla S2
+fmla fmla
+r,f
+
+h
+
+r,f
+
+List(X2 )
+fmla S2
+
+f
+
+Fmla(S2 )
+list S2
+
+ Fmla(S1 )
+r,f
+
+
+
+
+
+Pre
+
+r
+
+
+
+List(X2 )
+
+ List(X1 )
+f
+
+
+
+list S1
+
+indexed
+
+fibered
+
+Fig. 4. Indexed-Fibered
+
+Specifications. A specification T = S , T consists of a schema S = R, , X and a subset T  Fmla(S ) of S -constraints. As a subgraph, T extends to its consequence T   Fmla(S ), a mathematical subcontext, by using paths of constraints. A specification morphism T2 = S2 , T2 - - -  S1 , T1 = T1 is a schema
+ morphism S2 = S1 that preserves constraints: if sequent  2  h (2 ) is as  serted in T2 , then sequent r (2 )  h (r (2 )) is asserted in T1 . r,f r,f
+
+First-order Linguistics:
+
+Lang - -  Sch. A first-order logic (FOL) language
+SchSet Oper
+
+sch
+
+L = S , O consists of a relational schema S = R, , X and an operator domain O = X,  that share a common type set X . A first-order logic (FOL) language morphism L2 = S2 , O2 - - - -  S1 , O1 = L1 consists of a relational schema morphism S2 - - -  S1 and a functional language morphism O2 - - -  O1 that f  X1 . share a common type function X2 -
+8
+
+r,f,
+
+r,f
+
+f,
+
+In some sense, this formula/constraint approach to formalism turns the tuple calculus upside down, with atoms in the tuple calculus becoming constraints here.
+
+FOL
+schema: S fiber: type list I, s reflexivity : transitivity : meet : join : implication : negation :	and    implies	    (	) iff	 and	(    )	 , (	)    (	 )   iff    and      (	),   (	 ) (   )   iff	 (  ( ())
+h
+
+13
+
+)
+
+flow: type list morphism I  , s -  I, s h -monotonicity :
+h -monotonicity h -monotonicity
+
+: :
+
+   implies
+
+
+
+
+
+
+
+
+h (
+
+
+
+)
+
+
+h (
+
+
+
+)
+
+   implies h ()  h ( )	   implies
+h (   h (
+
+
+
+)
+
+
+h (
+
+
+
+)
+
+adjointness :
+
+)   iff   h ( )
+h (
+
+
+
+  h ( schema morphism: S2 = S1 r -monotonicity :
+r,f
+
+)),
+
+h (h
+
+())
+
+(2 2 2 ) implies (r(2 ) 1 r(2 ))
+
+Table 3. Axioms
+
+First-order Formalism. A first-order specification T = S , T, O, E is an FOL language L = S , O , where S , T is a relational specification and O, E is an equational presentation. A first-order specification morphism T2 = S2 , T2 , O2 , E2 - - -  S1 , T1 , O1 , E1 = T1 is an FOL language morphism L2 = S2 , O2
+r,f f, r,f
+
+- - - -
+
+r,f,
+
+S1 , O1 = L1 , where S2 , T2 - - -  S1 , T1 is a relational specification morphism and O2 , E2 - - -  O1 , E1 is a morphism of equational presentations. A  first-order specification morphism preserves constraints: if sequent  2  [t] (2 )	is asserted in T2 , then sequent r(2 )	[t] (r (2 )) is asserted in T1 . A.2.2 Semantics.
+sch
+
+Relational Semantics: Rel - -  Sch. Structures. A (model-theoretic) relational structure (classification form) (IFF [12]) M = R, ,  , E is a hypergraph of classifications -- a two dimensional construction consisting of a relation classification R = R, K, |=R , an entity classification E = X, Y, |=E and a list designation ,  : R  List(E ). 9 Hence, a
+9
+
+List(E ) = List(X ), List(Y ), |=List(E ) is the list construction of the entity classification. A tuple J, t  List(Y ) is classified by a signature I, s  List(X ), symbolized by J, t |=List(E ) I, s , when J = I and ti |=E si for all i  I .
+
+14
+
+Robert E. Kent
+
+structure satisfies the following condition: k |=R r implies  (k ) |=List(E )  (r). A structure M has an associated schema sch (M) = R, , X . Formulas. Any structure M = R, ,	, E has an associated formula structure fmla (M) = R, ,  , E with schema sch (fmla (M)) = R, , X . The formula classification R = R, K, |=R , which extends the relation classification of M, is directly defined by induction in Table 4.
+
+fiber: type list I, s with interpretation tup E (I, s) = operator relation meet join top bottom negation implication difference definiendum k |=R r k |=R (   ) k |=R (   ) k |=R  k  |=R  k |=R () k |=R ( ) k |=R ( \  )  (  )
+h
+
+iI
+
+ext E (si )
+
+when when when
+
+definiens k |=R r k |=R  and k |=R  k |=R  or k |=R
+
+when when when	( )
+
+k  |=R	if k |=R  then k |=R  k |=R  but not k |=R
+
+E - - - - - tup E (I, s)  I, s with interpretation tup E (I  , s )  flow: type list morphism I	, s - operator definiendum definiens existential k |=R h () when  (k)  h (RM ()) universal k |=R h () when  (k)  h (RM ()) substitution k |=R h ( ) when  (k)  h-1 (RM ( )) where RM () =  (ext R ())
+
+tup
+
+(h)
+
+Table 4. Formula Classification
+
+Satisfaction. Satisfaction is defined in terms of the extent order of the formula classification. For any S -structure M  Rel(S ), two formula ,   R with the same type list  () =  ( ) satisfy the specialization-generalization order  R  when their extents satisfy the containment order ext R ()  ext R ( ). An S -structure M  Rel(S ) satisfies an S -sequent (	 ) when  R  . An S -structure M  Rel(S ) satisfies an S -constraint  -	, symbolized by M |=S ( -  ), when M satisfies the sequent ( h ()   ); that is, when  (  )   ; equivalently, when  R h ( ). This can be expressed in terms h R of implication as ( h ()  )  ; equivalently, ( h ( ))  . When converting structures to databases, the satisfaction relationship M |=S ( -   ) determines the morphism of E -relations RM ()  - RM ( ) in Rel(E ) and a morphism of E -tables TM ()  - - - TM ( ) in Tbl(E ). (The operators RM and TM are defined in Appendix A.5.1. Satisfaction is summarized in Table 5.)
+h,k h h h h
+
+FOL M |=S ( -  )  h () R  k  K k |=R ( h ()  ) k  K k |=R h () implies k |=R  h (RM ())  RM ( ) a
+k  TM ( ) h (TM ()) - h
+
+15
+
+when iff iff implies
+
+implies k
+a
+
+For relational structure M = R, ,  , E , the fibered mathematical context Rel(E )op - -  List(X ) of E -relations is determined by the indexed preorder List(X )op -  Pre, which maps a type list I, s to the fiber relational order h RelE (I, s) = tup E (I, s),  and maps a type list morphism I  , s -  I, s   to the fiber monotonic function h = tup E (h) : RelE (I , s )  RelE (I, s). pr Similarly, for the fibered context Tbl(E )op -  Term(X ) of E -tables.
+rel list
+
+Table 5. Satisfaction
+
+Structure Morphisms. A (model-theoretic) structure morphism (IFF [12])
+r, k, f, g : M2 = R2 , 2 , 2 , E2  R1 , 1 , 1 , E1 = M1
+
+is a two dimensional construction consisting of a relation infomorphism r, k : R2 = R2 , K2 , |=R2  R1 , K1 , |=R1 = R1 , an entity infomorphism f, g : E2 = X2 , Y2 , |=E2  X1 , Y1 , |=E1 = E1 , and a list classification square
+r, k , List
+f,g
+
+: R2  List(E2 )  R1  List(E1 ) ,
+
+2 ,2
+
+1 ,1
+
+where the list infomorphism of the entity infomorphism is the vertical target of the list square. Hence, a structure morphism satisfies the following conditions.
+infomorphisms k1 |=R1 r (r2 ) y1 |=E1 f (x2 ) =List(E2 ) I, s2 = s2 g (J, t1 ) | iff iff iff k(k1 ) |=R2 r2 g (y1 ) |=E2 x2 t1 = J, t1 |=List(E1 )
+
+t1  g =
+
+f (I, s2 )
+
+= s2  f
+
+list preservation r  1 = 2  k  2 = 1
+f g
+
+Structure morphisms compose component-wise. Let Rel denote the mathematical context of relational structures and structure morphisms. A structure morphism r, k, f, g : M2  M1 has an associated schema morphism sch (r, k, f, g ) = r, f : sch (M2 ) = R2 , 2 , X2 = R1 , 1 , X1 = sch (M1 ). Hence, there is a schema passage sch : Rel  Sch. Formula. Any structure morphism r, k, f, g : R2 , 2 , 2 , E2  R1 , 1 , 1 , E1 has an associated formula structure morphism
+fmla (r, k, f, g ) = r, k, f, g : fmla (M2 ) = R2 , 2 , 2 , E2	R1 , 1 , 1 , E1 = fmla (M1 )
+
+16
+
+Robert E. Kent
+
+with schema morphism sch (fmla (r, k, f, g )) = r, f : R2 , 2 , X2  R1 , 1 , X1 . Hence, there is a formula passage fmla : Rel	Rel. 10 Between any structure and its formula extension is an embedding structure morphism M = incM , 1K , 1E : M = fmla (M). The formula operator commutes with embedding: M2	fmla (r, k, f, g ) = r, k, f, g  M1 . There is an embedding bridge  : id Rel  fmla . Proposition 2. There is an idempotent formula passage fmla : Rel  Rel that forms a monad Rel, , fmla with embedding. Structure Fiber Passage. Let S2 = R2 , 2 , X2 = = =  R1 , 1 , X1 = S1 be a schema morphism. There is a structure passage Rel(S2 )  - - - - Rel(S2 ) defined as follows. Let M1 = R1 , 1 , 1 , E1  Rel(S1 ) be an S1 -structure with a relation classification R1 = R1 , K1 , |=R1 , an entity classification E1 = X1 , Y1 , |=E1 and a list designation 1 , 1 : R1  List(E1 ). Define the inverse image S2 -structure rel r,f (M1 ) = r-1 (R1 ), 2 , 1 , f -1 (E1 )  Rel(S2 ) with r-1 (R1 ) = R2 , K1 , |=r , f -1 (E1 ) = X2 , Y1 , |=f and a list designation 2 , 1 : r-1 (R1 )  f -1 (E1 ). From the definitions of inverse image classifications, we have the two logical equivalences (1) k1 |=r r2 iff k1 |=E1 r(r2 ) and (2) J1 , t1 |= f I2 , s2 iff J1 , t1 |=List(E1 ) f (I2 , s2 ). Hence, k1 |=r r2 implies 1 (k1 ) |= f 2 (r2 ). There is a bridging structure morphism
+rel
+r,f
+
+r,f
+
+rel
+
+r,f
+
+(M1 ) = r -1 (R1 ), 2 , 1 , f -1 (E1 )
+
+r,1K ,f,1Y
+
+
+r,1K
+
+R1 , 1 , 1 , E1 = M1
+f,1Y
+
+with relation and entity infomorphisms r-1 (R1 )  R1 and f -1 (E1 )  E1 . - - Struc - - -  Lang. The mathematical context First-order Semantics: Rel
+RelCls Alg rel lang
+
+of first-order structures Struc is the product of the context Rel of relational structures and the context Alg of algebras modulo the context Cls of classifications. A first-order logic (FOL) structure is a "pair" M = R, ,	, E , , A,  consisting of a relational structure R, ,  , E and an algebra E , , A,  that share a common entity classification E . The algebra is the semantic base and the relational structure is the superstructure. Given a FOL language L = S , O and an L-structure M with relational S -structure rel (M) and O-algebra alg (M). M satisfies an L-equation I  , s - - - -  I, s , symbolized by M |=L (t = t ), when alg (M) |=L (t = t ); and M satisfies an L-constraint  -  , symbolized by M |=L ( -	), when rel (M) |=S ( -  ) for any t	representative term vector  ( ) = I , s -  I, s =  (). A first-order logic (FOL) structure morphism R2 , 2 , 2 , E2 , 2 , A2 , 2 - - - - - - - - - - -	R1 , 1 , 1 , E1 , 1 , A1 , 1 consists a relational structure morphism
+10
+
+(t=t )
+
+[t]
+
+[t]
+
+t
+
+r,k , f,g , ,h
+
+The schema and formula passages commute: fmla  sch = sch  fmla (Fig. 1).
+
+FOL
+
+17
+
+R2 , 2 , 2 , E2
+
+- - - - - - - -
+
+r,k , f,g
+
+R1 , 1 , 1 , E1
+f,g,,h
+
+and an many-sorted algethat share a
+
+braic homomorphism E2 , O2 , A2 , 2 - - - - - -  E1 , O1 , A1 , 1 common entity infomorphism f, g : E2	E1 . A.3 Examples
+
+Conceptual Graphs: Consider the English sentence "John is going to Boston by bus" [9]. We describe its representation in a FOLE logic language L = R, , X,  . By representing the verb as a ternary relation, a graphical representation is
+[P erson : John]  - - - (Go) - - -  [City : Boston]  inst [Bus]
+agnt dest
+
+Formally, we have the following elements: three entity types Person, City, Bus	X ; a relation type Go	R with signature  (Go) = I, s having valence 3, arity s I = {agnt, dest, inst} and signature function I -  X mapping agnt  Person, dest  City, inst  Bus; a constant symbol John  Person, ,0X of sort Person and a constant symbol Boston  City, ,0X of sort City. 11 In a conceptual graph representation, the logic language L = R, , X,  corresponds to a CG module X, R, C with type hierarchy X , relation hierarchy R and catalog of individuals C   . A CG representation is
+[Go](agnt)->[Person: John] (dest)->[City: Boston] (inst)->[Bus].
+
+Formally (compare this linear form to 11), we have the following elements: four entity types Go, Person, City, Bus  X ; three relation types agnt, dest, inst  R with signatures  (agnt) = 2, sagnt ,  (dest) = 2, sdest ,  (inst) = 2, sinst having valence 2, arity 2 = {0, 1} and signatures sagnt , sdest , sinst : 2  X , where sagnt (0) = sdest (0) = sinst (0) = Go, sagnt (1) = Person, sdest (1) = City, and sinst (1) = Bus; and two constants as above. Quantification: The universal quantification `xX P (x:X, y :Y, z :Z )' is traditionally viewed as formula flow along the type list inclusion {y, z }  {x, y, z }. FOLE handles existential/universal quantification and substitution in terms of formula flow (Table 1) along type list morphisms in the relational aspect or along term vectors in the logical aspect. Given a morphism of type
+11
+
+According to (Sowa [9]), every participant of a process is an entity that plays some role in that process. There is a "linearization" procedure that converts a binary/relational logical representation (FOLE, conceptual graphs) to a unary/functional logical representation (Sketches [5], Ologs [11]). In this example, linearization would define functional roles, changing the ternary relation type (process) to an entity type Go  X and converting its arity elements (participent roles) to function types agnt  Person , 1,Go , dest  City, 1,Go and inst	Bus, 1,Go .
+
+18
+
+Robert E. Kent
+
+lists I  , s -	I, s , for any table K, t  TblE (I, s), you can get two tables h (K, t), h (K, t)  TblE (I  , s ) as follows. Given any possible row (or better, tuple) t  tup E (I  , s ), you can ask either an existential or a universal question about it: for example, "Does there exist a key k	K in T with image t ?" (tup h (tk ) = t ) or "Is it the case that all possible tuples t  tup E (I, s) with image t are present in T ?" ([8]) Relation/Database Joins: The joins of E -relations (or E -tables) are represented in FOLE in terms of fibered products -- products modulo some referh2 h1	I2 , s2 ,  holds - I, s,  - ence. If an S -span of constraints I1 , s1 , 1  in a relational structure M = R, ,	, E , it is interpreted as an opspan of E -relations (or E -tables). Then the join of E -relations (or E -tables) is repre2 1 - I2 , s2  I, s  sent by the formula 1  (1 )  I,s 2  (2 ), where I1 , s1 - is the fibered sum of type lists. In general, the join of an arbitrary diagram of E -relations (or E -tables) is obtained by substitution followed by conjunction. A.4 Logical Environment
+r,f struc
+
+h
+
+Let S2 = R2 , 2 , X2 = = =  R1 , 1 , X1 = S1 be a schema morphism, with structure fiber passage Struc(S2 )  - - - - - - Struc(S2 ) and bridging structure morphism
+struc
+r,f
+r,f
+
+(M1 ) = r -1 (R1 ), 2 , 1 , f -1 (E1 )
+
+r,1K ,f,1Y
+
+
+r,1K
+
+R1 , 1 , 1 , E1 = M1
+f,1Y
+
+with relation and entity infomorphisms r-1 (R1 )  R1 and f -1 (E1 )  E1 . Proposition 3. The (formula) interpretation of the inverse image structure is the inverse image of the (formula) interpretation. Fact 1 The formula classification of the inverse image relation classfication is the inverse image classfication of the formula relation classification:
+r -1 (R1 ) = R2 , K1 , |=r = R2 , K1 , |=r = r -1 (R1 ).
+
+Proof. The proof is by induction on formulas 2	R2 . Fact 2 The formula structure morphism of the bridging structure morphism is:
+r, 1K , f, 1Y : r -1 (R1 ), 2 , 1 , f -1 (E1 )	R1 , 1 , 1 , E1 .
+
+Its (inst -vertical) relation infomorphism r, 1K : r-1 (R1 ) = R2 , K1 , |=r = R2 , K1 , |=r  R1 , K1 , |=R1 = R1 is the bridging infomorphism of the formula relation classification, with the infomorphism condition k1 |=r-1 (R ) 2 iff k1 |=R1 r (2 ). The extent monotonic
+1
+
+function r : ext (r-1 (R1 ))  ext (R1 ) is an isometry:  r-1 (R
+
+1)
+
+ iff r() R1 r ( ).
+
+FOL
+
+19
+
+Proposition 4. Satisfaction is invariant under change of notation; that is, for any schema morphism S2 = R2 , 2 , X2 = = =  R1 , 1 , X1 = S1 the following satisfaction condition holds:
+struc
+r,f
+
+r,f
+
+ r ( (M1 ) |=S2 (2 - =S1 (r(2 ) -   2 )) = fmla 2 ) iff M1 |
+
+h
+
+h
+
+r,f
+
+(2   2 ).
+
+Proof. But this holds, since r-1 (R1 ) = r-1 (R1 ). In more detail, h	 struc r,f (M1 ) |=S2 (2 - h (2 ) r -1 (R1 ) 2 2 ) iff	iff r ( h ( h (r (2 )) R1 r (2 ) 2 )) R1 r(2 ) iff  r( iff M1 |=S1 (r (2 ) - 2 )) = fmla
+h r,f
+
+(2   2 ).
+
+Proposition 5. The institution Sch, fmla , struc is a logical environment, since it satisfies the bimodular principle "satisfaction respects structure morphisms": given any schema S = R, , X , if 1R , k, 1X , g : M2  M1 is a sch vertical structure morphism over S , then we have the intent order M2 S M1 ; that is, M2 |=S (   ) implies M1 |=S (   ) for any S -sequent (   ). 12 Proof. The typ -vertical formula morphism 1R , k, 1X , g : M2  M1 over S has the typ -vertical relation infomorphism 1R , k : R2  R1 over R. M2 |=S (   ) iff  R2  implies  R1  iff M1 |=S (	 ) for any S -sequent (   ). A.5 Transformation to Databases
+
+A.5.1 Relational Interpretation. Let M = R, ,  , E be a (modeltheoretic) relational structure. The relation classification R is equivalent to the extent function ext R : R  K , which maps a relational symbol r  R to its R-extent ext R (r)	K . The list classification List(E ) is equivalent to the extent function ext List(E ) : List(X )  List(Y ), a restriction of the tuple passage tup E : List(X )op  Set, which maps a type list I, s  List(X ) to its List(E )extent tup E (I, s)  List(Y ). The list designation satisfies the condition k |=R r implies  (k ) |=List(E )  (r) for all k  K and r  R; so that k  ext R (r) implies  (k )  ext List(E ) ( (r)) = tup E ( (r)). Hence,  (ext R (r))  tup E ( (r)) for all r  R. Thus, we have the function order ext R	   ext List(E ) . The relational interpretation function RM : R  |Rel(E )| maps a relational symbol r  R with type list  (r) = I, s to the set of tuples RM (r) =  (ext R (r))	tup E (I, s) = RelE (I, s). The tabular interpretation function TM : R	|Tbl(E )| = |(Settup E )| maps a relational symbol r  R with type list	(r) = I, s to the pair TM (r) = K (r), tr consisting of the key set tr	tup E (I, s), a restriction K (r) = ext R (r)  K and the tuple function K (r) - of the tuple function  : K  List(Y ), which maps a key k  Kr to the tuple
+12
+
+For any classification A = X, Y, |=A , the intent order int (A) = Y, A is defined as follows: for two instances y, y   Y , y A y  when int A (y )  int A (y  ); that is, when y  |=A x implies y |=A x for each x  X .
+
+20
+
+Robert E. Kent
+
+tr (k ) =  (k )  tup E (I, s). Applying the image passage im E (I, s) : TblE (I, s)  RelE (I, s), the image of the table interpretation is the relation interpretation im E (I, s)(TM (r)) = RM (r) for any relation symbol r  R. Using the combined image passage im E : Tbl(E )  Rel(E ), we get the composition RM =
+M -  |Tbl(E )| - - -  |Rel(E )|. Note that tr : Kr  RM (r)  tup E (I, s), is a R- surjection-injection factorization of the tuple function. 13
+
+T
+
+|im E |
+
+A.5.2 Relational Logics. A relational logic L = S , M, T consists of a relational structure M = R, ,  , E and a relational specification T = S , T that share a common relational schema sch (M) = S . The logic is sound when the structure M satisfies every constraint in the specification T . A sound relational logic enriches a relational structure with a specification. For any sound TL -  Tbl(E ) = logic L = S , M, T , there is an interpretation functor Rop - (Settup E ), where R  Fmla(S ) is the consequence of T . Sound logics are important in the transformation of structures to databases (below). A relational logic morphism L2 = S2 , M2 , T2 - - - - - - - -  S2 , M2 , T2 = L2 consists of a relational structure morphism M2 - - - - - - - -  M1 and a relational specification morphism T2 = S2 , T2 - - -  S1 , T1 = T1 that share a common relational schema morphism sch ( r, k , f, g ) = S2 = S1 . Any sound relational logic L = S , M, T with structure M = R, ,  , E and specification T = S , T has an associated logical/relational database db (L) = S , E , K ,  with category of formulas R  Fmla(S ) (the consequence of T ), signature passage S : R  List(X ), entity classification E , key passage K : Rop  Set, tuple bridge  : K  S op  tup E , and table interpretation pasT  Tbl(E ) = (Settup E ), where  = T E . Any sound relational sage Rop - logic morphism L2 = S2 , M2 , T2 - - - - - - - -  S2 , M2 , T2 = L2 with structure morphism M2 - - - - - - - -  M1 and specification morphism T2 = S2 , T2 - - -  S1 , T1 = T1 has an associated (strict) logical/relational database morphism db ( r, k , f, g ) = F , f, g,	: db (L2 ) = S2 , E2 , K2 , 2  S1 , E1 , K1 , 1 = db (L1 ) with (strict) database schema morphism F , f : S2  S1 , entity infomorphism f, g : E2  E1 , and key natural transformation  : F op  K1  K2 , F op  which satisfy the condition   2 = F op 1	S2  f,g . The passage R2 - R1 from formula subcontext R2  Fmla(S2 ) to formula subcontext R1  Fmla(S1 ) is a restriction of the fibered formula passage Fmla(S2 ) - - - - - -  Fmla(S1 ). (Kent [7] has more details on relational database semantics.)
+fmla
+r,f
+
+r,k , f,g
+
+r,k , f,g
+
+r,f
+
+r,f
+
+r,k , f,g
+
+r,k , f,g
+
+r,f
+
+13
+
+Two tables are informationally equivalent when they contain the same information; that is, when their image relations are equivalent in RelE (I, s) = tup E (I, s). In particular, the table TM (r ) and relation RM (r ) of a relational symbol are informationally equivalent.
+
+FOL
+
+21
+
+L2 = S 2 , M2 , T 2 - - - - - - - -  S 2 , M2 , T 2 = L2
+
+r,k , f,g
+
+
+T2
+
+db  Rop 1  T1	 op
+S1
+op
+
+Rop 2
+op S2
+
+F
+
+op
+
+Tbl(E2 )
+K2
+
+=
+f)
+
+  sign op = E2	   (
+
+key E2
+
+
+
+E
+
+List(X2 )op
+
+List(X1 )op
+
+ op sign E1
+
+Tbl(E1 )
+K1
+
+  tup E2   tup E1
+f,g
+
+
+
+
+
+ E1
+
+key E1
+
+Set
+
+db (L2 ) = S2 , E2 , K2 , 2 - - - - - -  S1 , E1 , K1 , 1 = db (L1 )
+op   2 = F op 1  S2  f,g
+
+F ,f,g,
+
+Fig. 5. From Sound Logics to Logical/Relational Databases
+

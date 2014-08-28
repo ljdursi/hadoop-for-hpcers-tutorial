@@ -1,0 +1,1005 @@
+The Effect of Non-Smooth Payoffs on the Penalty Approximation of American Options
+S. D. Howison C. Reisinger May 21, 2013 J. H. Witte
+
+arXiv:1008.0836v3 [q-fin.CP] 20 May 2013
+
+Abstract This article combines various methods of analysis to draw a comprehensive picture of penalty approximations to the value, hedge ratio, and optimal exercise strategy of American options. We use matched asymptotic expansions to characterise the boundary layers between exercise and hold regions, and to compute first order corrections for representative payoffs on a single asset following a diffusion or jump-diffusion model. Furthermore, we demonstrate how the viscosity theory framework in [17] can be applied to derive upper and lower bounds on the option value. This analysis confirms the higher order of accuracy in the penalty parameter for convex payoffs (compared to the general case) seen earlier in numerical tests and from asymptotic expansions. In a small extension to [4], we derive weak convergence rates also for option sensitivities for convex payoffs under jump-diffusion models. Finally, we outline applications of the results, including accuracy improvements by extrapolation.
+
+Key Words: American Option, Jump-Diffusion Model, Penalty Method, Penalization Error, NonSmooth Payoff 2010 Mathematics Subject Classification: 60G40, 47G20
+
+1
+
+Introduction
+
+An American option is a financial instrument that gives its holder the right to claim a specified payoff on an asset at any time up to a certain date. Pricing an American option involves determining an optimal exercise strategy in addition to the price itself. For simplicity, we discuss first the Black-Scholes setting (cf. [5]), i.e., where the stock price follows dSt /St =  dt +	dWt , where  is the volatility,  the drift rate, and W a standard Brownian motion. (1)
+
+There are two main equivalent formulations of this problem: a probabilistic one based on optimal stopping, and a deterministic one in the form of a linear complementarity problem (free boundary problem). The optimal stopping formulation was first introduced in [3] and [18]; a concise outline can be found in [28].
+ Mathematical Institute and Oxford-Man Institute of Quantitative Finance, University of Oxford, OX1 3LB, Oxford, UK ([ howison , reisinge , witte ] @ maths.ox.ac.uk)  J. H. Witte acknowledges support from Balliol College and the Oxford-Man Institute, University of Oxford, and the UK Engineering and Physical Sciences Research Council (EPSRC)
+
+1
+
+In [8], it is described how an American option can be priced using a linear complementarity problem (LCP) min(-LBS V, V - ) = 0, where	is the payoff and L is the Black-Scholes operator LBS V := V 2V V +1  2 S 2 2 + ( r - q )S - rV, 2 t S S (3) (2)
+
+where r is the risk-free interest rate and q a continuously paid dividend yield. The relation between optimal stopping times and PDEs is further analysed in [19]. In this paper, we are concerned in particular with the effects of the payoff function on a so-called penalty approximation to the value of such an option. Penalty approximations are useful both for the analysis [4, 38] and numerical analysis [17] of the limiting problem, but also lend themselves to arguably the most efficient numerical approximation methods presently available for American option valuation [10]. Penalisation of (parabolic) variational inequalities is classical (cf. [4]). The canonical penalty approximation of (2) is - LBS V = 1 max( - V , 0) (4)
+
+for > 0 (cf. [3]). The penalty term on the right-hand side is only active when V < , and then it serves to push V upwards towards the payoff. In the context of American options, in chronological order, [36, 35, 34] study the penalisation error for the Black-Scholes model and different penalty terms, and [1] uses penalisation implicitly to solve a calibration problem; [11, 10, 29, 9, 30] introduce penalty approximations as a means of solving the discretised variational inequality. We first address the question of what a relevant measure of accuracy should be. This clearly depends on what the solution will be used for.
+
+Effect of the Penalisation Error on Pricing and Hedging
+Hedging American options requires knowledge of the hedge ratio, i.e., the amount of stocks held short in the hedging portfolio per unit long position in the option before it is exercised. In the complete market case of the Black-Scholes model, the hedge ratio is the so-called Delta, t = (V/S )(St , t). Because we do not know the exact option value, but only its penalty approximation, we are exposed to three sources of error if we, say, buy and hedge an American option:
+
+a) We bid the  lower, as we shall see  price V (S0 , 0) instead of V (S0 , 0) for the option at the outset. b) We hedge with the wrong hedge ratio t = instead of the exact Delta t . V (St , t) S
+
+2
+
+c) We exercise at the wrong time  := inf {0  t	T : V (St , t)	(St )}, which is no later than the optimal exercise time  , since V (St , t)  V (St , t). The values Xt and Xt of the corresponding hedge portfolios at t <  <	are
+t
+
+Xt = X0 +
+0 t
+
+Q u Su er(t-u) dWu , Q u Su er(t-u) dWu , 0
+
+Xt = X0 +
+
+by a classical replication argument (e.g., [28]), where dWtQ = dWt + ( - r)/ dt is the increment of a standard Brownian motion under the risk-neutral measure Q. Consider the stopping time   t. The stochastic integrals above are semi-martingales, and over a fixed finite time interval true martingales. Then, by the Optional Stopping Theorem, EQ [X and, by It^ o isometry,
+ t t
+
+- X
+
+t ]
+
+= X0 - X0
+
+VQ [X
+
+t
+
+- X
+
+t ]
+
+= EQ
+0 T
+
+2 2r (t-u)  2 Su e (u - u )2 du 2 2r (t-u)  2 Su e (u - u )2 du 0 2  2 e2r(t-u) EQ [Su (u - u )2 ] du
+
+ EQ
+T
+
+=
+0
+
+T
+
+
+
+  2 e2rT
+T 0  0
+
+p(S0 , 0; S, u) S 2 S
+
+V V (S, u) - (S, u) S S
+2
+
+2
+
+dS du (5)
+
+ C
+0 0
+
+V V (S, u) - (S, u) S S
+
+dS du,
+
+where p(S0 , 0; S, u) is the transition density of (St )0tT , under Q, from S0 at time 0 to S at time u. The last inequality follows because p S is bounded. The variance of the replication error at any time prior to exercise is therefore controlled by a weighted semi-norm given in (5), which is related to the H 1 norm and is one of the error measures we will consider. (The split of S 2 p in the above step into factors S and Sp is somewhat arbitrary at this point and will be useful later.) Next, the loss incurred by exercising too early is V (S ,  ) - V (S ,  ) = V (S ,  ) - (S ), (6)
+
+which is the (positive) difference between true and penalised solution at the (sub-optimal) penalty exercise boundary. Viewed differently, by hedging with  we are replicating an option which is exercised not at the optimal exercise time, but at the crossing time of an approximate exercise boundary. An alternative measure of error is therefore the maximum distance V -V
+
+
+=
+
+sup
+0tT,0S
+
+|V (S, t) - V (S, t)|,
+
+which is also an upper bound for |X0 - X0 | = V (S0 , 0) - V (S0 , 0). We will study the convergence in this norm also. 3
+
+Extension to Jump Models
+A model which allows the asset price process to jump to reflect the possibility of sudden changes in the market was first recorded in [22]; an extensive overview and detailed discussion of jump models and their use in modern mathematical finance can be found in [6]. The pricing of American options in the presence of jumps has been developed and studied in [38, 24], which remain the main references on the topic. We consider models where the underlying asset follows a jump-diffusion process, dSt /St =  dt +	dWt + (J - 1) dNt , (7)
+
+where J is a random jump amplitude with values in [0, ), and N a compound Poisson process with jump rate   0. The special case	= 0 recovers the Black-Scholes model. Under the assumption that jump risk is unpriced, the value of an American option under jump diffusion can still be described by an equation of the type (2), but with LBSJ V :=
+2 V V 2 2 V +1	S + (r - q - )S - rV + E[V (JS, t) - V (S, t)], 2 t S 2 S
+
+(8)
+
+where the expectation is taken with respect to the jump size J , for fixed S , and  = E[J - 1]. This can be re-written as a partial integro-differential equation (PIDE) in terms of the probability density function g of J via
+
+
+E[V (JS, t) - V (S, t)] =
+0
+
+V (SJ, t)g (J ) dJ - V (S, t).
+
+It will also be useful to consider the resulting PIDE in log-coordinates, x = log(S/S0 ), u(x, t) = V (S0 exp(x), t), where Lu = u 1 2	2 u u + 2 + (r - q -  -  2 /2) - ru +  t x2 x
+
+
+u(x + z, t) (z ) dz - u(x, t)
+-
+
+(9)
+
+in (2) and (z ) = (S0 exp(z )) is the new payoff and  the density of Z = log(J ). The pricing equation is then still (2), the penalised equation (4), where the operator L from (9) replaces LBS .
+
+We will see that the inclusion of finite activity jumps does not alter the properties of penalty approximations qualitatively, and all the general results later on in the paper are derived for this class of models. Some of the specific numerical examples and asymptotic expansions use the BlackScholes model for ease of exposition. It will be stated clearly at the start of all sections where this is the case.
+
+Main Findings and Structure of this Paper
+The main contribution of this paper is two-fold: to derive a precise description of the local structure of the penalisation error for relevant example payoffs, and to give a rigorous analysis of the magnitude of the penalisation error in relevant measures for general payoff classes. The local structure of the error will be analysed by matched asymptotic expansions and is not visible from the more global functional analysis. To our knowledge, this is the first study of this behaviour. The (heuristically computed) leading order correction terms will be seen to be in excellent agreement with numerical computations of the penalisation error, and can thus be used as the basis for accurate extrapolation schemes. 4
+
+Numerical estimate Asymptotic expansions Functional analysis
+
+L 1 1 1
+
+Convex 1 W 0.55 0.5 --
+
+kinks L2 H1 1 0.76 1 0.75 0.5 0.5
+
+L 0.5 0.5 0.5
+
+Concave kinks 1 W L2 0.07 0.61 0.5 -- 0
+
+H1 0.29 0.25 0
+
+Table 1: Order of convergence in the penalty parameter, for different measures and payoff types, and as predicted by different methods of analysis. 0 indicates convergence, but of no positive order; `--' indicates no known result; ` ' indicates no convergence. The numerical estimate was obtained by regression of the errors for different numerically computed penalised solutions. These and the results under asymptotic expansions were computed for representative payoffs (put and butterfly). While convergence of the penalised solution for sufficiently smooth obstacles is well established in the literature, see, e.g., [4, 38], sharp rates of convergence and particularly the effect of gradient discontinuities (i.e., the omni-present `kinks' in option payoffs) on this rate have not been fully analysed so far. This becomes important not least when using penalisation as part of a numerical technique for solving the obstacle problem. The general results here can be classified into two settings: that of convex kinks between otherwise smooth (usually linear) payoffs, and that of concave kinks. As concave kinks result in lower convergence order, it is clear that in situations with mixed convexity this behaviour is dominant. Table 1 provides a summary of the findings in this paper. It confirms that the convergence order predicted by asymptotic analysis is in line with the numerically estimated one in all situations, while the higher level functional analytic estimates are not always sharp. The remainder of this article is organised as follows. In Section 2, we discuss a few representative examples of typical payoffs and present numerical results as motivation for the following analysis. In Section 3, we derive the leading order corrections to the penalty solution and the exercise boundary by matched asymptotic expansions, for the American put and butterfly. Section 4 generalises the convergence order of the penalisation error of the value to more general classes of convex (order ) and non-convex (order 1/2 ) payoffs, and gives sharp upper and lower bounds on the solution, following the framework of [17] and extending it to jump processes. Section 5 derives H 1 errors, showing that the rate 1/2 derived in [4] also holds under jump-diffusions and for nonsmooth but convex obstacles. Finally, in Section 6, we discuss the results and their applications; in particular, we show how extrapolation can be used for accuracy improvement.
+
+2
+
+Different Payoffs and Their Implications
+
+Part of the appeal of penalty methods as a computational tool is that the resulting algorithms do not depend on the shape of the payoff. In contrast to the formulation as free boundary problem (e.g., `front-fixing' methods), the topology of exercise and continuation regions is irrelevant for the definition of the penalty approximation and (iterative) solution algorithms based on it. We will now illustrate how the shape and regularity of the payoff does, however, influence the approximation error.
+
+Example Payoffs and their Exercise Strategies
+Two typical payoffs are the standard put payoff (see Fig. 1) (S ) = max(K - S, 0), 5 (10)
+
+Figure 1: The value of an American put at different points in time (above) and the evolution of the corresponding exercise boundary (below). with strike K > 0, and a butterfly spread (see Fig. 2) (S ) = max(V0 - |S - K |, 0), (11)
+
+for some , V0 > 0. We also consider an academic example of a `modified' put (see Fig. 3), whose piecewise linear payoff (S ) =	(max(K - S, 0) - 1 max(K1 - S, 0)) (12)
+
+is the difference of two put payoffs with strikes 0 < K1 < K ,	> 0 and 0 < 1 < 1 (or a sum of a put and a butterfly spread). For American options, typically, an exercise boundary determines the asset price(s) at which (for fixed time), the optimal policy switches from holding the option to exercising. Figures 1, 2, and 3 show value functions with their exercise boundaries for different payoffs. For illustrative purposes, we use a Black-Scholes framework with no dividends, interest rate r = 0.05, volatility  = 0.4, and maturity T = 1. We will see later that jumps do not change the results qualitatively. We discuss the three examples in turn. 1. For the standard put, Figure 1, a smooth free boundary S  (t) separates an exercise region S < S  (t) from a hold region S > S  (t), and decreases strictly as we move away from expiry. Denote this American put value by P (S, t). Note that, at S = S  (t), P (S  (t), t) = K - S  (t), P  (S (t), t) = -1, S lim  2rK 2P (S, t) = 2, 2 (t) S 2  S  (t) (13)
+
+S S
+
+see, e.g., [8]. Before expiry, the solution is continuously differentiable with a jump in the second derivative (the Gamma ) at the exercise boundary. 6
+
+Figure 2: The value of an American butterfly spread at different points in time (above) and the evolution of the corresponding exercise boundary (below). Possibly hard to see in the plot, there is (only) one non-trivial free boundary which lies between 100 and 150. 2. For the butterfly spread, Figure 2, short before expiry, the option value is greater than the payoff on the call-like side S < K , and is similar to the situation in (1) above on the put-like side S > K , with an exercise boundary between 100 and 150. The solution smooths the convex kinks which the payoff has at 50 and 100; however, for all times, the solution has a kink at 100. As we move away from expiry, the free boundary on the put-like side at first decreases strictly from 150 and then, having reached S = 100, remains there. (One can easily construct a scenario where the free boundary does not reach the location of the concave kink but converges to the exercise boundary of a certain perpetual put.) 3. For the modified put, Figure 3, there is again a single exercise boundary which separates an exercise region for small S from a hold region. Before expiry, the solution smooths the convex kink which the payoff has at about 137, but, near expiry, it still has a kink at 105; however, far away from expiry, the solution appears to attach smoothly to a point on the payoff where S < 105. As we move away from expiry, the exercise boundary decreases strictly at first, stagnates  until smooth pasting is reached  and then decreases strictly again. A discussion on this `waiting time' phenomenon in the context of diffusion problems can be found in [25], to which the present case adds a further example.
+
+Numerical Penalisation Error
+We now analyse numerically the penalisation error for these three examples. We use a CrankNicolson finite difference scheme to discretise (2) and (4), respectively, and solve the resulting non-linear discrete system by projected successive over-relaxation (short PSOR, cf. [7]) in the case of (2) and a semi-smooth Newton iteration (cf. [10]) in the case of (4). Figure 4 shows the numerically computed penalisation error for the standard put as a function of S and t. It appears that the error is constant in the exercise region, jumps to about half this
+
+7
+
+Figure 3: The value function of the `modified' put (with payoff defined in (12)) at different points in time (above) and the evolution of the corresponding exercise boundary (below). value across the exercise boundary, and decays for large S . The irregular behaviour of the plotted error surface close to the exercise boundary is a discretisation artefact due to the movement of the exercise boundary relative to its closest mesh points between subsequent time steps (see also next paragraph). Figure 5 is the corresponding picture for the penalisation error in the first S -derivative. The error appears localised in a very narrow region around the exercise boundary. The jagged shape of the surface results again from an interplay of the penalisation error and discretisation. For the chosen time step and mesh size, the width of the region of large error is small compared with the mesh size, and, from one time step to the next, has a different location relative to its nearest grid points. For those time steps, where the location of the maximum is close to a mesh point, the plotted spike is large, whereas if the maximum lies between mesh points, it is small. For the butterfly, as seen from Figure 6, there is an asymmetry in the penalisation error between the call-like side, where the error grows more steeply in time-to-expiry, and the put-like side, where the error is flat up to the point in backward-time where the exercise boundary hits the top of the payoff, and from then on increases for larger time-to-maturity. The error is largest at the strike, constant in time, and decays rapidly on either side. The penalisation error for the modified put is shown in Figure 7. Table 2 shows estimated convergence orders of V to V as	0 for the three payoffs. We measure spatial errors pointwise in the maximum norm, and similarly for the derivative, which is approximated from the numerical solution by finite differences. From a sequence of these errors for small , we estimate the convergence rate by regression. Throughout, we use very fine time and space grids to make discretisation errors negligible. For the standard put, we find results for the spatial errors in V and V /S which appear consistent with O( ) and O( 1/2 ), respectively. For the butterfly spread, we find O( 1/2 ) for the spatial error in V , but the observed convergence in V /S is very slow. Looking at the solutions 8
+
+Figure 4: Local structure of the penalisation error for the put with parameters  = 0.4, r = 0.05, and -1 = 3  104 . The error is largest, and roughly constant, in the exercise region, and decays rapidly over a small layer around the exercise boundary. Penalty Approximation Time to Expiry Order in |V - V | Order in |V /S - V /S | Put 0.4 0.9 1.00 1.00 0.55 0.57 Butterfly Spread 0.4 0.9 0.50 0.50 0.07 0.08 Modified Put 0.07 0.4 0.9 0.51 0.51 0.53 0.07 0.06 0.61
+
+Table 2: At different points t in time, we measure the convergence rates in |V (, t) - V (, t)| and |V /S (, t) - V /S (, t)|, where V denotes the true solution, as  0. For the put and the butterfly spread, the rates are the same at all times. For the modified put, the convergence rate in V /S improves hugely when expiry is far into the future (at which point the free boundary has `overcome' the concave kink). (cf. Figures 1, 2), one readily suspects the concave kink of the butterfly spread, which is prevalent in the solution at all times, to be the reason for the slower convergence. This observation is further supported by the fact that, for the modified put, we find convergence rates comparable to the rates of the butterfly spread near expiry, but, further away from expiry, where the concave kink has been smoothed out (cf. Figure 3), convergence improves to roughly O( 1/2 ) for the spatial errors in V and V /S . In the next section, we will use matched asymptotic expansions for small to explain this behaviour and to derive the leading order corrections to the penalty solution.
+
+3
+
+Approximation by Matched Asymptotic Expansions
+
+In this section, we describe the structure of the solutions to the three canonical problems introduced above, within the framework of perturbation (asymptotic) analysis and matched asymptotic expansions. We exploit the fact that the penalty parameter 9 is `small' and analyse the problem for any
+
+Figure 5: Local structure of the penalisation error for the put delta with parameters  = 0.4, r = 0.05, and -1 = 3  104 . The error is largest in a small layer around the exercise boundary. specific value of by considering the limit as  0. The basic idea (see, for example, [13, 14]) is to decompose the solution domain into a number of overlapping regions, whose sizes are related to , and to formulate a simplified problem in each of these regions in which some terms in the equations can be seen a priori to be small. The solutions to the individual problems, which typically contain unknown functions, are joined together by `matching' in the overlap regions, by use of Van Dyke's matching principle (see [13]). This procedure typically provides the information that is needed to determine any unknown functions fully. Although the procedure is purely formal, it is confirmed by the numerical results and, indeed, provides an illuminating interpretation of the role of error estimates in problems of this kind. While is small, it is a dimensional quantity (with units of time) and in order to compare different combinations of the parameters  and in a consistent way, we introduce the small dimensionless parameter 1 = 2 and the limit we consider is	0.1 We will see later that  is the characteristic width of the `inner' region between the exercise and hold regions of the option.
+
+3.1
+
+Asymptotics for Put
+
+We first consider an American put option on an asset in the Black-Scholes model with no dividends. Initial (i.e., near expiry) transients are ignored: this means both the penalty term transient and the American-put transient. There are three regions. The key region is the `inner' region, located around the free boundary S = S  (t) of the American put; it is characterised by an inner variable x defined by S = S  (t)(1 + x). (14)
+
+1 We could have used r or T instead to scale  , with the same eventual answer. The choice we have made makes the intermediate calculations simpler. We also keep writing V to keep the notation simple.
+
+10
+
+Figure 6: Local structure of the penalisation error for the butterfly spread with parameters  = 0.4, r = 0.05, and -1 = 3  104 . The error is largest in a narrow region around the kink of the payoff. It is negligible on the put-like side up to the point where it is optimal not to exercise the option. The choice of scaling in (14) is motivated, as in classical boundary-layer analysis, by the need to retain a balance between the leading-order terms, including the highest-order derivative, in the penalty equation 1 2 LBS V = - max(K - S - V , 0) = - 2 max(K - S - V , 0),	(15)
+
+with all remaining terms remaining smaller as	0; see (22) and (23). The other two regions are for values of S below and above the inner region, and are referred to as the outer `exercise' and outer `hold' regions respectively. The set-up is summarised in Figure 8, and a summary of the expansions we find is given at the end of this subsection. First, write V (S, t) = K - S + W (S, t) (16) and expand W (S, t)  W0 (S, t) + W1 (S, t) +  2 W2 (S, t) +	. (17) We expect W0 (S, t) = P (S, t) - (K - S ), where P is the true put value, and W1 (S, t) = 0 (because smooth pasting always leads to a smaller error than a barrier-type `pinned' condition, cf. the asymptotic results on Bermudan options and discrete barrier options in [31, 15]). 3.1.1 Outer `hold' region S > S (t)
+
+W0 satisfies LBS W0 = -rK and all Wi for i > 0 satisfy the homogeneous Black-Scholes PDE, because the penalty is not active. Then Taylor-expanding W (S, t) about S = S (t) and writing
+
+11
+
+Figure 7: Local structure of the penalisation error for the modified put with parameters  = 0.4, r = 0.05, and -1 = 3  104 . It shows a combination of features of the put and butterfly payoff, and a decay in time-to-expiry resulting from the waiting time phenomenon and subsequent smoothness. the result in terms of x gives the outer expansion expanded in inner variables as W (S, t) = W (S	(t)(1 + x), t)
+  W0 (t)   +  (xS (t)W0 S (t) + W1 (t))
+
++ 2 +  , as   0, where
+
+1 2  2	  x S (t) W0SS (t) + xS (t)W1 S (t) + W2 (t) 2 (18)
+
+W0  (S (t), t) etc. S are functions of t alone and as yet unknown. Hence, in the absence of spatial boundary conditions, we can do no more in this region for now.
+ W0 (t) = W0 (S (t), t),  W0 S (t) =
+
+3.1.2
+
+Outer `exercise' region S < S (t)
+
+This is the region below the exercise point, in which the penalty term is active. The penalty equation (15) becomes 2 LBS W = rK + 2 W .  Inserting the expansion (17) and matching individual powers of  gives W0 = 0 W1 = 0 rK +  2 W2 = 0 W3 = 0 12 (coefficient of	-2 ), (coefficient of  -1 ), (coefficient of  0 ), (coefficient of  1 ),
+
+S  (t)
+
+True solution Penalty solution S  (t)(1 + x (t))
+
+Outer 'exercise'
+
+Inner
+
+Outer 'hold'
+
+K
+
+S
+
+Figure 8: Schematic of a put option solution with its three region structure (outer `hold' and `exercise' regions and an inner region), and a blow-up of the inner region. The true solution is the solid curve, the penalty solution is dashed.
+
+13
+
+so we obtain W	- 2 rK/ 2 + O( 4 ). This dictates the scaling of W in the inner region. 3.1.3 Inner region (19)
+
+Make the change of variables to x and t, and expand W (S, t) = w (x, t)  w0 (x, t) + w1 (x, t) +  w2 (x, t) +	 . The penalty equation becomes  w 1 + x w S 1 (1 + x)2  2 w w +r -  (1 + x) + 2 - rw 2 2 t S x 2  x  x 0 = rK + 2 2 w
+2
+
+(20) (21)
+
+x > x , x < x ,
+
+(22)
+
+  = dS	/dt, and with w = 0 and w /x continuous at x = x (i.e., x is the crossing where S point of the penalty solution). 3.1.4 Matching
+
+As x  -, we have (cf. (19)) w0	0, and as x  + we have (compare (18))
+ w0 (x, t)  W0 (t) + o(1),   w1 (x, t)	xS (t)W0 S (t) + W1 (t) + o(1), 1     w2 (x, t)  x2 S (t)2 W0 SS (t) + xS (t)W1S (t) + W2 (t) + o(1). 2
+
+w1  0,
+
+w2  -rK/ 2 ,
+
+The largest terms in (22) are O(1/ 2 ). When we substitute the expansion (21) in and collect terms, we get, at O(1/ 2 ), 2 0 x > x , 1 2  w0 (23) 2  x2 = 2  w0 x < x , and the only solution that vanishes at x = -, has continuous first derivative at x = x , and tends to a constant at x = +, is w0 (x, t)  0. This tells us that
+ W0 (t) = 0
+
+as expected. Because W0 (S, t) is the difference between the vanilla value of the put and the payoff, its S -derivative vanishes at S = S (t) -- this is smooth pasting. (In more detail, because W0 (S, t) has the right value at S = S (t) and the right payoff, uniqueness for solutions of the BSPDE in a  parabolic domain tells us that it is the vanilla put value.) Hence, W0 S (t) = 0. Now, at O (1/ ) in (22), we get 2 0 x > x , 1 2  w1 =	2 x2  2 w1 x < x .
+ As W0 S (t) = 0, w1 (x, t) has no linear term at x = +, and so, by the same argument as above,  it vanishes too, confirming that the inner scaling for W is indeed O( 2 ). Hence, W1 (t) = 0, and
+
+14
+
+we can return to the outer region S > S (t) to show that W1 (S, t)  0 (zero payoff, zero value on S = S (t)). Now we come to the first non-trivial term. At O(1) in (22), we have
+2 1 2  w2 2  x2
+
+= rK +
+
+0  2 w0
+
+x > x , x < x .
+
+For x < x , the solution that tends to -rK/ 2 at - and vanishes at x = x is
+- w2 (x, t) = rK e  2(x-x(t))
+
+- 1 / 2 .
+
+(24)
+
+For x > x , the solution that vanishes at x = x and whose derivative matches (24) is
++ w2 (x, t) =
+
+ rK (x - x(t))2 + rK 2/ 2 (x - x(t)). 2
+
+(25)
+
+Now comes the key point. From the matching, we now know that
++ 2  2	 w2 (x, t)  1 2 x S (t) W0SS (t) + W2 (t),
+
+x  .
+
+There is no linear term because W1 (S, t) = 0. Comparing with (25), we find that 1  rK/ 2 = S (t)2 W0 SS (t) 2	-2rKx(t)/ 2 + rK 2/ 2 = 0   (t) rKx (t)2 / 2 - 2rKx(t)/ 2 = W2 (coefficient of x2 ), (coefficient of x), (constant coefficient).
+
+The first of these confirms the boundary Gamma of the vanilla put. The second gives  x(t) = 1/ 2. The third gives
+ 2 W2 (t) = - 1 2 rK/ .
+
+In original variables, the crossing point is at S (t) = S (t)(1 + x(t) + . . .)   = S (t) 1 + / 2 + . . . as  2 =  2 , and the boundary value of the correction is, at leading order,
+  2 W2 (t) = - 1 2 rK .
+
+3.1.5
+
+Summary of results and numerical verification
+
+In summary, the penalisation error for the exercise boundary is 1 S (t) - S (t) =   2
+1/2
+
++ o(
+
+1/2
+
+),
+
+(26)
+
+and for the penalised value function V , compared to the true solution P for the put, (27) 1 W - (S, t) (S,t) (P - V )(S, t) = rK W - (S, t) + W0rK  W0 (S,t)  +   rK  W (S, t) + 1 2 D (S, t)	     15  S < S (t)(1 - O( ))	S (t)(1 - O( 1/2 )) < S < S (t)   + o( ), S (t) < S < S (t)   1/2  S (t) < S < S (1 + O( ))   S > S (t)(1 + O( 1/2 ))
+ 1/2
+
+Penalisation Error Value in Exercise Region Value in Hold Region Exercise Boundary
+
+Computed 4.9975e-04 2.5070e-04 0.0174
+
+Predicted 5.0000e-04 2.5000e-04 0.0165
+
+Relative Difference -5.0075e-04 0.0028 0.0516
+
+Table 3: For the American put, the maximum penalisation error in exercise and hold regions separately, and the error of the exercise boundary, for -1 = 100,  = 0.4, r = 0.05, K = 100, T = 1, hence  = 0.04. The numerical result is compared with the first order correction from the asymptotic analysis, as summarised in (27) and (26). where W - (S, t) = 1 - e 2(S -S (t))/( 1 (S - S (t))2 W + (S, t) = - , 2 2
+
+1/2
+
+)
+
+,
+
+and W0 from earlier. Note that for the relevant range 0 < S - S (t) = O( W0 (S, t) = P (S, t) - (K - S ) =
+
+1/2
+
+),
+
+1 (S - S (t))2 PSS (S (t), t) + o( 2 ) = O( 2 ) 2 due to smooth pasting, and W - and W + are O(1) in their relevant ranges. Finally, D is defined in the hold region, with 0  D  1. More precisely, the function D satisfies the Black-Scholes PDE as the penalty term is not active. It is 1 at the exercise boundary, D(S (t), t) = 1, and 0 at maturity, D(S, T ) = 0. Hence, it is interpretable as the value of an option with zero payoff at maturity which pays a fixed amount of 1 when (if) the stock crosses S (t) from above. The first-order correction to the value is independent of  to leading order. Interestingly, the continuity correction for a Bermudan option (i.e., the difference to the American option) found in [15] has the same boundary value if we set	2 =  2 T /2, where T is the interval between exercise dates. Table 3 compares the corrections based on the leading terms in (26) and (27) against the numerically computed penalisation error and finds excellent agreement.
+
+3.2
+
+Butterfly Spread
+max(V0 + 1 (S - K ), 0) max(V0 + 2 (K - S ), 0) S < K, S > K,
+
+Still in the Black-Scholes framework without dividends, consider now a butterfly spread with payoff
+
+where V0 , 1 , 2 are all positive. Denote again the penalty value by V (S, t), the true value by B (S, t). Consider the situation where B (S, t) has a free boundary on the put-like bit of the payoff (S > K ) but on the call-like bit, the value of B (K, t) is anchored to V0 . This certainly happens for short times before expiry (as the Black-Scholes operator on the payoff is positive). See also Figure 2. The former put-like bit is analysed as before so we focus on the region around the convex kink at S = K . 3.2.1 Outer `hold' region S < K
+
+The inner variable is now S = K (1 + x), the outer solution for S < K is of the form V (S, t) = B (S, t) + V1 (S, t) +	  and its inner expansion near S = K is
+ V0 +  (xBS (t) + V1 (t)) +    ,  where BS (t) = limS K B/S (S, t) and V1 (t) = V1 (K, t).
+
+16
+
+Figure 9: Schematic of a butterfly option solution and blow-up of the inner region near the peak. The true solution is the solid curve, the penalty solution is dashed.
+
+17
+
+3.2.2
+
+Outer `exercise' region S > K
+
+This is identical to the case of the put in Section 3.1.2. 3.2.3 Inner region V0 + 1 Kx V0 - 2 Kx x < 0, x > 0.
+
+The payoff in inner variables is
+
+This suggests that the inner solution is of size O( ), not O( 2 ), and this is consistent with the left-hand outer solution meeting the payoff at an angle (not smooth pasting). Write the inner expansion in the form V (S, t)  V0 + v1 (x, t) +    . Also let x (which is negative) be the point at which the penalty solution crosses the payoff. The leading order inner equation is
+2 1 2  v1 2  x2
+
+= 2
+
+v1 - 1 Kx v1 + 2 Kx
+
+x < 0, x > 0.
+
+3.2.4
+
+Matching
+
+The solution is C 1 at both x = 0 and x = x , where C 1 is the space of continuously differentiable functions. As x  , v1  -2 Kx because the solution is accurate to O( 2 ) in the `exercise' region to the right of S = K . So,   1 Kx + a(t)K cosh(x 2) + b(t)K sinh(x 2) x < 0,  v1 = -2 Kx + a(t)K e-x 2 x > 0, for some a(t), b(t). This is continuous at x = 0, and continuity of v1 /x at x = 0 gives   1 + b(t) 2 = -2 - a(t) 2. Now, at x = x , v1 meets the payoff and joins onto the outer solution: v1 (x(t), t) = 1 Kx(t), from which   1 x(t) + a(t) cosh(x(t) 2) + b(t) sinh(x(t) 2) = 1 x(t),	  (t). 1 + 2 a(t) sinh(x(t) 2) + b(t) cosh(x(t) 2 = BS This, with (28), is three equations for a(t), b(t) and x(t). From these, we readily find that 1 1 + 2 x(t) = -  log (t) . 1 - BS 2
+  This is clearly negative since we have 0 < BS < 1 . Also, it tends to - as BS  1 from below  that is, as (if) the free boundary moves away from S = K .
+
+(28)
+
+v1  = BS (t), x
+
+(29) (30)
+
+3.2.5
+
+Summary of results
+
+In the scenario where there is a non-trivial exercise boundary S (t) > K , and the solution is pinned to the payoff at S = K , we have computed the crossing point of the penalty solution just left of the strike. From this we derive the correction term V1 (K, t) = 1 Kx(t), although not explicitly  because of the complicated time dependence of x(t) via BS (t). 18
+
+3.3
+
+American Put under Jump-Diffusion
+
+We now extend the analysis under BlackScholes to include jumps of relative size J , at the jump time of a compound Poisson process with rate . We only do this for the standard put payoff to illustrate the extensions over Black-Scholes. The results are qualitatively very similar to the Black-Scholes case and the analysis suggest this will also be the case for other payoffs. In addition, we also account for continuously paid proportional dividends of rate q , where we assume q  r. (The solution for q > r is qualitatively different.) The penalised equation is similar to (15), specifically, for the put under a jump model 1 2 LBSJ V = - max(K - S - V , 0) = - 2 max(K - S - V , 0),  (31)
+
+where LBSJ is defined in (8). Smooth pasting still holds for the vanilla American put value P (S, t), and applying these conditions just to the right of the exercise boundary now gives the boundary Gamma as 2 2  (rK - (q + )S (t) - E[P (JS (t), t) - P (S (t), t)])  2  (t), 2 S (t)2   S (t) S S (t) (32) which we use to define the function (t) for future reference. Note that (t) depends on P (S, t) for all S > 0 via the term E[P (JS (t), t) - P (S (t), t)]. = There are three regions as in Section 3.1, see particularly Figure 8. 3.3.1 Outer `hold' region S > S (t) 2P S 2
+
+It will be useful to introduce again W (S, t) as in (16). As S e-q(T -t) and K e-r(T -t) satisfy LBSJ V = 0 individually (in fact, their difference is the value of a forward), one gets LBSJ V (S, t) = LBSJ W (S, t) - LBSJ (S - K ) = LBSJ W (S, t) - qS + rK. 3.3.2 Outer `exercise' region S < S (t)
+
+With the above substitution, as W (S, t)  0 in this region by assumption, LBSJ W (S, t) = rK - qS + 2 W (S, t). 2
+
+Inserting the expansion for W (S, t), W0 (S, t) and W1 (S, t) vanish in the outer region S < S (t) as before; however, when determining W2 (S, t) in the `exercise' region, we have to account for jumps into the other regions, particularly into the outer `hold' region S > S (t), where W (S, t) will not be small. Thus, at O(1), E[W0 (JS, t) - W0 (S, t)] = rK - qS +  2 W2 (S, t), and, solving for W2 (S, t), W2 (S, t) = - ((rK - qS ) - E[P (SJ, t) - (K - JS )]) / 2 = - ((rK - qS ) - E[P (SJ, t) - P (S, t) + (J - 1)S ]) / 2 .
+
+19
+
+3.3.3
+
+Inner region
+
+Similar to (22), we now have  w 1 + x w w S 1 (1 + x)2	2 w +r -  (1 + x) + 2 - rw t S x 2 2 x2  x   + E[W (JS (1 + x), t) - W (S (1 + x), t)] = rK - qS  (1 + x) + 0
+ 2
+2
+
+w
+
+x > x , x < x .
+
+(33)
+
+The non-local term is written in terms of the outer solutions because it acts on the scale of the outer variables. Writing the expectation term as integral and expanding in  gives, at leading order,
+
+
+S  x
+0
+
+J WS (JS  , t) g (J ) dJ.
+
+The simple expansion has a natural interpretation: given a jump size, all jumps starting from the inner region and ending in the outer region end up close to each other. If we were going to a higher order of accuracy (which we are not), we would have to treat the small jumps  those which both start and end in the inner region  separately. So the integral for the expectation would have its range split into inner and outer parts, and so on. Comparing terms O(1/ 2 ) and O(1/ ) gives again that w0 (x, t) and w1 (x, t) vanish, and now, at O(1), 2 0 x > x , 2  1 2  w2 2  x2 =   (t) + 2  w2 x < x . 3.3.4 Matching
+
+First, we match the inner solution with the outer solution in the exercise region. The matching of - w2 for x  - is now to a non-constant value, but it is clear that W2 (S, t) from (33) approaches (t) for S	S  in the `outer' variables, and matching in an overlap region demands that, as x  -, w2 (x, t)  -(t). Then calculations identical to before give, for x < x ,
+- w2 (x, t) = (t) e  2(x-x(t))
+
+-1 ,
+
+and, for x > x ,
++ w2 (x, t) = (t) (x - x(t))2 +
+
+
+
+2(x - x(t)) .
+
+(34)
+
+Matching with the outer region S > S  as before gives 1  (t) = S (t)2 W0 SS (t), 2  (t)(-2x(t) + 2) = 0,   (t)(x(t)2 - 2x(t)) = W2 (t). The first equation recovers the jump diffusion gamma from earlier. Interestingly, the relative position x of the penalty crossing point in relation to the exercise boundary, which is given by the second equation, is unaffected by the jumps. The last equation, upon inserting x , shows again that the penalisation error at the free boundary is half the value one would get by extrapolation from the outer exercise region. The penalisation error of the exercise boundary is the same in the presence of jumps as in the BlackScholes model. For the value function, the first-order correction to the value is again independent of  . 20
+
+3.4
+
+Discussion of Results
+
+We now return to discuss the results summarised earlier in Table 1 in the light of the findings of this section. The lack of uniform convergence of the penalty butterfly Delta, denoted by the ` ', results from the jump of the exact Delta at the strike, which cannot be matched simultaneously on both sides by the continuous penalty Delta. However, the asymptotic analysis also reveals that the error in the Delta is O( 1/2 ) except in a region which is of width O( 1/2 ). The rates in the H 1 norm can be explained by the asymptotic analysis as follows: for the put (as example of a convex payoff), we have an error in the derivative of O( 1/2 ) in the inner region of width O( 1/2 ), resulting in an L2 error of the derivative of O (
+1/2 )2 1/2
+
+= O(
+
+3/4
+
+).
+
+The error in the derivative in the outer region is integrable and O( ) (we can just differentiate the outer expansion) and therefore negligible. The contribution of the zero order term in the H 1 error is also of order 1. A similar argument explains the order 1/4 for the butterfly.
+
+4
+
+General Upper and Lower Value Bounds
+
+In the previous section, we computed the penalisation error to leading order in the penalty parameter, and noted a distinct difference in the error for the put, which O( ), and a butterfly payoff, which is O( 1/2 ). We now show that a distinction into categories of piecewise smooth payoffs with convex and non-convex kinks allows us to derive general upper and lower bounds on the value function. Under the location of a `convex kink' of a continuous, piecewise smooth function	we  where  (S -)  limS S +), and similarly for understand a point S   (S ) < limS S   (S )   (S concave kinks. We work under jump-diffusion models.
+
+4.1
+
+A Maximum Principle Argument
+1
+
+Considering the penalised equation -LBSJ V = max( - V , 0), (35)
+
+it is automatically true that -LBSJ V  0, and if (where) V > , then LBSJ V = 0, such that a complementarity condition is satisfied and min(-LBSJ V , V - )  0. Hence, V only fails to be a solution to min(-LBSJ V , V - ) = 0 where V	 is violated. We begin with an elementary analysis of this latter inequality constraint. Consider W = V - , such that the biggest violation of V   is given at a global negative minimum of W (if one is attained). Note that, for t < T , the solution V to (35) is twice continuously differentiable everywhere in S , by standard regularity arguments. We first consider points at which  is also smooth, i.e., excluding kinks. Then, at any such negative minimum S of W , by inspection of the individual terms, LBSJ W = 1 2W W W + 2 S 2 + (r - q - )S - rW t 2 S 2 S + E[W (JS, t) - W (S, t)] > 0. (36)
+
+21
+
+From
+
+1 - ( - V ) = LBSJ V = LBSJ W + LBSJ  V >  + LBSJ . (37)
+
+it follows that For piecewise linear payoffs , it is straighforward to show that, again excluding kinks, LBSJ  is bounded from below, uniformly for all S . Also, W = V -  does not have any negative minima at convex kinks of , i.e., points with  (S -) <  (S +). Summarising, the biggest violation of the inequality V   is either bounded by the maximum of LBSJ	taken over the smooth intervals of , or attained at concave kinks or at one of the boundaries S = 0 or S  . We will come back to this observation later to obtain easily computable bounds on the solution.
+
+4.2
+
+Constructing Bounds on the Value Function
+
+To treat the solution uniformly in the hold and exercise regions, inclusive of kinks, it is convenient to work in the framework of viscosity solutions. We use the equation min(-Lu, u -  ) = 0 (38)
+
+written in log coordinates on R, with L as in (9),  (x) = (S ) = (S0 exp(x)), and its penalised version 1 (39) -Lu = max( - u , 0). This avoids technicalities of boundary conditions and hence discontinuous viscosity solutions, and we can use the definition from [24], which we tailor slightly to our setting for convenience: Definition 4.1 (Viscosity Solution) u  C ([0, T ]	R) is a viscosity supersolution (subsolution) of (38), if min(-(L)(x, t), (x, t) -  (x))  0 ( 0) whenever   C 2 ([0, T ]  R)  C2 ([0, T ]  R) and u -  has a global minimum (maximum) at (x, t)  [0, T )  R with v (x, t) = (x, t). u is a viscosity solution iff it is a super- and subsolution. Here, C 2 is the space of twice continuously differentiable functions, and C2 the space of continuous functions with at most quadratic growth at . This includes the put and butterfly payoffs, but not the call payoff in log-coordinates. It is clear, though, that the results can be extended (e.g., by a coordinate transformation identical to the logarithm for small values, the identity for large values, and a smoothly increasing transition in between). We further assume that the density  has bounded third moments. Pham [24] shows that under these conditions (2) satisfies a comparison principle. Theorem 4.1 (Theorem 4.1 in [24]) If u and v are uniformly continuous sub- and supersolutions of (2) respectively, and u(x, T )  v (x, T ) for all x, then u  v everywhere. It is clear that u is a classical subsolution of (38), min(-Lu , u -  ) = min( 1 max( - u , 0), u -  )  0, and therefore also a viscosity subsolution, thus u  u is a lower bound for the true solution. We now seek to construct an upper bound by setting u := u +  ,  := min{  R,   0 : u +    } = max{( - u ) }. 22
++
+
+(40) (41)
+
+Figure 10: Illustration of the lower bound V , upper bound V = V + max{( - V )+ }, payoff , and true value function V for the American put (left) and the American butterfly spread (right), for = 100 (put) and = 0.00005 (butterfly). We are thinking of as a small number, however for very small values, the bounds for the put become optically indistinguishable from the solution. Indeed, u is a (classical and viscosity) supersolution of (38), min(-Lu , u -  ) = min(r + max( - u , 0), u -  )  0, and therefore u	u. From (37) and the discussion thereafter, we know that  can be estimated from (41) by using the right-hand side from (37) and values at concave kinks and boundaries. We can use this fact to compute simple lower and upper bounds, which converge to the true solution. Figure 10 illustrates this for the put and butterfly. Note the different magnitude of the penalty parameter required for the put and butterfly to achieve similar accuracy. The upper bounds are closely related to the regularised Lagrange multiplier approximation in [16], who propose to solve  0 -Lu = max ( - u)/ + ,  > 0 large enough to make the solution feasible. This essentially correfor some fixed function   sponds to  =	in (41) and will thus be possible if the penalisation error is O( ). In the following section, we show that the order of  is either O( ) in the case of no `active' concave kinks (i.e., where no non-convex kink lies in the active set of the inequality constraint) or O( 1/2 ) in the case of `active' concave kinks, as expected from the asymptotic expansions in Section 3, specifically 3.1 for the put (no concave kink) and 3.2 for the butterfly (active concave kink).
+
+4.3
+
+Convergence Rates and Further Properties
+
+The following results follow directly from the comparison principle. Lemma 4.2 Denote by u and u the solutions to (38) with obstacles  and  , and, similarly, denote by u and u the corresponding solutions to (lcplogpen). If	  everywhere, then we have u u and u  u.
+
+Trivially, u and u are nonnegative if	0. Moreover, denote by u 1 and u 2 the solutions to (39) corresponding to penalty parameters 1 > 2 > 0, respectively. Then u 1	u 2 . 23
+
+Proof:
+
+For the first part, consider min(-Lu,  - u)  min(-Lu,  - u)
+
+and -Lu =
+
+1
+
+max( - u , 0)
+
+1
+
+max( - u , 0),
+
+such that u and u are subsolutions to their governing equations with  replaced by  . Similarly, for the second part, apply the same argument to -Lu
+1
+
+=
+
+1
+1
+
+max( - u 1 , 0)
+
+1
+2
+
+max( - u 1 , 0).
+
+We can apply the framework of [17], pp. 48, to estimate  in (41). Theorem 4.3 If  is Lipschitz continuous and piecewise C 1 with linear growth and 1. convex kinks, then 0u-u C ; 2. concave kinks, then 0u-u C
+1/2
+
+.
+
+Proof: This follows precisely the steps in the proof of Theorem 2.1 in [17]. Although the context there is that of non-linear PDEs, the results are sufficiently abstract to accommodate PIDEs given a comparison principle as ascertained by Theorem 4.1. The main steps are based on smoothing the payoff with mollifiers, and bounding the approximation error in the two cases.
+
+5
+
+Solution of a Variational Formulation
+
+From the previous section, we know maxx |u(x, t) - u (x, t)| = O( ) for payoffs with convex kinks. Combined with the differentiability of u with respect to x, where the size of the derivative is independent of , u(x + u (x, t) = x
+1/2
+
+) - u(x, t)
+
+1/2
+
++ O(
+
+1/2
+
+)=
+
+u (x +
+
+1/2
+
+) - u (x, t)
+
+1/2
+
++ O(
+
+1/2
+
+)
+
+allows us to estimate the derivative up to 1/2 by a finite difference, which naturally `regularises' the differentiation. We know e.g. for the put from the asymptotic expansion that convergence will be better behaved everywhere except in a small neighbourhood (of width 1/2 ) of the exercise boundary. For non-convex kinks, convergence will be slower. This section develops estimates of the penalisation error for the derivative directly, via analysis in the H 1 norm. We follow here the set-up of [38], who show convergence of penalisation in jump-diffusion models, but do not derive convergence orders.
+
+5.1
+
+Set-up
+
+We study problems (38) and (39), but on a localised domain  := {x  R : |x| < l} with boundary	:= {x  R : |x| = l}. It would be possible to work on R, but this would require us to introduces weighted norms to be able to deal with functions that do not decay (sufficiently fast) for large x (such that their Sobolev norms are well defined), making the variational formulation more cumbersome to write out. Instead, on the finite domain, we can use the standard (separable Hilbert) spaces H := L2 () and V := {u	H : u/x  H } = H 1 () [2]. For	 {H , V }, define L2 (0, T ; ) as the (separable Hilbert) spaces of measurable functions u : [0, T ]   satisfying 24
+
+u(, t)	 for almost every t  [0, T ] and for which 0 |u(, t)|2	dt < , equipped with their canonical inner products (cf. [21]). The (Banach) space L (0, T ;  ) is defined to contain all measurable functions u : [0, T ]   satisfying u(, t)	 for almost every t  [0, T ] and for which |u|L (0,T ; ) := ess supt[0,T ] |u(, t)| <  (cf. [21]). Now, for u  H and x	 , define the jump operator (Bu)(x) :=
+z,z +x
+
+T
+
+u(x + z )  (z ) dz - u(x) .
+
+For u, v  V , define the bilinear forms a(u, v ) := where  = r - q -  and b(u, v ) := -
+
+
+2 2
+
+
+
+u v dx + x x
+
+ruv dx -
+
+
+-
+
+ 2 u v dx, 2 x
+
+(Bu)v dx.
+
+We assume in the following that  : R  R is continuous and there exists a constant M > 0 such that | (x)|  M eM |x| , x	R, (42) then set f (x) :=
+z,z +x /
+
+ (x + z )  (z ) dz,
+
+x
+
+and assume that f  H . The following two lemmas are taken from [37], to where we also refer for the proof of the subsequent theorem. Lemma 5.1 We have B  L(H , H ), i.e. B : H  H is a bounded linear operator. Proof: See [37].
+
+Lemma 5.2 There exist constants ,  > 0 such that
+2 a(u, u) + b(u, u)  |u|2 V -  |u|H ,
+
+uV .
+
+Proof: See [37]. We are now in a position to formulate the variational inequality the solution of which is the value function of the American option. Problem 5.3 Find a function u  L2 0, T ; V , u/t	L2 0, T ; H , such that u(, T ) = , u(x, ) =  (x) for x    , u	 a.e. on   [0, T ] and, a.e. on [0, T ], it is - u , v - u + a(u, v - u) + b(u, v - u) - (f, v - u)  0 t (43)
+
+for all v  V with v   . We emphasise that the payoff function  is not confined to the interval [-l, l] and that the function f is given by a nonlocal integral. Theorem 5.4 There exists a unique solution u to Problem 5.3 with u  L (0, T ; V ). Proof: See [37] or [38]. 25
+
+5.2
+
+Penalisation and Basic Properties
+
+Problem 5.5 Let > 0 and define	() := -( -)+ . Find a function u  L2 0, T ; V , u /t  L2 0, T ; H , such that u (, T ) = , u (x, ) =  (x) for x    and, a.e. on [0, T ], we have - for all v  V . Theorem 5.6 There exists a unique solution u to Problem 5.5. Furthermore, there exists a constant C > 0, C independent of , such that |u |L (0,T ;V ) + 1
+1/2
+
+u 1 , v + a(u , v ) + b(u , v ) - (f, v ) +  (u ), v = 0 t
+
+(44)
+
+| (u )|L2 (0,T ;H ) +
+
+u t
+
+L2 (0,T ;H )
+
+ C.
+
+(45)
+
+As  0, we have that u  u strongly and u /t  u/t weakly in L2 (0, T ; H ), where u is the solution to Problem 5.3. Proof: A result of this form comes up naturally when using penalisation to prove the existence of a solution to a variational inequality. In this particular case, it can be directly obtained by adapting the proof given in [37] for the non-localised problem. Alternatively, one can slightly extend a similar result given in [4]. Remark 5.7 The results of Lemma 4.2 still hold for the localised variational problem, but we omit the proof of this.
+
+5.3
+
+The American Put and Other Payoffs with Convex Kinks
+
+The following result is an extension of the one in [4] to jump diffusion, and to accommodate kinks. In the proofs, we work with weak coercivity instead of coercivity, and account for the loss of regularity at kinks explicitly. Theorem 5.8 Consider an American put option, i.e., let  be given by	(x) = (K - ex )+ , x  R,
+
+and suppose f  H . There exists a constant C > 0, C independent of , such that |u - u |L2 (0,T ;V ) + |u - u |L (0,T ;H )
+1/2
+
+C.
+
+Proof: Again, we extend a proof that was given in [4] for standard parabolic variational inequal1 ities in H0 . All constants Ci , with i an integer, are taken to be independent of and t. Plugging - (u )  V into (44) gives u 1 ,  (u ) - a u ,  (u ) - b u ,  (u ) + f,  (u ) -  (u ),  (u ) = 0, t which is equivalent to	1 (u ),  (u ) - a  (u ),  (u ) -  (u ),  (u ) t = a ,  (u ) + b u ,  (u ) - f,	(u ) -	,  (u ) . t
+
+26
+
+Note that  is independent of t. Integrating from t to T , t  [0, T ], we obtain 1  u (t) 2
+2 H T
+
++
+t T
+
+1 a  (u ),  (u ) ds + | (u )|2 L2 (t,T ;H ) a ,  (u ) + b u ,  (u ) - f,  (u ) ds. (46)
+
+=-
+t
+
+Recall Lemma 5.1 and note that
+T
+
+-
+t
+
+a ,  (u ) ds =
+
+  ( - u )+ dx x x t   2 ) ( - u )+ dx ds, + r  ( - u )+ dx - ( - 2  x
+T t
+
+T
+
+2 2
+
+(47)
+
+in which
+T t
+
+  ( - u )+ dx ds = - x x
+
+2 ( - u )+ dx ds. x2
+
+As  is known explicitly, we can write
+T t
+
+  ( - u )+ dx ds x x
+T
+
+(48)
+log K
+
+=
+t T
+
+- ex ( - u )+
+log K
+
+log K -l
+
++
+-l
+
+ex ( - u )+ dx ds
+T
+
+(49) (50)
+
+
+t -l
+
+ex ( - u )+ dx ds  K
+t
+
+( - u )+ dx ds.
+
+To get from (49) to (50), we used the following fact: since u  L2 (0, T ; V ), a monotonicity result + in Remark 5.7 gives that u (s)  0 for almost every s  [0, T ]; hence,  (log K ) - u (log K ) = + - u (log K ) = 0 almost everywhere on [0, T ]. Having observed this, applying (50) to (47), we then obtain
+T
+
+-
+t
+
+a ,  (u ) ds  C0 | |H 1 () | (u )|L2 (t,T ;H ) ,
+
+(51)
+
+which, applied to (46), gives
+T t
+
+1 a  (u ),  (u ) ds + | (u )|2 L2 (t,T ;H )  C1 | |H 2 () | (u )|L2 (t,T ;H ) + |u |L2 (t,T ;H ) | (u )|L2 (t,T ;H ) + |f |H | (u )|L2 (t,T ;H ) .
+
+The splitting of the integral was necessary because of the kink of  , whereas for    H 2 () the last inequality follows directly by integration by parts. Applying Lemma 5.2 and (45) to the last expression, we then get 1 | (u )|L2 (t,T ;H )  C2 (52) for 0 < < 1. Next, applying Lemma 5.2, (45) and (52) to equation (46) yields | (u )|L2 (t,T ;V ) + | (u )|L (t,T ;H )
+1/2
+
+C3 .
+
+(53)
+
+We define r :=	- u + ( - u )- , where ( - u )- := - min{ - u , 0}; in particular, this means u - u = r +  (u ). Owing to (53), to prove the theorem, it is now sufficient to show that |r |L2 (t,T ;V ) + |r |L (t,T ;H )  27
+1/2
+
+C4 .
+
+We set v = r + u =  + ( - u )-	 in (43) and v = -r  V in (44) and sum the two expressions to obtain -	(u - u ), r t + a(u - u , r ) + b(u - u , r ) + 1  (u ), u -   0.
+
+As - 1	(u ), u -   0, we further get - which in return gives - r ,r t + a(r , r ) + b(r , r )	 (u ), r t - a	(u ), r - b  (u ), r .	(u - u), r t + a(u - u, r ) + b(u - u, r )  0,
+
+We define r := et r , where we use  from Lemma 5.2. Multiplying both sides of the last inequality by e2t , we get - r ,r t  +  (r , r ) + a(r , r ) + b(r , r )  t e  (u ) , r t -  et	(u ), r - a et	(u ), r
+-
+
+- b et	(u ), r .
+
+^ (T ) = eT  (T ) - u(T ) +  (T ) - u (T ) Noting that r gives 1 |r (t)|2 H + 2
+T
+
+= 0, integrating from t to T , t  [0, T ],
+
+ (r , r ) + a(r , r ) + b(r , r ) ds
+t T
+
+ - et  (u )(t), r (t) -
+t T
+
+et  (u ),
+
+r t
+
+ds + b et  (u ), r ds. (54)
+
+-
+t
+
+ et  (u ), r
+
++ a et	(u ), r
+
+We now make three observations, which, taken together, will yield the desired result. First, according to Lemma 5.2, we have
+T T
+
+ (r , r ) + a(r , r ) + b(r , r ) ds
+t t
+
+|r |2 V ds.
+
+Second, according to (45),
+T
+
+-
+t
+
+et  (u ),
+
+r t
+
+ds u t
+
+ e2T | (u )|L2 (t,T ;H ) |r |L2 (t,T ;H ) + e2T | (u )|L2 (t,T ;H )  C5 | (u )|L2 (t,T ;H ) |r |L2 (t,T ;H ) + C6 . Third, we have
+T
+
+L2 (t,T ;H )
+
+- et  (u )(t), r (t) -
+t
+
+ et  (u ), r
+
++ a et	(u ), r
+
++ b et	(u ), r
+
+ds
+
+ C7 | (u )(t)|H |r (t)|H + C8 | (u )|L2 (t,T ;V ) |r |L2 (t,T ;V ) . Applying the last three statements as well as (53) to (54) completes the proof. Finally, we formulate a corollary which states that the result just given for the American put also holds for a wider class of functions including a number of traditional option payoffs. 28
+
+Corollary 5.9 If there is a finite number of disjoint open intervals Ii := (xi , xi+1 ), 0  i  N , N such that i=0 [xi , xi+1 ] = [-l, l],  Ii	H 2 (Ii ) for 0  i  N , and, additionally, lim	 (xi )	lim ( xi ) xxi x x
+
+x x i
+
+for 1  i  N , then the result of Theorem 5.8 also holds. In particular, this includes piecewise smooth functions which are convex, e.g., a straddle and an American call. Proof: Integrating by parts, we can write (48) as   ( - u )+ dx = x x
+N
+
+
+
+i=0
+
+ ( - u )+ x
+
+xi+1 xi
+
+N
+
+-
+i=0 Ii
+
+2 ( - u )+ dx, x2
+
+in which the first term on the right hand side equals
+N x x i
+
+lim
+
+i=1
+
+ (x)  (xi ) - u (xi ) x
+
++
+
+- lim
+
+xxi
+
+ (x)  (xi ) - u (xi ) x
+
++
+
+ 0,
+
+and we can replace (51) by
+T N
+
+-
+t
+
+a ,  (u ) ds  C7
+i=0
+
+| |H 2 (Ii ) | (u )|L2 (t,T ;H ) .
+
+Having done this, we then proceed as in the proof of Theorem 5.8. Remark 5.10 We have shown convergence of order 1/2 in in the L2 (0, T ; H 1 ) norm for piecewise smooth obstacles with convex kinks, while only convergence (but no positive convergence order) can be shown for non-convex kinks. Because of the embedding of H 1 in L in one dimension, this implies the same convergence orders in the maximum norm, which are weaker results than the higher orders (1 and 1/2, respectively) established in Section 4 via viscosity techniques. The above result further implies convergence of order 1/2 of the derivative in the L2 (0, T ; L2 ) norm, which is a new result and does not follow from the one in Section 4. Specifically, C 2	|u - u |2 L2 (0,T ;H 1 ())
+T
+
+
+0 T
+
+u u - x x S
+
+2
+
+dx dt
+2
+
+=
+0 S
+
+V V - S S
+
+dS dt,
+
+where S is the image of  under transformation into S coordinates, S = S0 exp(x). Comparing this to (5) we see that the variance of the hedging error will behave like O( ).
+
+6
+6.1
+
+Discussion and Applications
+Interplay Between Penalisation and Discretisation
+
+A comment is due on the effect of discretisation of the underlying PDE on the penalisation error, and, conversely, of penalisation on the discretisation error.
+
+29
+
+Penalisation of discrete systems Here, we reconcile the fact that convergence of penalised solutions to finite-dimensional (discretised) variational inequalities is almost always of first order in the penalty parameter irrespective of the payoff (see, e.g., [10]), with the observation of the earlier sections of a clear difference between different payoff classes in both theory and numerical results. We consider the Black-Scholes case and a discretisation with equally spaced mesh points Si = ih, 1  i  N , with mesh width h. The standard central difference scheme with fully implicit timestepping with time step k can be written as (55) min - Vij +1 - k Vij -
+j 1 2 2 Vi+1  Si
+
+-
+
+2
+
+2Vij h2
+
++
+
+Vij -1
+
+- rSi
+
+Vij +1
+
+- 2h
+
+Vij -1
+
++ krVij , Vij - (Sj )
+
+= 0,
+
+where  is the payoff function and Vij is the finite difference approximation to V at mesh point ih and time jk . Stepping backwards in time, in each time step, one has to solve a discrete linear complementarity problem of the form min(Ax - b, x - c) = 0, where xi+1 - xi-1 1 2 xi+1 - 2xi + xi-1 - krSi + krxi , (Ax)i = xi - k  2 Si 2 2 h 2h (56)
+
+(57)
+
+such that A  RN N is typically an M-matrix (subject to conditions on  and r, and can be forced to be an M-matrix by selective upwinding, see [32]), b, c, x  RN (we assume x0 and xN +1 are fixed by boundary conditions). Note that to obtain (56) we have multiplied the first term in (55) by k , which was allowable because the solution of (56) for fixed N is invariant to scaling of the two arguments of the `min' by a positive constant. However, scaling does become relevant for picking an appropriate penalty parameter for the disretised system (see also [12] for inexact arithmetic considerations surrounding this issue). In particular, [10] consider a penalised equation Ax - b = Large max(c - x , 0), for a large positive parameter Large, and show that x-x  C/Large, (59) (58)
+
+where  is the maximum norm. The error bound in (59) is of first order in the penalty parameter 1/Large. We now explain why this does not contradict the discrepancy between convex and concave payoffs found in the previous sections. A key estimate on p. 2117 in [10] is Ac	const, for some positive constant, where c = ((Si ))i is the discretised payoff. Applied to a Lipschitz payoff , the first central difference from (57) is bounded as h  0, and the second finite differences is O(1/h) (with its maximum in the vicinity of kinks). So as A contains these spatial finite differences multiplied by k , Ac  = maxi |(Ac)i | = O(k/h), and therefore, as long as k/h is kept fixed, C in (59) is independent of the mesh size. (Note that keeping k proportional to k is a sensible refinement regime as the Crank-Nicolson central difference scheme has consistency order 2 in both k and h and is unconditionally stable.) 30
+
+We now elucidate the relation between Large and . For k, h  0, the above penalised equation is not consistent (in the classical sense of consistency of finite difference schemes) with the penalised PDE (4) with fixed penalty parameter Large. Instead, if we arrange (58) into xi+1 - xi-1 1 x i - bi 1 1 2 xi+1 - 2xi + xi-1 - rSi (Ax )i - bi = -  2 Si + rxi 2 k k k 2 h 2h Large = max(ci - xi , 0), k the `effective' penalty parameter is Large/k and increases with k  0, so substituting back xi = Vij , bi = Vij +1 ci = (Si ), one sees that (58) is consistent with the obstacle problem (2) itself. If we replace Large by k/ in (58) to get a scheme consistent with the penalised PDE (4), (59) still holds, however, the constant C generally depends on k and h. Retracing the steps leading up to the key bound for the penalisation error, (A.6) in [10], one finds that only the positive part max(Ac, 0) is relevant for the estimate and not Ac , so for the (convex) put payoff, in particular, C in (59) is still asymptotically independent of the mesh size. For the butterfly (with a concave kink), in contrast, max(Ac, 0) = O(1/h) and C goes to  for h  0, k/h fixed. This reflects the fact that, for the butterfly, the limiting continuous problem exhibits reduced convergence order in . Therefore, the analysis of the limiting continuous problem informs the choice of penalty parameter for the discretised system. This is very clearly seen from Figure 10. Smoothing and discretisation of penalised equations We now turn the order of discretisation and penalisation around and consider the discretisation of a penalised PDE. The penalised PDE (4) does not have a (known) closed-form solution and has to be solved numerically. Error estimates for a finite element approximation to the penalised heat equation have been given, e.g., by [27] and [33], u -u  c+ C
+1/2
+
+ k + h2 ,
+
+(60)
+
+where h is the mesh size and k the timestep of an implicit Euler or -method respectively, and  the L2 norm. In contrast, error bounds for the unpenalised problem found in [20] have reduced order in k and h, u - u  c  k 1 /2 + h . (61)
+
+These results reflect the fact that penalisation smooths the solution. Consequently, the finite element error bounds (60) deteriorate for decreasing , and the order of convergence in the mesh parameters is lower for the limiting variational inequality. The above results are based on the assumption of sufficiently smooth obstacles, such that the penalisation error is determined by smooth pasting at the free boundary and not any kinks of the payoff. This technique of smoothing the solutions to non-linear PDEs by penalisation in order to derive grid convergence rates for the limiting problem is used in the more general context of HJB and Isaacs equations in [17]. We should remark that, in practice, one can observe O(k 3/2 + h2 ) convergence for Crank-Nicolson time stepping ( = 1/2) even in the limit (  0), i.e., for the direct discretisation of (2). The convergence is even O(k 2 + h2 ) for a suitably adapted time stepping scheme, see [10, 26], which accounts for the singular behaviour of the solution close to expiry. So in practice, one can let  0 without negatively affecting mesh convergence (subject to machine precision effects, see [12]).
+
+31
+
+Penalty Extrapolation
+
+Value 1.0000 2.0061
+
+Delta 0.4815 1.5015
+
+Table 4: Order of convergence with respect to the penalty parameter, in the maximum norm, for original and extrapolated value and its derivative. The setting is the Black-Scholes model with parameters as earlier.
+
+6.2
+
+Richardson Extrapolation
+
+We now show how extrapolation using the asymptotic results can be used to generate more accurate numerical solutions. Consider here the American put. We know from Section 3.1 (see also Table 1) that the leading order correction to the penalty solution is proportional to . So doing the calculation with and 2 , then taking one twice minus the other, V = 2V - V 2 , will be a second order approximation to V (assuming the next term in the expansion is quadratic). For the finite difference computation of V , we choose a mesh size h  1/2 , for two reasons. The (empirically observed) finite difference error is O(h2 ), whereas the penalisation error is O( ), so the above choice makes both terms the same order of magnitude. Secondly, although the convergence of the penalised PDE solution is O( ), overlaid is a displacement of the exercise boundary by 1/2 (see Section 3.1), at which the penalisation error changes rapidly, so extrapolation of the continuous equation (or, in practice, one with very small fixed grid size) does not result in an order improvement of the maximum error. However, extrapolation with mesh width O( 1/2 ) coupled to the penalisation, gives the desired numerical results. This is because the `inner region' is not resolved within grid cells of width O( 1/2 ) and therefore does not destroy the convergence order of Richardson extrapolation. The results are summarised in Table 4. Note that by this procedure we gain a full convergence order in the derivative as well. The inner (asymptotic) analysis in Section 3.1 is independent of the volatility to the order of accuracy we have given. One could use a local volatility model and simply freeze the volatility at its local value. So even in non-BlackScholes models, Richardson extrapolation may be a good way of using this to get a more accurate outer put value with little extra effort. The strategy should also work for multi-factor models.
+
+6.3
+
+Extensions
+
+While the analysis in this article focuses on Black-Scholes and jump-diffusion models, the main results, especially of Section 4 and the applicability of extrapolation, should extend to other settings, including local volatility models and derivatives on more than one underlying or on an asset modelled by additional stochastic factors, e.g., stochastic volatility or interest rates. Another interesting extension would be to free-boundary problems arising from portfolio selection under transaction costs, but we anticipate especially the matched asymptotic expansions to differ more substantially here due to the presence of first order derivatives in the penalty term (c.f. [23]).
+
+References
+[1] Y. Achdou. An inverse problem for a parabolic variational inequality arising in volatility calibration with American options. SIAM Journal on Control and Optimization, 43(5):1583 1615, 2005. 32
+
+[2] R. A. Adams. Sobolev spaces. Amsterdam, Oxford: Academic Press, 2nd edition, 2003. [3] A. Bensoussan. On the theory of option pricing. Acta Applicandae Mathematicae, 2(2):139 158, 1984. [4] A. Bensoussan and J. L. Lions. Applications of variational inequalities in stochastic control, volume 12 of Studies in mathematics and its applications. Amsterdam, New York, Oxford: North-Holland Pub. Co. , 1982. [5] F. Black and M. Scholes. The pricing of options and corporate liabilities. Journal of Political Economy, 81(3):637654, 1973. [6] R. Cont and P. Tankov. Financial modelling with jump processes. Chapman and Hall/CRC, 2004. [7] C. W. Cryer. The solution of a quadratic programming problem using systematic overrelaxation. SIAM Journal on Control, 9(3):385392, 1971. [8] P. Wilmott, J. Dewynne and S. Howison. Option pricing: mathematical models and computation. Oxford: Oxford Financial Press, 1993. [9] Y. d'Halluin, P. A. Forsyth and G. Labahn. A penalty method for American options with jump diffusion processes. Journal of Computational and Applied Mathematics, 91:321352, 2003. [10] P. A. Forsyth and K. R. Vetzal. Quadratic convergence for valuing American options using a penalty method. SIAM Journal on Scientific Computing, 23(6):20952122, 2002. [11] R. Zvan, P. A. Forsyth and K. R. Vetzal. Penalty methods for American options with stochastic volatility. Journal of Computational and Applied Mathematics, 91(2):199218, 1998. [12] Y. Huang, P. A. Forsyth and G. Labahn. Inexact arithmetic considerations for direct control and penalty methods: American options under jump diffusion. Technical report, David R. Cheriton School of Computer Science, University of Waterloo, 2011. [13] E. J. Hinch. Perturbation Methods. Cambridge University Press, Cambridge, 1991. [14] S. D. Howison. Matched asymptotic expansions in financial engineering. Journal of Engineering Mathematics, 53:385406, 2005. [15] S. D. Howison. A matched asymptotic expansions approach to continuity corrections for discretely sampled options. Part 2: Bermudan options. Applied Mathematical Finance, 14:91 104, 2007. [16] K. Ito and K. Kunisch. Parabolic variational inequalities: The Lagrange multiplier approach. Journal de Math ematiques Pures et Appliqu es, 85(3):415449, 2006. [17] E. R. Jakobsen. On error bounds for monotone approximation schemes for multi-dimensional Isaacs equations. Asymptotic Analysis, 49(3,4):249273, 2006. [18] I. Karatzas. On the pricing of American options. Applied Mathematics and Optimization, 17(1):3760, 1988. [19] P. Jaillet, D. Lamberton, B. Lapeyre and C. La Courtine. Variational inequalities and the pricing of American options. Acta Applicandae Mathematicae, 21:263289, 1990. [20] W. Allegretto, Y. Lin and H. Yang. Finite element error estimates for a nonlocal problem in American option valuation. SIAM Journal on Numerical Analysis, 39(3):834857, 2001. [21] J. L. Lions and E. Magenes. Probl` emes aux limites non homog` enes et applications, volume 1. Paris: Dunod, 1968. 33
+
+[22] R. C. Merton. Option pricing when underlying stock returns are discontinuous. Working papers 787-75, Massachusetts Institute of Technology (MIT), Sloan School of Management, 1975. [23] M. H. A. Davis, A. R. Norman. Portfolio selection with transaction costs. Mathematics of Operations Research, 15(4):676713, 1990. [24] H. Pham. Optimal stopping, free boundary, and American option in a jump-diffusion model. Applied Mathematics and Optimization, 35(2):145164, 1997. [25] A. Fasano, A. Mancini, M. Primicerio and B. Zaltzman. Waiting time phenomena forced by critical boundary conditions in classical diffusion problems. Quarterly of Applied Mathematics, 69:105122, 2011. [26] C. Reisinger and A. Whitley. The effect of a natural time-change on the convergence of the Crank-Nicolson scheme. Technical report, Oxford University, http://arxiv.org/abs/1210.5487, 2012. [27] R. Scholz. Numerical solution of the obstacle problem by the penalty method. Numerische Mathematik, 49(2-3):255268, 1986. [28] S. Shreve. Stochastic calculus for finance II: continous-time models. New York: Springer, 2008. [29] B. F. Nielsen, O. Skavhaug and A. Tveito. Penalty and front-fixing methods for the numerical solution of American option problems. Journal of Computational Finance, 5(2):6997, 2002. [30] B. F. Nielsen, O. Skavhaug and A. Tveito. Penalty methods for the numerical solution of American multi-asset option problems. Journal of Computational and Applied Mathematics, 222(1):316, 2008. [31] S. D. Howison, M. Steinberg. A matched asymptotic expansions approach to continuity corrections for discretely sampled options. Part 1: Barrier options. Applied Mathematical Finance, 14:6389, 2007. [32] J. Wang and P. A. Forsyth. Maximal use of central differencing for Hamilton-Jacobi-Bellman PDEs in finance. SIAM Journal on Numerical Analysis, 46(3):15801601, 2008. [33] J. H. Witte. On penalty based finite element methods for the pricing of American options. Transfer report, Mathematical Institute, University of Oxford, 2009. [34] K. Zhang, S. Wang, X. Q. Yang and K. L. Teo. A power penalty approach to numerical solutions of two-asset American options. Numerical Mathematics: Theory, Methods and Applications, 2(2):202223, 2009. [35] K. Zhang, X. Yang and K. L. Teo. Convergence analysis of a monotonic penalty method for American option pricing. Journal of Mathematical Analysis and Applications, 348(2):915926, 2008. [36] S. Wang, X. Q. Yang and K. L. Teo. Power penalty method for a linear complementarity problem arising from American option valuation. Journal of Optimization Theory and Applications, 129(2):227254, 2006. [37] X. L. Zhang. M ethodes num eriques pour le calcul des options am ericaines dans un mod` ele de  diffusion avec des sauts. Th` ese de doctorat, Ecole Nationale des Ponts et Chauss ees, 1994. [38] X. L. Zhang. Numerical analysis of American option pricing in a jump-diffusion model. Mathematics of Operations Research, 22(3):668690, 1997.
+
+34
+

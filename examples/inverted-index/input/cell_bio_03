@@ -1,0 +1,196 @@
+Capacity of a Simple Intercellular Signal Transduction Channel
+Andrew W. Eckford
+Dept. of Computer Science and Engineering York University Toronto, Ontario, Canada M3J 1P3 Email: aeckford@yorku.ca
+
+Peter J. Thomas
+Dept. of Mathematics and Dept. of Biology Case Western Reserve University Cleveland, Ohio, USA 44106-7058 Email: pjthomas@case.edu
+
+arXiv:1305.2245v1 [cs.IT] 10 May 2013
+
+Abstract--We model the ligand-receptor molecular communication channel with a discrete-time Markov model, and show how to obtain the capacity of this channel. We show that the capacity-achieving input distribution is iid; further, unusually for a channel with memory, we show that feedback does not increase the capacity of this channel.
+
+input distributions were found for a simplified "ideal" receptor; that paper also discusses but does not solve the capacity for the channel model we use. II. M ODELS Notation. Capital letters, e.g., X , are random variables; lower-case letters are constants or particular values of the corresponding random variable, e.g., x is a particular value of X . Vectors use superscripts: X i represents an i-fold random vector with elements [X1 , X2 , . . . , Xi ]; xi represents a particular value of X i . Script letters, e.g., X , are sets. The logarithm is base 2 unless specified. A. Physical model Signalling between biological cells involves the transmission of signalling molecules, or ligands. These ligands propagate through a shared medium until they are absorbed by a receptor on the surface of a cell. Thus, a message can be passed to a cell by affecting the states of the receptors on its surface; moreover, this process can be modelled as a finite state machine. This setup is depicted in Figure 1, and our goal in this paper is to calculate the information-theoretic capacity of this channel. Finite state Markov processes conditional on an input process provide models of signal transduction and communication in a variety of biological systems, including chemosensation via ligand-receptor interaction, [16], [17], dynamics of ion channels sensitive to signals carried by voltage, neurotransmitter concentration, or light [18][20]. Typically a single ion channel or receptor is in one of n states, with instantaneous transition rate matrix Q = [qjk ] depending on an external input X (t). The probability, pk , that the channel is in state Y (t) = k  Y evolves according to
+n
+
+I. I NTRODUCTION Microorganisms communicate using molecular communication, in which messages are expressed as patterns of molecules, propagating via diffusion from transmitter to receiver: what can information theory say about this communication? The physics and mathematics of Brownian motion and chemoreception are well understood (e.g., [1], [2]), so it is possible to construct channel models and calculate information-theoretic quantities, such as capacity [3]. We expect that Shannon's channel coding theorem, and other limit theorems in information theory, express ultimate limits on reliable communication, not just for human-engineered systems, but for naturally occurring systems as well. We can hypothesize that evolutionary pressure may have optimized natural molecular communication systems with respect to these limits [4]. Calculating quantities such as capacity may allow us to make predictions about biological systems, and explain biological behaviour [5], [6]. Recent work on molecular communication can be divided into two categories. In the first category, work has focused on the engineering possibilities: to exploit molecular communication for specialized applications, such as nanoscale networking [7], [8]. In this direction, information-theoretic work has focused on the ultimate capacity of these channels, regardless of biological mechanisms (e.g., [9], [10]). In the second category, work has focused on analyzing the biological machinery of molecular communication (particularly ligandreceptor systems), both to describe the components of a possible communication system [11] and to describe their capacity [12][15]. Our paper, which builds on work presented in [13], fits into this category, and many tools in the informationtheoretic literature can be used to solve problems of this type. Related work is also found in [14], where capacity-achieving
+This work was funded by grants from the National Science Foundation (DMS-0720142, EF-1038677) and the Natural Sciences and Engineering Research Council (NSERC).
+
+dpk /dt =
+j =1
+
+pj (t)qjk (X (t))
+
+(1)
+
+where for (j = k ), qjk is the input-dependent per capita rate at which the receptor transitions from state j to state k , and qjj = - k=j qjk . Taking {X (t)}T t=0 as the input, and the receptor state Y (t)  Y as the output, gives a channel model, the capacity of which is of general interest.
+
+Here we specialize from (1) to the case of a single receptor that can be in one of two states, either bound to a signaling molecule or ligand (Y = B), or unbound (Y = U) and hence available to bind. Thus Y = {U, B}. (In practice, signals are transduced in parallel by multiple receptor protein molecules, however in many instances they act to a good approximation as independent receivers of a common ligand concentration signal, in which case analysis of the single molecule channel can provides a useful reference point.) When the receptor is bound by a ligand molecule, the signal is said to be transduced; typically the receptor (a large protein molecule) undergoes a conformational shift upon binding the ligand. This change then signals the presence of the ligand through a cascade of intracellular reactions catalyzed by the bound receptor. The ligand-receptor interaction comprises two chemical reactions, a binding reaction (ligand + receptor - bound receptor) with on-rate k+ , and a reverse, unbinding reaction with off-rate k- . In a continuous time model, let p(t) = Pr[Yt = B]. Then (1) reduces to dp/dt = k+ c(t)(1 - p(t)) - k- p(t), (2)
+
+U$
+Ligands$
+
+Cell$ B$
+
+Fig. 1. A depiction of our system, in which information is passed to the cell by affecting the state of the receptor. When the ligand binds to the receptor, the receptor enters the B state, no longer sensitive to the concentration of ligands. When the ligand unbinds (leaves), the cell enters the U state. While in the U state, the binding rate is dependent of the concentration, either H or L. Discrete-time state transition probabilities H , L , and  are illustrated.
+
+addition, Kabanov proved that the capacity of the Poisson channel cannot be increased by allowing feedback. B. Mathematical model Motivated by the preceding discussion, we examine a discrete-time, finite-state Markov representation of both the transmission process and the observation process. We also use a two-state Markov chain to represent the state of the observer. As in the continuous time case, the receiver may either be in an unbound state, in which the receiver is waiting for a molecule to bind to the receptor, or in a bound state, in which the receiver has captured a molecule, and must release it before capturing another. Let X = {L, H} represent the input alphabet, where L represents low concentration, and H represents high concentration. Let X n = [X1 , X2 , . . . , Xn ] represent a sequence of (random) inputs, where Xi  X for all i. For now, we make no assumptions on the distribution of X n . As before, let Y = {U, B} represent the output alphabet, where U represents the unbound state and B represents the bound state. Also, let Y n = [Y1 , Y2 , . . . , Yn ] represent a sequence of outputs, where Yi	Y for all i. We define parameters to bring the continuous-time dynamics, expressed in (1), into discrete time. In our model, the transition probability from U to B (called the binding rate) is dependent on the input concentration xi . However, the transition probability from B to U (called the unbinding rate) is independent of xi . Thus, given xn , y n forms a nonstationary Markov chain with three parameters:  L , the binding rate given xi = L;  H , the binding rate given xi = H; and   , the unbinding rate (independent of xi ). We assume H  L , since binding is more likely at high concentration. If xi = L, then the transition probability matrix is given by PY |X =L = 1 - L  L 1- , (4)
+
+where c(t) is the time-varying ligand concentration. A key feature distinguishing this channel is that the receptor is insensitive to the input when in the state Y = B, and can only transduce information about the input, X (t) = k+ c(t), when Y = U. Thus, analysis of the ligand-binding channel is complicated by the receptor's insensitivity to changes in concentration occurring while the receptor is in the occupied state. This fact plays a decisive role in our proof of our main result, which asserts that feedback from the channel state to the input process cannot increase the capacity, in a discrete time analog of this simple model of intercellular communication. In the limit in which transition from the bound state back to the unbound state is instantaneous, the ligand-binding channel becomes a simple counting process, with the input encoded in the time varying intensity. This situation is exactly the one considered in Kabanov's analysis of the capacity of a Poisson channel, under a max/min intensity constraint [21], [22]. For the Poisson channel, the capacity may be achieved by setting the input to be a two-valued random process fluctuating between the maximum and minimum intensities. If the intensity is restricted to lie in the interval [1, 1 + c], the capacity is [22] CKab (c) = 1 (c + 1)1+1/c - 1+ e c ln(c + 1). (3)
+
+Our long-term goal is to obtain expressions analogous to (3) for the continuous-time systems (1) and (2). As a first step, we restrict attention to a discrete time analog of the two-state system (2). Kabanov's formula may be obtained by restricting the input to a two-state discrete time Markov process with input X (t) taking the values Xlo = 1 and Xhi = 1 + c, with transitions Xlo  Xhi happening with probability r, and transitions Xhi	Xlo with probability s, per time step. Maximizing the mutual information with respect to r and s, and taking the limit of small time steps, yields (3). In
+
+with entries for U on the first row and column, and B on the second row and column. If xi = H, we have PY |X =H = 1 - H  H 1- . (5)
+
+following result, found in the literature, says there is at least one feedback-capacity-achieving input distribution in P  . Lemma 1: Taking the maximum in (9) over P	 P ,
+pX n |Y n (xn | y n )P
+
+max
+
+These matrices thus specify pYn+1 |Xn+1 ,Yn (yn+1 |xn+1 , yn ). III. C APACITY OF THE INTERCELLULAR TRANSDUCTION
+CHANNEL
+
+n
+
+lim
+
+1 I (X n  Y n ) n
+
+= Cfb .
+
+(12)
+
+The main result of this paper is to show that capacity of the discrete-time intercellular transduction channel is achieved by an iid input distribution for 0 < L , H ,  < 1. Our approach is to start with the feedback capacity, show that it is achieved with an iid input distribution, and conclude that feedback capacity must therefore be equal to regular capacity; unusually for a channel with memory, feedback does not increase capacity of our channel. In proving these statements, we rely on the important results on feedback capacity from [23], [24]. Let C represent the capacity of the system without feedback, and let Ciid represent the capacity of the system, restricting the input distribution to be iid. Then the main result is formally stated as follows: Theorem 1: For the intercellular signal transduction channel described in this paper, if 0 < L , H ,  < 1, Cfb = C = Ciid . (6)
+
+Proof: The lemma follows from [23, Thm. 1]. It turns out that the feedback-capacity-achieving input distribution in P  causes Y n to be a Markov chain (the reader may check; see also [23], [24]). That is, pYn |Y n-1 (yn | y n-1 ) = pYn |Yn-1 (yn | yn-1 ). Using the following shorthand notation: pL|B
+(i) pL|U (i)
+
+(13)
+
+:= pXi |Yi-1 (L | B) := pXi |Yi-1 (L | U) := H (1 - pL|U ) + L pL|U ,
+(i) (i)
+
+(14) (15) (16)
+
+  (i)
+
+where the superscripts represent the time index, the transition (i) probability matrix for Y at time i, PY , is PY =
+(i)
+
+1-  (i)
+
+  (i) 1-
+
+,
+
+(17)
+
+The remainder of this section is dedicated to the proof of Theorem 1. We start with feedback capacity, which is defined using directed information. The directed information between vectors X n and Y n [25] is given by
+n
+
+with the first row and column corresponding to U , and the second row and column corresponding to B . We now consider stationary distributions. Let P	P  represent the distributions that can be written with stationary pXi |Yi-1 (xi | yi-1 ), i.e., with some time-independent distribution pX |Y such that
+n
+
+pX n |Y n (xn | y n ) =
+k=2
+
+pX |Y (xi | yi-1 ) pX1 (x1 ). (18)
+
+I (X n	Y n ) =
+i=1
+
+I (X i ; Yi | Y i-1 ).
+
+(7)
+
+The per-symbol directed information rate is given by 1 lim I (X n  Y n ). n n Feedback capacity, Cfb , is then given by Cfb =
+pX n |Y n (x |
+
+Then: Lemma 2: Taking the maximum in (9) over P   P   P,
+pX n |Y n (xn | y n )P
+
+(8)
+
+max
+
+n
+
+lim
+
+1 I (X n  Y n ) n
+
+= Ciid . (19)
+
+max n
+
+y n )P
+
+n
+
+lim
+
+1 I (X n  Y n ) , n
+
+(9)
+
+Proof: We start by showing that I (X i ; Yi | Y i-1 ) is (k) independent of pL|B for all k . There is a feedback-capacityachieving input distribution in P  (from Lemma 1). Using this input distribution, I (X i ; Yi | Y i-1 ) = H (Yi | Y i-1 ) - H (Yi | Yi-1 , X i ) (20)
+
+where P represents the set of causal-conditional feedback input distributions: pX n |Y n (xn | y n )  P if and only if pX n |Y n (xn | y n ) can be written as
+n
+
+= H (Yi | Yi-1 ) - H (Yi | Yi-1 , Xi ). (21) pXk |X k-1 ,Y k-1 (xk |xk-1 , y k-1 )pX1 (x1 ). where (21) follows since (by definition) Y is conditionally i k=2 i-1 given Yi-1 , and since Y i is first-order (10) independent of X Let P   P represent the set of feedback input distributions Markov. Expanding (21), that can be written I (X i ; Yi | Y i-1 ) = pX n |Y n (xn |y n ) =
+n
+
+pX n |Y n (xn | y n ) =
+i=2
+
+pXi |Yi-1 (xi | yi-1 )pX1 (x1 ).
+
+(11)
+yi-1
+
+pYi-1 (yi-1 )
+xi
+
+pXi |Yi-1 (xi | yi-1 )
+
+(22)
+
+(Note that distributions in P  need not be stationary: pXi |Yi-1 (x | y ) can depend on i.) Then P   P for n > 2. The
+
+
+yi
+
+pYi |Yi-1 ,Xi (yi |yi-1 , xi ) log
+
+pYi |Yi-1 ,Xi (yi |yi-1 , xi ) . pYi |Yi-1 (yi |yi-1 )
+
+From (17), pYi-1 (yi-1 ) is calculated from parameters in (i) PY and the initial state, so pYi-1 (yi-1 ) is independent (k ) of pL|B for all k . Further, everything under the last sum (over yi ) is independent of pL|B , from (17) and the definition of pYi |Yi-1 ,Xi (yi | yi-1 , xi ). There remains the term (i-1) pXi |Yi-1 (xi | yi-1 ), which is dependent on pL|B when yi-1 = B . However, if yi-1 = B , then pYi |Yi-1 ,Xi (yi | B, xi ) log
+yi (k )
+
+pYi |Yi-1 ,Xi (yi | B, xi ) pYi |Yi-1 (yi | B ) (23) (24) (25)
+
+-p log2 p - (1 - p) log2 (1 - p) represent the binary entropy function. In the iid input distribution, let pL and pH represent the probability of low and high concentration, respectively. Then 1 lim I (X ; Y ) n n = H (Yn | Yn-1 ) - H (Yn | Xn , Yn-1 ) (27) H(H pH + L pL ) - pH H(H ) - pL H(L ) . (28) = 1 + (H pH + L pL )/ Maximizing this expression with respect to pL and pH (with appropriate constraints) gives the capacity. It is straightforward to show that the largest possible value of the capacity is obtained in the limit L ,   0 and H  1; in this case the capacity is exactly  C = log   0.694242 (bits per time step), where  = (1 + 5)/2; this capacity is achieved when pH =  - 1  0.381966. IV. ACKNOWLEDGMENTS The authors thank Robin Snyder and Marshall Leitman for their comments, and Toby Berger for giving us a copy of [26]. A PPENDIX We start by defining strong irreducibility and strong aperiodicity for Y n , assuming that the input distribution is in P  ^ = [P ^ij ] (i.e., Y n is a Markov chain). Recalling (4)-(5), let P represent a 2	2 {0, 1} matrix with elements ^ij = P 1, mink{L,H} PY |X =k,ij > 0 0, otherwise, (29)
+
+=
+yi
+
+pY |Y (yi | B ) pYi |Yi-1 (yi | B ) log i i-1 pYi |Yi-1 (yi | B ) pYi |Yi-1 (yi | B ) log 1
+
+=
+yi
+
+=
+
+0,
+
+where (23) follows since yi is independent of xi in state B . (k) Thus, the entire expression is independent of pL|B for all k . Moreover, from (7), directed information is independent of (k) pL|B for all k . To prove (19), distributions in P  have pL|U = pL|U = . . ., and pL|B = pL|B = . . .. Since I (X i ; Yi | Y i-1 ) is independent of pL|B for all k (by the preceding argument), we may set pL|B = pL|H for all k , without changing I (X i ; Yi | Y i-1 ). Thus, inside P  , there exists a maximizing input distribution that is independent for each channel use. By the definition of P  , that maximizing input distribution is iid, and there cannot exist an iid input distribution outside of P  . Finally, we must show that feedback capacity is itself achieved by a stationary input distribution. To do so, we rely on [24, Thm. 4], which states that there is a feedback-capacityachieving input distribution in P  , as long as several technical conditions are satisfied. Stating the conditions and proving that they hold requires restatement of definitions from [24], so we give this result in the appendix as Lemma 3. Up to now, we have dealt only with feedback capacity. We now return to the proof of Theorem 1, where we relate these results to the regular capacity C . Proof: From Lemma 1, Cfb is satisfied by an input distribution in P  . From Lemma 2, if we restrict ourselves to the stationary input distributions P	(where P   P  ), then the feedback capacity is Ciid . From Lemma 3, the conditions of [24, Thm. 4] are satisfied, which implies that there is a feedback-capacity-achieving input distribution in P  . Therefore, Cfb = Ciid . (26) Considering the regular capacity C , Cfb  C , since the receiver has the option to ignore feedback; and C  Ciid , since an iid input distribution is a possible (feedback-free) input distribution. Thus, Cfb = C = Ciid . Finally, if the input distribution is iid, then Y n is a Markov chain (see also the discussion after Lemma 1), and the mutual information rate can be expressed in closed form. Let H(p) =
+(k) (k) (k ) (1) (2) (1) (2)
+
+^ represent the i, j th element and for positive integers , let P ij ^ of P . Further, for the ith diagonal element of the th matrix ^ , let Di contain the set of integers such that P ^ = 0. power P ii ii Then: n  Y is strongly irreducible if, for each pair i, j , there exists ^ = 0; and an integer > 0 such that P ij n  If Y is strongly irreducible, it is also strongly aperiodic if, for all i, the greatest common divisor of Di is 1. These conditions are described in terms of graphs in [24], but our description is equivalent. Lemma 3: If 0 < L , H ,  < 1, the conditions of [24, Thm. 4] are satisfied, namely: 1) Y n is strongly irreducible and strongly aperiodic. 2) For i	{U, B}, let Ri = pYt |Xt ,Yt+1 (B | L, i) pYt |Xt ,Yt+1 (B | H, i) pYt |Xt ,Yt+1 (U | L, i) pYt |Xt ,Yt+1 (U | H, i) (30) ,
+
+and let I (p, Ri ) = I (Y1 ; X1 | Y0 = i), where the input distribution is p  P  , and the input-output probabilities are given by Ri . Then (reiterating [24, Defn. 6]) for the set of possible input distributions in P  , and for all ~  satisfying i  {U, B}, there exists a subset P  ~  }. a) {Ri p : p  P } = {Ri p : p	P
+
+[3] J. M. Kimmel, R. M. Salter, and P. J. Thomas, "An information theoretic framework for eukaryotic gradient sensing," in Advances in Neural Information Processing Systems 19 (B. Sch olkopf and J. Platt and T. Hoffman, ed.), pp. 705712, Cambridge, MA: MIT Press, 2007. [4] E. K. Agarwala, H. J. Chiel, and P. J. Thomas, "Pursuit of food versus Ri p=r i pursuit of information in a markovian perception-action loop model of =  (31) foraging," J Theor Biol, vol. 304, pp. 23572, Jul 2012. [5] R. Cheong, A. Rhee, C. J. Wang, I. Nemenman, and A. Levchenko, "Information transduction capacity of noisy biochemical signaling netc) There exists a positive constant  such that works," Science, Sep 2011. [6] P. J. Thomas, "Cell signaling: Every bit counts," Science, vol. 334, I (p2 , Ri ) I (p1 , Ri ) pp. 3212, Oct 2011. -  -||p2 - p1 || (32)	 [7] S. Hiyama, Y. Moritani, T. Suda, R. Egashira, A. Enomoto, M. Moore, and T. Nakano, "Molecular communication," in Proc. 2005 NSTI Nan~  , where is in for any nonidentical p1 , p2	P otechnology Conference, pp. 391394, 2005. the direction from p1 to p2 , and the norm is the [8] L. Parcerisa and I. F. Akyildiz, "Molecular communication options for long range nano networks," Computer Networks, vol. 53, pp. 27532766, Euclidean vector norm. Nov. 2009. Proof: To prove the first part of the lemma, if 0 < [9] A. W. Eckford, "Nanoscale communication with Brownian motion," in ^ is an all-one matrix, so Y n is strongly Proc. 41st Annual Conference on Information Sciences and Systems L , H ,  < 1, then P (CISS), 2007. irreducible (with = 1); further, since the positive powers of [10] R. Song, C. Rose, Y.-L. Tsai, and I. S. Mian, "Wireless signalling with an all-one matrix can never have zero elements, Di contains all identical quanta," in IEEE Wireless Commun. and Networking Conf., 2012. To appear. positive integers from 1 to n, whose greatest common divisor [11] T. Nakano, T. Suda, T. Kojuin, T. Haraguchi, and Y. Hiraoka, "Molecis 1, so Y n is strongly aperiodic. ular communication through gap junction channels: System design, To prove the second part of the lemma, we first show that experiments and modeling," in Proc. 2nd International Conference on Bio-Inspired Models of Network, Information, and Computing Systems, the definition is satisfied for RB , given by Budapest, Hungary, 2007. [12] B. Atakan and O. Akan, "An information theoretical approach for 1- 1- RB = . (33) molecular communication,," in Proc. 2nd Intl. Conf. on Bio-Inspired   Models of Network, Information, and Computing Systems, 2007. [13] D. J. Spencer, S. K. Hampton, P. Park, J. P. Zurkus, and P. J. Thomas, ~  to consist of a single point p  P  We choose the subset P "The diffusion-limited biochemical signal-relay channel," in Advances in Neural Information Processing Systems 16 (S. Thrun, L. Saul, and (it can be any point, as all points give the same result). The Sch olkopf, eds.), Cambridge, MA: MIT Press, 2004. columns of RB are identical, since the output is not dependent [14] B. A. Einolghozati, M. Sardari, and F. Fekri, "Capacity of diffusionon the input in state B. Then for every p  P  , based molecular communication with ligand receptors," in IEEE Inform. Theory Workshop, 2011. 1- 1- 1- pL|B A. Einolghozati, M. Sardari, A. Beirami, and F. Fekri, "Capacity of = . (34) [15] discrete RB p = molecular diffusion channels," in IEEE Intl. Symp. on Inform.    pH|B Theory, 2011. ~  , so condition 1 is [16] K. Wang, W.-J. Rappel, R. Kerr, and H. Levine, "Quantifying noise This is also true of the single point in P levels of intercellular signals.," Phys Rev E Stat Nonlin Soft Matter Phys, satisfied. Similarly, by inspection of (33), when Y0 = B, the vol. 75, no. 6 Pt 1, p. 061905, 2007 Jun. output Y1 is not dependent on the input X1 , so I (p, RB ) = 0 [17] M. Ueda and T. Shibata, "Stochastic signal processing and transduction in chemotactic response of eukaryotic cells.," Biophys J, vol. 93, pp. 11 for all p  P . Since all p  P  "maximize" I (p, RB ) and 20, Jul 1 2007.  ~ have identical values of Rp (including the single point in P ), [18] D. Colquhoun and A. G. Hawkes, Single-Channel Recording, ch. The ~	is always in both sets, and the Principles of the Stochastic Interpretation of Ion-Channel Mechanisms. then the single point p	P Plenum Press, New York, 1983. intersection (31) is nonempty; so condition 2 is satisfied. There [19] D. X. Keller, K. M. Franks, T. M. Bartol, Jr, and T. J. Sejnowski,  ~ is only one point in P , so condition 3 is satisfied trivially. "Calmodulin activation by calcium transients in the postsynaptic density of dendritic spines," PLoS One, vol. 3, no. 4, p. e2045, 2008. Now we show the conditions are satisfied for RU , given by [20] K. Nikolic, J. Loizu, P. Degenaar, and C. Toumazou, "A stochastic model of the single photon response in drosophila photoreceptors," Integr Biol L H RU = . (35) (Camb), vol. 2, pp. 35470, Aug 2010. 1 - L 1 - H [21] M. Davis, "Capacity and cutoff rate for poisson-type channels," IEEE Transactions on Information Theory, vol. 26, no. 6, pp. 710  715, 1980. There are two possibilities. First, suppose L = H , so that [22] Y. M. Kabanov, "The capacity of a channel of the poisson type," Theory RU has the same form as RB ; then RU satisfies the conditions of Probability and Applications, vol. 23, pp. 143147, 1978. In Russian. English translation by M. Silverman. by the same argument that we gave above. Second, suppose L = H ; then RU has rank 2, so by [24, Lem. 6], RU satisfies [23] Y. Ying and T. Berger, "Characterizing optimum (input, output) processes for finite-state channels with feedback," in Proc. IEEE Intl. Symp. the conditions. on Info. Theory, p. 117, 2003. Closely related results on feedback capacity of binary [24] J. Chen and T. Berger, "The capacity of finite-state markov channels with feedback," IEEE Trans. Info. Theory, vol. 51, pp. 780798, Mar. channels were given in [26] (unfortunately, unpublished). 2005. [25] J. L. Massey, "Causality, feedback and directed information," in R EFERENCES Proc. 1990 Intl. Symp. on Info. Th. and its Applications, 1991. [1] I. Karatzas and S. E. Shreve, Brownian Motion and Stochastic Calculus [26] Y. Ying and T. Berger, "Feedback capacity of binary channels with unit output memory," unpublished. (2nd edition). New York: Springer, 1991. [2] H. C. Berg and E. M. Purcell, "Physics of chemoreception," Biophysical Journal, vol. 20, pp. 193219, 1977.
+
+b) For any r  {Ri p : p  P  ]},     arg max I (p, Ri )	arg max I (p, Ri ) ~ p:pP p:pP	 R p =r
+

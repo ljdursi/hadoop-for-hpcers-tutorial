@@ -1,0 +1,293 @@
+Families of fast elliptic curves from Q-curves
+Benjamin Smith
+Team GRACE, INRIA Saclayle-de-France and Laboratoire d'Informatique de l'cole polytechnique (LIX) Btiment Alan Turing, 1 rue Honor d'Estienne d'Orves Campus de l'cole polytechnique, 91120 Palaiseau, France
+
+arXiv:1305.5400v1 [math.NT] 23 May 2013
+
+Abstract. We construct new families of elliptic curves over Fp 2 with efficiently computable endomorphisms, which can be used to accelerate elliptic curvebased cryptosystems in the same way as GallantLambertVanstone (GLV) and GalbraithLinScott (GLS) endomorphisms. Our construction is based on reducing Q-curves--curves over quadratic number fields without complex multiplication, but with isogenies to their Galois conjugates--modulo inert primes. As a first application of the general theory we construct, for every p > 3, two one-parameter families of elliptic curves over Fp 2 equipped with endomorphisms that are faster than doubling. Like GLS (which appears as a degenerate case of our construction), we offer the advantage over GLV of selecting from a much wider range of curves, and thus finding secure group orders when p is fixed. Unlike GLS, we also offer the possibility of constructing twist-secure curves. Among our examples are prime-order curves equipped with fast endomorphisms, with almost-prime-order twists, over Fp 2 for p = 2127 - 1 and p = 2255 - 19.
+
+Keywords: Elliptic curve cryptography, endomorphisms, GLV, GLS, exponentiation, scalar multiplication, Q-curves.
+
+1 Introduction
+Let E be an elliptic curve over a finite field Fq , and let G  E (Fq ) be a cyclic subgroup of prime order N . When implementing cryptographic protocols using G , the fundamental operation is scalar multiplication (or exponentiation): Given P in G and m in Z, compute [m ]P := P	    P .
+m times
+
+The literature on general scalar multiplication algorithms is vast, and we will not explore it in detail here (see [11, 2.8,11.2] and [5, Chapter 9] for introductions to exponentiation and multiexponentiation algorithms). For our purposes, it suffices to note that the dominant factor in scalar multiplication time using conventional algorithms is the bitlength of m . As a basic example, if G is a generic cyclic abelian group, then we may compute [m ]P using a variant of the binary method, which requires at most log2 m  doublings and (in the worst case) about as many addings in G .
+
+But elliptic curves are not generic groups: they have a rich and concrete geometric structure, which should be exploited for fun and profit. For example, endomorphisms of elliptic curves may be used to accelerate generic scalar multiplication algorithms, and thus to accelerate basic operations in curve-based cryptosystems. Suppose E is equipped with an efficient endomorphism , defined over Fq . By efficient, we mean that we can compute the image (P ) of any point P in E (Fq ) for the cost of O (1) operations in Fq . In practice, we want this to cost no more than a few doublings in E (Fq ). Assume (G )  G , or equivalently, that  restricts to an endomorphism of G .1 Now G is a finite cyclic group, isomorphic to Z/N Z; and every endomorphism of Z/N Z is just an integer multiplication modulo N . Hence,  acts on G as multiplication by some integer eigenvalue  : that is, |G = [ ]G . The eigenvalue  must be a root in Z/N Z of the characteristic polynomial of . Returning to the problem of scalar multiplication: we want to compute [m ]P . Rewriting m as m = a + b  (mod N ) for some a and b , we can compute [m ]P using the relation [m ]P = [a ]P + [b  ]P = [a ]P + [b ](P ) and a two-dimensional multiexponentation such as Straus's algorithm [26], which requires has a loop length of log2 (a , b )  (ie, log2 (a , b )	doubles and as many adds; recall that (a , b )	= max(|a |, |b |)). If	is not too small, then we can easily find (a , b ) such that log2 (a , b )  is roughly half of log2 N . (We remove the "If" and the "roughly" for our  in 4.) The endomorphism lets us replace conventional log2 N -bit scalar multiplications with 1 2 log2 N -bit multiexponentiations. In terms of basic binary methods, we are halving the loop length, cutting the number of doublings in half. Of course, in practice we are not halving the execution time. The precise speedup ratio depends on a variety of factors, including the choice of exponentiation and multiexponentiation algorithms, the cost of computing , the shortness of a and b on the average, and the cost of doublings and addings in terms of bit operations--to say nothing of the cryptographic protocol, which may prohibit some other conventional speedups. For example: in [12], Galbraith, Lin, and Scott report experiments where cryptographic operations on GLS curves required between 70% and 83% of the time required for the previous best practice curves--with the variation depending on the architecture, the underyling point arithmetic, and the protocol.
+1 This assumption is satisfied almost by default in the context of old-school discrete log (Z/N Z)2 , so N 2 | #E (Fq ) based cryptosystems. If (G )  G , then E [N ](Fq ) = G + (G ) =
+
+and N | q - 1; such E are cryptographically inefficient, and discrete logs in G are vulnerable to the MenezesOkamotoVanstone reduction [21]. However, these G do arise naturally in pairing-based cryptography; in that context the assumption should be verified carefully.
+
+2
+
+To put this technique into practice, we need a source of cryptographic elliptic curves equipped with efficient endomorphisms. To date, in the large characteristic case2 , there have been essentially only two constructions: 1. The classic GallantLambertVanstone (GLV) construction [13]. Elliptic curves over number fields with explicit complex multiplication by CM-orders with small discriminants are reduced modulo suitable primes p ; an explicit endomorphism on the CM curve reduces to an efficient endomorphism over the finite field. 2. The more recent GalbraithLinScott (GLS) construction [12]. Here, curves over Fp are viewed over Fp 2 ; the p -power sub-Frobenius induces an extremely efficient endomorphism on the quadratic twist (which can have prime order). These two constructions have since been combined to give 3- and 4-dimensional variants [18,30], and extended to hyperelliptic curves in a variety of ways [3,17,24,27]. However, basic GLV and GLS remain the archetypal constructions. Our contribution: new families of endomorphisms. In this work, we propose a new source of elliptic curves over Fp 2 with efficient endomorphisms: quadratic Q-curves. Definition 1. A quadratic Q-curve of degree d is an elliptic curve E without complex multiplication, defined over a quadratic number field K , such that there exists an isogeny of degree d from E to its Galois conjugate E , where  = Gal(K /Q). (The Galois conjugate E is the curve formed by applying  to all of the coefficients of E .)
+Q-curves are well-established objects of interest in number theory, where they have formed a natural setting for generalizations of the ShimuraTaniyama conjecture. Ellenberg's survey [9] gives an excellent introduction to this beautiful theory. Our application of quadratic Q-curves is rather more prosaic: given a d -isogeny E  E over a quadratic field, we reduce modulo an inert prime p to obtain an isogeny E  E over Fp 2 . We then exploit the fact that the p -power Frobenius isogeny maps E back onto E ; composing with the reduced d -isogeny, we obtain an endomorphism of E of degree d p . For efficiency reasons, d must be small; it turns out that for small values of d , we can write down one-parameter families of Q-curves (our approach below was inspired by the explicit techniques of Hasegawa [15]). We thus obtain one-parameter families of elliptic curves over Fp 2 equipped with efficient non-integer endomorphisms. For these endomorphisms we can give convenient explicit formul for short scalar decompositions (see 4). For concrete examples, we concentrate on the cases d = 2 and 3 (in 5 and 6, respectively), where the endomorphism is more efficient than a single doubling (we briefly discuss higher degrees in 10). For maximum generality and flexibility, we define our curves in short Weierstrass form; but we include transformations to Montgomery, twisted Edwards, and DocheIcartKohel models where appropriate in 8.
+
+Comparison with GLV. Like GLV, our method involves reducing curves defined over number fields to obtain curves over finite fields with explicit complex multiplication.
+2 We are primarily interested in the large characteristic case, where q = p or p 2 ; so we will
+
+not discuss -adic/Frobenius expansion-style techniques here.
+
+3
+
+However, we emphasise a profound difference: in our method, the curves over the number fields generally do not have complex multiplication themselves. GLV curves are necessarily isolated examples--and the really useful examples are extremely limited in number (see [18, App. A] for a list of curves). The scarcity of GLV curves3 is their Achilles' heel: as noted in [12], if p is fixed then there is no guarantee that there will exist a GLV curve with prime (or almost-prime) order over Fp . Consider the situation discussed in [12, 1]: the most efficient GLV curves have CM discriminants -3 and -4. If we are working at a 128-bit security level, then the choice p = 2255 - 19 allows particularly fast arithmetic in Fp . But the largest prime factor of the order of a curve over Fp with CM discriminant -4 (resp. -3) has 239 (resp. 230) bits: using these curves wastes 9 (resp. 13) potential bits of security. In fact, we are lucky with D = -3 and -4: for all of the other discriminants offering endomorphisms of degree at most 3, we can do no better than a 95-bit prime factor, which represents a catastrophic 80-bit loss of relative security. In contrast, our construction yields true families of curves, covering  p isomorphism classes over Fp 2 . This gives us a vastly higher probability of finding prime (or almost-prime)-order curves over practically important fields. Comparison with GLS. Like GLS, we construct curves over Fp 2 equipped with an inseparable endomorphism. While these curves are not defined over the prime field, the fact that the extension degree is only 2 means that Weil descent attacks offer no advantage when solving DLP instances (see [12, 9]). And like GLS, our families offer around p distinct isomorphism classes of curves, making it easy to find secure group orders when p is fixed. But unlike GLS, our curves have j -invariants in Fp 2 : they are not isomorphic to or twists of subfield curves. This allows us to find twist-secure curves, which are resistant to the FouqueLercierRalValette fault attack [10]. As we will see in 9, our construction reduces to GLS in the degenerate case d = 1 (that is, where  is an isomorphism). Our construction is therefore a sort of generalized GLS--though it is not the higher-degree generalization anticipated by Galbraith, Lin, and Scott themselves, which composes the sub-Frobenius with a non-rational separable homomorphism and its dual homomorphism (cf. [12, Theorem 1]). In 4, we prove that we can immediately obtain decompositions of the same bitlength as GLS for curves over the same fields: the decompositions produced by our Proposition 2 are identical to the GLS decompositions of [12, Lemma 2] when
+3 The scarcity of useful GLV curves is easily explained: efficient separable endomorphisms
+
+have extremely small degree (so that the dense defining polynomials can be evaluated quickly). But the degree of the endomorphism is the norm of the corresponding element of the CM-order; and to have non-integers of very small norm, the CM-order must have a tiny discriminant. Up to twists, the number of elliptic curves with CM discriminant D is the Kronecker class number h (D ), which is in O ( D ). Of course, for the tiny values of D in question, the asymptotics of h (D ) are irrelevant; for the six D corresponding to endomorphisms of degree at most 3, we have h (D ) = 1, so there is only one j -invariant. For D = -4 (corresponding to j = 1728) there are two or four twists over Fp ; for D = -3 (corresponding to j = 0) we have two or six, and otherwise we have only two. In particular, there are at most 18 distinct curves over Fp with a non-integer endomorphism of degree at most 3.
+
+4
+
+d = 1, up to sign. For this reason, we do not provide extensive implementation details in this paper: while our endomorphisms cost a few more Fq -operations to evaluate than the GLS endomorphism, this evaluation is typically carried out only once per scalar multiplication. This evaluation is the only difference between a GLS scalar multiplication and one of ours: the subsequent multiexponentiations have exactly the same length as in GLS, and the underlying curve and field arithmetic is the same, too.
+
+2 Notation and conventions
+Throughout, we work over fields of characteristic not 2 or 3. Let E : y 2 = x 3 + a2 x 2 + a4 x + a6 be an elliptic curve over such a field K . Galois conjugates. For every automorphism  of K , we define the conjugate curve
+
+
+E : y 2 = x 3 + a2 x 2 + a4 x + a6 .
+
+If  : E  E 1 is an isogeny, then we obtain a conjugate isogeny	: E  E 1 by applying  to the defining equations of , E , and E 1 . Quadratic twists. For every	= 0 in K , we define a twisting isomorphism () : E - E	: y 2 = x 3 + 2 a2 x 2 + 4 a4 x + 6 a6 by () : (x , y ) - (2 x , 3 y ).
+
+
+The twist E  is defined over K (2 ), and () is defined over K (). For every K -endomorphism  of E , there is a K (2 )-endomorphism  = ()(-1 ) of E  . Observe  that (1 )(2 ) = (1 2 ) for any 1 , 2 in K , and (-1) = [-1]. Also, (E  ) = E  for all automorphisms  of K . If  is a nonsquare in K , then E  is called a quadratic twist. If K = Fq , then 1 and E 2 are Fq -isomorphic for all nonsquares 1 , 2 in Fq (the isomorphism E ( 1 /2 ) is defined over Fq because 1 /2 must be a square). When the choice of nonsquare is not important, we denote the quadratic twist by E  . Similarly, if  is an Fq -endomorphism of E , then  is the corresponding Fq -endomorphism of E  . (Conjugates are marked by left-superscripts, twists by right-superscripts.) The trace. If K = Fq , then E denotes the q -power Frobenius endomorphism of E . Recall that the characteristic polynomial of E has the form E (T ) = T 2 - tr(E )T + q , with |tr(E )|  2 q .
+
+The integer tr(E ) is the trace of E ; we have #E (Fq ) = q + 1 - tr(E ) and tr(E  ) = -tr(E ).
+
+p-th powering. We write (p ) for the p -th powering automorphism of Fp . Note that
+
+(p ) is almost trivial to compute on Fp 2 = Fp ( ), because (p )(a + b ) = a - b  for all a and b in Fp . 5
+
+3 Quadratic Q-curves and their reductions
+Suppose E /Q( ) is a quadratic Q-curve of prime degree d (cf. Definition 1), where  is a discriminant prime to d , and let  : E  E be the corresponding d -isogeny. In general,  is only defined over a quadratic extension Q( , ) of Q( ). We can compute  from  and ker  using [14, Proposition 3.1], but after a suitable twist we can always reduce to the case where  = d (see [14, remark after Lemma 3.2]). The families of explicit Q-curves of degree d that we treat below have their isogenies defined over Q( , -d ); so to simplify matters, from now on we will Assume  is defined over Q( , -d ). Let p be a prime of good reduction for E that is inert in Q( ) and prime to d . If O is the ring of integers of Q( ), then
+Fp 2 = O /(p ) = Fp ( ).
+
+Looking at the Galois groups of our fields, we have a series of injections (p ) = Gal(Fp ( )/Fp )  Gal(Q( )/Q)	Gal(Q( , -d )/Q). The image of (p ) in Gal(Q( )/Q) is , because p is inert in Q( ). When extending  to an automorphism of Q( , -d ), we extend it to be the image of (p ): that is,
+
+
+ +   +	-d +  -d  =  -	 + -d p  -d -  -d
+
+(3.1)
+
+Composing  with  yields endomorphisms	 of E and    of E , each of degree d 2 . But (by definition) E and E do not have complex multiplication, so all of their endomorphisms are integer multiplications; and since the only integer multiplications of degree d 2 are [d ] and [-d ], we can conclude that
+
+
+Applying  to , we obtain a second d -isogeny  : E  E travelling in the opposite direction, which reduces mod p to a conjugate isogeny (p ) : (p )E  E over Fp 2 .
+
+for all , , , and   Q. (Recall that the Legendre symbol n p is 1 if n is a square mod p , -1 if n is not a square mod p , and 0 if p divides n .) Now let E be the reduction modulo p of E . The curve E reduces to (p )E , while the d -isogeny  : E  E reduces to a d -isogeny  : E  (p )E defined over Fp 2 .
+
+   = [p d ]E
+
+and
+
+   = [p d ]E ,
+
+where p  {1}.
+
+Technically,  and (p ) are--up to sign--the dual isogenies of  and , respectively. The sign p depends on p (as well as on ): if  is the extension of  to Q( , -d ) that is not the image of (p ), then	  = [-p d ]E . Reducing mod p , we see that
+(p )
+
+   = [p d ]E
+
+and
+
+  (p ) = [p d ](p )E .
+
+(3.2)
+
+The map (x , y )  (x p , y p ) defines p -isogenies 0 : (p )E - E and 6
+(p )
+
+0 : E - (p )E .
+
+Clearly, (p )0	0 (resp. 0  (p )0 ) is the p 2 -power Frobenius endomorphism of E (resp. (p )E ). Composing 0 with  yields a degree-pd endomorphism  := 0    End(E ). If d is very small--say, less than 10--then  is efficient because  is defined by polynomials of degree about d , and 0 acts as a simple conjugation on coordinates in Fp 2 , as in Eq. (3.1). (The efficiency of	depends primarily on its separable degree, d , and not on the inseparable part p .) We also obtain an endomorphism  on the quadratic twist E  of E . Indeed, if  E = E	, then	=   , and  is defined over Fp 2 . Proposition 1. With the notation above: 2 = [p d ]E and ( )2 = [-p d ]E  .
+
+There exists an integer r satisfying dr 2 = 2p + p tr(E ) such that =
+1 r
+
+E +  p p
+
+and
+
+ =
+
+-1 r
+
+E  -  p p .
+
+The characteristic polynomial of both  and  is P  (T ) = P  (T ) = T 2 - p r dT + d p . Proof. Clearly, 0   = (p )  (p )0 . Hence 2 = 0    0   = 0    (p )  (p )0 = 0 [p d ](p )0 = [p d ]0 (p )0 = [p d ]E . Choosing a nonsquare  in Fp 2 , so E  = E = ((1-p
+2
+
+
+
+and  =
+
+
+
+, we find
+
+( )2 = (1/2 )  2  (-1/2 ) = (1/2 )  [p d ]E  (-1/2 )
+)/2
+
+)[p d ]E  = (-1)[p d ]E  = [-p d ]E
+
+2 2 2  Using the relations 2 E - tr(E )E + p = 0 and E	+ tr(E )E + p = 0, we verify that the  expressions for	and  give the two square roots of p d E in Q(E ), and -p d E  in Q( ), and that the claimed characteristic polynomial is satisfied.   E
+
+Now we just need a source of quadratic Q-curves of small degree. Elkies [8] shows that all Q-curves correspond to rational points on certain modular curves: Let X  (d ) be the quotient of the modular curve X 0 (d ) by all of its AtkinLehner involutions, let K be a quadratic field, and let  be the involution of K over Q. If e is a point in X	(d )(Q) and E is a preimage of e in X 0 (d )(K ) \ X 0 (d )(Q), then E parametrizes (up to Q-isomorphism) a d -isogeny	: E  E over K . Luckily enough, for very small d , the curves X 0 (d ) and X  (d ) have genus zero--so not only do we get plenty of rational points on X  (d ), we get a whole one-parameter family of Q-curves of degree d . Hasegawa gives explicit universal curves for d = 2, 3, and 7 in [15, Theorem 2.2]: for each squarefree integer  = 1, every Q-curve of degree d = 2, 3, 7 over Q( ) is Q-isomorphic to a rational specialization of one of these families. Hasegawa's curves for d = 2 and 3 (E 2,,s in 5 and E 3,,s in 6) suffice not only to illustrate our ideas, but also to give useful practical examples. 7
+
+4 Short scalar decompositions
+Before moving on to concrete constructions, we will show that the endomorphisms developed in 3 yield short scalar decompositions. Proposition 2 below gives explicit formul for producing decompositions of at most log 2 p  bits. Suppose G is a cyclic subgroup of E (Fp 2 ) such that (G ) = G , and let N = #G . Proposition 1 shows that  acts as a square root of p d on G : its eigenvalue is   (1 + p p )/r We want to compute a decomposition m = a + b  so as to efficiently compute [m ]P = [a ]P + [b  ]P = [a ]P + [b ](P ). The decomposition of m is not unique: far from it. The set of all decompositions (a , b ) of m is the coset (m , 0) + L , where L := (N , 0), (- , 1)  Z2 is the lattice of decompositions of 0 (that is, of (a , b ) such that a + b   0 (mod N )). We want to find a decomposition where a and b have minimal bitlength: that is, where log2 (a , b )   is as small as possible. The standard technique is to (pre)compute a short basis of L , then use Babai rounding [1] to transform each scalar m into a short decomposition (a , b ). The following lemma outlines this process; for further detail and analysis, see [13, 4] and [11, 18.2]. Lemma 1. Let e1 , e2 be linearly independent vectors in L . Let m be an integer, and set (a , b ) := (m , 0) - e1 - e2 , where (, ) is the (unique) solution in Q2 to the linear system (m , 0) = e1 + e2 . Then m  a +  b (mod N ) and (a , b )
+
+
+(mod N ).
+
+(4.1)
+
+(mod N )
+
+ max ( e1
+
+,
+
+e2
+
+) .
+
+Proof. This is just [13, Lemma 2] (under the infinity norm).
+
+
+
+We see that better decompositions of m correspond to shorter bases for L . If | | is not unusually small, then we can compute a basis for L of size O ( N ) using the Gauss reduction or Euclidean algorithms (cf. [13, 4] and [11, 17.1.1]).4 The basis depends only on N and	, so it can be precomputed. In our case, lattice reduction is unnecessary: we can immediately write down two linearly independent vectors in L that are "short enough", and thus give explicit formulae for (a , b ) in terms of m . These decompositions have length log2 p , which is near-optimal in cryptographic contexts: if N  #E (Fp 2 )  p 2 , then log2 p  1 2 log2 N .
+4 Bounds on the constant hidden by the O ( N ) are derived in [24], but they are suboptimal
+
+for our endomorphisms. In cryptographic contexts, Proposition 2 gives better results.
+
+8
+
+Proposition 2. With the notation above: given an integer m, let a = m - m (1 + p p )/#E (Fp 2 ) (1 + p p ) + mr /#E (Fp 2 ) p dr and
+
+b = m (1 + p p )/#E (Fp 2 ) r - mr /#E (Fp 2 ) (1 + p p ). Then, assuming d  p and m  0 (mod N ), we have m  a + b  (mod N ) and log2 (a , b )
+
+   log2 p .
+
+d |r |	2 d p (since |tr(E )|  2p ) and d  p , so e2  = p + p . The result follows on taking logs, and noting that log2 (p  1) = log2 p  (since p > 3).
+
+Proof. Eq. (4.1) yields r   1 + p p (mod N ) and r p d	(1 + p p ) (mod N ), so the vectors e1 = (1 + p p , -r ) and e2 = (-p dr , 1 + p p ) are in L (they generate a sublattice of determinant #E (Fp 2 )). Applying Lemma 1 with  = m (1 + p p )/#E (Fp 2 ) and  = mr /#E (Fp 2 ), we see that m  a + b  (mod N ) and (a , b )   e2	. But
+
+5 Endomorphisms from quadratic Q-curves of degree 2
+Let  be a squarefree integer. Hasegawa defines a one-parameter family of elliptic curves over Q( ) by E 2,,s : y 2 = x 3 - 6(5 - 3s )x + 8(7 - 9s ), (5.1)
+
+where s is a free parameter taking values in Q [15, Theorem 2.2]. The discriminant of E 2,,s is 29  36 (1 - s 2 )(1 + s ), so the curve E 2,,s has good reduction at every p > 3 with  p = -1, for every s in Q. The curve E 2,,s has a rational 2-torsion point (4, 0), which generates the kernel of a 2-isogeny 2,,s : E 2,,s  E 2,,s defined over Q( , -2). We construct 2,,s explicitly: Vlu's formulae [28] define the (normalized) quotient E 2,,s  E 2,,s /(4, 0), and then the isomorphism E 2,,s /(4, 0)  E 2,,s is the quadratic twist (1/ -2). Composing, we obtain an expression for the isogeny as a rational map: 2,,t : (x , y ) - -x 9(1 + s ) - , 2 x -4 y -1 9(1 + s ) + (x - 4)2 -2 2 .
+
+Conjugating and composing, we recognise that 2,,t 2,,t = [2] if ( -2) = - -2, and [-2] if ( -2) = -2: that is, the sign function for 2,,t is  p = - -2 p = 1 -1 if p  1, 3 (mod 8). if p  5, 7 (mod 8), (5.2)
+
+Theorem 1. Let p > 3 be a prime, and define p as in Eq. (5.2). Let  be a nonsquare5 in Fp , so Fp 2 = Fp ( ). Let C 2, : Fp  Fp 2 be the mapping defined by
+5 The choice of  is (theoretically) irrelevant, since all quadratic extensions of F are isomorp phic. If  and  are two nonsquares in Fp , then / = a 2 for some a in Fp , so E 2,,t and
+
+C 2, (s ) := 9(1 + s ).
+
+E 2, ,at are identical. We are therefore free to choose any practically convenient value for , such as one permitting faster arithmetic in Fp ( ).
+
+9
+
+For each s in Fp , let E 2,,s be the elliptic curve over Fp 2 defined by E 2,,s : y 2 = x 3 + 2(C 2, (s ) - 24)x - 8(C 2, (s ) - 16). Then E 2,,s has an efficient Fp 2 -endomorphism 2,,s : (x , y ) - of degree 2p, such that 2,,s = 1 E 2,,s + p p r and 2 2,,s = [p 2]E 2,,s -x p C 2, (s )p y p -1 C 2, (s )p - p , + p 2 x -4 (x - 4)2 -2 2 ,
+
+for some integer r satisfying 2r 2 = 2p + p tr(E 2,,s ). The characteristic polynomial of  2,,s is P 2,,s (T ) = T 2 -p r T +2p. The twisted endomorphism  2,,s on E 2,,s satisfies   2  2,,s = (-E  + p p )/r , and (2,,s ) = [-p 2]E	, and P 2,,s (2,,s ) = 0.
+2,,s 2,,s
+
+Proof. Reduce E 2,,s and 2,,s mod p and compose with 0 as in 3, then apply Proposition 1 using Eq. (5.2).   If G  E 2,,s (Fp 2 ) is a cyclic subgroup of order N such that 2,,s (G ) = G , then the eigenvalue of 2,,s on G is 2,,s = 1 1 + p p   p 2 (mod N ). r
+
+Applying Proposition 2, we can decompose scalar multiplications in G as [m ]P = [a ]P + [b ]2,,s (P ) where a and b have at most log2 p  bits. Proposition 3. Theorem 1 yields at least p - 3 non-isomorphic curves (and at least 2p - 6 non-Fp 2 -isomorphic curves, if we count the quadratic twists) equipped with efficient endomorphisms.
+-3 s  ) takes at least Proof. It suffices to show that the j -invariant j E 2,,s = 2 (5 (1-s 2 )(1+s ) p - 3 distinct values in Fp 2 as s ranges over Fp . If j (E 2,,s ) = j (E 2,,s 1 ) with s1 = s2 , then
+6 3
+
+s1 and s2 satisfy F 0 (s1 , s2 ) - 2 F 1 (s1 , s2 ) = 0, where F 1 (s1 , s2 ) = (s1 + s2 )(63s1 s2 - 65) and F 0 (s1 , s2 ) = (s1 s2 + 1)(81s1 s2 - 175) + 49(s1 + s2 )2 are polynomials over Fp . If s1 and s2 are in Fp , then we must have F 0 (s1 , s2 ) = F 1 (s1 , s2 ) = 0. Solving the simultaneous equations, discarding the solutions that can never be in Fp , and dividing by two (since (s1 , s2 ) and (s2 , s1 ) represent the same collision) yields at most 3 collisions j (E 2,,s 1 ) = j (E 2,,s 2 ) with s1 = s2 in Fp .   We observe that E 2,,s = E 2,,-s , so we do not gain any more isomorphism classes in Proposition 3 by including the codomain curves. 10
+
+6 Endomorphisms from quadratic Q-curves of degree 3
+Let  be a squarefree discriminant; Hasegawa defines a one-parameter family of elliptic curves over Q( ) by E 3,,s : y 2 = x 3 - 3 5 + 4s  x + 2 2s 2  + 14s  + 11 , (6.1)
+
+where s is a free parameter taking values in Q. As for the curves in 5, the curve E 3,,s has good reduction at every p > 3 with  p = -1, for every s in Q. The curve E 3,,s has a subgroup of order 3 defined by the polynomial x - 3, consisting of 0 and (3, 2(1- s )). Exactly as in 5, taking the Vlu quotient and twisting by 1/ -3 yields an explicit 3-isogeny 3,,s : E 3,,s  E 3,,s ; its sign function is  p = - -3 p = 1 -1 if p  1 (mod 3). if p  2 (mod 3), (6.2)
+
+Theorem 2. Let p > 3 be a prime, and define p as in Eq. (6.2). Let  be a nonsquare6 in Fp , so Fp 2 = Fp ( ). Let C 3, : Fp  Fp 2 be the mapping defined by C 3, (s ) := 2(1 + s ). For each s in Fp , we let E 3,,s be the elliptic curve over Fp 2 defined by E 3,,s : y 2 = x 3 - 3 2C 3, (s ) + 1 x + C 3, (s )2 + 10C 3, (s ) - 2 . Then E 3,,s has an efficient Fp 2 -endomorphism 3,,s : (x , y ) - - x p 4C 3, (s )p 4C 3, (s )2p y p -1 4C 3, (s )p 8C 3, (s )2p , + - - + p 3 xp - 3 3(x p - 3)2 (x - 3)2 3(x p - 3)3 -3 3 1	+ p p r
+
+of degree 3p, such that 2 3,,s = [p 3]E 3,,s and 3,,s =
+
+for some integer r satisfying 3r 2 = 2p + p tr(E 3,,s ). The characteristic polynomial of  3,,s is P 3,,s (T ) = T 2 -p r T +3p. The twisted endomorphism  3,,s on E 3,,s satisfies  2	 (3,,s ) = [-p 3]E  , and 3,,s = (-E  + p p )/r , and P 3,,s (3,,s ) = 0.
+3,,s 3,,s
+
+Proof. Reduce E 3,,s and 3,,s mod p , compose with 0 as in 3, and apply Proposition 1 using Eq. (6.2).	 Proposition 4. Theorem 2 yields at least p - 8 non-isomorphic curves (and counting quadratic twists, at least 2p - 16 non-Fp 2 -isomorphic curves) equipped with efficient endomorphisms. Proof. The proof is exactly as for Proposition 3.
+6 As in Theorem 1, the particular value of  is theoretically irrelevant.
+
+
+
+11
+
+7 Cryptographic-sized curves
+We will now exhibit some curves with our families with cryptographic parameter sizes, and secure and twist-secure group orders. We computed the curve orders below using Magma's implementation of the SchoofElkiesAtkin algorithm [23,19,4]. First, consider the degree-2 curves of 5. By definition, E 2,,s and its quadratic  twist E 2, ,s have points of order 2 over Fp 2 : they generate the kernels of our endomorphisms. If p	2 (mod 3), then 2r 2 = 2p + p tr(E ) implies tr(E )  0 (mod 3), so  when p  2 (mod 3) either p 2 - tr(E ) + 1 = #E 2,,s (Fp 2 ) or p 2 + tr(E ) + 1 = #E 2, ,s (Fp 2 ) is divisible by 3. However, when p  1 (mod 3) we can hope to find curves of order twice a prime whose twist also has order twice a prime. Example 1. Let p = 280 - 93 and  = 2. For s = 4556, we find a twist-secure curve:  (Fp 2 ) = 2N  where #E 2,2,4556 (Fp 2 ) = 2N and #E 2,2,4556 N = 730750818665451459101730957248125446994932083047 are 159-bit primes. Proposition 2 lets us replace 160-bit scalar multiplications in  (Fp 2 ) with 80-bit multiexponentiations. E 2,2,4556 (Fp 2 ) and E 2,2,4556 Now, consider the degree-3 curves of 6. The order of E 3,,s (Fp 2 ) is always divisible by 3: the kernel of 3,,s is generated by the rational point (3, C 3, (s )). However, on the quadratic twist, the nontrivial points in the kernel of  3,,s are not defined  ( F over Fp 2 (they are conjugates over Fp 2 ), so E 3, 2 ) can have prime order. p ,s Example 2. Let p = 2127 - 1; then  = -1 is a nonsquare in Fp . The parameter value s = 122912611041315220011572494331480107107 yields #E 3,-1,s (Fp 2 ) = 3  N and
+  #E 3, -1,s (Fp 2 ) = N ,
+
+N = 730750818665451459101729015265709251634505119843
+
+
+and
+
+where N is a 253-bit prime and N  is a 254-bit prime. Using Proposition 2, any scalar  multiplication in E 3,-1,s (Fp 2 ) or E 3, -1,s (Fp 2 ) can be computed via a 127-bit multiexponentiation. Example 3. Let p = 2255 - 19; then  = -2 is a nonsquare in Fp . The parameter s =
+
+0x7516D419C4937E5E8F0761FDB9BB0382FE20E9D0B7AB6924BA1DA02561C5145E
+yields #E 3,-2,s (Fp 2 ) = 3  N and #E 3,-2,s (Fp 2 ) = N  , where N and N  are 509- and 510bit primes, respectively. Proposition 2 transforms any 510-bit scalar multiplication  in E 3,-2,s (Fp 2 ) or E 2, -2,s (Fp 2 ) into a 255-bit multiexponentiation.
+
+8 Montgomery, Twisted Edwards, and DocheIcartKohel models
+Montgomery models. The curve E 2,,s has a Montgomery model over Fp 2 if and only if 2C 2, (s ) is a square in Fp 2 (by [22, Proposition 1]): in that case, setting B 2, (s ) := 2C 2, (s ) and 12 A 2, (s ) = 12/B 2, (s ),
+
+the birational mapping (x , y )  ( X / Z , Y / Z ) = (x - 4)/B 2, (s ), y /B 2, (s )2 takes us from E 2,,s to the projective Montgomery model
+M 2 2 2 E 2, ,s : B 2, ( s )Y Z = X X + A 2, ( s ) X Z + Z .
+
+(8.1)
+
+ M (If 2C 2, (s ) is not a square, then E 2, ,s is Fp 2 -isomorphic to the quadratic twist E 2,,s .) These models offer a particularly efficient arithmetic, where we use only the X and Z coordinates [20]. The endomorphism is defined (on the X and Z coordinates) by
+
+2,,s : ( X : Z ) - ( X 2p + A 2, (s )p X p Z p + Z 2p : -2B 2, (s )1-p X p Z p ). Twisted Edwards models. Every Montgomery model corresponds to a twisted Edwards model (and vice versa) [2,16]. With u = X / Z and v = Y / Z , the birational maps (u , v ) - (x1 , x2 ) = u u -1 , v u +1 and (x1 , x2 ) - (u , v ) = 1 + x2 1 + x2 , 1 - x2 x1 (1 - x2 )
+
+take us between the Montgomery model of Eq. (8.1) and the twisted Edwards model
+TE 2 2 2 2 E 2, ,s : a 2 ( s ) x1 + x2 = 1 + d 2 ( s ) x1 x2 ,
+
+where
+
+d2 (s ) = ( A 2, (s ) - 2)/B 2, (s ).
+
+a2 (s ) = ( A 2, (s ) + 2)/B 2, (s )
+
+DocheIcartKohel models. Doubling-oriented DocheIcartKohel models of elliptic curves are defined by equations of the form y 2 = x (x 2 + D x + 16D ). These curves have a rational 2-isogeny , with kernel (0, 0); in this form, we can double more quickly by using the decomposition [2] =   (see [7, 3.1] for details). Our curves E 2,,s come equipped with a rational 2-isogeny, so it is natural to try putting them in DocheIcartKohel form. The isomorphism  : (x , y ) - (u , v ) = 2 (x + 4), 3 y
+DIK 2 2 E 2, ,s : v = u u + D 2, ( s )u + 16D 2, ( s ) ,
+
+with
+
+=4
+
+6/C 2, (s )
+
+takes us from E 2,,s into a doubling-oriented DocheIcartKohel model where D 2, (s ) = 27 /(1 + s ).
+
+DIK While E 2, ,s is defined over Fp 2 , the isomorphism is only defined over Fp 2 ( 1 + s ); -1 The endomorphism DIK is Fp -isomorphic to the DocheIcart 2,,s := 2,,s	Kohel isogeny, since they have the same kernel. The eigenvalue of 2,,s on cryptographic subgroups is  2, so computing [m ]P as [a ]P + [b ]DIK 2,,s with Doche	DIK so if 1 + s  is not a square in Fp 2 then E 2, ,s is Fp 2 -isomorphic to E 2,,s .
+
+IcartKohel doubling for [a ] and [b ] is like using a 2-adic expansion of m . Similarly, we can exploit the rational 3-isogeny on E 3,,s for DocheIcartKohel tripling (see [7, 3.2]). The isomorphism (x , y )	(u , v ) = a3, (s )(x /3 - 1), b 3, (s )3 y , with a3, (s ) = 9/C 3, (s ) and b 3, (s ) = a3, (s )-1/2 , takes us from E 3,,s to the triplingoriented DocheIcart-Kohel model
+DIK 2 3 2 E 3, ,s : v = u + 3a 3, ( s )(u + 1) .
+
+13
+
+9 Degree one: GLS as a degenerate case
+Returning to the framework of 3, suppose E is a curve defined over Q, and baseextended to Q( D ): then E = E , and we can apply the construction of 3 taking  : E  E to be the identity map. Reducing modulo an inert prime p , the endomorphism  is nothing but 0 (which is an endomorphism, since E is a subfield curve). We have 2 = 2 0 = E , so the eigenvalue of	is 1 on cryptographic subgroups of E (Fp 2 ). Clearly, this endomorphism is of no use to us for scalar decompositions. However, looking at the quadratic twist E  , the twisted endomorphism  satisfies  2 ( ) = -E  ; the eigenvalue of  on cryptographic subgroups is a square root of -1. We have recovered the GalbraithLinScott endomorphism (cf. [12, Theorem 2]). More generally, suppose  : E  E is a Q-isomorphism: that is, an isogeny of degree 1. If E does not have CM, then  = p -1 , so 2 = [p ]E with p = 1. This situation is isomorphic to GLS. In fact, E  = E implies j (E ) = j (E ) = j (E ), so j (E ) is in Q, and E is isomorphic to (or a quadratic twist of) a curve defined over Q. We note that in the case d = 1, we have r = t0 in Proposition 1, and the basis constructed in the proof of Proposition 2 is (up to sign) the same as the basis of [12, Lemma 3]. While E  (Fp 2 ) may have prime order, E (Fp 2 ) cannot: the points fixed by 0 form 2 a subgroup of order p + 1 - t0 , where t0 - 2p = tr(E ) (the complementary subgroup, where 0 has eigenvalue -1, has order p + 1 + t0 ). We see that the largest prime divisor of #E (Fp 2 ) can be no larger than O (p ). If we are in a position to apply the Fouque LercierRalValette fault attack [10]--for example, if Montgomery ladders are used for scalar multiplication and multiexponentiation--then we can solve DLP instances in E  (Fp 2 ) in O (p 1/2) group operations (in the worst case!). While O (p 1/2) is still exponentially difficult, it falls far short of the ideal O (p ) for general curves over Fp 2 . GLS curves should therefore be avoided where the fault attack can be put into practice.
+
+10 Higher degrees
+We conclude with some brief remarks on Q-curves of other small degrees. Hasegawa provides a universal curve for d = 7 (and any ) in [15, Theorem 2.2], and our results for d = 2 and d = 3 carry over to d = 7 in an identical fashion, though the endomorphism is slightly less efficient in this case (its defining polynomials are sextic). For d = 5, Hasegawa notes that it is impossible to give a universal Q-curve for every discriminant : there exists a quadratic Q-curve of degree 5 over Q( ) if and only if 5 p i = 1 for every prime p i = 5 dividing  [15, Proposition 2.3]. But this is no problem when reducing modulo p , if we are prepared to give up the freedom of choosing : we could take  = -11 for p  1 (mod 4) and	= -1 for p  3 (mod 4), and then use the curves defined in [15, Table 6]. Composite degree Q-curves (such as d = 6 and 10) promise more interesting results, as do exceptional CM specializations of the universal curves; we will return to these cases in future work. Degrees greater than 10 yield less efficient endomorphisms, and so are less interesting from a practical point of view. 14
+
+Acknowledgements The author thanks Franois Morain and David Gruenewald for their comments.
+
+References
+1. L. Babai, On Lovasz' lattice reduction and the nearest lattice point problem. Combinatorica 6 (1986) 113 2. D. J. Bernstein, P . Birkner, M. Joye, T. Lange, and C. Peters, Twisted Edwards curves. In S. Vaudenay (ed.), AFRICACRYPT 2008. Lecture Notes in Comput. Sci. 5023 (2008) 389405 3. J. W. Bos, C. Costello, H. Hisil, and K. Lauter, Fast cryptography in genus 2. In T. Johansson and P . Q. Nguyen (eds), Advances in cryptology  EUROCRYPT 2013, Lecture Notes in Comput. Sci. 7881 (2013) 194210 4. W. Bosma, J. J. Cannon, C. Fieker, and A. Steel (eds), Handbook of Magma functions. Edition 2.19 (2013) 5. H. Cohen and G. Frey (eds), Handbook of elliptic and hyperelliptic curve cryptography. Chapman & Hall / CRC (2006) 6. J. Cremona, J. C. Lario, J. Quer, and K. Ribet (eds), Modular Curves and Abelian Varieties. Birkhuser, Basel (2004) 7. C. Doche, T. Icart, and D. R. Kohel, Efficient scalar multiplication by isogeny decompositions. In M. Yung, Y. Dodis, A. Kiayias, and T. Malkin (eds), Public Key Cryptography 2006, Lecture Notes in Comput. Sci 3958 (2006) 191206 8. N. D. Elkies, On elliptic k-curves. In [6], pp. 8192 9. J. S. Ellenberg, Q-curves and Galois representations. In [6], pp. 93103 10. P .-A. Fouque, R. Lercier, D. Ral, and F. Valette, Fault attack on elliptic curve with Montgomery ladder. FDTC '08, IEEE-CS (2008) 9298 11. S. D. Galbraith, Mathematics of public key cryptography. Cambridge University Press (2012) 12. S. D. Galbraith, X. Lin, and M. Scott, Endomorphisms for faster elliptic curve cryptography on a large class of curves. J. Crypt. 24 #3 (2011) 446469 13. R. P . Gallant, R. J. Lambert, and S. A. Vanstone, Faster point multiplication on elliptic curves with efficient endomorphisms. In J. Kilian (ed.), Advances in Cryptology: CRYPTO 2001, Lecture Notes in Comput. Sci. 2139 (2001) 190200 14. J. Gonzalez, Isogenies of polyquadratic Q-curves to their Galois conjugates. Arch. Math. 77 (2001) 38390 15. Y. Hasegawa, Q-curves over quadratic fields. Manuscripta Math. 94 #1 (1997) 34764 16. H. Hisil, K. Wong, G. Carter, and E. Dawson, Twisted Edwards curves revisited. In J. Pieprzyk (ed.), Advances in Cryptology -- ASIACRYPT 2008, Lecture Notes in Comput. Sci 5350 (2008) 326343 17. D. R. Kohel and B. Smith, Efficiently computable endomorphisms for hyperelliptic curves. In F. Hess, S. Pauli, and M. Pohst (eds), Algorithmic number theory: ANTS-VII, Lecture Notes in Comput. Sci. 4076 (2006) 495509 18. P . Longa and F. Sica, Four-dimensional GallantLambertVanstone scalar multiplication. In X. Wang and K. Sako (eds), Advances in Cryptology  ASIACRYPT 2012. Lecture Notes in Comput. Sci. 7658 (2012) 718739 . Full version: http://eprint.iacr.org/2011/608 19. The Magma computational algebra system. http://magma.maths.usyd.edu.au/ 20. P . L. Montgomery, Speeding the Pollard and Elliptic Curve Methods of factorization. Math. Comp. 48 #177 (1987) 243264 21. A. Menezes, T. Okamoto, and S. A. Vanstone, Reducing elliptic curve logarithms to logarithms in a finite field. IEEE Trans. Inform. Theory 39 #5 (1993) 163946
+
+15
+
+22. K. Okeya, H. Kurumatani, and K. Sakurai, Elliptic curves with the Montgomery-form and their cryptographic applications. In H. Imai and Y. Zheng (eds), Public Key Cryptography: PKC 2000, Lecture Notes in Comput. Sci. 1751 (2000) 23857 23. R. Schoof, Elliptic curves over finite fields and the computation of square roots mod p . Math. Comp. 44 (1985) 74563 24. F. Sica, M. Ciet, and J.-J. Quisquater, Analysis of the Gallant-Lambert-Vanstone method based on efficient endomorphisms: Elliptic and hyperelliptic curves. In K. Nyberg and H. M. Heys (eds), Selected Areas in Cryptography: SAC 2002, Lecture Notes in Comput. Sci. 2595 (2003) 2136 25. J. H. Silverman, The arithmetic of elliptic curves, Grad. Texts in Math. 106 (2e), Springer (2009) 26. E. G. Straus, Addition chains of vectors. Amer. Math. Monthly 71 #7 (1964) 8068 27. K. Takashima, A new type of fast endomorphisms on Jacobians of hyperelliptic curves and their cryptographic application. IEICE Trans. Fundamentals E89-A #1 (2006) 124133 28. J. Vlu, Isognies entre courbes elliptiques. C. R. Math. Acad. Sci. Paris 273 (1971) 23841 29. E. Verheul, Evidence that XTR is more secure than supersingular elliptic curve cryptosystems. J. Crypt. 17 (2004) 27796 30. Z. Zhou, Z. Hu, M. Xu, and W. Song, Efficient 3-dimensional GLV method for faster point multiplication on some GLS elliptic curves. Inf. Proc. Lett. 110 #22 (2010) 10031006
+
+16
+

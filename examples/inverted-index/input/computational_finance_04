@@ -1,0 +1,536 @@
+Monte Carlo approximation to optimal investment
+L. C. G. Rogers P. Zaczkowski
+
+arXiv:1305.3433v1 [q-fin.CP] 15 May 2013
+
+Statistical Laboratory, University of Cambridge May 16, 2013
+
+Abstract This paper sets up a methodology for approximately solving optimal investment problems using duality methods combined with Monte Carlo simulations. In particular, we show how to tackle high dimensional problems in incomplete markets, where traditional methods fail due to the curse of dimensionality.
+
+1
+
+Introduction.
+
+From the early work of Merton and his seminal papers [6] and [5], the optimal investment literature has been trying to determine how to invest in financial markets when facing uncertainty. Over the following twenty years, many general results were proved, and many techniques for tackling the questions developed. Deriving the abstract forms of the solutions is a great achievement of mathematical finance. However, anyone who wants to use them to guide them in making investment decisions will quickly find out that they are typically rather uninformative. This is because, apart from a couple of highly stylized examples, concrete numerical answers in optimal investment problems are simply unobtainable, largely due to the curse of dimensionality. See [9] for a survey of the traditional methods and a range of examples where answers can actually be found. The goal of this paper is to take a pragmatic approach. We take the point of view of an investor who is facing a particular market and is interested in knowing a good thing to do at a particular time. Hence, we want to be able to describe what a good investment strategy is in a particular market environment without computing the whole value function for the problem, and we want to quantify what we mean by a good investment strategy, in terms of bounds on the objective.
+Corresponding author: Statistical Laboratory, Wilberforce Road, Cambridge CB3 0WB, United Kingdom. lcgr1@cam.ac.uk  Statistical Laboratory, Wilberforce Road, Cambridge CB3 0WB, United Kingdom.
+
+
+1
+
+Taking this standpoint lets us make progress by combining various optimization techniques that would fail individually when applied to difficult optimal investment problems. Namely, we shall use the PontryaginLagrange approach to determine locally optimal trajectories; the dual formulation of the optimal investment problem to derive bounds on the optimal trajectory; and Monte Carlo techniques to approximate the expectation operator. Combining these related methods lets us handle a surprisingly large class of problems. We will show how to find approximately optimal investment paths for any continuous-path incomplete market driven by a diffusion factor process. As an illustration of the effectiveness of the method, we shall provide a couple of numerical examples. We shall start with the benchmark Merton problem, moving on to problems that are increasingly more difficult to handle numerically and mathematically. This paper is structured as follows. In Section 2 we present the general problem and the methodology for solving it. Section 3 describes the algorithms used in the method. In Section 4 we give numerical evidence for the performance of the method, considering examples of the Merton problem, the non-constant relative risk aversion, and finally a multi-dimensional incomplete market driven by a diffusion. Section 5 concludes.
+
+2
+
+Continuous markets driven by a diffusion.
+
+We shall present the methodology in the context of a finite-horizon optimal investmentconsumption problem where the volatilities and drifts of the assets depend on some diffusion factor process. It will become evident that the general approach is not limited to such examples, but it is easier to explain in this more concrete setting. We shall also make various assumptions of boundedness on processes and global Lipschitz properties of coefficients which could be relaxed, but which simplify the exposition and proof: the aim is transparency, not maximality. To begin with, suppose that X is an Rk -valued diffusion process satisfying dXt = X (Xt ) dWt + X (Xt ) dt  X dWt + X dt, (2.1)
+
+where W is a d-dimensional Brownian motion, and X : Rk	Rk  Rd and X : Rk  Rk are globally Lipschitz coefficients. We shall consider an investor who is allowed to invest in a market with a riskless asset yielding interest at rate rt  r (Xt ), and n stocks having volatility matrix t   (Xt ) and drift t	(Xt ). Here, r : Rk  R,  : Rk  Rn  Rd , and  : Rk  Rn are bounded measurable functions. We assume non-degeneracy of the market, that is, d  n, and that the row rank of  equals n. When n = d, the matrix  is then invertible, and we have a special case of a complete market. With these assumptions in place, the investor's wealth wt at time t evolves1 as dwt = rt wt dt + t  (t dWt + (t - rt 1) dt) - ct dt,
+1
+
+(2.2)
+
+We use the notations a	b for the scalar product of two vectors a and b, and 1 for the column vector of ones.
+
+2
+
+where the n-vector process t represents the cash holdings in each of the stocks, and ct denotes the agent's consumption rate. The agent's objective at time t is to achieve
+T
+
+sup E
+(c, )A t
+
+U (s, cs )ds + (wT ) wt = w, Xt = x  V (t, w, x),
+
+(2.3)
+
+where U and  are strictly concave C 2 utility functions satisfying the Inada conditions2 , and A denotes the set of admissible consumption-portfolio pairs: A = {(c, ) : c and	are previsible, c  0, and for some K < , t  K }. Remarks. (i) Notice that the function	is defined on the whole of R. (ii) The above definition of admissibility (2.4) is not the usual one3 . We do not expect that the supremum in (2.3) will be attained within the set A, but as our goal is to come up with good sub-optimal strategies, this does not matter for our current purposes. Admissibility is imposed to eliminate doubling strategies, where wealth may go arbitrarily negative before time T , but ends up at a high value at time T . The assumptions made here rule this out; if we were to go to large negative wealth at some time in (0, T ), boundedness of  ,	and  prevent us returning to positive wealth with certainty by time T , and the penalty imposed by the concave function  then makes this a bad thing to do. (iii) If the dimension k of the statespace of the factor diffusion X were not very small, it is not feasible to calculate and store the value function V . The approach we develop in this paper allows us to determine approximately optimal policies without the need to calculate V . We shall require one technical condition on U , which is expressed as a condition on the inverse marginal utility I , defined by Uc (s, I (s, z )) = z, We require Assumption: there exists , A > 0 such that I (t, z )  A(1 + z - ) . The inequality has to hold for all z > 0 and all t	[0, T ]. We are now ready to state the main result of the paper, which allows us to derive effective Monte Carlo bounds on the value, and to find good sub-optimal strategies pathwise. The proof uses duality arguments similar to those presented in [2], [4], and later described in a more general setting in [3].
+These are the conditions limc0 Uc (t, c) =  = limw-  (w), limc Uc (t, c) = 0 = limw  (w). One typically imposes a non-negativity constraint on the wealth process associated with the trading strategy .
+2 3
+
+(2.4)
+
+(z > 0).
+
+(2.5)
+
+(2.6)
+
+3
+
+Theorem 2.1. Suppose that  is a bounded previsible process such that t - rt 1 - t t = 0, and that  solves the linear SDE dt = t (-t dWt - rt dt). Define the function g by4
+T
+
+(2.7)
+
+(2.8)
+
+g (t, z, x) = E
+t
+
+~ (s, s )ds +  U ~(T ) t = z, Xt = x
+
+(2.9)
+
+for t  [0, T ], z > 0, x  Rk . Then for any t  [0, T ], z > 0, w  R, x	Rk , and bounded previsible , we have the inequalities g (t, z, x) + wz - h(t, w, z, x, )  V (t, w, x)	g (t, z, x) + wz, where
+  h(t, w, z, x, )  E  ~(T ) - (wT ) + T wT
+
+(2.10)
+
+wt = w, t = z, Xt = x ,
+
+(2.11)
+
+and the process w  is the solution to the wealth evolution (2.2) with portfolio process  and consumption process cs = I (s, s ), (s  t). (2.12) Remarks. (i) In general the matrix  is not even square, so not invertible, but we could try to find  to satisfy (2.7) by taking the pseudo-inverse of  :
+T T -1 t = t (t t ) (  t - r t 1) .
+
+(2.13)
+
+T -1 This can be done if (t t ) is bounded, in effect a uniform ellipticity condition of the kind commonly imposed in such problems.
+
+(ii) From the definition of the convex dual function  ~, it is clear that h is always non-negative. Since h dominates the gap between the lower and upper bounds, we should aim to make h as small as we can. Ideally, we would have that h was zero, which would require us to have  (w T ) =	T . (2.14)
+
+If we demanded that this happens, then the problem becomes a BSDE with (2.14) as the terminal condition. As it seems that there are as yet no efficient numerical methods for solving BSDEs in high dimensions, this does not help much. What we are attempting to do with this approach is in effect relax the demand that the solution we construct hits the terminal condition (2.14), but instead to estimate the error we make when we fail to match the terminal condition.
+4
+
+~,  ~ (t, z )  supx {U (t, x) - zx},  The functions U ~ are the convex dual functions, U ~(z )	supx {(x) - zx}.
+
+4
+
+Proof. (a) The upper bound. The process  is determined by (2.7) and (2.8); in what follows, we shall suppose that c is determined from	by (2.12). Consider the It^ o expansion of T wT . We have:
+T
+
+0 = -T wT + t wt +
+t T
+
+(s dws + ws ds + d[, w ]s) s (s  s - ws s ) dWs
+t
+
+= -T wT + t wt +
+T
+
++
+t
+
+s (rs ws + s  (s - rs 1) - cs - rs ws - s  s s ) ds
+T T
+
+= -T wT + t wt +
+t
+
+s (s  s - ws s ) dWs -
+t
+
+s cs ds
+
+(2.15)
+
+using (2.7) and (2.8). We claim that the stochastic integral has zero mean, and in order to establish this, it is necessary to control the integrand. The processes , , and  are all bounded by hypothesis, so we need to have control on  and w . Since  satisfies the linear SDE (2.8) with bounded coefficients  and r , it is not hard to establish a bound on E [(t)p ] for any t > 0, and for any p  2, where t  sup0st |s |; see, for example, Lemma V.11.5 of [10]. Similarly, we may bound E [(t )-p ] for any t > 0, and for any p  2, by considering the linear SDE for  -1.  All that remains is to establish a similar bound for wt , where w is given by (2.2). The only problematic part of this estimation is in controlling c, but this is where the Assumption (2.6) comes in, since t-1 is controlled as before, and c is bounded by some power of  . We therefore conclude that
+T
+
+0 = E -T wT + t wt -
+t
+
+s cs ds .
+
+(2.16)
+
+We can add this equality to (2.3) to find5
+T
+
+V (t, w, x) =
+
+sup E
+(c, )A t
+
+{U (s, cs ) - s cs } ds + (wT ) - T wT + +t wt wt = w, Xt = x, t =  (2.17)
+
+T
+
+ E
+t T
+
+~ (s, s ) ds +	U ~(T ) + t wt wt = w, Xt = x, t =  ~ (s, s ) ds +  U ~(T ) wt = w, Xt = x, t =  + w (2.18)
+
+= E
+t
+
+= g (t, , x) + w. This is the upper bound in (2.10).
+5
+
+We use (2.12) at the first step.
+
+5
+
+(B) The lower bound. The argument reuses elements of the proof of the upper bound. The task this time is to propose some admissible (c, ) and deduce a lower bound from it. Given the state-price density process  as in (2.8), our intention is to use the process c to be defined from it by (2.12). Doing this, we see that the integral term appearing in the right-hand side of (2.17) is equal to
+T
+
+E
+t
+
+~ (s, s ) ds, U
+
+and moreover that (2.16) still holds by the same argument as before. For any bounded previsible , the pair (c, ) is admissible, so if we use that admissible pair we find as at (2.17) that
+T
+
+V (t, w, x)  E
+t
+
+   ~ (s, s ) ds + (wT wt = w, Xt = x, t =  U ) - T wT + t wt
+
+= g (t, , x) + w - h(t, w, , x, ) when we recall the definitions (2.9) and (2.11) of g and h.
+
+(2.19)
+
+Remarks. (i) For any bounded previsible  and  the result (2.10) of Theorem 2.1 gives two-sided bounds on the value function. Importantly, the numerical values of g and h can be estimated by forward simulation from current values. It is also worth noting that the methodology does not require any `simulation within simulations' which substantially increases the computation times; we will be evaluating the state-price density and the portfolio process along just one trajectory. All we need to do is to simulate sufficiently many sample paths to approximate the expectation operator in (2.9) and (2.11). (ii) We need to have a measure for comparison between the bounds in (2.10). Since utility functionals are defined up to affine transformations, our measure needs to be invariant under those. Thus the difference between the upper and lower bounds is not informative. We can however think of giving up a fraction of the initial wealth w and look for the minimal  such that the upper bound corresponding to (1 - )w initial wealth is at most as large as the lower bound for starting with wealth w . This  is of course: (t, w, , X, )  h(t, w, , X, ) , w (2.20)
+
+which will from now on be our efficiency measure. Notice that (2.20) is a dimensionless quantity. (iii) The key issue for obtaining good bounds is of course the choice of the processes  and . The traditional way to approach solving the problem (2.3) would be to write down the HJB equation, derive the corresponding PDEs, and try to solve them. However, these PDEs are typically highly non-linear, and we only stand a chance of getting reasonably stable solutions in dimensions one or two. 6
+
+Nevertheless, we can deduce some worthwhile information from the HJB equation. Dropping the t subscript, and remembering the function V takes (t, w, X ) as arguments, the HJB equation is 0 = sup U (t, c) + Vt + (rw +   ( - r 1) - c) Vw + X  VX +
+c,
+
+1 T T tr(X X VXX ) . + |T  |2 Vww +   X VXw + 1 2 2
+
+(2.21)
+
+Optimizing over c leads to the conclusion that ct = I (t, Vw ), and optimizing over  tells us that we should have
+T  = -( T )-1 ( - r 1)Vw + X VXw /Vww .
+
+(2.22)
+
+Here  T is invertible by our non-degeneracy assumptions on the market. Assuming that V and g are dual (as we would expect from (2.10)), in that V (t, w, x) = inf {g (t, , x) + w },
+
+
+g (t, , x) = sup{V (t, w, x) - w },
+w
+
+(2.23)
+
+this would lead us to the relations w = -gz (t, z, x), Straightforward calculus then leads to Vww (t, w, x) = -1/g (t, , x). (2.25)  = Vw (t, w, x). (2.24)
+
+These relations help us to make choices of  and . We will use (2.13) to make our (pathwise) choice for , and then we will use the truncated form  = -( T )-1 ( - r 1)Vw /Vww = ( T )-1 ( - r 1) g (t, , X ) (2.26)
+
+for the pathwise choice of . We should in principle include the cross derivative term from (2.22) in the choice of , and in some situations it might well be worth doing this, but the cost is that we have to get hold of the derivative of  with respect to X , and doing this by simulation is cumbersome. The virtue of the form (2.26) is that we just need the second derivative of the convex function g with respect to its scalar argument  , and determining this by simulation is computationally feasible. (iv) In practice, it will be clumsy to form an estimate of the term h in (2.10) if we are determining the portfolio process  according to the recipe just outlined, because if we are to simulate an evolution of (X, w ) we will at each step need to identify derivatives of g , and this is a simulation within a simulation. We envisage the lower bound in (2.10) being used as a means to assess a particular portfolio rule which may be expressed explicitly as some function of (t, X, w ). In a high-dimensional problem, we do not expect the optimal portfolio rule to be something we can characterize, but we may well have some heuristic for some `good' portfolio rule, and (2.10) gives us a way to tell how good that heuristic may be. 7
+
+Algorithm 1: Computing the optimal path. Step 1: Initialisation. Pick starting values w = w0 , X = X0 and a grid of time steps 0 = t0 < t1 < t2 <    < tN = T along which we want to know the solution. Simulate a realisation of the Brownian motion W along which we want to calculate the optimal path. Finding the optimal 0 . For any  , we can calculate g (0, , X ) + w0 . This function is convex in  , so we can use the golden Section search to find the minimum in (2.23). This gives us the value of V (0, w0, X0 ) and the optimal starting value of the dual process 0 . Calculating the optimal path. For each n = 0, 1, . . . , N - 1, we have (tn , tn , Xtn ) available. We use (2.12) to work out ctn , (2.26) to work out tn , and (2.24) to work out wtn . We then cacluate tn wth (2.7) and use the Euler scheme to move to time tn+1 using (2.1) and (2.8).
+
+Step 2:
+
+Step 3:
+
+Summarising: Given an initial state (t, w,  ), we can follow the dynamics of w ,  , and X , using (2.1), (2.2), (2.8),	given by (2.7), c given by (2.12), and	given by (2.26) (or perhaps (2.22)). The key advantage of this formulation is that all we need to do now is to optimise the bounds (2.10) for a one-dimensional starting value of the dual process  . This is a quick procedure numerically.
+
+3
+
+Algorithms.
+
+We will now describe an algorithm for simulating the optimal path and controls for the problem (2.3), given a particular realisation of the Brownian motion. That is, we do not attempt to recover the whole value function, as this is bound to fail in higher dimensions. Our method, which is effectively local, will follow a particular realisation of the Brownian motion W and tell us how to invest and consume in that particular case. After all, one is predominantly interested in how to invest in the current market conditions, and does not necessarily care about all possible versions of reality! Algorithm 1 describes how to compute the best bounds numerically. The cost of running this algorithm will be O(N )  O(g ), where O(g ) is the average cost of evaluation of the function g and h. In Algorithm 1, we have not yet given the details of how to calculate the function g numerically (which will be the business of Algorithm 2). That is, we want to be able to numerically calculate the expectation in (2.9) and (2.11) for t = tn , being one of the grid points in the time discretization. We approach the calculation numerically with Monte Carlo methods, sampling M paths of Brownian motion W for t = tn , tn+1 , . . . , tN , simulating the values of the functional in the expectation of (2.9) and (2.11), and finally averaging over the
+
+8
+
+sampled paths. In practice, we find that it might be necessary to use importance sampling in order to decrease the volatility of our estimates. In order to do that, define the change of measure martingale
+-1 -1 Z dZs = Zs s dWs for t  s  T,
+
+Zt = 1,
+
+(3.1)
+
+and set
+
+dQ | dP Ft
+
+= Zt-1 . Then we can rewrite (2.9) and (2.11) as
+T Q t
+
+g (t, , X ) = E
+
+~ (s, s )ds + ZT  Zs U ~(T ) t = , Xt = X ,
+
+(3.2) (3.3)
+
+  h(t, w, , X, ) = EQ ZT (wT ) - ZT w T  T - ZT  ~(T ) wt = w, t = , Xt = X .
+
+with a new Brownian motion W Q under Q defined by  t = dWt -  Z dt. dW t (3.4)
+
+ The idea now is to choose Z in a way that the Ito expansion of the term ZT  ~(T ) has no dW term. This has a variance reducing property. Writing =  whenever two sides of an equality differ only by integrals with respect to ds, we have
+T T
+
+ZT  ~(T ) = Zt	~(t ) +
+t T
+
+d (Z s d  ~(s ))=  Zt  ~(t ) +
+t
+
+(Z s  ~ (s )ds + dZs  ~(s ))
+
+(3.5) (3.6)
+
+= Zt  ~(t ) +
+t
+
+Z  s. Zs -s  ~ (s )s - s  ~(s ) dW
+
+Therefore, we set: Z  -s s  ~ (s ) ,  ~(s ) (3.7)
+
+ term in (3.5), and in turn in (3.2). which cancels the dW With this in mind, we now present the numerical algorithm for calculating g (t, , X ). The computational complexity of Algorithm 2 comes from (3.8), where we clearly see that we need O(N )  O(M ) operations. Therefore, we deduce that O(g ) = O(MN ). The key to performance of the method is of course the accuracy of the Monte Carlo simulation. As we shall see in the following Section, the numerical results are promising. Even a fairly moderate number of Monte Carlo paths can provide a good approximation to the true value of g and h. With this in mind, we proceed to examine the numerical results for the performance of the method.
+
+9
+
+~) Algorithm 2: Computing g (tn , , X ) and h(tn , w, , X,  Step 1:  i, i = Initialisation. Recall t = tn . Generate M paths of Brownian motion W t 1, 2, . . . , M , with values evaluated at t = tn , tn+1 , . . . , tN . The corresponding paths for  , X , w and Z are denoted by  i , X i , w i and Z i with tin =  , i = w. Xtin = X , Ztin = 1 and wt n i Simulation. For k = n, n + 1, . . . , N - 1, update tik+1 , Xtik+1 , Ztik+1 and wt k+1 as follows. Equations (3.7) and (3.4) give us the corresponding dWtk . We then use (2.8), (2.1), (3.1) and (2.2) to move to the next time point using the Euler scheme. Averaging. Having calculated paths  i , X i , Z i and w i corresponding to M  i , we return the approximate values of g and h: paths of W 1 g (tn , , X )  M ~)  1 h(tn , w, , X,  M
+M N -1
+
+Step 2:
+
+Step 3:
+
+~ (tk , ti ) + Zti  Ztik U ~(tiN ) N k
+i=1 M i i ZtiN (wt ) - wt i -  ~(tiN ) . N N tN i=1 k =n
+
+(3.8) (3.9)
+
+4
+
+Numerical performance
+
+In this Section, we shall compare the results of the Monte Carlo solutions with special cases of the problem (2.3) where we either know the solution in closed form, or we know highly accurate numerical schemes for approximating the solution. We start off by analysing complete markets where some of the analysis in the previous Section simplifies. Recall that, in a complete market the asset volatility matrix  is invertible. This means we have a unique6 state-price density for the problem, given by
+t t
+
+t = 0 exp -
+0
+
+s  dWs -
+0
+
+1 rs + |s |2 ds , 2
+
+(4.1)
+
+-1 where s  s (s - rs 1). Therefore, provided that (2.23) holds, our Monte Carlo method should be able to find the optimal path exactly, modulo numerical errors coming from Monte Carlo approximation of the expectation operator in (2.9), approximating the derivatives in (2.24) and (2.25), and finally the numerical optimisation over the (scalar!) value  in (2.9). The positive side is that all these errors can be made small provided we use enough computational power. With that in mind, we start off with two examples of problems dealing with complete markets where the benchmark answers are reliable; and finish by analysing runs in incomplete markets where we provide estimate error bounds, but where no other solutions methods are available.
+6
+
+Up to a multiplicative constant still to be found.
+
+10
+
+4.1
+
+The Merton problem
+
+We start by comparing our results to the solutions of the Merton problem, which are available in closed form in multiple dimensions. Recall that the Merton problem assumes that functions r ,	and  in (2.2) are constant, and the utility functions U and  in (2.3) take a particular form: U (t, c) = e-t u(c), (w ) = Au(w ), where a, b,  are positive constant, and u is a constant relative risk aversion utility: u ( c) = c1-R , 1-R (4.4) (4.2) (4.3)
+
+for R > 0, R = 1. Then the optimal solution takes the form: V (t, w, X ) = f (t)u(w ), t = M wt , ct =	(t)wt , where e-t/R (1 - e-(b+/R)(T -t) ) f (t) = A e + b + /R M = R-1 ( T )-1 ( - r 1),
+1/R -b(T -t) R
+
+(4.5) (4.6) (4.7)
+
+,
+
+(4.8) (4.9) (4.10)
+
+ (t) = e
+
+-t/R
+
+f (t)
+
+-1/R
+
+,
+
+where b = (R - 1)(r + ||2 /2R)/R; see [9], Section 2.1. Figure 1 shows the results of the simulation runs for the 3-dimensional version of the problem using M = 1000 paths. The top left panel shows the running estimate of the value function VM (t, wM (t)) along a particular realization of Brownian motion W . The top right and bottom left panels show investment and consumption proportions, respectively. Finally, the bottom right panel depicts the estimated wealth process compared to the Merton wealth process. As we see, all the graphs give a very satisfactory approximation to the Merton solution. This is especially remarkable taking into account that we are already in dimension 3, and we have used relatively few paths. We now present the study of how the accuracy of the solutions to the Merton problem varies for different values of the number of simulations M and number of dimensions K . We found that the number of time steps N used to discretize the integral in (3.2) does not greatly influence the accuracy of the solutions. We compare the estimates of the optimal starting 0 found by the procedure (2.23) in Algorithm 1. For each test, we keep the initial data of Step 1 fixed. We then run Step 2 11
+
+Merton Average(0 ) Stdev(0 ) Time / run (min)
+
+K=1 9.97 9.72 0.12 0.67
+
+K =2 9.49 9.33 0.14 2.32
+
+K=3 8.92 8.64 0.23 2.95
+
+K =4 8.61 8.86 0.34 3.51
+
+K=5 8.17 7.53 0.30 4.08
+
+K=6 8.02 7.85 0.30 4.63
+
+K =7 7.73 7.36 0.36 5.15
+
+K=8 7.44 7.54 0.60 5.61
+
+K =9 7.11 6.44 0.24 6.41
+
+K = 10 6.68 5.31 0.48 6.83
+
+Table 3: Comparison of the 0 for the Merton problem and the values found using the Monte Carlo method for different values of the dimension parameter K . The number of Monte Carlo paths each time was equal to M = 1000. For each set of simulated Monte Carlo paths, we find the optimal implied value of 0 . We then take the average as the estimate, and calculate its standard deviation. Here we take r = 0.05,  = 0.03, R = 3, w0 = 1, a = 1, b = 1, N = 100, dt = 0.05. The parameters  and  were generated randomly:  had a U [10%, 50% distribution, once the entries of  were drawn from U [-1, 1] until the resulting matrix was positive definite. of Algorithm 1, each time approximating the function g with a different set of Monte Carlo paths. This way, we can investigate how sensitive our optimized values of 0 are to the Monte Carlo procedure for approximating the expectation operator. Table 3 and Table 4 present the results of the simulations for different number of Monte Carlo paths to calculate g , M = 1000 and M = 10000, respectively. We see that the numerical results work reasonably well for K	6 when we choose to use 1000 Monte Carlo paths. The average 0 is pretty close to the true value, and the volatility of the estimates stays modest. However, for larger values of K , we see that the estimates are either not as accurate, or become more volatile. For M = 10000, the results look much better. For K	9, we see a considerable drop in the volatility of the estimates, and all of them lie within two standard deviations of the true value, with most of them being less than one standard deviation away. These results are very encouraging. They show that, even in dimensions up to 10, having a reasonably modest number of Monte Carlo paths of 10000 can provide satisfactory results when solving the Merton problem. This is particularly interesting since the traditional HJB approach would struggle in these dimensions unless the problem has a particular structure such that we can work out the value function explicitly. One might think that the accuracy of the method relies on the special structure of the Merton problem. We now show that this is not the case. We consider departures from the basic problem where accurate numerical solutions are available.
+
+4.2
+
+Non-constant relative risk aversion
+
+The example of the Merton problem has shown us that the Monte Carlo method can handle situations where we deal with a multi-dimensional Brownian motion. However, the multiplicative scaling property of the CRRA utility function u means that we are unable to assess the accuracy in predicting . The remarkable accuracy in prediction in Figure 1 is caused by the fact that g (t, , X ) =  1-1/R g ~(t, X ), for some function g ~, and the fact that the optimal  12
+
+Merton Average(0 ) Stdev(0 ) Time / run (min)
+
+K=1 10.10 10.15 0.04 6.87
+
+K =2 9.67 9.58 0.08 22.90
+
+K=3 9.34 9.35 0.06 28.65
+
+K =4 8.63 8.76 0.08 34.42
+
+K=5 8.35 8.29 0.08 40.06
+
+K=6 8.13 8.33 0.12 46.25
+
+K =7 7.33 7.30 0.15 52.08
+
+K=8 7.10 7.16 0.19 57.27
+
+K =9 6.83 6.63 0.12 61.26
+
+K = 10 6.48 6.95 0.49 68.09
+
+Table 4: Comparison of the 0 for the Merton problem and the values found using the Monte Carlo method for different values of the dimension parameter K . The number of Monte Carlo paths each time was equal to M = 10000. For each set of simulated Monte Carlo paths, we find the optimal implied value of 0 . We then take the average as the estimate, and calculate its standard deviation. Here we take r = 0.05,  = 0.03, R = 3, w0 = 1, a = 1, b = 1, N = 100, dt = 0.05. The parameters  and	were generated randomly:  had a U [10%, 50% distribution, once the entries of  were drawn from U [-1, 1] until the resulting matrix was positive definite. satisfies (2.26). It will therefore be informative the consider an example where the proportion of money invested in the risky assets varies with wealth. This can be done, although the price to pay is dimensionality. In this Section, we assume that the financial market has constant coefficients and that there is only one asset in the market. For R1 > 1 > R2 > 0, we define the agent's marginal utility as I (t, y ) = a1 I ( y ) =
+1/R1 -t/R1 -1/R1
+
+e
+
+y
+
++ a2
+
+1/R2 -t/R2 -1/R2
+
+e
+
+y
+
+,
+
+(4.11) (4.12)
+
+1/R b1 1 y -1/R1
+
++
+
+1/R b2 2 y -1/R2 .
+
+What this means is that, for small values of wealth w , the agent's relative risk aversion is close to R1 and the agent behaves similarly to the Merton investor from Section (4.1) with R = R1 , a = a1 and b = b1 , and value function V1 (t, w ). Conversely, the investor for large values of w is less risk averse, with risk aversion R2 . He behaves like a Merton investor from Section (4.1) with R = R2 , a = a2 , and b = b2 , and value function V2 (t, w ). In dimension one, there are two very effective methods for solving this problem: policy improvement and quantisation7 . We proceed by briefly describing each one of them, and then by comparing their performance with the Monte Carlo scheme we proposed earlier. Policy improvement. We follow the approach described in Section 3.4 of [9]. The HJB equation for our problem is 1 0 = sup U (t, c) + Vt (t, w ) + (rw + ( - r ) - c)Vw (t, w ) + 2  2 Vww (t, w ) , 2 c, and we are given the terminal value V (T, w ) = (w ).
+7
+
+(4.13)
+
+(4.14)
+
+Both of which are difficult to generalise to dimensions more than one, though.
+
+13
+
+Given functions (4.11), functions U and , although not available in closed form, can be found efficiently using binary search. We therefore give ourselves a grid of time points 0 < t1 < t2 <	  < tN = T and a grid of space points w1 < w2 <    < wM and we wish to find V evaluated at their mesh. At the boundaries, we know that the solution resembles the Merton solutions: V (t, w1 ) = V1 (t, w1 ), V (t, wN ) = V2 (t, wN ). (4.15)
+
+Let L(c, , w ) be a functional acting on smooth test functions	(t, w ) as 1 L(c, ) (t, w ) = (rw + ( - r ) - c) (t, w ) + 2  2   (t, w ). 2 Noticing that  (t, wi+1 ) -  (t, wi-1 ) + + - - ( (t, wi+1 ) -  (t, wi )) - + ( (t, wi ) -  (t, wi-1 )) ,	 (t, w )  + - (+ + - )	 (t, w )  (4.17) (4.18) (4.16)
+
+where + = wi+1 - wi and - = wi - wi-1 , it is possible to approximate L acting on  (t, ) by a sparse triagonal matrix L(c, ) acting on a column vector	(t, wi ), i = 2, . . . M - 1, using approximations (4.17) plugged into (4.16)8 . We now discretize the differential operator appearing in the HJB equation (4.13) on the chosen time and space grid. By letting Vin = V (tn , wi ) and V n = (Vin )i=1,2,...,M , we obtain: 0 = sup
+c,
+
+V n+1 - V n + (L(cn , n )V n + U (tn , , cn )) tn+1 - tn + (1 - )(L(cn+1 , n+1 )V n+1 + U (tn+1 , , cn+1)) . (4.19)
+
+We took  = 0.5, giving the Crank-Nicholson method. We define L to act on the boundary points w1 and wM in such a way that (4.19) yields boundary solutions given by (4.15). Given (c, ), (4.19) is then a sparse set of linear equations which we solve for V . We then improve on (c, ) by maximisation in (4.19), given the found V . We iterate the process until convergence. Figure 2 shows the results of the policy improvement algorithm for t = 0. As we see, we were able to recover the whole value function using the method described above. It is worth pointing out, though, that the method is tricky to implement even in one dimension, and higher dimensions are almost certainly out of question. However, once V has been found in one dimension, working out the optimal consumption and investment around a sample path of Brownian motion are immediate.
+Where we consider w = (w1 , w2 , . . . , wM )T as a column vector, with the corresponding controls (c1 , c2 , . . . , cM )T and (1 , 2 , . . . , M )T .
+8
+
+14
+
+Quantization. We proceed to a method which builds on the observations from Section 2, but avoids using the Monte Carlo method for approximating the expectation operator in (2.9). Instead, quantisation proposes approximating the expectation of the Brownian functional by a deterministic sum. Here we follow the details from the website [8] and related papers [7] and [1]. The idea is to use the Karhunen-Loeve expansion of Brownian motion (Wt )0tT :
+
+
+Wt =
+k =1
+
+n en (t),
+
+(4.20)
+
+where (n )n1  N (0, n ) is a sequence of independent normal random variables with variance n . Here the decomposition functions are en (t) = n = 2 sin T t T
+2
+
+n- .
+
+1 2
+
+,
+
+(4.21) (4.22)
+
+T 1 )  (n - 2
+
+Brownian motion W is then firstly approximated by choosing the first d terms in the sum (4.20). We can then think of  = (n )n=1,2,...,d and e(t) = (en (t))n=1,2,...,d as d-dimensional vectors, and the Brownian motion as being approximated by the dot product Wt	e(t) (4.23)
+
+We then quantise the random d-dimensional vector  by a random variable X taking n distinct values x1 , x2 , . . . , xn	Rd with respective probabilities p1 , p2 , . . . , pn , and giving us the final approximation Wt  X  e(t). Now, if we need to calculate an expected value of a functional
+T
+
+(4.24)
+
+E
+0
+
+f (t, Wt )dt + F (WT ) ,
+
+(4.25)
+
+we can now approximate it by a deterministic sum
+n T
+
+pk
+k =1 0
+
+f (t, xk  e(t))dt + F (xk  e(t)) .
+
+(4.26)
+
+The effectiveness of this application depends on the number of terms n taken in the expansion (4.20), as well as the placing of the points and weights xi and pi . Files of the points and weights for many different values of n and for dimension up to 10 may be freely downloaded from the website [8]. These points and weights are optimal quantizations of the standard Gaussian distribution, in a sense explained in detail there. For a chosen number 15
+
+of n, we can therefore load up the optimal xi and pi from these files. For our runs, we use n = 10160. The important thing is that, for the current problem, the calculations we need to perform are of the particular form (4.25). Indeed, in a complete market with one asset, we have
+T
+
+g (t,  ) = E
+t
+
+~ (t, s )ds +  U ~(T ) t =  ,
+
+(4.27)
+
+compare it with (2.9). Here  has a closed-form expression 1 s = t exp -(Ws - Wt ) - (r + 2 )(s - t) 2 for s  t, (4.28)
+
+which is of the required form (4.25). Having laid out the problem setup and the accurate numerical methods for solving the problem, we now show the numerical results of our calculations. Comparison of the methods. Figure 3 shows the results of the simulation runs. It is clear that all the methods proposed give virtually the same answers; with Monte Carlo being only away from the two benchmark methods of policy improvement and quantisation. The most reassuring message here is that the Monte Carlo methodology also does a very good job on approximating the investment proportions for the problem as in (2.26) and (2.12). This is the part the the Merton problem example was unable to reveal due to the special structure. The time taken to get the answer for the policy improvement was approximately 10 minutes, most of which was taken on the calculation of the value function (evaluating the solution along a chosen path is extremely fast). In comparison, quantisation has taken roughly 4 minutes, and Monte Carlo took 8 minutes. Of course, each of the methods has their costs and benefits. The value function takes a time-investment at the start, but is very fast regardless of how many sample paths we would like to evaluate. This is not the case for quantisation and the Monte Carlo method. Quantisation is the overall speed-winner here, however we must remember that this is mainly due to the preloaded files which we used to quantise the Brownian motion. Overall, we conclude that the Monte Carlo method performs very well on the complete market problems, as it should. After all, as mentioned before, the only errors we are incurring are numerical: approximating the derivatives and the expectation operator. With sufficient computational power, these should be possible to be made small.
+
+4.3
+
+Incomplete markets driven by a diffusion
+
+Finally, we consider an example where no benchmark methods are available, and the bounds derived in (2.10) are the only sensible indicator for how well our method is doing. We consider an example that is as challenging as possible: an incomplete market driven by a diffusion. As a specific example, we consider a market composed of 4 stocks driven by a 5-dimensional Brownian motion. The same Brownian motion drives the 5-dimensional factor process X , 16
+
+which we assume to a be an OU process with the mean-reversion and volatility parameters generated randomly. We take a CRRA utility function, with a number of Monte Carlo paths being equal to M = 1000. The results of the optimisation run are depicted on Figure 4. The run time here took 23h. The details regarding the parameters are displayed below the panel. As we can see from the first two panels on the top, the upper and lower bounds stay reasonably close during the sample runs, with the error measure defined in (2.20) between 12% and 22%, and generally decreasing as we near the end of investment. This is a positive result, especially in light of the dimensionality of the problem. Notice that the market is incomplete, and that the value function for this problem would need to be 7-dimensional (1 dimension for wealth, 1 for time, and 5 for the factor process X ). Hence, any other method for approaching this problem would really struggle. We could of course try to improve on the performance of this algorithm. We lose efficiency when we use the approximation of  in (2.13), and also when we truncate the expression (2.22) for . However, our main goal of the paper has already been achieved here: we have illustrated how to use our method on a very difficult problem, and derived satisfactory bounds on the efficiency.
+
+5
+
+Conclusions
+
+This paper presented an effective methodology for tackling optimal investment problems in incomplete markets driven by a Brownian diffusion. We were able to derive a generic methodology for numerically tackling these problems by taking some convenient mode realisation of the market. Secondly, we settle for suboptimal controls which are close to the optimal control. These assumptions are not a weakness of the method; they are rather a necessary cost needed to be taken if we want to get concrete investment advise in a general setup. After all, they let us derive what we really need in practise: a method for finding a good investment strategy when faced by a particular realisation of the market! We have also illustrated the effectiveness of the method in a variety of contexts. For the problems where other reliable numerical techniques are available, we showed our method does just as good. For a very complex multi-dimensional problem concluding Section 4, we have showed that the investment errors can be kept satisfactory low. No other method was able to provide even estimates of the solutions in this context. This proves the effectiveness of the method and shows that it has a potential of giving what we really need: concrete investment prescriptions facing a particular market environment.
+
+17
+
+Figure 1: Monte Carlo solution to the Merton problem. Here we take k = 3, r = 0.05,  = 0.03, R = 3, a = 1, b = 2, N = 100, dt = 0.05, M = 1000, w0 = 1,  = [0.07; 0.25; 0.15],	= [0.12, 0.01, 0.03; 0.01, 0.50, 0.01; 0.03, 0.01, 0.27]. 18
+
+Figure 2: Value function found using policy improvement algorithm. Here we take w0 = 2,  = 0.10,  = 0.20, r = 0.05,  = 0.03, a1 = 10, a2 = 20, b1 = 30, b2 = 10, R1 = 3, R2 = 0.5, T = 1, N = 100. 19
+
+Figure 3: Comparison of different methods for the non-constant relative risk aversion example. Here we take w0 = 2,  = 0.10,  = 0.20, r = 0.05,  = 0.03, a1 = 10, a2 = 20, b1 = 30, b2 = 10, R1 = 3, R2 = 0.5, T = 1, N = 100. The number of Monte Carlo paths we took is M = 10000. 20
+
+Figure 4: An incomplete market driven by a stochastic factor. Here we take an incomplete market 5-dimensional Brownian motion with 4 independent assets and M = 1000 Monte Carlo paths in the approximation of g . We start with w0 = 1,  = 0.03, T = 1, N = 100. We take the CRRA utility function with parameters a = 1, b = 2, R = 3. X is taken to be an OU process with randomly-generated volatility matrix and mean-reverting drift. The market interest rate r and  are constant and randomly generated. Market volatility  is a random 4  5 matrix multiplied by a stochastic scaling factor 1 + exp(-1  Xt ). The randomisation is done by drawing relevant parameters from U [-1, 1] distribution via Gibbssampling until the regularity conditions imposed by the paper are met (i.e.   r  0,  has rank 4 and  T  is invertible). The top panels represent the running upper and lower bounds on the objective as defined in (2.10), error rate as in (2.20), and the corresponding wealth process from (2.24). The bottom panel represents the investment and consumption proportions, together with the first two components of the factor process X . 21
+
+References
+[1] Corlay, S. Some aspects of optimal quantization and applications to finance. PhD thesis, Universit e Pierre et Marie Curie, 2011. [2] Cox, J. C., and Huang, C.-f. Optimal consumption and portfolio policies when asset prices follow a diffusion process. Journal of economic theory 49, 1 (1989), 3383. [3] Karatzas, I. Optimisation problems in the theory of continuous trading. Control Optim 27 (1989), 12211259. [4] Karatzas, I., Lehoczky, J. P., and Shreve, S. E. Optimal portfolio and consumption decisions for a "small investor" on a finite horizon. SIAM journal on control and optimization 25, 6 (1987), 15571586. [5] Merton, R. Lifetime portfolio selection under uncertainty: the continuous-time model. Rev. Econ. Statist., 51 (1969), 247257. [6] Merton, R. Optimum consumption and portfolio rules in a continuous-time model. J. Econ. Theory, 3 (1971), 373413. [7] Pag` es, G., and Printems, J. Optimal quadratic quantization for numerics: the Gaussian case. Monte Carlo Methods and Applications 9 (2003), 135166. [8] Pag` es, G., Printems, J., and Corlay, S. The optimal quantization web site. http://www.quantize.maths-fi.com/gaussian_process_database ; accessed 20March-2013. [9] Rogers, L. C. G. Optimal Investment. Springer Briefs in Quantitative Finance. Springer-Verlag, 2013. [10] Rogers, L. C. G., and Williams, D. Diffusions, Markov Processes and Martingales, vol. 2. Cambridge University Press, 2000.
+
+22
+

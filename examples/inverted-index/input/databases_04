@@ -1,0 +1,475 @@
+Search and Result Presentation in Scientific Workflow Repositories
+Susan B. Davidson1 Xiaocheng Huang2 Julia Stoyanovich3 Xiaojie Yuan2
+1
+
+University of Pennsylvania Philadelphia, USA susan@cis.upenn.edu
+
+Nankai University Tianjin, China huangx@seas.upenn.edu yuanxj@nankai.edu.cn
+2
+Input M0
+
+3 Drexel University Philadelphia, USA stoyanovich@drexel.edu
+
+arXiv:1305.4195v1 [cs.DB] 17 May 2013
+
+ABSTRACT
+We study the problem of searching a repository of complex hierarchical workflows whose component modules, both composite and atomic, have been annotated with keywords. Since keyword search does not use the graph structure of a workflow, we develop a model of workflows using contextfree bag grammars. We then give efficient polynomial-time algorithms that, given a workflow and a keyword query, determine whether some execution of the workflow matches the query. Based on these algorithms we develop a search and ranking solution that efficiently retrieves the top-k grammars from a repository. Finally, we propose a novel result presentation method for grammars matching a keyword query, based on representative parse-trees. The effectiveness of our approach is validated through an extensive experimental evaluation.
+
+Discover Prognosis Output W1 M3
+
+r1
+
+W0 M1 Determine Genetic Susceptibility r2 r3 W2 M5 23AndMe r4
+
+M2 Evaluate Risk
+
+M3 Expand SNPs
+
+Determine Expand SNPs Genetic Susceptibility M4 Consult Evaluate Database Risk r6 r7 W5 M6 Query OMIM W6 M7 Query PubMed r5 W3 M8
+
+M3 HapMap Expand SNPs
+
+W4 M9 Check Results
+
+1.
+
+INTRODUCTION
+
+Data-intensive workflows are gaining popularity in the scientific community. Workflow repositories are emerging in support of sharing and reuse, either as part of a particular workflow system (e.g., VisTrails [4] or Taverna [28]) or independently within a particular community (e.g., myExperiment.org [29]). As workflows become more widely used, workflow repositories grow in size, making information discovery an interesting challenge. Current workflow repositories, e.g., myExperiment.org, support tagging of workflows with keywords. Notably, because workflows are modular, users may wish to share and reuse components of a workflow [31]. It is thus important to support tagging, and to enable search, not just at the level of a workflow, but also at the level of modules and subworkflows. Recent work considered search in workflow repositories [10, 25, 30], and also argued that, because workflows can be large and complex, it is important to provide usable result presentation mechanisms. In this paper we propose a novel search and result presentation approach for complex hierarchical workflows. We now illustrate our approach with an example. Consider a workflow in Figure 1 that computes succeptibility of an individual to genetic disorders, and is based closely on [33]. This workflow takes a person's genetic information in the form of single nucleotide polymorphisms (SNPs) as input, and produces an assessment of genetic disorder risk. The workflow is implemented by module M0 , which is composite, and, when invoked, executes modules M1 and M2 in sequence. Module M1 expands the set of
+
+Figure 1: Disease succeptibility workflow. r1 : M0  {M1 , M2 } r2 : M1	{M3 , M 4} r3 : M3  {M5 , M3 } r4 : M3	{M8 , M3 } r5 : M3  {M9 } r6 : M4  {lookup, M6 } r7 : M4  {lookup, M7 } r8 : M2  {evaluate} r9 : M5  {23andMe} r10 : M9  {check} r11 : M6  {OMIM} r12 : M7  {PubMed} r13 : M8  {HapMap} Figure 2: Disease succeptibility workflow as a bag grammar. SNPs by considering known associations between SNP pairs and triplets. This module is composite, and has three alternative executions. In the first, the SNP set is expanded using a proprietary database of associations, e.g., 23andMe (module M5 ), followed by a recursive call to M3 . In the second alternative, a public association database, e.g., HapMap (module M8 ) is used, followed by a recursive call to M3 . The final alternative involves checking the retrieved results and terminating the recursion (module M9 ). Having computed an expanded SNP set, the workflow goes on to look up any genetic disorders associated with the SNPs. This is implemented by module M4 , which has two alternative executions: it may issue a query to OMIM (module M6 ) or to PubMed (module M7 ). Having retrieved results from OMIM or from PubMed, the workflow terminates. Suppose that this workflow exists in a repository, and that some of its modules are tagged. Let us assume the
+
+following assignment of keywords to workflow modules: M2 (evaluate), M4 (lookup), M5 (23andMe), M6 (OMIM), M7 (PubMed), M8 (HapMap), and M9 (check). It is not required that all modules be tagged, e.g., there is no keyword assigned to M1 in our example. It is also possible, and even likely, that multiple keywords are assigned per module, and that keywords are reused across modules, and across workflows [31]. However, we do not use multiple or repeating keywords here, to simplify our example. Suppose now that a user wants to know whether the workflow in Figure 1 matches a particular keyword query. Assuming "and" query semantics, answering this question amounts to determining if there exists some execution of the workflow in which all query keywords are present. For example, query {23andM e, HapM ap} matches an execution in which module M3 is run twice, evaluating M5  M3 (23andMe) on the first invocation, and M8  M3 (HapMap) on the second invocation. Intuitively, this execution exists because of the combination of alternation and recursion at M3 . On the other hand, there is no execution that matches {OM IM, P ubM ed} because, once an alternative for expanding M4 is chosen, then M6 (OMIM) or M7 (PubMed) is executed, and there is no recursion that allows M4 to repeat, possibly choosing another branch. It has recently been shown that complex hierarchical workflows can be naturally represented as context-free graph grammars involving recursion and alternation [1, 3]. We build on this work and adapt it to keyword search in workflows with tagged modules. Because of our proposed query semantics, observe that, while hierarchical workflow structure, alternation and recursion are important for determining whether a workflow matches a query, the graph structure within each composite module is unimportant for our purposes. This observation leads us to model scientific workflows as contextfree bag grammars (also called commutative grammars [13]). Figure 2 represents a bag grammar corresponding to the workflow in Figure 1. The bag grammar captures the hierarchical structure of the workflow (expansion of composite modules), alternation and recursion. Importantly, the grammar makes assignment of keywords to modules explicit, by including keywords as terminals. Note that keywords may annotate both atomic and composite modules, appearing in the corresponding grammar productions. So, M4 is tagged with lookup, which is captured in productions r6 and r7 . Query {23andM e, HapM ap} matches the workflow in Figure 1, and we would now like to explain to the user how the match occurs. Let us now return to our example, and focus on result presentation. Providing a usable result presentation mechanism is important, because workflow specifications can be large, and each workflow can match a query in multiple ways, due in large part to recursion and alternation. We propose here a result presentation mechanism based on a novel notion of representative parse trees (rpTree for short). Figure 3 shows a particular rpTree for query {23andM e, HapM ap}, with nodes representing bag grammar productions and terminals (see Figure 2), and edges corresponding to a firing of a production. Keyword matches occur at the leaves. Intuitively, an rpTree represents a class of parse trees of a bag grammar that derive a particular set of terminals. An rpTree is an irredundant representative of its class, in the sense that it does not fire recursive productions that do not derive additional query-relevant terminals. For example, the
+
+r1 (M0 ) r 2 (M 1 ) r 3 (M 3 ) r4 (M3 ) r5 (M3 ) r 8 (M 2 ) r6 (M4 ) evaluate r9 (M5 ) lookup r11 (M6 ) OMIM
+
+r13 (M8 ) 23andMe
+
+r10 (M9 ) HapMap check Figure 3: An rpTree for query {23andM e, HapM ap}. rpTree in Figure 3 represents also a tree in which production r3 is fired recursively twice, both times followed by r9 , and thus generating the terminal 23andMe twice. We will make the sense in which an rpTree is an irredundant representative of its class more precise in Section 5, and will show how rpTrees can be derived efficiently. Contributions. The contributions of our paper include:  A model of search and result presentation over keywordannotated context-free bag grammars (Section 2): Although the motivation for our model is derived from the problem of searching workflow repositories, it is applicable to any other scenario involving search over context-free bag grammars, e.g., business processes, call structure of programs, or other hierarchical graph applications.  Search and ranking algorithms (Sections 3 and 4): We give a bottom-up match algorithm, and develop an optimization, which borrows ideas from semi-naive datalog evaluation to avoid unproductive calculations. Next, translating probabilistic context-free grammars to our setting, we develop efficient search and ranking algorithms, and use them to identify top-k grammars.  Novel result presentation methods (Section 5): Since a workflow may match a query in many different ways, we develop a presentation mechanism to help the user understand how the keyword matches are most likely to occur. The mechanism is based on a novel notion of representative parse trees, which are the most probable parse trees that are structurally irredundant.  Extensive experimental evaluations (Section 6): We use synthetic datasets to demonstrate the effectiveness of our approach. Our synthetic data is generated in a way that resembles characteristics of workflows in myExperiment.org, in terms of keyword assignment and workflow size. However, since current scientific workflow management systems do not yet allow that workflows be expressed as grammars, we are unable to use the myExperiment.org dataset directly in our experiments. Related Work. Much effort [7, 17, 32] has been made recently to annotate scientific workflows to enable keyword search. As observed in [25], since scientific workflows are usually modeled as a three-dimensional graph structure when considering the expansions of composite modules (dashed
+
+edges in Figure 1), results on searching relational and XML data [5, 24, 35] or graph data [9, 18, 20, 34] can not be easily extended. [10, 25, 30] consider the scenario when alternation or recursion is not present in workflows. [23, 27] consider the scenario where nodes of XML documents exist with a probability (analogous to choice), however there is no recursion. There are also extensive results in (context-sensitive) commutative grammars [14, 13], which have been cast as vector addition systems [21] and Petri nets [8]. Decidability issues of Petri nets are surveyed in [14], and are shown to be N P -complete, directing focus towards more specific problems. We focus on a novel sub-problem,i.e., on whether there exists a bag that contains a keyword set and is accepted by a commutative grammar. Most related to our work on matching and ranking is [12], which considers the more general problem of querying the structure of a specification using graph patterns. The paper gives a query evaluation algorithm of polynomial data complexity; the authors also consider the probability of the match in [11]. By considering each permutation of the keyword query Q as a simple graph pattern, where each node represents a keyword and nodes form a chain connected by transitive edges, and taking the union of matching specifications for each permutation, these results could be used in our setting. However, our matching algorithm is optimized for queries that are sets of keywords, and is therefore simpler and considerably more efficient than [12] for this setting (see results in Section 6). Importantly, unlike [12], our solution does not require that the input grammar be transformed for each query. For this reason, our solution can be tailored to present results using representative parse trees (Section 5), while the solution of [12] cannot. Also closely related to our match algorithm is [2], which gives a polynomial time algorithm for checking if the intersection of a context-free string grammar (which could represent the workflow specification) and a finite automaton (which could represent the query) results in an empty grammar; however, our match algorithm has a much better average case performance since it can terminate early if a match is found.
+
+ure 1, and with the corresponding grammar given in Figure 2. This grammar was derived by replacing each composite module (variable) with production rules that emit their keywords (as in rules r6 and r7 for module M4 ), and adding a production rule for each atomic module (terminal) that emits its keyword (as in rules r8 through r13 ). In the remainder of the paper, we will refer to a contextfree bag grammar simply as a grammar, and will use productions(M )  R to denote the set of productions with M in the head. For clarity, we also label productions. Definition 2.2. (Match) Given a grammar G = (, , S, R) and a keyword query Q  , we say that G matches Q iff there exists some X  L(G) such that Q  X . Example 2.1. Consider the grammar G = ({S, A, B, C, s1 , s2 , b, c}, {s1 , s2 , b, c}, S, R), where R is:
+r1 : S = {A, S } r2 : S = {s1 } r3 : S = {s2 } r4 : A = {B, C } r5 : B = {b} r6 : C = {B } r7 : C = {c}
+
+The language of G is L(G) = {(s1 + s2 )(bc + bb)n |n  N0 }. G matches query Q1 = {s1 , b} since Q1  {s1 , b, b}  L(G). However, G does not match Q2 = {s1 , s2 }. Since the language of a grammar can be infinite, we will need to focus our attention on a small sample of its elements in which a match can be found. For this, we will use the notion of parse trees and derivation sequences. Definition 2.3. (Parse Tree) A parse tree T associated with a grammar G = (, , S, R) is a finite unordered tree where each interior node represents a production r  R and whose children represent body (r), i.e. each child is either a terminal in body (r) (in which case it is a leaf) or is a production whose head is a variable in body (r). If T consists of a single node, then it represents a terminal in . We use root(T), and leaves(T) to denote the root production and leaves of T , respectively. For our purposes, a parse tree can be rooted at any terminal or production rather than just those whose head is S . Given a parse tree T of a grammar, we denote by paths(T ) the bag of all root-to-leaf paths in T , productions(T ) the bag of productions applied in T , and symbols(T ) the set of symbols that appear in productions(T ). We now define what portions of a keyword query a parse tree T matches in terms of the query-relevant keywords generated by T , and adapt the notion of derivation sequence to our setting. Definition 2.4. (Generates) Given a grammar G = (, , S, R) and a query Q  , we say a parse tree T generates the set of matching keywords leaves(T )  Q. A symbol M   generates a set X	Q iff one of its parse trees generates X . Definition 2.5. (Derivation Sequence) Given a grammar G = (, , S, R), we say a variable A  / derives a symbol B   iff there exists a parse tree T where root(T )  productions(A), and B  symbols(T ). Each path from A to B in T is a sequence of productions called a derivation sequence. sequence seq (A	B ), we denote by Set(seq (A  B )) the bag of all productions applied in it. If a variable A derives a symbol B , we say A is an ancestor of B and B is a descendant of A.
+
+2.
+
+MODEL
+
+In this section, we give background and definitions that will be used throughout the paper. We start with the definition of a context-free bag grammar, its language, and what it means for a search query with "and" semantics to match a grammar. We then introduce parse trees and derivation sequences. Finally, we define the notion of a repository of context-free bag grammars. Definition 2.1. (Context-free Bag Grammar) A context-free bag grammar is a grammar G = (, , S, R) where  is the set of symbols (variables and terminals),    is the set of terminals, S is the start variable and R is the set of production rules. For production r  R, we denote by head(r)  / the head of the production and body (r) the bag of symbols in the body of the production. The language of the grammar, L(G), is a set of bags whose elements are  in : L(G) = {w   |S = w} We use context-free bag grammars to represent keywordannotated scientific workflows, of the kind described in Fig-
+
+Definition 2.6. (Simple Derivation Sequence) A derivation sequence is simple iff there is no production that appears in it more than once. Intuitively, a simple derivation sequence is a derivation sequence where a recursion is fired at most once. It disregards unnecessary recursions and provides an upperbound for the complexity results in Section 3.1. Definition 2.7. (Distance) Given a grammar G = (, , S, R), the distance from a variable A  / to symbol B   is the length of the longest simple derivation sequence for A deriving B , denoted d(A  B ).The distance of a grammar is defined as the longest distance between any two symbols, denoted d(G). It is easy to see d(A  B )  d(G)  |R|. Example 2.2. For the grammar in Example 2.1 there is only one simple derivation sequence for S to derive C , i.e. r1 r4 . However, there are two simple derivation sequences to derive B , i.e. r1 r4 and r1 r4 r6 . Hence d(S  C ) = 2 and d(S  B ) = 3. It is also easy to check that d(G) = 4. We end this section by discussing the notion of a repository of bag grammars. A repository of grammars is essentially a set of grammars in which symbols (modules) may be shared, but must be done so consistently. We assume that all grammars are proper, i.e. have no underivable symbols or unproductive variables.
+
+shown that the fixpoint will be reached at or before height O(d(G)), and that therefore the algorithm is polynomial in the size of the grammar (although exponential in the query size due to the cost of generating sets of query-relevant keyword sets). Match generates for each symbol M   the set F (M ) of sets of query-relevant keywords for M . It does so by considering parse trees of increasing height i, and calculating for each M   the set Fi (M ) of sets of query-relevant keywords for M that are derived by parse trees of height	i. For terminals M   (which are the leaves in a parse tree), F0 (M ) can be calculated directly (line 2, ignore for now line 3). For variables M  /, F0 (M ) =	(line 4). It then calculates Fi (M ) by initializing it to Fi-1 (M ) (line 7) or , then considering each production r with M as head, taking the "product-union" of Fi-1 (j ) for each j in body (r), and adding the resulting set of query-relevant keywords to Fi (M ) (lines 9-11). This continues until the query is matched by some M (line 12), or until a fixpoint is reached (for each symbol M , Fi (M ) = Fi-1 (M ), line 13). Algorithm 1: Match
+Input: a grammar G = (, , S, R) and a query Q	Output: boolean /* F (M ) : set of sets of query-relevant keywords for M /* Fi (M ) = {leaves(T )  Q|root(T )  productions(M ),
+height(T )  i}
+1
+
+*/ */
+
+Definition 2.8. (Bag Grammar Repository) A bag grammar repository is a set of bag grammars such that for any two grammars G1 = (1 , 1 , S1 , R1 ) and G2 = (2 , 2 , S2 , R2 ), r r= M  (1  2 ),
+r R1 head(r )=M r R2 head(r )=M
+
+2 3 4 5 6 7 8 9 10 11
+
+begin foreach M   do if F (M ) =  then F0 (M )	{{M }  Q} /* for OptMatch (Algorithm 2) else F0 (M )  F (M ) foreach M	/ do F0 (M )   i  0 // a counter for iteration times L: i  i + 1 foreach M   do Fi (M )  Fi-1 (M ) foreach M  / do Fi (M )   foreach production r : M  1 2 . . . n  R do /* Construct parse trees rooted at r foreach X1  Fi-1 (1 ), . . . Xn  Fi-1 (n ) do
+n
+
+*/
+
+3.
+
+MATCHING AND SEARCHING
+
+In this section we give an efficient algorithm that, given a grammar G and keyword query Q, determines whether G matches Q. We start by presenting the basic algorithm, Match, which computes a fixpoint of subsets of matching keywords using a bottom-up approach over the hierarchy of nonterminals (Section 3.1). We then give an optimized match algorithm (Section 3.2), and extend the results to searching a repository of grammars. Note that the matching problem is NP-complete with respect to combined (data and query) complexity, as shown in [12]. However, since query size is typically small (6 or fewer keywords), we focus on the data complexity and give a matching algorithm that is polynomial in the size of the grammar. As observed in the introduction, the algorithm in [12] could also be used here, since it considers a (more general) graph pattern query. However, our algorithm is optimized for keyword queries and is therefore simpler and considerably more efficient in our setting (see results in Section 6).
+
+*/
+
+Fi (M ).addElement(
+j =1
+
+Xj )
+
+12 13 14
+
+if M  , Q  Fi (M ) then return true if M  /, Fi (M ) = Fi-1 (M ) then goto L return false
+
+3.1
+
+Keyword query match
+
+We now give an algorithm, Match (Algorithm 1), which determines whether or not a grammar G matches a keyword query Q. To do this, Match builds a parse tree bottom-up until some symbol generates Q, in which case G matches Q, or until a fixpoint of query-relevant keywords is reached for each symbol, in which case G does not match Q. It can be
+
+Example 3.1. Consider the grammar in Example 2.1 and query Q = {b, c}. Initially, F0 (s1 ) = F0 (s2 ) = {}, F0 (b) = {{b}}, F0 (c) = {{c}}, and F0 (S ) = F0 (A) = F0 (B ) = F0 (C ) =	(lines 1-4). In the first iteration of L (i = 1), we add to F1 (S ) the set  (after processing rule r1 , r2 , r3 ). After processing all other productions, we have F1 (A) = , F1 (B ) = {{b}}, and F1 (C ) = {{c}}. We then proceed to the second iteration (i = 2). During this iteration, when rule r4 is processed, we add to F2 (A) (which was initialized to F2 (A) = ) the product of F1 (B ) and F1 (C ), at each step taking the union of the two elements (e.g. {b}  {c} = {b, c}), resulting in F2 (A) = {{b, c}}. Since Q  F2 (A), Match terminates. If this early termination condition were omitted, the fixpoint would have been reached in the fifth iteration, since F5 (S ) = F4 (S ), F5 (A) = F4 (A), F 5 (B ) = F 4 (B ), F 5 (C ) = F 4 (C ). We now show that the data complexity of Match is O(|G|
+
+d(G)). We start by showing that it will reach a fixpoint in d(G)  (|Q| + 1) + |Q| iterations by proving that if a symbol M   generates a set X	Q, then there exists a parse tree T rooted at r  productions(M ) of height at most d(G)  (|Q| + 1) + |Q| such that leaves(T )  Q = X . Lemma 3.1. Given a grammar G = (, , S, R) and a query Q	, M  , X  Q, height(M, X )  d(G)  (|Q| + 1) + |Q|. Proof. Note that if M   generates X	Q, then the parse trees that generate X fall in one of two classes: (1) each child subtree generates a subset of X , in which case we say the parse tree produces the set X ; (2) some child subtree generates X by itself, in which case we say the parse tree broadcasts X . We denote by height(M, X ) (M  /, X  Q) the minimum height of parse trees of M that generate X ; height(M, X ) = -1 if M cannot generate X . Similarly, we denote by heightp (M, X ) (heightb (M, X )) the minimum height of parse trees of M that produce (broadcast) X . For heightp (M, X ) we have the following:
+  0 heightp (M, X ) = -1  -1 heightp (M, X )  1 + if M	, X = {M }  Q if M  , X = {M }	Q if M	/, |X |  1 max height(M , X )
+
+unproductive calculations introduced by variables which are fixed early. Given a grammar G = (, , S, R), we create a precedence graph G = (V , E ) of symbols as follows: V = , and a directed edge (M, M ) is added to E iff r  R, head(r) = M, body (r) M . G has a directed cycle iff G is recursive. Two symbols are mutually recursive iff they participate in the same cycle of G . Mutual recursion is an equivalence relation on , where each equivalence class corresponds to a strongly connected component of G . Denote by [M ] the symbol equivalence class of M , and perform a topological sort of G to construct a list [M1 ], [M2 ] . . . [Mn ]. Clearly, if there is a path from [Mj ] to [Mi ] (i < j ), then symbols in [Mi ] are fixed earlier than symbols in [Mj ]; symbols in the same equivalence class are fixed in the same iteration. Optimization 2: Set Domination We note that an element in Fi (M ) is useless if it is a subset of (dominated by ) another element in Fi (M ). For example, {b} is useless in F3 (A) = {{b}, {b, c}} of Example 3.1. Using set domination, |Q| |F (M )| decreases from 2|Q| to |Q . |/2 Algorithm 2: OptMatch
+
+(1)
+
+M ,X X
+
+(2)
+
+Turning to heightb (M, X ), we have:
+1
+
+heightb (M, X )  d(G) + max heightp (M , X )
+M
+
+(3)
+
+2 3 4
+
+height(M, X )  max(heightp (M, X ), heightp (M, X ))
+
+Input: a grammar G = (, , S, R) and a query Q	Output: boolean Initialization Precompute the symbol equivalence classes [M ] Precompute the topological order of the symbol equivalence classes, T order begin foreach M   do F (M ) =  foreach [M ]  T order do // Find the relevant productions of [M ] R  {r|r  R, head(r)	[M ]}	(head(r)  body (r))
+r R
+
+(4)
+
+/* all descendants have been fixed and hence are
+
+So we have height(M, X )  d(G)	(|Q| + 1) + |Q|.
+5
+
+treated as terminals
+
+*/
+
+Using Lemma 3.1 we can prove the following. Theorem 1. The data complexity of Match is O(|G|  d(G)). Proof. The size of a grammar G = (, , S, R) is defined as the sum of the sizes of its productions, |G| = (1 + |body (r)|). By Lemma 3.1 we know that the
+r R
+6 7
+
+   / ([M ]/) /* F () is a global variable visible for both
+OptM atch() and M atch() */
+
+if M atch(Q,  ,  , M, R ) then return true return false
+
+number of iterations of Algorithm 1 is bounded by d(G)	(|Q| + 1) + |Q|. Each iteration (loop L) of Algorithm 1 processes all productions, each of which takes O(|body (r)|  2|Q| ). Since the query size is considered as a constant, this yields a total time of O(|G|  d(G)).
+
+Algorithm 2 gives the optimized algorithm, OptMatch. Note that the topological order of symbol equivalence classes is query-independent and can be precomputed. Line 6 of OptMatch calls Match for the current equivalence class. F (M ) is global, and is used in lines 2-3 of Match. Set domination is captured in the addElement method in Match. Example 3.2. Consider the grammar in Example 2.1 and query Q = {b, c}. One topological order of the symbol equivalence classes is [b], [c], [B ], [C ], [s1 ], [s2 ], [A], [S ] where each of the classes consists of the symbol itself. For [b], R = ,  = {b},  = {b} (lines 3-5); after calling Match (line 6), F (b) = {{b}}. Similarly, F (c) = {{c}}, F (B ) = {{b}}. Now we process [C ] where R = {r6 , r7 },  = {C, B, c},  = {B, c}. When calling Match for [C ], the initialization results in F0 (B ) = F (B ) = {{b}}, F0 (c) = F (c) = {{c}} (line 3 of Algorithm 1). At the end of Match, we get F (C ) = {{b}, {c}}. We can check that OptMatch terminates after processing [A] since Q  F (A) = {{b, c}}.
+
+3.2
+
+Optimized keyword query match
+
+We now introduce two improvements to Match, one of which avoids unproductive calculations introduced by variables that are fixed early, and the other of which reduces the size of Fi (M ). Optimization 1: Symbol Dependencies Borrowing ideas from semi-naive Datalog evaluation, we observe that a grammar yields symbol dependencies through the head and body structure of rules, e.g. that in Match the start variable S will not be fixed until A is fixed (a variable M is fixed in the ith iteration, iff j > i, Fj (M ) = Fi (M ), j < i, Fj (M )  Fi (M )). The first optimization is to avoid
+
+3.3
+
+Searching a bag grammar repository
+
+Given a bag grammar repository and query Q, we must retrieve all grammars that match Q. A straightforward way to do this is to run OptM atch over each grammar. This way a grammar that is reused by other grammars will be processed multiple times. One solution is to union productions of all grammars to form a universal grammar. However, this grammar would be too large to fit in memory. We therefore process grammars one by one while recognizing grammar reuse; an individual grammar can be assumed to fit in main memory. We first build inverted indexes to help identify candidate grammars, i.e. grammars in which every keyword of the query appears (although they may not simultaneously occur in some bag in the language of the grammar). Each index maps a keyword to a list of grammars in which the keyword appears. Given a query, we find candidate grammars by intersecting the corresponding lists. We then process candidate grammars (using OptM atch) so that a grammar is always processed earlier than the grammars that reuse it. Specifically, we create a precedence graph where nodes of the graph are grammars, and there is an edge from Gi to Gj iff Gj reuses Gi (i.e. the start module of Gi appears in Gj as a variable). The graph is a DAG, since there is a temporal dimension to reuse. A topological order of the DAG is the order in which grammars are processed. We cache intermediate results (F (S )) for grammars that are reused and clean them from memory when there are no unprocessed grammars that reuse them. In this way, we balance memory size and overhead of redundant computations.
+
+Given a grammar G and a query Q, our goal is to compute a relevance score, denoted score(G, Q)	[0, 1], representing the likelihood of G to generate a parse tree that matches Q. We want these scores to be comparable across grammars, which would enable us to say that, if score(G, Q) > score(G , Q), then G is more query-relevant than G . Generating scores that are comparable across grammars turns out to be tricky, because, as we show next, parse trees of probabilistic context-free bag grammars may not form a valid probabilistic space. Consider the grammar G in Figure 4 that consists of two productions, chosen with equal probability (probabilities are indicated in parentheses). Since G is recursive, it generates an infinite number of parse trees that match query Q = {a}. Two of these are shown in Figure 4.
+r2 r1 : S = r2 : S = {S, S, S } {a} (0.5) (0.5) a T1 r1 r2 r2 r2 a a T2 a
+
+Figure 4: Recursive bag grammar These trees have probabilities: (T1 ) = 0.5 and (T2 ) = 0.54 = 0.0625. Unfortunately, it is not possible to compute a normalization factor by summing the probabilities of the infinitely many parse trees, because this sum is irrational [6]. Generally, given a PCG G = (, , S, R, ), and a query Q	, it is customary to define a relevance score score(G, Q) using max or sum semantics.
+scoresum (G, Q) =
+r (T )R(S ) Qleaves(T )
+
+4.
+
+RANKING
+
+For large repositories of grammars, more grammars may match a query than can be shown to a user, motivating ranking. In this section we describe a relevance measure based on probabilistic grammars (Section 4.1) and develop an algorithm for computing the relevance of a grammar to a query (Section 4.2). We also describe an efficient top-k algorithm (Section 4.3).
+
+(T )/
+r (T )R(S )
+
+(T )
+
+(5)
+
+scoremax (G, Q) =
+
+r (T )R(S ) Qleaves(T )
+
+max
+
+(T )/
+
+r (T )R(S )
+
+max
+
+(T )
+
+(6)
+
+4.1
+
+Semantics of relevance
+
+Probabilistic context-free grammars (PCFG) have been used in applications such as natural language processing (NLP) to analyze the probability that a string is generated by a particular grammar. It is therefore natural to use them for ranking. Although our grammars generate bags rather than strings, the formalism applies literally in our setting. Definition 4.1. (Probabilistic Context-Free Bag Grammar) A probabilistic context-free bag grammar G = (, , S, R, ) is a context-free bag grammar in which each production is augmented with a probability	: R  (0, 1] such that M  /, (r) = 1.
+r productions(M )
+
+In a PCFG, which production r  productions(M ) is chosen at a given composite module M is independent of the choices that lead to M . Thus, the probability of a parse tree T , which we will denote (T ), is the product of the probabilities of productions used in the derivation, i.e.,  (T ) = (r).
+r productions(T )
+
+Sum semantics is intuitive: we normalize the total probability of all parse trees matching the query by the total probability of all parse trees. Unfortunately, as we argued above, this value cannot be computed because probabilities may be irrational. It was shown in [15] that scoresum may be approximated by solving a monotone system of polynomial equations. However, this approach is in PSPACE, and is very expensive in practice. Motivated by these considerations, we opt for max scoring semantics, where the score of a grammar for a query is computed by dividing the probability of the most likely parse tree matching the query by the probability of the over-all most likely parse tree. This semantics is reasonable, and, as we will show next, scoremax (G, Q) can be computed efficiently. We refer to scoremax (G, Q) simply as score(G, Q) in the remainder of the paper.
+
+4.2
+
+Computing the score of a workflow
+
+Probabilities of productions in G may be given by an expert or mined from the corpus. In this paper, we do not consider how these probabilities are derived, but note that much work on the topic has been done in the NLP community [26], and the techniques are likely applicable here.
+
+We now present Algorithm 3, Score, which computes the relevance score of grammar G for query Q per Equation 6. This is a fixpoint algorithm that is similar in spirit to Match. Note that the algorithm of [11] can also be used to compute the relevance score of grammar G for query Q. This algorithm uses a similar framework as [12], and so is very general, but is less efficient in our particular scenario. We will give experimental support to this claim in Section 6.3.
+
+Algorithm 3: Score
+Input: grammar G = (, , S, R) and query Q   Output: double begin foreach M   do if F (M ) =  then F0 (M )  {{M }  Q}; 0 (M, {M }  Q)  1.0 else F0 (M )	F (M ) X  F0 (M ), 0 (M, X )  (M, X ) foreach M  / do F0 (M )	i  0 // a counter for iteration times L: i  i + 1 foreach M   do Fi (M )  Fi-1 (M ) X  Fi (M ), i (M, X )  i-1 (M, X ) foreach M  / do Fi (M )	 foreach production r : M  1 2 . . . n	R do foreach X1  Fi-1 (1 ), . . . Xn  Fi-1 (n ) do
+n
+
+1 2
+
+r1 : S ={S, A} r2 : S ={S, S, B } r3 : S ={s} r4 : A ={a} r5 : B ={B, S } r6 : B ={b} r2 r1 r3 s r4 a T3 r3 r6 s b
+
+r1 r3 s T1 r4 a r3 s r1
+
+r1 r4 r4 a T2 r2 r1 r3 s r4 a T4 r3 s r3 s r5 r6 b a
+
+3
+
+4 5 6 7
+
+8 9 10
+
+Figure 5: An example of a grammar.
+1 (S, Q) =  1 1 and returns 1 1 2 /max (S ) = 3 2 3 3 th it terminates at the end of the 5 iteration. 1 3 1 6
+
+when
+
+X
+j =1
+
+Xj prob  (r)
+
+n j =1
+
+i-1 (j , Xj )
+
+11 13
+
+if X  Fi (M ) then i (M, X )  prob else i (M, X )  max(i (M, X ), prob) Fi (M ).addElement(X ) if M  /, Fi (M ) = Fi-1 (M ) then goto L if Q  F (S ) then return 0.0 // not matching if M  , X	Fi (M ), i (M, X ) > i-1 (M, X ) then goto L F (M ) = Fi (M ); (M, X ) = i (M, X ) return (S, Q)/max (S )
+
+Recall from Match that Fi (M ) represents the set of sets of query-relevant keywords that module M matches, and that are derived by parse trees of height  i. Score uses Fi (M ) and a data structure i (M, X ), in which it stores, for each X  Fi (M ), the score of the corresponding parse tree. Like Match, Score manipulates a global data structure F (M ); Score also maintains the corresponding global (M, X ). These data structures will become important when we consider an optimization, called OptScore. Algorithm Score starts by storing the set of query-relevant keywords annotating each terminal module M in F0 (M ), and by recording the probability score of 1.0 in 0 . Next, for non-terminal modules, F0 (M ) is initialized to an empty set. The bulk of the processing happens next, where, at each iteration i, we consider each production r rooted at M , and generate all sets of query terminals resulting from parse trees of height at most i rooted at M . We record the resulting subset of query keywords X if this subset has not been seen before, or it if is the highest-scoring parse tree for this subset at the current round. We compute the probability score of a parse tree resulting from production r as the product of the probabilities of its subtrees and the probability of r. Score terminates when either no new subsets of the query are generated, or no better (more probable) derivations of existing subsets are found. Score returns the normalized probability of the most probable derivation tree matching Q. Note that normalization factor max (S ) is query-independent and can be computed by invoking Score(G, ). We compute max (S ) offline and store it for future use. Example 4.1. Consider the grammar in Example 2.1 and assume that productions with the same head are equally likely. Given the query Q = {b, c}, Score calculates max (S ) = 1/3,
+
+The worst-case running time of Score is polynomial in the size of the grammar. This can be shown by a similar argument as for Match (Section 3.1), and is based on the observation that, for any symbol M , the height of the most probable parse tree generating any subset of Q is bounded by  d(G)  (|Q| + 1) + |Q|. We also developed an optimized version of Score, which we call OptScore. We do not detail the OptScore algorithm here, but note that it is based on the two optimizations performed in OptMatch. The first optimization, symbol dependencies, identifies equivalence classes of modules of G based on their reuse of variables on the right-hand-side of productions. OptScore computes a topological ordering among equivalence classes, and runs algorithm Score for each class in reverse topological order, saving intermediate results in global data structures F (M ) and (M, X ). The second optimization, set domination, includes probabilities in the notion of domination: a set X1  Fi (M ) dominates X2  Fi (M ) iff X1  X2 and i (M, X1 )  i (M, X2 ).
+
+Identifying the top-k workflows We conclude our discussion of ranking by presenting an efficient way to retrieve, and compute the scores of, the topk workflows in a repository. Given a repository, a query Q, and an integer k, a naive approach is to compute score(G, Q) using, e.g., OptScore, sort grammars in decreasing order of score, and return the top-k. Here, OptScore may be executed on the entire repository, or only on its promising subset, leveraging an inverted index that maps each keyword to the set of workflows in which it appears. Even assuming that only the grammars matching Q are considered (i.e., grammars for which Match(G,Q) returns true), this naive approach will still require us to compute score(G, Q) for many more than k grammars. We use the Threshold Algorithm (TA) [16] to limit the number of score computations. Our use of TA is based on the observation that score(G, Q)  minX Q score(G, X ). In particular, score(G, Q) is at most as high as the score of G for any single-keyword subset of Q. We leverage this observation and build inverted lists, one per keyword a, storing all grammars G that match a, in decreasing order of score(G, {a}). Then, given a multikeyword query Q, we access the query-relevant lists sequentially in parallel, and compute score(G, Q) for the first k
+
+4.3
+
+grammars. We refer to the current kth highest score as , and we update	as the algorithm proceeds. We consider grammars in inverted list order, and, when an unseen grammar G is encountered, retrieve its entries from all inverted lists with random accesses, and compute the score upper-bound ub(G, Q) = minaQ score(G, {a}). If ub(G, Q) > , we compute score(G, Q) using an algorithm from Section 4.2 and update  if necessary. TA terminates when the score upper-bound of unseen grammars, computed as the minimum of current scores in the relevant inverted lists, is lower than .
+
+r1 r2 r3 r1 : S SS r2 : S AB r3 : A a1 r4 : A a2 r5 : B a1 r6 : B a3 r3 a1 r2 r6 r4 a1 r5 r4 r2 r6 a3
+
+a1 a2 T1 r1 r2
+
+5.
+
+RESULT PRESENTATION
+
+Since grammars may be large and complex objects, it is important to develop presentation mechanisms that help the user understand where keyword matches occur in the result grammars. Interestingly, a single grammar may match a query in many ways, more than can be shown to a user. In Section 4 we proposed to compute probabilities of parse trees, and to use these probabilities to rank grammars. In this section, we build on this idea and propose to choose the most probable parse trees that are structurally irredundant. We refer to such trees as representative parse trees, and describe them in Section 5.1. We then give an algorithm for finding the top-k representative parse trees for a given grammar in Section 5.2.
+
+r5 a1
+
+a3 a2 T2
+
+Figure 6: paths(T1 ) = paths(T2 ) while T1 = T2
+
+Definition 5.3. (Representative Parse Tree) A representative parse tree (rpTree) T of a grammar G is a parse tree s.t. there does not exist a parse tree T of G that subsumes T . We now list several important properties of rpTrees. Given a path p, we denote by len(p) the length of p. Theorem 2. A grammar G matches a query Q iff there exists an rpTree T in G that generates Q. Proof. The forward direction is trivial. For the reverse, recall that if a grammar G matches Q, then Q must be contained in the leaves of some parse tree for G. Then it must also be contained in the leaves of an rpTree, since an rpTree generates the same terminal set as the trees that it subsumes. Lemma 5.1. If a parse tree is representative, then all its subtrees are also representative. Proof. Proof is by contradiction. Let T be an rpTree. Suppose a subtree of T denoted by Tsub is subsumed by tree Tsub . Let T be the tree obtained from T by replacing Tsub with Tsub . It is easy to see that T  T , which contradicts that T is an rpTree tree. The converse is not true, see T2 in Figure 5 for a counterexample. One can verify that the two child subtrees of T2 are rpTrees. T2 however is subsumed by T1 and hence is not representative. Lemma 5.2. Given parse trees T and T , if T  T then height(T )  height(T ). Proof. Let pmax be one of the longest paths in paths(T ). Then height(T ) = len(pmax ). Since T  T , for any path p  paths(T ), there is a path p  paths(T ) s.t. p  p . Let p be a path in paths(T ) that pmax subsumes. Note that len(p)  len(p ) if p	p . Then height(T ) = len(pmax )  len(p )  height(T ). Consider trees T3 and T4 in Figure 5. These trees are of the same height, yet T3  T4 .
+
+5.1
+
+Representative parse trees
+
+Recursion gives rise to structural redundancy. Consider the grammar in Figure 5, and its parse trees T1 and T2 . These trees both match query Q = {s, a}. Both trees fire the same productions in the same order, and, while T1 cuts through the chase, T2 loops by firing r1 twice in sequence, and by generating a along the path S  A  a twice. The concept of a representative parse tree (rpTree for short), which we define next, models the intuition that, while both trees match the query in the same way (by firing the same productions in the same order), T1 is more concise than T2 . For convenience, we will sometimes represent parse trees as bags of paths, denoted paths(T ). Recall that a path is a sequence of productions that ends with a terminal, e.g., r1 r3 s is a path in T1 in Figure 5. We can represent T1 as paths(T1 ) = {r1 r3 s, r1 r4 a}. Note that the paths representation may be ambiguous i.e. the same bag of paths may correspond to two different parse trees (See Figure 6). Definition 5.1. (Path Subsumption) Path p subsumes path p , denoted p  p if p is a sub-sequence of p . For example, r1 r3 s  r1 r1 r3 s. Note that, since a path ends with a terminal, if p  p then the paths must end in the same terminal. We use path subsumption to define the main concept of this section, parse tree subsumption. Definition 5.2. (Parse Tree Subsumption) Parse tree T subsumes parse tree T , denoted T  T , iff head(root(T )) = head(root(T )) and there exists an onto mapping from paths(T ) to paths(T ), in which, if p  paths(T ) is mapped to p  paths(T ) then p	p . For example, consider the parse trees in Figure 5. Observe that T1	T2 according to Definition 5.2. The onto mapping from paths(T2 ) to paths(T1 ) is: r1 r1 r3 s  r1 r3 s, r1 r1 r4 a  r1 r4 a and r1 r4 a  r1 r4 a. In contrast, no subsumption holds between parse trees T2 and T3 .
+
+Lemma 5.3. If T  T and height(T ) = height(T ), then T and T must be rooted at the same production. Proof. Let pmax be one of the longest paths in T . Since T	T , there exists a path p  paths(T ) s.t. pmax	p . Thus height(T ) = len(pmax )  len(p )  height(T ). Since height(T ) = height(T ), len(pmax ) = len(p ). Recall that pmax  p . Thus pmax = p . Since pmax (p ) starts with the root production of T (T ), T and T are rooted at the same production.
+
+Proof. Consider grammar: r1 : S  SS r2 : S  AAA r3 : A	a1 r4 : A  a2 There are three trees T1 = {r2 r3 a1 , r2 r3 a1 , r2 r4 a2 }, T2 = {r2 r3 a1 , r2 r4 a2 , r2 r4 a2 }, T3 = {r1 T1 , r1 T2 } where T1 , T2 are representative, and T1  T3 , T2  T3 .
+
+Identifying top-k representative parse trees We now describe an algorithm for identifying top-k rpTrees of grammar G that generate Q. This is a bottom-up Theorem 3. Given trees T and T , the time complexity of algorithm that progressively builds rpTrees of height at most checking if T  T is polynomial in tree size. i by combining rpTrees of lower height. Correctness of such a procedure is based on Lemma 5.1. Proof. We prove the theorem by giving a polynomial algoConsider first a naive bottom-up algorithm, which first rithm of checking if T  T . builds all possible parse trees of height i that generate Q, and The algorithm starts by computing a mapping f : paths(T )  then removes subsumed trees using pair-wise subsumption paths(T ) such that for any path p  paths(T ), f (p ) p checks. The algorithm stops when no new rpTrees are found. iff p  p . Note that if p  paths(T ), f (p ) =  then This algorithm, while correct by Lemmas 5.1 and 5.2, will be T T . very expensive, as there may be exponentially many rpTrees We then build a flow network s.t. the network has maxifor a given grammar, which would all have to be retained mum flow |paths(T )| iff there exists a surjective mapping until fixpoint, and against which all newly generated trees g : paths(T )  paths(T ) s.t. if g (p ) = p, p  p . The flow would need to be checked for subsumption. Yet, since our network is built as follows. Let N = (V, E ) be a network goal is to find only the top-k highest-scoring rpTrees, most with s, t being the source and the sink of N , respectively. of these would be discarded at the end of the run. For each path p  paths(T ) (p  paths(T )), there is a Thus, to control the running time and the space overhead, node p (p )  V . For each p  paths(T ), there is an edge we designed an algorithm that keeps a bounded number of from p to sink t in E . For each p  paths(T ), there is an rpTrees in memory. As another naive approach, consider edge from source s to p in E and an edge from p to p for an algorithm that keeps up to a fixed number of highestany p  f (p ). Every edge has a capacity of 1. It is easy to scoring rpTrees found so far in a buffer. When a new tree see that N has maximum flow |paths(T )| iff such g exists. T is constructed, the algorithm checks whether any rpTree It is easy to see that T  T iff p  paths(T ), f (p ) =  in the buffer subsumes it and, if not, assumes that the new and g exists. tree is an rpTree. This algorithm is straight-forward, but Note that given two paths p, p , checking if p	p can be it may return trees that are not representative. This will done in time len(p) + len(p ), i.e. O(height(T )). It takes happen if there exists a tree T  T , yet T was not retained O(|paths(T )||paths(T )| height(T )) to compute f . In the in the buffer from the previous round. Fortunately, we can worst case, the size of f could be |paths(T )|  |paths(T )|. use Lemma 5.6, stating that a tree can only be subsumed It takes O(|paths(T )|  |paths(T )|) to build the flow netby a tree with a higher probability score, to devise an algowork. Using the Ford-Fulkerson algorithm [22], it takes rithm that is both correct and uses bounded buffers. This 2 O(|paths(T )|	|paths(T )|) to compute the maximum flow. is Algorithm 4, which we now describe. In total, the algorithm has a time complexity O(|paths(T )|  The algorithm uses the following data structures. Denote |paths(T )|  height(T ) + |paths(T )|2  |paths(T )|). by T = r, T1 . . . Tn a parse tree rooted at production r with T1 . . . Tn as subtrees. Also denote by Ti (M, X ) the rpTrees Lemma 5.4. Given a terminal set of a grammar, the height of height  i rooted at M and generating X  Q. Ti (M, X ) of rpTrees that generate it may be exponential in grammar is an ordered list of rpTrees sorted by decreasing score. The size. size of Ti (M, X ) is bounded by some constant c, and we refer to this data structure as the bounded buffer. Proof. Consider the grammar: S AS | s A B | C B D We associate with Ti (M, X ) a boolean function C D D E | F E a F a isT runci (M, X ), indicating whether the list Ti (M, X ) was truncated to accommodate bounded size. Importantly, we There are exponential (in grammar size) number of difalso associate with Ti (M, X ) a score lower-bound, denoted ferent paths for A to derive {a}, precisely 22 = 4. By firing LBi (M, X ), set as follows: S  AS once, we get one instance of A and the height increases by 1. Consider a tree that is derived by firing S	AS 4 times where instances of A derive {a} distinctly. 0 isT runci (M, X ) One can verify that the tree is an rpTree. And height of the LBi (M, X ) = M INT Ti (M,X ) (T ) isT runci (M, X ) tree is exponential in grammar size.
+Lemma 5.5. All parse trees of non-recursive grammars are rpTrees. Lemma 5.6. Given two parse trees T and T , if T  T then (T ) > (T ). Lemma 5.7. A tree may be subsumed by two different rpTrees. LBi (M, X ) represents the lowest score of any parse tree rooted at M and generating X for which we can confidently state whether it is subsumed by any rpTree currently in Ti (M, X ). Intuitively, if no truncation took place, then we can check all trees for subsumption (LBi (M, X ) = 0). If some rpTrees were not retained, then we can only check for subsumption of trees that have a higher score
+
+5.2
+
+Algorithm 4: topKRep
+Input: a grammar G = (, , S, R), a query Q   k, buffer size c Output: a set of top-k rpTrees begin foreach M  , X  Q do if X = {M }  Q then T0 (M, X )	{ M } else T0 (M, X )	foreach M  /, X  Q do T0 (M, X )   i0 L: i  i + 1 foreach M  , X  Q do Ti (M, X )  Ti-1 (M, X ) foreach M  / do f indN ewT rees(M, i, c) if M  , X  Q, Ti (M, X ) = Ti-1 (M, X ) then goto L // fixpoint if |Ti (S, Q)|  k then return Ti (S, Q).subList(0, k) else if !isT runci (S, Q) then return Ti (S, Q) else topKRep(G, Q, k, 2	c)
+# grammars
+
+250000
+
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+
+Figure 7: Distribution of grammar sizes in the repository. An interesting point to note is that the top-k rpTrees in non-recursive grammars are made up of subtrees that are themselves top-k rpTrees. This is not necessarily the case for recursive grammars, which makes the topKRep algorithm less efficient in the recursive case.
+
+6.
+than the lowest-scoring rpTree in the buffer (LBi (M, X ) = M INT Ti (M,X ) (T )). Algorithm 4 (topKRep) finds the top-k rpTrees for G matching Q. The most interesting part of the algorithm is in line 10, in the call to procedure f indN ewT rees(M, i, C ). We omit algorithmic details of this procedure due to lack of space, and describe it in text. Procedure f indN ewT rees(M, i, C ) identifies new rpTrees of height up to i rooted at M generating X  Q. For a given X , we first construct candidate trees by considering all productions r  productions(M ). A production can generate X in multiple ways, by combining different sets X1  . . .  Xn = X . Each combination yields several parse trees, and we can find the top-scoring trees among them. Consider for example production r : M  {A, B }, and suppose that A can generate {a}, while B can generate {b} or {a, b}. Then this production can generate {a, b} in two ways: as {a}  {b} or {a}  {a, b}. Suppose now that, to generate {a, b} = {a}  {b} we comA B bine T1  Ti-1 (A, {a}) with T1	Ti-1 (B, {b}), deriving a AB A B tree T1 = r, T1 , T1 with probability 1 . Alternatively, we may use the combination {a, b} = {a}  {a, b}, combinA B ing T1  Ti-1 (A, {a}) with T2  Ti-1 (B, {a, b}), deriving AB A B a tree T2 r, T1 , T2 with probability 2 . AB AB It is not guaranteed that T1 and T2 are the top-2 trees for M generating {a, b}. This is because Ti-1 (A, {a}) may have been truncated. For example, we may have removed A AB T2	Ti-1 (A, {a}), which, if used to construct T3 = A B r, T2 , T1 , would have probability 3 > 2 . We could be AB sure that no such tree T3 exists if either Ti-1 (A, {a}), Ti-1 (B, {b}), Ti-1 (B, {a, b}) were not truncated, or if the new tree had a higher score than (r)M AX (LBi-1 (A, {a}) LBi-1 (B, {b}), (LBi-1 (A, {a})  LBi-1 (B, {a, b})). Similar reasoning is used when multiple productions are combined to generate Ti (M, X ). We note that that we implemented a more efficient version of topKRep for non-recursive grammars. Recall from Lemma ?? that all parse trees of a non-recursive grammar are representative. We can directly construct the highestscoring parse trees by combining highest-scoring subtrees. No subsumption checks are required in the process. This algorithm is straight-forward, and its details are omitted.
+
+EXPERIMENTAL EVALUATION Experimental setup
+
+6.1
+
+All experiments were implemented in Java 6 and performed on a local PC with Intel Core i7 3.4GHz CPU and 4G memory running Linux. Experiments were executed against memory-resident data structures. All reported running times are averages of 5 executions per setting. Dataset. We implemented a workflow generator that creates a repository containing a mix of recursive and nonrecursive grammars, of which some are stand-alone, while others reuse existing workflows as modules. Repository size, workflow characteristics, and the amount of reuse are specified as generator parameters. All experiments in this section were executed with the following parameter settings. A simple workflow has at most 5 modules; a given module has a probability of 0.6 to be composite, and a probability of 0.4 to occur multiple times within the workflow. Each composite module has at most 3 productions, each simple workflow has a probability of 0.5 to be recursive, and each grammar reuses at most 5 other grammars. Using these parameter settings, we generated a repository consisting of about 1,200 grammars. The distribution of grammar sizes in the repository is shown in Figure 7. The size of a grammar ranges from 10 to 5, 000, and most grammars have size smaller than 1, 000. (Note that grammar size is defined as the total number of symbols in its productions.) Our choice of parameters is based on our analysis of myExperiment.org, the largest public repository of scientific workflows, and on [31], where it was observed that most current workflows are small. Next, we generated keyword annotations for the workflows in the repository using results of keyword co-occurrence analysis of [32]. This analysis was based on myExperiment.org, where users tag workflows in support of keyword search. In [32] we used topic mining to extract 20 topics from the repository, with each topic defining a probability distribution over the tags. Here, we take 20 most frequent keywords per topic, and use their probabilities to achieve a realistic keyword assignment to workflow modules. Given a workflow, the repository generator first randomly chooses a topic, and then assigns at most 3 keywords to each module in accordance with the topic's probability distribution. Queries. We experimented with many different queries,
+
+[0hundreds)
+
+lologarithm)
+
+avlogarithm)
+
+1000.1
+
+Match
+
+optMatch
+
+Baseline
+
+1000
+
+Match
+
+optMatch
+
+Baseline
+
+580ms
+
+10i80%ovement
+
+|Q||Q|=8
+
+10
+
+7.67ms
+
+1
+
+0.h50dreds)
+
+0.h50dreds)
+
+% grammars
+
+100
+
+100%
+
+(a) Average running time of M atch for Q2 . (b) Longest running time M atch for Q2 . (c) Improvement of OptM atch over M atch. Point (x, y ) represents running time over Point (x, y ) represents running time over grammars of size in [x - 100, x). grammars of size in [x - 100, x).
+
+Figure 8: Performance of M atch and OptM atch.
+
+generated by first randomly choosing a topic, and then drawing between 2 and 8 keywords according to the topic's probability distribution. Due to space constraints, we show only representative results. Unless otherwise noted, all experiments use three queries described below. Q1 = {text mining, e-lico, workf low component} consists of 3 most frequent keywords from its topic, and retrieves workflows with text mining components, contributed by members of e-lico (an e-laboratory for collaborative research). Q2 = {T erM ine, text encoding, input} looks for possible inputs to T erM ine (a web demonstration service). Q3 = {input, xml invalid, read f ile} is a more technical query. In experiments that focus on scalability, we work with 7 additional queries that contain up to 8 keywords, and where larger queries are supersets of smaller queries.
+
+6.2
+
+Keyword query match
+
+We now evaluate the performance of algorithms described in Section 3. We show that M atch (Algorithm 1) runs in time polynomial in the size of the grammar, and that the OptM atch optimization (Algorithm 2) is effective for the vast majority of queries. We then discuss the effectiveness of the sharing optimization (Section 3.3). We first evaluate the performance of M atch compared with the general method that intersects a given grammar G with a query Q represented by a finite state automaton [2] or a graph chain pattern [12]. An adaption of the method to our scenario (called Baseline in Figure 8) works as follows. First, we transform grammar G to grammar G , where each production has at most two symbols on the right-hand side. Having the grammar in this form guarantees quadratic data complexity of the algorithm, and is done off-line. Next, we intersect G with Q to construct a new grammar G , where 1) for each production M	1 2 in G , add a production (M, X )  (1 , X1 )(2 , X2 ) to G , for each X  Q, X1  X2 = X , making (M, X ), (1 , X1 ), (2 , X2 ) symbols in G ; and 2) for each terminal M in G , mark the symbol (M, {M }  Q) in G as a terminal. Having constructed G , the algorithm checks whether its language is empty in time linear in grammar size [19]. G matches Q iff the language of G is not empty. Figures 8a and 8b demonstrate the average and longest running time of M atch and Baseline for query Q2 for grammars of different sizes. Some 154 grammars in our repository contain all keywords of Q2 , and we run the algorithms on these grammars. According to Figure 8a and 8b, M atch runs in time polynomial in grammar size, as expected. The running time of the algorithm is reasonable, and is below
+
+10ms for all grammars. We observed similar trends for other queries. Although Baseline and M atch both run in time polynomial in grammar size, M atch significantly outperforms Baseline in all cases, because it terminates early if a variable other than the start symbol matches the query. Figure 8c shows that OptM atch, which is an optimization of M atch, is effective at reducing the running time for most queries. For example, OptM atch outperforms M atch by at least 20% for 80% of 2-keyword queries. OptM atch slightly increases running times for some queries. We also measured the total running time of M atch and OptM atch for a variety of queries, and for all workflows in the repository. We found that OptM atch brings an over-all gain of at least a factor of 2 for queries of size between 2 and 8. For example, the total running time of M atch for queries of size 2 is 77.67ms, compared to 43ms for OptM atch. Finally, we measured the effectiveness of leveraging grammar reuse, when executing M atch and OptM atch on all workflows in the repository (see Section 3.3). We found that this optimization, to which we refer as sharing, is extremely effective, bringing the total running time of M atch to between 130ms and 150ms for queries of size 2 to 8. Match and OptMatch have comparable performance with this optimization. Details are omitted due to lack of space. In summary, M atch and OptM atch are efficient algorithms. OptM atch outperforms M atch for most grammars, and should be used when individual grammars are tested. Either Match or OptMatch with the sharing optimization may be used when all workflows in the repository are tested.
+
+6.3
+
+Ranking of grammars
+
+We now demonstrate that the techniques of Section 4 can be implemented efficiently. We first show that the running time of Score (Algorithm 3) is polynomial in grammar size, and that OptScore outperforms Score in most cases. We then show that top-k workflows can be identified efficiently when TA is used to find the promising grammars. We observed similar trends for average and longest running time of Score(optScore) to that of M atch(optM atch). Figure 9a reports the longest running times of Score and optScore for grammars in our repository and demonstrates that the running time of this algorithm is reasonable, and is below 40ms for all grammars. Comparing Figure 9a with Figure 8b, we note that Score is almost three times slower than M atch. We also observe that our Score algorithm outperforms Baseline [12] (which is used for matching). Since a scoring algorithm is necessarily slower than a matching algorithm, we conclude that a scoring algorithm that uses
+
+40(optScore
+
+38(ms)ning
+
+800Q30
+
+100Q320
+
+20
+
+400100
+
+10
+
+0 (50ndreds)
+
+0
+
+(a) Longest running time of Score and optScore for Q2
+
+(b) Running time of TA (ms).
+
+# RA
+
+500
+
+(c) Running time of TA (RA).
+
+Figure 9: Performance of the ranking solution: Score, OptScore and threshold algorithm (TA).
+k=sQ300marm)
+
+25logarithm)
+
+64
+
+16
+
+4
+
+1
+
+0.s200mmar
+
+(a) Q1
+
+(b) Q3
+
+(c) Size of the top-1 tree
+
+Figure 10: Performance of finding top-k rpTrees for the top-10 grammars (ellipses indicate non-recursive grammars). a similar framework as Baseline will be less efficient than Score, and do not run a direct experimental comparison. We also measured the improvement of optScore over Score and got a trend very similar to those observed for OptM atch (Figure 8c). OptScore results in an improvement for the vast majority of grammars, for queries of varying lengths. Figure 9b reports the running time of Threshold Algorithm (TA), followed by an execution of OptScore for the promising grammars, for queries Q1 , Q2 , Q3 . We can see from Figure 9b that it takes under 100ms to find the top-5 grammars for Q1 , and around 400ms for Q2 and Q3 . These queries all match between 150 and 180 grammars in our repository, and, as is usually the case for TA, the difference in performance is due to the distribution of scores. Figure 9c gives the running time of TA in terms of the number of random accesses (RA), demonstrating that the stopping condition for TA is reached after only a fraction of all matching grammars have been considered. In summary, Score and OptScore are efficient algorithms, and OptScore outperforms Score for most grammars. Using TA to identify promising grammars, and then invoking OptScore for these grammars, allows us to achieve interactive response times when retrieving the top-k grammars from the repository. from 1 to 10. Observe from Figure 10a that the top-10 grammars for Q1 are small (< 200), and that the total running time of topKRep is reasonable, under 161.33ms for k = 10. We use ellipses to indicate running times for non-recursive grammars. We noted in Section 5 that, because all parse trees of non-recursive grammars are representative, we can design an efficient version of topKRep for this case. The difference in running time is not significant for Q1 (Figure 10a), but becomes more pronounced for Q3 (Figure 10b). Figure 10b shows that topKRep is significantly slower for Q3 than for Q1 , for three reasons. First, the top-10 grammars for Q3 are much larger, and have larger parse trees. Figure 10c shows that sizes of top-1 trees for large grammars are usually larger than those for small grammars. Second, there are more parse trees to be constructed for large grammars. Third, it is more common for large grammars to require a larger buffer size when computing the top-k rpTrees. Recall that buffer size is an argument in Algorithm 4, and that the algorithm is re-executed with a larger buffer if the original setting does not yield enough rpTrees. For the 4th grammar in Figure 10b, the required buffer size for k = 3 was 48 (meaning that topKRep was executed 5 times). This was higher than for k = 5 and k = 10, where buffer size of 40 (for 4 and 3 executions of topKRep, respectively) was sufficient. We now present an example that illustrates the effectiveness of rpTrees. For query Q1 , the top-1 matching grammar in our repository is one where the start module is annotated with all the keywords in Q1 . Thus all parse trees of this grammar match Q1 . To simplify presentation, we eliminate the keywords of modules and show only the grammar below: ) r2 : S	{A, A, S, s1 } ( 1 ) r1 : S  {S, B } ( 1 3 3 1 r3 : S  {s2 } ( 3 ) r4 : A  {B, a1 } ( 1 ) 2 1 r5 : A  {a2 } ( 2 ) r6 : B  {S, b1 } ( 1 ) 3 1 r7 : B  {S, b2 } ( 3 ) r8 : B  {b3 } ( 1 ) 3 Note that the top-6 trees of this grammar are all rpTrees.
+
+6.4
+
+Result presentation
+
+Finally, we evaluate the running time and quality of topKRep (Algorithm 4), and show that it can be used to find the highest-scoring representative parse trees in interactive time. Recall from Section 5 that topKRep is invoked on a particular grammar, typically one that is among the highestscoring grammars for a given query, and computes a fixed number of rpTrees for that grammar that match the query. Figure 10 reports the total running time of topKRep over top-10 grammars for queries Q1 and Q3 , as a function of grammar size. The number of rpTrees, denoted k, varies
+
+The 7th most probable tree T7 (with a probability 0.004) is shown in Figure 11b. Observe that T7 is subsumed by the top 2nd tree T2 (Figure 11a), and so is not an rpTree. On the other hand, T8 (with probability 0.003) is an rpTree, and is more interesting to show to the user than T7 , although its probability score is lower. r1 r8 b3 r3 s2 r8 b3 T2 (0.037)
+(a) top-2 tree
+
+r1 r1 s2 T7 (0.004)
+(b) top-7 tree
+
+r1 r8 r2 r5 r5 r3 a2 a2 s2 T8 (0.003)
+(c) top-8 tree
+
+r8 b3
+
+r 3 b3
+
+Figure 11: Trees for the top-1 grammar that matches Q1 In summary, topKRep can be used to efficiently compute the highest-scoring representative parse trees for many grammars. For certain large grammars, topKRep does not terminate in interactive time, due to parse tree size, and to conservative buffer size requirements. Performance can be improved using alternative strategies for setting buffer size.
+
+7.
+
+CONCLUSIONS
+
+In this paper we addressed the problem of searching a repository of workflow specifications in which modules, both atomic and composite, are annotated with keywords. Since search does not interact with the graph structure of workflows, we reduced the problem to one of searching a repository of bag grammars. We gave an efficient polynomial-time matching algorithm with respect to data complexity, and extended this to search over a repository of bag grammars. We developed efficient algorithms for calculating the relevance score of a grammar to a given query, and for finding the top-k grammars for a given query. Finally, we proposed a novel result presentation method. This work introduces a novel use of bag grammars, and shows the importance of probabilistic bag grammars. Our approach has been based on efficiency considerations; in the future we would like to gain a deeper understanding of how to use probabilistic bag grammars and continue to explore ways of presenting concise search results. Moving beyond keyword search, we would like to add structural features into queries. We also plan on testing the usability of these ideas on real datasets.
+
+8.
+
+ACKNOWLEDGEMENTS
+
+We thank Tova Milo for extensive discussions and feedback on this draft.
+
+9. REFERENCES [1] Z. Bao et al. Labeling recursive workflow executions
+on-the-fly. In SIGMOD, 2011. [2] Y. Bar-Hillel et al. On formal properties of simple phrase structure grammars. Language and Information: Selected Essays on Their Theory and Application, 1964. [3] C. Beeri et al. Querying business processes. In VLDB, 2006. [4] S. P. Callahan et al. Managing the evolution of dataflows with VisTrails. In SciFlow, 2006. [5] Y. Chen et al. Keyword search on structured and semi-structured data. In SIGMOD, 2009. [6] Z. Chi. Statistical properties of probabilistic context-free grammars. Computational Linguistics, 25, 1999.
+
+[7] D. Chiu et al. Keyword search support for automating scientific workflow composition. In SSDBM, 2011. [8] S. Crespi-Reghizzi and D. Mandrioli. Petri nets and commutative grammars. 745, Mar, 1974. [9] B. B. Dalvi et al. Keyword search on external memory data graphs. PVLDB, 2008. [10] S. B. Davidson et al. Keyword search in workflow repositories with access control. In AMW, 2011. [11] D. Deutch et al. Optimal top-k query evaluation for weighted business processes. PVLDB, 3(1), 2010. [12] D. Deutch and T. Milo. A structural/temporal query language for business processes. J. Comput. Syst. Sci., 78(2), 2012. [13] J. Esparza. Petri nets, commutative context-free grammars, and basic parallel processes, 1997. [14] J. Esparza and M. Nielsen. Decidability issues for petri nets - a survey, 1994. [15] K. Etessami and M. Yannakakis. Recursive markov chains, stochastic grammars, and monotone systems of nonlinear equations. J. ACM, 56, 2009. [16] R. Fagin et al. Optimal aggregation algorithms for middleware. In PODS, 2001. [17] A. G andara et al. Knowledge annotations in scientific workflows: An implementation in kepler. In SSDBM, 2011. [18] H. He et al. Blinks: ranked keyword searches on graphs. In SIGMOD, 2007. [19] J. E. Hopcroft et al. Introduction to automata theory, languages, and computation. Addison-Wesley, 2003. [20] V. Kacholia et al. Bidirectional expansion for keyword search on graph databases. In VLDB, 2005. [21] R. M. Karp and R. E. Miller. Parallel program schemata. J. of CSS, 3(2), 1969. [22] J. Kleinberg and E. Tardos. Algorithm Design. 2005. [23] J. Li et al. Top-k keyword search over probabilistic xml data. In ICDE, 2011. [24] Z. Liu and Y. Chen. Processing keyword search on xml: a survey. WWW, 14(5-6), 2011. [25] Z. Liu et al. Searching workflows with hierarchical views. PVLDB, 3(1-2), 2010. [26] C. D. Manning and H. Sch utze. Foundations of statistical natural language processing. MIT Press, 2001. [27] A. Nierman and H. V. Jagadish. Protdb: Probabilistic data in xml. In VLDB, 2002. [28] T. Oinn et al. Taverna: a tool for the composition and enactment of bioinformatics workflows. Bioinformatics, 20(1), 2003. [29] D. D. Roure et al. The design and realisation of the myExperiment virtual research environment for social sharing of workflows. FGCS, 25(5), 2009. [30] Q. Shao et al. Wise: A workflow information search engine. In ICDE, 2009. [31] J. Starlinger et al. (re)use in public scientific workflow repositories. In SSDBM, 2012. [32] J. Stoyanovich et al. Exploring repositories of scientific workflows. In WANDS, 2010. [33] J. Stoyanovich and I. Pe'er. Mutagenesys: estimating individual disease susceptibility based on genome-wide snp array data. Bioinformatics, 24(3):440442, 2008. [34] T. Tran et al. Top-k exploration of query candidates for efficient keyword search on graph-shaped (rdf) data. In ICDE, 2009. [35] J. X. Yu et al. Keyword search in relational databases: A survey. IEEE Data Eng. Bull., 33(1), 2010.
+

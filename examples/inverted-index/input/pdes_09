@@ -1,0 +1,854 @@
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+MORITZ KASSMANN, RUSSELL W. SCHWAB
+
+Abstract. We survey recent regularity results for parabolic equations involving nonlocal operators like the fractional Laplacian. We extend the results of [28] and obtain regularity estimates for nonlocal operators with kernels not being absolutely continuous with respect to the Lebesgue measure.
+
+arXiv:1305.5418v1 [math.AP] 23 May 2013
+
+1. Introduction In this article we discuss the regularity properties such as the weak Harnack inequality and Hlder regularity for functions, u : I  Rd	R, which are solutions of t u(t, x) - Lu(t, x) = f (t, x), (t, x)  I  , (1.1)
+
+where  denotes a bounded domain in Rd and I an open, bounded interval in R. L is an integro-differential operator of the form ^
+
+Lu(t, x) = p. v.
+
+[u(t, y ) - u(t, x)] a(t, x, y )(x, dy ) .
+
+(1.2)
+
+Rd
+
+Previous results (discussed in Section 2) have focused on the case in which (x, dy ) is absolutely continuous with respect to the Lebesgue measure, and so the key motivation for this note is to prove that in fact similar results still hold when  is only a measure. Furthermore, we take this article as an opportunity to present a small survey on a rapidly expanding and important family of results surrounding the study of regularity properties of solutions of (1.1). We first present the set-up and assumptions for (1.2) and our main results, and then in Sections 2 and 3 we provide a somewhat extensive discussion for (1.1). In [28] properties of solutions are studied under the assumption that the measures (x, dy ) are absolutely continuous with respect to the Lebesgue-measure in Rd . Here we try to avoid this assumption. We assume that a : [0, )  Rd  Rd  [1, 2] satisfies a(t, x, y ) = a(t, y, x) for all t, x, y and ((x, ))xRd is a family of measures satisfying the following assumptions. On one hand, we assume the symmetry condition that for every set A  B  Rd	Rd ^ ^ ^ ^ (x, dy ) dx . (1.3) (x, dy ) dx =
+A B B A
+
+Date : May 24, 2013. 2010 Mathematics Subject Classification. Primary 35B65, Secondary 47G20, 60J75. Key words and phrases. integro-differential operator, nonlocal operator, parabolic equation, Moser iteration, weak Harnack inequality, Hlder regularity. Support by the German Science Foundation DFG (SFB 701) is gratefully acknowledged.
+
+1
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+2
+
+On the other hand, we need to impose conditions on the singular behaviour of the measures (x, dy ) at the diagonal {x = y }. We assume that for some   (0, 2) and some	 1 and every x0  Rd ,  > 0 and v  H /2 (B (x0 )) ^ ^ 2 -2 (x0 , dy )  - , (K1 )  |x0 - y | (x0 , dy ) +
+|x0 -y | |x0 -y |>
+
+-1
+
+
+
+[v (x) - v (y )]2 (x, dy )dx  (2 - )
+
+
+2
+
+[v (x) - v (y )]2 |x - y |d+
+
+dxdy (K2 )
+
+BB
+
+BB
+
+[v (x) - v (y )] (x, dy )dx,
+
+where B = B (x0 ).
+
+BB
+
+Remark: We assume these conditions to hold for all  > 0 because it simplifies our presentation. It would be sufficient to assume (K1 ), (K2 ) for small , say for all	(0, 1]. Remark: A standard example satisfying the above assumptions is given by () (x, dy ) = |x - y |-d- dy for some	(0, 2). In this case the constant  would depend on  and blow up for   2-. This would affect our results because the constants in our theorems depend (only) on d, a lower bound for  and . If, instead, one chooses () (x, dy ) = (2- )|x - y |-d- dy , then assumptions (K1 ), (K2 ) are satisfied for one fixed  and all for all  satisfying 0   < 2. In this sense our results are robust, i.e. the constants stay bounded for   2-. This is a natural assumption considering the fact that it is (x, dy ) = (2 - ) |x - y |-d- dy , a(t, x, y ) = 1, which ensures (1.2) to converge to c(d)(-)u as   2-, where c(d) is a dimensional constant. Here are our main results: Theorem 1.1 (weak Harnack inequality). Assume (K1 ) and (K2 ) hold true for some   1 and   (0 , 2). There is a constant C = C (d, 0 , ) such that for every supersolution u of (1.1) on Q = (-1, 1)  B2 (0) which is nonnegative in (-1, 1)  Rd the following inequality holds: u
+L1 (U )
+
+ C inf u + f
+U
+
+L (Q)
+
+(HI)
+
+1   where U = 1 - ( 1  B1/2 (0). 2 ) , 1  B1/2 (0), U = -1, -1 + ( 2 )
+
+Theorem 1.2 (Hlder regularity). Assume (K1 ) and (K2 ) hold true for some   1 and   (0 , 2). There is a constant  =  (d, 0 , ) such that for every solution u of (1.1) in Q = I   with f = 0 and every Q  Q the following estimate holds: sup
+(t,x),(s,y )Q
+
+|u(t, x) - u(s, y )| |x - y | + |t - s|1/
+
+
+
+
+u
+
+L (I Rd )
+
+,
+
+(HC)
+
+with some constant  =  (Q, Q ) > 0. It is worth pointing out the fact that both Theorems 1.1 and 1.2 only require (1.1) to hold in some region I  , where  may not be the whole space Rd . There are only very few such local results for integro-differential operators in "divergence form" form, see Section 2.1 for a definition. One of the standard approaches in variational calulus, proving a local Caccioppoli inequality, already is nontrivial. Global Caccioppoli inequalities are easier to obtain, though. Note that in this work we prove and use local Caccioppoli inequalities for negative and small positive powers of supersolutions only.
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+3
+
+Let us briefly comment on the weak Harnack inequality. We recall that (HI) is called weak Harnack inequality, cp. [49, Sec. 1] and would be called Harnack inequality or strong Harnack inequality if u L1 (U ) were replaced by supU u. In terms of Hlder regularity the weak Harnack inequality is as good as the (strong) Harnack inequality, i.e. both imply the same a priori bounds in Hlder spaces. However, with regard to other results such as heat kernel bounds one wants to know when a Harnack inequality holds true. In our general set-up it can easily be seen that this is not possible. As explained in Section 3 our assumption allows to study the generator L of a process X = (X1 , X2 ) where Xi are one-dimensional symmetric stable processes. A strong Harnack inequality cannot hold for such a process, even not in the elliptic case. One can construct a sequence of functions un : Rd  R which are harmonic in the unit ball B , nonnegative in Rd but satisfy un (xn )/un (0)	+ for an appropriate sequence xn  0. We remark that such a counterexample exists also in the case where (x, dy ) is of the form (x, dy ) = j (x - y ) dy for a specific choice of the function j , see [9]. The article is organised as follows: In Section 2 we review related results from the literature on nonlocal parabolic problems. We explain the notion of nonlocal operators in divergence form and non-divergence form. In Section 3 we present two examples of measures (x, dy ) which are not absolutely continuous with respect to the Lebesgue measure in Rd but satisfy the conditions (K1 ) and (K2 ). In Section 4 we explain the arguments used in the proofs of Theorem 1.1 and Theorem 1.2. We concentrate on the ideas and refer to [28] for technical details. Acknowledgement: We thank Matthieu Felsinger for several helpful comments. 2. A short survey on results for parabolic equations involving nonlocal operators For a start let us look at a simple example. Choose a(t, x, y )(x, dy ) = |x - y |-d- dy , where dy  (R  Rd ), denotes the Lebesgue measure. For this choice and for smooth functions u, say u  Cc Lu equals -c(d, )(-)/2 u where we use ^	2 ( d+ u(t, y ) - u(t, x) /2 2 ) dy . (2.1) -(-) u(t, x) = d/2 - lim  |( 2 )| 0+ |y-x|> |y - x|d+
+ (Rd ) This definition implies for v  Cc
+
+(-)/2 v ( ) = | | v ( ) . Thus (-)/2 is a pseudodifferential operator with symbol | | which justifies the use of the symbol and the name "fractional Laplacian". In place of -(-)/2 we write /2 . The precise value of the constant c(d, )-1 in (2.1) is not important but the following property is: The quantity c(d, )-1 (2 - ) remains positive and bounded for   0+ and   2-. Thus the equation (1.1) reduces in the most simple case to t u(t, x) - /2 u(t, x) = f (t, x), In the case f = 0 the solutions can be obtained as ^ ^ ()  (t, x; t0 , y )u0 (y ) dy = u(t, x) =
+Rd
+
+(t, x)	(0, )  Rd ,
+
+(2.2)
+
+Rd
+
+p() (t, x - y, 0)u0 (y ) dy ,
+
+when u0 (x) = u(t0 , x), () is the fundamental solution and p() (t, x, y ) = () (t, x; 0, y ). The function p() is often referred to as the heat kernel of the corresponding semi-group. Only
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+4
+
+in the case  = 1 an explicit expression for p() (t, x, y ) is known. But one can prove that there is a continuous function () : Rd  (0, ) which is rotationally invariant and satisfies c-1 |x|-d-  () (|x|)  c|x|-d- for some constant c  1 and all x with |x| > 1 such that for all t > 0 and all x, y  Rd p() (t, x, y ) = t-d/ p() (1, t-1 x, t-1 x) = t-d/ () (t-1 (x - y )) . As a result we obtain for all t > 0 and all x, y  Rd p
+()
+
+(t, x, y )  t
+
+-d/
+
+t1/ 1 |x - y |
+
+d+
+
+(2.3)
+
+Here, the symbol  denotes that the quotient of the two expression involved stays positive and bounded. It is worthwile to compare the situation for nonlocal operators with the one for local operators. For  = 2 the nonlocal problem (2.2) becomes the classical heat equation with p(2) (t, x, y ) =
+-|x-y |2 1 4t e . (4t)d/2
+
+One of the main results in the theory of elliptic differential operators of second order and in divergence form are the so called Aronson bounds. Every operator of the form u	- div(A()u), where A(x) are uniformly positive definite matrices possesses a heat kernel q which satisfies the following bounds. There are positive constants c1 , c2 , c3 , c4 such that for all t > 0 and all x, y  Rd c1 p(2) (t, c2 |x - y |)  q (t, x, y )  c3 p(2) (t, c4 |x - y |) . This means that the heat kernel for the classical heat equation controls the heat kernels for nondegenerate parabolic problems. Below we provide details of how this phenomenon remains true for nonlocal problems. A second result, and this is most important for the study of nonlinear problems, are a-priori Hlder estimates for solutions to parabolic equations involving the operator u  - div(A()u) where the dependence of A(x) = (aij (x)) on x is only measurable and bounded. This part of the theory is due to De Giorgi, Nash and Moser. During the last years there have been several attempts to work out a similar program for nonlocal operators which generalise the fractional Laplacian like the operator u  - div(A()u) generalises the classical Laplacian. We expand upon this in Section 2.1 which discusses divergence form operators. Many cases involving operators similar to the fractional Laplacian also fall into the category of non-divergence form operators, and there has also been much recent progress investigating regularity properties similar to Theorems 1.1 and 1.2 above. We mention these results in Section 2.2. 2.1. Divergence Form Operators. Let us review some results from the literature which concern regularity issues for solutions to equations similar to (1.1). By "divergence form", we mean operators defined as (1.2). In this case solutions are defined with the help of bilinear forms. If (1.3) holds, then the bilinear forms are symmetric. Note that all previous results in this direction assume the measures (x, dy ) to be absolutely continuous with respect to the Lebesgue-measure on Rd . Thus, for the range of this little
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+5
+
+survey, we assume that for some appropriate function k : (0, )	Rd  Rd	[0, ) and all t > 0, x, y  Rd a(t, x, y )(x, dy ) = k(t, x, y ) dx dy , k (t, x, y ) = k(t, y, x)
+
+The method of Nash is applied to equation (1.1) by Komatsu in [40, 41]. The author assumes k(t, x, y ) to be positive, continuous in t and to satisfy pointwise bounds of the form k(t, x, y )	|x - y |-d- for small values of |x - y |. The main results are the existence and Hlder regularity of a fundamental solution together with some pointwise estimates. Note that Nash's method is a global one, i.e. one works in whole of Rd . An important contribution to theory is [8]. Bass and Levin prove sharp pointwise bounds on the heat kernel and a Harnack inequality. The state space is Zd but this does not constitute a serious limitation. The upper bounds are proved using Davies' method. The lower bounds are based on the Harnack inequality which is derived with the help of Krylov-Safonov type estimates. The existence of a related stochastic process and its properties are essential for this part of the proof. It is assumed in [8] that the function k(t, x, y ) is constant in t, i.e. k(t, x, y ) = k (x, y ) with k (x, y )	|x - y |-d- for all values of |x - y |. The results of [8] are extended in [21] to a general d-set (F,	). Moreover, the theory of Dirichlet forms is applied consistently which allows to work with the weak formulation as it should be. Chen and Kumagai show that, under the assumption k(t, x, y ) = k (x, y ) with k (x, y )  |x - y |-d- there exists a Feller process that corresponds with the Dirichlet form (E , F ) given by  (u(y ) - u(x)) (v (y ) - v (x)) k  (x, y ) (dx) (dy ) , (2.4) E (u, v ) =
+FF
+
+F = w  L2 (F,  )|
+
+
+FF
+
+(w(y ) - w(x))2  (dx) (dy ) < + . |x - y |d+
+
+(2.5)
+
+It is shown in [21] that the heat kernel p(t, x, y ) exists and satisfies p(t, x, y )  t
+-d/
+
+t1/ 1 |x - y |
+
+d+
+
+(2.6)
+
+for all x, y  F and 0 < t  1. This is an Aronson bound for nonlocal oerators, cp. (2.3). A more general situation concerning the regularity at |x - y | = 0 is treated by Barlow, Bass, Chen and the first author in [2]. Again, k(t, x, y ) is assumed to be constant in t, i.e. k(t, x, y ) = k (x, y ) but may satisfy c0 |x - y |-d-  k (x, y )  c1 |x - y |-d- , |x - y |	1 (2.7)
+
+for some positive constants c0 , c1 , ,  with 0 <    < 2. The existence of a heat kernel p(t, x, y ) is shown together with some upper and lower bounds which hold true outside of some exceptional set. Since k does not have upper and lower bounds which allow for the same type of scaling, these results cannot be used in order to deduce regularity results. Quite contrary to this, [2] provides an example of a kernel satisfying (2.7) and a corresponding discontinuous harmonic function. Moreover it is shown that the martingale problem is not well posed in general under the condition (2.7).
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+6
+
+The situation is better if the exponent  depends on x and has some regularity. In [6] the main assumption is c0 |x - y |-d-((x)(y))  k (x, y )	c1 |x - y |-d-((x)(y)) , |x - y |  1 (2.8) for some positive constants c0 , c1 and a Dini-continuous function  taking values in some closed subinterval of (0, 2). Bass, Kumagai and the first author prove bounds of the heat kernel and a priori Hlder estimates. As mentioned in the introduction, the results of this article are based on the work by Felsinger and the first author in [28]. Thus we do not comment on [28] here in greater detail. Several of the technical ingredients used in this work and in [28] are based on ideas in [36]. The first author establishes a Moser iteration scheme for elliptic operators corresponding to (1.1) leading to a weak Harnack inequality and Hlder regularity estimates. This article for the first time establishes a PDE approach to local regularity for nonlocal operators with measurable coefficients. Moreover, the results are robust, i.e. the constants in the assertion stay positive and bounded for   2-. In [10] Caffarelli, Chan, and Vasseur prove Hlder regularity for weak solutions of (1.1) in all of Rd . The methods follow the spirit of De Giorgi's program, but there are non-trivial modifications to account for the nonlocality of L. Their estimates are global in the sense that all of the quantities estimated require the equation and the behavior of u to hold globally. Their results are slightly different than the ones of [28] in the sense that the Hlder continuity is controlled in terms of u L2 (Rd ) instead of u L (Rd ) , and they are not robust as	2-. [10] also provides an important justification of how in the nonlocal setting, results such as [10, Theorem 2.2], [28, Theorem 1.2], and Theorem 1.2 above, also apply to fully nonlinear equations as well as give C 1, regularity for nonlinear, translation invariant operators which could be of the form ^  (u(t, y ) - u(t, x)) (x, dy ), F u(t, x) = p. v.
+Rd
+
+assuming F is translation invariant (typically shown as (x, dy ) = K (x - y )dy ) and  is a convex function satisfying some mild regularity and coercivity assumptions. Cf. [12, Section 13] and [11] for the non-divergence elliptic setting. It is worth mentioning a recent use of regularity results for equations similar to (1.1) to random matrix theory and random Schrdinger equations. Erds and Yau [27] apply the ideas of [10] to discrete situations. In our context their assumption, cf. [27, Thm 9.1], would allow k(t, x, y ) to be unbounded as a function of t which is not included in our approach. In [29], Gomez uses a priori estimates for a hypo-elliptic version of (1.1) for studying the limits of a random Schrdinger equation to a deterministic nonlocal radiative transfer equation. A very different application of Theorem 1.1 appears in [34] where the authors study the asymptotic symmetry of solutions to nonlinear fractional reaction diffusion equations. In [35] a Harnack inequality is used to study a fractional version of the Yamabe flow. It is important to point out that this little survey is by no means complete. Several interesting areas are neglected resp. not treated according to their presence in journals. One such area is given by heat kernel bounds for more general nonlocal Dirichlet forms on general state spaces. The articles [22], [3], [17] extend [21] and treat regularity and estimates of the heat kernel. For a general introduction to off-diagonal heat kernel bounds involving non-Gaussian tails, see [31]. A detailed study of off-diagonal upper bounds can be found in [4]. A recent work is [30]. Therein, the authors derive off-diagonal upper bounds from on-diagonal ones. A key feature is that the walk dimension of the underlying space is allowed to exceed 2.
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+7
+
+Another area concerns heat kernels for nonlocal operators in bounded and unbounded domains or equivalently transition densities for jump processes in such domains. In [19] sharp twosided estimates for the transition density (heat kernel) of the symmetric stable process (the fractional Laplacian) killed upon exiting a C 1,1 open set	Rd are obtained. Sharp bounds for the heat kernel up to the boundary of a bounded domain  in the so called censored case, i.e. when the integral in (1.2) is taken over  instead of the full space, are proved in [20]. 2.2. Non-Divergence Form Operators. By a "non-divergence form" operator in (1.2), we mean an operator ^ (2.9) u(t, y ) - u(t, x) - B1 (y - x) u(t, x), (y - x) m(t, x, dy ) . Lu(t, x) =
+Rd
+
+for a general family of measures m such that for all t and x, m(t, x, dy ) is still a Lvy measure in the y variable. A less general and time-independent version which still is characteristic would be given by: ^ (2.10) Lv (x) = v (y ) - v (x) - B1 (y - x) v (x), (y - x) J (x, y - x)dy ,
+Rd
+
+ where J is a function satisfying supxRd min{1, |h|2 }J (x, h) d h < +. If additionally J (x, h) = J (x, -h) for all x and h = 0, then the operator L from (2.10) reduces further to ^ 1 [v (x + h) - 2v (x) + v (x - h)] J (x, h)dh . (2.11) Lv (x) = 2 Rd The assumption J (x, h) = J (x, -h) ensures that this operator is of divergence form with k(x, y ) = J (x, y - x). Its bilinear form is symmetric if J (x, h) = J (x + h, -h) for all x and h = 0 which basically means for the corresponding process that a jump from x by h to x + h has the same probability as a jump from x + h by -h back to x. The second order analog of these nonlocal types of operators are of the form aij (x)uxi xj as opposed to div(A(x)u(x)). The condition J (x, h) = J (x, -h) for all x and h = 0 is similar to the symmetry of the matrices aij (x). In the second order case, the main program for proving regularity of solutions of equations similar to (1.1) with estimates that do not depend on the x-dependence of the equation (the so-called "bounded measurable coefficients") goes back to Krylov and Safonov [42] where they prove Harnack inequality and Hlder regularity for solutions of the second order version of (1.1). Lihe Wang extends the Krylov-Safonov program to viscosity solutions (c.f. [23]) of fully nonlinear second order versions of (1.1). A Harnack inequality and Hlder regularity results are obtained for linear equations by Bass and Levin in [7] not assuming regularity of the kernel with respect to the state variable. Global Schauder estimates are obtained by Bass in [5] where almost no regularity with respect to the jump variable is assumed. The key argument in the PDE approach to local regularity is sometimes referred to as a "pointto-measure" estimate or a "growth lemma" ([11, Lemma 10.1], [15, Lemma 5.6], [47, Lemma 4.1]), the main consequence of which is what is known as a sort of weak Harnack inequality which typically carries the name " L -lemma" ([11, Theorem 10.3], [15, Theorem 5.1]). The main tool which is required to begin this program is the Aleksandrov-Bakelman-Pucci-Krylov-Tso inequality which only requires u to be a subsolution of (1.1) in a cylinder Q and less than or equal to zero on the boundary. It gives (cf. [50, Theorem 3.14]) sup u  f
+Q Ld+1 ({u=}) ,
+
+(2.12)
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+8
+
+where  is a special envelope of u, typically taken to be a concave envelope in (t, x) in the second order setting, but can be much more complicated in the nonlocal setting [15, Theorem 4.1]. In fact, the absence of a nonlocal analog for the Alexsandrov-Bakelman-Pucci-Krylov-Tso inequality as well as an appropriate corresponding envelope, , for the nonlocal setting has been a significant stumbling block for both the parabolic and elliptic non-divergence results. This is especially true when one hopes to prove results which are robust as	2-. In most of the existing works, a finite cube approximation to the estimate has been devised as a substitute for (2.12). Hlder regularity results in these situations are derived by Caffarelli and Silvestre in [11]. So far the only result in this direction which avoids coverings is [32] by Guillen and the second author in the stationary setting of (1.1). By construction, these point-to-measure estimates are inherently local results, and as a consequence most of the corresponding regularity results along this line of work are local as well. This is in contrast to the divergence setting discussed above. Although it applies to the elliptic setting, a key contribution to the non-divergence theory is the work of Silvestre [47], where he studies the Hlder regularity for solutions of the stationary version of (1.1). The results are not robust, but they do not make any sort of special symmetry assumptions on the kernels, and the method of proof of the point-to-measure estimate has been a significant inspiration for [48] and [15]. An interesting and important phenomenon of competing scaling influences happens when (1.1) contains a drift term, b(x)	u, and the order is  = 1. In this case the gradient term (which is non-regularizing) and the nonlocal term, Lu, (which is regularizing) have the same order so a priori it is not clear which influence will be dominant. In [48], Silvestre proves that indeed the nonlocal term has enough influence to regularize and solutions will be classical. Note that we do not review the results for the 2-dimensional dissipative surface quasi-geostrophic equations. These are equations of the form (1.1) including a drift b which is assumed to be divergence free  so not quite within the scope of (1.1). The critical case is  = 1 and vi	L (BMO), see [39], [13] and [43]. Very recently the fully nonlinear, non-divergence version of (1.1) was treated by Chang Lara and Dvila in [15], where they prove robust and local Hlder regularity via a hybrid of the methods from the stationary case [11] and a modification of the techniques of [48]. There are also some results which use methods other than the ones above. Related to a Hamilton-Jacobi version of (1.1) (similar to the equation treated by Silvestre), Droniou and Imbert in [24] and Imbert in [33] study regularity properties and deduce classical solutions in many situations. These results do not recover the critical result of  = 1. Very general local and nonlocal fully nonlinear parabolic problems are treated via representation formulas from optimal control in [14] Cardaliaguet and Rainer. They prove that solutions are uniformly Hlder regular with bounds which only depend on the relevant extremal operators hence only lower and upper bounds, but not on the regularity in the coefficients in x for their version of (1.1). An example of such an equation would be ut + H (x, u, D 2 u) - Lu = f, where L is a non-divergence form of (1.2). 2.3. Related areas. Let us also mention the currently very active field of potential theory for subordinate Brownian motion. A model case of a generator would be given by L = (-) where  is a complete Bernstein function. In this specific case one can employ several formulas in order to prove estimates on the heat kernel or the Green function. But if one considers operators with variable coefficients which generalize (-), then one faces several obstacles, the absence of scaling properties being one of them. Moreover, there are interesting limit cases
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+9
+
+where the order of differentiability, which in general is a function and not just a number, is very close to zero (less than any positive ) or very close to 2. We refer the reader to [38] for an introduction and to [37], [18] for recent contributions concerning regularity. The existence of solutions to parabolic nonlocal problems in non-divergence form has been studied by several authors (and long ago). We only mention [1]1 and [44] and refer the reader to the references therein. 2.4. Discussion of Theorem 1.1 and Theorem 1.2. Let us underline, in light of the aforementioned articles, what we view to be the main contributions of the approach laid out in [28] and extended in the present work. We prove local regularity results such as a weak Harnack inequality. By a "local regularity result" we understand an assertion for functions which are supposed to satisfy the corresponding equation only in a certain bounded set. The assertion then says something about these functions in the interior of this set. Harnack or weak Harnack inequalities are protoptypes of such results. In the introduction we already mention that our results are robust for   2, i.e. the constants in our main theorems do not depend on   (0 , 2). 3. Two examples The two main examples we have in mind for our results are the singular measure supported on the axes
+d
+
+axes (x, dy ) =
+i=1
+
+
+
+and the measure in
+
+R2
+
+supported on a cusp near y = 0
+
+|xi - yi |-1- dyi
+
+j =i
+
+xj (dyj ) ,
+
+
+
+(3.1)
+
+cusp (x, dy ) = {|z2 |>|z1 |s } (x - y ) |x - y |-d- dy. Here we have used the notation for z  Rd , z = (z1 , z2 ) and 0 < s < 1. The canonical measure is  (x, dy ) = |x - y |-d- dy.
+
+(3.2)
+
+(3.3)
+
+The measure axes corresponds to a pure jump process whose coordinates are given by independent one dimensional Lvy processes of order . As indicated by the product of xj measures, this measure only charges differences of x and y which occur on one coordinate axis, and this corresponds to the fact that each jump occurs along one of the coordinate directions. The measure cusp is simply the restriction of the -stable measure |x - y |-d- dy to the set where x - y fall in the cusp region. Remark It is worth emphasizing that cusp gives rise to an operator which is not of  order, but rather of order  = (1 - 1/s) +	<  if  > 0 . The lower order comes from the fact that the cusp causes spheres of small radius to be charged with a larger power of r than in the case with the canonical measure,  . Not surprisingly this places a restriction on the possible choices for s once  is fixed.
+1Note that one of the main assumptions in [1], condition (1.4), contains a typo, it should be k (x, y )  1 c|y |-n- for small values of |y |.
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+10
+
+In the remainder of this section, we check the assumptions for these two important example measures. It will be useful to have some notation. E,A,B (u, v ) := ^ ^
+A
+
+(u(x) - u(y ))(v (x) - v (y ))(x, dy )dx
+
+(3.4)
+
+B
+
+E  = E for (x, dy ) = |x - y |-d- dy E E
+axes cusp
+
+(3.5) (3.6) (3.7)
+
+= E for (x, dy ) = axes = E for (x, dy ) = cusp
+
+Lemma 3.1. axes satisfies (K1). Proof of (K1 ) for axes . This will follow from the simple observation that the two measures, axes and	, charge any annulus centered at x with a value which only differs by a dimensional constant. Indeed given any r < R and R(x) = BR (x) \ Br (x),
+d R(x) i=1
+
+axes (x, R(x)) = = and
+
+^
+
+
+
+2d - (r - R- ),  ^
+
+|xi - yi |
+
+-1-
+
+dyi
+j =i
+
+xj (dyj ) = 2
+
+
+
+d i=1
+
+^
+
+R r
+
+|yi |-1- dyi
+
+ (x, R(x)) =
+
+|x - y |-d- dy =
+
+R(x)
+
+C (d) - (r - R- ),
+
+where C (d) is the surface area of the d - 1 sphere in this case. Now we see that writing both integrals of (K1 ) using e.g. dyadic rings makes the calculation equivalent to that of the canonical measure,  , which gives the desired result. Lemma 3.2. cusp satisfies (K1). Proof of (K1 ) for cusp . This follows almost exactly the argument of the case of axes , except here we can actually work with the surface measure on Br (x), since cusp is absolutely continuous with respect to Lebesgue measure. It is easiest to note that we can represent the contribution of ^
+Br (x)
+
+{|zd |>|Z |s } (x - y ) |x - y |-d- dSr (y )
+^ |x - y |-d- dSr (y ).
+Br (x)
+
+(3.8)
+
+as a fraction of the contribution (3.9)
+
+If we let md ( ) be the proportion of the sphere which is within an angle of  with the positive z2 -axis we see that the measure cusp only allows for a contribution from a small portion of the sphere depending on r . We have ^
+
+Br (x)
+
+{|zd |>|Z | } (x - y ) |x - y |
+s
+
+-d-
+
+dSr (y ) = md ( (r ))
+
+^
+
+|x - y |-d- dSr (y ),
+Br (x)
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+11
+
+for  (r ) = sin-1 z1 (r ) z1 (r )2s + z1 (r )2 .
+
+Here we have used the notation that given any fixed r , z1 (r ) is the unique positive solution of r 2 = z1 (r )2 + z1 (r )2s . The most important feature of this relationship is that for r small (which can be quantified in terms of s), |z1 (r )|	r 1/s The key observations which both identifies the correct fractional scale of the energy associated to cusp and the fact which allows us to verify (K1 ) are that for r small (uniformly, depending only on d and s), md ( (r ))  Cr (1-s)/s , and for r large, md ( (r ))  1. The small r behavior of cusp is the main determining factor for the true scale of the operator in (1.2). Indeed we see, for example, that for r << 1 ^ r^ ^ r ^ ^ 2-d- 2 (1-s)/s  |z |2-d--(s-1)/s dS (z ) |z | dS (z ) = |z | (0, dz )  C
+Br 0 B 0 B
+
+This tells us that cusp does not have scale , but rather satisfies (K1 ) and (K2 ) with the scale 1  = (1 - ) +  <  , s as long as  is positive. These heuristic arguments can be made rigorous in checking (K1 ) by choosing a cutoff, r0 , which depends only on a lower bound of s, say s0  s, such that 1  (r )  sin( (r ))   (r ) 2 and 1 1 sin( (r ))  z1 (r )1-s  r (1-s)/s , 2 2 for all r  r0 . Then the integrals in (K1 ) can be split at r0 and estimated using either m( (r ))  C (d, s0 )r (1-s)/s or ~ (d, s0 ). 1  m( (r ))  C
+
+Lemma 3.3. axes satisfies (K2). Proof of (K2 ) for axes . We include the details for the case d = 2, and then comment on the few modifications for the general dimensional case at the end. So temporarily assume d = 2. First we note that it suffices to check the inequality for v  C 0,1 (B ). This assumption on v allows us to both ignore a small neighborhood of the diagonal of B  B and to write all of the energies in terms of Riemann sums. This will make the accounting of terms easier. We use the following notation N fixed, depending only on v (3.10)
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+12
+
+h =
+
+2 fixed, depending only on v N y = x = h r = h h  = 2
+
+(3.11) (3.12) (3.13) (3.14) BB (3.15) (3.16) (3.17) (3.18) B) (3.19) (3.20)
+
+{(xj , yk )} = centers of the cells of (hZ)2  (hZ)2 xj	yk if either (xj )1 = (yk )1 or (xj )2 = (yk )2 rjk = |xj - yk | vjk = (v (xj ) - v (yk )) Rl (xj ) = yk  (Blr (xj ) \ B(l-1)r (xj )
+
+y ^lm = yk if the lr, m (polar) cell lies a majority within Qy (yk )
+
+Here we include all of x, y , r , h,  even though we set equality y = x = h = r and  = h/(2). This is just to try to indicate which integrals we are discretizing in various lines of the calculation. The main discretization parameter is h, and this is chosen based only on the C 0,1 norm of v to ensure that all approximations of the various integrals are within a given tolerance of the continuous versions. It will be convenient to approximate the original energy in cartesian coordinates,
+2 vjk x j yk x j 1+ rjk
+
+axes = Eapprox
+
+y (x)2 ,
+
+the canonical energy in both polar coordinates in the inside integration
+ Eapprox = xj l yk Rl (xj 2 vjk
+
+r 2+ ) jk
+
+rjk r  (x)2 ,
+
+and finally the canonical energy in cartesian coordinates
+ Eapprox = xj yk 2 vjk 2+ rjk
+
+(y )2 (x)2 .
+
+We have chosen to work with a uniform grid in cartesian coordinates, with cells centered at (xj , yk )	B  B . Since v is fixed and in C 0,1 , the grid size can be chosen small enough so that this collection of cartesian grid points {(xj , yk )} is sufficient to resolve both the cartesian and polar approximate decompositions. This is relevant because the polar approximation grid does not match the cartesian one, but if h is small enough the cartesian points can be used for the polar ones without adding significantly to the overall error.
+axes  Step 1: EB,B  C (d)EB,B .
+
+The strategy is that we can link E axes with E	via an intermediate energy which has the same weights in rjk and y as E axes but sums over all xj and yk instead of only yk  xj : (v (xk ) - v (yk ))2 y (x)2 1+ rjk
+
+F (v ) =
+xj yk
+
+(3.21)
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+13
+
+The inequality 2 (v (x) - v (y ))2 + (v (z ) - v (y ))2  (v (x) - v (y ))2 (3.22)
+
+allows us to recover the contribution between any two points, x and y from that of points which satisfy x  y . Specifically, given x and y , the choice of z = (x1 , y2 ) allows for such a connection. In particular, for z fixed, all of the entries on the axes passing through z will need to be used CN (C is dimensional) times in connecting all of the x and y lying on the axes passing though z . This gives the inequality
+2 vjk x k yk x j 1+ rjk
+
+axes 4N Eapprox = 4N 2 vjk xj yk 1+ rjk
+
+h(h)2
+
+(3.23)
+
+
+
+h(h)2 = F (v ).
+
+(3.24)
+
+ Next we work from F (v ) to Eapprox by using polar coordinates for the inside integral. The reason for initially discretizing in polar is to more easily see the balance between the unmatched powers of rjk and y between E axes and E  .
+
+1 F (v ) = h
+
+2 vjk xj yk 1+ rjk rjk
+
+rjk hh(h)2
+2 vjk
+
+(3.25)
+
+= (C (d))
+
+1 h
+
+xj
+
+rjk r (2 )(x)2 1+ rjk r Rl (xj ) yk Rl (xj ) jk
+2 vjk
+
+(3.26)
+
+= (C (d))
+
+2  h
+
+xj Rl (xj ) yk Rl (xj 2 vjk xj yk 2+ rjk
+
+r 2+ ) jk
+
+rjk r  (x)2
+
+(3.27)
+
+= C (d)
+
+2N
+
+(y )2 (x)2
+
+(3.28) (3.29)
+
+ = C (d)N Eapprox
+
+Again, due to the C 0,1 nature of v , N and h, can be chose appropriately so that we can deduce
+ axes ,  C (d)EB,B EB,B
+
+(3.30)
+
+which completes step 1. Now we move on to the easier step
+axes  Step 2: EB,B (v, v )  C (d)EB,B (v, v ).
+
+We again appeal to the intermediate energy (3.21). We reuse the above calculation, where instead we make use of the inequality (v (x) - v (z ))2 + (v (z ) - v (y ))2  (v (x) - v (y ))2 . (3.31)
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+14
+
+axes 4N Eapprox
+
+=
+xj
+
+2 1+ y (x) yk xj rjk
+
+2 vjk
+
+(3.32) (3.33) (3.34)
+
+
+xj yk
+
+(v (xk ) - v (yk ))2 y (x)2 1+ rjk
+
+ = C (d)N Eapprox .
+
+This completes the argument for d = 2. For an arbitrary dimension, the main modification is in the number of times a given line will be used as auxiliary points to connect arbitrary xj and yk on the grid. In this case, each axes will be used CN d-1 times to make these connections. Matching this power of yk in Eapprox d - 1 N is the term r d-1 (h)d-1 which must be introduced to F (v ) to be compatible with the approximation of E  in spherical coordinates. Thus we end up in the same situation (neglecting dimensional constants) with a multiplication by N d-1 on both sides of the inequality. It turns out to be at least a little bit non-trivial to check (K2 ) for the measure, cusp. Instead of giving a Riemann Sum argument as for axes , we use the fact that (K2 ) has already been verified in [25]. We note that none of the constants in the proof of [25] depend  in the underlying set, B. Lemma 3.4 ([25]). cusp satisfies (K2). 4. Proofs In this section we explain how to prove Theorem 1.1 and Theorem 1.2. We closely follow the strategy of [28] and restrict our explanations to those parts of the proofs which are different for our set-up. Let us first explain what it means that a function R  Rd  R satisfies equation (1.1) in a bounded region in the weak sense. For   (0, 2) the Sobolev space of fractional order /2 is defined by H /2 () = v  L2 () : where the norm is defined by v We denote by H0
+/2 /2 2 H /2 ()
+
+v
+
+H /2 ()
+
+< +
+
+(4.1)
+
+= v
+
+2 L2 ()
+
++ (2 - )
+
+
+
+|v (x) - v (y )|2 |x - y |+d
+H /2 (Rd )
+
+dxdy.
+
+(4.2)
+
+
+
+ () under  () the completion of Cc
+
+and by H -/2 the dual
+
+of H0 . By inf v and sup v we denote the essential infimum and the essential supremum, respectively, of a given funktion v . 4.1. Weak solutions. We define a nonlocal bilinear form associated to L by  [u(t, y ) - u(t, x)] [v (t, y ) - v (t, x)] a(t, x, y )(x, dy )dx. Et (u, v ) =
+Rd Rd
+
+(4.3)
+
+Let us recall the notion of local solutions from [28].
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+15
+
+Definition 4.1. Assume Q = I	Rd+1 and f  L (Q). We say that u  L (I ; L (Rd )) is a supersolution of (1.1) in Q = I	, if
+2 (i) u  Cloc (I ; L2 loc ())  Lloc (I ; Hloc ()),  (ii) for every subdomain   , for every subinterval [t1 , t2 ]  I and for every nonnegative 1 (I ; L2 ( ))  L2 (I ; H /2 ( )), test function   Hloc 0 loc ^ t2 ^ t2 ^ ^ ^ Et (u, )dt u(t, x)t (t, x)dxdt + (t1 , x)u(t1 , x)dx - (t2 , x)u(t2 , x)dx-   t1  t1 /2
+
+
+
+^
+
+t2
+
+t1
+
+^
+
+f (t, x)(t, x)dxdt.
+
+
+(4.4)
+
+Instead of writing that u is a supersolution in I   we write t u - Lu  f in I  . Subsolutions and solutions are defined accordingly. Working rigorously with local weak solutions for parabolic equations requires some care. Instead of the definition above we will use the inequality ^ ^ f (t, x)(t, x)dx for a.e. t  I, (4.4') t u(t, x)(t, x)dx + Et (u(t, ), (t, ))
+
+
+for test functions of the form (t, x) = q > 0, where u is a positive supersolution in I   and  a suitable cut-off function. In particular, we assume that u is a.e. differentiable in time. The use (4.4') can be justified using Steklov averages. A second crucial ingredient in our proof is the scaling property of (1.1) which we are now going to explain. 4.2. Scaling. We will often make use of scaling. Let us explain how the operator under consideration behaves with respect to rescaled functions. Define Br (x0 ) = x  Rd : |x - x0 | < r and Ir (t0 ) = (t0 - r  , t0 + r  ), I (r ) = (0, r ), I (r ) = (-r , 0),
+
+
+ - q  (x)u (t, x),
+
+Qr (x0 , t0 ) = Ir (t0 )  Br (x0 ), Q (r ) = I (r )  Br (0), Q (r ) = I (r )  Br (0).
+
+Lemma 4.2 (Scaling property). Let   (0, 2),   Rd ,   R and r > 0. Define a diffeomorphism J by J (x) = rx +  . Let u be a supersolution of the equation (1.1) in some cylindrical domain I   = Q  Qr (,  ). Define new functions u by u(t, x) = u(r  t + , J (x)) and f by f (t, x) = r  f (r  t + , rx +  ). ~  J -1 ()  (-1, 1)  B1 (0), where L is defined as in (1.2) Then u satisfies t u - Lu  f in I with a(t, x, dy )(x, dy ) defined by a(t, x, y ) = a(r  t + , rx + , ry +  ), (x, dy ) = r	(  J )(Jx, dy ) . (4.5) where (  J )(z, A) = (z, J (A)). The function a is positive, bounded and symmetric as is a. The family of measures (, dy ) satisfies assumptions (K1 ) and (K2 ) with the same constants as in the case of (, dy ). Proof. Since the coefficient, a, is only modified by a straightforward change of variables, we take for simplicity a(t, x, y ) = 1. A general a does not modify the argument, but just adds extra notation. Now we must verify (4.4) for u ~ in (-1, 1)  B1 (0). We start with a set, I	(-1, 1)  B1 (0) 1 (I  ; L2 ( ))  L2 (I	; H /2 ( )), for the u ~ J -1 ()  and a test function,	 Hloc ~ equation in I 0 loc
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+16
+
+(-1, 1)  B1 (0). The definition of  ~ is exactly chosen so that (4.4) reduces, after a change of variables (s, z ) = (r  t + , J (x)), to ^ ^
+
+J ( )
+
+(s2 , J -1 (z ))u(s2 , z )r -d dz - - ^
+s2
+
+J ( )
+
+(s1 , J -1 (z ))u(s1 , z )r -d dz
+
+s1
+
+^
+
+J ( )
+
+u(s, z )r  s (s, J -1 z )r -d dxr -dt+
+
++
+
+^
+
+s2
+
+s1
+
+^
+
+Rd
+
+^
+
+Rd
+
+(u(s, z ) - u(s, w)) (s, J -1 (z )) - (s, J -1 (w)) r  (z, dz )r -d dwr - ds ^ s2 ^ r  f (s, z )(s, J -1 (z ))r -d dzr - ds. (4.6)
+s1 J ( )
+
+Since r -d (r  () + , J -1 ()) is a valid test function in [s1 , s2 ]  J ( )  Qr (,  ), we conclude by the supersolution property of u that (4.6) holds true. We also briefly verify that  ~ satisfies (K1 ), (K2 ) with the same constants as . First we verify (K1 ). Let  > 0 be fixed, and without loss of generality we check the conditions at x0 = 0 as any other x0 follows the same argument mutatis mutandi. We calculate the two integrals with the change of variables y = J -1 (z ). This gives ^ ^ 2 2 -2 -2 J -1 (z ) r	(J (0), dy ) (4.7) |y | (0, dy ) =   J (B ) B ^ -2 |z -  |2 r -2 r  (, dy ) (4.8) =
+Br ( )
+
+and ^ (0, dy ) =
+(B )C
+
+^
+
+r  (J (0), dy )
+)C )
+
+(4.9) (4.10)
+
+J ((B
+
+=
+
+^
+
+r  (, dy ).
+( ))C
+
+(Br
+
+Therefore after this change of variables, combined with (K1 ) for , we have ^ ^ 2 -2 (0, dy ) |y | (0, dy ) +  (B )C B ^ ^ 2  -2  = r (r) |z -	| (0, dy ) + r (0, dy )  r  (r)- ,
+Br ( ) (Br ( ))C
+
+(4.11) (4.12)
+
+and hence (K1 ) holds for . Next we turn to (K2 ). We change variables for the	energy as x = J -1 (w) and y = J -1 (z ). Then, owing to the fact that	satisfies (K2 ) in the set J (B ) with the test function r -d/2 v  J -1 , we have the validity of (4.15)(4.17) below. -1  [v (x) - v (y )]2 (x, dy )dx
+-1
+
+(4.13)
+2
+
+BB
+
+=
+
+
+
+v (J -1 (w)) - v (J -1 (z ))
+
+r (J (J -1 (w)), d (J -1 (z )))r -d dw
+
+(4.14)
+
+J (B ) J (B )
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+17
+
+=
+
+-1
+
+
+
+r -d/2 v (J -1 (w)) - r -d/2 v (J -1 (z ))
+
+2
+
+r  (w, dz )dw
+2
+
+(4.15)
+
+J (B ) J (B )
+
+ (2 - )
+
+r -d/2 v (J -1 (w)) - r -d/2 v (J -1 (z ))
+2
+
+|w - z |-d- r  dz dw
+
+(4.16)
+
+J (B ) J (B )
+
+
+
+r -d/2 v (J -1 (w)) - r -d/2 v (J -1 (z ))
+
+r  (w, dz )dw
+
+(4.17)
+
+J (B ) J (B )
+
+=
+
+[v (x) - v (y )]2 (x, dy )dx.
+
+(4.18)
+
+BB
+
+Hence  satisfies (K2 ). Assumption (K2 ) assures that we can apply standard Sobolev and Poincar embeddings. We also need a weighted Poincare inequality of the following form: Proposition 4.3 (Weighted Poincar inequality). Let  : B3/2  [0, 1] be defined by (x) = 3 -|x|)1. Then there is a positive constant c2 (d, 0 , ) such that for every v  L1 (B3/2 , (x)dx) (2  ^ 2 [v (x) - v (y )]2 ((x)	(y )) (x, dy )dx , [v (x) - v ] (x)dx  c2
+B3/2 B3/2 B3/2
+
+where v =
+
+^
+
+(x)dx
+B3/2
+
+-1
+
+^
+
+v (x)(x)dx.
+
+B3/2
+
+The result is a simple application of [26, Theorem 1]. A more involved proof for a smaller class of weights and not being robust for   2- can be found in [16]. 4.3. Moser iteration. The main idea of the proof is to use the lemma of Bombieri-Giusti and to apply the Moser iteration in order to fulfill the conditions in the lemma. So we need to iterate positive and negative powers of the supersolution. Let us first look at negative powers. The following proposition is established by using as a test function (t, x) = u-q (t, x) q+1 (x) -|x| where q > 1 and	: Rd  [0, 1] is defined by  (x) = R R-r  1  0. Proposition 4.4. Let 1 2  r < R	1 and p > 0. Then every nonnegative supersolution u in Q = I  , Q  Q (R), with u   > 0 in Q satisfies the following inequality 1/ ^ ^ -p u (t, x)dxdt u-p (t, x)dxdt , (4.19) A
+Q (r ) Q (R)
+
+where u = u + f
+
+L (Q) ,
+
+=1+
+
+ d
+
+and A can be chosen2 as with C = C (d, 0 , ). (4.20)
+
+A = C (p + 1)2 (R - r )- + (R - r  )-1
+
+The only difference in the proof to the version in [28] is the following: This time, rather than estimating  [ (x) -  (y )]2 u1-q (t, x)kt (x, y )dy dx 4
+c BR BR
+
+2Note that in the cases d  {1, 2} one would need to adjust the definition of .
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+18
+
+from above, we need to estimate  ^ 4 [ (x) -  (y )]2 u1-q (t, x)a(t, x, y )(x, d y )dx	c1 (d, )(R - r )-
+c BR BR
+
+u1-q (t, x)dx,
+
+BR
+
+which is possible due to assumption (K1 ) and properties of  . Once, Proposition 4.4 is established, we can iterate the result and obtain:
+1 Theorem 4.5 (Moser iteration for negative exponents). Let 2  r < R  1 and 0 < p  1. Then there is a constant C = C (d, 0 , ) > 0 such that for every nonnegative supersolution u in Q = I  , Q  Q (R), with u   > 0 in Q the following estimate holds:
+
+sup u
+Q (r )
+
+-1
+
+
+
+C G1 (r, R)
+
+1/p
+
+^
+
+1/p
+
+u
+Q (R)
+
+-p
+
+(t, x)dxdt if	1, if  < 1.
+
+,
+
+(4.21)
+
+where u = u + f
+
+L (Q)
+
+and G1 (r, R) =
+
+(R - r )d+ (R - r  )(d+)/
+
+Let us recall that  would be different if d  {1, 2}. Next, we apply a similar procedure for positive powers of supersolutions. As a result we can estimate the L1 -norm of supersolutions u from above by the L1 -norm of up for small values of p > 0 as in the following theorem:
+-1 Theorem 4.6 (Moser iteration for positive exponents). Let 1 2  r < R  1 and p  (0,  )  with	= 1 + d . Then there are constants C, 1 , 2 > 0 depending only on d, 0 , , such that for every nonnegative supersolution u in Q = I  , Q  Q (R), the following estimate holds:
+
+^
+
+u(t, x)dxdt
+
+Q (r )
+
+C |Q (1)| G2 (r, R) and G2 (r, R) =
+
+1/p-1
+
+^
+
+1/p
+
+u (t, x)dxdt if   1, if  < 1.
+
+p
+
+,
+
+(4.22)
+
+Q (R)
+
+where u = u + f
+
+L (Q(R))
+
+(R - r )1 (R - r )2
+
+At this stage we make an important observation. Since we are working with supersolutions (and not with solutions) one cannot expect to estimate the supremum of u in Q (r ) but only the L1 -norm. Note that for nonlocal equations, under our general assumptions, this is not possible even for solutions. If it were correct, then we would be able to prove a Harnack inequality it its strong formulation which we know to fail, see the discussion in the introduction. 4.4. Estimates of log(u) for supersolutions u. The estimates on log(u) are always quite delicate in the theory of De Giorgi-Nash-Moser. In the case of second order differential operators, the following inequality for nice positive functions , w is important: ^ ^ ^ 1 2 2 2 -1  ( log(w)) - 2 ( )2 (4.23) w (- w )  2 In the nonlocal case we have a substitute for this inequality of the following type:  w(t, y ) w(t, x) 2 Et (w, - 2 w-1 )   (x) (y ) log - log a(t, x, y )(x, dy )dx - 3 Et (,  )  (y )  (x) Using this observation and the technique of [45] we obtain the following estimate of the level sets for log(u):
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+19
+
+Proposition 4.7. There is C = C (d, 0 , ) > 0 such that for every supersolution u of (1.1) in Q = (-1, 1)  B2 (0) which satisfies u   > 0 in (-1, 1)  Rd , there is a constant a = a(u)  R such that the following inequalities hold simultaneously: C |B1 | , s C |B1 | , s > 0 : (dt	dx) (Q (1)  {log u > s - a})  s where u = u + f L (Q) . s > 0 : (dt  dx) (Q (1)  {log u < -s - a})  (4.24a) (4.24b)
+
+4.5. The proof of Theorem 1.1 and Theorem 1.2. Let us explain how the results of the previous subsection lead to a proof of Theorem 1.1. Proof of Theorem 1.1. The main idea is to apply the famous lemma of Bombieri-Giusti, proved in [45, pp. 731-733]. The version we use can be found in [46, Section 2.2.3]. Let u as in the assumption and define u = u + f L (Q) . Without loss of generality we assume u   for some  > 0. Next, we set w = e-a u-1 and w = w-1 = ea u, where a = a(u) is chosen according to Proposition 4.7, i.e. there is c1 > 0 such that for every s > 0 c1 |B1 | c1 |B1 | , and |Q (1)  {log w > s}|  . (4.25) s s We apply the lemma of Bombier-Giusti twice: first to w on a family of domains U = (U (r )) 1 r1 |Q (1)  {log w > s}|
+2
+
+and then to w and a family of domains U = (U (r )) 1 r1 . Theorem 4.6 and Theorem 4.5 are
+2
+
+needed for this step. Let us restrict to the case   1. In this case the families U and U are given by U (1) = Q (1), U (1) = Q (1), We obtain sup w = e-a sup u-1  C
+1 U( 2 )
+
+U (r ) = (1 - r  , 1)  Br , U (r ) = (-1, -1 + r  )  Br and w = ea u  C.
+
+U( 1 ) 2
+
+)) L1 (U ( 1 2
+
+L1 (U ( 1 )) 2
+
+Multiplying these two inequalities eliminates a and yields u
+L1 (U ( 1 )) 2
+
+ c2 inf u
+1 U( 2 )
+
+for a constant c2 = C C that depends only on d, 0 and . This proves (HI) in the case   1. The case  < 1 is similar. We will not explain the details of how Theorem 1.1 implies Theorem 1.2. This implication is straight-forward for differential operators of second order. In the case of nonlocal operators one has to take care of the fact that the auxiliary functions M (t, x) = supQ u - u(t, x) and m(t, x) = u - inf Q u are nonnegative in Q but not in all of Rd . That is why one cannot apply Theorem 1.1 directly for f = 0. The idea is to define f (t, x) = (Lu- )(t, x) which is a bounded function in a region if u is nonnegative in a slightly larger region. This step is carried out in [47] for elliptic equations and works well for parabolic problems. Note that this approach requires sup
+xB2 (0)
+
+^
+
+Rd \B3 (0)
+
+|x - y | (x, dy )  C0 .
+
+(K3 )
+
+for some   (0, 1) and C0  1. This condition follows from (K1 ). If one assumes (K1 ), (K2 ) for bounded radii  only, then one would need to assume (K3 ) in order to prove Theorem 1.2.
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+20
+
+References
+[1] Helmut Abels and Moritz Kassmann. The Cauchy problem and the martingale problem for integrodifferential operators with non-smooth kernels. Osaka J. Math., 46(3):661683, 2009. [2] Martin T. Barlow, Richard F. Bass, Zhen-Qing Chen, and Moritz Kassmann. Non-local Dirichlet forms and symmetric jump processes. Trans. Amer. Math. Soc., 361(4):19631999, 2009. [3] Martin T. Barlow, Richard F. Bass, and Takashi Kumagai. Parabolic Harnack inequality and heat kernel estimates for random walks with long range jumps. Math. Z., 261(2):297320, 2009. [4] Martin T. Barlow, Alexander Grigor yan, and Takashi Kumagai. Heat kernel upper bounds for jump processes and the first exit time. J. Reine Angew. Math., 626:135157, 2009. [5] Richard F. Bass. Regularity results for stable-like operators. J. Funct. Anal., 257(8):26932722, 2009. [6] Richard F. Bass, Moritz Kassmann, and Takashi Kumagai. Symmetric jump processes: Localization, heat kernels and convergence. Ann. Inst. H. Poincar Probab. Statist., 46(1):5971, 2010. [7] Richard F. Bass and David A. Levin. Harnack inequalities for jump processes. Potential Anal., 17(4):375 388, 2002. [8] Richard F. Bass and David A. Levin. Transition probabilities for symmetric jump processes. Trans. Amer. Math. Soc., 354(7):29332953, 2002. [9] Krzysztof Bogdan and Pawel Sztonyk. Harnack's inequality for stable Lvy processes. Potential Anal., 22(2):133150, 2005. [10] Luis Caffarelli, Chi Hin Chan, and Alexis Vasseur. Regularity theory for parabolic nonlinear integral operators. J. Amer. Math. Soc., 24(3):849869, 2011. [11] Luis Caffarelli and Luis Silvestre. Regularity theory for fully nonlinear integro-differential equations. Comm. Pure Appl. Math., 62(5):597638, 2009. [12] Luis Caffarelli and Luis Silvestre. Regularity results for nonlocal equations by approximation. Arch. Ration. Mech. Anal., 200(1):5988, 2011. [13] Luis A. Caffarelli and Alexis Vasseur. Drift diffusion equations with fractional diffusion and the quasigeostrophic equation. Ann. of Math. (2), 171(3):19031930, 2010. [14] Pierre Cardaliaguet and Catherine Rainer. Hlder regularity for viscosity solutions of fully nonlinear, local or nonlocal, Hamilton-Jacobi equations with superquadratic growth in the gradient. SIAM J. Control Optim., 49(2):555573, 2011. [15] Hctor Chang Lara and Gonzalo Dvila. Regularity for solutions of non local parabolic equations. Calc. Var. PDE, 2012. published online. [16] Zhen-Qing Chen, Panki Kim, and Takashi Kumagai. Weighted Poincar inequality and heat kernel estimates for finite range jump processes. Math. Ann., 342(4):833883, 2008. [17] Zhen-Qing Chen, Panki Kim, and Takashi Kumagai. Global heat kernel estimates for symmetric jump processes. Trans. Amer. Math. Soc., 363(9):50215055, 2011. [18] Zhen-Qing Chen, Panki Kim, and Renming Song. Dirichlet heat kernel estimates for subordinate brownian motions with gaussian components. arxiv.org/abs/1303.6626. [19] Zhen-Qing Chen, Panki Kim, and Renming Song. Heat kernel estimates for the Dirichlet fractional Laplacian. J. Eur. Math. Soc. (JEMS), 12(5):13071329, 2010. [20] Zhen-Qing Chen, Panki Kim, and Renming Song. Two-sided heat kernel estimates for censored stable-like processes. Probab. Theory Related Fields, 146(3-4):361399, 2010. [21] Zhen-Qing Chen and Takashi Kumagai. Heat kernel estimates for stable-like processes on d-sets. Stochastic Process. Appl., 108(1):2762, 2003. [22] Zhen-Qing Chen and Takashi Kumagai. Heat kernel estimates for jump processes of mixed types on metric measure spaces. Probab. Theory Related Fields, 140(1):277317, 2008. [23] Michael G. Crandall, Hitoshi Ishii, and Pierre-Louis Lions. User's guide to viscosity solutions of second order partial differential equations. Bull. Amer. Math. Soc. (N.S.), 27(1):167, 1992. [24] Jrme Droniou and Cyril Imbert. Fractal first-order partial differential equations. Arch. Ration. Mech. Anal., 182(2):299331, 2006. [25] Barlomiej Dyda and Moritz Kassmann. Regularity estimates for elliptic nonlocal operators. arXiv:1109.6812 (2011). [26] Bartlomiej Dyda and Moritz Kassmann. On weighted Poincar inequalities. Ann. Acad. Sci. Fenn. Math. in print, see also http://arxiv.org/abs/1209.3125. [27] Laszlo Erds and Horng-Tzer Yau. Gap universality of generalized wigner and beta-ensembles. http://arxiv.org/abs/1211.3786. [28] Matthieu Felsinger and Moritz Kassmann. Local regularity for parabolic nonlocal operators. to appear in Comm. PDE.
+
+REGULARITY RESULTS FOR NONLOCAL PARABOLIC EQUATIONS
+
+21
+
+[29] Christophe Gomez. Radiative transport limit for the random Schrdinger equation with long-range correlations. J. Math. Pures Appl. (9), 98(3):295327, 2012. [30] Alexander Grigor'yan, Jiaxin Hu, and Ka-Sing Lau. Estimates of heat kernels for non-local regular dirichlet forms. Trans. AMS. to appear. [31] Alexander Grigor yan and Takashi Kumagai. On the dichotomy in the heat kernel two sided estimates. In Analysis on graphs and its applications, volume 77 of Proc. Sympos. Pure Math., pages 199210. Amer. Math. Soc., Providence, RI, 2008. [32] Nestor Guillen and Russell W. Schwab. Aleksandroff-Bakelmann-Pucci type estimates for integrodifferential equations. Archive for Rational Mechanics and Analysis, pages 147. 10.1007/s00205-012-0529-0. [33] Cyril Imbert. A non-local regularization of first order Hamilton-Jacobi equations. J. Differential Equations, 211(1):218246, 2005. [34] Sven Jarohs and Tobias Weth. Asymptotic symmetry for a class of nonlinear fractional reaction diffusion equations. arxiv.org/abs/1301.1811. [35] Tianling Jin and Jingang Xiong. http://arxiv.org/abs/1110.5664. A fractional Yamabe flow and some applications. [36] Moritz Kassmann. A priori estimates for integro-differential operators with measurable kernels. Calc. Var. Partial Differential Equations, 34(1):121, 2009. [37] Panki Kim and Ante Mimica. Subordinate Brownian motions: stable and beyond. [38] Panki Kim, Renming Song, and Zoran Vondracek. Potential theory of subordinate Brownian motions revisited. In Stochastic analysis and applications to finance, volume 13 of Interdiscip. Math. Sci., pages 243290. World Sci. Publ., Hackensack, NJ, 2012. [39] A. Kiselev, F. Nazarov, and A. Volberg. Global well-posedness for the critical 2D dissipative quasigeostrophic equation. Invent. Math., 167(3):445453, 2007. [40] Takashi Komatsu. Continuity estimates for solutions of parabolic equations associated with jump type Dirichlet forms. Osaka J. Math., 25(3):697728, 1988. [41] Takashi Komatsu. Uniform estimates for fundamental solutions associated with nonlocal Dirichlet forms. Osaka J. Math., 32(4):833850, 1995. [42] N. V. Krylov and M. V. Safonov. A property of the solutions of parabolic equations with measurable coefficients. Izv. Akad. Nauk SSSR Ser. Mat., 44(1):161175, 239, 1980. [43] Yasunori Maekawa and Hideyuki Miura. Upper bounds for fundamental solutions to non-local diffusion equations with divergence free drift. J. Funct. Anal., 264(10):22452268, 2013. [44] R. Mikulevicius and H. Pragarauskas. On the Cauchy problem for integro-differential operators in Sobolev classes and the martingale problem. http://arxiv.org/abs/1112.4467. [45] J. Moser. On a pointwise estimate for parabolic differential equations. Comm. Pure Appl. Math., 24:727 740, 1971. [46] Laurent Saloff-Coste. Aspects of Sobolev-type inequalities, volume 289 of London Mathematical Society Lecture Note Series. Cambridge University Press, Cambridge, 2002. [47] Luis Silvestre. Hlder estimates for solutions of integro-differential equations like the fractional Laplace. Indiana Univ. Math. J., 55(3):11551174, 2006. [48] Luis Silvestre. On the differentiability of the solution to the Hamilton-Jacobi equation with critical fractional diffusion. Adv. Math., 226(2):20202039, 2011. [49] Neil S. Trudinger. Pointwise estimates and quasilinear parabolic equations. Comm. Pure Appl. Math., 21:205226, 1968. [50] Lihe Wang. On the regularity theory of fully nonlinear parabolic equations. I. Comm. Pure Appl. Math., 45(1):2776, 1992. Fakultt fr Mathematik, Universitt Bielefeld, Postfach 100131, D-33501 Bielefeld, Germany E-mail address : moritz.kassmann@uni-bielefeld.de Department of Mathematics, Michigan State University, 619 Red Cedar Road, East Lansing, MI 48824, United States of America E-mail address : rschwab@math.msu.edu
+

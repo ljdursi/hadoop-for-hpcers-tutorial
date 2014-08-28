@@ -1,0 +1,252 @@
+APS/123-QED
+
+Retrieving Infinite Numbers of Patterns in a Spin-Glass Model of Immune Networks
+Elena Agliari1,2 , Alessia Annibale3,4 , Adriano Barra5 , Anthony CC Coolen4,6 , and Daniele Tantari7
+1 Dipartimento di Fisica, Universit` a degli Studi di Parma, viale Usberti 7/A, 43100 Parma, Italy 2 Istituto Nazionale di Fisica Nucleare, Gruppo Collegato di Parma, Italy 3 Department of Mathematics, King's College London, The Strand, London WC2R 2LS, UK 4 Institute for Mathematical and Molecular Biomedicine, King's College London, Hodgkin Building, London SE1 1UL, UK 5 Dipartimento di Fisica, Sapienza Universit` a di Roma, P.le A. Moro 2, 00185, Roma, Italy 6 London Institute for Mathematical Sciences, 35a South Street, Mayfair, London W1K 2XF, UK 7 Dipartimento di Matematica, Sapienza Universit` a di Roma, P.le A. Moro 5, 00185, Roma, Italy
+
+arXiv:1305.2076v1 [cond-mat.dis-nn] 9 May 2013
+
+The similarity between neural and immune networks has been known for decades, but so far we did not understand the mechanism that allows the immune system, unlike associative neural networks, to recall and execute a large number of memorized defense strategies in parallel. The explanation turns out to lie in the network topology. Neurons interact typically with a large number of other neurons, whereas interactions among lymphocytes in immune networks are very specific, and described by graphs with finite connectivity. In this paper we use replica techniques to solve a statistical mechanical immune network model with `coordinator branches' (T-cells) and `effector branches' (Bcells), and show how the finite connectivity enables the system to manage an extensive number of immune clones simultaneously, even above the percolation threshold. The system exhibits only weak ergodicity breaking, so that both multiple antigen defense and homeostasis can be accomplished.
+PACS numbers: 07.05.Mh,87.19.L-,05.20.-y
+
+After a pioneering early paper [1], followed by about two decades of dormancy, there is now increasing interest in statistical mechanical models of the immune system [2 7]. This interest is stimulated in part by the potential of new quantitative methods for the study of systems with complex network topologies [812]. In this paper we show how statistical mechanics can resolve a central problem in theoretical immunology: understanding the parallel processing ability of the subclass of lymphocytes that are dedicated to the coordination of the adaptive immune response, i.e. helper and regulator T-cells. B-lymphocytes are divided into clones. Cells of the same clone detect and attack the same antigens, and are selected for activation when their allocated antigens invade the host. Conditional on authorization by Thelpers (via eliciting cytokines), the selected B-cells undergo clonal expansion: they multiply, and start releasing high quantities of soluble antibodies to inhibit the enemy. After the antigen has been deleted, B-cells are instructed by T-regulators (via suppressive cytokines) to stop producing antibodies and undergo apoptosis. In this way the clones reduce their sizes, and order is restored. We stress that two signals are required for B-cell clones to expand. The first arises from antigen binding; the second is a `consensus' signal, a cytokine secreted by Thelpers. This mechanism prevents abnormal reactions, such as autoimmunity [13]. The immune system thus consists of an effector branch (the B-clones [21]) and a coordination branch (the helper and regulator T-clones), which interact through cytokines that convey either eliciting or suppressive signals. This can be modeled as a collection of interacting variables on a bipartite network, endowed with specific `spin-glass couplings' [2]. The immune system is able to learn (e.g. how to fight new antigens), memorize (e.g. previously seen antigens) and `think' (e.g. select the best strategy to deal with
+
+(a)
+
+(b)
+
+(c)
+
+(d)
+
+FIG. 1: Examples of connected components in the bipartite interaction graph B of the model (2) with interacting B and T-cells (upper panels), and the corresponding connected components in the equivalent graph G of the effective system (4) with T-cels only (lower panels). Dashed green links mark positive interactions; solid red links mark negative ones.
+
+pathogens), all of which it has in common with neural networks. However, the architectures of neural and immune networks are very different. Neurons tend to have a huge number of connections with others [14], and neural network models with full connectivity (mathematically convenient) are acceptable. In contrast, the interactions among lymphocytes in immune networks (via chemical messengers) are very specific, and the underlying topology displays finite connectivity. This difference plays a crucial operational role. Neural network models perform high-resolution serial processing, which is achieved by many spins (neurons) interacting extensively. We will show that the immune system's striking ability to cope with many antigens simultaneously can be understood as a direct consequence of having many spins (lymphocytes) that interact in an intelligent sparse manner. Let us consider an immune repertoire of NB differ-
+
+2 ent B-clones, labeled by   {1, ..., NB }. The size of clone  is b  R. In the absence of interactions with T-cells, we take clonal sizes to be Gaussian distributed; this is supported both by experiments and theoretical arguments [2]. Without loss of generality we may take zero means and unit widths, i.e. P (b )  N (0, 1). A value b 0 then indicates that clone  has expanded (relative to the typical clonal size), while b 0 implies inhibition. Similarly, we consider NT T-clones, labeled by i	{1, ..., NT }. The state of T-clone i is denoted by i . For simplicity, T-clones are assumed to have just two possible states: secreting cytokines (i = +1) or quiescent  (i = -1), see [2] for details. The cytokine i secreted by helper i and detected by clone  is described by a discrete	variable, carrying either an excitatory (i = +1) or in	hibitory (i = -1) instruction; the value, i = 0 is used to indicate lack of signaling among clones i and . The pattern of cytokines, which describes the interactions between T and B clones, represents a bipartite graph, de noted as B . Its NT NB entries {i } are quenched, and taken to be independently distributed according to
+ P (i )=
+
+FIG. 2: Examples of graphs G obtained for different values of c, with NT = 5000 and  = 0.1. Recalling the critical threshold c2 = 1, here we compare graphs with c2 < 1 (below percolation, left panel) and c2 = 1 (percolation threshold, right panel). Isolated nodes are not shown; their number is 4229 and 3664, respectively. As expected, loops between cliques start to occur at the percolation threshold.
+
+c c  (	+  i )	,-1 ) + (1 - 2NT i ,+1 NT i ,0
+
+(1)
+
+with c > 0. We focus on the biologically relevant finite 0 connectivity regime, i.e. c = O(NT ), and high storage, i.e. NB = NT with  > 0 fixed and NT	. Here	the number of B and T-clones are comparable. P (i ) implicitly accounts for bond dilution in the graph B . In particular, when the link probability c/NT exceeds the percolation threshold 1/ NT NB , i.e. for c2 > 1, the graph B will have a giant component. We restrict ourselves to an equilibrium analysis, and are led to the following Hamiltonian for the combined T and B-cell system [3, 15], interacting on the graph B : 1 ^ ( b,	| ) = -  H c 1	i  i b +  2  i=1 =1
+NT NB NB
+
+b2 .
+=1
+
+(2)
+
+In the language of disordered systems, this is a hyperdiluted bipartite spin-glass. In the partition function Z , en route to the free energy and  the system's thermodynamics at invere noise level  (consistent with b  N (0, 1)), we can integrate out the b [3, 15], viz.
+Z=  db e-
+ ^ (b, |) H
+
+=
+
+e-H ( |) ,
+
+(3)
+
+where H ( | ) now includes T-T interactions only: H ( | ) = - 1 T B   1 B 2 i j i j = - M ( ). 2c ij =1 =1 2c =1
+N N N
+
+(4)  Here M ( )    is the non-normalized overlap i i i	 between the T-cell state  and the vector (1 , . . . , N ). The B-T system on the bipartite graph B has thereby been mapped to an equivalent effective T-T system on
+
+a monopartite weighted graph G , in which the coupling between node pairs (i, j ) has the Hebbian form [14, 17] NB   Jij = =1 i j . It follows that T-clones can retrieve stored cytokine signalling patterns. To understand the immunological meaning of pattern retrieval, we focus on the B-clone  and consider the case where each T-clone	i is `aligned' with the related cytokine i (if nonzero).  Those i that inhibit clone  (i.e. secrete i = -1) will be quiescent (i = -1), and those i that excite  (i.e.	secrete i = +1) will be active (i = +1). This state gives the maximum of M ( ), i.e. of the overall signal received by B-clone , see (2). The random environment becomes a`staggered magnetic field' that forces the expansion of clone , so the arrangement of T-cells leading to the retrieval of pattern  corresponds to clone-specific  excitatory signalling upon B-clone . If i  {-1, 1} for all (i, ), so the bipartite network is fully connected, retrieval will operate as in the Hopfield model [17]; the system could expand only one B-clone at a time and this would be a disaster for immuno-surveillance. If the immune system is to manage an extensive number of expanded B-clones simultaneous, it will require dilution. Let us first take a topological perspective. We note that in the under-percolated regime the graph B is a forest, where the typical components are (combinations of) stars centered on a B -node (because experimentally NT > NB [13]); see Fig. 1a. Such trees are mapped into complete graphs or combinations of complete graphs in G (Fig. 1c). Therefore, when c2 < 1 the typical components in G are of finite size (see Fig. 2, right panel) and, may form cliques whose occurrence frequency decays exponentially with their size. In this regime, two T-nodes i, j have at most one common neighboring B-node , so the spins i and j can propagate non-conflicting signals to . We thus expect this regime to be compatible with parallel retrieval. Parallel retrieval can be jeopardized by the presence of loops in B , which create alternative feed-back routes between spins; see Fig. 1b. The probability that a loop occurs in B scales as (c2 )2 [16], so
+
+3
+
+2.5 2 1.5
+T parallel processing of extensively many clones
+
+c=1
+
+c=2 c=3 c=4
+clonal cross-talk
+
+1 0.5 0 0 0.5 1
+c2
+
+1.5
+
+2
+
+2.5
+
+3
+
+FIG. 3: Transition lines (8) for c = 1, 2, 3, 4, in the (, T ) plane. In the parallel processing phase the effective T-T network can successfully control an extensive number of Bclones simultaneously. In the clonal cross-talk phase (at low temperatures above the precolation point) the connectivity causes interference between clone-specific strategies. Circles: transition calculated via numerical solution of (7) for c = 1.
+
+loops should appear near the percolation threshold. In the graph G , such a loop implies that two cliques can share not only nodes but also links, and that two T-nodes can have a coupling |Jij |  2 (see Fig. 1d and Fig. 2, left panel). As a result, the simultaneous retrieval of all patterns within the same component is no longer ensured. Since each subsystem is of finite size k , the system will exhibit weak ergodicity breaking [18], and the typical time scale for transitions between the two gauge symmetric 2 magnetizations M = k will scale as t  ek , which tends to infinity only at zero noise level T =  -1 , and grows with the size of the subsystem. This may in fact have deep implications in homeostasis: it would enable fast switching between positive and negative instructions to clones, so cells that are not triggered within a given
+
+time-scale may undergo anergy [19] and apoptosis [13]. Hyper-dilution in B is apparently crucial for extensive multiple clonal expansions. It ensures that patterns to be retrieved in G have many blank entries and that, unlike neural networks, `pure states' are no longer low energy   configurations. Retrieving a pattern (1 , . . . , N ) does not involve all spins i , and those corresponding to null entries can be used to recall other patterns. This is energetically favorable since the energy is quadratic in the magnetizations. However, to quantify retrieval within this new scenario we need alternative order parameters. NB -1 The distribution P (M ) = NB =1 M,M ( ) of Mattis magnetizations would contain entangled information, from the thermal magnetization fluctuations within a single pattern, and from fluctuations over different patterns. Upon denoting with Pc (k ) the probability that a pattern has k non-zero entries, we can disentangle the different contributions by focusing on P (M |k ), the conditional magnetization distribution for patterns with k nonzero NT entries, defined via P (M ) = k=1 Pc (k )P (M |k ). We can easily calculate Pc (k ), because it depends only on the structure of B . Since we have NT independent entries, each nonzero with probability c/NT , in the thermodynamic limit the variable k is Poissonian distributed:
+
+
+P (M ) = e-c
+k=0
+
+ck P (M |k ). k!
+
+(5)
+
+We can in fact solve the present model analytically, and calculate the free energy per spin using the finite connectivity replica method, within the replica-symmetric approximation (RS). Full details of this (somewhat lengthy) calculation will be published elsewhere [16]. The result leads to an explicit expression for P (M |k ) in terms of an effective field distribution W (h), which is to be solved from a self-consistent equation:
+
+P (M |k ) = W (h) =
+
+r 0
+
+e-ck (c)r r! c k! e
+r 0
+
+k
+
+dh
+sr
+
+W (hs )
+l1 ...lr =1 r
+
+  M,
+k
+
+lk l
+
+e 2c (
+lk
+
+
+
+l k
+
+l )2 +
+sr
+
+s r
+
+hs ls
+
+
+
+
+
+e
+
+ 2c (
+
+l )2 +
+
+hs ls
+
+.
+sr
+
+(6)
+hs ls
+
+
+
+e
+k0
+
+-c k
+
+-ck
+
+(c) r!
+
+dh
+sr
+
+W (hs )
+l1 ...lr =1
+
+ h-
+
+1 e ln	2 e 2c (
+
+ 2c (
+
+lk
+
+l )2 +	c
+
+lk
+
+l +
+
+
+
+
+ 2 lk l ) + c
+
+lk l +
+
+sr hs ls
+
+(7)
+
+with the two short-hands f ( )	= 1  =1 f ( ) and 2 -k f ( )  = 2 1 ...k =1 f (1 , . . . , k ). From P (M |k ) we can deduce to what extent the network can perform extensive parallel retrieval, since the `pattern size' k determines the associated overlap range via -k  M	k . One observes that W (h) =  (h) is a solution of (7) at any noise level. If we inspect bifurcations of alternative solutions with nonzero moments mr = dh hr W (h)
+
+(in particular with m1 = 0 but m2 = 0, because W (h) = W (-h)), we find a second order transition along the critical surface in the (, , c) space- defined by c2
+k 0
+
+e-c
+
+ck k!
+
+Dz tanh  coshk+1  Dz cosh
+k+1
+
+2
+
+
+
+= 1,
+2
+
+(8)
+
+where  = z /c + /c and Dz = (2 )-1/2 e-z /2 dz . This expression is confirmed by the results of solving
+
+4 a size-k Curie-Weiss ferromagnet:
+P (M |k ) P (M |k )
+-1 P (M |k ) = Zk M,
+l k
+
+l
+
+e (
+
+lk
+
+l )2 /2c
+
+
+
+(9)
+
+M
+
+M
+
+M
+
+M
+
+FIG. 4: Top panels: effect on P (M |k) of moving into the cross-talk regime by increasing  (left: c = 3 and T = 5/3; right: c = 1 and T = 5/4). Bottom panels: shapes of P (M |k) and P (M ) for c2 = 1/2, in the parallel processing regime. All values are calculated from the solution of (7, 6), for k = 6.
+
+(7) via the population dynamics method [20]. The lefthand side of (8) obeys LHS  c2 , lim 0 LHS = 0 and lim  LHS = c2 . Hence a transition at finite noise -1 (, c) > 0 to a new state with W (h) =  (h) level Tc = c exists as soon as c2 > 1. The critical noise level goes to zero when c2 = 1, i.e. at the percolation threshold. The transition line (8) is shown in the (, T ) plane in Fig. 3. In the under-percolated regime, i.e. for c2 < 1, there is no possibility of a phase transition. Here the only solution of (7) is W (h) =	(h), and (6) reduces to an expression corresponding to a Boltzmann distribution for
+
+Hence for c2 < 1 the cross-talk between different patterns vanishes. Each pattern effectively links to its own dedicated set of spins, and the system behaves as a set of NB disjunct networks, each with a single stored pattern, and each acting as a finite ferromagnet (after the  gauge transformation i  i i ). In the infinite noise limit   0 we find the trivial P (M |k ) = M, lk l  , i.e. all spins take random values. In the zero noise limit 1	 we obtain P (M |k ) = 2 (M,k + M,-k ), i.e. perfect retrieval. Overall P (M |k ) goes from a single peak at M = 0 for high noise levels, towards two symmetric peaks, at low noise levels; P (M ) always has a maximum at M = 0. Below the critical line in Fig. 3 the relevant solution of (7) has W (h) =  (h). Now the effective Boltzmann factor in (6) acquires a further term  sr hs ls , which accounts for the fact that the NB subsystems are no longer disconnected, leading to cross-talk interference via effective random fields {h }, which reduce the system's parallel processing ability. All our results are supported by numerical simulations [16]. In conclusion, we have shown how new insights and techniques from graph theory and the statistical mechanics of finitely connected spin systems allow us to deepen our understanding of important aspects of the adaptive immune system, namely its remarkable and crucial ability to manage an extensive number of clones in parallel, and its homeostatic regulation of cell numbers. The authors are grateful for support from FIRB grant RBFR08EKEV, Sapienza University, INFN and the UK's Biotechnology and Biological Sciences Research Council.
+
+P (M |k )
+
+[1] G. Parisi, Proc. Natl. Acad. Sci. USA 87, 429, (1990). [2] E. Agliari, A. Barra, F. Guerra, F. Moauro, J. Theor. Biol. 287, 48, (2011). [3] E. Agliari, A. Barra, A. Galluzzi, F. Guerra, F. Moauro, Phys. Rev. Lett. 142, 2313, (2012). [4] A. Ko smrlj, A.K. Chakraborty, M. Kardar, E.I. Shakhnovich, Phys. Rev. Lett. 103, 068103, (2009). [5] A. Ko smrlj, A.K. Jha, E.S. Huseby, M. Kardar, A.K. Chakraborty, Proc. Natl. Acad. Sci. USA 105, 16671, (2008). [6] T. Mora, A.M. Walczak, W. Bialek, C.G. Callan, Proc. Natl. Acad. Sci. USA 107, 5405, (2010). [7] T. Uezu, C. Kadano, J.P.L. Hatchett, A.C.C. Coolen, Prog. Theor. Phys. 161, 385, (2006). [8] E. Agliari, A. Barra,Europhys. Lett. 94, 10002, (2011). [9] R. Albert, A.L. Barabasi, Rev. Mod. Phys. 74, 47, (2002). [10] J. P. L. Hatchett, I. Perez Castillo, A. C. C. Coolen, N. S. Skantzos, Phys. Rev. Lett. 95, 117204, (2005). [11] N.S. Skantzos, A.C.C. Coolen, J.Phys. A: Math. Gen. 33, 5785, (2000).
+
+P (M )
+
+[12] B. Wemmenhove, A.C.C. Coolen, J. Phys. A: Math. Gen. 36, 9617, (2003). [13] C. Janeway, P. Travers, M. Walport, M. Shlomchik, Immunobiology, Garland Science Publishing, New York, (2005). [14] A.C.C. Coolen, R. K uhn, P. Sollich, Theory of Neural Information Processing Systems, Oxford Press, Oxford, (2005). [15] E. Agliari, A. Annibale, A. Barra, A.C.C. Coolen, D. Tantari, preprint arXiv:1302.7259 (2013). [16] E. Agliari, A. Annibale, A. Barra, A.C.C. Coolen, D. Tantari, manuscript submitted to J. Phys. A (2013). [17] D. J. Amit, H. Gutfreund, H. Sompolinsky, Phys. Rev. Lett. 55, 1530, (1985). [18] R.A. Denny, D.R. Reichman, J.P. Bouchaud, Phys. Rev. Lett. 90, 025503, (2003). [19] C.C. Goodnow, Nature 435, 590, (2005). [20] M. Mezard, G. Parisi, Eur. Phys. J. B 20, 217, (2001). [21] The effector branch includes also e.g. killer T-cells [13], which will not be considered here. See e.g. [2].
+

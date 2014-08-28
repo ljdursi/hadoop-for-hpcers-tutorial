@@ -1,0 +1,309 @@
+Draft version May 27, 2013
+A Preprint typeset using L TEX style emulateapj v. 5/2/11
+
+DWARF GALAXY FORMATION WITH H2 -REGULATED STAR FORMATION: II. GAS-RICH DARK GALAXIES AT REDSHIFT 2.5
+Michael Kuhlen1,2 , Piero Madau2 , and Mark Krumholz2
+Draft version May 27, 2013
+
+arXiv:1305.5538v1 [astro-ph.CO] 23 May 2013
+
+ABSTRACT We present a cosmological hydrodynamic simulation of the formation of dwarf galaxies at redshifts z 2.5 using a physically-motivated model for H2 -regulated star formation. Our simulation, performed using the Enzo code and reaching a peak resolution of 109 proper parsecs at z = 2.5, extends the results of Kuhlen et al. (2012) to significantly lower redshifts. We show that a star formation prescription regulated by the local H2 abundance leads to the suppression of star formation in dwarf galaxy halos with Mh 1010 M and to a large population of gas-rich "dark galaxies" at z = 2.5 with low star formation efficiencies and gas depletion timescales > 20 Gyr. The fraction of dark galaxies is 60% at Mh 1010 M and increases rapidly with decreasing halo mass. Dark galaxies form late and their gaseous disks never reach the surface densities, 5700 M pc-2 (Z/10-3 Z )-0.88 , that are required to build a substantial molecular fraction. Despite this large population of dark galaxies, we show that our H2 -regulated simulation is consistent with both the observed luminosity function of galaxies and the cosmological mass density of neutral gas at z 2.5. Moreover, our results provide a theoretical explanation for the recent detection in fluorescent Ly emission of gaseous systems at high redshift with little or no associated star formation. We further propose that H2 -regulation may offer a fresh solution to a number of outstanding "dwarf galaxy problems" in CDM. In particular, H2 regulation leads galaxy formation to become effectively stochastic on mass scales of Mh	1010 M , and thus these massive dwarfs are not "too big to fail". Subject headings: cosmology: theory  galaxies: dwarfs  galaxies: formation  galaxies: halos  methods: numerical
+1. INTRODUCTION
+
+For almost two decades observations of dwarf galaxies have challenged the CDM paradigm of cosmological structure formation and our understanding of the mapping from dark matter halos to their baryonic components. Dwarfs  either in the field or in the halos of larger systems like our own Milky Way  are much less abundant than the Mh 1010 M dark matter halos that should, in principle, be able to host them. Dark matter-only simulations predict steep ("cuspy") inner density profiles, while the observed rotation curves of dwarf galaxies instead suggest that they have nearconstant density cores. Similarly, the most massive subhalos found in dark matter-only simulations of Milky Way-sized systems appear to be too dense to be consistent with existing constraints on the classical Galactic dwarf satellites. While the discrepancies above may be truly reflective of a fundamental failure of the otherwise remarkably successful CDM model, numerous astrophysical solutions have been proposed to explain this "dwarf galaxy problem" and are being actively investigated. To date, they all appear to provide only a partial, often environmentdependent solution to the puzzle. Photo-heating from the cosmic ultraviolet background may suppress gas infall into dwarf galaxy halos in the low-redshift universe (Efstathiou 1992; Thoul & Weinberg 1996), but the importance of photoionization feedback is greatly reduced at
+1 Theoretical Astrophysics Center, University of California Berkeley, Hearst Field Annex, Berkeley, CA 94720. 2 Department of Astronomy and Astrophysics, University of California, 1156 High Street, Santa Cruz, CA 95064.
+
+high redshift because dwarf galaxy-sized objects can either self-shield against the ionizing background (Dijkstra et al. 2004) or accrete substantial amount of gas prior to reionization (Bullock et al. 2000; Madau et al. 2008). Gas removal by ram pressure in massive galaxy halos (Mayer et al. 2006) or through hydrodynamical interactions with the cosmic web (Ben itez-Llambay et al. 2013), while able to quench star formation in satellite and isolated dwarfs at late times, must operate in concert with other suppression mechanisms that prevent the early conversion of gas into stars in such systems. Mass loss driven by supernova (SN) feedback can reduce the baryonic content of bright dwarfs (Dekel & Silk 1986; Mori et al. 2002; Governato et al. 2007) and flatten their central dark matter cusps (Read & Gilmore 2005; Mashchenko et al. 2008; Governato et al. 2010; Pontzen & Governato 2012; Teyssier et al. 2013). However, dwarf spheroidal galaxies in the Local Group are so deficient in stars that the total SN energy available may be insufficient to lower their central densities (Garrison-Kimmel et al. 2013; Zolotov et al. 2012; Boylan-Kolchin et al. 2012; Penarrubia et al. 2012). In Kuhlen et al. (2012, Paper I) we followed a different avenue by revisiting the dwarf galaxy problem in light of new understanding of the chemistry and thermodynamics of the interstellar gas that is actually forming stars. Spatially resolved observations of local galaxies have revealed that star formation correlates much more tightly with the density of molecular gas than total gas density (Leroy et al. 2008; Bigiel et al. 2008), even in regions where molecular gas constitutes only a trace component of the ISM (Schruba et al. 2011). Even though the primary cooling agents are lines of CO or C ii (depending on the chemical state of the carbon), molecular hydro-
+
+2 gen (H2 ) is expected to be good tracer of star formation (Krumholz et al. 2011; Glover & Clark 2012a,b). This is because star formation occurs only where the gas is able to reach very low temperatures, which is possible only in regions where the extinction is high enough to block out the background interstellar radiation field that is responsible both for heating the gas and for dissociating H2 molecules. In Paper I we showed that H2 -regulated star formation leads to the suppression of star formation in dwarf galaxy halos at z 4, and discussed how such a novel quenching mechanism	one that modifies the efficiency of star formation of cold gas directly, rather than indirectly reducing the cold gas content with supernova feedback  may contribute to alleviate some of the issues faced by theoretical galaxy formation models. Similar models have been investigated numerically by Gnedin et al. (2009), Gnedin & Kravtsov (2010, 2011) and Christensen et al. (2012), and semi-analytically by Fu et al. (2010) and Krumholz & Dekel (2012). Our work in Paper I and here differs from the previous numerical simulations in that we investigate a cosmologically-representative volume rather than single galaxies, and we are therefore able to discuss the statistical properties of the galaxy population produced by H2 -regulated star formation. At the same time, we are still performing full three-dimensional simulations, rather than relying on semi-analytic model prescriptions. Here, we extend our state-of-the-art simulations to lower redshifts and confirm the existence at these epochs of a large population of very inefficient star formers below Mh 1010 M . We show that such "dark galaxies" form late and that their gaseous disks never reach the surface densities required to build a substantial molecular fraction.
+2. SIMULATION AND MOLECULAR CHEMISTRY
+
+hydrogen density by the free-fall time, tff , determined from the total gas density, gas   SF = fH2 , (1) tff where fH2 = H2 /gas is the H2 fraction, computed as described below, and the star formation efficiency = 0.01, the value favored by observations (Krumholz & Tan 2007; Krumholz et al. 2012). No density threshold for star formation is applied. Stars form only once per root grid time step and only in cells at the highest refinement level (here l = 7), but the star particle mass is proportional to the root grid time step t0 (see Kravtsov 2003), i.e. m = fH2 gas (x7 )3 t 0 . tff (2)
+
+We enforce a minimum stellar mass of mmin = 104 M , since even t0 can occasionally become very small. Below this mass we implement a stochastic star formation criterion as follows: if m < mmin , we form a particle of mass equal to mmin if a randomly generated number is smaller than (m /mmin ). To obtain the molecular hydrogen mass fraction fH2 in a given grid cell, we use the two-phase equilibrium model of Krumholz et al. (2008), Krumholz et al. (2009), and McKee & Krumholz (2010), hereafter referred to as the KMT model. This model is based on a radiative transfer calculation of an idealized spherical giant atomic molecular complex, subject to a uniform and isotropic Lyman-Werner (LW) radiation field. The H2 abundance is calculated assuming formation-dissociation balance and a two-phase equilibrium between a cold neutral medium (CNM) and a warm neutral medium (WNM) (Wolfire et al. 2003): fH2 s=  = 2.3 1- 3 s , 4 1 + 0.25s (3) (4) (5)
+
+We summarize here the main features of our cosmological AMR hydrodynamics simulation (see Kuhlen et al. (2012) for a more extensive discussion) with the Enzo v2.2 code3 . The computational domain covers a (12.5 Mpc)3 box with a root grid of 2563 grid cells. The dark matter density field is resolved with 2563 particles of mass 3.1  106 M . Adaptive mesh refinement is allowed to occur throughout the entire domain for a maximum of 7 levels of refinement, resulting in a maximum spatial resolution of x7 = 109  3.5/(1 + z ) proper parsec. Mesh refinement is triggered by a grid cell reaching either a dark matter mass equal to 4 times the mean root grid cell dark matter mass, or a baryonic mass equal to 8  2-0.4l times the mean root grid cell baryonic mass, where l is the grid level. The simulation is initialized at z = 99 with cosmological parameters consistent with the WMAP 7-year results (Komatsu et al. 2011). It includes radiative cooling from both primordial and metal enriched gas, as well as photo-heating from an optically thin, uniform meta-galactic UV background. An artificial pressure support is applied to cells that have reached the maximum refinement level in order to stabilize these cells against artificial fragmentation. We implement an H2 -regulated star formation prescription as follows. The local star formation rate (hereafter SFR) in a grid cell is proportional to the molecular
+3
+
+ln(1 + 0.6 + 0.012 ) , 0.6 c 1 + 3.1 (Z/ZSN )0.365 . CNM
+
+d,-21 R-16.5
+
+http://enzo-project.org/
+
+c 0.067 (Z/Z ) (HI / M pc-2 ) is the dust optical depth of the cloud, d,-21 is the dust cross-section per H nucleus to 1000  A radiation, normalized to a value of 10-21 cm-2 , R-16.5 is the rate coefficient for H2 formation on dust grains, normalized to the Milky Way value of 10-16.5 cm3 s-1 (Wolfire et al. 2008), ZSN is the gas phase metallicity in the solar neighborhood, and CNM is the ratio of the typical CNM density to the minimum density at which a two-phase CNM-WNM equilibrium can be established. We set ZSN = Z (Rodr iguez & Delgado-Inglada 2011), Z = 0.0204, CNM = 3, and (d,-21 /R-16.5 ) = 1. Note that in this model the H2 fraction is independent of the intensity of the ambient UV radiation field (which is responsible for both heating and H2 dissociation), since under the assumption of a two-phase CNM-WNM equilibrium the CNM density scales approximately linearly with the UV intensity, and the equilibrium H2 -abundance depends on the ratio of the two. Krumholz & Gnedin (2011) demonstrated that this simple analytical model very accurately reproduces
+
+3
+100 10-1 b /M 10-2 10-3 10-4 10-5 10-6 10-7 109 1010 Mh 102 101
+
+tdep =MHI +H2 /SFR [Gyr]
+1011
+
+SFR [M yr-1 ]
+
+102 101 100 10-1
+
+f =M /Mh
+
+100 10-1 10-2 10-3
+
+[M ]
+
+1011
+
+1012
+
+109
+
+1010 Mh
+
+[M ]
+
+1012
+
+109
+
+1010 Mh
+
+[M ]
+
+1011
+
+1012
+
+Fig. 1.-- Stellar mass fraction f = M /Mh (left panel), star formation rate (middle panel), and gas depletion time tdep = MHI+H2 /SFR (right panel) vs. total halo mass. In the left panel, the dotted horizontal line indicates an f equal to the cosmic baryon fraction b /M , i.e. a 100% gas to star conversion efficiency. The dashed lines in the left and middle panels indicate the lowest f and SFR that our simulation can resolve, given our minimum stellar particle mass of (1 - fej ) msp = 7.5  103 M and SF averaging timescale of 10 Myr. In the right panel the horizontal dotted line marks our definition of a "dark galaxy", i.e. one with tdep > 20 Gyr. Completely dark halos (M = 0, SFR= 0, or tdep = ) are indicated by arrows at the location corresponding to the lowest resolvable M or SFR (for clarity we only plotted 1/10 of all such halos).
+
+the H2 abundance determined in full non-equilibrium radiative transfer calculations when Z/Z 10-2 . At lower metallicities the equilibrium model tends to overpredict the H2 abundance, but at such low metallicities star formation should nevertheless scale with the equilibrium H2 abundance, not with the non-equilibrium value (Krumholz 2012). While in the KMT model fH2 drops to zero at a metallicity-dependent critical column density of crit (Z ) = log(1 + 0.6 + 0.012 ) M pc-2 0.0804 Z/Z Z/Z 10-3
+-0.88
+
+Pleiades and cost  200, 000 core hours to run to z = 2.5.
+3. DARK GALAXIES
+
+ 5700 M pc-2
+
+,
+
+(6)
+
+observations indicate that such a hard cutoff is too extreme. In particular, Bigiel et al. (2010) have demonstrated that the scaling between total gas and SFR surface density continues below the turn-over commonly attributed to the transition from atomic to molecular gas phase ( few M pc-2 at solar metallicity), albeit at a  50 - 100 times lower amplitude. Assuming the molecular gas-SFR scaling relation measured by Schruba et al. (2011) continues to correspondingly low values of SFR ( 10-4 M yr-1 kpc-2 ), the gas at these extremely low total gas columns has an effective molecular gas fraction of fH2	0.01. In order to capture this empirical low surface density behavior, we impose a a floor of fH2 = 0.01 in cells with T < 104 K even if they have gas < crit (Z ). The resolution of our simulation is not sufficient to resolve the formation sites of the first generation of stars, the so-called Population III. In order to capture the metal enrichment resulting from the supernova explosions of this primordial stellar population, we instantaneously introduce a metallicity floor of [Zfloor ]  log10 (Zfloor /Z ) = -3.0 at z = 10, as motivated by recent high resolution numerical simulations of the transition from Pop III to Pop II SF (Wise et al. 2012). This ensures the presence of a minimum amount of metals, which seed subsequent star formation and further metal enrichment. The simulation was run on the NASA supercomputer
+
+Our previous work in Paper I was limited to z 4, but we have since extended the simulations to z = 2.5. The left panel of Figure 1 shows a scatter plot of the stellar mass fraction (f = M /Mh ) against the total halo mass Mh . Only halos in which the refinement reached the maximum refinement level of max = 7 are analyzed, and there are 1010 such halos in our simulation at z = 2.5. At high halo masses (> 1011 M ) about half of the available gas has been converted to stars. Such a large star formation efficiency appears to be in conflict with observational constraints derived from abundance matching (e.g. Moster et al. 2010; Behroozi et al. 2012), which imply a peak efficiency of a few percent for 1012 M halos. This discrepancy is a well known problem with hydrodynamic galaxy formation simulations that include only a weak form of thermal supernova feedback (see e.g. Katz 1992), and much contemporary work is concerned with solving this problem (Stinson et al. 2013; Hopkins et al. 2012; Agertz et al. 2012; Guedes et al. 2011), primarily by improving the treatment of feedback from young massive stars, supernovae, and black holes. Here we defer addressing this problem and instead wish to draw attention to the fact that a suppression of the gas-to-star conversion efficiency in low mass halos can be effected simply by the difficulty that low metallicity gas has in transitioning to a cold, molecular phase that is capable of forming stars. In our simulation, the stellar mass fraction drops rapidly below 1010 M and becomes highly stochastic, with f spanning about two orders of magnitude. The mean star formation efficiency drops from 0.046 to 1.6	10-3 when averaged over all halos with mass 1010 - 1011 M and 109 - 1010 M , respectively. A small number of halos (8 out of 1010) has not been able to form any stars, and we have marked these as upper limits at the lowest f that our simulation can resolve given our minimum stellar particle mass of msp = 104 M , of which fej = 0.25 is ejected back into the interstellar medium as part of the supernova feedback prescription.
+
+4 The middle panel of Figure 1 shows the total SFR vs. halo mass. Again the effect of our metallicity-dependent H2 -regulated SF prescription is clearly visible as a drop in SFR around Mh = 1010 M . At higher masses, the SFR falls on a narrow "SFR main sequence" corresponding to a roughly constant halo-mass-specific SFR of  4  10-11 yr-1 . At lower halo masses, the SFR drops by almost two orders of magnitude, but remains non-zero owing to our 1 per cent H2 -floor. Slightly less than half of our halos (396 out of 1010) have zero SFR, and one tenth of these are plotted as upper limit arrows at the lowest SFR our simulation can resolve, 7.5  10-4 M yr-1 (i.e. forming 1 star particle over the SF averaging time scale of 10 Myr). Finally, the right panel of this figure shows the neutral hydrogen gas depletion time, defined as tdep = (MHI +MH2 )/SFR. On the "SFR main sequence" (Mh 1010 M ) we find gas depletion times ranging from 0.4 to a few Gyr, consistent with the observational constraints from (Leroy et al. 2008; Bigiel et al. 2008; Genzel et al. 2010). The SF-suppressed galaxies make up a second population with depletion times in excess of 20 Gyr. Owing to their low stellar content and suppressed SFR, such galaxies would be extremely difficult to detect with continuum IR, optical, or UV observations, and hence we refer to them as "dark galaxies". In this work we use tdep > 20 Gyr as a working definition of a dark galaxy. With this definition 789 out of our 1010 halos are dark galaxies. To first order, dark galaxies lie in halos that rely on the 1 per cent H2 -floor to form any stars, while halos that become metal enriched enough to enter the KMT regime (gas > crit (Z )) quickly form a siginficant stellar population and are luminous. The top panel of Figure 2 gives fdark , the fraction of dark galaxies (tdep > 20 Gyr) at z = 2.5. fdark rises from zero at 5  1010 M to near unity at Mh 5  109 M . A remarkable prediction of our work then is that the universe should be filled with a large number of dark galaxies of mass 1010 M that were unable to convert their gas into stars simply because their metal content never rose to the level required for a conversion from atomic to molecular phase. Unlike in the more conventional feedback-based star formation suppression models, in our picture many of these dark galaxies would retain nearly the cosmic baryon budget in the form of neutral hydrogen, making them potentially observable in 21cm or Lyman alpha fluorescence. Indeed, Cantalupo et al. (2012) may have already discovered examples of such dark galaxies in Ly fluorescence illuminated by a z  2.4 quasar. The bottom panel of Figure 2 shows the mean baryonic contents of our halos as a function of total halo mass. As discussed above, the drop in f occurs around 1010 M , and it closely follows the transition between predominantly atomic gas in lower mass systems and mostly molecular gas in higher mass ones. At lower halo masses the effects of the metagalactic UV background are apparent, by lowering the neutral relative to ionized hydrogen abundance and a reduction in the total baryon fraction. Figure 3 illustrates two points, (i) that more massive halos are more easily able to convert atomic into molecular gas and hence support star formation and (ii) that
+
+1.0 0.8 0.6 0.4 0.2 0.0 10-1
+
+fraction
+
+fdark
+
+10-2
+
+10-3
+
+10-4 9 10
+
+f fbaryon fHI fHII fH2
+1010
+
+Mh [M ]
+
+1011
+
+1012
+
+Fig. 2.-- Top panel: The fraction of dark galaxies (tdep > 20 Gyr) vs. total halo mass. Bottom panel: The average mass fraction of total baryons, neutral, ionized, and molecular hydrogen, and stars vs. total halo mass. These lines were calculated using a sliding window of width 0.5 dex. The cosmic baryon fraction (b /M ) is indicated by the dotted horizontal line.
+
+the threshold halo mass for star formation increases towards lower redshifts. In our simulation we determined for each halo the maximum Hi density reached at a given redshift. To get a simple estimate of the column density we multiply by the width of the most refined grid cell, max = max  x7 = max  109 pc (3.5/(1 + z )). This quantity is plotted as circles whose size indicates the halo's mass and which are filled blue if the halo is luminous or white if it is a dark galaxy. max should be compared against the KMT critical column density to allow the atomic-to-molecular conversion to occur, which is metallicity dependent and plotted with dotted horizontal lines for metallicities Z/Z = 10-3 , 10-2 , 10-1 , and 1: crit = 5700, 690, 92.8, and 13.6 M pc-2 . The lowest metallicity (10-3 Z ) corresponds to the metallicity floor that we impose at z = 10, implying that halos must at some point exceed this threshold in order for a substantial number of stars to form. Subsequent star formation is much easier, since the metal enrichment from these stars rapidly lowers the required density. Halos that never exceed the 10-3 Z column density threshold are dark galaxies.
+4. DISCUSSION 4.1. Analytical model
+
+To gain an understanding of the trends seen in Figure 3, we have calculated the expected central surface density using the analytical model of Mo et al. (1998). In this
+
+5
+105
+10
+11 M
+
+104
+
+1010 M 109 M
+
+max [M pc-2 ]
+
+Z/Z 10-3
+
+103
+
+10-2 M/M 1012 1011 1010 109 9 10 10-1
+
+sity is set by the mean density of the halo, which decreases towards lower redshift. It follows that a halo with an initial metallicity equal to our metallicity floor of Z/Z = 10-3 can only become luminous if either it grows to a large enough mass that its disk surface density exceeds crit = 5700 M pc-2 or, alternatively, if it becomes externally enriched from a nearby star forming system. The star formation afforded by the low molecular gas content resulting from our 1 per cent H2 -floor by itself is generally too low to allow the halo to become luminous.
+4.2. External metal enrichment?
+
+102
+
+101 2
+
+3
+
+4
+
+5
+
+6
+
+z
+
+7
+
+8
+
+1
+
+Fig. 3.-- The maximum column density, max = max  x7 = max  109 pc (3.5/(1 + z )), reached in the simulated halos as a function of redshift. The size of the plotted symbol corresponds to the mass of the halo. Luminous galaxies are shown in blue, dark galaxies in white. The horizontal dotted lines give the critical column density required for H2 formation, at metallicities (from top to bottom) Z/Z = 10-3 , 10-2 , 10-1 , and 1. The curved solid lines gives estimates of the maximum central surface density (averaged over x7 ) calculated using the analytical model by Mo et al. (1998) for halos of mass 1011 , 1010 , and 109 M (see text for details). The solid lines are for a spin parameter  = 0.035, and the gray shaded band delimits the region between  = 0.02 and 0.05 for the 1010 M case. The dashed line gives the analytical estimate for a fixed central averaging scale of 50 pc. This plot shows that (i) at a given redshift, more massive halos are more easily able to convert gas to the molecular phase and hence form stars, and (ii) at a given halo mass, it is easier for gas to become molecular at higher redshift, which results in an increase towards lower redshifts of the critical halo mass below which star formation is not possible in very low metallicity systems.
+
+model the baryonic disk is completeley specified by its host halo's properties, and is modeled as an exponential disk embedded in the potential of an NFW dark matter halo4 . The disk mass is set to md = 0.05 times the total halo mass, and the disk scale radius is determined in an iterative manner from the assumption that the baryons contain a fraction jd = 0.05 of the total angular momentum J of the dark matter halo, which itself is related to the halo spin parameter  = J |E |1/2 G-1 M -5/2 . Numerical simulations have shown that  is distributed approximately log-normally, with a mean of   0.035 and a dispersion of	0.5 (Knebe & Power 2008). Given this analytic disk model, we can estimate the central gas surface density on a length scale comparable to the most refined grid cells in our simulation. The solid lines in R Figure 3 give  R = [ 0 2r (r) dr]/R2 for R = x7 in halos of mass 1011 , 1010 , and 109 M with a concentration c = 5. The shaded band denotes the region spanned by  = 0.02 and 0.05. The analytical model agrees with our simulation results quite well, and explains why a halo of a fixed mass and metallicity has a harder time converting its gas to molecular phase at lower redshifts  the disk surface den4 We neglect the treatment of adiabatic contraction, since observationally there does not seem to be much evidence for it in late type galaxies (e.g. Dutton et al. 2011).
+
+The possibility of external enrichment deserves further consideration. As discussed above, our simulation has fairly weak stellar feedback, and as a result don't exhibit strong metal enriched galactic outflows. In order to estimate how many of our dark galaxies would have been externally enriched by more realistic galactic outflows from neighboring galaxies, we perform the following simple calculation: For every luminous halo we calculate its escape velocity (vesc = (2GMh /Rvir )1/2 ), as well as the mean age of all its star particles, t . Assuming a galactic wind outflow with velocity vwind = fwind vesc , we determine the radius of its wind sphere of influence (SOI), Rwind = vwind t . We estimate the mean metallicity of the wind by uniformly spreading the total metal mass contained in the luminous halo over the wind SOI. Next we determine for each dark galaxy how many SOI's it intersects, and sum up the metallicities of each of these to produce an estimate of the metallicity Zwind that this dark galaxy would have been externally enriched to. We compare this metallicity to Zcrit(max ), the KMT critical metallicity for atomic-to-molecular gas conversion given the maximum density reached in each of our dark galaxies. If Zwind > Zcrit , then we judge this halo to have been externally enriched to the point where stars would have formed, and hence it would no longer be a dark galaxy. Using this procedure we find that for fwind = 3 only 7 out 789 dark galaxies would be externally enriched to above their critical metallicity. For fwind = 1 (5), this number becomes 44 (1). The fraction of externally enriched halos becomes smaller for larger fwind , because even though the enriched region extend farther and intercepts more dark halos, the wind SOI's metallicity becomes correspondingly smaller. It thus appears that the majority of our dark halos is isolated enough to remain unenriched, and hence dark, even in the presence of strong galactic outflows. Note that external enrichment will result in a strong spatial clustering of the small fraction of low mass halos that are able to become luminous in this way.
+4.3. z = 2.5 UV luminosity function
+
+Next we confront our simulated galaxy population with the observationally determined rest-frame UV luminosity function of Lyman break galaxies (LBG) at z = 1.9 - 2.7 from Reddy & Steidel (2009). For this purpose we calculate UV luminosities from the simulated SFR assuming a Z = 0.2Z Chabrier initial mass function (IMF) from 0.08 to 120 M and a constant SFR for 100 Myr (Madau et al. 1998): LUV = 1.25  1028 (SFR / M yr-1 ) erg s-1 Hz-1 . A Salpeter IMF would result in
+
+6
+10-1
+
+10-2
+
+10-3
+
+10-4 22
+
+21
+
+20
+
+19
+
+simulation (Mdust = +1.75) Reddy & Steidel 2009 (z =1.9-2.7)
+
+MUV
+
+18
+
+17
+
+16
+
+15
+
+14
+
+Fig. 4.-- The simulated UV luminosity function at z = 2.5 compared to the observational determination from Reddy & Steidel (2009). We calculate LUV from the SFR according to LUV = 1.25  1028 (SFR/ M yr-1 ) erg s-1 Hz-1 (MUV = 51.63 - 2.5 log10 (LUV /erg s-1 Hz-1 )), corresponding to a Z = 0.2Z Chabrier IMF from 0.08 to 120 M . The simulated galaxies' luminosities have been dimmed by a factor of 5 (M = +1.75) to account for the expected attenuation from dust, consistent with the observational constraints from Reddy et al. (2012).
+
+ 1.7 times lower luminosities. We obtain SFR from our simulated galaxies by summing the mass of all young star particles with ages less than  = 10 Myr and dividing by this SF time scale, SFR = age <	m / . Star forming galaxies at z  2.5 are known to be significantly reddened and extincted by internal dust obscuration. Reddy et al. (2012) use a combination of Herschel, Very Large Array, and Spitzer data of 146 UV-selected galaxies with spectroscopic redshifts in the GOODS-North field to derive a median dust correction factor of 5.2  0.6 between the bolometric luminosity and the unobscured (i.e. observed) UV luminosity. Consistent with this measurement, we dim our SFR-derived UV luminosities by a factor of 5 (Mdust = +1.75), and then calculate a restframe luminosity function by binning our galaxies in bins of width 0.5 MUV (Fig. 4). The agreement between the simulated and observed luminosity function is remarkably good down to the observational limit of -18 mag. Owing to our fairly small boxsize we don't have any simulated galaxies with dustcorrected UV luminosities brighter than -21 mag. The suppression of star formation due to the inability of low metallicity gas to become molecular in low mass halos results in a flattening and eventual cutoff in the faint end of the UV luminosity function, which occurs 1-2 magnitudes below the current observational limit. It thus appears that the predictions of our H2 -regulated star formation simulations, and the existence of a large number of dark galaxies, are perfectly consistent with current observational constraints of the z  2.5 UV luminosity function. Our simulations, however, predict that the steep faint-end slopes measured in current surveys should not extend to much fainter systems. Deeper multicolor imaging surveys will be able to test this prediction.
+4.4. HI abundance and mass function
+
+In Figure 5 we consider the abundance and mass distribution of neutral hydrogen in our simulation. The left panel shows the Hi mass function at z = 2.5. We find halos with Hi masses as low as 50 M and as high as 4.6  109 M . From MHI = 107 to 109 M the Hi mass function is remarkably flat (in contrast to the DM mass function which is steeply rising towards low masses), and exhibits a sharp cutoff at higher Hi masses. This cutoff is a result of the limited box size of our simulation, which prohibits us from resolving halos more massive than  1012 M at z = 2.5. The flat shape of the mass function at lower masses is due to the ionizing and heating effects of the metagalactic UV background, which causes a declining neutral gas fraction towards lower mass halos (see Fig. 2), thus compensating the higher abundance of such halos. Dark galaxies make up the vast majority of all MHI < 109 M systems. Comparing to the observational measurement of the Hi mass function in the local universe from the ALFALFA survey (Haynes et al. 2011), we see an excess of about 1 order of magnitude at MHI between 107 and a few 109 M in our simulation. Note that we are here comparing z  0 observational measurements with simulation results from an epoch  11 Gyr earlier, so this is not really a fair comparison. Nevertheless this excess is somewhat troubling, since most physical processes that are commonly proposed to lower the Hi content in low mass halos (e.g. radiative feedback from young stars or supernova driven galactic outflows, Altay et al. 2011; Dav e et al. 2013) rely on a substantial SFR, which is not present in our dark galaxies. It is possible that over the following 11 Gyr the low residual star formation in our dark galaxies (stemming from the H2 -floor), or external enrichment from nearby luminous halos, will raise the metal content of these systems to the point where the molecular transition and hence more efficient star formation becomes possible. Additionally, interactions with the cosmic web could ram pressure strip gas from these dark galaxies (Ben itez-Llambay et al. 2013) and reduce their Hi content. In the central panel of Figure 5 we show the differential contribution to HI per decade of MHI (i.e. MHI (MHI )/crit ) from all halos and from dark halos only. In our simulation, the dominant contribution to HI comes from systems with MHI between 3  108 and 109 M , and luminous halos contribute about 1.5 times as much to the total Hi budget than dark galaxies. The shape of our distribution closely matches that of the observational distribution from the ALFALFA survey (see Fig. 9 of Martin et al. 2010), which, however, is peaked at about half a dex higher MHI . Again, we attribute this shift to the comparatively small boxsize of our simulation. In the right panel we show a comparison of our simulation results to observational measurements of HI from quasar absorption line studies from Rao et al. (2006) at z < 2 and Prochaska & Wolfe (2009) and Noterdaeme et al. (2012) at z > 2. The total Hi content of our simulation is in reasonable agreement with the data. At z = 2.5 it is about 0.2 - 0.4 dex (factor of 1.5 - 2.5) too high, and this is likely a consequence of the weak supernova feedback in our simulation (see also Altay et al. 2011; Erkal et al. 2012; Dav e et al. 2013). We re-emphasize that the dark galaxies in our simulation only contribute
+
+(MUV) [Mpc-3 mag-1 ]
+
+7
+100 10-3 2.6 2.8 10-4 10-5 10-6 10-7 6 10 107 108 109 1010 1011
+
+10
+
+-2
+
+dHI/dlog10MHI [dex-1 ]
+
+(MHI) [Mpc-3 dex-1 ]
+
+10-1
+
+all halos dark galaxies
+
+10-3 10-4 10-5 10-6 6 10
+all galaxies dark galaxies ALFALFA (z =0)
+
+log HI
+
+3.0 3.2 3.4 3.60 1 2 3 4
+
+107
+
+MHI [M ]
+
+108
+
+109
+
+1010
+
+1011
+
+MHI [M ]
+
+redshift
+
+Fig. 5.-- Left: The simulated HI mass function at z = 2.5 compared to the z  0 determination from the ALFALFA survey (Haynes et al. 2011). The solid line is for all simulated halos, and the dashed for all dark galaxies. Middle: The differential contribution to HI per decade of MHI from all halos (solid) and dark galaxies (dashed). Right: HI vs. redshift. Comparison of observational constraints from Rao et al. (2006) (orange triangles) at z < 2 and Prochaska & Wolfe (2009) (cyan circles) and Noterdaeme et al. (2012) (red symbols, the filled triangles are systematics-corrected) at z > 2 with HI determined in our simulation, summing over all halos (solid circles) and dark halos only (open circles).
+
+sub-dominantly to the total Hi content of the simulation (see the open circles in the figure), and the absence of radiative feedback or supernova-driven outflows in these systems is not a problem for the Hi budget.
+4.5. H i depletion time vs. MHI
+
+Finally, in Figure 6 we show a comparison of the relation between Hi depletion time and Hi mass in our simulation at z = 2.5 to observational data both from high redshift (z  2.5 - 3, top panel) and in the local universe (bottom panel). In the top panel we include the "dark galaxy" systems reported by Cantalupo et al. (2012), which were detected as Ly fluorescence in a z  2.4 quasar field. Assuming a negligible contribution to the Ly luminosity from internal SF or cooling, these authors derive a total hydrogen mass of  109 M (assumed to be mostly ionized). Without a nearby quasar to ionize it, most of this hydrogen would be neutral and so we equate it with MHI . The range of MHI derived from the Ly luminosities is indicated by the horizontal error bar. Since no continuum emission was measured in these systems, they report only an upper limit of SFR< 0.01 M yr-1 derived from a stacking analysis, and a corresponding lower limit on tdep,HI . This lower limit is consistent with the long depletion times of our simulated dark galaxies, but systems with MHI 109 M in our simulation tend to lie in > 1010 M halos with more active star formation and shorter depletion times. Note, however, that the Hi masses derived from the unresolved Ly sources are quite uncertain, since they depend on modeling the unknown spatial distribution of the fluorescing gas. We also plot in this panel a band corresponding to Hi depletion times determined in z  3 damped Lyman alpha (DLA) systems without central bulges of star formation from Rafelski et al. (2011). Since no length scales are known for these DLAs, we cannot obtain MHI estimates and instead show a horizontal band. The vertical extent of the band corresponds to the range of smoothing parameters employed by Rafelski et al. (2011), which result in different lower limits on tdep,HI . The band lies above the cloud of simulation points corresponding to actively star forming halos with short tdep,HI , and is consistent
+
+with the much longer tdep,HI of our dark galaxies. In the lower panel of this plot we compare to measurements in the local universe. Again we caution that this is not really a fair comparison, since a lot of evolution in both SFR and MHI may occur in the	11 Gyr between z = 2.5 and today. Nevertheless, it is interesting to see how our z = 2.5 dark galaxies compare to observational constraints in z = 0 dwarf galaxies. We plot data points from low surface brightness galaxies (Wyder et al. 2009), ALFALFA dwarf galaxies (Huang et al. 2012), the THINGS survey (Walter et al. 2008), and for the newly discovered Leo P dwarf galaxy (Rhode et al. 2013). We see that a small fraction of the local dwarfs overlap with the cloud of high tdep,HI simulation points, indicating that some counterparts of dark galaxies may have already been observed in the local universe. Most of the z  0 dwarfs, however, fall in between the bimodal distribution of simulation points, with intermediate tdep,HI of  10 Gyr, where there are few systems in our simulation. The sharpness of the division between low and high tdep,HI systems is likely to be a consequence of the unique value of our H2 floor and our adoption of a single Zfloor ; the latter issue has been emphasized by Tassis et al. (2012) and Krumholz & Dekel (2012). In reality there is probably some scatter in both the minimum H2 content in low column density gas and the metal content provided by population III star formation, and incorporating this scatter in our simulation would fill in some of the intermediate tdep,HI region. Furthermore, any reduction in the Hi content of our dark galaxy halos, which we already know to be necessary from our comparison with the z = 0 ALFALFA Hi mass function (see Section 4.4), would move the high tdep,HI points down and to the left, bringing them into better agreement with the local dwarf data. A pure downward shift of these points could be effected by a slight increase in the SFR at a fixed Hi content, which may occur through gradual internal or external metal enrichment.
+5. SUMMARY AND CONCLUSIONS
+
+We have extended the work of Kuhlen et al. (2012), by evolving simulations with a metallicity-dependent H2 regulated SF prescription for an additional one billion
+
+8
+103
+
+high redshift
+
+102
+
+101
+
+100
+
+103
+
+Simulation z =2.4 DG (C12) z  3 DLA (R11)
+
+z 0
+
+log MHI [M ]
+
+102
+
+101
+
+100
+
+10-1
+
+Simulation (z=2.5) LSBs (W09) ALFALFA (H12) THINGS (W08) Leo P (G13, R13)
+106 107
+
+log MHI [M ]
+
+108
+
+109
+
+1010
+
+Fig. 6.-- Comparison of the relation between Hi depletion time tdep,HI and MHI with observational data. Top panel: High redshift data. Simulation points are from the z = 2.5 output. As in Figure 1 we mark halos with SFR = 0 as lower limits at the depletion time corresponding to the minimum resolvable SFR in our simulation. The cyan star is the lower limit from the stack of dark galaxies in Cantalupo et al. (2012, C12) assuming a SFR < 10-2 M yr-1 and their MHI estimates (width of the errorbar). The green shaded band indicates the range of lower limits to the depletion times reported by Rafelski et al. (2011, R11) in z  3 DLA's without a central SF component. Bottom panel: Low redshift observational data. Simulation data is the same as in the top panel. The data points (star symbols) are for low surface brightness galaxies (red, Wyder et al. 2009, W09), ALFALFA dwarf galaxies (green, Huang et al. 2012, H12), the THINGS survey (magenta, Walter et al. 2008, W08), and for the newly discovered Leo P dwarf galaxy (cyan, Rhode et al. 2013; Giovanelli et al. 2013, R13, G13). All data, both local and high-redshift, have been standardized to the star formation rate-luminosity calibrations recommended by Kennicutt & Evans (2012).
+
+years to z = 2.5. We have improved the simulations by imposing a one per cent floor in the H2 fraction of cold metal poor gas, where the KMT prescription predicts zero molecular gas content. While the previous simulations exhibited a sharp cutoff in the stellar content below 1010 M , our new simulations results in a more gradual turnover, with star formation becoming effectively stochastic at halo masses below 1010 M . We have shown that this stochasticity reflects the halo formation time, with more massive (at a fixed time) and earlier collapsing (at a fixed mass) halos more easily exceeding the metallicity-dependent surface density threshold (gas 5700 M pc-2 (Z/10-3 Z )-0.88 ) for molecular gas formation. If the resulting  2 dex scatter in the
+
+stellar mass content of 1010 M halos persists to z = 0, it may explain the puzzling dearth of bright dwarf satellite galaxies in the Local Group. In this picture, massive halos that previously have been deemed "too big to fail" (Boylan-Kolchin et al. 2012), would instead just be halos lying in the tails of the f distribution. An interesting implication of our results is that the z  2.5 universe may be filled with a large population of gas rich halos with very low stellar content and close to zero ongoing star formation, which we term "dark galaxies". We define dark galaxies to be systems with a neutral gas depletion time of tdep = MHI+H2 /SFR greater than 20 Gyr. In our simulation we find that the fraction of dark galaxies rises from zero at Mh > 5	1010 M to near unity at Mh < 1	1010 M . In total 78 per cent of resolved halos (789 out of 1010) are classified as dark galaxies. Remarkably, the existence of a substantial population of dark galaxies at z = 2.5 appears to be fully compatible with existing observational constraints. In particular our simulated galaxies matches the luminosity function determined by Reddy & Steidel (2009), once their luminosities as dimmed by a factor of 5 (consistent with measurements by Reddy et al. 2012) to account for dust dimming. Our simulation also reproduces to within a factor of  2 the cosmological mass density of neutral gas at z 2.5. We conclude by highlighting some areas where our simulations are challenged by observational data, and which demand additional work. The biggest concern is the stellar mass content in halos sufficiently massive (Mh > 1011 M ) to avoid being constrained by the molecular gas transition. The lack of efficient feedback processes in our simulation allows almost half of all gas to be converted into stars, resulting in a stellar mass fraction that is 5 - 10 times higher than observational constraints based on abundance matching (Moster et al. 2010; Behroozi et al. 2012). A second, possibly related, concern is that, compared to the Hi mass function measured by the ALFALFA survey in the local universe (Martin et al. 2010; Haynes et al. 2011), we overproduce by almost one order of magnitude the abundance of MHI < 109 M systems. The majority of this excess is contributed by dark galaxies, for which more effective stellar or supernova feedback would not likely help much, given their low SFR. It remains to be seen whether internal or external processes in the subsequent 11 Gyr between z = 2.5 to z = 0 can reduce the neutral gas content in low mass halos, and if so, whether these processes maintain the stochastic nature of the stellar mass content in the present universe. We thank Naveen Reddy for assistance with the dust attenuation of high redshift star forming galaxies, and Sebastiano Cantalupo, Phil Hopkins, and Eliot Quataert for stimulating discussions. Support for this work was provided by the NSF through grants OIA1124453 and AST-0955300, by NASA through ATP grants NNX12AF87G, NNX13AB84G, and a Chandra telescope grant, and by the Alfred P. Sloan Foundation. We acknowledge computational support from the NASA Advanced Supercomputing Division, on whose Pleiades supercomputer this simulation was carried out.
+
+tdep,HI [Gyr]
+
+tdep,HI [Gyr]
+
+9
+REFERENCES Agertz, O., Kravtsov, A. V., Leitner, S. N., & Gnedin, N. Y. 2012, ArXiv e-prints, 1210, 4957 Altay, G., Theuns, T., Schaye, J., Crighton, N. H. M., & Vecchia, C. D. 2011, The Astrophysical Journal Letters, 737, L37 Behroozi, P. S., Wechsler, R. H., & Conroy, C. 2012, ArXiv e-prints, 1207, 6105 Ben itez-Llambay, A., Navarro, J. F., Abadi, M. G., et al. 2013, The Astrophysical Journal Letters, 763, L41 Bigiel, F., Leroy, A., Walter, F., et al. 2010, The Astronomical Journal, 140, 1194 --. 2008, The Astronomical Journal, 136, 2846 Boylan-Kolchin, M., Bullock, J. S., & Kaplinghat, M. 2012, Monthly Notices of the Royal Astronomical Society, 422, 1203 Bullock, J. S., Kravtsov, A. V., & Weinberg, D. H. 2000, The Astrophysical Journal, 539, 517 Cantalupo, S., Lilly, S. J., & Haehnelt, M. G. 2012, Monthly Notices of the Royal Astronomical Society, 425, 1992 Christensen, C., Quinn, T., Governato, F., et al. 2012, Monthly Notices of the Royal Astronomical Society, 425, 3058 Dav e, R., Katz, N., Oppenheimer, B. D., Kollmeier, J. A., & Weinberg, D. H. 2013, ArXiv e-prints, 1302, 3631 Dekel, A., & Silk, J. 1986, The Astrophysical Journal, 303, 39 Dijkstra, M., Haiman, Z., Rees, M. J., & Weinberg, D. H. 2004, The Astrophysical Journal, 601, 666 Dutton, A. A., Conroy, C., van den Bosch, F. C., et al. 2011, Monthly Notices of the Royal Astronomical Society, 416, 322 Efstathiou, G. 1992, Monthly Notices of the Royal Astronomical Society, 256, 43P Erkal, D., Gnedin, N. Y., & Kravtsov, A. V. 2012, The Astrophysical Journal, 761, 54 Fu, J., Guo, Q., Kauffmann, G., & Krumholz, M. R. 2010, Monthly Notices of the Royal Astronomical Society, 409, 515 Garrison-Kimmel, S., Rocha, M., Boylan-Kolchin, M., Bullock, J., & Lally, J. 2013, ArXiv e-prints, 1301, 3137 Genzel, R., Tacconi, L. J., Gracia-Carpio, J., et al. 2010, Monthly Notices of the Royal Astronomical Society, 407, 2091 Giovanelli, R., Haynes, M. P., Adams, E. A. K., et al. 2013, ArXiv e-prints, 1305, 272 Glover, S. C. O., & Clark, P. C. 2012a, Monthly Notices of the Royal Astronomical Society, 421, 9 --. 2012b, Monthly Notices of the Royal Astronomical Society, 426, 377 Gnedin, N. Y., & Kravtsov, A. V. 2010, The Astrophysical Journal, 714, 287 --. 2011, The Astrophysical Journal, 728, 88 Gnedin, N. Y., Tassis, K., & Kravtsov, A. V. 2009, The Astrophysical Journal, 697, 55 Governato, F., Willman, B., Mayer, L., et al. 2007, Monthly Notices of the Royal Astronomical Society, 374, 1479 Governato, F., Brook, C., Mayer, L., et al. 2010, Nature, 463, 203 Guedes, J., Callegari, S., Madau, P., & Mayer, L. 2011, The Astrophysical Journal, 742, 76 Haynes, M. P., Giovanelli, R., Martin, A. M., et al. 2011, The Astronomical Journal, 142, 170 Hopkins, P. F., Quataert, E., & Murray, N. 2012, Monthly Notices of the Royal Astronomical Society, 421, 3522 Huang, S., Haynes, M. P., Giovanelli, R., et al. 2012, The Astronomical Journal, 143, 133 Katz, N. 1992, The Astrophysical Journal, 391, 502 Kennicutt, R. C., & Evans, N. J. 2012, Annual Review of Astronomy and Astrophysics, 50, 531 Knebe, A., & Power, C. 2008, The Astrophysical Journal, 678, 621 Komatsu, E., Smith, K. M., Dunkley, J., et al. 2011, The Astrophysical Journal Supplement Series, 192, 18 Kravtsov, A. V. 2003, The Astrophysical Journal Letters, 590, L1 Krumholz, M. R. 2012, The Astrophysical Journal, 759, 9 Krumholz, M. R., & Dekel, A. 2012, The Astrophysical Journal, 753, 16 Krumholz, M. R., Dekel, A., & McKee, C. F. 2012, The Astrophysical Journal, 745, 69 Krumholz, M. R., & Gnedin, N. Y. 2011, The Astrophysical Journal, 729, 36 Krumholz, M. R., Leroy, A. K., & McKee, C. F. 2011, The Astrophysical Journal, 731, 25 Krumholz, M. R., McKee, C. F., & Tumlinson, J. 2008, The Astrophysical Journal, 689, 865 --. 2009, The Astrophysical Journal, 693, 216 Krumholz, M. R., & Tan, J. C. 2007, The Astrophysical Journal, 654, 304 Kuhlen, M., Krumholz, M. R., Madau, P., Smith, B. D., & Wise, J. 2012, The Astrophysical Journal, 749, 36 Leroy, A. K., Walter, F., Brinks, E., et al. 2008, The Astronomical Journal, 136, 2782 Madau, P., Kuhlen, M., Diemand, J., et al. 2008, The Astrophysical Journal Letters, 689, L41 Madau, P., Pozzetti, L., & Dickinson, M. 1998, The Astrophysical Journal, 498, 106 Martin, A. M., Papastergis, E., Giovanelli, R., et al. 2010, The Astrophysical Journal, 723, 1359 Mashchenko, S., Wadsley, J., & Couchman, H. M. P. 2008, Science, 319, 174 Mayer, L., Mastropietro, C., Wadsley, J., Stadel, J., & Moore, B. 2006, Monthly Notices of the Royal Astronomical Society, 369, 1021 McKee, C. F., & Krumholz, M. R. 2010, The Astrophysical Journal, 709, 308 Mo, H. J., Mao, S., & White, S. D. M. 1998, Monthly Notices of the Royal Astronomical Society, 295, 319 Mori, M., Ferrara, A., & Madau, P. 2002, The Astrophysical Journal, 571, 40 Moster, B. P., Somerville, R. S., Maulbetsch, C., et al. 2010, The Astrophysical Journal, 710, 903 Noterdaeme, P., Petitjean, P., Carithers, W. C., et al. 2012, Astronomy and Astrophysics, 547, L1 Penarrubia, J., Pontzen, A., Walker, M. G., & Koposov, S. E. 2012, The Astrophysical Journal Letters, 759, L42 Pontzen, A., & Governato, F. 2012, Monthly Notices of the Royal Astronomical Society, 421, 3464 Prochaska, J. X., & Wolfe, A. M. 2009, The Astrophysical Journal, 696, 1543 Rafelski, M., Wolfe, A. M., & Chen, H. 2011, The Astrophysical Journal, 736, 48 Rao, S. M., Turnshek, D. A., & Nestor, D. B. 2006, The Astrophysical Journal, 636, 610 Read, J. I., & Gilmore, G. 2005, Monthly Notices of the Royal Astronomical Society, 356, 107 Reddy, N., Dickinson, M., Elbaz, D., et al. 2012, The Astrophysical Journal, 744, 154 Reddy, N. A., & Steidel, C. C. 2009, The Astrophysical Journal, 692, 778 Rhode, K. L., Salzer, J. J., Haurberg, N. C., et al. 2013, The Astronomical Journal, 145, 149 Rodr iguez, M., & Delgado-Inglada, G. 2011, The Astrophysical Journal Letters, 733, L50 Schruba, A., Leroy, A. K., Walter, F., et al. 2011, The Astronomical Journal, 142, 37 Stinson, G. S., Brook, C., Macci` o, A. V., et al. 2013, Monthly Notices of the Royal Astronomical Society, 428, 129 Tassis, K., Gnedin, N. Y., & Kravtsov, A. V. 2012, The Astrophysical Journal, 745, 68 Teyssier, R., Pontzen, A., Dubois, Y., & Read, J. I. 2013, Monthly Notices of the Royal Astronomical Society, 429, 3068 Thoul, A. A., & Weinberg, D. H. 1996, The Astrophysical Journal, 465, 608 Walter, F., Brinks, E., de Blok, W. J. G., et al. 2008, The Astronomical Journal, 136, 2563 Wise, J. H., Turk, M. J., Norman, M. L., & Abel, T. 2012, The Astrophysical Journal, 745, 50 Wolfire, M. G., McKee, C. F., Hollenbach, D., & Tielens, A. G. G. M. 2003, The Astrophysical Journal, 587, 278 Wolfire, M. G., Tielens, A. G. G. M., Hollenbach, D., & Kaufman, M. J. 2008, The Astrophysical Journal, 680, 384 Wyder, T. K., Martin, D. C., Barlow, T. A., et al. 2009, The Astrophysical Journal, 696, 1834 Zolotov, A., Brooks, A. M., Willman, B., et al. 2012, The Astrophysical Journal, 761, 71
+

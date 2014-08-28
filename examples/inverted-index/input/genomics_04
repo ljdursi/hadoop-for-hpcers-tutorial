@@ -1,0 +1,1723 @@
+arXiv:1305.3986v1 [q-bio.GN] 17 May 2013
+
+Ubiquitous nucleosome unwrapping in the yeast genome
+R azvan V. Chereji 1 and Alexandre V. Morozov 1,2 Department of Physics and Astronomy, Rutgers University, Piscataway, New Jersey 08854-8019, USA 2 BioMaPS Institute for Quantitative Biology, Rutgers University, Piscataway, New Jersey 08854-8019, USA May 17, 2013
+1
+
+Abstract Nucleosome core particle is a dynamic structure  DNA may transiently peel off the histone octamer surface due to thermal fluctuations or the action of chromatin remodeling enzymes. Partial DNA unwrapping enables easier access of DNA-binding factors to their target sites and thus may provide a dominant pathway for effecting rapid and robust access to DNA packaged into chromatin. Indeed, a recent high-resolution map of distances between neighboring nucleosome dyads in S.cerevisiae shows that at least 38.7% of all nucleosomes are partially unwrapped. The extent of unwrapping follows a stereotypical pattern in the vicinity of genes, reminiscent of the canonical pattern of nucleosome occupancy in which nucleosomes are depleted over promoters and well-positioned over coding regions. To explain these observations, we developed a biophysical model which employs a 10-11 base pair (bp) periodic nucleosome energy profile. The profile, based on the pattern of histone-DNA contacts in nucleosome crystal structures and the idea of linker length discretization, accounts for both nucleosome unwrapping and higher-order chromatin structure. Our model reproduces the observed genome-wide distribution of interdyad distances, and accounts for patterns of nucleosome occupancy and unwrapping around coding regions. At the same time, our approach explains in vitro measurements of accessibility of nucleosome-covered binding sites, and of nucleosome-induced cooperativity between DNA-binding factors. We are able to rule out several alternative scenarios of nucleosome unwrapping as inconsistent with the genomic data.
+ rchereji@physics.rutgers.edu  morozov@physics.rutgers.edu
+
+1
+
+Eukaryotic genomes are organized into arrays of nucleosomes [1]. Each nucleosome consists of a stretch of genomic DNA wrapped around a histone octamer core [2]. The resulting complex of DNA with histones and other regulatory and structural proteins is called chromatin [1, 3]. Arrays of nucleosomes form 10-nm fibers which resemble beads on a string and fold into higher-order structures [4, 5, 6]. Depending on the organism and cell type, 75-90% of genomic DNA is packaged into nucleosomes [1]. Since nucleosomal DNA is tightly wrapped around the histone octamer, its accessibility to various DNA-binding proteins such as repair enzymes, transcription factors (TFs), polymerases, and recombinases, is suppressed. The question of how DNA-binding proteins gain access to their target sites in vivo efficiently and robustly is one of the outstanding puzzles in chromatin biology. Two different mechanisms for site exposure have been proposed: nucleosome translocation by thermal fluctuations or by ATP-dependent chromatin remodeling factors [7, 8, 9], and transient unwrapping of nucleosomal DNA off the histone octamer surface [10, 11, 12, 13]. Proteins can utilize spontaneous DNA unwrapping to bind to their target sites, which would favor further destabilization of the histone-DNA complex and binding of additional proteins (Fig. 1A). Since partial unwrapping of nucleosomal DNA is energetically less costly than nucleosome translocation, it is likely to play a major role in numerous DNAmediated processes. For example, nucleosome "breathing" governs transcription dynamics of RNA polymerase [14], and may provide an explanation for fast DNA repair by photolyases [15]. Partial unwrapping of nucleosomal DNA and subsequent differential accessibility of nucleosome-covered protein-binding sites were observed in single nucleosomes [16, 10, 17, 11, 18, 19, 20, 12, 13], di-nucleosomes [21], and multinucleosome arrays [22, 23], and modeled computationally [24, 25, 26, 27, 28, 29]. Recently, nucleosome dyad positions were mapped with single base-pair (bp) precision in S.cerevisiae, resulting in a genome-wide collection of distances between neighboring nucleosomes [30]. Surprisingly, almost 40% of these interdyad distances are less than 147 bp, indicating that at least one nucleosome in the pair is partially unwrapped. Furthermore, there are distinct 10-11 bp periodic oscillations in the histogram of inter-dyad distances, suggesting a stepwise unwrapping mechanism consistent with the pattern of histone-DNA contacts in the crystal structure [2, 31, 32]. We present a rigorous statistical mechanics approach to nucleosome unwrapping which explains the observed genome-wide distribution of inter-dyad distances [30] as well as earlier experiments which probed differential accessibility of nucleosome-covered binding sites [10, 11] and studied nucleosome-induced cooperativity between DNA-binding factors [16, 13]. Using this approach, we reproduce both nucleosome occupancy and inter-dyad distance profiles in the vicinity of transcription start sites (TSS). The model neglects sequence specificity of histone-DNA interactions but requires potential barriers at gene promoters, which may be created by DNA-bound TFs and transcription pre-initiation complexes (PICs). Although sequence-specific nucleosome positioning is not crucial for explaining many features of the distribution of inter-dyad distances, 2
+
+our framework allows us to predict both sequence-specific free energies of nucleosome formation and the unwrapping potential from paired-end high-throughput sequencing datasets.
+
+1
+1.1
+
+Results
+Nucleosome unwrapping potential
+
+We use a high-resolution in vivo map of nucleosome dyad positions based on chemical modification of engineered histones and DNA backbone cleavage by hydroxyl radicals [30]. With cleaved DNA segments sorted by molecular mass on the agarose gel and the  150 - 200 bp fraction sequenced using pairedend reads, the map provides a direct measurement of both dyad positions and distances between adjacent dyads. Although superior to methods based on micrococcal nuclease (MNase) digestion whose accuracy is affected by MNase sequences preferences and its tendency to over- or under-digest DNA [33, 34, 35], the map is biased by unknown hydroxyl radical cutting preferences for two alternate sites at each DNA strand [30]. A genome-wide histogram of inter-dyad distances shows that at least 38.7 % of all nucleosomes are partially unwrapped (blue line in Fig. 1C). In order to study the energetics of unwrapping, we introduce a simple model based on the 10-11 bp periodic pattern of histone contacts with the minor groove of the nucleosomal DNA [31, 32] (Fig. 1B). As DNA is peeled off each contact patch, its free energy increases because hydrogen bonds and favorable electrostatic contacts between histone side chains and the DNA phosphate backbone are lost. However, once DNA breaks free from the contact patch, it may adopt multiple conformations, which allows it to increase its entropy and thus lower the total free energy. The favorable entropic term grows with the extent of unwrapping until the next contact patch is reached, completing one cycle in the oscillatory energy profile. The oscillations are superimposed on a straight line whose slope reflects the average free energy cost per bp of histone-DNA contact loss. Additional details of the potential construction can be found in SI Appendix, Model A. The histone-DNA potential constructed in this way has no sequence specificity, in contrast to the free energy cost of bending DNA into a nucleosomal superhelix [36]. To a good approximation, we expect sequence effects to average out in the genome-wide histogram of inter-dyad distances (this assumption is tested later). Thus we aim to reproduce the observed distribution of inter-dyad distances with a model in which nucleosome energetics is sequence-independent but transient unwrapping is allowed. We compute the conditional probability P (c + d|c) of finding the nucleosome dyad at bp c + d, given that the previous dyad is located at bp c (Materials and Methods). Since inter-dyad distances cannot be used to distinguish between symmetric and asymmetric unwrapping, we assume the former for simplicity. The model is fit to the observed distribution of inter-dyad distances (SI Appendix). The free parameters of the model in-
+
+3
+
+clude the amplitude of the oscillations, the slope of the free energy profile and amin(max) , the minimum (maximum) effective length of the nucleosome particle (SI Appendix, Model A). The maximum extent of nucleosome unwrapping is controlled by amin , while amax is allowed to exceed 147 bp in order to account for the effects of higher-order chromatin structure and linker histone deposition. We also fit the relative frequency of hydroxyl radical DNA cleavage at the -1 position with respect to the nucleosome dyad (SI Appendix) and the chemical potential of histone octamers. Our model reproduces both the overall shape and fine oscillatory structure of the observed inter-dyad distance distribution (Fig. 1C,D). In contrast, models without unwrapping are unable to capture even the overall shape of the observed inter-dyad distribution (gray line in Fig. 1C).
+
+1.2
+
+Higher-order chromatin structure and linker histone energetics
+
+The effective length of the particle found in the fit, amax = 163 bp, is greater than 147 bp, the length of the DNA in the nucleosome core [32]. Indeed, amax = 147 bp is incompatible with the observed inter-dyad distribution (Fig. S3A,B). The model is less sensitive to the value of amin because extensively unwrapped particles are energetically unfavorable and therefore are not frequently seen in the data. The overall shape of the inter-dyad distribution is also sensitive to the slope of the energy profile in Fig. 1B, providing a robust estimate of the average nucleosome unwrapping energy (Fig. S3C). The fitted value of the slope yields 14.4 kB T for the average histone-DNA interaction energy in a fully wrapped nucleosome. Thus the energy profile in Fig. 1B describes both DNA interactions with the histone octamer core (up to 73 bp from the dyad) and the effects of higherorder chromatin structure, including, potentially, the attachment of Hho1p, the H1 linker histone of S. cerevisiae, to the DNA immediately outside of the nucleosome core [37, 38, 39]. Although Hho1p is less abundant in yeast than in higher eukaryotes, it is involved in higher-order chromatin organization, including chromatin compaction in stationary phase [40, 39]. Relatively little is known about the molecular mechanism of H1 binding: there is no consensus yet whether the binding is symmetric or asymmetric, or even what the extent of the H1 footprint is [37, 38]. H1 binding and other factors that mediate chromatin folding into higher-order structures cause linker lengths to be discretized [1, 41]. Linker length discretization can be described by a periodic decaying two-body effective potential between neighboring nucleosomes, with the first minimum approximately 5 bp away from the nucleosome edge [1, 42, 43]. Based on these observations, we have constructed two models for the energy profile outside of the nucleosome core region. One model is a polynomial fit that extends the quasiperiodic profile of the unwrapping energy through another cycle (Fig. 1B; SI Appendix, Model A). The depth and the position of the first minimum outside of the nucleosome core are additional free parameters. As can be seen in Fig. S4B, our fit robustly predicts the first minimum to be positioned 5-6 bp outside of the nucleosome core, in agreement with previous 4
+
+A
+
+
+B
+Dyad
+
+0.5 0
+
+1.5
+
+2.5
+
+3.5
+
+4.5
+
+5.5
+
+6.5
+
+uhalf (kBT)
+
+-2 -4 -6 -8 0 10 20
+
+Dyad - edge distance (bp)
+
+30
+
+40
+
+50
+
+60
+
+70
+
+80
+
+C
+Probability
+
+0.020 0.015 0.010 0.005 0 50
+
+Data Model (unwrapping) Model (no unwrapping)
+
+RMS: 9.99610-4
+
+100
+-3
+
+Inter-dyad distance (bp)
+
+150
+
+200
+
+250
+
+D
+Oscillatory part
+
+2 1 0 -1
+
+x 10
+
+Data Model
+
+-2 50
+
+Correlation: 0.764
+100
+
+Inter-dyad distance (bp)
+
+150
+
+200
+
+250
+
+Figure 1: Genome-wide distribution of inter-dyad distances. (A) A nucleosome is a dynamic structure. Transient nucleosome unwrapping followed by factor binding prevents subsequent rewrapping, mediating further binding events. (B) Nucleosome energy profile. The energy of a nucleosome that covers 2x + 1 bps is given by uSI nuc = 2uhalf (x) with symmetric unwrapping. The minima and maxima of the energy landscape are based on the crystal structure of the nucleosome core particle [31, 32]. Dark gray bars show where the histone binding motifs interact with the DNA minor groove in the structure. Light gray bars show where the DNA major groove faces the histones. The energy profile was obtained by a polynomial fit as described in SI Appendix, Model A. (C) The inter-dyad distance distribution from a high-resolution nucleosome map [30] (blue), and from the model with (red) and without unwrapping (gray). In the model without unwrapping, amin = amax = 147 bp and the fitting parameters are Eb ,  and f (SI Appendix, Model A). RMS - total root-mean-square deviation between the model and the data. (D) Oscillations in the observed (blue) and predicted (red) inter-dyad distance distributions, obtained by subtracting a smooth background from the data and the model with unwrapping in (C). The smooth background was found by applying a Savitzky-Golay filter of polynomial order 3 with 31 bp length (using the sgolayfilt function from the Signal Processing Toolbox of MATLAB). Correlation refers to rosc , the linear correlation coefficient between measured and predicted oscillations.
+
+5
+
+studies [1, 42, 43]. The depth of this minimum is comparable to the depth of the unwrapping minima (Fig. S4, SI Appendix, Model A). The other model represents the energy profile outside of the nucleosome core by a linear function (Fig. S5A; SI Appendix, Model B). The two free parameters are the slope and the length of the line, which are related to the H1-DNA interaction energy and the H1 footprint. This model is motivated by a picture of the H1 histone being gradually detached from its DNA site immediately outside of the nucleosome core. This alternative scenario, although likely oversimplified, can be used to check the sensitivity of our results toward a particular energy profile outside of the core region. We find that the linear profile fits the overall shape of the inter-dyad distribution somewhat less well than the oscillatory one (compare RMS values in Figs. 1B and S5B), although the 10-11 bp periodic fine structure is reproduced in both cases (Figs. 1C, S5C). The optimal linear profile is 7 bp long, yielding a symmetric H1 footprint with two 7 bp half-sites (Fig. S5D) and the H1-DNA interaction energy of  5kB T (Fig. S5E).
+
+1.3
+
+Alternative models of nucleosome unwrapping
+
+Next we have tested the sensitivity of our fits to the functional form of the unwrapping free energy profile. Although our primary model follows nucleosome crystal structures in creating a quasi-periodic energy profile with both 10 and 11 bp modes, strictly periodic 10 or 11 bp sinusoidal profiles yield nearly the same quality of fit (Fig. S6; SI Appendix, Models C,D). Since the initial phase of the oscillations is not determined by the crystal structure anymore, it becomes another fitting parameter. The fitted initial phases in the 10 and 11-bp models make the periodic curves match the crystal structure further away from the dyad, where most of the observed unwrapping takes place (Fig. S6A). The phases diverge closer to the dyad, where they are not as strongly constrained by the data. RMS deviation is less sensitive to the initial phase than rosc , the linear correlation between predicted and observed oscillations in the inter-dyad histograms (Fig. S7). The primary peak in the dependence of rosc on the initial phase matches the crystal structure. There is also a secondary peak corresponding to the 5 bp shift in the unwrapping energy profile, which in turn leads to the 10 bp, in-phase shift in the distribution of inter-dyad oscillations (Fig. S7B). Since the inter-dyad distance distribution has a distinct oscillatory component, it is not surprising that a purely linear model of unwrapping energy does not fit the data as well, although it does match its overall shape (Fig. S8A; SI Appendix, Model E). Less trivially, it was suggested on the basis of singlenucleosome unzipping experiments that nucleosome unwrapping proceeds with 5-bp periodicity because histones interact with each DNA strand separately where the DNA minor groove faces the histone octamer surface, creating two distinct contact "subpatches" [44]. This single-molecule data was fit to a model with a step-wise unwrapping free energy profile [45]. Each step in the profile corresponds to breaking a point histone-DNA contact, and the steps occur every 5.25 bp on average. We do not find any evidence for 5 bp periodicity of nucleosome unwrapping in the genomic data. Indeed, both 5 bp step-wise and 6
+
+5 bp periodic sinusoidal profiles fit the data poorly, about as well as the linear model (Fig. S8B,C). Even the 10-bp step-wise unwrapping profile, while clearly having the right periodicity, does not fit the data as well as the structure-based model (Fig. S8D). This observation suggests that the picture of gradual loss of favorable finite-range histone-DNA interactions followed by gain in DNA conformational entropy is closer to reality than abrupt disruption of short-range histone-DNA contacts. A direct comparison of single-molecule and genomewide energy profiles is unfortunately obscured by the fact that the reported single-nucleosome unzipping experiments are specific to the 601 nucleosomeforming sequence [46], in contrast to our methodology which provides the average, sequence-independent picture of unwrapping energetics.
+
+1.4
+
+Genome-wide organization of nucleosome unwrapping states
+
+Fig. 2A, in which genes are sorted by the promoter length and aligned by the TSS, shows a canonical picture of nucleosomes depleted in promoters and wellpositioned over coding regions [50, 51]. Interestingly, promoter nucleosomes have shorter inter-dyad distances and are therefore more unwrapped (Fig. 2B). When averaged over all genes, the number of dyads at a given bp and the average inter-dyad distance at that bp are strongly correlated (compare blue and red lines in Fig. 2C). The profile of average inter-dyad distances is also correlated with the distribution of DNA fragment lengths in an MNase assay which mapped both nucleosomes and subnucleosome-size particles by pairedend sequencing (Fig. S9A, green line in Fig. 2C) [47]. The two profiles do not coincide completely because inter-dyad distances also depend on the distribution of linker lengths. The observed behavior is opposite of the naive expectation that unwrapping increases with occupancy due to nucleosome crowding, but can be reproduced in a simple sequence-independent model in which nucleosomes phase off a potential barrier placed in the promoter region (Fig. S10) [52]. Partially unwrapped nucleosomes tend to have elevated histone turnover rates [49], both around TSS and genome-wide (Figs. 2C,S9B,S9D). We find that nucleosomes at loci enriched in PICs [48] are also more unwrapped (Figs. 2C,S9C). Finally, inter-dyad distances tend to increase with the fraction of A/T nucleotides, indicating that nucleosomes occupying A/T-rich sequences have longer footprints genome-wide (Fig. S9E). We note that it is misleading to equate inter-nucleosome distances with peak-to-peak distances in the average profile of nucleosome dyad counts (blue line in Fig. 2C). The peak-to-peak distances are 164-165 bp, while the average inter-dyad distance for the nucleosomes in the [TSS,TSS+1000] region is 149.6 bp. Thus nucleosome unwrapping is much more common than could be predicted by mapping single-nucleosome positions alone.
+
+7
+
+A
+
+Nucleosome dyad counts
+
+
+B
+
+"WFSBHFJOUFSEZBEEJTUBODF
+160 158
+
+
+
+156 154 152
+
+8
+
+6
+
+150 148
+
+4
+
+146 144 142
+
+
+
+
+
+
+
+
+
+150 12
+165 bp 164 bp 164 bp 164 bp 165 bp
+
+153 152 151 150 149 6 148 4 147 2 146 145 +1000
+
+145
+
+10
+
+8
+
+140
+
+135
+
+130
+
+0
+
+
+
+TSS
+
++500
+
+Distance (bp)
+
+Figure 2: Nucleosome unwrapping in the vicinity of transcription start sites. (A) Distribution of nucleosome dyad counts [30] near the TSS. 4763 verified S.cerevisiae open reading frames (ORFs) were aligned by their TSS and sorted by promoter lengths. Each horizontal line corresponds to one ORF. (B) Distribution of the average distance between neighboring dyads. For each bp, the distances between a dyad at that bp and all neighboring dyads were averaged. ORFs are sorted as in (A). In (A) and (B), values at bps without dyads were obtained by interpolation, and heatmaps were smoothed using a 2D Gaussian kernel with  = 3 pixels. (C) Data in (A), (B) and Fig. S9A-C averaged over all genes. Blue: nucleosome dyad counts, red: average distance between neighboring dyads, green: average length of DNA-bound particles mapped by MNase digestion [47] (see Fig. S9A for details). Curve with light gray background: combined occupancy of 9 PICs (TBP, TFIIA, TFIIB, TFIID, TFIIE, TFIIF, TFIIH, TFIIK, PolII) [48], curve with light pink background: average histone turnover rate [49]. The peaks in the dyad count profile (blue) are marked with orange ovals representing nucleosomes, and peak-to-peak distances are shown.
+
+8
+
+Average distance to the next dyad (bp)
+
+C
+
+Position (bp)
+
+TSS
+
+
+
+
+
+
+
+3000
+
+2000
+
+1000
+
+Position (bp)
++3 +4 +5
+
+TSS
+
+1000
+
+2000
+
+140
+
+2
+
+1
+
++1
+
++2
+
++6
+
+Average fragment size (bp)
+
+Average number of dyads
+
+A
+10-1 10-2 10-3 10-4 10-5 10-6
+
+Probed Site
+BsaHI TaqI BstNI BsaJI TaqI BsrI TaqI BstUI 150 PmlI 150 BstUI 125 BfaI 125
+
+p open
+
+Unwrapping No unwrapping 0 25 PstI HindIII AvaII MspI HaeIII 50 BamHI 75 HhaI 100 MseI StyI 100
+
+B
+10-3 10-4 10-5 10-6 0
+
+p open
+
+Unwrapping No unwrapping
+
+25
+
+50
+
+75
+
+Position (bp)
+
+Figure 3: Probability of binding site exposure within a nucleosome. The solid blue and dashed green lines represent model predictions with and without unwrapping, respectively. In the latter case, amin = amax = 147 bp and all other parameters are adopted from the model with unwrapping. The dyad is fixed at bp 74. (A) Restriction enzyme sites inserted into the 5S rRNA sequence at locations indicated by the centers of vertical red bars [10]. (B) Restriction enzyme sites inserted into the 601 sequence at locations indicated by the centers of the vertical red bars in the middle of each group [11]. Each group of three bars corresponds to independent measurements in which the 601 sequence was flanked by different DNA sequences. In (A) and (B), the height of each bar is the equilibrium constant for site exposure averaged over multiple experiments (error bars show standard deviation).
+
+1.5
+
+Accessibility of nucleosomal DNA to factor binding
+
+Partial unwrapping of nucleosomal DNA results in differential accessibility of factor binding sites with respect to their position inside the nucleosome: sites on the edges are more accessible than those closer to the dyad. In contrast, all-ornone nucleosome formation should not be sensitive to the binding site position  a nucleosome, once unfolded, liberates its entire site. Polach and Widom [10] studied differential accessibility of 6 restriction enzymes to their target sites. The sites were placed at various positions throughout the 5S rRNA nucleosomal sequence (Fig. 3A). A later study used the 601 sequence and an extended set of 11 restriction enzymes (Fig. 3B) [11]. These studies measured equilibrium conf constants for site exposure Keq , which are related to the probability for a site conf conf conf [29]. to be accessible for binding: popen = Keq /(1 + Keq )  Keq We use our crystal structure-based unwrapping model (Fig. 1B; SI Appendix, Model A) to fit the data on site accessibility [10, 11]. Here the system consists of a single nucleosome and asymmetric unwrapping is allowed. We assume that a site becomes accessible for the enzyme only after an additional number of bps, d, have been unwrapped from the histone octamer surface [29]. We also assume that once the dyad is unwrapped from either end, the entire nucleosome 9
+
+is unfolded. Then the probability for a binding site to be accessible is given by   1 - Occnuc (x + d) for x < xd - d 1 - Occnuc (xd ) for xd - d  x  xd + d popen (x) =  1 - Occnuc (x - d) for x > xd + d, where x  [1, 147] bp, xd = 74 bp is the position of the dyad, and the nucleosome occupancy is given by Eq. (3). Besides d, the fitting parameters of the model are the overall slope of the binding energy and the histone chemical potential  (all other parameters are as in SI Appendix, Model A, with the exception of amin = 1 bp, amax = 147 bp). For the 5S rRNA measurements [10], we obtain 5S = -0.13 kB T/bp,  = -17.5 kB T, and d = 23 bp. For the 601 measurements [11], 601 = -0.16 kB T/bp,  = -16.4 kB T, and d = 45 bp. As expected, the nucleosome formation energy of the 601 sequence is 147  ( 5S - 601 ) = 4.4 kB T more favorable than that of the 5S sequence, in agreement with the experimentally measured difference of 4.9 kB T [53]. The nucleosome formation energy of the 601 sequence is 24.1 kB T, close to the 23.8 kB T estimate made on the basis of 601 unzipping experiments [45]. Interestingly, the 601 DNA has to unwrap more extensively past the binding site to allow access to restriction enzymes. Overall, our model reproduces the observed differential accessibility of restriction enzyme binding sites with respect to the nucleosome dyad (Fig. 3). The only outliers are Sty I and Bfa I binding sites in the 601 series which were not used in the fit and which, if unwrapping proceeds from the ends, cannot be more open than the Pml I site located further away from the dyad.
+
+1.6
+
+Nucleosome-induced cooperativity
+
+If multiple biding sites reside within a single nucleosome, binding of one factor makes the other sites more accessible, in a phenomenon known as nucleosomeinduced cooperativity [16, 18, 25]. The cooperativity disappears in the absence of nucleosomes and reduces in extent with the distance between consecutive sites [16]. Moreover, the cooperativity is not observed if the two sites are on the opposite sides of the nucleosome dyad [13]. We can use our model of nucleosome unwrapping (SI Appendix, Model A with amin = 1 bp, amax = 147 bp) to capture all these aspects of nucleosomeinduced cooperativity (Fig. 4). Specifically, for sites located more than 40 bp away from the dyad site accessibility is strongly enhanced if DNA unwrapping is allowed (Fig. 4A). Interestingly, cooperativity between two TFs bound on the same side of the dyad is observed both with and without unwrapping (Fig. 4B). However, without unwrapping it is impossible to show that binding on the opposite sides of the dyad is not cooperative, as observed in experiments [13] (Fig. 4C). Furthermore, the decrease of cooperativity with distance [16] cannot be reproduced (Fig. 4D). Thus modeling transient nucleosome unwrapping is necessary for understanding how TFs and other DNA-binding proteins gain access to their nucleosome-covered sites.
+
+10
+
+1.7
+
+Sequence-dependent nucleosome positioning and unwrapping
+
+Here we test the assumption that sequence specificity of nucleosome formation may be neglected when inferring nucleosome unwrapping potential from genomic data. In general, the total free energy unuc (k, l) of a nucleosome occupying bps k, . . . , l is a sum of a sequence-independent term uSI nuc (k, l) describing contacts between histone side chains and the DNA phosphate backbone (Fig. 1B), and a sequence-dependent term uSD nuc (k, l) describing DNA bending into the nucleosomal superhelix [36]. Our approach (Eq. (4), SI Appendix) can be used to infer both contributions from high-throughput maps of nucleosome positions. Since the number of different unwrapped species may be as high as several thousand depending on the maximum extent of unwrapping and the assumption of unwrapping symmetry, we expect robust inference to require levels of read coverage that are not currently available, especially in higher eukaryotes. Furthermore, resolution of MNase-based nucleosome maps is insufficient for capturing the 10-11 bp periodicity of the unwrapping potential. In the absence of high-resolution, high-coverage experimental data, we have tested our ability to predict nucleosome unwrapping energetics using a realistic model system. Specifically, we assumed that uSD nuc depends only on the number of monoand dinucleotides in the nucleosomal DNA [54] (SI Appendix). The length of nucleosomal DNA ranges from amin = 74 bp to amax = 147 bp; all other parameters of uSI nuc are as in SI Appendix, Model A. Using Eq. (1) with  = -13 kB T, we computed the exact nucleosome distribution nnuc 1 (k, l) for the S.cerevisiae chromosome I. We sampled paired-end nucleosomal reads [k, l] from nnuc 1 (k, l) until a desired level of read coverage (mean number of reads starting at a bp) was reached. From this finite sample, we constructed a histogram of nucleosome lengths P () and used it to optimize the parameters of uSI nuc (in each step of nuc alone was used to predict n , which in turn gave the fitting procedure, uSI nuc 1 P ()). Next, we used Eq. (4) to predict unuc (i, j ), subtracted uSI nuc from it (assuming that the dyad is at the mid-point of each particle), and fit uSD nuc to the SD nuc rest. Finally, uSI + u were used to compute n ~ , which was then compared nuc nuc 1 with the exact profile nnuc . 1 We find that we are able to reproduce the unwrapping potential even if nucleosome formation is sequence-specific (Fig. S11A). However, the overall slope of the potential is overpredicted because the histogram of particle lengths is affected by well-positioned nucleosomes which have negative sequence-dependent energies. The average of these energies biases the slope. Nucleosome occupancy SD predicted using uSI nuc + unuc yields a reasonable correlation with the exact profile even at 1 read per bp, although at least 10 reads per bp are required to reproduce dyad positions (Fig. S11B).
+
+11
+
+0.8
+
+TF binding probability
+
+0.8 0.8 0.6 0.6 0.4 0.4 0.2 0.2
+
+Unwrapping No unwrapping
+
+TF binding probability
+
+A
+Occupancy
+
+1
+
+11
+
+B
+
+
+
+6OXSBQQJOH5' 6OXSBQQJOH5'T /PVOXSBQQJOH5' /PVOXSBQQJOH5'T
+
+0.6 0.4 0.2 0 0 20
+
+Distance from the dyad (bp)
+Nucleosome (unwrapping) TF (unwrapping) Nucleosome (no unwrapping) TF (no unwrapping)
+
+00 0
+
+20
+
+40
+
+60
+
+40
+
+60
+
+80 100 120 140
+
+
+
+TF binding probability
+
+TF binding probability
+
+C
+
+Position (bp)
+1
+Unwrapping. 1 TF Unwrapping. 2 TFs No unwrapping. 1 TF No unwrapping. 2 TFs
+
+D
+
+TF chemical potential (kBT)
+0.5 0.4 0.3 0.2 0.1 0 0 10 20
+
+D
+Unwrapping. 2 TFs No unwrapping. 2 TFs
+
+30
+
+40
+
+50
+
+TF chemical potential (kBT)
+
+Distance (bp)
+
+Figure 4: Modes of nucleosome-induced cooperativity. (A) TF and nucleosome occupancy with and without unwrapping. The TF binding site occupies bps 1120. Inset: TF binding probability as a function of the distance between the nucleosome dyad and the proximal edge of the TF site, with and without unwrapping. (B) TF titration curves for one TF site vs. two TF sites located on the same side of the dyad. Site 1 occupies bps 1120, site 2 occupies bps 3140. Inset: Binding site locations. (C) Same as (B), but with the two TF sites located on the opposite sides of the dyad. Site 1 occupies bps 1120, site 2 occupies bps 117126. Inset: Binding site locations. (D) Nucleosome-induced cooperativity as a function of the distance between two TF binding sites. The binding probability of the second TF is shown. Site 1 occupies bps 11-20, while the position of the second site is variable. Inset: Definition of the distance between the two binding sites. In all panels, free energy of a fully wrapped nucleosome is - log(109 ) kB T; histone chemical potential is log(10-6 ) kB T; TF binding energy is - log(1010 ) kB T to cognate sites, and - log(106 ) kB T to all other sites; TF chemical potential is log(10-9 ) kB T unless varied. Asymmetric unwrapping is allowed; in the model without unwrapping, amin = amax = 147 bp and all other parameters are the same as in the model with unwrapping.
+
+2
+
+Discussion and Conclusions
+
+Since DNA wrapped in nucleosomes is sterically occluded, nucleosome formation prevents access of DNA-binding factors such as TFs or polymerase subunits to their cognate sites. Transient DNA unwrapping off the histone octamer surface, extensively studied in model systems [16, 10, 17, 11, 18, 19, 20, 12, 13, 21, 22, 23], can facilitate such binding events but its importance on the genomic scale has been unclear. MNase-based maps of nucleosome positions employing pairedend sequencing have identified numerous subnucleosome-size particles [47, 55]. 12
+
+However, it is impossible to deduce from these experiments which particles correspond to unwrapped nucleosomes. In addition, there is a concern that DNA fragments may have been under- or overdigested by MNase. These challenges have been overcome in a recent experiment in which chemically modified histones are used to map nucleosome dyads with single-bp resolution [30]. Used in conjunction with paired-end sequencing, the experiment provides information about both dyad positions and the distances between neighboring dyads. The latter is especially important since it probes the two-particle distribution in the same cell. The histogram of inter-dyad distances shows that at least 38.7% of all S.cerevisiae nucleosomes are partially unwrapped. Gene promoters are enriched in such nucleosomes, which also have higher histone turnover rates. Over coding regions, the distribution of wrapped DNA lengths oscillates in phase with the nucleosome occupancy profile, so that more stable nucleosomes are also more wrapped. We have developed a statistical mechanics description of nucleosome arrays which allows DNA unwrapping while rigorously treating steric exclusion and sequence specificity of nucleosome formation. We have shown that prominent 10-11 bp periodicity in the distribution of inter-dyad distances [30] can be explained using an unwrapping energy profile based on the pattern of histone-DNA contacts in the nucleosome crystal structures. We were able to rule out alternative scenarios of step-wise unwrapping and 5 bp periodicity of the unwrapping process. Furthermore, fitting the distribution of inter-dyad lengths required accounting for linker length discretization, commonly thought to be imposed by chromatin fiber formation [41]. Our model yields estimates of nucleosome unwrapping energies consistent with previous biophysical experiments, and accounts for single-nucleosome observations which show that nucleosome-covered binding sites closer to the edge of the nucleosome are more easily accessible to DNA-binding factors and that binding of the first factor enhances binding of subsequent factors on the same side of the dyad. Finally, our approach reproduces the periodic distribution of wrapped DNA lengths in the vicinity of TSS if potential barriers are placed in the promoters. The barriers may be created in vivo by PICs [48], other DNA-bound factors, and chromatin remodelers. The extent of nucleosome unwrapping in the yeast genome suggests that its treatment should be included in all future models of nucleosome positioning and chromatin energetics.
+
+3
+3.1
+
+Methods
+Statistical mechanics of DNA-bound particles
+
+Here we outline the exact theory for T molecular species simultaneously interacting with one-dimensional DNA (details and extensions are provided in SI Appendix). The DNA-bound particles are subject to steric exclusion and may also be partially unwrapped. Let us (k, l) (s  {1, 2, . . . , T }) denote the binding energy of a particle of type s attached to bps k, . . . , l. One can show that the
+
+13
+
+one-body distribution of particles of type t is given by nt 1 (k, l) = 1 - Z (k ) t, k |z |t, l Z + (l), Z (1)
+
+where Z is the grand canonical partition function, t, k |z |s, l = e [s -us (k,l)] t,s ,  = 1/kB T is the inverse temperature, s is the chemical potential of particles of type s, and t,s is the Kronecker symbol. If the DNA length is L, vectors |t, k are T L-dimensional with a 1 at position (t - 1)L + k and 0 everywhere else. Similarly, the nearest-neighbor two-body distribution function is given by nt,s 2 (i, j ; k, l) = 1 - Z (i) t, i|z |t, j (k - j ) s, k |z |s, l Z + (l), Z (2)
+
+where  is the Heaviside step function, and Z - (k ) and Z + (k ) are partial partition functions for the DNA segments [1,k) and (k,L], respectively. Z - (k ), Z + (k ), and Z can be computed recursively, as shown in SI Appendix. Using Eq. (1), one can find particle occupancy:
+i k+at max -1
+
+Occt (i) =
+t k=i-at max +1 l=max(i,k +amin -1)
+
+nt 1 (k, l),
+
+(3)
+
+t where at min (amax ) is the minimum (maximum) length of a particle of type t. The inverse problem of predicting DNA binding energies from one-particle distributions can also be solved:
+
+ [ut (i, j ) - t ] = - ln
+
+nt 1 (i, j )Z , - Z (i)Z + (j )
+
+(4)
+
+where Z, Z - , Z + are again found recursively using only one-particle distributions nt 1 (i, j ) as input (SI Appendix). Eq. (4) enables us to disentangle intrinsic sequence preferences and unwrapping energetics from steric effects.
+
+3.2
+
+Model of inter-dyad distances
+
+To predict the distribution of inter-dyad lengths, we compute the conditional probability of having a nucleosome with the dyad at bp c + d, given that the adjacent upstream nucleosome has the dyad at bp c: P (c + d|c) = N2 (c, c + d) , N1 (c) (5)
+
+where the probability distributions of the nucleosome centers can be computed using Eqs. (1) and (2) for a single particle type: N1 (c) =
+1
+
+nnuc 1 (c - 1 , c + 1 ),
+nuc,nuc n2 (c - 1 , c + 1 ; c + d - 2 , c + d + 2 ). 1 ,2
+
+N2 (c, c + d) =
+
+14
+
+Here, 21,2 +1 are lengths of the particles centered at bp c and c+d, respectively. To estimate P (c + d|c), we use c = 5 kbp and a box of length L = 10 kbp, so that the boundaries of the box are far away. We ignore nucleosome sequence specificity, convolve P (c + d|c) with a kernel to account for site-specific chemical cleavage bias (SI Appendix), and fit model parameters to reproduce the observed distribution of inter-dyad distances.
+
+Acknowledgments
+We thank Leonid Mirny for insightful discussions. This research was supported by National Institutes of Health (R01 HG004708 to A.V.M.). A.V.M. is an Alfred P. Sloan Research Fellow.
+
+15
+
+Supplementary Information
+1
+1.1
+1.1.1
+
+Supplementary Methods
+Direct problem: Matrix solution
+Single particle type
+
+We consider a problem of mutually interacting particles (one-dimensional rods) that can be reversibly adsorbed to a one-dimensional lattice of L sites [here, DNA base pairs (bps)]. In order to model partial unwrapping of nucleosomal DNA off the surface of histone octamers, we allow the particles to cover a variable number of bps between amin and amax . We assume that the particles cannot overlap while they are attached to the lattice. This is implemented using hard-core interactions between adjacent particles. There are also hard walls at the ends of the lattice so that particles are prevented from running off it. In addition, we allow generic two-body interactions between nearest-neighbor particles. The attachment of a particle to the DNA modifies the total energy of the system in a sequence-specific manner. Physically, the binding energy may have contributions from DNA bending, electrostatic interactions, hydrogen bond formation, van der Waals contacts, etc. Thus a particle which covers bps k, k +1, . . . , l has a total one-body binding energy u(k, l). Note that for pairs of coordinates (k, l) such that l - k + 1 > amax or l - k + 1 < amin , u(k, l) = , because all particles must have the length between amin and amax bps. The theory presented below is valid for arbitrary binding energies u(k, l). Let (j, k ) be the two-body interaction between a pair of nearest-neighbor particles which cover base pairs . . . , j - 1, j and k, k +1, . . . (k > j ) (Fig. S1). In the case of nucleosomes, such interactions may be used to account for the effects of higher-order chromatin structure [52]. Although we do not focus on two-body interactions in this work, they are included below for the sake of generality. We impose  if k  j, (j, k ) = V (k - j - 1) if k > j, where V (d) is an arbitrary interaction potential which depends only on the linear distance d between two neighboring particles. For a fixed number of particles attached to the DNA, N , the canonical partition function is QN =
+{in =1...L}n{1,...,2N }
+
+e-u(i1 ,i2 ) e- (i2 ,i3 ) e-u(i3 ,i4 ) . . .  e-u(i2N -3 ,i2N -2 ) e- (i2N -2 ,i2N -1 ) e-u(i2N -1 ,i2N ) , (S1)
+
+where  = 1/kB T is the inverse temperature (kB is the Boltzmann constant). Note that with our definitions of one-body energies, two-body interactions and 16
+
+u(i, j) i j
+
+(j, k) k
+
+u(k, l) l
+
+Figure S1: Schematic illustration of one-body and two-body potentials in a multi-nucleosome system. Nucleosomes may be partially unwrapped, resulting in variable DNA footprints. hard-wall boundary conditions, only legitimate configurations of non-overlapping particles will contribute to Eq. (S1). In order to simplify the notation, we introduce two L  L matrices: k |e|l = e-u(k,l) , k |w|l = e- (k,l) . Here k |M |l represents the element of matrix M in row k and column l. |l is a column vector of dimension L with 1 at position l and 0 everywhere else, and k | is a row vector with 1 at position k and 0 otherwise. Let |J be a vector of dimension L with 1 at every position. Eq. (S1) gives QN = J |(ew)N -1 e|J 1 if N  1, if N = 0.
+
+If the particles are allowed to attach and detach from the lattice, the system has a variable number of particles, and the grand-canonical partition function is
+Nmax
+
+Z=
+N =0
+
+eN  QN
+Nmax
+
+=1+
+N =1
+
+J |(zw)N -1 z |J J |(zw)M z |J
+M =0
+
+=1+
+
+= 1 + J |(I - zw)-1 z |J ,
+
+(S2)
+
+where  is the chemical potential, Nmax is the maximum number of particles that can fit on L bp, I is the identity matrix, and k |z |l = e [-u(k,l)]   (k, l). 17
+
+Note that all particle configurations with N > Nmax do not contribute to Z , allowing us to extend the upper limit from Nmax to . From the partition function, we can compute s-particle distribution functions (see the chapter by Stell in [56]):  (k, l) Z , Z  (k, l)  (i, j ) (k, l) 2 Z n2 (i, j ; k, l) = , Z  (i, j ) (k, l) n1 (k, l) = and in general ns (i1L , i1R ; . . . ; isL , isR ) =  (i1L , i1R ) . . .  (isL , isR ) s Z . Z  (i1L , i1R ) . . .  (isL , isR )
+
+Using these relations, we obtain the one-particle distribution n1 (k, l) = 1 J |(I - zw)-1 |k k |z |l l|(I - wz )-1 |J , Z (S3)
+
+and the two-particle distribution 1 J |(I - zw)-1 |i i|z |j j |w(I - zw)-1 |k k |z |l l|(I - wz )-1 |J . Z (S4) In particular, the nearest-neighbor two-particle distribution is given by n2 (i, j ; k, l) = n2 (i, j ; k, l) = 1 J |(I - zw)-1 |i i|z |j j |w|k k |z |l l|(I - wz )-1 |J . Z
+
+Eqs. (S3) and (S4) allow an obvious interpretation. To find the probability of starting a particle covering positions from k to l [Eq. (S3)], we have to add statistical weights of all the configurations that contain a particle at that position, and divide the resulting sum by the partition function. Similarly, in order to find the probability of a pair of particles, one covering positions i to j and the other covering positions k to l [Eq. (S4)], we need to sum statistical weights of all the configurations containing that pair of particles, and divide by the partition function. With the one-particle distribution, we can define the occupancy of a bp i as the probability of finding that bp in contact with any particle. In other words, we need to sum the probabilities of all configurations in which particles cover bp i:
+i k+amax -1
+
+Occ(i) =
+k=i-amax +1 l=max(i,k+amin )
+
+n1 (k, l).
+
+Note that 1 - Occ(i) is the probability that bp i is not covered by any particles.
+
+18
+
+ut(i, j) i jk
+
+us(k, l) l
+
+(t,j; s,k)
+
+Figure S2: Schematic illustration of one-body and two-body potentials in a system with multiple particle types. The model allows all particles to be in multiple stages of unwrapping. In practice, we allow nucleosomes to be partially unwrapped but the transcription factors (TFs) always have fixed DNA footprints. 1.1.2 Multiple particle types
+
+The above formalism can be easily extended to the case in which T types of particles can attach to the one-dimensional lattice. Let the binding energy of a particle of type t	{1, . . . , T } that covers bps i to j on the lattice be ut (i, j ). The interaction between a particle of type t ending at position k , and the next particle of type s starting at position l will be denoted by (t, k ; s, l) (Fig. S2). Each particle of type t, when attached to the DNA, is in contact with a number t of bps between at min and amax . Thus ut (i, j ) = 0 if i and j do not satisfy the t constraints amin  j - i + 1  at max . Also, (t, i; s, j ) =  for j  i since the particles cannot overlap. With this notation, the grand-canonical partition function becomes Z=
+all states
+
+e- [ut1 (i1L ,i1R )-t1 ] e- (t1 ,i1R ;t2 ,i2L ) e- [ut2 (i2L ,i2R )-t2 ] . . . ,
+
+where t is the chemical potential of the particles of type t. The sum is over all configurations, which can have variable numbers of particles of any type. Using the matrix notation, t, k |z |s, l = e- [ut (k,l)-t ] t,s  t (k, l)t,s , t, k |w|s, l = e- (t,k;s,l) , where t,s is the Kronecker delta symbol, the partition function can be written as Z= t1 , i1L |z |t1 , i1R t1 , i1R |w|t2 , i2L t2 , i2L |z |t2 , i2R . . .
+all states
+
+19
+
+Each vector |t, i has dimension T L and only one non-zero element, set to 1 for normalization. For example, |1, i vectors have a 1 at position i, |2, i vectors have a 1 at position L + i, etc. As above, we denote by |J a vector in which all T L elements are equal to 1, to obtain Z = 1 + J |(I - zw)-1 z |J , equivalent to Eq. (S2). Similarly to the previous case of a single particle type, we can compute the one-particle density nt 1 (k, l) = = t (k, l) Z Z t (k, l) 1 J |(I - zw)-1 |t, k t, k |z |t, l t, l|(I - wz )-1 |J . Z
+
+(S5)
+
+We can also obtain the two-particle density nt,s 2 (i, j ; k, l) = 1 J |(I - zw)-1 |t, i t, i|z |t, j Z  t, j |w(I - zw)-1 |s, k s, k |z |s, l s, l|(I - wz )-1 |J
+
+(S6)
+
+and the nearest-neighbor two-particle density nt,s 2 (i, j ; k, l) = 1 J |(I - zw)-1 |t, i t, i|z |t, j Z  t, j |w|s, k s, k |z |s, l s, l|(I - wz )-1 |J .
+
+(S7)
+
+Eqs. (S6) and (S7) give the joint probability that a particle of type t covers bps i to j , while a second particle of type s covers bps k to l. Using Eq. (S5) we can compute occupancy for each type of particles t and for each bp i:
+i k+at max -1
+
+Occt (i) =
+k=i-at max +1 l=max(i,k+at min )
+
+nt 1 (k, l).
+
+In the following sections we will focus on the one-particle density function.
+
+1.2
+
+Direct problem: Recursive solution for hard-core interactions
+
+A straightforward application of Eqs. (S5) and (S6) entails computationally intensive matrix manipulations. Fortunately, for particles that interact only through hard-core repulsion rather than long-range two-body interactions, the one-particle distribution can be computed recursively and therefore much more efficiently.
+
+20
+
+1.2.1
+
+General case
+
+With multiple particle types, Eq. (S5) can be rewritten as nt 1 (i, j ) = 1 - Z (i) t, i|z |t, j Z + (j ), Z
+
+where Z - (i) and Z + (j ) are the partition functions for the domains [1, i) and (j, L], respectively. Note that in the case of hard-core interactions alone, Z - (i) and Z + (j ) do not depend on the type of the particle occupying positions i through j . In the case of steric exclusion alone, these partial partition functions satisfy the following recursion relations: Z - (i) = Z - (i - 1) +
+s
+s i-as max j i-amin
+
+Z - (j ) s, j |z |s, i - 1 ,
+
+(S8)
+
+and Z + (i) = Z + (i + 1) +
+s
+s i+as min j i+amax
+
+s, i + 1|z |s, j Z + (j ).
+
+(S9)
+
+Here each particle type s has two characteristic lengths, corresponding to its s minimum and maximum DNA footprints, respectively: as min and amax . The - + boundary conditions are Z (1) = 1 and Z (L) = 1. The full partition function is given by Z = Z - (L + 1) = Z + (0). Note that all unphysical terms for which bound particles run off the lattice automatically vanish from Eqs. (S8) and (S9). To avoid numeric instabilities, the recursion should be done in log space. Let F (i) = ln Z - (i), R(i) = ln Z + (i). With this notation, Eqs. (S8) and (S9) become F (i) = F (i - 1) + ln 1 +
+s
+s i-as max j i-amin
+
+eF (j )-F (i-1)+ [s -us (j,i-1)] , (S10)
+
+R(i) = R(i + 1) + ln 1 +
+s
+s i+as min j i+amax
+
+eR(j )-R(i+1)+ [s -us (i+1,j )] ,
+
+with the boundary conditions F (1) = R(L) = 0. Then the one-particle distribution function is
+F (i)+R(j )-ln Z + [t -ut (i,j )] nt , 1 (i, j ) = e
+
+where ln Z = F (L + 1) = R(0). Although we do not show it here, the two-particle distribution can be computed in a very similar way. The only new ingredient in Eq. (S6) is the partition function for the box with walls at two arbitrary positions, Z (t, j, s, k )  t, j |w(I - zw)-1 |s, k . This partition function can be computed recursively, exactly as the partial partition functions Z  discussed above. 21
+
+1.2.2
+
+Special case: No unwrapping
+
+The special case in which all particles are fully attached to their DNA sites (i.e., there is no DNA unwrapping) can be easily obtained from our general formalism. s s Indeed, in this case we restrict as min = amax = a in Eq. (S10), obtaining F (i) = F (i - 1) + ln 1 +
+s
+
+eF (i-a eR(i+a
+s
+
+s
+
+)-F (i-1)+ [s -us (i-as ,i-1)]
+
+, .
+
+R(i) = R(i + 1) + ln 1 +
+
+s
+
+)-R(i+1)+ [s -us (i+1,i+as )]
+
+As before, the boundary conditions are F (1) = R(L) = 0. The one-particle distribution is given by
+F (i)+R(i+a t nt 1 (i, i + a - 1) = e
+t
+
+-1)-ln Z + [t -ut (i,i+at -1)]
+
+.
+
+1.3
+
+Inverse problem: Recursive solution for hard-core interactions
+
+In the previous section, we have solved the direct problem: given the binding energies for all particle types, we compute s-particle distributions. However, typically it is particle distributions that are observed experimentally, and the energetics of particle-DNA interactions need to be inferred. This inverse problem can be solved recursively for the case of systems with multiple particle types, partial unwrapping (variable footprints), and steric exclusion. The recursive solution is efficient enough to be employed on the genome-wide scale. Here we focus on one-particle distributions and one-body energies; the exact matrix formulation of the inverse problem for a single particle type with the two-particle distribution and the two-body potential is available in Ref. [52]. 1.3.1 General case
+
+Using Eqs. (S5), (S8) and (S9), we obtain:   Z - (i) = Z - (i - 1)  1 + = Z - (i - 1) 1 + Z - (i   Z  nt 1 (j, i - 1) + - 1)Z (i - 1)
+
+t, t i-at max j i-amin
+
+N R (i - 1) ,  (i - 1)
+
+(S11)
+
+where N R (i) = nt t 1 (j, i) represents the probability t i-at max +1j i-amin +1 of finding a particle of any type with the right edge at bp i, and  (i) = Z - (i)Z + (i)/Z .
+
+22
+
+Z + satisfies a similar recursive relation: Z + (i) = Z + (i + 1) 1 + N L (i + 1) ,  (i + 1) (S12)
+
+where N L (i) is the probability of finding a particle of any type with the left edge at bp i: N L (i) = t i+at -1j i+at nt 1 (i, j ). max -1 min The quantity	(i) satisfies  (i + 1) -  (i) = 1 Z - (i + 1)Z + (i + 1) - Z - (i)Z + (i) Z 1 Z - (i + 1) Z + (i + 1) - Z + (i) = Z + Z + (i) Z - (i + 1) - Z - (i) =N R (i) - N L (i + 1), so that  (i) = 1 +
+k=0 i -1
+
+N R (k ) - N L (k + 1) ,
+
+(S13)
+
+where the initial condition  (0) = 1 has been used. After we compute both Z - and Z + in this way, the total partition function is given by Z = Z - (L + 1) = Z + (0) as before, and the binding energy for any particle attached to the DNA is given by  [ut (i, j ) - t ] = - ln nt 1 (i, j ) 1.3.2 Special case: No unwrapping Z . Z - (i)Z + (j ) (S14)
+
+In the case of the all-or-none binding, all matrix elements i|nt 1 |j vanish unless j = i + at - 1, where at is the length of the binding site for the particle of type t. Thus N L (i) =
+t t nt 1 (i, i + a - 1), t nt 1 (i - a + 1, i). t
+
+N (i) =
+
+R
+
+Using these expressions, we can employ Eqs. (S11), (S12) and (S13) to compute Z + and Z - in log space. Finally, Eq. (S14) can be used to compute the binding energies. If all particles are of the same type, the quantity  can be simplified further:
+i
+
+ (i) = 1 -
+k=i-a+1
+
+N L (k ) = 1 - Occ(i),
+
+23
+
+where Occ(i) is the probability that bp i is covered by a particle. Thus in this limit	(i) is simply the probability that bp i is not bound by any particles. The recursion relations for Z - and Z + become Z - (i + 1) = Z - (i) 1 + Z + (i) = Z + (i + 1) 1 + N L (i - a + 1) , 1 - Occ(i) N L (i + 1) . 1 - Occ(i + 1)
+
+These expressions are equivalent to those previously obtained in [54].
+
+1.4
+
+Sequence-specific nucleosome formation energies
+
+The simplest sequence-dependent model of nucleosome formation assumes that the nucleosome energy depends only on the mono- and dinucleotide counts in the nucleosomal site [54]. Thus for the sequence S1 S2 . . . SN , the nucleosome N N -1 formation energy is Si Si+1 , where Si and Si Si+1 are the i=1 Si + i=1 mono- and dinucleotide contributions, respectively. Here we consider a symmetrized version of the model, with A = T , C = G and 10 unique dinucleotide energies: AA/T T , AC/GT , AG/CT , AT , CA/T G , CC/GG , CG , GA/T C , GC , T A . Using Eq. (S14), we can estimate all 12 's for a model in which nucleosomes are the only particle type and unwrapping is allowed. For each sequence starting a bp i and ending at bp j , we have
+j j -1 Sk k=i
+
+u(i, j ) -  =
+
++
+k=i
+
+Sk Sk+1
+
+- ,
+A/T
+
+   ,  (S15)
+
+=
+
+mA/T
+
+mC/G
+
+mAA/T T
+
+
+
+mT A
+
+-1
+
+
+
+. . .
+TA
+
+
+
+where mX and mXY are the counts of mono- and dinucleotides X and XY in the sequence, respectively. Using all possible combinations of pairs (i, j ) where a nucleosome can form, we obtain a large number P of equations of this type: E- = M  .
+
+Here, E -  is a column vector of dimension P , where each row contains one is the column vector from Eq. (S15),  and M is a P  13 matrix with mono- and dinucleotide counts and -1's in the u(i, j ) -	element from Eq. (S15).
+
+24
+
+last column. From this equation we can derive the energies and	by a least squares fit. A problem that arises is that matrix M has a one-dimensional kernel, or null space [52]. Because in every DNA sequence the number of mononucleotides is equal to the length of the sequence, and the number of dinucleotides is equal to the length of the sequence minus 1, the columns of the matrix M are not linearly independent. Indeed, the column vector   1  1     -1	  |V =	.    .	.   -1	1 is the only linearly independent vector from the kernel of M : M |V = 0 (i.e., the kernel of M is spanned by |V ). Thus we have only 12 linearly independent equations, and cannot obtain a unique solution for the 13 parameters and . We need to add one constraint, which we choose to be
+12 i i=1
+
+= 0,
+
+to make the solution unique.
+
+1.5
+
+Site-specific chemical cleavage bias
+
+Hydroxyl radicals that cleave DNA near the nucleosome dyad have two preferred cutting sites, at positions -1 bp and +6 bp with respect to the dyad [30]. If DNA is cut at these positions with frequencies f and 1 - f , the distance between two consecutive cuts (one on the Watson and one on the Crick strand) is given by dcuts = ddyads + b, where ddyads is the distance between two neighboring dyads and the bias b is    -12	(1 - f )2 -5 2f (1 - f ) . b= with probability	 2 2 f The cleavage bias has to be inter-dyad distance probability bias:     F ( x) =	 taken into account by convolving the predicted P (c + d|c) with a kernel corresponding to this (1 - f )2 for x = -12 2f (1 - f ) for x = -5 . f2 for x = 2 0 otherwise
+
+The convolution is then compared with the observed distribution of interdyad distances. 25
+
+1.6
+
+Parameter optimization
+
+Parameter fitting for all models was carried out in a two-stage procedure using the genetic algorithm optimization function ga from the MATLAB Global optimization toolbox. First, the objective function to be minimized was set equal to the root-mean-square (RMS) deviation between predicted and observed inter-dyad distributions. Once RM S < 10-3 had been achieved, the objective function was replaced by RMS - rosc -rosc , where rosc is the linear correlation between observed and predicted oscillations after the smooth background has been subtracted from inter-dyad distributions, as in Fig. 1D. We have found that the two-stage setup allows us to effectively fit both the overall shape and the fine oscillatory structure in the data. The best-fit parameters for all models are given in SI Results.
+
+26
+
+2
+
+Supplementary Results
+
+Model A: Crystal structure augmented with an additional well. The binding energy of a particle of length a = 1 + x1 + x2 (1 bp for the dyad, and x1 and x2 for the extra number of bps in contact with the histone octamer on each side of the dyad) is given by u = uhalf (x1 ) + uhalf (x2 ), with uhalf (x) = interp1(...) - Eb x, 147
+
+where Eb is the binding energy of a fully wrapped particle in the absence of 10-11 bp oscillations. The oscillations are based on the the positions of the histone-DNA contacts in the crystal structure [57]. The MATLAB function interp1(...) was used to generate the oscillatory pattern by piecewise cubic Hermite interpolation between the following data points: x (Position) -1 3 7 13 17 24 28 34 38 44 49 55 59 65 69 75 p 85 f(x) (Energy) -A A -A A -A A -A A -A A -A A -A A -A A -d A
+
+The oscillatory pattern was superimposed onto a line with the slope of -Eb /147.
+
+27
+
+2
+
+Parameter amax amin Eb	A f p d
+
+Value
+(kBT) u
+half
+
+0 -2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80 90
+
+163 bp 3 bp 14.39 kB T -14.51 kB T 1.13 kB T 0.51 79 bp 0.86 kB T
+
+Dyad - edge distance (bp)
+
+Table S1: Fitted parameters for Model A. amax and amin are the maximum and minimum lengths of the nucleosome particle,	is the histone octamer chemical potential, A is the amplitude of the oscillations, and f is the hydroxyl radical cutting frequency. p and d are the position and the depth of the first minimum outside of the nucleosome core particle, respectively. Eb is the binding energy of a fully wrapped particle in the absence of 10-11 bp oscillations.
+
+Fit residuals: RM S = 9.9958  10-4 rosc = 0.764364 RM Sosc = 1.8662  10-4 RM S is the root-mean-square error of the predicted inter-dyad distribution. rosc is the linear correlation between the oscillatory parts of the measured and predicted inter-dyad distributions. The oscillatory part was obtained by subtracting the smooth background from the full inter-dyad distribution. Smoothing was done by applying a Savitzky-Golay smoothing filter [also known as leastsquares, or DISPO (Digital Smoothing Polynomial) filter] of polynomial order 3 and length 31 bp. RM Sosc is the root-mean-square error of the oscillatory part of the predicted inter-dyad distribution.
+
+28
+
+Model B: Crystal structure augmented with a linear function. Same as Model A for x  [1, 73], followed by a linear function: uhalf (x) =
+Eb x interp1(...) - 147 Eb interp1(...) - 73 147 - E X ( x
+
+- 73)
+
+for x  [1, 73], for x  [74, 73 + X ],
+
+where E/X is the slope of the linear function (i.e., E is the energy difference between the first and last points of the linear function and X is the cardinality of the range of the linear function).
+0
+
+Parameter amin Eb  A f E X
+
+Value
+(kBT)
+half
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80 90
+
+27 bp 14.66 kB T -15.04 kB T 1.28 kB T 0.50 -2.47 kB T 7 bp
+
+u
+
+Dyad - edge distance (bp)
+
+Table S2: Fitted parameters for model B. All parameters are as in Model A, except for E and X which are defined above. Fit residuals: RM S = 0.0012 (RM S cannot decrease below 10-3 for this model) rosc = 0.769179 RM Sosc = 1.8411  10-4 All residuals are defined as in Model A.
+
+29
+
+Model C: 10-bp oscillations superimposed onto a linear function. uhalf (x) = -A cos 2 Eb (x - x0 ) - x, 10 147
+
+where A is the amplitude of the oscillations, x0 determines the phase of the oscillations, and Eb is the binding energy of a fully wrapped particle in the absence of the oscillations.
+2
+
+Parameter amax amin Eb	A x0 f
+
+Value
+(kBT) u
+half
+
+0 -2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80 90
+
+165 bp 3 bp 14.43 kB T -13.99 kB T 1.06 kB T 79 bp 0.50
+
+Dyad - edge distance (bp)
+
+Table S3: Fitted parameters for Model C. All parameters are as in Model A, except for x0 which is defined above. Fit residuals: RM S = 9.9861  10-4 rosc = 0.708620 RM Sosc = 2.0203  10-4 All residuals are defined as in Model A.
+
+30
+
+Model D: 11-bp oscillations superimposed onto a linear function. uhalf (x) = -A cos 2 Eb (x - x0 ) - x, 11 147
+
+where A, x0 and Eb have the same meaning as in Model C.
+0
+
+Parameter amax amin Eb	A x0 f
+
+Value
+(kBT)
+half
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80 90
+
+161 bp 25 bp 13.99 kB T -14.30 kB T 1.03 kB T 80 bp 0.52
+
+u
+
+Dyad - edge distance (bp)
+
+Table S4: Fitted parameters for Model D. All parameters are as in Model C. Fit residuals: RM S = 9.9121  10-4 rosc = 0.688838 RM Sosc = 2.0735	10-4 All residuals are defined as in Model A.
+
+31
+
+Model E: Uniform unwrapping. uhalf (x) = - Eb x, 147
+
+where Eb is the binding energy of a fully wrapped nucleosome.
+0
+
+Parameter amax amin Eb	f
+
+Value
+(kBT)
+half
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80 90
+
+163 bp 35 bp 13.40 kB T -13.14 kB T 0.58
+
+u
+
+Dyad - edge distance (bp)
+
+Table S5: Fitted parameters for Model E. All parameters are as in Model A. Fit residuals: RM S = 9.9725  10-4 rosc = 0.274786 RM Sosc = 2.7507	10-4 All residuals are defined as in Model A.
+
+32
+
+Model F: 5-bp oscillations superimposed onto a linear function. uhalf (x) = -A cos 2 Eb (x - x0 ) - x, 5 147
+
+where A, x0 and Eb have the same meaning as in Model C.
+0
+
+Parameter amax amin Eb	A x0 f
+
+Value
+(kBT)
+half
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80 90
+
+163 bp 39 bp 13.50 kB T -16.13 kB T 2.36 kB T 74 bp 0.63
+
+u
+
+Dyad - edge distance (bp)
+
+Table S6: Fitted parameters for Model F. All parameters are as in Model C. Fit residuals: RM S = 9.8984  10-4 rosc = 0.206240 RM Sosc = 3.0554	10-4 All residuals are defined as in Model A.
+
+33
+
+Model G: 5-bp stepwise unwrapping. uhalf (x) = -Estep ceil x - x0 5 ,
+
+where Estep is the amount of energy lost in each step, and x0 determines the phase of the stepwise profile.
+0
+
+Parameter amax amin Estep  x0 f
+
+Value
+(kBT)
+half
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80 90
+
+163 bp 39 bp 0.48 kB T -12.83 kB T 2 bp 0.63
+
+u
+
+Dyad - edge distance (bp)
+
+Table S7: Fitted parameters for Model G. All parameters are as in Model A, except for Estep and x0 defined above. Fit residuals: RM S = 9.9040	10-4 rosc = 0.282593 RM Sosc = 2.7421  10-4 All residuals are defined as in Model A.
+
+34
+
+Model H: 10-bp stepwise unwrapping. uhalf (x) = -Estep ceil x - x0 10 ,
+
+where Estep is the amount of energy lost in each step, and x0 determines the phase of the stepwise profile.
+0
+
+Parameter amax amin Estep  x0 f
+
+Value
+(kBT) u
+half
+
+-2 -4 -6 -8 -10 -12 0 10 20 30 40 50 60 70 80 90
+
+169 bp 3 bp 1.16 kB T -12.04 kB T 3 bp 0.62
+
+Dyad - edge distance (bp)
+
+Table S8: Fitted parameters for Model E. All parameters are as in Model F. Fit residuals: RM S = 9.7895  10-4 rosc = 0.545077 RM Sosc = 2.4569	10-4 All residuals are defined as in Model A.
+
+35
+
+3
+A
+
+Supplementary Figures
+B
+x 10
+
+
+4 2 180 160 150 100 140 50 0
+
+Correlation
+
+6
+
+
+
+RMS
+
+0
+
+ 180 160 150 100 140 50 0
+
+amax (bp)
+
+amin (bp)
+
+amax (bp)
+
+amin (bp)
+
+C
+
+3.5 3 2.5
+
+x 10
+
+
+
+RMS
+
+2 1.5 1 0.5 0.04
+
+0.06
+
+0.08
+
+0.1
+
+0.12
+
+0.14
+
+0.16
+
+Slope (kBT / bp)
+
+Figure S3: Sensitivity of the predicted inter-dyad distribution to the parameters of the unwrapping potential based on nucleosome crystal structures. (A) Root-mean-square error (RMS) of the inter-dyad distribution predicted using the model in Fig. 1B, as a function of amin and amax . (B) The linear correlation coefficient between oscillations in the predicted and observed inter-dyad distributions (rosc ), as a function of amin and amax . The oscillations were obtained by subtracting the smooth background from inter-dyad distributions, as described in the Fig. 1 caption. (C) Variation of the RMS with the slope of the unwrapping potential in Fig. 1B. In all panels, model parameters that were not varied were kept fixed at their best-fit values (SI Results, Model A).
+
+36
+
+A
+
+RMS
+3.5 3.3 3.1 2.9
+
+x 10 4.5 4 3.5 3 2.5 2 1.5 1
+
+
+
+Depth (kBT)
+
+2.7 2.5 2.3 2.1 1.9 1.7 1.5 76 77
+
+Minimum (bp) Correlation
+
+78
+
+79
+
+80
+
+81
+
+82
+
+B
+
+3.5 3.3 3.1 2.9
+
+0.7 0.6 0.5 0.4 0.3 0.2 0.1 0  76 77
+
+Depth (kBT)
+
+2.7 2.5 2.3 2.1 1.9 1.7 1.5
+
+Minimum (bp)
+
+78
+
+79
+
+80
+
+81
+
+82
+
+Figure S4: Sensitivity of the predicted inter-dyad distribution to model parameters describing higher-order chromatin structure. The unwrapping potential is based on nucleosome crystal structures (SI Results, Model A). (A) Root-mean-square error (RMS) of the predicted inter-dyad distribution, as a function of the position and the depth of the first minimum outside of the nucleosome core (Fig. 1B). The depth of the first minimum is computed with respect to uhalf (x = 73 bp). (B) The linear correlation coefficient between oscillations in the predicted and observed inter-dyad distributions (rosc ), as a function of the position and the depth of the first minimum outside of the nucleosome core (Fig. 1B). The oscillations were obtained by subtracting the smooth background from inter-dyad distributions, as described in the Fig. 1 caption. In both panels, model parameters that were not varied were kept fixed at their best-fit values (SI Results, Model A).
+
+37
+
+A
+uhalf (kBT)
+
+2 0 -2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80
+
+D
+
+Correlation
+ 5     0   1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+
+'E (kBT)
+
+0
+
+Dyad - edge distance (bp)
+
+B
+0.020
+
+Probability
+
+Data Model
+
+RMS: 11.96410-4
+
+
+
+0.015 0.010 0.005 0 50 100
+-3
+
+Extra number of base-pairs
+
+E
+150
+FigS4_Xray_slope_outside.pdf 200
+
+
+
+Inter-dyad distance (bp)
+
+250
+
+C
+Oscillatory part
+
+1 0 -1 -2 50
+
+Data Model
+
+RMS
+
+2
+
+x 10
+
+
+
+Correlation: 0.769
+100
+
+Inter-dyad distance (bp)
+
+150
+
+200
+
+250
+
+
+
+
+
+
+
+'E (kBT)
+
+
+
+
+
+
+
+
+
+
+
+Figure S5: Crystal structure-based model augmented by a linear potential outside of the nucleosome core. (A) The energy profile fitted to reproduce the inter-dyad distance distribution shown in (B). All fitting parameters are listed in SI Results, Model B. Under the symmetric unwrapping assumption, the energy of a nucleosome which covers 2x + 1 bps is given by 2uhalf (x). (B) The inter-dyad distance distribution observed in a high-resolution nucleosome map [30] (blue line), and predicted using Model B in SI Results (red line). RMS - root-mean-square deviation between the model and the data. Note that in this model RMS below 10-3 could not be achieved, and thus optimization was switched to maximize the correlation coefficient rosc once RMS reached 1.2  10-3 (see SI Methods for details). (C) Oscillations in the observed (blue line) and predicted (red line) inter-dyad distributions. The oscillations were obtained by subtracting the smooth background from the data and the model in (B), as described in the Fig. 1 caption. Correlation refers to rosc , the linear correlation coefficient between measured and predicted oscillations. (D) Heatmap with superimposed contour lines of the rosc dependence on the two parameters of the linear potential outside of the nucleosome core: x = xlast - 73 bp and E = uhalf (xlast ) - uhalf (73), where [1, xlast ] is the range of the energy profile (SI Results, Model B). Note that the best fit corresponds to x = 7 bp. (E) The dependence of the RMS on E for the best-fit value of x = 7 bp. All parameters not explicitly varied in (D) and (E) were kept fixed at their best-fit values (SI Results, Model B).
+
+38
+
+A
+
+Dyad
+
+0.5 0 2
+
+1.5
+
+2.5
+
+3.5
+
+4.5
+
+5.5
+
+6.5
+
+DSZTUBMTUSVDUVSF 10CQQFSJPEJD 11CQQFSJPEJD
+
+VIBMG LB5
+
+
+4 6 8 0 10
+
+%ZBEFEHFEJTUBODFCQ
+
+
+20
+
+30
+
+40
+
+50
+
+60
+
+70
+
+80
+
+B
+Probability
+
+0.025 0.020 0.015 0.010 0.005 0 50
+
+Probability
+
+Data Model
+
+RMS: 9.98610-4
+
+D
+
+0.025 0.020 0.015 0.010 0.005 0 50
+
+Data Model
+
+RMS: 9.91210-4
+
+100
+-3
+
+Inter-dyad distance (bp)
+
+150
+
+200
+
+250
+
+100
+-3
+
+Inter-dyad distance (bp)
+
+150
+
+200
+
+250
+
+C
+Oscillatory part
+
+2 1 0 -1
+
+x 10
+
+E
+Oscillatory part
+Data Model
+
+2 1 0 -1
+
+x 10
+
+Data Model
+
+-2 50
+
+Correlation: 0.709
+100
+
+Inter-dyad distance (bp)
+
+150
+
+200
+
+250
+
+-2 50
+
+Correlation: 0.689
+100
+
+Inter-dyad distance (bp)
+
+150
+
+200
+
+250
+
+Figure S6: Strictly periodic models of nucleosome unwrapping. (A) Nucleosome unwrapping/higher-order structure potential energy profiles. Under the symmetric unwrapping assumption, the energy of a nucleosome that covers 2x+1 bps is given by 2uhalf (x). The minima and maxima of the energy landscape are either based on the crystal structures of the nucleosome core particle as in Figure 1 (blue), or else are 10 (green) and 11 (red) bp-periodic oscillations with fitted initial phase (SI Results, Models C and D). Dark gray bars show where the histone binding motifs interact with the DNA minor groove. Light gray bars indicate where the DNA major groove faces the histones. (B) The inter-dyad distance distribution from a high-resolution nucleosome map [30] (blue line), and from the 10 bp-periodic model (red line). All model parameters are listed in SI Results, Model C. RMS - root-mean-square deviation between the model and the data. (C) Oscillations in the observed (blue line) and predicted (red line) inter-dyad distributions. The oscillations were obtained by subtracting a smooth background from the data and the model in (B), as described in the Fig. 1 caption. Correlation refers to rosc , the linear correlation coefficient between measured and predicted oscillations. (D) Same as (B), for the 11 bpperiodic model. All model parameters are listed in SI Results, Model D. (E) Same as (C), for the 11 bp-periodic model.
+
+39
+
+A
+
+RMS
+0.15 0.14 0.13
+
+x 10 4 3.5 3 2.5 2 1.5
+
+
+
+Slope (kBT / bp)
+
+0.12 0.11 0.10 0.09 0.08 0.07 0.06 0.05 64 65 66 67 68 69 70 71 72 73
+
+1
+
+B
+
+Minimum (bp)
+
+0.5
+
+Correlation
+
+0
+
+ 0.15 0.1 68 70 72
+
+Slope (kBT / bp)
+
+0.05
+
+64
+
+66
+
+Minimum (bp)
+
+Figure S7: Sensitivity of the predicted inter-dyad distribution to parameters of the 10 bp-periodic model. (A) Heatmap with superimposed contour lines of the RMS dependence on the slope of the energy profile and the position of the last minimum within the nucleosome core. RMS - root-meansquare deviation between the model and the data. (B) The linear correlation coefficient rosc between oscillations in the predicted and observed inter-dyad distributions, as a function of the overall slope of the energy profile and the position of the last minimum within the nucleosome core. All parameters not explicitly varied were kept fixed at their best-fit values (SI Results, Model C).
+
+40
+
+A
+2 0
+
+Linear model
+
+B
+2 0
+
+5 bp sin model
+
+C
+2 0
+
+5 bp step-wise model
+
+D
+2 0
+
+10 bp step-wise model
+
+uhalf (kBT)
+
+uhalf (kBT)
+
+uhalf (kBT)
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80
+
+uhalf (kBT)
+
+-2 -4 -6 -8 -10 0 10 20 30 40 50 60 70 80
+
+Dyad - edge distance (bp)
+Data Model
+
+Dyad - edge distance (bp)
+Data Model
+
+Dyad - edge distance (bp)
+Data Model
+
+Dyad - edge distance (bp)
+Data Model
+
+0.020
+
+RMS: 9.97210-4 Probability
+
+0.020 0.015 0.010 0.005 0 50 2 x 10
+-3
+
+RMS: 9.89810-4 Probability
+
+0.020 0.015 0.010 0.005 0 50 2 x 10
+-3
+
+RMS: 9.90410-4 Probability
+
+0.020 0.015 0.010 0.005 0 50 2 x 10
+-3
+
+RMS: 9.79010-4
+
+Probability
+
+0.015 0.010 0.005 0 50 2 x 10
+-3
+
+Inter-dyad distance (bp)
+
+100
+
+150
+
+200
+
+250
+
+Inter-dyad distance (bp)
+
+100
+
+150
+
+200
+
+250
+
+Inter-dyad distance (bp)
+
+100
+
+150
+
+200
+
+250
+
+Inter-dyad distance (bp)
+
+100
+
+150
+
+200
+
+250
+
+Oscillatory part
+
+Oscillatory part
+
+Oscillatory part
+
+1 0 -1
+
+1 0 -1
+
+1 0 -1
+
+Oscillatory part
+
+Data Model
+
+Data Model
+
+Data Model
+
+1 0 -1
+
+Data Model
+
+Correlation: 0.275
+-2 50
+
+Correlation: 0.206
+-2 50
+
+Correlation: 0.283
+-2 50
+
+Correlation: 0.545
+-2 50
+
+Inter-dyad distance (bp)
+
+100
+
+150
+
+200
+
+250
+
+Inter-dyad distance (bp)
+
+100
+
+150
+
+200
+
+250
+
+Inter-dyad distance (bp)
+
+100
+
+150
+
+200
+
+250
+
+Inter-dyad distance (bp)
+
+100
+
+150
+
+200
+
+250
+
+Figure S8: Alternative models of nucleosome unwrapping. (A) Linear model (SI Results, Model E). (B) 5-bp periodic model (SI Results, Model F). (C) 5-bp step-wise model (SI Results, Model G). (D) 10-bp step-wise model (SI Results, Model H). In each column, the upper panel shows the nucleosome unwrapping/higher-order structure potential energy profile (as in Fig. 1B), the middle panel shows the comparison of experimental and predicted inter-dyad distance distributions (as in Fig. 1C), and the lower panel shows observed and predicted oscillations in the inter-dyad distance distributions (as in Fig. 1D).
+
+41
+
+A
+
+Average fragment length
+
+
+B
+
+)JTUPOFUVSOPWFSSBUF[TDPSF
+
+2
+
+C
+
+PIC occupancy
+
+
+1.5  1
+
+
+
+
+
+
+
+0.5
+
+
+
+0  0.5
+
+
+
+
+
+
+
+
+
+
+
+Position (bp)
+
+
+TSS
+
+
+
+
+
+ 3000
+
+2000
+
+1000
+
+Position (bp) E
+
+TSS
+
+1000
+
+2000
+
+1
+
+
+
+
+
+
+
+Position (bp)
+
+TSS
+
+
+
+
+
+
+
+D
+
+160 155 150 145 140 135 130 125 0.7 0.8
+
+Average interEZBEEJTUBODF
+
+Correlation:  "WFSBHFIJTUPOFUVSOPWFSSBUF[TDPSF
+
+0   3
+
+"WFSBHFJOUFSEZBEEJTUBODF
+
+Correlation: 0.501 A/T ratio
+0.9 1 1.1
+
+Figure S9: Genome-wide distribution of nucleosome lengths, histone turnover rates, and transcription pre-initiation complexes. (A) Distribution of average lengths of DNA-bound particles mapped by MNase digestion [47] in the vicinity of TSS. We considered particles with sizes between 80 and 200 bp and assigned particle lengths to the mid-point of each particle. Values for bps without dyads were obtained by interpolation. (B) Distribution of histone turnover rates [49] in the vicinity of TSS. (C) Distribution of the combined occupancy of 9 transcription pre-initiation complexes (PICs) [48] in the vicinity of TSS. PIC occupancies provided at 20 bp interval in Ref. [48] were interpolated. In panels (A)-(C), gene order is as in Figure 1B, and the heatmaps were smoothed using a 2D Gaussian kernel with	= 3 pixels. (D) Correlation between inter-dyad distances and histone turnover rates averaged over 10 kbp windows tiling the yeast genome. (E) Correlation between average inter-dyad distances and the A/T ratio in 10 kbp windows tiling the yeast genome. A/T ratio is the fraction of A/T nucleotides in the window, divided by the genomewide A/T fraction. Correlation in (D) and (E) refers to the linear correlation coefficient. 42
+
+0.06 0.05 0.04
+
+2 1.8 1.6
+
+Normalized dyad density (Brogaard et al.) Normalized dyad density (simulation) Average nuc. size (Henikoff et al.) Average nuc. size (simulation)
+
+155
+
+100 90
+
+150
+
+80
+
+Average fragment size (bp)
+
+Potential barrier (kBT / bp)
+
+0.03 0.02 0.01 0 -0.01 -0.02 -0.03
+
+1.4 145 1.2 1 140 0.8 0.6 0.4 0.2 -1000 130 +1000
+
+60 50 40 30 20 10 0
+
+135
+
+-500
+
+TSS
+
++500
+
+Distance (bp)
+
+Figure S10: Modeling distributions of nucleosome lengths and dyad positions in the vicinity of TSS. We align all yeast genes by their TSS as in Fig. 2 and for each bp compute the fraction of times that bp is found in an intergenic region, as opposed to the ORF of a neighboring gene (grey background curve). The intergenic fraction has an asymmetric shape with a maximum at about 50 bp upstream of the TSS. We use this shape as a guide for constructing an energy barrier for in vivo histone deposition (pink background curve).
+-c) The barrier is composed of three half-Gaussians: B (x) = H exp - (x2 2
+1 2 2 2
+
+Intergenic region ratio (%)
+
+Normalized dyad density
+
+70
+
+(x
+
+-c) -c ) c), (H + D) exp - (x2 - 1 - D exp - (x2 (x > c). The free param2 2 2 3 eters of the barrier are fit to maximize the sum of two correlations: between observed and predicted normalized dyad counts [30] (solid and dashed blue lines, respectively), and between observed and predicted average nucleosome DNA lengths [47] (solid and dashed green lines, respectively). Normalized dyad counts are computed as the total number of dyads at a given bp for all genes, divided by the average of this quantity in a [-1000,1000] bp window around the TSS. Average DNA lengths are computed for all nucleosomes with a midpoint at a given bp, for all genes (if the midpoint falls in between two bps, the one on the left is used). The fitted parameters are: H = 0.0545 kB T, D = 0.0243 kB T, c = xTSS - 32 bp, 1 = 162.7 bp, 2 = 28.0 bp, 3 = 2090.9 bp, where xTSS is the absolute position of the TSS in the box, c is the center of the 3 Gaussians, H is the height of the first Gaussian, D is the depth of the third Gaussian, and 1 , 2 , 3 are the standard deviations of the three Gaussian distributions. The simulations were done in a 15 kbp box with the barrier placed at its center to eliminate the boundary effects. Unwrapping was assumed to be symmetric and the nucleosome structure-based unwrapping potential (SI Results, Model A) was used. The total free energy unuc (k, l) of a nucleosome occupying bps k, . . . , l is l barrier a sum of uSI = j =k j , where j is the value of the barrier at bp nuc and unuc j . Note that the chemical mapping data underestimates the number of -1 and +1 nucleosomes due to gel selection bias [30].
+
+43
+
+A
+
+2
+
+4FRVFODFJOEFQFOEFOU binding energy (kBT)
+
+0      0
+
+Exact $PNQVUFESFBECQ $PNQVUFESFBETCQ $PNQVUFESFBETCQ
+
+20
+
+B
+
+Dyad  edge distance (bp)
+
+40
+
+60
+
+80
+
+100 80
+
+1 read / bp 10 reads / bp 100 reads / bp
+
+1 0.8 0.6 0.4 0.2 0
+
+|'P| / |P| (%)
+
+60 40 20 0
+
+Parameter
+
+ya
+
+Figure S11: Inference of the unwrapping potential in a model with sequence-specific nucleosome formation energies. (A) Exact unwrapping potential vs. unwrapping potentials predicted at three levels of sequence coverage. All calculations were done on S. cerevisiae chromosome I with L = 230 kbp. M L reads were randomly sampled from the exact distribution nnuc 1 (i, j ) (see Materials and Methods), where M	{1, 10, 100} is the desired level of read coverage per bp. Sampled reads were used to compile a chromosome-wide histogram of nucleosome DNA lengths, to which the unwrapping potential in SI Results, Model A was fit using a genetic algorithm optimization function ga from MATLAB, which minimizes the root-mean-square error of the predicted distribution of nucleosome lengths. (B) The relative errors between predicted and exact (SI Results, Model A) parameters of the unwrapping potential at three levels of sequence coverage (light blue background). P denotes any parameter on the horizontal axis. Linear correlation between predicted and exact distributions of dyad positions and nucleosome occupancy (light pink background). The height of each bar represents the mean relative error for the corresponding parameter or the mean correlation coefficient, obtained by averaging the results of 100 random sampling experiments. The uncertainty intervals represent standard deviations.
+
+44
+
+O
+
+D
+
+cc .
+
+amax
+
+amin
+
+Eb
+
+
+
+A
+
+p
+
+d
+
+ds
+
+Correlation
+
+References
+[1] K. E. van Holde, Chromatin. New York: Springer, 1989. [2] K. Luger et al., "Crystal structure of the nucleosome core particle at 2.8  A resolution," Nature, vol. 389, pp. 251260, Sept. 1997. [3] G. Felsenfeld and M. Groudine, "Controlling the double helix," Nature, vol. 421, pp. 448453, 2003. [4] A. L. Olins and D. E. Olins, "Spheroid chromatin units (v bodies)," Science, vol. 183, pp. 330332, Jan. 1974. [5] R. Kornberg, "Chromatin structure: a repeating unit of histones and dna.," Science (New York, NY), vol. 184, no. 4139, pp. 868871, 1974. [6] C. Woodcock, J. Safer, and J. Stanchfield, "Structural repeating units in chromatin. i. evidence for their general occurrence.," Experimental cell research, vol. 97, pp. 101110, 1976. [7] H. Schiessel, J. Widom, R. Bruinsma, and W. Gelbart, "Polymer reptation and nucleosome repositioning," Phys. Rev. Lett., vol. 86, pp. 44144417, 2001. [8] I. Kulic and H. Schiessel, "Chromatin dynamics: Nucleosomes go mobile through twist defects," Phys. Rev. Lett., vol. 91, p. 148103, 2003. [9] M. Vignali et al., "ATP-Dependent chromatin-remodeling complexes," Mol. Cell. Biol., vol. 20, pp. 18991910, Mar. 2000. [10] K. J. Polach and J. Widom, "Mechanism of protein access to specific DNA sequences in chromatin: A dynamic equilibrium model for gene regulation," J. Mol. Biol., vol. 254, pp. 130149, Nov. 1995. [11] J. D. Anderson, A. Th astr om, and J. Widom, "Spontaneous access of proteins to buried nucleosomal DNA target sites occurs via a mechanism that is distinct from nucleosome translocation," Mol. Cell. Biol., vol. 22, pp. 7147 7157, Oct. 2002. [12] H. S. Tims et al., "Dynamics of nucleosome invasion by DNA binding proteins," J. Mol. Biol., vol. 411, pp. 430448, Aug. 2011. [13] G. Moyle-Heyrman, H. S. Tims, and J. Widom, "Structural constraints in collaborative competition of transcription factors against the nucleosome," J. Mol. Biol., vol. 412, pp. 634646, Sept. 2011. [14] C. Hodges et al., "Nucleosomal fluctuations govern the transcription dynamics of RNA polymerase II," Science, vol. 325, pp. 626628, July 2009. [15] A. Bucceri, K. Kapitza, and F. Thoma, "Rapid accessibility of nucleosomal DNA in yeast on a second time scale," EMBO J, vol. 25, pp. 31233132, July 2006. 45
+
+[16] C. C. Adams and J. L. Workman, "Binding of disparate transcriptional activators to nucleosomal DNA is inherently cooperative," Mol. Cell. Biol., vol. 15, p. 14051421, 1995. [17] J. D. Anderson and J. Widom, "Sequence and position-dependence of the equilibrium accessibility of nucleosomal DNA target sites," J. Mol. Biol., vol. 296, pp. 979987, 2000. [18] J. A. Miller and J. Widom, "Collaborative competition mechanism for gene activation in vivo," Mol. Cell. Biol., vol. 23, pp. 16231632, 2003. [19] G. Li and J. Widom, "Nucleosomes facilitate their own invasion," Nat. Struct. Mol. Biol., vol. 11, no. 1, pp. 763769, 2004. [20] G. Li et al., "Rapid spontaneous accessibility of nucleosomal DNA," Nat. Struct. Mol. Biol., vol. 12, no. 1, pp. 4653, 2004. [21] M. Engeholm et al., "Nucleosomes can invade DNA territories occupied by their neighbors," Nat. Struct. Mol. Biol., vol. 16, no. 2, pp. 151158, 2009. [22] M. G. Poirier et al., "Spontaneous access to DNA target sites in folded chromatin fibers," J. Mol. Biol., vol. 379, pp. 772786, June 2008. [23] M. G. Poirier, E. Oh, H. S. Tims, and J. Widom, "Dynamics and function of compact nucleosome arrays," Nat. Struct. Mol. Biol., vol. 16, pp. 938945, 2009. [24] T. Chou, "An exact theory of histone-DNA adsorption and wrapping," Europhys. Lett., vol. 62, pp. 753759, June 2003. [25] L. A. Mirny, "Nucleosome-mediated cooperativity between transcription factors," Proc. Natl. Acad. Sci. U.S.A., vol. 107, pp. 2253422539, Dec. 2010. [26] V. B. Teif and K. Rippe, "Statisticalmechanical lattice models for proteinDNA binding in chromatin," J. Phys.: Condens. Matter, vol. 22, p. 414105, Oct. 2010. [27] V. B. Teif and K. Rippe, "Nucleosome mediated crosstalk between transcription factors at eukaryotic enhancers," Phys. Biol., vol. 8, p. 044001, Aug. 2011. [28] V. B. Teif and K. Rippe, "Calculating transcription factor binding maps for chromatin," Brief. Bioinform., vol. 13, pp. 187201, Mar. 2012. [29] P. Prinsen and H. Schiessel, "Nucleosome stability and accessibility of its DNA to proteins," Biochimie, vol. 92, pp. 17221728, Dec. 2010. [30] K. Brogaard et al., "A map of nucleosome positions in yeast at base-pair resolution," Nature, vol. 486, pp. 496501, 2012.
+
+46
+
+[31] C. Davey, D. Sargent, K. Luger, A. Maeder, and T. Richmond, "Solvent mediated interactions in the structure of the nucleosome core particle at 1.9  aresolution," J. Mol. Biol., vol. 319, pp. 10971113, 2002. [32] T. J. Richmond and C. A. Davey, "The structure of DNA in the nucleosome core," Nature, vol. 423, pp. 145150, 2003. [33] C. Dingwall, G. P. Lomonosoff, and R. A. Laskey, "High sequence specificity of micrococcal nuclease," Nucl. Acids Res., vol. 9, pp. 26592673, 1981. [34] J. D. McGhee and G. Felsenfeld, "Another potential artifact in the study of nucleosome phasing by chromatin digestion with micrococcal nuclease," Cell, vol. 32, pp. 12051215, 1983. [35] H.-R. Chung, I. Dunkel, F. Heise, C. Linke, S. Krobitsch, A. E. EhrenhoferMurray, S. R. Sperling, and M. Vingron, "The effect of micrococcal nuclease digestion on nucleosome positioning data," PLoS ONE, vol. 5, no. 12, p. e15754, 2010. [36] A. V. Morozov, K. Fortney, D. A. Gaykalova, V. M. Studitsky, J. Widom, and E. D. Siggia, "Using DNA mechanics to predict in vitro nucleosome positions and formation energies," Nucleic Acids Res., vol. 37, pp. 4707 4722, 2009. [37] J. Zlatanova, C. Seebart, and M. Tomschik, "The linker-protein network: control of nucleosomal DNA accessibility," Trends Biochem. Sci., vol. 33, pp. 247253, 2008. [38] S. H. Syed et al., "Single-base resolution mapping of h1nucleosome interactions and 3D organization of the nucleosome," Proc. Natl. Acad. Sci. U.S.A., vol. 107, pp. 96209625, May 2010. [39] M. Georgieva, A. Roguev, K. Balashev, J. Zlatanova, and G. Miloshev, "Hho1p, the linker histone of saccharomyces cerevisiae, is important for the proper chromatin organization in vivo," Biochim. et Biophys. Acta, vol. 1819, pp. 366374, 2012. [40] G. Schafer, C. McEvoy, and H.-G. Patterton, "The saccharomyces cerevisiae linker histone Hho1p is essential for chromatin compaction in stationary phase and is displaced by transcription," Proc. Natl. Acad. Sci. U.S.A., vol. 105, pp. 1483814843, 2008. [41] J. Widom, "A relationship between the helical twist of DNA and the ordered positioning of nucleosomes in all eukaryotic cells," Proc. Natl. Acad. Sci. USA, vol. 89, pp. 10951099, 1992. [42] J. P. Wang, Y. Fondufe-Mittendorf, L. Xi, G. F. Tsai, E. Segal, and J. Widom, "Preferentially quantized linker DNA lengths in Saccharomyces cerevisiae," PLoS Comput. Biol., vol. 4, p. e1000175, 2008.
+
+47
+
+[43] R. V. Chereji et al., "Statistical mechanics of nucleosome ordering by chromatin-structure-induced two-body interactions," Phys. Rev. E, vol. 83, p. 050903, May 2011. [44] M. Hall, A. Shundrovsky, L. Bai, R. Fulbright, J. Lis, and M. Wang, "Highresolution dynamic mapping of histone-DNA interactions in a nucleosome," Nat. Struct. Mol. Biol., vol. 16, pp. 124129, 2009. [45] R. Forties, J. North, S. Javaid, O. Tabbaa, R. Fishel, M. Poirier, and R. Bundschuh, "A quantitative model of nucleosome dynamics," Nucleic Acids Res., vol. 39, pp. 83068313, 2011. [46] A. Thastrom, P. T. Lowary, H. R. Widlund, H. Cao, M. Kubista, and J. Widom, "Sequence motifs and free energies of selected natural and nonnatural nucleosom e positioning DNA sequences," J. Mol. Biol., vol. 288, pp. 213229, 1999. [47] J. G. Henikoff, J. A. Belskyb, K. Krassovsky, D. MacAlpine, and S. Henikoff, "Epigenome characterization at single base-pair resolution," Proc. Natl. Acad. Sci. USA, vol. 108, pp. 1831818323, 2011. [48] H. S. Rhee and B. F. Pugh, "Genome-wide structure and organization of eukaryotic pre-initiation complexes," Nature, vol. 483, pp. 295301, 2012. [49] M. F. Dion, T. Kaplan, M. Kim, S. Buratowski, N. Friedman, and O. J. Rando, "Dynamics of replication-independent histone turnover in budding yeast," Science, vol. 315, pp. 14051408, 2007. [50] G. C. Yuan, Y. J. Liu, M. F. Dion, M. D. Slack, L. F. Wu, S. J. Altschuler, and O. J. Rando, "Genome-scale identification of nucleosome positions in S. cerevisiae," Science, vol. 309, pp. 626630, 2005. [51] T. N. Mavrich, I. P. Ioshikhes, B. J. Venters, C. Jiang, L. P. Tomsho, J. Qi, S. C. Schuster, I. Albert, and B. F. Pugh, "A barrier nucleosome model for statistical positioning of nucleosomes throughout the yeast genome," Genome Res., vol. 18, pp. 10731083, 2008. [52] R. V. Chereji and A. V. Morozov, "Statistical mechanics of nucleosomes constrained by higher-order chromatin structure," J. Stat. Phys., vol. 144, no. 2, pp. 379404, 2011. [53] A. Th astr om, P. Lowary, and J. Widom, "Measurement of histoneDNA interaction free energy in nucleosomes," Methods, vol. 33, pp. 3344, May 2004. [54] G. Locke, D. Tolkunov, Z. Moqtaderi, K. Struhl, and A. V. Morozov, "Highthroughput sequencing reveals a simple model of nucleosome energetics," Proceedings of the National Academy of Sciences, vol. 107, pp. 2099821003, Nov. 2010.
+
+48
+
+[55] H. A. Cole, B. H. Howard, and D. J. Clark, "Activation-induced disruption of nucleosome position clusters on the coding regions of Gcn4-dependent genes extends into neighbouring genes," Nucl. Acids Res., vol. 39, pp. 9521 9535, 2011. [56] H. L. Frisch and J. L. Lebowitz, The equilibrium theory of classical fluids: a lecture note and reprint volume. WA Benjamin, 1964. [57] T. J. Richmond and C. A. Davey, "The structure of DNA in the nucleosome core," Nature, vol. 423, pp. 145150, May 2003.
+
+49
+

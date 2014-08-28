@@ -1,0 +1,21 @@
+#!/bin/bash
+export PATH=${HOME}/bin:${PATH}
+
+export JAVA_HOME=/usr/lib/jvm/default-java
+export HADOOP_VERSION=2.3.0
+export HADOOP_PREFIX=$HOME/hadoop-${HADOOP_VERSION}
+export HADOOP_INSTALL=${HADOOP_PREFIX}
+export PATH=$PATH:${HADOOP_PREFIX}/bin
+export PATH=$PATH:${HADOOP_PREFIX}/sbin
+export HADOOP_MAPRED_HOME=${HADOOP_INSTALL}
+export HADOOP_COMMON_HOME=${HADOOP_INSTALL}
+export HADOOP_CONF_DIR=${HADOOP_INSTALL}/etc/hadoop
+export HADOOP_HDFS_HOME=${HADOOP_INSTALL}
+export YARN_HOME=${HADOOP_INSTALL}
+
+export PIG_INSTALL=${HOME}/pig-0.13.0
+export PATH=${PATH}:$PIG_INSTALL/bin
+
+export SPARK_YARN_USER_ENV="JAVA_HOME=${JAVA_HOME}"
+export PATH=${PATH}:${HOME}/spark-1.0.2-bin-hadoop2/bin
+

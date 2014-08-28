@@ -1,0 +1,1015 @@
+A Nonlinear Constrained Optimization Framework for Comfortable and Customizable Motion Planning of Nonholonomic Mobile Robots  Part II
+Shilpa Gulati Chetan Jhurani Benjamin Kuipers
+
+arXiv:1305.5025v1 [cs.RO] 22 May 2013
+
+Abstract
+In this series of papers, we present a motion planning framework for planning comfortable and customizable motion of nonholonomic mobile robots such as intelligent wheelchairs and autonomous cars. In Part I, we presented the mathematical foundation of our framework, where we model motion discomfort as a weighted cost functional and define comfortable motion planning as a nonlinear constrained optimization problem of computing trajectories that minimize this discomfort given the appropriate boundary conditions and constraints. In this paper, we discretize the infinite-dimensional optimization problem using conforming finite elements. We describe shape functions to handle different kinds of boundary conditions and the choice of unknowns to obtain a sparse Hessian matrix. We also describe in detail how any trajectory computation problem can have infinitely many locally optimal solutions and our method of handling them. Additionally, since we have a nonlinear and constrained problem, computation of high quality initial guesses is crucial for efficient solution. We show how to compute them.
+
+1
+
+Introduction
+
+In the first paper of this series (Gulati et al., 2013), we formulated motion planning for a nonholonomic mobile robot moving on a plane as a constrained nonlinear optimization problem. This formulation was motivated by the need for planning trajectories that result in comfortable motion for human users of autonomous robots such as assistive wheelchairs (Fehr et al., 2000; Simpson et al., 2008) and autonomous cars (Silberg et al., 2012). We reviewed literature from robotics and ground vehicles and identified several properties that a trajectory must have for comfort. We then reviewed motion planning literature in robotics (Latombe, 1991; Choset et al., 2005; LaValle, 2006, 2011a,b) and concluded that most existing methods have been developed for robots that do not transport a human user and have not explicitly addressed issues of comfort and customization. We then posed motion planning as a constrained nonlinear optimization problem where the objective is to compute trajectories that minimize a discomfort cost functional and satisfy appropriate boundary conditions and constraints. The discomfort cost functional was formulated based on comfort studies in road and railway vehicle design. We performed an in-depth analysis of conditions under which the cost-functional
+ Corresponding author. This work was performed as part of Shilpa's Ph.D. (Gulati, 2011) in the Mechanical Engineering Department at the University of Texas, Austin, TX 78712, USA. Shilpa now works at Bosch Research and Technology Center, 4009 Miranda Ave Suite 150, Palo Alto, CA 94304, USA. Email: shilpa.gulati@gmail.com  Tech-X Corporation, 5621 Arapahoe Ave, Boulder, CO 80303, USA. Email: chetan.jhurani@gmail.com  Electrical Engineering and Computer Science Department, University of Michigan, Ann Arbor, MI 48109 USA. Email: kuipers@umich.edu
+
+is mathematically meaningful, a thorough analysis of boundary conditions, and formulated the constraints necessary for motion comfort and for obstacle avoidance. We showed that we must be able to impose two kinds of boundary conditions. In the first kind, the problem is set in the Sobolev space of functions whose up to second derivatives are square-integrable. In the second kind, we must allow functions that are singular at the boundary (with a known strength) but still lie in the same Sobolev space in the interior. The above optimization problem is infinite dimensional since it is posed on infinite dimensional function spaces. This means that we must discretize it as a finite dimensional problem before it can be solved numerically. Keeping the problem setting and requirements mentioned above in mind, it is natural to use the Finite Element Method (FEM) (Hughes, 2000) to discretize it. In this paper, we present the details of this discretization and show how to use an appropriate finite dimensional subspace for both kinds of boundary conditions. We also show the sparsity structure of the Hessian of the global problem. Some of the discretized inequality and inequality constraints, if computed naively, lead to a dense global Hessian. We avoid this and keep the global Hessian sparse by introducing auxiliary variables. A good initial guess is crucial for solving a nonlinear optimization problem. We describe a method for computing high quality initial guesses for the optimization problem. The choice of finite-element method for discretization, the choice of appropriate finite dimensional subspace for different types of boundary conditions, the choice of appropriate variables to be solved for, and a method to compute good initial guess together result in a fast and reliable solution method.
+
+2
+
+Background
+
+For completeness, we briefly describe the assumptions and problem formulation that are presented in more detail in Part I of this series.
+
+2.1
+
+Motion of a nonholonomic mobile robot moving on a plane
+
+We model the robot as rigid body moving on a plane subject to the following nonholonomic constraint x  sin  - y  cos  = 0. (1)
+
+Here dot, (), represents derivative with respect to t. A motion of such a body can be specified by specifying a travel time  and a trajectory r(t) for t  [0,  ]. The orientation (t) can be computed from Equation (1).  (t) is zero, which means the velocity is zero, then this equation cannot Essentially, (t) = arctan2( r(t)). If r be used. If the instantaneous velocity is zero at t = t0 , and non-zero in a neighborhood of t0 , then (t0 ) can be defined as a limtt0 arctan2( r(t)). Let the geometric path on which the robot moves be an arc-length parameterized curve r(s) (see Figure 1). The tangent and normal vectors to the curve are given by T(s) = N(s) = The signed curvature (s) is defined as (s) = where (s) is the tangent angle. 2 d ds (3) dr ds
+dT ds dT ds
+
+(2)
+
+N y r 0 x
+
+
+T
+
+Figure 1: Tangent and Normal to a curve
+
+2.2
+
+The discomfort cost functional
+
+From review of comfort studies in road and railway vehicles (Suzuki, 1998; Jacobson et al., 1980; Pepler et al., 1980; F orstberg, 2000; Chakroborty and Das, 2004; Iwnicki, 2006), we concluded that for motion comfort, it is necessary to have continuous and bounded acceleration along the tangential and normal directions. It is possible that the actual values of the bounds on the tangential and normal components are different. It is also desirable to keep jerk small and bounded. We model discomfort as the following cost functional J :
+
+
+J =  + wT
+0
+
+... ( r  T)2 dt + wN
+0
+
+
+
+... ( r  N)2 dt.
+
+(4)
+
+... ... Here  is the total travel time and r is the position of robot at time t  [0,  ]. r represents the jerk. r  T ... and r	N are the tangential and normal components of jerk respectively. The weights (wT and wN ) are non-negative known real numbers. We separate tangential and normal jerk to allow a choice of different weights (wT and wN ). The weights serve two purposes. First, they act as scaling factors for dimensionally different terms. Second, they determine the relative importance of the terms and provide a way to adjust the robot's performance according to user preferences. For example, for a wheelchair, some users may not tolerate high jerk and prefer traveling slowly while others could tolerate relatively high jerks if they reach their destination quickly. We determine the the typical values of weights using dimensional analysis (see Part I (Gulati et al., 2013)).
+
+2.3
+
+Parameterization of the trajectory
+
+The trajectory r can be parameterized in various ways. We have found that expressing the trajectory in terms of speed and orientation as functions of a scaled arc-length parameter leads to relatively simple expressions for all the remaining physical quantities (such as accelerations and jerks). Let u  [0, 1]. The trajectory is parameterized by u. The starting point is given by u = 0 and the ending point is given by u = 1. Let r = r(u) denote the position vector of the robot in the plane. Let v = v (u) be the speed. Both r and v are functions of u. Let  denote the length of the trajectory. Since only the start and end positions are known,  cannot be specified in advance. It has to be an unknown that will be found by the optimization process.
+s Let s  [0, ] be the arc-length parameter. We choose u to be a scaled arc-length parameter where u =  . The trajectory, r(t), t  [0,  ] is completely specified by the trajectory length , the speed v = v (u), and the orientation or the tangent angle  = (u) to the curve.	is a scalar while speed and orientation are
+
+3
+
+functions of u. These are the three unknowns, two functions and one scalar, that will be determined by the optimization process. With this parameterization, the discomfort cost functional of Equation (4) can be written as
+1
+
+J (v, , ) =
+0
+
+ du + wT v
+
+1 0
+
+v (v 2 + vv - v 2  2 )2 du + wN 3
+
+1 0
+
+v3 (3v	+ v )2 du. 3
+
+(5)
+
+The first integral (J ) is the total time, the second integral (JT ) is total squared tangential jerk, and the third integral (JN ) is total squared normal jerk. The discomfort J is now a function of the primary unknown functions v , , and a scalar , the trajectory length. All references to time t have disappeared. Once the unknowns are found via optimization, we can compute t using the following expression.
+u
+
+t = t(u) =
+0
+
+ du. v (u)
+
+(6)
+
+The position vector r(u) can be computed via the following integrals.
+u u
+
+r(u) = r(0) +
+0
+
+cos (u) du,
+0
+
+sin (u) du .
+
+(7)
+
+If (u) is known, r(u) can be computed from Equation (7). If v (u) and  are known, t(u) can be computed from Equation (6). Using these two, we can determine the function r(t), t  [0,  ]. The expressions for tangential acceleration aT and normal acceleration aN are aT =  rT= aN =	rN= Here N is the direction normal to the tangent (rotated (u) = The angular speed  is given by  (u) = v .  (11)
+ 2
+
+vv
+
+(8)
+
+v2  . (9)  anti-clockwise). The signed curvature is given by (10)
+
+
+
+2.4
+
+Function spaces for v and
+
+We now define the function spaces to which v and  can belong so that the discomfort J in Equation (5) is well-defined (finite). We have two distinct cases depending on whether the speed is zero at an end-point on not. Let  = [0, 1] and H 2 () be the Sobolev space of functions on  with square-integrable derivatives of up to order 2. Let f :	R. Then f  H 2 ()
+ def
+
+dj f dxj 4
+
+2
+
+dx <   j = 0, 1, 2.
+
+(12)
+
+We can show that if v,	 H 2 (), then the integrals of squared tangential and normal jerk are finite. Using the Sobolev embedding theorem (Adams and Fournier, 2003) it can be shown that if f	H 2 (), then f	C 0 () and by extension f  C 1 (). Here C j () is the space of functions on  whose up to j th derivatives are bounded and continuous. Thus, if v,   H 2 (), then all the lower derivatives are bounded and continuous. Physically this means that quantities like the speed, acceleration, and curvature are bounded and continuous - all desirable properties for comfortable motion (Section 2.2). We also need that the inverse of v be integrable so that J is finite. Inverse of v is integrable if v is uniformly positive in [0, 1]. This is trivially true if v is uniformly positive, that is, v  v > 0 for some constant positive v throughout the interval [0, 1]. However, v can be zero at one or both end-points because of the imposed conditions (see Section 2.5).
+
+Positive speed on boundary Consider the case that v is positive on both end-points. We make the justifiable assumption that the trajectory that actually minimizes discomfort will not have a halt in between. Thus, if v > 0 on end-points, it remains uniformly positive in the interior and the discomfort is finite.
+
+Zero speed on boundary
+1 Consider the case in which v (0) = 0. The case v (1) = 0 can be treated in a similar manner. If v (0) = 0, v 1 must not blow up faster than up where p < 1 to keep J finite. Thus, if zero speed boundary conditions are imposed, we will have to choose v outside H 2 (). In such a case, at u = 0, it is sufficient that v approaches 3 < p < 1 or p = 1 zero as up where 5 2 . For the right end point, where u = 1, replace u with (1 - u) in the 2 condition. v	H () in the interior.
+
+2.5
+
+Boundary conditions
+
+The expression for the cost functional J in Equation (5) shows that the highest derivative order for v and  is two. Thus, for the boundary value problem to be well-posed we need two boundary conditions on v and  at each end-point - one on the function and one on the first derivative. We now relate the mathematical requirement on v and  boundary values above to expressions of physical quantities. We do this for the starting point only. The ending point relations are analogous.
+
+Positive speed on boundary First, consider the case when v > 0 on the starting point. The speed v needs to be specified, which is quite natural. The u-derivative of v , however, is not tangential acceleration. The tangential acceleration is the t-derivative and is given by Equation (8). It is vv  . Here v is known but  is not. Thus specifying tangential acceleration gives us a constraint equation and not directly a value for v (0). This is imposed as an equality constraint. Similarly, fixing a value for  on starting point is natural. We "fix" the values of  (0) by fixing the signed curvature	=   . As before, this leads to an equality constraint relating	(0) and  if  = 0. Since choosing a meaningful non-zero value of  is difficult, it is natural to impose	= 0. In this case  (0) = 0 can be imposed easily. 5
+
+{x, y } y
+
+()  {x0 , y0 } x
+
+Figure 2: Notation for star-shaped obstacles. A non-convex star-shaped obstacle is shown with its "center" {x0 , y0 } and a distance function  = (). The distance function gives a single point on the boundary for   [0, 2 ]. The robot trajectory must lie outside the obstacle.
+
+Zero speed on boundary
+
+If v (0) = 0, then, as seen in Section 2.4, v (u) must behave like up for 2 < q < 0 or q = - 1 v (u)  uq for - 5 2 respectively. In this case v (u)  u-1/3
+
+3 5
+
+< p < 1 or p =
+
+1 2
+
+near u = 0 and
+
+(13)
+
+is the appropriate strength of the singularity for v (u) at the starting point.
+
+2.6
+
+Obstacle avoidance constraints
+
+We model the "forbidden" region formed by the obstacles as a union of star-shaped domains with boundaries that are closed curves with piecewise continuous second derivative. A set in Rn is called a star-shaped domain if there exists at least one point x0 in the set such that the line segment connecting x0 and x lies in the set for all x in the set. Intuitively this means that there exists at least one point in the set from which all other points are "visible". We will refer to such a point x0 as a center of the star-shaped domain. Let an obstacle be specified by its boundary in polar coordinates that are centered at r0 = {x0 , y0 }. Each	[0, 2 ) gives a point on the boundary using the distance () from the obstacle origin. The distance function  must be periodic with a period 2 . See Figure 2. Suppose we want a point r = {x, y } to be outside the obstacle boundary. Define C (r) as C (r) = ||r - r0 ||2 - (arctan2(r - r0 )) (14)
+
+where the subscript 2 refers to the Euclidean norm. C (r)  0  the point r is outside the obstacle. The constraint function C (r) is piecewise differentiable for all r except at a single point r = r0 . If r = r0 by chance, which is easily detectable, we know that the r is inside the obstacle and can perturbed to avoid this undefined behavior. Note that C (r) remains bounded inside the obstacle. 6
+
+3
+
+The infinite-dimensional optimization problem
+
+We now summarize the nonlinear and constrained trajectory optimization problem taking into account all input parameters, all the boundary conditions, and all the constraints. This is the "functional" form of the problem (posed in function spaces). We will present an appropriate discretization procedure valid for all input combinations in the Section 4. Minimize the discomfort functional J , where
+1
+
+J (v, , ) =
+0
+
+ du + wT v
+
+1 0
+
+v (v 2 + vv - v 2  2 )2 du + wN 3
+
+1 0
+
+v3 (3v	+ v )2 du, 3
+
+given the following boundary conditions for both starting point and ending point  position (r0 , r ),  orientation (0 ,  ),  signed curvature (0 ,  ),	speed (v0  0, v  0),  tangential acceleration (aT ,0 , aT , ), and constraints on allowable range of  speed (vmin = 0, vmax ),	tangential acceleration (aT ,min , aT ,max ),  normal acceleration (aN ,min , aN ,max ),  angular speed (min , max ),  curvature, if necessary (min = 0, max ), and  number of obstacles Nobs ,
+obs  locations of obstacles {ci }N i=1 obs  representation of obstacles that allows computation of {i ()}N i=1 , for   [0, 2 )
+
+and  an initial guess for (v (u), (u), ), in u	[0, 1],  weights wT > 0 and wN > 0. 7
+
+The constraint on starting and ending position requires that
+1 1
+
+r - r0 =
+0
+
+cos  du,
+0
+
+sin  du .
+
+(15)
+
+Staying outside all obstacles requires that ||r(u) - ci ||2 - i (arctan2(r(u) - ci ))  0  i  1, . . . , Nobs , and  u  [0, 1] where r(u) = r(0) +
+0 u u
+
+cos  du,
+0
+
+sin  du .
+
+As a post-processing step, we compute time t as a function of u using
+u
+
+t = t(u) =
+0
+
+ du v (u)
+
+and convert all quantities (v, , r, and their derivatives) from u domain to t domain.
+
+4
+
+A finite element discretization of the infinite-dimensional optimization problem
+
+We first discuss the case when there is no singularity in the speed v . This is the case when the given boundary speeds are positive. In this case, v  H 2 () as described in Section 2.4, where  = [0, 1]. We assume that   H 2 () always (whether v is singular or not) because it is sufficient for the discomfort to be finite. Thus, to discretize the problem, it is natural to use the basis functions in C 1 (), the space of functions that are continuous and have continuous first derivatives. This makes the second derivative of v and  discontinuous but its square is still integrable. 4.1 Basis functions
+
+We minimize the discomfort and satisfy all the constraints in a finite dimensional subspace of C 1 (). We make the following choice.
+q
+
+v h (u) h (u)
+
+=
+i=1 q
+
+v i i (u)
+
+(16) (17)
+
+=
+i=1
+
+ i i (u)
+
+Here i (u)  C 1 () are basis functions for this problem. The symbol h traditionally denotes a measure of the "mesh width" to distinguish the approximate solution from the "exact" infinite dimensional solution. v  The unknown scalar values i and i for i = 1, . . . , q are the degrees of freedom (DOFs) which are to be determined via "solving" the optimization problem of Section 3. For reasonable choices of i (u), as q increases the finite dimensional solution approaches the exact solution. Usually, one chooses i (u)   that are easy and cheap to compute, and have local support. Piecewise polynomial functions that have sufficient differentiability are good candidates. By having local support, we mean the functions are non-zero only over a limited interval and not on whole . This has two main advantages. First, while performing integration to compute J , the product of i and j is zero over most of the interval. This leads to O(n) rather than O(n2 ) interactions. Second, the global Hessian matrix is sparse 8
+
+rather than being dense. Typically for 1D problems, the matrix has a small constant band-width.
+1 For our problem, we first divide the interval [0, 1] into n equal-size intervals of length h = n . Each of these intervals is an element. Thus we have n elements and n + 1 equidistant points or nodes. The collection of elements and nodes is the finite element mesh.
+
+At each node we define two piecewise polynomial functions that are non-zero only on the two elements surrounding the node. This is the standard cubic Hermite basis for problems posed in the H 2 space in 1D. See Figure 3 for both the functions and their first and second derivatives. The first kind of basis function is 1 on the node with which it is associated and has zero derivative there. The second function is zero on the corresponding node and has unit derivative there. Additionally, both are zero with first derivatives also zero on two surrounding nodes. Thus, in all, we have 2(n + 1) basis functions and unknown scalars each for v and . Because of the above-mentioned properties each basis functions belongs to C 1 ()  H 2 (). Note that the basis functions on the boundary points are slightly different. They are not extended outside the interval. Figure 4 shows 5 basis functions of each kind for n = 4. As seen, the boundary basis functions are truncated. It would not matter anyway what their values outside the interval are since no integration is performed outside. The other basis functions are translations of each other. 4.2 Element shape functions
+
+In FEM practice, we define basis functions in terms of "shape functions". The shape functions are defined only on a single reference element and multiple shape functions placed on neighboring elements are joined to create a single basis function. This requires that shape functions have appropriate values and derivative on reference element boundary so that the basis functions are valid for the problem. Figure 5 shows the four cubic Hermite shape functions on a single reference element [0, 1]. The shape functions are 1 (x) 2 (x) 3 (x) 4 (x) = = = = (x - 1)2 (1 + 2x) (x - 1)2 x (3 - 2x)x2 (x - 1)x2
+
+For maintaining basis function continuity, each i satisfies i (0) = i (0) = i (1) = i (1) = 0, except 1 (0) = 2 (0) = 3 (1) = 4 (1) = 1. 4.3 Singular shape functions at boundary
+
+For the case when either one or both the boundary points have zero speed specified, v (u) is singular at the corresponding boundary with v (u) infinite with singularity u-1/3 when acceleration is also zero and u-1/2 if acceleration is non-zero. Thus, v as a function does not belong to H 2 (). However, v does belong to H 2 in the interior as shown in Section 2.4. After a FEM mesh is decided, we take this into account and do not use the above-mentioned regular shape functions for v on the element(s) near the boundary with zero speed. For the interior elements, however, no change is done and the regular shape functions are used. We now derive the new singular shape functions for the left boundary (u  [0, h]) element and the singular shape functions for the right boundary element can be derived using symmetry. We need at least two shape functions so that the two shape functions coming from the [h, 2h] element can be L L matched. Denote them by 1 and 2 . The function value and the function derivative both must be matched 9
+
+Figure 3: Cubic Hermite basis functions and their first and second derivatives. Two kinds of basis functions are defined at each node such that each is zero everywhere except on the two elements sharing the node. The first kind, k,1 has a value of 1 and a zero derivative at the associated node k. Its value and derivatives are zero on both adjacent nodes. The second kind, k,2 has a value of zero and a unit derivative at the associated node k. Its value and derivatives are zero on both adjacent nodes. Both k,1 and k,2 are square integrable on u  [0, 1].
+
+10
+
+1
+
+5 Basis1 functions
+
+2
+
+5 Basis2 functions
+
+u u
+Figure 4: Cubic Hermite basis functions on five consecutive nodes. The two kinds of basis functions on any node are translations of the respective basis function of Figure 3. The basis functions on a boundary node are truncated.
+
+1
+
+f1
+
+H x - 1 L2 H2 x + 1 L
+
+f2
+4 27
+
+H x - 1 L2 x
+
+0 0
+
+1
+
+x
+
+0 0
+
+1
+
+x
+
+1
+
+f3
+
+H3 - 2 x L x 2
+
+0
+
+f4
+
+H x - 1 L x2
+1
+
+x
+
+0 0
+
+x 1
+
+4 - 27
+
+Figure 5: Cubic Hermite shape functions on a reference element. Four shape functions are defined on each element. Each is a cubic polynomial on x = [0, 1] where x is the local coordinate on the element.
+
+L L L L at h. For a reference element shape function, this means 1 (1) = 1, 1 (1) = 0, 2 (1) = 0, 2 (1) = 1. Both L L 1 and 2 must be zero on u = 0 because the speed is zero there. Thus, the Dirichlet boundary condition is 1 imposed explicitly. Finally, as x  0, one of the functions must behave as xp , for p = 2 3 or p = 2 , to match
+
+11
+
+x23 -
+
+2 3
+
+H x - 1L x
+
+H x - 1L x
+
+L y1
+
+L y2
+
+0
+
+x
+1
+
+1
+
+0 0
+H1 - xL23 2 3
+
+x
+1
+H x - 1L x
+
+-1 4
+- H x - 1L x
+
+R y1
+
+R y2
+1 4
+
+1
+
+0 0
+
+x
+1
+
+0 0
+
+x
+1
+
+Figure 6: Singular shape functions on boundary elements for zero speed and zero acceleration boundary conditions. Two singular shape functions are defined on a boundary element. Consider zero speed condition on left element. The L first shape function 1 has a value of 1 and zero derivative on the right to match the shape function 1 of Figure 5 L on the next element. The second shape function 2 has a value of 0 and a unit derivative on the right to match the L L shape function 2 of Figure 5 on the next element. Both 1 and 2 have a value of zero on the left because speed is zero. The singular shape functions for zero speed boundary conditions on right are similarly defined.
+
+the singularity in Equation (13). It can be seen that the choice
+L 1 (x) L 2 (x)
+
+= =
+
+xp + p(1 - x)x (x - 1)x
+
+satisfies all these requirements. Figure 6 shows the four shape functions, two for the left element and two 2 L R and 1 are singular when approaching the for the right element for the case p = 3 . Figure 7 shows that 1 2 L R boundary (shown for p = 3 only). The other two functions 2 and 2 are smooth.
+
+4.4
+
+The finite-dimensional optimization problem
+
+With the choice of basis functions described above, we can express v h (u) and h (u) as:
+n+1 n+1
+
+v h (u)
+h
+
+=
+i=1 n+1
+
+vi i,1 (u) +
+i=1 n+1
+
+vi i,2 (u) i i,2 (u)
+i=1
+
+(18)
+
+ (u)
+
+=
+i=1
+
+i i,1 (u) + 12
+
+(19)
+
+2 3
+
+-2 x +
+
+1
+3
+
++1
+
+2x-1
+
+x
+
+L Dy1
+
+L Dy2
+
+1
+
+4 2
+
+0
+
+x
+1
+
+0 0
+2 3 -2 x 1
+3
+
+x
+1
++1 1-x
+
+-1
+1-2x
+
+R Dy1
+
+R Dy2
+
+1
+
+0
+
+x
+1 0
+
+-2 -4
+
+x
+1
+
+-1
+
+Figure 7: First and second derivatives of singular shape functions for zero speed and zero acceleration boundary conditions.
+L R L R and 2 are smooth. 1 and 1 tend to infinity as x- 3 as they approach the boundary. 2
+2
+
+where vi , vi , i , and i for i = 1, . . . , n are the unknown nodal values and i,1 (u) and i,2 (u) are the two kinds of basis functions described in the previous section. For optimization, the values of cost, its gradient and Hessian, the values of constraints, and the gradient and Hessian of each constraint are required. For efficiency, it is desirable that cost and constraint Hessians be sparse. We will see later that for the Hessian of obstacle avoidance constraints to be sparse, it is useful to N introduce 2N additional unknowns in the form of position ri = {xi , yi }i=1 at N points. Thus, our objective now is to determine the values of these unknowns and the unknown path length  that minimize the cost functional and satisfy the boundary conditions and constraints described in (Section 3).
+
+Numerical integration for computing the integrals in the cost functional and constraints We use Gauss quadrature formulas to compute the integrals in the cost functional and constraints. When using m integration points in an interval, the formulas are accurate for polynomials of degree up to 2m - 1. For the regular C 1 basis functions, which have maximum polynomial degree 3, it is easily seen that the square tangential jerk is a polynomial of degree 23, and the squared normal jerk is a polynomial of degree 17. See Equation (5). These are polynomials in u and not t. Hence, 12 Gauss points will give exact integrals up to floating point accuracy. Of course, the integrands being polynomials, the integrals corresponding to JT and JN can be evaluated without using Gauss points (if one is ready to work with complex algebraic expressions). But the other integrals, for J and those relating r to  (Equation (7)), must be evaluated numerically. Hence, we use 12 Gauss points to evaluate all integrals. 13
+
+4.5
+
+Imposing constraints
+
+We need to impose multiple equality and inequality constraints while minimizing the cost functional. Some of the equality constraints affect a single DOF each and hence they can be used to eliminate the particular unknown. The others relate multiple DOFs and must be imposed as an equality explicitly. The equality constraints are described below.  Fix end-point positions (r0 , r ) by eliminating the unknowns x and y on the first and last nodes.  Fix end-point orientations (0 ,  ) by eliminating the unknown	on the first and last nodes.  Relate start and end position r - r0 =
+1 0
+
+cos  du,
+
+1 0
+
+sin  du
+
+(Equation (15)) by computing
+
+the integrals as described in Section 4.6, Equation (20).  Fix end-point speeds (v0  0, v  0) by eliminating the unknown v on the first and last nodes.  If speed on an end-point is positive, tangential acceleration aT must be specified at that end-point. Impose vv  = aT on that end point. Otherwise, this constraint will be automatically imposed by using singular shape functions.  Impose specified end-point curvature  by imposing  =  on each end-point. The inequality constraints that are not related to obstacles avoidance are as follows. We must maintain  velocity in [vmin = 0, vmax ],  tangential acceleration in [aT,min , aT,max ],  normal acceleration in [aN,min , aN,max ], and  angular velocity in [min , max ].  curvature in [min = 0, max ], Note that these must be maintained for each u  [0, 1] in the infinite dimensional optimization problem. For the discretized version, we choose the Gauss integration points and impose that these quantities remain in the specified range only on those points. Thus, for a mesh with n elements, each inequality above results in 12n constraints (assuming 12 points are used as discussed in Section 4.4). The values of these physical quantities on each Gauss point is a function of the DOFs on element nodes. Thus, these constraints are local. They are not affected when DOFs of non-element nodes change. There are two important reasons to keep the values within range on Gauss points as opposed to on some other, say, uniform set of points. First, since we use v at the Gauss point to compute the integrals, it is more important that v remain non-negative there to avoid problems of large negative values of J . Second, since v and  are already computed there it saves extra computation. 4.6 Obstacle avoidance constraints
+
+Staying outside obstacles, if present, requires additional inequality constraints. For this we pick N uniformly separated points in the interval [0, 1] and impose the constraint that each of r on the N points remain outside each of Nobs obstacles. This leads to N  Nobs constraints. In our implementation we make N = nM +(n +1), so that if the distribution is uniform, each element has M such points in the interior and each node is a point too. Two of these N points are the boundary points which must be outside all obstacles for the optimization 14
+
+problem to have a feasible solution. If the robot boundary is not circular and we choose P points on the robot's boundary, then the number of constraints is N	Nobs  P . We come back to obstacle related constraint relating a single obstacle and a single point on the trajectory. One could simply relate the position at the point with (u) and  using Equation (7), and use Equation (14) to impose conditions on (u) and . However, because of the structure of Equation (14) and because r(u) depends on all  DOFs of nodes that are before u, the Hessian of this constraint is not sparse. This would lead to efficiency problems when doing iterations in the numerical optimization process. Even computing the dense Hessian would be very costly as Nobs and N increase. We must work around this elimination approach of imposing the obstacle related constraints. To avoid the dense Hessian of obstacle constraint, we make two changes to the simplistic approach. First, we do not use Equation (15) for eliminating r but keep r as an unknown function. Second, we relate adjacent r's via Equation (7) as follows.
+uj uj
+
+r(uj ) - r(uj -1 ) =
+uj -1
+
+cos  du,
+uj -1
+
+sin  du .
+
+(20)
+
+Here j goes from 1 to N - 1. What this change does is that, as long as adjacent r(uj ) and r(uj -1 ) belong to a maximum two adjacent elements, the equation above relates only a small number of local DOFs. Secondly, since each r(uj ) is now a legitimate unknown, it can be used to impose the inequality constraint Equation (14) without  being involved. This new approach does have a price, however. We have increased the number of unknowns and hence increased the size of the gradient vector and Hessian matrix. But this is a small price to pay considering that the sparsity is still maintained, the amount of computation does not grow, and equations are local in nature. We explore the sparsity pattern more in Section 4.7 ahead. 4.7 Element and global gradient and hessian
+
+An important choice in the FEM discretization of any variational problem is the ordering of all the unknowns when forming the global Hessian matrix. A good choice simplifies the assembly process as well as could lead to useful structural sparsity. We have four kinds of DOFs. For simplicity, we discuss the regular case and where boundary conditions are not yet imposed. The singular case differs in minor details only that does not affect the ordering process. The four kinds are as follows.  four unknowns each on n + 1 node -v, v , ,   N x and N y unknowns  a scalar unknown  The unknowns are ordered in the same sequence shown above starting from u = 0 and going to u = 1. The ordering chosen above means that each DOF except  interacts with DOFs on two elements. The scaled arc-length parameter, , is global by its nature and interacts with all other DOFs. Hence, the global Hessian matrix is sparse. Some interactions lead to linear equations, so they do not affect the Hessian. This is the case for x, y , and  interactions in Equation (20). We now describe the structure of the finite dimensional optimization problem using a small mesh with n = 3 elements and N = 10 points for obstacle constraints as shown in Figure 8(a). In FEM, each element provides 15
+
+a small Hessian, typically dense, that relates all the DOFs present in that element. We have eight v and  DOFs on each element except for the singular corner elements that have six. Figure 8(b), shows the global connectivity structure of the problem after boundary conditions are imposed on boundary v, , x, and y DOFs. These are marked A in Figure 8(a). The three element matrices are added to their appropriate positions. The DOFs marked B (for	) are constrained via equality constraints. The DOFs marked C (for v ) are constrained via equality constraints if speed is non-zero. Otherwise, it is infinite and is taken care using singular elements. The x and y DOFs do not enter the expression of cost, hence all corresponding rows and columns are empty (zero). The Hessian of obstacles constraints does contain non-zero 2  2 blocks relating x and y of the same point. 4.8 Convergence on decreasing mesh size
+
+To analyze the effect of mesh size on convergence, we construct two examples of straight line motion, each with start and end positions as {0, 0} and {10, 0}, and start and end orientations as 0. In the first example, speed at both ends is 0. In the second, speed at both ends is 1. Tangential acceleration at both ends is 0. We vary the number of elements from 2 to 128 in multiples of 2 and each time solve the discomfort minimization problem for one initial guess. As the number of elements increases, the optimum cost found by the optimization process decreases. This is natural because increasing the mesh size means we're minimizing a function in a superset of degrees of freedom. As the number of elements increases, the relative change in minimum cost decreases. We compare all costs with the cost corresponding to 128 elements. We see that the 32 elements give a cost that within 0.01% of cost for 128 elements (when v > 0 on end-points). The curve for v = 0 shows a lower convergence rate and we believe that the reason behind this is using standard Gauss-Legendre quadrature for the singular elements. A more precise procedure would use specially designed quadrature scheme keeping in mind the form of singularity at end-points. We have kept this as part of future work.
+
+5
+
+Initial guess for the optimization problem
+
+We have described a nonlinear constrained optimization problem to find an optimal trajectory that results in a small discomfort. Because of the non-linearity and presence of both inequality and inequality constraints, it is crucial that a suitable initial guess of the trajectory be computed and provided to an optimization algorithm. Many packages can generate their own "starting points", but a good initial guess that is within the feasible region can easily reduce the computational effort (measured by number of function and derivative evaluation steps) many times. Not only that, reliably solving a nonlinear constrained optimization problem without a good initial guess can be extremely difficult. Because of these reasons, we invest considerable mathematical and computational effort to generate a good initial guess of the trajectory. 5.1 Overview
+
+As described in Section 2.3, a trajectory can be completely described by its length , orientation (u), and the speed v (u) for u  [0, 1]. Our optimization problem is to find the scalar  and the two functions  and v that minimize the discomfort. We compute the initial guess of trajectory by computing  and  first and then computing v by solving a separate optimization problem. We emphasize that the initial guess computation process must deal with arbitrary inputs and reliably compute the initial guesses. Before we discuss the initial guess of , we must discuss a genuine non-uniqueness issue. It is obvious that there exist infinitely many paths for a given pair of initial and final orientations. There exist at least two different kinds of non-uniqueness. The first kind of non-uniqueness exists because multiple numerical values of an angle correspond to a single "physical" orientation. The second kind of non-uniqueness exists because 16
+
+A C A B A A
+
+ v0   v0  0   0  x0  y0
+
+x1 y1
+
+x2 y2
+
+v1  v1 1  1 x3 y3
+
+x4 y4
+
+x5 y5
+
+v2  v2 2  2 x6 y6
+
+x7 y7
+
+x8 y8
+
+v3  v3 3  3 x9 y9
+
+ A  C  A  B  A	A
+
+(a) A finite element mesh with 3 elements along with N = 10 {x, y } pairs for obstacle avoidance.
+	x y x y ... x y  v0 0 v1 v1 1 1 v2 v2 2 2 v3 3 1 1 2 2 8 8
+
+.. .. . . .. ... .
+
+(b) Connectivity structure
+
+Figure 8: Global connectivity structure of the finite dimensional optimization problem. (a) Some boundary element DOFS and the first and last {x, y } pairs, are set equal to the appropriate boundary conditions and removed from the list of unknowns (A). Some boundary element DOFS are related to boundary conditions by equality constraints (B ). Some are either related to boundary conditions via equality constraints if speed is non-zero, or taken care of by singular elements(C ). (b) All unknowns on a node interact with unknowns on only two neighboring nodes. Each {x, y } pair interacts only with itself. All DOFS on a node interact with .
+
+17
+
+0 1 2
+128| log10(|J-J J128 )
+
+v = 0 on both ends v = 1 on both ends
+
+3 4 5 62 4 8 16 Number of elements 32 64
+
+Figure 9: Convergence on decreasing mesh size. J128 | ) on y - axis against number of elements on log2 scale on x-axis. The curve on top is for zero speed log10 ( |J - J128 boundary conditions on both ends and the curve on bottom is for unit speed boundary conditions on both ends.
+
+even for the same numerical values of initial and final angles, one can end up in one of multiple local minima after optimization. We now discuss these in detail.
+
+5.2
+
+Multiplicity of paths
+
+Since the trajectory orientation  is an angle, a single  value is completely equivalent in physical space to   2n n  N. However, consider a trajectory that starts with a given angle 0 , and stops at orientation  (where  denotes final time). Such a trajectory will be different than a trajectory that starts off with the same orientation but stops at	2n . This is because  is continuous and cannot jump to a different value in between. Of course, the boundary condition will still be satisfied. Thus, even though the original trajectory optimization problem is specified using a single stopping orientation, we must consider multiple stopping orientations, differing by 2 , when computing the initial guess as well as solving the original discomfort minimization problem. We have called this a "parity" problem. Note that the same logic of parity applies to the starting orientation, but what matters is the difference and we have chosen to vary only the ending orientation by choosing different values of n. Figure 10 shows a few examples of this parity. It shows four paths corresponding to different n each sharing a common starting angle, but reach the destination at {-3, -, , 3 }. Of course, we could create more paths by increasing the 2 difference but doing so makes the paths more convoluted and self-intersecting in general. This is because when n is too large in magnitude, (u) has to vary rapidly at least around some u values in [0, 1] to satisfy the larger difference in boundary conditions. For optimization purposes, we assume that the starting and ending orientations are given between [0, 2 ) and we choose just three end-point orientations that give the least difference | - 0 |. Apart from the multiplicity of  curves due to parity, the optimization problem discussed Section 5.3 to compute  as well as the full discomfort minimization problem can lead to multiple solutions even when parity remains unchanged. This occurs due to the non-linearity of constraints in Equation (15). Figure 11(a) and 18
+
+(b) shows two such paths A and B that start and end at the same numerical orientation but are qualitatively different. We do observe such multiple minima in practice. If we observe B more carefully, it is seen that it can be continuously deformed into B  shown in Figure 11(c) and (d). This figure clearly shows that the reason B is qualitatively different from A is because of two self-intersections - first in anti-clockwise direction and second in clockwise direction. Both "loops" cancel each others' changes in orientation. We suspect that this topological difference is the cause of multiple local minima. Of course, this argument can be carried further and one can introduce an equal number of clockwise and anti-clockwise loops in arbitrary order and the final orientation will remain unchanged. Thus, we believe that there can be infinitely many local minima. Obviously, doing so would increase the discomfort in general and such a path will not be desirable. We try to avoid this problem by setting bounds on maximum and minimum	when we compute the initial guess of . However, it is important to not ignore multiple minima if they are found within these bounds. If obstacles are present so that A is infeasible, B might be chosen even though it is longer and has more turns. Thus, because of these two kinds of multiplicities, we use more than one initial guess when minimizing the discomfort and choose the one that has the minimum discomfort and satisfies the constraints. We discuss the details in the following section.
+
+5.3
+
+Initial guess of path
+
+We compute initial guesses for	and (u) using two different methods. The first method computes a (u) such that the trajectory has a piecewise constant curvature. This is a computationally inexpensive method and does not satisfy many of the constraints exactly. The output of this method can be used to solve the full discomfort minimization problem. The second method computes a (u) and  by solving an auxiliary (but simpler) nonlinear constrained optimization problem. Of course, now we need an initial guess for this new optimization problem! The output of the "constant curvature" method mentioned above is used as the initial guess. Unlike the first method, the output of this second method leads to trajectories that have continuous and differentiable curvature and also satisfy boundary conditions and maximum curvature constraint exactly.
+
+3
+
+C
+
+A P
+0 = 0
+
+C
+2
+
+B
+0
+
+O B D
+
+A D
+
+- -2 -3
+
+(a) Four paths
+
+(b) Four  curves
+
+Figure 10: Four paths with different parity The paths A, B, C, and D start from O and reach P at identical physical angles but, looked as  curves, their ending angles differ by integer multiples of 2 .
+
+19
+
+3
+
+B P O A
+(a) Two paths (b) Two  curves
+0 = 0
+
+B
+
+2   = 0
+
+ 2
+
+A
+-
+
+B P O
+0 = 0
+
+3
+
+B B? B?
+
+2   = 0 -
+
+ 2
+
+(c) Deformed path
+
+(d) Deformed  curve
+
+Figure 11: (Two local minima for same boundary conditions (a)(b) The paths A and B are different but both minimize discomfort compared to neighboring paths. (c)(d) B is obtained by a continuous deformation of B . The  curves of B and B  are similar. The corresponding paths show that B  contains two self intersections and is topologically different from A that does not contain self intersections.
+
+Piecewise constant curvature path
+
+In the full discomfort minimization problem, the orientation (u) has to satisfy the boundary conditions and Equation (15). In total, there are four constraints - two linear (those due to boundary conditions) and two non-linear (those of Equation (15)). For computing initial guess of , we modify the inputs of the full optimization problem using a rotation such that initial and final position have the same y coordinate value. The initial and final orientations are also modified appropriately. Once we find an initial guess for the transformed input, it can be easily transformed back to the original configuration by the inverse rotation. This is done to allow efficient storage of precomputed  guesses for various end-point conditions. Thus, the inputs to the initial guess generation problem are the initial and final positions, x0 and x , and orientations, 0 and  , in the rotated frame. The output will be a path length	and a function (u). We begin by choosing the value of path length  as max(R, 2	L), where R is the minimum turning radius of the robot and L = ||r - r0 ||. Using this maximum takes care of the case when initial and final positions are very close to each other. In such a case, the path length is decided by the minimum turning radius constraint. Ideally, an initial guess of (u) should obey the following constraints so that the constraints of the full 20
+
+Constraint cost
+4  8 3 6 2 1 1 40 20 0 20
+(a) Cost from Equation (24)
+'
+
+Various  guesses
+
+4 2 0 40 2
+(b) Two constant curvature optimizers
+Constraint costs for various  guesses
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+u 1.0
+
+
+15 10
+
+Paths for various  guesses
+
+y
+0.3 0.2 0.1 0.2 0.1 0.2 0.4 0.6 0.8 1.0
+
+5 0 5
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+u
+
+x
+
+10 15
+
+(c) Paths corresponding to (b)
+
+(d) Multiple local minima
+
+Figure 12: Piecewise constant curvature initial guesses (a) Multiple local minima in graph of Jcc of Equation (24). Two minima closest to the maxima are highlighted. (b) Piecewise constant curvature paths (not dashed) corresponding to highlighted minima in (a). (c) Paths corresponding to the  curves in (b). Both start at  and end at	. (d) Lighter shade represents minima and darker shade represents 2 3 maxima. The two optimizing paths of (b) are shown.
+
+optimization problem are satisfied: (0) = 0 , (1) =  , and transformed Equation (15)
+1
+
+(21)
+
+
+0 1
+
+cos  du = x - x0 , (22) sin  du = 0,
+0
+
+
+
+Consider a piecewise linear function that looks like the solid curves in Figure 12(b).
+1 Essentially, each such curve is defined on [0, 1], is continuous, and is made of three line segments in [0, 3 ], 1 2 2 [ 3 , 3 ], and [ 3 , 1]. The middle line segment has zero derivative. The values at 0 and 1 are known and the only variable is the function value on the middle segment. Equivalently, one can use the slope of first line
+
+21
+
+segment as the variable. Let this slope be denoted by 1 . Then, we  0 + 1 u  0 + 1 (u) = 3 1  1 2  - 3(  -  +  )( u - 0 + 1 0 1 3 1 3 1 3)
+
+define (u) as if 0  u < 1 3; 2 if 1  u < 3 3; 2 if 3  u  1.
+
+(23)
+
+If we use such a curve for (u), it will result in a circular arc, a tangent line segment, and another circular arc tangential to the middle segment, in that order. This, in turn, implies that the resulting path will have a piecewise constant curvature. To determine (u), we need to determine the value of the unknown slope 1 . Since only one value cannot satisfy two constraints of Equation (22), we minimize
+1 2 1 2
+
+Jcc (1 ) =
+0
+
+cos  du - 1
+
++
+0
+
+sin  du
+
+(24)
+
+to find 1 . Figure 12(a) shows the plot of Jcc as a function of 1 . Depending on the boundary conditions, the shape of Jcc changes but qualitatively it has the behavior as shown - oscillatory with a maximum not too far from zero. We find this maximum using a table lookup and the neighboring two minima to compute the  initial guess. Figure 12(c) shows two paths using this method where 0 =	2 and  = 3 . The path length is 1. As seen, the curve end-point is not too far from x-axis, and the curve satisfies the boundary condition on . Figure 12(d) shows the cost Jcc for various constant curvature paths. The lighter shade corresponds to the minima.
+
+Optimization approach for initial guess of path In this second method to compute the initial guess of the path, we minimize
+1
+
+J (, ) =  + w
+0
+
+ 2 du
+
+(25)
+
+where w := max(L, R), and  must satisfy the boundary conditions, the two equality constraints of Equation (15), and the curvature constraint | (u)|  max u  [0, 1]. We do not impose the obstacle related constraints in this problem. This problem is related to the concept of "Minimum Variation Curves" Moreton (1993) which have been proposed for curve shape design. We add the curve length  so that in the presence of multiplicities, discussed in Section 5.2 earlier, the curves with smaller lengths are preferred. This optimization problem is discretized using C 1 finite elements as described in Section 4.2, and the initial guess is the piecewise constant curvature function from Section 5.3.
+
+5.4
+
+Initial guess of speed
+
+Computing the initial guess of v is relatively simpler. We solve a convex quadratic optimization problem with linear inequality box constraints to compute the initial guess. Because of convexity of the functional and the convex shape of the feasible region, this problem has a unique solution and an initial guess is not necessary to solve it. Any good quality optimization package can find the solution without an initial guess. Of course, because of the simplicity of box constraints, we can and do provide a feasible initial guess for this auxiliary problem. 22
+
+First consider the case when both end-points have non-zero speed. We minimize
+1
+
+J (v ) =
+0
+
+v 2 du
+
+(26)
+
+0 1 subject to boundary constraints v (0) = v0 > 0, v (1) = v1 > 0, v (0) = av , v (1) = av and inequality 0 1 constraints vmin (u)  v (u)  vmax (u) and Amin (u)  v (u)  Amax (u). The expressions for v (0) and v (1) come from the relation in Equation (8). The length  is computed when the initial guess for  is computed. Here we choose vmin (u) = min(v0 , v1 )/2 and vmax (u) is a constant that comes from the hardware limits. The function Amin (u) is chosen to be the constant 10amin / min(v0 , v1 ) where amin is the minimum allowed physical acceleration. Amax (u) is chosen similarly using amax .
+
+This optimization problem is discretized using C 1 finite elements as described in Section 4.2 and leads to a convex programming problem that is easily solved. Of course, this method does not take care of cases in which one or both points have zero speed boundary conditions.
+
+Solution 1 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) Solution 3 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) y (m)
+23
+
+Solution 2 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) Solution 4 2 0 2 4 6 3 2 10 1 2 x (m)
+
+Figure 13: Four initial guess of path. Problem input is as follows: initial position = {0, 0}, orientation = 0, speed = 0, tangential acceleration = 0; final position = {-1, -4}, orientation = 0, speed = 0, tangential acceleration = 0. The four initial guesses of path are computed using the method described in Section 5.3 so that final orientation in (a),(b),(c) and (d) is 0, 0, -2 and 2 respectively. All quantities have appropriate units in terms of meters and seconds. Initial and final positions are shown by markers and orientations are indicated by arrows. While the path is parameterized by u, for ease of visualization, we show markers at equal intervals of time. Thus distance between markers is inversely proportional to speed.
+
+If both end-points have zero speeds, the function v (u) = vmax (4u(1 - u))
+2/3
+
+(27)
+
+satisfies the boundary conditions and singularities and has a maximum value of vmax . This case does not require any optimization. If only one of the end-points has a zero speed boundary condition, we split the initial guess for v into a sum of two functions. The first one takes care of the singularity and the second takes care of the non-zero speed boundary condition on the other end-point. We now maintain only the vmax constraint because v (u) is unbounded and vmin = 0 naturally. If the right end-point has zero speed, we choose v (u) = vsingular (u) + vnon-singular (u) where 16 1/3 2 vmax u2 (1 - u)2/3 . 9 This function has the correct singularity behavior and its maximum value is vmax /2. The non-singular part is computed via optimization so that the sum is always less than vmax . For the other case, when left end-point has zero speed, the singular part (using symmetry) is vsingular (u) = 16 1/3 2 vmax (1 - u)2 u2/3 . 9 Figure 14 shows these different cases. All the imposed bounds are maintained and the initial guesses of v are smooth curves for all kinds of boundary conditions. For non-zero boundary speed, the values are 1 on the starting point and 2 on the ending point. Maximum speed is 3. Where imposed, Amin = -50 and Amax = 50.
+
+24
+
+5.5
+
+Implementation details
+
+We have implemented our code in C++. We use Ipopt, a robust large-scale nonlinear constrained optimization library (W achter and Biegler, 2006), also written in C++, to solve the optimization problem to compute the initial guess of path (Section 5.3) and speed (Section 5.4). We explicitly compute gradient and Hessian problem in our code instead of letting Ipopt compute these using finite difference. This leads to greater robustness and faster convergence. We set the Ipopt parameter for relative tolerance as 10-8 and the maximum number of iterations to 100. 5.6 Computational time for initial guess
+
+To evaluate the reliability of our method, we constructed a set of 7500 problems with different boundary conditions and solved the full constrained optimization problem corresponding to each of the 4 initial guesses for each problem. We present an analysis of the reliability and run-time for the initial guesses for this problem set. We generate the problem set as follows. Fix the initial position as {0, 0} and orientation as 0. Choose final position at different distances along radial lines from the origin. Choose 10 radial lines that start from 0 degrees and go up to 180 degrees in equal increments. The distance on the radial line is chosen from the set {1, 2, 4, 8, 16}. The angle of the radial line and the distance on the line determines the final position. Choose 30 final orientations starting from 0 up to 360 degrees (360 degrees not included) in equal increments. The speed, v , and tangential acceleration, aT , at both ends are varied by choosing {v, aT } pairs from the set {{0, 0} , {1, -0.1} , {1, 0} , {1, 0.1} , {3, 0}}. Thus we have 10 radial lines, 5 distances on each radial line, 30 orientations, 5 {v, aT } pairs, resulting in 10	5  30  5 = 7500 cases. Each problem has 189 degrees of freedom. All the problems were solved on a computer with an Intel Core i7 CPU running at 2.67 GHz, 4 GB RAM, and 4 MB L-2 cache size. Histograms of run-time for computing initial guess of speed and initial guess of path are shown in Figures 16 and 15 respectively. Histograms for all four initial guesses and all four discomfort minimization problems are shown. In all these histograms, we have removed 1% or less of cases that lie outside the range of the axis shown for better visualization. All histograms show both successful and unsuccessful cases. For all 7500 problems, at least one initial guess was successfully computed. From Figure 15 we see that than 99% or more of initial guesses of path are computed in less than 0.2 s. From Figure 16 we see that 99% or more of initial guesses of speed are computed in less than 0.12 s. These initial guesses were used to solve the full nonlinear optimization problem. Results for the full problem are presented in Part I. Here is a summary. Out of a set of 7500 examples with varying boundary conditions, and all dynamic constraints imposed, 3.6 solution paths, on average, were found per example. At least one solution was found for all of the problems and four solutions were found for roughly 60% of the problems. The time taken to compute the solution to the discomfort minimization problem was less than 10 seconds for all the cases, 99% of all problems were solved in less than 4 seconds, and roughly 90% were solved in less than 100 iterations.
+
+25
+
+v(u) - no singularity and touching a specified vmin
+3.5 3 2.5 3.5 3 2.5
+
+v(u) - no singularity and touching a specified vmax
+
+v(u)
+
+1.5 1 0.5 0 0 0.2 0.4 0.6 0.8 1
+
+v(u)
+
+2
+
+2 1.5 1 0.5 0 0 0.2 0.4 0.6 0.8 1
+
+u
+
+u
+
+(a) vmin = 0.5 is active
+v(u) - no singularity and touching specified vmin and vmax
+3.5 3 2.5 3.5 3 2.5
+
+(b) vmax = 3 is active
+v(u) - singularity on both end-points and touching a specified vmax
+
+v(u)
+
+v(u)
+0 0.2 0.4 0.6 0.8 1
+
+2 1.5 1 0.5 0
+
+2 1.5 1 0.5 0 0 0.2 0.4 0.6 0.8 1
+
+u
+
+u
+
+(c) Both vmin and vmax active
+
+(d) Both ends vmax (4u(1 - u))2/3
+
+singular
+
+and
+
+v (u)
+
+=
+
+v(u) - singularity on left end-point and touching a specified vmax 3.5 3 2.5 3.5 3 2.5
+
+v(u) - singularity on right end-point and touching a specified vmax
+
+v(u)
+
+1.5 1 0.5 0 0 0.2 0.4 0.6 0.8 1
+
+v(u)
+
+2
+
+2 1.5 1 0.5 0 0 0.2 0.4 0.6 0.8 1
+
+u
+
+u
+
+(e) vmax = 3 is active, singular start
+
+(f) vmax = 3 is active, singular end
+
+Figure 14: Initial guesses for speed
+
+26
+
+3000 2500 Frequency 2000 1500 1000 500 0 0.00 0.05
+
+Path Guess 1
+
+3000 2500 Frequency 2000 1500 1000 500 0 0.00
+
+Path Guess 2
+
+0.10 0.15 Run time (s)
+
+0.20
+
+0.05
+
+0.10 0.15 Run time (s)
+
+0.20
+
+(a) 99% solved within 0.2 s.
+
+(b) 99% solved within 0.2 s.
+
+3000 2500 Frequency 2000 1500 1000 500 0 0.00 0.05
+
+Path Guess 3
+
+3000 2500 Frequency 2000 1500 1000 500 0 0.00
+
+Path Guess 4
+
+0.10 0.15 Run time (s)
+
+0.20
+
+0.05
+
+0.10 0.15 Run time (s)
+
+0.20
+
+(c) 100% solved within 0.2 s.
+
+(d) 100% solved within 0.2 s.
+
+Figure 15: Histogram of time taken to compute initial guess of path. Total 7500 cases.
+
+Speed Guess 1 1400 1200 1000 800 600 400 200 0 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Run time (s)
+(a) 99% solved within 0.12 s.
+
+Speed Guess 2 1400 1200 1000 800 600 400 200 0 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Run time (s)
+(b) 99% solved within 0.12 s.
+
+Frequency
+
+Speed Guess 3 1400 1200 1000 800 600 400 200 0 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Run time (s)
+(c) 99% solved within 0.12 s.
+
+Frequency
+
+Frequency
+
+Frequency
+
+Speed Guess 4 1400 1200 1000 800 600 400 200 0 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Run time (s)
+(d) 99% solved within 0.12 s.
+
+Figure 16: Histogram of time taken to compute 27 initial guess of speed. Total 7500 cases.
+
+2000 1500 Frequency 1000 500 00 20
+
+Path Guess 1
+
+2000 1500 Frequency 1000 500
+
+Path Guess 2
+
+40 60 80 Number of iterations
+(a)
+
+100
+
+00
+
+20
+
+40 60 80 Number of iterations
+(b)
+
+100
+
+2000 1500 Frequency 1000 500 00 20
+
+Path Guess 3
+
+2000 1500 Frequency 1000 500
+
+Path Guess 4
+
+40 60 80 Number of iterations
+(c)
+
+100
+
+00
+
+20
+
+40 60 80 Number of iterations
+(d)
+
+100
+
+Figure 17: Histogram of number of iterations to compute initial guess of path.
+
+28
+
+6
+
+Acknowledgements
+
+This work has taken place in the Intelligent Robotics Lab at the Artificial Intelligence Laboratory, The University of Texas at Austin. Research of the Intelligent Robotics lab was supported in part by grants from the National Science Foundation (IIS-0413257, IIS-0713150, and IIS-0750011), the National Institutes of Health (EY016089), and from the Texas Advanced Research Program (3658-0170-2007).
+
+References
+Adams, R. A. and Fournier, J. F. (2003). Sobolev spaces. Elsevier. Chakroborty, P. and Das, A. (2004). Principles of Transportation Engineering. PHI Learning Pvt. Ltd. Choset, H., Lynch, K. M., Hutchinson, S., Kantor, G., Burgard, W., Kavraki, L. E., and Thrun, S. (2005). Principles of Robot Motion: Theory, Algorithms, and Implementations. MIT Press. Fehr, L., Langbein, W. E., and Skaar, S. B. (2000). Adequacy of power wheelchair control interfaces for persons with severe disabilities: A clinical survey. Journal of Rehabilitation Research and Development, 37(3):35360. F orstberg, J. (2000). Ride comfort and motion sickness in tilting trains: Human responses to motion environments in train experiment and simulator experiments. PhD thesis, KTH Royal Institute of Technology. Gulati, S. (2011). A framework for characterization and planning of safe, comfortable, and customizable motion of assistive mobile robots. In Ph.D. Thesis. Gulati, S., Jhurani, C., and Kuipers, B. (2013). A nonlinear constrained optimization framework for comfortable and customizable motion planning of nonholonomic mobile robots  part i. Submitted to The International Journal of Robotics Research. Hughes, T. J. (2000). The Finite Element Method: Linear Static and Dynamic Finite Element Analysis. Dover Publications. Iwnicki, S. (2006). Handbook of Railway Vehicle Dynamics. CRC Press. Jacobson, I. D., Richards, L. G., and Kuhlthau, A. R. (1980). Models of human comfort in vehicle environments. Human factors in transport research, 20:2432. Latombe, J.-C. (1991). Robot Motion Planning. Kluwer Academic Press. LaValle, S. M. (2006). Planning Algorithms. Cambridge University Press. LaValle, S. M. (2011a). Motion planning: The essentials. IEEE Robotics and Automation Society Magazine, 18(1):7989. LaValle, S. M. (2011b). Motion planning: Wild frontiers. IEEE Robotics and Automation Society Magazine, 18(2):108118. Moreton, H. P. (1993). Minimum Curvature Variation Curves, Networks, and Surfaces for Fair Free-Form Shape Design. PhD thesis, EECS Department, University of California, Berkeley. Pepler, R. D., Sussman, E. D., and Richards, L. G. (1980). Passenger comfort in ground vehicles. Human factors in transport research, 20:7684. Silberg, G., Wallace, R., Matuszak, G., Plessers, J., Brower, C., and Subramanian, D. (2012). Self-driving cars: The next revolution. Technical report, KPMG Center for Automotive Research. Simpson, R. C., LoPresti, E. F., and Cooper, R. A. (2008). How many people would benefit from a smart wheelchair? Journal of Rehabilitation Research and Development, 45(1):5372. Suzuki, H. (1998). Research trends on riding comfort evaluation in japan. Proceedings of the Institution of Mechanical Engineers  Part F  Journal of Rail and Rapid Transit, 212(1):6172. W achter, A. and Biegler, L. T. (2006). On the implementation of a primal-dual interior point filter line search algorithm for large-scale nonlinear programming. Mathematical Programming, 106(1):2557. 29
+

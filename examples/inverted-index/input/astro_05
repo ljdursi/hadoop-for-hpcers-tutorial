@@ -1,0 +1,788 @@
+Prepared for submission to JCAP
+
+arXiv:1305.5541v1 [astro-ph.CO] 23 May 2013
+
+Measuring the X-ray Background in the Reionization Era with First Generation 21 cm Experiments
+
+Pierre Christian1 and Abraham Loeb
+Astronomy Department, Harvard University, 60 Garden Street, Cambridge, MA
+
+Abstract. The X-ray background during the epoch of reionization is currently poorly constrained. We demonstrate that it is possible to use first generation 21 cm experiments to calibrate it. Using the semi-numerical simulation, 21cmFAST, we calculate the dependence of the 21 cm power spectrum on the X-ray background flux. Comparing the signal to the sensitivity of the Murchison Widefield Array (MWA) we find that in the redshift interval z =8-14 the 21 cm signal is detectable based on the upper limit set by the present-day unresolved soft X-ray background. We show that there is no degeneracy between the X-ray production efficiency and the Ly production efficiency and that the degeneracy with the ionization fraction of the intergalactic medium can be broken.
+1
+
+pchristian@cfa.harvard.edu
+
+1
+
+Introduction
+
+The dominant heating process of the intergalactic medium (IGM) during the epoch of reionization (EoR) is mediated by X-rays [1]. Through photoionization of HI and HeI, X-ray photons generate high energy electrons which then deposit their energy into increasing the gas temperature. In principle, ultraviolet photons, which constitute the bulk of ionizing radiation during the EoR, could contribute to this photo-heating process. However, their mean free path is much smaller than the X-ray photons', thereby constraining their photo-heating to the ionized regions around their sources [2]. There are multiple hypotheses concerning the sources of the X-ray photons, including active galactic nuclei [3], miniquasars [4], and high mass X-ray binaries [5]. In principle, if we knew both the number density and the X-ray emissivity of these sources during the EoR, we could have inferred the EoR X-ray background. This approach however embodies many uncertainties due to unaccounted X-ray sources [2]. Recently, there has been a growing interest in using the cosmologically redshifted 21 cm signal from neutral hydrogen to probe the reionization era. The potential of the redshifted 21 cm emission to be an emissary of the EoR motivated the construction of several radio experiments such as the Murchison Widefield Array (MWA)1 , the Precision Array for Probing the Epoch of Reionization (PAPER)2 , and the LOw Frequency ARray (LOFAR)3 ; all of which just started their operation. During the EoR, the intensity of the redshifted 21 cm signal is primarily modulated by a combination of density, ionization fraction, and spin temperature fluctuations [6]. The sensitivity of the spin temperature to the gas temperature makes it natural to consider employing the redshifted 21 cm signal to measure the EoR X-ray background (XRB) intensity. In fact, a recent upper limit published by the PAPER collaboration had already ruled out an EoR heating scenario with no X-ray heating [7]. In this work we examine whether the sensitivities of first generation radio arrays are sufficient to provide constraints to the EoR X-ray background intensity. Although we focus our work on the 128 antennae of the MWA, our results can be generalized to other first generation observatories. Throughout this paper, we will adopt the CDM cosmological parameters: M = 0.32 , b = 0.05,  = 0.68, and h = 0.67 [8].
+
+2
+
+The 21 cm Signal
+
+The 21 cm signal results from the spin flip transition of the electron in neutral hydrogen. The intensity of this signal is quantified in the offset of the 21 cm brightness temperature, Tb , from the Cosmic Microwave Background (CMB) temperature, T . This offset at a given frequency  along a line of sight at a redshift z is given by [9]: T 0.3153 (1 + z )1/2 mK, TS (2.1) where z is the signal's redshift, TS the spin temperature of the gas, 0 is the optical depth at the 21 cm line frequency, xHI = 1 - xi is the neutral fraction (where xi is the ionized fraction),  (x, z )  / - 1 the fractional overdensity, H (z ) the Hubble parameter, and dvr /dr Tb ( ) = H dvr /dr + H 1-
+1 2
+
+TS - T (1-e-0 )  27xHI (1+ ) 1+z
+
+http://www.MWAtelescope.org/ http://eor.berkeley.edu/ 3 http://www.lofar.org/
+
+2
+
+the comoving velocity gradient along the line of sight. Note that the intensity of the 21 cm signal is proportional to TS - T . Higher value of |TS - T | will result in a stronger 21 cm signal. Regions where TS < T will appear in absorption, while regions with TS > T will appear in emission. Three effects regulate the spin temperature TS [9]: collisions between hydrogen atoms, as well as with free protons and electrons; scattering of CMB photons; and the WouthuysenField effect, which describes the mixing of the hyperfine states due to absorption and reemission of Ly photons [10] [11]. The combination of these effects results in TS that is given by the equation [11]: -1 + x T -1 + x T -1 T 1  c c K = , (2.2) Ts 1 + x + xc where xc and x are the coupling coefficients describing collisions and Ly scattering, respectively, Tc is the color temperature of the Ly photons, and TK is the kinetic temperature of the gas. During the reionization era, the universe is not sufficiently dense for collisional coupling to be efficient. However, multiple scattering couple the Ly color temperature to the kinetic temperature so that Tc  TK [1]. In this paper, the most important aspect of TS is this dependency on TK . X-ray photons are the dominant source of heating during the EoR, and as such the X-ray background during the EoR is strongly coupled to the kinetic temperature, TK .
+
+3
+
+21cmFAST Simulation
+
+We use the output of the 21cmFAST code, a semi-numerical simulation of the redshifted 21 cm which takes into account the evolution of Tb as prescribed in equation (1) [12]. Our simulation volume is a 400400400 comoving Mpc box discretized to 800 cells per axis. Our simulations ran from z = 35 to z = 7. In order to explore the X-ray background efficiency, 21cmFAST parameterizes the X-ray background efficiency by the two parameters x , the number of X-ray photons emitted per solar mass in stars and f , the star formation efficiency. The effects of these two parameters are multiplicative, so the effective X-ray background efficiency is proportional to the product x f , the number of X-ray photons emitted per total baryonic mass in collapsed halos. We ran the simulation multiple times with different values of x . In practice, our results are insensitive to whether the change in X-ray background is due to a change in x or a change in f . Changing x alone while keeping f constant is equivalent to altering their product. The fiducial value often assumed for this parameter is x f = 1056 photons per solar mass in stars. This corresponds to  1 X-ray photon per stellar baryon with f = 10%, the value inferred at z = 0. 3.1 Generalization of X-ray Sources
+
+We can translate x f native to 21cmFAST to more intuitive intensity units by the following change of variable: c b IX =   x f  coll  h , (3.1) 4 M where IX is the X-ray intensity, coll the global mass density in collapsed halos, and h the average photon energy (taken to be  1 keV). Note that in general this relation depends on redshift.
+
+3
+
+We calculate coll from the Sheth-Tormen mass function of collapsed dark matter halos [13]: nST (M ) = A 2a m -d(ln  ) 1 c 1 + 2 )q  M dM (a c  exp
+2 -a c 2
+
+,
+
+(3.2)
+
+with a = 0.707, q = 0.3, and A = 0.322, fitted to model ellipsoidal collapse. coll is the integration of nST as a function of mass:
+
+
+coll =
+M min
+
+M nsT (M )dM ,
+
+(3.3)
+
+where we adopt a minimum galaxy halo mass, Mmin , corresponding to the threshold for atomic hydrogen cooling at a virial temperature of  104 K. 3.2 Conversion between X and fX
+
+It is often more convenient to express the X-ray background in terms of fX , the parameter connecting the X-ray luminosity, LX , with the star formation rate, SFR [2]: LX = 1.4  1039 fX f SFR M yr-1 erg s-1 , (3.4)
+
+instead of X . We can relate X and fX by normalizing fX = 1 to the LX -SFR relation of R erg s-1 when fX f = 1. The resulting Dijkstra et al. (2012) [2]: LX = 1.4  1039 MSFyr -1 conversion is: x fX = 2.14 . (3.5) 1057 M-1 We will use fX in place of x throughout the rest of the paper.
+
+4
+
+Noise
+
+The 21 cm power spectrum is inherently three dimensional. In Fourier space, u and v correspond to the two angular dimensions while f is the frequency of the observation (or redshift) providing the line-of-sight spatial dimension. For each (u, v, f ) voxel, there is a corresponding thermal noise that we must calculate to figure out the sensitivity of the observation. We start with the radiometer equation for the thermal noise on the visibility measurement [14]: c2 Tsys Vrms (u, v, f ) = 2  , (4.1) f Ae  f  where Tsys is the system temperature, assumed to be uniform across the observational bandwidth, Ae the effective area per antenna, f the channel width, and  is the total integration time for the specific (u, v, f ) voxel. It is important to note that due to the redundancy of the baselines,  can be very different from the actual observation time of the array. At this point, it is useful to bring our calculation to the familiar cosmological wavenumber space, k . Following Beardsley et al. (2013) [15], the (u, v ) angular frequencies can be mapped directly to k , the wavenumber perpendicular to the line-of-sight, by the mapping k = 2u , D (4.2)
+
+4
+
+where D(z ) is the comoving distance to a redshift z . To obtain a similar mapping for the line-of-sight direction, we map the observed frequency to redshift by using the rest frame frequency of the 21 cm line. Then we calculate the comoving distance to this redshift before performing a Fourier transform to bring it to wavenumber space. To obtain the noise on the power spectrum, we square equation (1) to obtain, as in Beardsley et al. (2013) [15]:
+2 C (k ) = Tsys
+
+D 2 2 Ae
+
+D B
+
+1  (k )
+
+.
+
+(4.3)
+
+As stated previously,  (k ) is different from the actual observation time and is a function of the wavenumber k . In particular, the functional form of  (k ) depends on the antenna positions. This work uses	(k ) as calculated by Beardsley et al. (2013) [15], which is specific to the 128 antennae of the MWA. Note, however, that  still scales linearly with observation time, and as such, our noise goes down as 1/t. Our values of Tsys , Ae , D, and B are those listed in Table 1 of Beardsley et al. (2013) [15]. Averaging this noise in the three dimensional k space in spherical bins in the manner of McQuinn et al. (2006) [16] gives us our noise in the one dimensional |k | space.
+
+5
+
+Results
+
+Slices of the 21 cm signal at z = 12 from simulation runs with fX f = 10-1 , 10-2 , 10-3 , 10-4 are shown in Figure 1. Note that at these conditions, decreasing fX f monotonically increases the overall 21 cm signal. The reason for this can be seen in the global evolution of the 21 cm signal. Decreasing the X-ray background delays gas heating, in effect moving the absorption trough to a lower redshift. Within the absorption trough, different regions can have very large differences in TK , resulting in a large 21 cm intensity. A clear visualization of this argument is presented in panel (a) of Figure 2, which shows the 21 cm power spectrum at k = 0.1 Mpc-1 . As discussed in Mesinger et al. (2013) [17], there are three peaks in the signal corresponding to epochs of Ly pumping, X-ray heating, and reionization (from highest to lowest z ). As one decreases the X-ray efficiency, the X-ray peak is shifted towards low redshifts. At low enough X-ray efficiency (e.g. fX f  10-3 ), the X-ray peak enters a redshift regime that is uncontaminated by the strong foreground [18] and thus is accessible by first generation experiments. The 21 cm power spectra and thermal noise for 1000 hours of MWA observation is shown in Figure 3. The sensitivity of this first generation array is high enough to place constraints on the X-ray background at redshift z = 8 - 14. For example, at k = 0.1 Mpc-1 , a non detection at z = 8 will rule out reionization models with an X-ray background corresponding to fX f = 10-4 (dotted curve). A detection could be checked against the same set of simulations to ascertain the value of fX f at the signal's redshift. As such, the 21 cm power spectrum could be used to measure the cosmic X-ray background at a given redshift during the EoR - making it an X-rayometer. Note that one does not need to measure the amplitude of the 21 cm power spectrum in order to measure the X-ray background. Figure 2 implies that the location of the X-ray peak is uniquely determined by the X-ray efficiency. The X-ray background is measurable from the redshift of this peak. Of course, measuring the actual value of the 21 cm power spectrum will allow us a more precise determination of the X-ray background, and the best way to locate the X-ray peak in the first place would involve measuring the 21 cm power
+
+5
+
+(a) fX f = 10-1
+
+(b) fX f = 10-2
+
+(c) fX f = 10-3
+
+(d) fX f = 10-4
+
+Figure 1: Slices of the 21 cm signal at z = 12 for different values of fX f with fiducial f = 1 and ion = 31.5. Note the monotonic increase in overall power as we decrease fX f . spectrum around the peak. Still, lower limits on the X-ray background can be deduced by the absence of the X-ray peak below a certain redshift. 5.1 Detectability of the 21 cm Signal
+
+The best prospects for detecting the 21 cm signal are represented by the peaks displayed in Figure 2. The large X-ray peak for the fiducial model is at a high redshift, z  18. At such high redshift, the foreground is large, preventing observations by first generation 21 cm observatories. However, lower X-ray backgrounds can delay the heating enough that the X-ray peak is moved to lower redshift. At fX f = 10-2 , for example, the X-ray peak is
+
+6
+
+104
+
+2 2 21(mK )
+
+fX f
+
+10 10 10
+
+3
+
+fX fX
+
+<Tb >2
+
+1
+
+5
+
+10
+
+15
+
+<Tb >2
+
+2
+
+2 2 21(mK )
+
+fX f
+
+=10-1 =10-2 f  =10-3 f	=10-4
+
+103 102 101 100 5 10 15 20 25
+
+
+
+=1Planck =0.045Planck =0.38Planck =1.8Planck
+
+20
+
+z
+
+25
+
+30
+
+35
+
+z
+
+30
+
+35
+
+(a)
+
+(b)
+
+Figure 2: (a) Evolution of the 21 cm power spectrum at k = 0.1 Mpc-1 as a function of redshift. The three peaks prominently shown by the fiducial model fX f = 10-1 correspond to the epochs of Ly pumping, X-ray heating, and reionization (from highest to lowest z ). As the X-ray efficiency is decreased, the X-ray peak shifts towards lower redshifts, thereby putting it in a regime detectable by first generation observatories. The largest 21 cm signal possible is achieved at low X-ray efficiency where the X-ray peak merges with the reionization peak (e.g. fX f = 10-3 & 10-4 ). (b) Same as (a), but modulating the ionization efficiency, ion , while keeping fX f = 10-1 . Each model's optical depth is calculated using equation (10), and all optical depths are measured at z = 7. The degeneracy between the ionization and X-ray efficiency can be broken by noting the qualitative difference between the curves of (a) and (b): changing ion will not change the location of the X-ray peak. One can use either the X-ray peak's redshift or the value of the power spectrum at the peak to uniquely determine the X-ray background fX f . located at z  12, a redshift accessible by first generation arrays. The largest signal possible is located around z = 10 - 12 at very low X-ray efficiencies (fX f = 10-3 & 10-4 ), where the X-ray peak merges with the reionization peak. Panel (a) of Figure 4 presents the maximum X-ray background intensity allowed to make the 21 cm signal at k = 0.1 Mpc-1 detectable at 10 after 1000 hours of MWA observations. Note that in using equation (5) to convert fX f to physical units, we have placed our observer at the signal's redshift (i.e. IX measures the X-ray background intensity observed by a comoving observer at that redshift). In panel (b) of Figure 4, we calculated IX as a fraction of the observed unresolved soft X-ray background at z = 0: IX (z = 0) = 1  0.2  10-12 erg s-1 cm-2 steradian-1 [19]. We multiplied the EoR X-ray background by (1 + z )-4 to account for the redshift effect due to the expansion of the universe. Note that the value used for IX (z = 0) is measured in the band between 0.65 - 1 keV. We need to bear in mind that EoR X-ray photons will redshift away from these bands at z = 0. Given a specific source spectrum one may correct the conversion between the emitted and observed X-ray intensity through a redshift factor for the corresponding energy bands. For active galactic nuclei at z  10, this correction amounts to a modest reduction by a factor of  1.6 [20] in the vertical axis of Figure 4b. For high-mass X-ray binaries, the correction
+
+7
+
+221(mK2 )
+
+10 10
+
+4 3
+
+fX f  fX fX fX
+
+221(mK2 )
+<Tb >2
+
+105
+
+Thermal Noise
+
+10 10 10 10 10
+
+4
+
+=10-1 f  =10-2 f  =10-3 f  =10-4
+
+3
+
+2
+
+1
+
+<Tb >2
+
+102 101 10-2
+k
+
+0
+
+10
+
+-1
+
+10-1
+
+(Mpc
+
+-1
+
+)
+
+100
+
+10
+
+-2
+
+10
+
+-1
+
+k
+
+(
+
+Mpc )
+-1
+
+10
+
+0
+
+(a) z = 14
+
+(b) z = 12
+
+10
+
+4
+
+10
+
+3
+
+221(mK2 )
+
+10
+
+3
+
+221(mK2 )
+<Tb >2
+-1 1
+
+10
+
+2
+
+10
+
+2
+
+10
+
+1
+
+<Tb >2
+
+10
+
+1
+
+10
+
+0
+
+10
+
+0
+
+10
+
+-1
+
+10
+
+-1
+
+10
+
+-2
+
+10
+
+k
+
+(
+
+Mpc )
+-1
+
+10
+
+0
+
+10
+
+10
+
+-2
+
+10
+
+-2
+
+10
+
+-1
+
+k
+
+(
+
+Mpc )
+-1
+
+10
+
+0
+
+10
+
+1
+
+(c) z = 10
+
+(d) z = 8
+
+Figure 3: The thermal noise for 1000 hours of integration time with the MWA (solid line) and the 21 cm signal given a variety of X-ray efficiencies: fX f = 10-1 , 10-2 , 10-3 , 10-4 for the points, dashed, dotted-dashed, and dotted lines respectively. is even weaker [2]. In addition, most of the unresolved component of the z = 0 soft X-ray background is thought to be produced by local sources [21]. It is nevertheless comforting that at redshifts larger than  8, the maximum X-ray background required for a 10 detection is greater than the unresolved background at z = 0. This has positive implications for the detectability of the EoR 21 cm signal. 5.2 Monotonicity
+
+The aforementioned study is only possible in certain redshift regimes. The fourth panel of Figure 3 shows the power spectra at z = 8. At this redshift, the magnitude of the 21 cm power spectrum is insensitive to the X-ray background except when the efficiency is extremely low. For most of our choices of fX f at z  8, the heating had saturated, thus rendering the power spectra insensitive to changes in fX f . Note that at very low X-ray backgrounds
+
+8
+
+IX,10 (erg sec-1 cm-2 sr-1 )
+
+10
+
+-5
+
+10
+
+3
+
+10
+
+-7
+
+IX(z =0)(1 + z)
+
+IX,10(z)
+
+4
+
+10
+
+-6
+
+10
+
+2
+
+10
+
+1
+
+10
+
+-8
+
+10
+
+0
+
+10
+
+-9
+
+7
+
+8
+
+9
+
+10
+
+z
+
+11
+
+12
+
+13
+
+10
+
+-1
+
+7
+
+8
+
+9
+
+10
+
+z
+
+11
+
+12
+
+13
+
+(a)
+
+(b)
+
+Figure 4: (a) The maximum X-ray background intensity required in order for the 21 cm signal at k = 0.1 Mpc-1 be detectable at 10 by 1000 hours of MWA observations. We have used equation (5) to convert fX f to physical units, IX , the X-ray background intensity measured by a comoving observer at that redshift. (b) Same as (a), calculated as a fraction of the unresolved, diffuse soft X-ray background at z = 0: IX (z = 0) = 1  0.2  10-12 erg s-1 cm-2 steradian-1 . In comparing the X-ray background during the EoR and at z = 0, we multiply the EoR values by (1 + z )-4 to account for the redshift dimming factor. (e.g. fX f = 10-4 ), the heating had not saturated at z=8 and a large signal amplitude is generated. In particular, when X-ray heating saturates the 21 cm signal is no longer a monotonic function of fX f . Acknowledging this complication, we conducted a study on the monotonicity of the 21 cm signal with respect to X-ray efficiency. Figure 5 shows the evolution of the 21 cm power spectrum at k = 0.1 Mpc-1 as a function of redshift. We show models with fX f in the ranges 10-2 - 10-1 , 10-3 - 10-2 , 10-4 - 10-3 , and 10-5 - 10-4 using solid lines, dashed lines, dotted-dashed lines, dotted lines, and vertical bars, respectively. There are three families of curves in Figure 5. The largest signals are produced by low Xray efficiency models (fX f  10-3 ), due to the merging of the X-ray and reionization peaks. The second family of curves are those with X-ray efficiencies around fX f = 10-3 - 10-2 , where the signals reflect the shoulder of the X-ray peak. These signals have a large power at z	11 - 12 but quickly decline with decreasing redshift. The third type of curves corresponds to models with fX f	10-2 . These models descend down their X-ray peaks at z  12, and at z = 8 - 12 are experiencing another peak due to reionization. The monotonicity problem arises from the fact that at a given redshift, models with higher X-ray heating, due to the reionization peak, can produce signals that is larger than models with lower X-ray heating, which are descending from their X-ray peaks. If only an upper limit on the 21 cm signal is established, care must be taken when converting this to an upper limit on the X-ray background. One must be sure that the power spectrum lies in the regime of monotonicity. Without any other constraint, there is no regime where the 21 cm signal is completely monotonic. However, if one is able to disfavor
+
+9
+
+X-ray heating models, then one may open up a regime where the 21 cm signal is monotonic. If models with fX f  10-2 are disfavored, the regime of monotonicity stretches between z = 7 - 11. If instead we are to include these models and instead disfavor models with extremely low X-ray heating ( fX f  10-4 ), the regime of monotonicity becomes much narrower, occupying the redshifts between z	11 - 12. Without disfavoring any models a priori, a robust upper limit on the X-ray background can be obtained by establishing 21 cm signal upper limits at multiple redshifts. With multiple upper limits we can disfavor different fX f models, and find whether the peak at z = 8 - 13 is due to reionization, X-ray, or combined X-ray plus reionization. Note that this problem is not significant at our redshifts of interest if the upper limit is large (at least in the  102 - 103 mK2 range). The reionization peak of higher fX f models cannot produce a signal as large as the combined X-ray plus reionization peak exhibited by models of lower fX f . In fact, if we only consider upper limits of at least  102 mK2 , the regime of monotonicity stretches between z = 8 to almost z = 12. In addition, note that curves of vastly different X-ray efficiencies in Figure 5 can intersect. Thereby, unless the detected signal is very large (at least in the  102 - 103 mK2 range), a single detection is not sufficient to determine the X-ray background. Breaking this degeneracy again requires two or more detections (or at the very least a detection and an upper limit) at different redshifts. With detection at multiple redshifts, one can reconstruct points from Figure 5 and uniquely infer the X-ray background. Our assertion that knowing the redshift of the X-ray peak is sufficient to determine the X-ray background still holds: knowing the position of the peak requires multiple measurements of the power spectrum at and around the peak. Of course, this also implies that knowing the value of the power spectrum at the X-ray peak is sufficient in determining the X-ray background.
+
+6
+
+Denegeracies
+
+Possible sources of degeneracies are the Ly and the ionization efficiencies at the signal's redshift. The former is due to the Wouthuysen-Field (WF) mechanism [10] [11]. The latter stems from the xHI term in equation (1). 6.1 Ly-XRB degeneracy
+
+The Ly effect can be parameterized by f , defined as the number of Ly photons produced per baryon in stars. In order to explore how the Ly efficiency affect on our result, we reran our simulation with different values of f . Our results, plotted in Figure 6 show that the 21 cm power spectrum at the redshift of interest (z  15) is insensitive to changes in the Ly flux. This insensitivity originates from the fact that the effect of WF coupling on the 21 cm signal is already saturated during the reionization epoch at z  7 - 15 [9]. Thereby, changing the amount of Ly photons has little effect to the 21 cm intensity. 6.2 Ionization efficiency-XRB degeneracy
+
+The second source of degeneracy involves the ionization efficiency. This effect is implemented in the 21cmFAST code via the parameter ion , where any cell is flagged as being ionized -1 if the collapsed fraction is larger than ion [12]. The fiducial value for this parameter is 31.5, which is set so that reionization ends at z  7. In Figure 7 we present runs with ion = 1, 10, 31.5, 100.
+
+10
+
+<Tb >2
+
+2 2 21(mK )
+
+103 102 101 100 7 8 9 10
+z
+
+11
+
+12
+
+13
+
+Figure 5: Evolution of the 21 cm power spectrum at k = 0.1 Mpc-1 as a function of redshift. Models with fX f in the ranges 10-2 - 10-1 , 10-3 - 10-2 , 10-4 - 10-3 , and 10-5 - 10-4 are plotted in solid lines, dashed lines, dotted-dashed lines, dotted lines, and vertical bars, respectively. If models with fX f	10-2 are disfavored, the regime of monotonicity, where lowering fX f increases the 21 cm signal, stretches between z = 7 to z  11. However, if we are to include these models and instead disfavor models with extremely low X-ray heating (fX f  10-4 ), the regime of monotonicity becomes much narrower, between z  11 and z  12. At first, the results might seem worrying: the changes to the 21 cm signal due to changes in ion are rather large. However, ion is also the parameter that determines the neutral fraction of the IGM. Therefore, there is a good constraint on ion because the end of reionization is constrained by various experiments to be around z  6 - 7 [22]. The end of reionization redshift is very sensitive to changes in ion ; our choices of ion = 1 and 10 failed to fully ionize the universe by z = 6.5 (neutral fraction of 0.94 and 0.43 respectively at z = 7), while ion = 100 ended reionization at z = 9.8. We calculate the electron scattering optical depth for each of our models from the equation: z ne 0 c	(z ) = (1 + z )3 (1 - XHI )T dz , (6.1) (1 + z )H (z )	where XHI is the neutral fraction, T is the Thomson cross section, ne0 the number density of electrons at z = 0, and H (z ) is given by: H (z ) = H0 (M (1 + z )3 +  )1/2 . (6.2)
+
+For each model, we calculate the optical depth at z = 7 (the redshift when our simulation terminates) and compare it to the Thomson optical depth measured by the Planck mission:  (z = 0) = 0.089  0.032 [8]. In order to calculate the Planck optical depth at z = 7, we assume a fully ionized universe at z  7 and subtract the z = 0 to z = 7 contribution from the Planck optical depth. For ion = 1, 10, 31.5, 100 we obtain optical depths of  (z = 7) = 0.045, 0.38, 1, 1.8 P lanck (z = 7) respectively. If we ignore the constraint on ion from the Planck optical depth, we could still break this degeneracy by noting that modulating ion affects the power spectrum evolution in a
+
+11
+
+10
+
+3
+
+221(mK2 )
+
+10
+
+2
+
+221(mK2 )
+<Tb >2
+-1 1
+
+f f f
+
+=1 =10 =100
+
+10
+
+4
+
+10
+
+1
+
+10
+
+3
+
+<Tb >2
+
+10
+
+0
+
+10
+
+2
+
+10
+
+-1
+
+10
+
+-2
+
+10
+
+-2
+
+10
+
+k
+
+(
+
+Mpc )
+-1
+10
+4
+
+10
+
+0
+
+10
+
+10 -2 10
+
+1
+
+10
+
+-1
+
+k
+
+(
+
+Mpc )
+-1
+
+10
+
+0
+
+10
+
+1
+
+(a) z = 12
+
+(b) z = 20
+
+221(mK2 )
+<Tb >2
+
+10
+
+3
+
+10
+
+2
+
+10
+
+1
+
+10 -2 10
+
+0
+
+10
+
+-1
+
+k
+
+(
+
+Mpc )
+-1
+
+10
+
+0
+
+10
+
+1
+
+(c) z = 25
+
+Figure 6: 21 cm power spectra at z=10 for various choices of f . A change of f by two orders of magnitude has a weak influence on the signal at redshifts z  20. There is considerable degeneracy between fX and f at very high redshifts (as seen in the z = 25 plot) due to the Ly coupling being unsaturated. different way than changing fX f . Panel (b) of Figure 2 displays the redshift evolution of the 21 cm power spectrum at k = 0.1 Mpc-1 for different values of ion . Note that changing ion shifts the location of the reionization peak (the one with the lowest z ), but keeps the location of the X-ray peak unchanged. As such, if we can locate the position of the X-ray peak, we can use either the peak's redshift or the actual power spectrum at and around the peak to measure the X-ray background free from any degeneracy with ion . Note that the reionization efficiency uniquely determines the redshift of the reionization peak. One might then naively assume that we could measure the position of the reionization peak and through a similar process uniquely determine ion . However, a low enough X-ray efficiency will merge the X-ray and reionization peaks. Due to the X-ray peak being much larger than the reionization peak, the redshift of this combined peak will correspond more to
+
+12
+
+the X-ray peak's redshift, thereby masking useful information on ion . If one can demonstrate that the peak is solely due to reionization (either because of its low power or by detecting the X-ray peak at a different redshift), one could uniquely determine both ion and fX f , trivially breaking the degeneracy. Another method to measure the X-ray background free from the ion degeneracy follows from the result that modulating the reionization efficiency does not change the 21 cm power spectrum beyond the X-ray peak. A robust measurement of the X-ray background can also be conducted at these high redshift (z  18 for the fiducial fX f = 0.1 model), although the foreground would make observations challenging. At a sufficiently high redshift, one can also consider the different spatial effects of changing ion and fX f . Due to their short mean free paths, UV photons would only be able to modulate the 21 cm power spectrum at short spatial scales, implying that ion would have a larger effect on large k .
+
+7
+
+Conclusions
+
+We have shown that the upper limit on the X-ray background intensity during the EoR based on the present-day unresolved soft X-ray background implies that first generation 21 cm experiments are capable of detecting the 21 cm signal during the EoR. At z = 10, an X-ray intensity of 2  10-7 erg sec-1 cm-2 steradian-1 will result in a 10 detection after 1000 hours of MWA observation. Figure 2 shows that modulating the X-ray background will shift the position of the X-ray heating peak. Since there is a one-to-one correspondence between the position of this peak and the EoR X-ray background, measuring the signal at multiple redshifts would allow one to measure the X-ray background during the EoR. Noting the lack of degeneracies between the Ly efficiency and fX f at our redshift of interest, as well as the strong constraint on the reionization efficiency (e.g. from measurements of the neutral fraction and the CMB Thomson optical depth) and the fact that modulating ion and fX f affect the 21 cm power spectrum evolution differently, we have determined that our method is robust. If the reionization peak is located, one can use its redshift to measure the ionization efficiency (or equivalently the Thomson optical depth) of the IGM. This will help in inferring the reionization history of the universe independent from other constraints (e.g. quasar spectra or CMB electron scattering optical depth). Acknowledgments. We thank Andrei Mesinger for his creation and maintenance of the 21cmFAST code. We would also like to thank Judd Bowman, Adam Beardsley, and Aaron Ewall-Wice for some useful discussions. This work was supported in part by NSF grant AST-0907890 and NASA grants NNX08ALY36 and NNA09DB30A.
+
+References
+[1] J. R. Pritchard and A. Loeb, 21 cm cosmology in the 21st century, Reports on Progress in Physics 75 (Aug., 2012) 086901, [arXiv:1109.6012]. [2] M. Dijkstra, M. Gilfanov, A. Loeb, and R. Sunyaev, Constraints on the redshift evolution of the LX -SFR relation from the cosmic X-ray backgrounds, MNRAS 421 (Mar., 2012) 213223, [arXiv:1108.4420].
+
+13
+
+10
+
+2
+
+10
+
+3
+
+2 2 (mK2 ) 21
+
+221(mK2 )
+<Tb >2
+1
+
+10
+
+2
+
+10
+
+1
+
+10
+
+1
+
+10
+
+0
+
+ion ion ion ion
+
+10
+
+-1
+
+=31 5  =1 =1  =0 045 =10  =0 38 =100  =1 8
+.   .  .
+
+<Tb >
+
+Planck Planck Planck
+
+10
+
+0
+
+10
+
+-1
+
+. Planck
+
+10
+
+-2
+
+10
+
+-1 ) k (Mpc
+(a) z = 14
+10
+2
+
+-1
+
+10
+
+0
+
+10
+
+10
+
+-2
+
+10
+
+-2
+
+10
+
+-1
+
+k
+
+(
+
+Mpc )
+-1
+
+10
+
+0
+
+10
+
+1
+
+(b) z = 12
+
+221(mK2 )
+<Tb >2
+
+10 10
+
+1
+
+0
+
+10 10 10 10 10
+
+-1
+
+-2
+
+-3
+
+-4
+
+-5
+
+10
+
+-2
+
+10
+
+-1
+
+k
+
+(
+
+Mpc )
+-1
+
+10
+
+0
+
+10
+
+1
+
+(c) z = 10
+
+Figure 7: 21 cm power spectra at z = 10 for various choices of ion . The fiducial value of ion = 31.5 corresponds to ionization ending at z  7. The scenarios of ion = 1 and ion = 10 failed to fully ionize the universe at z = 6.5. Another way to showcase this constraint is to calculate the electron scattering optical depth,  , for each reionization scenario. Each model's  is listed in the first panel's inset in terms of the Planck's Thomson optical depth at z = 7.
+[3] P. Madau, F. Haardt, and M. J. Rees, Radiative Transfer in a Clumpy Universe. III. The Nature of Cosmological Ionizing Sources, ApJ 514 (Apr., 1999) 648659, [astro-ph/9809058]. [4] P. Madau, M. J. Rees, M. Volonteri, F. Haardt, and S. P. Oh, Early Reionization by Miniquasars, ApJ 604 (Apr., 2004) 484494, [astro-ph/0310223]. [5] S. Mineo, M. Gilfanov, and R. Sunyaev, X-ray emission from star-forming galaxies - I. High-mass X-ray binaries, MNRAS 419 (Jan., 2012) 20952115, [arXiv:1105.4610]. [6] J. R. Pritchard and S. R. Furlanetto, 21-cm fluctuations from inhomogeneous X-ray heating before reionization, MNRAS 376 (Apr., 2007) 16801694, [astro-ph/0607234]. [7] A. R. Parsons, A. Liu, J. E. Aguirre, Z. S. Ali, R. F. Bradley, C. L. Carilli, D. R. DeBoer, M. R. Dexter, N. E. Gugliucci, D. C. Jacobs, P. Klima, D. H. E. MacMahon, J. R. Manley,
+
+14
+
+D. F. Moore, J. C. Pober, I. I. Stefan, and W. P. Walbrugh, New Limits on 21cm EoR From PAPER-32 Consistent with an X-Ray Heated IGM at z=7.7, ArXiv e-prints (Apr., 2013) [arXiv:1304.4991]. [8] Planck Collaboration, P. A. R. Ade, N. Aghanim, C. Armitage-Caplan, M. Arnaud, M. Ashdown, F. Atrio-Barandela, J. Aumont, C. Baccigalupi, A. J. Banday, and et al., Planck 2013 results. XVI. Cosmological parameters, ArXiv e-prints (Mar., 2013) [arXiv:1303.5076]. [9] A. Loeb and S. Furlanetto, The First Galaxies in the Universe. 2013. [10] S. A. Wouthuysen, On the excitation mechanism of the 21-cm (radio-frequency) interstellar hydrogen emission line., AJ 57 (1952) 3132. [11] G. B. Field, Excitation of the Hydrogen 21-CM Line, Proceedings of the IRE 46 (Jan., 1958) 240250. [12] A. Mesinger, S. Furlanetto, and R. Cen, 21CMFAST: a fast, seminumerical simulation of the high-redshift 21-cm signal, MNRAS 411 (Feb., 2011) 955972, [arXiv:1003.3878]. [13] R. K. Sheth and G. Tormen, An excursion set model of hierarchical clustering: ellipsoidal collapse and the moving barrier, MNRAS 329 (Jan., 2002) 6175, [astro-ph/0105113]. [14] A. R. Thompson, J. M. Moran, and G. W. Swenson, Interferometry and synthesis in radio astronomy. 1986. [15] A. P. Beardsley, B. J. Hazelton, M. F. Morales, W. Arcus, D. Barnes, G. Bernardi, J. D. Bowman, F. H. Briggs, J. D. Bunton, R. J. Cappallo, B. E. Corey, A. Deshpande, L. deSouza, D. Emrich, B. M. Gaensler, R. Goeke, L. J. Greenhill, D. Herne, J. N. Hewitt, M. Johnston-Hollitt, D. L. Kaplan, J. C. Kasper, B. B. Kincaid, R. Koenig, E. Kratzenberg, C. J. Lonsdale, M. J. Lynch, S. R. McWhirter, D. A. Mitchell, E. Morgan, D. Oberoi, S. M. Ord, J. Pathikulangara, T. Prabu, R. A. Remillard, A. E. E. Rogers, A. Roshi, J. E. Salah, R. J. Sault, S. N. Udaya, K. S. Srivani, J. Stevens, R. Subrahmanyan, S. J. Tingay, R. B. Wayth, M. Waterson, R. L. Webster, A. R. Whitney, A. Williams, C. L. Williams, and J. S. B. Wyithe, The EoR sensitivity of the Murchison Widefield Array, MNRAS 429 (Feb., 2013) L5L9, [arXiv:1204.3111]. [16] M. McQuinn, O. Zahn, M. Zaldarriaga, L. Hernquist, and S. R. Furlanetto, Cosmological Parameter Estimation Using 21 cm Radiation from the Epoch of Reionization, ApJ 653 (Dec., 2006) 815834, [astro-ph/0512263]. [17] A. Mesinger, A. Ferrara, and D. S. Spiegel, Signatures of X-rays in the early Universe, MNRAS 431 (May, 2013) 621637, [arXiv:1210.7319]. [18] M. F. Morales, B. Hazelton, I. Sullivan, and A. Beardsley, Four Fundamental Foreground Power Spectrum Shapes for 21 cm Cosmology Observations, ApJ 752 (June, 2012) 137, [arXiv:1202.3830]. [19] R. C. Hickox and M. Markevitch, Resolving the Unresolved Cosmic X-Ray Background in the Chandra Deep Fields, ApJ 661 (June, 2007) L117L121, [astro-ph/0702556]. [20] G. Risaliti and M. Elvis, A Panchromatic View of AGN, in Supermassive Black Holes in the Distant Universe (A. J. Barger, ed.), vol. 308 of Astrophysics and Space Science Library, p. 187, Aug., 2004. astro-ph/0403618. [21] N. Cappelluti, P. Ranalli, M. Roncarelli, P. Arevalo, G. Zamorani, A. Comastri, R. Gilli, E. Rovilos, C. Vignali, V. Allevato, A. Finoguenov, T. Miyaji, F. Nicastro, I. Georgantopoulos, and A. Kashlinsky, The nature of the unresolved extragalactic cosmic soft X-ray background, MNRAS 427 (Nov., 2012) 651663, [arXiv:1208.4105]. [22] B. E. Robertson, S. R. Furlanetto, E. Schneider, S. Charlot, R. S. Ellis, D. P. Stark, R. J. McLure, J. S. Dunlop, A. Koekemoer, M. A. Schenker, M. Ouchi, Y. Ono, E. Curtis-Lake, A. B.
+
+15
+
+Rogers, R. A. A. Bowler, and M. Cirasuolo, New Constraints on Cosmic Reionization from the 2012 Hubble Ultra Deep Field Campaign, ArXiv e-prints (Jan., 2013) [arXiv:1301.1228].
+
+16
+

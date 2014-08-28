@@ -1,0 +1,2007 @@
+Existence of a solution to a fluid-multi-layered-structure interaction problem
+arXiv:1305.5310v1 [math.AP] 23 May 2013
+Boris Muha Department of Mathematics University of Zagreb  c Sun cica Cani Department of Mathematics University of Houston
+
+Abstract We study a nonlinear, unsteady, moving boundary, fluid-structure (FSI) problem in which the structure is composed of two layers: a thin layer which is in contact with the fluid, and a thick layer which sits on top of the thin structural layer. The fluid flow, which is driven by the time-dependent dynamic pressure data, is governed by the 2D Navier-Stokes equations for an incompressible, viscous fluid, defined on a 2D cylinder. The elastodynamics of the cylinder wall is governed by the 1D linear wave equation modeling the thin structural layer, and by the 2D equations of linear elasticity modeling the thick structural layer. The fluid and the structure, as well as the two structural layers, are fully coupled via the kinematic and dynamic coupling conditions describing continuity of velocity and balance of contact forces. The thin structural layer acts as a fluid-structure interface with mass. The resulting FSI problem is a nonlinear moving boundary problem of parabolic-hyperbolic type. This problem is motivated by the flow of blood in elastic arteries whose walls are composed of several layers, each with different mechanical characteristics and thickness. We prove existence of a weak solution to this nonlinear FSI problem as long as the cylinder radius is greater than zero. The proof is based on a novel semi-discrete, operator splitting numerical scheme, known as the kinematically coupled scheme. We effectively prove convergence of that numerical scheme to a solution of the nonlinear fluid-multi-layered-structure interaction problem. The spaces of weak solutions presented in this manuscript reveal a striking new feature: the presence of a thin fluid-structure interface with mass regularizes solutions of the coupled problem.
+
+1
+1.1
+
+Introduction
+Problem definition
+
+We consider the flow of an incompressible, viscous fluid modeled by the Navier-Stokes equations in a 2D, time-dependent cylindrical fluid domain F (t), which is not known a priori: FLUID : F (t u + u  u) =	 ,   u = 0, 1 in F (t), t  (0, T ), (1.1)
+
+where F denotes the fluid density; u the fluid velocity;  = -pI +2D(u) is the fluid Cauchy stress 1 tensor; p is the fluid pressure;  is the kinematic viscosity coefficient; and D(u) = 2 (u +  u) is the symmetrized gradient of u. The cylindrical fluid domain is of length L, with reference radius r = R. The radial (vertical) displacement of the cylinder radius at time t and position z  (0, L) will be denoted by  (t, z ), giving rise to a deformed domain with radius R +  (t, z ). For simplicity, we will be assuming that longitudinal displacement of the structure is negligible. This is a common assumption in literature on FSI in blood flow. Thus, the fluid domain, sketched in Figure 1, is given by F (t) = {(z, r)  R2 : z  (0, L), r  (0, R +  (t, z )}, where the lateral boundary of the cylinder corresponds to fluid-structure interface, denoted by (t) = {(z, r)  R2 : z  (0, L), r = R +  (t, z )}. Without loss of generality we only consider the upper half of the fluid cylinder, with a symmetry boundary condition prescribed at the axis of symmetry, denoted by b in Figure 1.
+
+Figure 1: Domain sketch. The fluid is in contact with a thin elastic structure, which is located between the fluid and the thick structural layer. The thin structure thereby serves as a fluid-structure interface with mass. In this manuscript we will be assuming that the elastodynamics of the thin elastic structure is governed by the 1D wave equation THIN STRUCTURE : s1 h tt  = c2 zz  + f, z  (0, L), t  (0, T ), (1.2)
+
+where  denotes radial (vertical) displacement. More generally, the wave equation can be viewed as a special case of the linearly (visco)elastic cylindrical Koiter shell model
+2 2 4 2 4 s1 ht  + C0  - C1 z  + C2 z  + D0 t  - D1 t z  + D2 t z  = f,
+
+(1.3)
+
+2
+
+with C0 = C2 = D0 = D1 = D2 = 0. Here, s1 is structure density, h denotes structure thickness, and f denotes force density in the radial (vertical) direction acting on the structure. The constants Ci and Di > 0 are the material constants describing structural elasticity and viscosity, respectively, which are given in terms of four material parameters: the Young's modulus of elasticity E , the Poisson ratio  , and their viscoelastic couter-parts (for a derivation of this model and the exact form of the coefficients, please see [6, 9]). The results of the manuscript hold in the case when all the coefficients in the Koiter shell model are different from zero. From the analysis point of view, however, the most difficult case is the case of the wave equation, and for that reason we consider this case in the present manuscript. The thick structural layer will be modeled by the equations of linear elasticity THICK STRUCTURE : s2 tt d =	 S in S , t  (0, T ), (1.4)
+
+where d(t, z, r) = (dz (t, z, r), dr (t, z, r)) denotes structural displacement of the thick elastic wall at point (z, r)  S and time t, S is the first Piola-Kirchhoff stress tensor, and s2 is the density of the thick structure. Equation (1.4) describes the second Newton's Law of motion for an arbitrary thick structure. We are interested in linearly elastic structures for which S =  (d + (d)T ) + (  d)I, (1.5)
+
+where  and  are Lam e constants describing material properties of the structure. Since structural problems are typically defined in the Lagrangian framework, domain S corresponds to a fixed, reference domain which is independent of time, and is given by S = (0, L)  (R, R + H ). A deformation of S at time t is denoted by S (t) in Figure 1. The coupling between the fluid, the thin structural layer, and the thick structural layer is achieved via two sets of coupling conditions: the kinematic coupling condition and the dynamic coupling condition. In the present manuscript the kinematic coupling condition is the no-slip boundary condition between the fluid and thin structure, as well as between the thin and thick structural layers. Depending on the application, different kinematic coupling conditions can be prescribed between the three different physical models. The dynamic coupling condition describes balance of forces at the fluid-structure interface (t). Since (t) is a fluid-structure interface with mass, the dynamic coupling condition states that the mass times the acceleration of the interface is balanced by the sum of total forces acting on (t). This includes the contribution due to the elastic energy of the structure (zz  ), and the balance of contact forces exerted by the fluid and the thick structure onto (t). More precisely, we have the following set of coupling conditions written in Lagrangian framework, with z  (0, L) and t	(0, T ):  The kinematic coupling condition: (t	(t, z ), 0) = u(t, z, R +  (t, z )), ( (t, z ), 0) = d(t, z, R), 3 (continuity of velocity) (continuity of displacement) (1.6)
+
+ The dynamic coupling condition: s1 htt  = c2 zz  - J (t, z )( n)|(t,z,R+(t,z))  er + S(t, z, R)er  er . (1.7)
+
+Here J (t, z ) = 1 + (z  (t, z ))2 denotes the Jacobian of the transformation from Eulerian to Lagrangian coordinates, and er is the unit vector associated with the vertical, r-direction. Problem (1.1)-(1.7) is supplemented with initial and boundary conditions. At the inlet and outlet boundaries to the fluid domain we prescribe zero tangential velocity and a given dynamic	pressure p + 2f |u|2 (see e.g. [14]): p+ f 2 |u| = Pin/out (t), 2 ur = 0 , on in/out , (1.8)
+
+where Pin/out  L2 loc (0, ) are given. Therefore, the fluid flow is driven by a prescribed dynamic pressure drop, and the flow enters and leaves the fluid domain orthogonally to the inlet and outlet boundary. At the bottom boundary we prescribe the symmetry boundary condition: ur = r uz = 0, on b . (1.9)
+
+At the end points of the thin structure we prescribe zero displacement:  (t, 0) =  (t, L) = 0. (1.10)
+
+For the thick structure, we assume that the external (top) boundary r = H is exposed to an external ambient pressure Pe : Ser = -Pe er , on ext , (1.11) while at the end points of the annular sections of the thick structure, s in/out , we assume that the displacement is zero d(t, 0, r) = d(t, L, r) = 0, for r	(R, H ). The initial fluid and structural velocities, and the initial displacements are given by u(0, .) = u0 ,  (0, .) = 0 , t  (0, .) = v0 , d(0, .) = d0 , t d(0, .) = V0 , (1.12)
+
+1 and are assumed to belong to the following spaces: u0  L2 (F (0)), 0	H0 (0, 1), v0  L2 (0, 1), V 0  L2 (S ), d0  H 1 (S ), satisfying the following compatibility conditions:
+
+(0 (z ), 0) = d0 (z, R), 0 (0) = 0 (L) = v0 (0) = v0 (L) = 0 = d0 (0, .) = d0 (L, .) = V0 (0, .) = V0 (L, .), R + 0 (z ) > 0, z  [0, L].
+
+(1.13)
+
+We study the existence of a weak solution to the nonlinear FSI problem (1.1)-(1.13), in which the flow is driven by the time-dependent inlet and outlet dynamic pressure data. 4
+
+For simplicity, in the rest of the manuscript, we will be setting all the parameters in the problem to be equal to 1. This includes the domain parameters R and L, the Lam e constants	and , and the structure parameters s1 , s2 and h. Furthermore, we will be assuming that the external pressure, given in (1.11), is equal to zero. Correspondingly, we subtract the constant external pressure data from the inlet and outlet dynamic pressure data to obtain an equivalent problem.
+
+1.2
+
+Motivation
+
+This work was motivated by blood flow in major human arteries. In medium-to-large human arteries, such as the aorta or coronary arteries, blood can be modeled as an incompressible, viscous, Newtonian fluid. Arterial walls of major arteries are composed of several layers, each with different mechanical characteristics. The main layers are the tunica intima, the tunica media, and the tunica adventitia. They are separated by the thin elastic laminae, see Figure 2. To this date, there have been no fluid-structure interaction models or computational solvers of arterial flow that take into account the multi-layered structure of arterial walls. In this manuscript we take a first step in this direction by proposing to study a benchmark problem in fluid-multi-layered-structure interaction in which the structure consists of two layers, a thin and a thick layer, where the thin layer serves as a fluid-structure interface with mass. The proposed problem is a nonlinear moving-boundary problem of parabolic-hyperbolic type for which the questions of well-posedness and numerical simulation are wide open.
+
+Figure 2: Arterial wall layers.
+
+1.3
+
+Literature review
+
+Fluid-structure interaction problems have been extensively studied for the past 20 years by many authors. The focus has been exclusively on FSI problems with structures consisting of a single material. The field has evolved from first studying FSI between an incompressible, viscous fluid and a rigid structure immersed in a fluid, to considering compliant (elastic/viscoelastic) structures interacting with a fluid. Concerning compliant structures, the coupling between the structure and 5
+
+the fluid was first assumed to take place along a fixed fluid domain boundary (linear coupling). This was then extended to FSI problems in which the coupling was evaluated at a deformed fluidstructure interface, giving rise to an additional nonlinearity in the problem (nonlinear coupling). Well-posedness results in which the structure was assumed to be a rigid body immersed in a fluid, or described by a finite number of modal functions, were studied in [5, 15, 18, 20, 21, 24, 27, 50]. FSI problems coupling the Navier-Stokes equations with linear elasticity where the coupling was calculated at a fixed fluid domain boundary, were considered in [23], and in [2, 3, 38] where an additional nonlinear coupling term was added at the interface. A study of well-posedness for FSI problems between an incompressible, viscous fluid and an elastic/viscoelastic structure with nonlinear coupling evaluated at a moving interface started with the result by daVeiga [4], where existence of a strong solution was obtained locally in time for an interaction between a 2D fluid and a 1D viscoelastic string, assuming periodic boundary conditions. This result was extended by Lequeurre in [41, 42], where the existence of a unique, local in time, strong solution for any data, and the existence of a global strong solution for small data, was proved in the case when the structure was modeled as a clamped viscoelastic beam. D. Coutand and S. Shkoller proved existence, locally in time, of a unique, regular solution for an interaction between a viscous, incompressible fluid in 3D and a 3D structure, immersed in the fluid, where the structure was modeled by the equations of linear [16], or quasi-linear [17] elasticity. In the case when the structure (solid) is modeled by a linear wave equation, I. Kukavica and A. Tufahha proved the existence, locally in time, of a strong solution, assuming lower regularity for the initial data [34]. A similar result for compressible flows can be found in [35]. A fluid-structure interaction between a viscous, incompressible fluid in 3D, and 2D elastic shells was considered in [13, 12] where existence, locally in time, of a unique regular solution was proved. All the above mentioned existence results for strong solutions are local in time. We also mention that the works of Shkoller et al., and Kukavica at al. were obtained in the context of Lagrangian coordinates, which were used for both the structure and fluid problems. In the context of weak solutions, the following results have been obtained. Continuous dependence of weak solutions on initial data for a fluid structure interaction problem with a free boundary type coupling condition was studied in [30]. Existence of a weak solution for a FSI problem between a 3D incompressible, viscous fluid and a 2D viscoelastic plate was considered by Chambolle et al. in [11], while Grandmont improved this result in [29] to hold for a 2D elastic plate. These results were extended to a more general geometry in [39], and then to the case of generalized Newtonian fluids in [40], and to a non-Newtonian shear dependent fluid in [36]. In these works existence of a weak solution was proved for as long as the elastic boundary does not touch "the bottom" (rigid) portion of the fluid domain boundary.  c recently proved existence of weak solutions to a class of FSI problems modeling Muha and Cani the flow of an incompressible, viscous, Newtonian fluid flowing through a cylinder whose lateral wall was modeled by either the linearly viscoelastic, or by the linearly elastic Koiter shell equations [45], assuming nonlinear coupling at the deformed fluid-structure interface. The fluid flow boundary conditions were not periodic, but rather, the flow was driven by the dynamic pressure drop data. The methodology of proof in [45] was based on a semi-discrete, operator splitting Lie scheme, which was used in [31] to design a stable, loosely coupled partitioned numerical scheme, called the
+
+6
+
+kinematically coupled scheme (see also [6]). Ideas based on the Lie operator splitting scheme were also used by Temam in [52] to prove the existence of a solution to the nonlinear Carleman equation. Since the kinematically-coupled scheme is modular, it is particularly suitable for dealing with problems in which the structure consists of several layers, since modeling each additional layer can be accomplished by adding a new module to the partitioned scheme. Indeed, in the present manuscript we use the kinematically coupled scheme to prove the existence of a weak solution to a fluid-multi-layered structure interaction problem described in (1.1)-(1.13). The method of proof, first introduced by the authors in [45], is robust in the sense that it can be extended to the multilayered structural case considered in this manuscript. In particular, the method presented in [45] can be adopted to prove the existence of a FSI solution when the thin structure is modeled as a linearly elastic Koiter shell, and the elastodynamics of the thick structure is described by the equations of linear elasticity. In this manuscript we make further progress in this direction by considering the linear wave equation, and not the full Koiter shell model for our thin structural model. This is a 4 more difficult case since the fourth-order flexural term z , which provides higher regularity of weak solutions in the Koiter shell problem, is not present in the pure membrane model described by the linear wave equation. As a result, the analysis is more involved, and a non-standard version of the Trace Theorem (see [44] and Theorem 6.2) needs to be used to obtain the existence result. The existence proof presented in this manuscript is constructive. To deal with the motion of the fluid domain we adopt the Arbitrary Lagrangian Eulerian (ALE) approach. We construct a sequence of approximate solutions to the problem written in ALE weak formulation by performing the time-discretization via Lie operator splitting. At each time step, the full FSI problem is split into a fluid and a structure sub-problem. To achieve stability and convergence of the corresponding splitting scheme, the splitting is performed in a special way in which the fluid sub-problem includes structure inertia via a "Robin-type" boundary condition. The fact that structure inertia are included implicitly in the fluid sub-problem, enabled us, in the present work, to get appropriate energy estimates for the approximate solutions, independently of the size of the time discretization. Passing to the limit, as the size of the time step converges to zero, is achieved by the use of compactness arguments alla Simon, and by a careful construction of the appropriate test functions associated with moving domains. Our analysis revealed a striking new result that concerns solutions of coupled, multi-physics problems. We found that the presence of a thin structure with mass at the fluid-structure interface, regularizes the FSI solution. In [46] it is shown that this is not just a consequence of our mathematical approach, but a physical property of the problem. The partitioned, loosely coupled scheme used in the proof in this manuscript has already been implemented in the design of several stable computational FSI schemes for simulation of blood flow in human arteries with thin structural models [6, 25, 31, 37], with a thick structural model [7], and with a multi-layered structural model [8]. We effectively prove in this manuscript that this numerical scheme converges to a weak solution of the nonlinear fluid-multi-layered structure interaction problem.
+
+7
+
+2
+
+The energy of the coupled problem
+
+We begin by first showing that the coupled FSI problem (1.1)-(1.13) is well-formulated in the sense that the total energy of the problem is bounded in terms of the prescribed data. More precisely, we now show that the following energy estimate holds: d (Ekin (t) + Eel (t)) + D(t)  C (Pin (t), Pout (t)), dt where Ekin (t) := Eel (t) :=
+1 2 1 2
+
+(2.1)
+
+u
+
+2 L2 (F (t))
+
++ t
+
+2 L2 ()
+
++ t d
+
+2 L2 (S ) 2 L2 (S )
+
+, (2.2) ,
+
+z
+
+2 L2 ()
+
++ 2 D(d)
+
+2 L2 (S )
+
++ d
+
+denote the kinetic and elastic energy of the coupled problem, respectively, and the term D(t) captures viscous dissipation in the fluid: D(t) := D(u)
+2 L2 (F (t)) .
+
+(2.3)
+
+The constant C (Pin (t), Pout (t))) depends only on the inlet and outlet pressure data, which are both functions of time. Notice that, due to the presence of an elastic fluid-structure interface with mass, the kinetic energy term Ekin (t) contains a contribution from the kinetic energy of the fluid-structure interface t  2 L2 () incorporating the interface inertia, and the elastic energy Eel (t) of the FSI problem accounts for the elastic energy z  2 L2 () of the interface. If a FSI problem between the fluid and a thick structure was considered without the thin FSI interface with mass, these terms would not have been present. In fact, the traces of the displacement and velocity at the fluid-structure interface of that FSI problem would not have been even defined for weak solutions. To show that (2.1) holds, we first multiply equation (1.1) by u, integrate over F (t), and formally integrate by parts to obtain: t u	u + (u	)u  u + 2
+F (t) F (t)
+
+|Du|2 -
+ F (t)
+
+(-pI + 2D(u))n(t)  u = 0.
+
+To deal with the inertia term we first recall that F (t) is moving in time and that the velocity of the lateral boundary is given by u|(t) . The transport theorem applied to the first term on the left hand-side of the above equation then gives: t u  u =
+F (t)
+
+1d 2 dt
+
+|u|2 -
+F (t)
+
+1 2
+
+|u|2 u	n(t).
+(t)
+
+The second term on the left hand side can can be rewritten by using integration by parts, and the divergence-free condition, to obtain: (u  )u	u =
+F (t)
+
+1 2
+
+|u|2 u	n(t) =
+ F (t)
+
+1 2
+
+|u|2 u	n(t)
+(t)
+
+8
+
+-
+in
+
+|u|2 uz +
+out
+
+|u|2 uz .
+
+These two terms added together give t u  u +
+F (t) F (t)
+
+(u  )u	u =
+
+1d 2 dt
+
+|u|2 -
+F (t)
+
+1 2
+
+|u|2 uz +
+in
+
+1 2
+
+|u|2 uz .
+out
+
+(2.4)
+
+Notice the importance of nonlinear advection in canceling the cubic term
+
+(t)
+
+|u|2 u	n(t)!
+
+To deal with the boundary integral over  F (t), we first notice that on in/out the boundary condition (1.8) implies ur = 0. Combined with the divergence-free condition we obtain z uz = -r ur = 0. Now, using the fact that the normal to in/out is n = (1, 0) we get: (-pI + 2D(u))n	u =
+in/out in
+
+Pin uz -
+out
+
+Pout uz .
+
+(2.5)
+
+In a similar way, using the symmetry boundary conditions (1.9), we get: (-pI + 2D(u))n	u = 0.
+b
+
+What is left is to calculate the remaining boundary integral over (t). To do this, consider the wave equation (1.2), multiply it by t  , and integrate by parts to obtain
+1
+
+f t  =
+0
+
+1d t  2 dt
+
+2 L2 (0,1)
+
++
+
+1 z  2
+
+2 L2 (0,1) .
+
+Next, consider the elasticity equation (1.4), multiply it by t d and integrate by parts to obtain: 1d 2 dt
+1
+
+t d
+
+2 L2 (S )
+
++ 2 D(d)
+
+2 L2 (S )
+
++ d
+
+2 L2 (S )
+
+=-
+0
+
+Ser  t d.
+
+(2.6)
+
+By enforcing the dynamic and kinematic coupling conditions (1.6), (1.7), we obtain
+1 1
+
+-
+(t)
+
+ n(t)  u = -
+0
+
+J n  u =
+0
+
+(f - Ser  er )t .
+
+(2.7)
+
+Finally, by combining (2.7) with (2.6), and by adding the remaining contributions to the energy of the FSI problem calculated in equations (2.4) and (1.8), one obtains the following energy equality: 1d 2 dt + 1d 2 dt t d |u|2 +
+F (t)
+
+1d t  2 dt
+2 L2 (S )
+
+2 L2 (0,1)
+
++2
+F (t) 2 L2 (S )
+
+|Du|2 +
+
+1d z  2 dt
+
+2 L2 (0,1)
+
+2 L2 (S )
+
++ 2 D(d)
+
++ d
+
+= Pin/out (t)
+in/out
+
+uz
+
+(2.8)
+
+By using the trace inequality and Korn inequality one can estimate: C C |Pin/out (t) uz |  C |Pin/out | u H 1 (F (t))  |Pin/out |2 + D(u) 2 2 in/out By choosing such that
+C 2
+
+2 L2 (F (t)) .
+
+ 1 we get the energy inequality (2.1). 9
+
+3
+3.1
+
+The ALE formulation and Lie splitting
+First order ALE formulation
+
+Since we consider nonlinear coupling between the fluid and structure, the fluid domain changes in time. To prove the existence of a weak solution to (1.1)-(1.13) it is convenient to map the fluid domain onto a fixed domain F . The structural problems are already defined on fixed domains since they are formulated in the Lagrangian framework. We follow the approach typical of numerical methods for FSI problems and map our fluid domain F (t) onto F by using an Arbitrary Lagrangian-Eulerian (ALE) mapping [6, 31, 22, 47, 48]. We remark here that in our problem it is not convenient to use Lagrangian formulation for the fluid sub-problem, as is done in e.g., [17, 13, 34], since, in our problem, the fluid domain consists of a fixed, control volume of a cylinder, with prescribed inlet and outlet pressure data, which does not follow Largangian flow. We begin by defining a family of ALE mappings A parameterized by  : A (t) : F  F (t), A (t)(~ z, r ~) := z ~ (1 +  (t, z ~))~ r , (~ z, r ~)  F , (3.1)
+
+where (~ z, r ~) denote the coordinates in the reference domain F = (0, 1)  (0, 1). The mapping A (t) is a bijection, and its Jacobian is given by |detA (t)| = |1 +  (t, z ~)|. Composite functions with the ALE mapping will be denoted by u (t, .) = u(t, .)  A (t) and p (t, .) = p(t, .)  A (t). The derivatives of composite functions satisfy: t u = t u - (w   )u , u =  u , (3.4) (3.3) (3.2)
+
+where the ALE domain velocity, w , and the transformed gradient,  , are given by:   z  ~ - r ~ r ~  z 1 +  . w	= t  r ~er ,  =   1 r ~ 1+
+
+(3.5)
+
+One can see that  v = v(A )-1 . For the purposes of the existence proof we also introduce the following notation:   = -p I + 2D (u ), 1 D (u ) = ( u + ( ) u ). 2
+
+We are now ready to rewrite problem (1.1)-(1.13) in the ALE formulation. However, before we do that, we will make one more important step in our strategy to prove the existence of a weak solution 10
+
+to (1.1)-(1.13). Namely, as mentioned earlier, we would like to "solve" the coupled FSI problem by approximating the problem using the time-discretization via Lie operator splitting. Since Lie operator splitting is defined for systems that are first-order in time, see Section 3.2, we have to replace the second-order time-derivatives of  and d, with the first-order time-derivatives of the thin and thick structure velocities, respectively. Furthermore, we will use the kinematic coupling condition (1.6) which implies that the fluid-structure interface velocity is equal to the normal trace of the fluid velocity on  (t). Thus, we will introduce a new variable, v , to denote this trace, and will replace t  by v everywhere in the structure equation. This has deep consequences both for the existence proof presented in this manuscript, as well as for the proof of stability of the underlying numerical scheme, as it enforces the kinematic coupling condition implicitly in all the steps of the scheme. We also introduce another new variable V = t d which denotes the thick structure velocity. This enables us to rewrite problem (1.1)-(1.13) as a first-order system in time. Thus, the ALE formulation of problem (1.1)-(1.13), defined on the reference domain F , and written as a first-order system in time, is given by the following: Find u(t, z ~, r ~), p(t, z ~, r ~),  (t, z ~), v (t, z ~), d(t, z ~) and V(t, z ~) such that t u + ((u - w )   )u =	,   u = 0, ur = 0, r uz = 0 in (0, T )	F , (3.6)
+
+on (0, T )  b , on (0, T )  in/out ,	    on S ,
+
+(3.7)
+
+|u|2 = Pin/out (t), p+ 1 2 ur = 0, u d t  2  t v - z = = = =
+
+(3.8)
+
+v er ,	er , v, -J n  er + Ser	er t d = V , t V =   S,
+
+on (0, T )  (0, 1),
+
+(3.9)
+
+(3.10)
+
+ = 0 on (0, T )   , d = 0 on (0, T )  s in/out Ser = 0 on (0, T )  ext . u(0, .) = u0 ,  (0, .) = 0 , v (0, .) = v0 , d(0, .) = d0 , V(0, .) = V0 at t = 0.
+
+(3.11) (3.12) (3.13)
+
+Here, we have dropped the superscript  in u to simplify notation. This defines a parabolichyperbolic-hyperbolic nonlinear moving boundary problem. The nonlinearity appears in the equations (3.6), and in the coupling conditions (3.9) where the fluid quantities are evaluated at the deformed fluid-structure interface  (t, z ). Parabolic features are associated with the fluid problem 11
+
+(3.6)-(3.8), while hyperbolic features come from the 2D equations of elasticity, and from the 1D wave equation modeling the fluid-structure interface, described by the last equation in (3.9).
+
+3.2
+
+The operator splitting scheme
+
+To prove the existence of a weak solution to (3.6)-(3.13) we use the time-discretization via operator splitting, known as the Lie splitting or the Marchuk-Yanenko splitting scheme. The underlying multi-physics problem will be split into the fluid and structure sub-problems, following the different "physics" in the problem, but the splitting will be performed in a particularly clever manner so that the resulting problem defines a scheme that converges to a weak solution of the continuous problem. The basic ideas behind the Lie splitting can be summarized as follows. Let N  N, t = T /N and tn = nt. Consider the following initial-value problem: d + A = 0 in (0, T ), (0) = 0 , dt where A is an operator defined on a Hilbert space, and A can be written as A = A1 + A2 . Set i 0 = 0 , and, for n = 0, . . . , N - 1 and i = 1, 2, compute n+ 2 by solving  d  i + Ai i = 0 in (tn , tn+1 ), dt i-1  (t ) = n+ 2
+i n
+
+and then set n+ 2 = i (tn+1 ), for i = 1, 2. It can be shown that this method is first-order accurate in time, see e.g., [28]. We apply this approach to split problem (3.6)-(3.13) into two sub-problems: a structure and a fluid sub-problem defining operators A1 and A2 . Problem A1: The structure elastodynamics problem. In this step we solve an elastodynamics problem for the location of the multi-layered cylinder wall. The problem is driven only by the initial data, i.e., the initial boundary velocity, taken from the previous time step as the trace of the fluid velocity at the fluid-structure interface. The fluid velocity u remains unchanged in this step. More precisely, the problem reads: Given (un ,  n , v n , dn , V n ) from the previous time step, find (u, v, , V , d) such that: t u = 0, t V =	 S, t d = V d=0 Ser = 0 d =  er t v - = 0, t  = v  (0) =  (1) = 0,
+2 z
+
+i
+
+in (tn , tn+1 )  F , in (tn , tn+1 )  S , on s in/out , on (tn , tn+1 )  ext , on (tn , tn+1 )	(0, 1), on (tn , tn+1 )  (0, 1), (3.15) (3.14)
+
+12
+
+with u(tn ) = un ,  (tn ) =  n , v (tn ) = v n , d(tn ) = dn , V(tn ) = Vn . 1 1 1 1 1 Then set un+ 2 = u(tn+1 ),  n+ 2 =  (tn+1 ), v n+ 2 = v (tn+1 ), dn+ 2 = d(tn+1 ), Vn+ 2 = V(tn+1 ). Problem A2: The fluid problem. In this step we solve the Navier-Stokes equations coupled with structure inertia through a "Robin-type" boundary condition on  (lines 5 and 6 in (3.16) below). The kinematic coupling condition is implicitly satisfied. The structure displacement remains unchanged. With a slight abuse of notation, the problem can be written as follows: Find (u, v, , V , d) such that: t  = 0 t d = 0 t u + ((un - w
+1 n+ 2
+
+on (tn , tn+1 )  (0, 1), on (tn , tn+1 )  S ,
+n n
+
+)   )u =     n	 u = 0
+
+n
+
+in (tn , tn+1 )  F , on (tn , tn+1 )  (0, 1), on (tn , tn+1 )  b , on (tn , tn+1 )  in/out ,
+1 1
+
+t v = -J n  er u = v er ur = 0 r uz = 0 p+
+1
+
+(3.16)
+
+f |u|2 2
+
+= Pin/out (t) ur = 0
+1 1
+
+with u(tn , .) = un+ 2 ,  (tn , .) =  n+ 2 , v (tn , .) = v n+ 2 , d(tn , .) = dn+ 2 , V(tn , .) = Vn+ 2 . Then set un+1 = u(tn+1 ),  n+1 =  (tn+1 ), v n+1 = v (tn+1 ), dn+1 =  (tn+1 ), Vn+1 = V(tn+1 ). Notice that, since in this step  does not change, this problem is linear. Furthermore, it can be viewed as a stationary Navier-Stokes-like problem on a fixed domain with a Robin-type boundary condition. In numerical simulations, one can use the ALE transformation An to "transform" the problem back to domain n and solve it there, thereby avoiding the un-necessary calculation of n the transformed gradient  . The ALE velocity is the only extra term that needs to be included with that approach. See, e.g., [6] for more details. For the purposes of our proof, we will, however, remain in the fixed, reference domain F . It is important to notice that in Problem A2, the problem is "linearized" around the previous location of the boundary, i.e., we work with the domain determined by  n , and not by  n+1/2 . This is in direct relation with the implementation of the numerical scheme studied in [6, 19]. However, 1 we also notice that ALE velocity, wn+ 2 , is taken from the just calculated Problem A1! This choice is crucial for obtaining a semi-discrete version of an energy inequality, discussed in Section 5. In the remainder of this paper we use the splitting scheme described above to define approximate solutions of (3.6)-(3.13) (or equivalently of problem (1.1)-(1.13) ) and show that the approximate solutions converge to a weak solution, as t  0.
+
+13
+
+4
+4.1
+
+Weak solutions
+Notation and function spaces
+
+To define weak solutions of the moving-bounday problem (1.1)-(1.13) and of the moving-boundary problem (3.6)-(3.13) defined on a fixed domain, we introduce the following notation. We use aS to denote the bilinear form associated with the elastic energy of the thick structure: aS (d,  ) =
+S
+
+2D(d) : D( ) + (  d)  (   ) .
+
+(4.1)
+
+Here A : B := tr AB T . Furthermore, we will be using b to denote the following trilinear form corresponding to the (symmetrized) nonlinear advection term in the Navier-Stokes equations: b(t, u, v, w) = 1 2 (u  )v  w -
+F (t)
+
+1 2
+
+(u  )w	v.
+F (t)
+
+(4.2)
+
+Finally, we define a linear functional which associates the inlet and outlet dynamic pressure boundary data to a test function v in the following way: F (t), v
+in/out
+
+= Pin (t)
+in
+
+vz - Pout (t)
+out
+
+vz .
+
+The following functions spaces define our weak solutions. For the fluid velocity we would like to work with the classical function space associated with weak solutions of the Navier-Stokes equations. This, however, requires some additional consideration. Namely, since our thin structure is governed by the linear wave equation, lacking the bending rigidity terms, weak solutions cannot be expected to be Lipschitz-continuous. Indeed, from the energy inequality (2.1) we only have   H 1 (0, 1), and from Sobolev embedding we get that	C 0,1/2 (0, 1), which means that F (t) is not necessarily a Lipshitz domain. However, F (t) is locally a sub-graph of a H older continuous function. In that case one can define a"Lagrangian" trace (t) : C 1 (F (t))	C (), (t) : v  v (t, z, r +  (t, z )). (4.3)
+
+Furthermore, it was shown in [11, 29, 44] that the trace operator (t) can be extended by continuity to a linear operator from H 1 (F (t)) to H s (), 0	s < 1 . For a precise statement of the results 4 about "Lagrangian" trace, we refer the reader to Theorem 6.2 below [44]. Now, we define the velocity solution space in the following way: VF (t) = {u = (uz , ur )  C 1 (F (t))2 :   u = 0, uz = 0 on (t), ur = 0 on  F (t) \ (t)}, VF (t) = VF (t)
+H 1 (F (t))
+
+(4.4)
+
+. 14
+
+Using the fact that F (t) is locally a sub-graph of a H older continuous function we can get the following characterization of the velocity solution space VF (t) (see [11, 29]): VF (t) = {u = (uz , ur )  H 1 ( (t))2 :   u = 0, uz = 0 on (t), ur = 0 on   (t) \ (t)}. (4.5)
+
+The function space associated with weak solutions of the 1D linear wave equation and the thick wall are given, respectively, by 1 VW = H0 (0, 1), (4.6) VS = {d = (dz , dr )  H 1 (S )2 : dz = 0 on , d = 0 on s in/out }. (4.7) Motivated by the energy inequality we also define the corresponding evolution spaces for the fluid and structure sub-problems, respectively: WF (0, T ) = L (0, T ; L2 (F (t)))  L2 (0, T ; VF (t)), WW (0, T ) = W 1, (0, T ; L2 (0, 1))  L2 (0, T ; VW ), WS (0, T ) = W
+1,
+
+(4.8) (4.9) (4.10)
+
+(0, T ; L (S ))  L (0, T ; VS ).
+
+2
+
+2
+
+Finally, we are in a position to define the solution space for the coupled fluid-multi-layered-structure interaction problem. This space must involve the kinematic coupling condition. The dynamic coupling condition will be enforced in a weak sense, through the integration by parts in the weak formulation of the problem. Thus, we define W (0, T ) = {(u, , d)  WF (0, T )  WW (0, T )  WS (0, T ) : u(t, z, 1 +  (t, z )) = t  (t, z )er , d(t, z, 1) =  (t, z )er }. (4.11)
+
+Equality u(t, z, 1 +  (t, z )) = t  (t, z )er is taken in the sense defined in [11, 44]. The corresponding test space will be denoted by
+1 ([0, T ); VF	VW  VS ) : q(t, z, 1 +	(t, z )) =  (t, z )er =  (t, z, 1)}. Q(0, T ) = {(q, ,	)  Cc (4.12)
+
+4.2
+
+Weak solutions for the problem defined on the moving domain
+
+We are now in a position to define weak solutions of fluid-multi-layered structure interaction problem, defined on the moving domain F (t). Definition 4.1. We say that (u, , d)  W (0, T ) is a weak solution of problem (1.1)-(1.13) if for every (q, ,  )  Q(0, T ) the following equality holds:
+T T T
+
+-
+0 F (t)
+
+u  t q +
+0 T 1
+
+b(t, u, u, q) + 2
+0 T 1 F (t) T
+
+D(u) : D(q) -
+T
+
+1 2
+
+T 0 0
+
+1
+
+(t  )2
+
+-
+0 T 0
+
+t t  +
+0 0
+
+z z  -
+0 S 1
+
+d  t  +
+0
+
+aS (d,	)
+
+(4.13)
+
+=
+0
+
+F (t), q
+
+in/out
+
++
+0
+
+u0  q(0) +
+0
+
+v0  (0) +
+S
+
+V0   (0).
+
+15
+
+In deriving the weak formulation we used integration by parts in a classical way, and the following equalities which hold for smooth functions: (u  )u	q =
+F (t)
+
+1 2
+
+(u   )u  q -
+F (t)
+
+1 2
+
+(u  )q	u
+F (t)
+
++
+T T
+
+1 2
+
+1
+
+(t  )2
+0
+
+1 2
+
+|ur |2 vr ,
+out/in T 1
+
+t u  q = -
+0 F (t) 0 F (t)
+
+u  t q -
+0
+
+u0  q(0) -
+0 0
+
+(t  )2 .
+
+4.3
+
+Weak solutions for the problem defined on a fixed, reference domain
+
+Since most of the analysis will be performed on the problem mapped to F , we rewrite the above definition in terms of F using the ALE mapping A (t) defined in (3.1). For this purpose, the following notation will be useful. We define the transformed trilinear functional b : b (u, u, q) := 1 2 (1 +  )((u - w )	)u  q -
+F
+
+1 2
+
+(1 +  )((u - w )   )q  u,
+F
+
+(4.14)
+
+where 1 +  is the Jacobian of the ALE mapping, calculated in (3.2). Notice that we have included the ALE domain velocity w into b . It is important to point out that the transformed fluid velocity u is not divergence-free anymore. Rather, it satisfies the transformed divergence-free condition	u = 0. Furthermore, since  is not a Lipschitz function, the ALE mapping is not necessarily a Lipschitz function, and, as a result, u is not necessarily an H 1 function on F . Therefore we need to redefine the function spaces for the fluid velocity by introducing	VF = {u : u  VF (t)}, where u is defined in (3.3). Under the assumption 1 +  (z ) > 0, z  [0, 1], we can define a scalar  product on VF in the following way:
+ = (u , v )VF
+
+(1 +  ) u  v +	u :  v = (u, v)H 1 (F (t)) .
+F
+
+  Therefore, u	u is an isometric isomorphism between VF (t) and VF , so VF is also a Hilbert space.   instead The function spaces WF (0, T ) and W  (0, T ) are defined the same as before, but with VF VF (t). More precisely:    WF (0, T ) = L (0, T ; L2 (F ))  L2 (0, T ; VF (t)),
+
+(4.15)
+
+ W  (0, T ) = {(u, , d)  WF (0, T )WW (0, T )WS (0, T ) : u(t, z, 1) = t  (t, z )er ,  (t, z ) = d(t, z, 1)}. (4.16) The corresponding test space is defined by  1 Q (0, T ) = {(q, , d)  Cc ([0, T ); VF  VW  VS ) : q(t, z, 1) =  (t, z )er = d(t, z, 1)}.
+
+(4.17)
+
+16
+
+Definition 4.2. We say that (u, , d)  W  (0, T ) is a weak solution of problem (3.6)-(3.13) defined on the reference domain F , if for every (q, ,  )  Q (0, T ) the following equality holds:
+T T T
+
+-
+0 F
+
+(1 +  )u  t q +
+0
+
+b (u, u, q)+2
+0 T 1 F
+
+(1 +  )D (u) : D (q)
+T 1
+
+-
+
+1 2
+
+T
+
+(t  )u	q-
+0 F T 0 0
+
+t t  +
+0 T 0
+
+z z  (4.18)
+
+-
+0 T S
+
+d  t  +
+0
+
+aS (d,	)
+1
+
+=
+0
+
+F (t), q
+
+in/out
+
++
+0
+
+u0  q(0) +
+0
+
+v0  (0) +
+S
+
+V0   (0).
+
+To see that this is consistent with the weak solution defined in Definition 4.1, we present the main steps in the transformation of the first integral on the left hand-side in (4.13), responsible for the fluid kinetic energy. Namely, we formally calculate: -
+F (t)
+
+u  t q = -
+F
+
+(1 +  )u  (t q - (w   )q) = -
+F
+
+(1 +  )u  t q
+
++
+
+1 2
+
+(1 +  )(w   )q	u +
+F
+
+1 2
+
+(1 +  )(w   )q	u .
+F
+
+In the last integral on the right hand-side we use the definition of w and of  , given in (3.5), to obtain  t  r ~ r (1 +  )(w	 )q  u = ~q  u .
+F F
+
+Using integration by parts with respect to r, keeping in mind that  does not depend on r, we obtain -
+F (t)
+
+u  t q = -
+F
+
+(1 +  )u  (t q - (w   )q) = -
+F
+
+(1 +  )u  t q t  u  q + 1 2
+1
+
++
+
+1 2
+
+(1 +  )(w   )q	u -
+F
+
+1 2
+
+(1 +  )(w   )u	q -
+F
+
+1 2
+
+(t  )2 ,
+0
+
+F
+
+By using this identity in (4.13), and by recalling the definitions for b and b , we obtain exactly the weak form (4.18). In the remainder of this manuscript we will be working on the fluid-multi-layered structure interaction problem defined on the fixed domain F , satisfying the weak formulation presented in Definition 4.2 For brevity of notation, since no confusion is possible, we omit the superscript "tilde" which is used to denote the coordinates of points in F . 17
+
+5
+
+Approximate solutions
+
+In this section we use the Lie operator splitting scheme and semi-discretization to define a sequence of approximate solutions of the FSI problem (3.6)-(3.13). Each of the sub-problems defined by the Lie splitting in Section 3.2 as Problem A1 and Problem A2, will be discretized in time using the Backward Euler scheme. This approach defines a time step, which will be denoted by t, and a number of time sub-intervals N  N, so that
+N -1 n n+1 (0, T ) = n ), =0 (t , t
+
+tn = nt, n = 0, ..., N - 1.
+
+For every subdivision containing N  N sub-intervals, the vector of unknown approximate solutions will be denoted by XN
+i n+ 2
+
+= uN 2 , vN
+
+n+ i
+
+i n+ 2
+
+, N
+
+i n+ 2
+
+, V N 2 , dN
+
+n+ i
+
+i n+ 2
+
+T
+
+, n = 0, 1, . . . , N - 1, i = 1, 2,
+
+(5.1)
+
+where i = 1, 2 denotes the solution of Problem A1 or A2, respectively. The initial condition will be denoted by X0 = (u0 , v0 , 0 , V 0 , d0 )T . The semi-discretization and the splitting of the problem will be performed in such a way that the semi-discrete version of the energy inequality (2.1) is preserved at every time step. This is a crucial ingredient for the existence proof. The semi-discrete versions of the kinetic and elastic energy (2.2), and of dissipation (2.3) are defined by the following:
+2 = Ekin,N
+
+n+ i
+
+n+1 Eel,N
+
+1 2 1 = 2
+
+(1 +  n-1+i )|uN 2 |2 + vN
+F
+
+n+ i
+
+i n+ 2 2 L2 (0,1)
+
++ VN
+
+i n+ 2 2 L2 (S )
+
+, , (5.2)
+
+z N
+
+1 n+ 2 2 L2 (0,1)
+
++ 2 D(dN 2 )
+n+ i
+
+n+ 1
+
+2 L2 (S )
+
++   dN
+
+1 n+ 2 2 L2 (S )
+
+EN
+n+1 DN = t F
+
+i n+ 2
+
+n+1 2 = Ekin,N + Eel,N ,
+n
+
++1 2 (1 +  n )|D (un N )| , n = 0, . . . , N - 1, i = 0, 1.
+
+(5.3)
+
+Throughout the rest of this section we fix the time step t, i.e., we keep N  N fixed, and study the semi-discretized sub-problems defined by the Lie splitting. To simplify notation, we omit the i i i i i n+ i n+ i n+ i n+ i n+ i subscript N and write (un+ 2 , v n+ 2 ,  n+ 2 , V n+ 2 , dn+ 2 ) instead of (uN 2 , vN 2 , N 2 , V N 2 , dN 2 ).
+
+5.1
+
+Semi-discretization of Problem A1
+
+A semi-discrete version of Problem A1 (Structure Elastodynamics), defined by the Lie splitting in (3.14) can be written as follows. First, in this step u does not change, and so un+ 2 = un .
+1
+
+18
+
+2 2 We define (v n+ 2 ,  n+ 2 , Vn+ 2 , Un+ 2 )  VW  VS as a solution of the following problem, written in weak form:
+
+1
+
+1
+
+1
+
+1
+
+S
+
+dn+ 2 (z, 1) =	n+ 2 (z, 1)er , z  (0, 1), 1 1 1 dn+ 2 - dn  n+ 2 -  n n+ 1 2 =V = v n+ 2 , , t t 1 1 n+ 1 1 1 v 2 - vn Vn+ 2 - Vn n+ 1 2 +  + aS (d , ) + z  n+ 2 z  = 0, t t 0 0
+
+1
+
+1
+
+(5.4)
+
+which holds for all (, )  VW  VS such that (t, z, 1) =	(t, z ). The first equation enforces the kinematic coupling condition, the second row in (5.4) introduces the structure velocities, while the third equation corresponds to a weak form of the semi-discretized elastodynamics problem. Notice that we solve the thin and thick structure problems as one coupled problem. The thin structure enters as a boundary condition for the thick structure problem. Proposition 5.1. For each fixed t > 0, problem (5.4) has a unique solution (v n+ 2 ,  n+ 2 , V n+ 2 , dn+ 2 )  2 2 .  VS VW Proof. First notice that Korn's inequality implies that the bilinear form aS is coercive on VS . From here, the proof is a direct consequence of the Lax-Milgram Lemma applied to the weak form
+1 0
+1 1 1 1
+
+ n+ 2  +
+L S
+
+1
+
+1
+
+dn+1   + (t)2
+0
+
+z z  + aS (dn+ 2 , )
+
+1
+
+=
+0
+
+tv n +	n  +
+S
+
+(tV n + dn )  , (, )  {VW  VS |(t, z, 1) =  (z, 1)},
+1 1
+
+which is obtained after a substitution of v n+ 2 and V n+ 2 in the third equation in (5.4), by using the equations (5.4)2 . Proposition 5.2. For each fixed t > 0, a solution of problem (5.4) satisfies the following discrete energy equality:
+n+1 2 Ekin,N + Eel,N + n+ 1
+1
+
+1 2
+
+v n+ 2 - v n
+1
+
+1
+
+2 L2 (0,1)
+
++ V n+ 2 - V n
+1
+
+1
+
+2 L2 (S )
+
+(5.5)
+
++ z ( n+ 2 -  n )
+
+2 L2 (0,1)
+
+n n + aS (dn+ 2 - dn , dn+ 2 - dn ) = Ekin,N + Eel,N ,
+
+n n where the kinetic and elastic energy, Ekin,N , Eel,N , are defined in (5.2).
+
+Proof. From the second row in (5.4) we immediately get v
+1 n+ 2 1  n+ 2 -  n dn+ 2 - dn =  VW , V n+ 2 =  VS . t t 1 1
+
+Therefore, we can proceed as usual, by substituting the test functions in (5.4) with structure 1 1 velocities. More precisely, we replace the test function (,	) by (v n+ 2 , V n+ 2 ) in the first term on the 19
+
+left hand-side, and then replace (,  ) by (( n+ 2 -  n )/t, (dn+ 2 - dn )/t) in the bilinear forms that correspond to the elastic energy. To deal with the terms (v n+1/2 - v n )v n+1/2 , ( n+1/2 -  n ) n+1/2 , (V n+1/2 - V n )  V n+1/2 , and (dn+1/2 - dn )  dn+1/2 , we use the algebraic identity (a - b)  a = 1 (|a|2 + |a - b|2 - |b|2 ). After multiplying the entire equation by t, the third equation in (5.4) can 2 be written as: ( v n+ 2
+1
+
+1
+
+1
+
+2 L2 (0,1)
+
++ v n+ 2 - v n
+1
+
+1
+
+2 L2 (0,1) )
+1
+
++ ( V n+ 2
+
+1
+
+2 L2 (S )
+
++ V n+ 2 - V n
+1 1
+
+1
+
+2 L2 (S ) )
+
+z  n+ 2
+1
+
+2 L2 (0,1)
+1
+
++ z ( n+ 2 - z	n )
+2 L2 (0,1)
+
+2 L2 (0,1)
+
++ aS (dn+ 2 , dn+ 2 ) + z  n
+2 L2 (0,1)
+
++aS (dn+ 2 - dn , dn+ 2 - dn ) = v n
+1
+
++ Vn
+
+2 L2 (S )
+
++ aS (dn , dn ).
+1 1
+
+Since in this sub-problem un+ 2 = un , we can add f
+
+F
+
+(1 +  n )un+1/2 on the left hand-side, and
+
+f F (1+  n )un on the right hand-side of the equation. Furthermore, displacements dn+ 2 and  n+ 2 do not change in Problem A2 (see (5.6)), and so we can replace dn and  n on the right hand-side 1 1 of the equation with dn- 2 and  n- 2 , respectively, to obtain exactly the energy equality (5.5).
+
+5.2
+
+Semi-discretization of Problem A2
+
+In this step  , d and V do not change, and so  n+1 =  n+ 2 , dn+1 = dn+ 2 , V n+1 = V n+ 2 .
+n 1 1 1
+
+(5.6)
+
+ Then, define (un+1 , v n+1 )  VnF  L2 (0, 1) so that the weak formulation of problem (3.16) is satisfied.  Namely, for each (q,  )  VF  L2 (0, 1) such that q| =  er , velocities (un+1 , v n+1 ) must satisfy:
+1 1 un+1 - un+ 2 n (1 +  ) q+ (un - v n+ 2 rer )   un+1  q t 2	1 1 1 1 n v n+ 2 un+1  q - (un - v n+ 2 rer )	q  un+1 + 2 2  n n +2  (1 +  n )D (u) : D (q) 1
+
+n
+
+(5.7)
+
+1
+
++s h
+0
+
+v n+1 - v n+ 2 n  = Pin t with	 un+1 = 0,
+n
+
+1
+
+1
+
+1
+
+(qz )|z=0 -
+0
+
+n Pout 0
+
+(qz )|z=L ,
+
++1 un = v n+1 er , |
+
+(n+1)t 1 Pin/out (t)dt. t nt The existence of a unique weak solution and energy estimate are given by the following proposition. n where Pin/out =
+
+20
+
+Proposition 5.3. Let t > 0, and assume that  n are such that 1 +  n  Rmin > 0, n = 0, ..., N . Then:
+ 1. The fluid sub-problem defined by (5.7) has a unique weak solution (un+1 , v n+1 )  VF L2 (0, 1);
+n
+
+2. Solution of problem (5.7) satisfies the following discrete energy inequality:
+n+1 Ekin,N +
+
+F n+1 +DN
+
+1 2
+
+(1 +  n )|un+1 - un |2 +
+n+ 1 2 Ekin,N
+
+1 1 n+1 v - v n+ 2 2
+
+2 L2 (0,1)
+
+(5.8)
+
++
+
+n 2 ) C t((Pin
+
++
+
+n 2 ) ), (Pout
+
+n n where the kinetic energy EN and dissipation DN are defined in (5.2) and (5.3), and the constant C depends only on the parameters in the problem, and not on t (or N ).
+
+The proof of this proposition is identical to the proof presented in [45] which concerns a FSI problem between an incompressible, viscous fluid and a thin elastic structure modeled by a linearly elastic Koiter shell model. The fluid sub-problems presented in [45] and in the present manuscript (Problem A2) are the same, except for the fact that  in this manuscript satisfies the linear wave equation. As a consequence, the fluid domain boundary in the full, continuous problem, is not necessarily Lipschitz. This is, however, not the case in the semi-discrete approximations of the fluid multi-layered structure interaction problem, since the regularity of the approximation  n+1/2 obtained from the previous step (Problem A1) is H 2 (0, 1), and so the fluid domain in the semidiscretized Problem A2 is, in fact, Lipschitz. This is because  n+1/2 satisfies an elliptic problem for the Laplace operator with the right hand-side given in terms of approximate velocities v n , v n+1/2	L2 (0, 1) (see equation (5.4)). Therefore, the proof of Proposition 5.3 is the same as the proof of Proposition 3[45] (for statement 1) and the proof of Proposition 4[45] (for statement 2). We pause for a second, and summarize what we have accomplished so far. For a given t > 0, the time interval (0, T ) was divided into N = T /t sub-intervals (tn , tn+1 ), n = 0, ..., N - 1. On each sub-interval (tn , tn+1 ) we "solved" the coupled FSI problem by applying the Lie splitting scheme. First, Problem A1 was solved for the structure position and velocity, both thick and thin, and then Problem A2 was solved to update fluid velocity and fluid-structure interface velocity. We showed that each sub-problem has a unique solution, provided that 1+  n  Rmin > 0, n = 0, ..., N , and that each sub-problem solution satisfies an energy estimate. When combined, the two energy estimates provide a discrete version of the energy estimate (2.1). Thus, for each t we have designed a time-marching, splitting scheme, which defines an approximate solution on (0, T ) of our main FSI problem (3.6)-(3.13). Furthermore, the scheme is designed in such a way that for each t > 0 the approximate FSI solution satisfies a discrete version of an energy estimate for the continuous problem. We would like to ultimately show that, as t  0, the sequence of solutions parameterized by N (or t), converges to a weak solution of (3.6)-(3.13). Furthermore, we also need to show that 1 +  n  Rmin > 0 is satisfied for each n = 0, ..., N - 1. In order to obtain this result, it is crucial to show that the discrete energy of the approximate FSI solutions defined for each t, is uniformly bounded, independently of t (or N ). This result is obtained by the following Lemma. 21
+
+Lemma 5.1. (The uniform energy estimates) Let t > 0 and N = T /t > 0. Furthermore,
+j n+1 let EN 2 , EN , and DN be the total energy and dissipation given by (5.2) and (5.3), respectively. There exists a constant C > 0 independent of t (and N ) such that the following estimates hold: n+ 1
+
+1. EN 2. 3.
+
+n+ 1 2 N j =1
+
+n+1  C, EN  C , for all n = 0, ..., N - 1, j DN  C,
+1
+
+N -1
+
+(1 +  n )|un+1 - un |2 + v n+1 - v n+ 2
+n=0 F
+
+2 L2 (0,1)
+
++ v n+ 2 - v n
+N -1
+
+1
+
+2 L2 (0,1)
+
++ V n+1 - V n
+
+2 L2 (S )
+
+ C,  C.
+
+4.
+n=0
+
+( z ( n+1 -  n )
+
+2 L2 (0,1)
+
++ aS dn+1 - dn , dn+1 - dn
+2 L2 (0,T )
+
+~ Pin 2 2 In fact, C = E0 +C L (0,T ) + Pout only on the parameters in the problem.
+
+~ is the constant from (5.8), which depends , where C
+
+Proof. We begin by adding the energy estimates (5.5) and (5.8) to obtain
+n+1 n+1 EN + DN +
+
+1 2
+
+(1 +  n )|un+1 - un |2 + v n+1 - v n+ 2
+F
+
+1
+
+2 L2 (0,1) 2 L2 (0,1)
+
++ v n+ 2 - v n
+
+1
+
+2 L2 (0,1)
+
++ V n+1 - V n
+
+2 L2 (S )
+
++ z ( n+ 2 -  n )
+
+1
+
++aS dn+1 - dn , dn+1 - dn
+
+n ~ t((P n )2 + (P n )2 ),  EN +C in out
+
+n = 0, . . . , N - 1.
+
+Then, we calculate the sum, on both sides, and cancel out like terms in the kinetic energy that appear on both sides of the inequality to obtain
+N -1 N EN + n=0 n+1 DN +
+1
+
+1 2
+
+N -1
+
+(1 +  n )|un+1 - un |2 + v n+1 - v n+ 2
+n=0 F 2 L2 (S )
+
+1
+
+2 L2 (0,1)
+
++ v n+ 2 - v n
+
+2 L2 (0,1)
+
++ V n+1 - V n
+
++ z ( n+ 2 -  n )
+N -1
+
+1
+
+2 L2 (0,1)
+
++aS dn+1 - dn , dn+1 - dn
+
+~ t  E0 + C
+n=0
+
+n 2 n 2 ((Pin ) + (Pout ) ).
+
+To estimate the term involving the inlet and outlet pressure, we recall that on every sub-interval (tn , tn+1 ) the pressure data is approximated by a constant which is equal to the average value of pressure over that time interval. Therefore, we have, after using H older's inequality:
+N -1 N -1
+
+t
+n=0
+
+n 2 (Pin )
+
+= t
+n=0
+
+1 t
+
+(n+1)t
+
+2
+
+Pin (t)dt
+nt
+
+ Pin
+
+2 L2 (0,T ) .
+
+22
+
+By using the pressure estimate to bound the right hand-side in the above energy estimate, we have ~ Pin/out 2 2 obtained all the statements in the Lemma, with the constant C given by C = E0 + C L (0,T ) . Notice that Statement 1 can be obtained in the same way by summing from 0 to n - 1, for each n, instead of from 0 to N - 1. We will use this Lemma in the next section to show convergence of approximate solutions.
+
+6
+
+Convergence of approximate solutions
+
+We define approximate solutions of problem (3.6)-(3.13) on (0, T ) to be the functions which are piece-wise constant on each sub-interval ((n - 1)t, nt], n = 1 . . . N of (0, T ), such that for t  ((n - 1)t, nt], n = 1 . . . N,
+n n  uN (t, .) = un N , N (t, .) = N , vN (t, .) = vN , vN (t, .) = vN	= vN See Figure 3. Notice that functions vN n-1/2 n- 1 2 n , dN (t, .) = dn N , V N (t, .) = V N . (6.1)
+
+are determined by Problem A1 (the elastodynamics
+
+Figure 3: A sketch of uN .
+n sub-problem), while functions vN = vN are determined by Problem A2 (the fluid sub-problem). As a consequence, functions vN are equal to the normal trace of the fluid velocity on , i.e., uN = vN er ,   which may be different from vN . However, we will show later that vN - vN L2 (0,1)  0, as N	. Using Lemma 5.1 we now show that these sequences are uniformly bounded in the appropriate solution spaces. 1 We begin by showing that (N )N N is uniformly bounded in L (0, T ; H0 (0, 1)), and that there n exists a T > 0 for which 1 + N > 0 holds independently of N and n.
+
+Proposition 6.4. The sequence (N )N N is uniformly bounded in
+1 L (0, T ; H0 (0, 1)).
+
+Moreover, for T small enough, we have 0 < Rmin	1 + N (t, z )  Rmax , N  N, z  (0, 1), t  (0, T ). 23 (6.2)
+
+Proof. The proof is similar to the corresponding proof in [45], except that our structure displacement 1 -norm, and not in H 2 -norm, as in [45]. This is, however, still sufficient is bounded uniformly in H0 to obtain the desired result. More precisely, from the energy estimate in Lemma 5.1 we have N (t) which implies N
+1 (0,1)) L (0,T ;H0
+
+2 L2 (0,1)
+
++ z N (t)
+
+2 L2 (0,1) ,
+
+C, t  [0, T ],
+
+ C.
+
+To show that the radius 1 + N is uniformly bounded away from zero for T small enough, we first notice that the above inequality implies
+n N - 0
+1 (0,1) H0
+
+ 2C, n = 1, . . . , N, N  N.
+
+Furthermore, we calculate
+n-1 n N n-1 i+1 N i=0 0 = 0 . Lemma 5.1 implies that EN where we recall that N This combined with the above inequality implies n N - 0 L2 (0,1) n+ 1 2
+
+- 0
+
+L2 (0,1)
+
+
+
+-
+
+i N L2 (0,1)
+
+= t
+i=0
+
+vN
+
+1 i+ 2
+
+L2 (0,1) ,
+
+ C , where C is independent of N .
+
+ Cnt  CT, n = 1, . . . , N, N  N.
+
+n n 1 (0,1) are uniformly bounded, we can use the interpolation - 0 H 0 - 0 L2 (0,1) and N Now, since N inequality for Sobolev spaces, Thm. 4.17, p. 79 in [1], to get n N - 0 H s (0,1)
+
+ 2CT 1-s , n = 1, . . . , N, N	N, for 0 < s < 1.
+
+From Lemma 5.1 we see that C depends on T through the norms of the inlet and outlet data in such a way that C is an increasing function of T . Therefore, by choosing T small, we can make n - 0 H s (0,1) arbitrarily small for n = 1, . . . . , N , N  N. Because of the Sobolev embedding N n - 0 C [0,1] arbitrarily small. Since the of H s (0, 1) into C [0, 1], for s > 1/2, we can also make N initial data 0 is such that 1 + 0 (z ) > 0 (due to the conditions listed in (1.13)), we see that for T > 0 small enough, there exist Rmin , Rmax > 0, such that 0 < Rmin  1 + N (t, z )	Rmax , N  N, z	(0, 1), t  (0, T ). We will show in the end that our existence result holds not only locally in time, i.e., for small T > 0, but rather, it can be extended all the way until either T = , or until the lateral walls of the channel touch each other. Proposition 6.4 implies, among other things, that the standard L2 -norm, and the following weighted L2 -norm are equivalent: for every f  L2 (F ), there exist constants C1 , C2 > 0, which depend only on Rmin , Rmax , and not on f or N , such that C1
+F
+
+(1 + N )f 2  f
+
+2 L2 (F )
+
+ C2
+F
+
+(1 + N )f 2 .
+
+(6.3)
+
+24
+
+We will be using this property in the next section to prove strong convergence of approximate solutions. Next we show that the sequences of approximate solutions for the velocity and its trace on the lateral boundary, as well as the displacement of the thick structure and the thick structure velocity, are uniformly bounded in the appropriate norms. To do that, we introduce the following notation which will be useful in the remainder of this manuscript to prove compactness: denote by h the translation in time by h of a function f h f (t, .) = f (t - h, .), h  R. Proposition 6.5. The following statements hold:
+ 1. (vN )N N , (vN )N N are uniformly bounded in L (0, T ; L2 (0, 1)).
+
+(6.4)
+
+2. (uN )N N is uniformly bounded in L (0, T ; L2 (F )). 3. (t N uN )N N is uniformly bounded in L2 ((0, T )  F ). 4. (dN )N N is uniformly bounded in L (0, T ; H 1 (S )). 5. (V N )N N is uniformly bounded in L (0, T ; L2 (S )).
+ )N N , (dN )N N , (V N )N N , and the uniform boundProof. The uniform boundedness of (vN )N N , (vN  2 edness of (uN )N N in L (0, T ; L (F )) follow directly from Statements 1 and 2 of Lemma 5.1, and  )N N , (dN )N N , (V N )N N and (uN )N N as step-functions in t so from the definition of (vN )nN , (vN that T N -1
+
+vN 2 L2 (0,1) dt
+0
+
+=
+n=0 t N
+
+n vN
+
+2 L2 (0,1) t.
+
+It remains to show uniform boundedness of ( uN )N N in L2 ((0, T )  F ). From Lemma 5.1 we only know that the symmetrized gradient is bounded in the following way:
+N n-1 (1 + N )|D N n=1 F
+n-1
+
+2 (un N )| t  C.
+
+(6.5)
+
+We cannot immediately apply Korn's inequality since estimate (6.5) is given in terms of the transformed symmetrized gradient. Thus, there are some technical difficulties that need to be overcome due to the fact that our problem involves moving domains. To get around this difficulty we take the	n-1 following approach. We first transform the problem back to the physical fluid domain FN which n-1 is defined by the lateral boundary N , on which uN is defined. There, instead of the transformed gradient, we have the standard gradient, and we can apply Korn's inequality in the usual way. However, since the Korn constant depends on the domain, we will need a result which provides a universal Korn constant, independent of the family of domains under consideration. Indeed, a result of this kind was obtained in [11, 54, 45], assuming certain domain regularity. In particular, 25
+
+in [54] as in our previous work [45], the family of domains FN had a uniform Lipschitz constant, 1 which is not the case in the present paper, since N are uniformly bounded in H0 (0, 1) and not in 2 H (0, 1). This is why we take the approach similar to [11], where the universal Korn constant was calculated explicitly, by utilizing the precise form of boundary data. We have the following. For each fixed N  N, and for all n = 1, . . . , N , transform un N back to the physical domain n-1 which is determined by the location of N . We will be using super-script N to denote functions defined on physical domains: uN,n := un N  A n-1 , n = 1, . . . , N, N  N.
+N
+
+ n-1
+
+By using formula (3.5) we get
+n-1 (1 + N )|D N F
+n-1
+
+2 (un N )| =
+
+FN
+
+ n-1
+
+|D(uN,n )|2 = D(uN,n )
+
+2
+
+L2 (FN
+
+ n-1
+
+.
+)
+
+We now show that the following Korn's equality holds for the space VF (t): uN,n
+2 L2 (FN
+ n-1
+
+= 2 D(uN,n )
+)
+
+2
+
+L2 (FN
+
+ n-1
+
+.
+)
+
+(6.6)
+
+Notice that the Korn constant (the number 2) is domain independent. The proof of this Korn equality is similar to the proof in Chambolle et al. [11], Lemma 6, pg. 377. However, since our assumptions are a somewhat different from those in [11], we present a sketch of the proof here. By writing the symmetrized gradient on the right hand-side of (6.6) in terms of the gradient, and by calculating the square of the norms on both sides, one can see that it is enough to show that
+ n-1 FN
+
+ n un N :  uN = 0.
+
+To simplify notation, in the proof of this equality we omit the subscripts and superscripts, i.e. we n-1 write	and u instead of N and un N , respectively. First, we prove the above equality for smooth functions u and then the conclusion follows by a density argument. By using integration by parts and	 u = 0 we get u :  u = -
+ F  F
+
+u  (  u) +
+  F
+
+( u)n  u =
+  F
+
+( u)n  u,
+
+where n = (- , 1) . We now show that ( u)n  u = 0 on  F . Since  F =   in/out  b we consider each part of the boundary separately: 1. On  we have u = (0, ur ), i.e., we have uz (z, 1 +  (z )) = 0. Since u is smooth we can differentiate this equality w.r.t. z to get z uz + r uz  = 0 on , i.e., for z  (0, L). By using	u = 0, we get: -r uz  = z uz = -r ur . By using n = (- , 1) we get ( u)n  u = (( u)n)r ur = (-r uz  + r ur )ur = 0. 26
+
+2. On in/out we have u = (uz , 0) and n = (1, 0). Hence, ( u)n	u = uz (( u)n)z = uz (z uz ) = -uz r ur = 0. 3. On b we have u = (uz , 0), r uz = 0 and n = (0, -1). Hence, ( u)n  u = uz (( u)n)z = uz (-z ur ) = 0. This concludes the proof of Korn's equality (6.6). Now, by using (6.6) and by mapping everything back to the fixed domain F , we obtain the following Korn's equality on F : 2
+F n-1 (1 + N )|D N
+n-1
+
+2 (un N )| = F
+
+n-1 (1 + N )| N
+
+n-1
+
+2 (un N )| .
+
+(6.7)
+
+By summing equalities (6.7) for n =, 1 . . . , N , and by using (6.3), we get uniform boundedness of (t N uN )N N in L2 ((0, T )  F ). From the uniform boundedness of approximate sequences, the following weak and weak* convergence results follow. Lemma 6.2. (Weak and weak* convergence results) There exist subsequences (N )N N ,  1 (vN )N N , (vN )N N , (dN )N N , (V N )N N and (uN )N N , and the functions   L (0, T ; H0 (0, 1)),   2   2  2 v, v  L (0, T ; L (0, 1)), d  L (0, T ; VS ), V  L (0, T ; L (S )), u  L (0, T ; L (F )) and G  L2 ((0, T )  F ) such that N vN  vN dN VN uN t N uN Furthermore, v = v. (6.9) Proof. The only thing left to show is that v = v  . For this purpose, we multiply the second N n 2 statement in Lemma 5.1 by t, and notice again that vN 2 n=1 vN L2 (0,1) . L2 ((0,T )(0,1)) = t    This implies vN - vN L2 ((0,T )(0,1))  C t, and we have that in the limit, as t	0, v = v . Naturally, our goal is to prove that G =  u. However, to achieve this goal we will need some stronger convergence properties of approximate solutions. Therefore, we postpone the proof until Section 7. 27
+1  weakly in L (0, T ; H0 (0, 1)),  2 v weakly in L (0, T ; L (0, 1)), v  weakly in L (0, T ; L2 (0, 1)),
+
+d weakly in L (0, T ; H 1 (S )), V weakly in L (0, T ; L2 (S )), u weakly in L (0, T ; L2 (F )), G weakly in L2 ((0, T )  F ).
+
+(6.8)
+
+6.1
+
+Strong convergence of approximate sequences
+
+To show that the limits obtained in the previous Lemma satisfy the weak form of problem (3.6)(3.13), we will need to show that our sequences converge strongly in the appropriate function spaces. The strong convergence results will be achieved by using the following compactness result by Simon [51]: Theorem 6.1. [51] Let X be a Banach space and F  Lq (0, T ; X ) with 1  q < . Then F is a relatively compact set in Lq (0, T ; X ) if and only if
+t2
+
+(i)
+t1
+
+f (t)dt : f  F
+Lq (h,T ;X )
+
+is relatively compact in X , 0 < t1 < t2 < T ,
+
+(ii) h f - f
+
+ 0 as h goes to zero, uniformly with respect to f  F .
+
+We used this result in [45] to show compactness, but the proof was simpler because of the higher regularity of the lateral boundary of the fluid domain, namely, of the fluid-structure interface. In the present paper we need to obtain some additional regularity for the fluid velocity uN on F and its trace vN on the lateral boundary, before we can use Theorem 6.1 to show strong convergence of our approximate sequences. Notice, we only have that our fluid velocity on F is uniformly bounded in L2 (F ), plus a condition that the transformed gradient t N uN is uniformly bounded in L2 . Since  is not Lipschitz, we cannot get that the gradient uN is uniformly bounded in L2 on F . This lower regularity of N will give us some trouble when showing regularity of uN on F , namely it will imply lower regularity of uN in the sense that u  H s (F ), for 0 < s < 1/2, and not H 1 (F ). Luckily, according to the trace theorem in [44], this will still allow us to make sense of the trace of uN on . More precisely, we prove the following Lemma. Lemma 6.3. The following statements hold: 1. (uN )N N is uniformly bounded in L2 (0, T ; H s (F )), 0 < s < 1/2; 2. (vN )N N is uniformly bounded in L2 (0, T ; H s/2 (0, 1)), 0 < s < 1/2. Proof. We start by mapping the fluid velocity uN defined on F , back to the physical fluid domain with the lateral boundary t N (t, z ) = N (t - t, z ). We denote by uN (t, .) the fluid velocity on the physical domain t N :
+1 uN (t, .) = uN (t, .)  A- t N (t), N	N.
+
+As before, we use sub-script N to denote fluid velocity defined on the physical space. From (3.4) we see that uN = t N uN . Proposition 6.5, statement 3, implies that the sequence (uN )N N is uniformly bounded in L2 , and so we have that uN L2 (0,T ;H 1 (t  )) is uniformly bounded. 28
+
+Now, from the fact that the fluid velocities uN defined on the physical domains are uniformly bounded in H 1 , we would like to obtain a similar result for the velocities uN defined on the reference domain F . For this purpose, we recall that the functions N , N	N that are involved in the ALE mappings At N (t), N  N, are uniformly bounded in H 1 (0, 1). This is, unfortunately, not sufficient to obtain uniform boundedness of the gradients (uN )N N in L2 (F ). However, from the Sobolev embedding H 1 (0, 1)	C 0,1/2 (0, 1) we have that the sequence (N )N N is uniformly bounded in L (0, T ; C 0,1/2 (0, 1)). This will help us obtain uniform boundedness of (uN )nN in a slightly lowerregularity space, namely in the space L2 (0, T ; H s (F )), 0 < s < 1/2. To see this, we first notice that uN on F can be expressed in terms of function uN defined on t N as uN (t, z ~, r ~) = uN (t, z ~, (1 + t N )(t, z ~))~ r), (~ z, r ~)  F . (6.10) Therefore, uN can be written as an H 1 -function uN composed with a C 0,1/2 -function N , in the way described in (6.10). The following Lemma, proved in [44], implies that uN belongs to a space with asymmetric regularity (more regular in r ~ than in z ~) in the sense that uN  L2 (0, 1; H s (0, 1)), 0 < 2 2 s < 1/2, and r ~uN  L (0, 1; L (0, 1)). We use notation from Lions and Magenes [43], pg. 10, to denote the corresponding function space by
+2 2 W (0, 1; s) = {f : f  L2 (0, 1; H s (0, 1))), r ~f	L (0, 1; L (0, 1))}.
+
+More precisely, Lemma 3.3 from [44] states the following: Lemma 6.4. [44] Let	C 0, , 0 <  < 1, and let u  H 1 ( ). Define u ~(~ r, z ~) = u(~ z , (1 +  (~ z ))~ r ), Then u ~  W (0, 1; s) for 0 < s < . Thus, Lemma 6.4 implies that uN (t, .)  W (0, 1; s) for 0 < s < 1/2. Now, using the fact W (0, 1; s)  H s (F ) we get uN (t, .)
+2 H s (F )
+
+(~ z, r ~)  F .
+
+(6.11)
+
+ C uN (t, .)
+
+2 H 1 ((t-t) ) ,
+
+a.a. t	(0, T ), 0 < s < 1/2.
+
+By integrating the above inequality w.r.t. t we get the first statement of Lemma 6.3. To prove the second statement of Lemma 6.3 we use Theorem 3.1 of [44], which states that the notion of the trace for the functions of the form (6.10) for which uN  H 1 and N  C 0,1/2 , can be defined in the sense of H s/2 , 0 < s < 1/2. For completeness, we state Theorem 3.2 of [44] here. Theorem 6.2. [44] Let  < 1 and let  be such that   C 0, (0, 1),  (z )  min > -1, z  [0, 1],  (0) =  (1) = 1. Then, the trace operator  : C 1 ( )  C () that associates to each function u  C 1 ( ) its "Lagrangian trace" u(~ z , 1 +  (~ z ))	C (), defined via (6.11) for r ~ = 1,  : u  u(~ z , 1 +  (~ z )), can be extended by continuity to a linear operator from H 1 ( ) to H s () for 0  s < /2. 29
+
+By recalling that vN = (uN )| , this proves the second statement of Lemma 6.3. Notice that the difficulty associated with bounding the gradient of uN is somewhat artificial, since the gradient of the fluid velocity uN defined on the physical domain is, in fact, uniformly bounded (by Proposition 6.5). Namely, the difficulty is imposed by the fact that we decided to work with the problem defined on a fixed domain F , and not on a family of moving domains. This decision, however, simplifies other parts of the main existence proof. The "expense" that we had to pay for this decision is embedded in the proof of Lemma 6.3. We are now ready to use Theorem 6.1 to prove compactness of the sequences (vN )N N and (uN )N N . Theorem 6.3. Sequences (vN )N N and (uN )N N are relatively compact in L2 (0, T ; L2 (0, 1)) and L2 (0, T ; L2 (F )), respectively. Proof. We use Theorem 6.1 with q = 2, and X = L2 . We verify that both assumptions (i) and (ii) hold. Assumption (i): To show that the sequences (vN )N N and (uN )N N are relatively compact in 2 L (0, 1) and L2 (F ), respectively, we use Lemma 6.3 and the compactness of the embeddings H s (F )  L2 (F ) and H s/2 (0, 1)	L2 (0, 1), respectively, for 0 < s < 1/2. Namely, from Lemma 6.3 we know that sequences (uN )N N and (vN )N N are uniformly bounded in L2 (0, T ; H s (F )) and L2 (0, T ; H s/2 (0, 1)), respectively, for 0 < s < 1/2. The compactness of the embeddings H s (F )  L2 (F ) and H s/2 (0, 1)  L2 (0, 1) verify Assumption (i) of Theorem 6.1. Assumption (ii): We prove that the "integral equicontinuity", stated in assumption (ii) of Theorem 6.1, holds for the sequence (vN )N N . Analogous reasoning can be used for (uN )N N . Thus, we want to show that for each  > 0, there exists a  > 0 such that h vN - vN
+2 L2 ( ;L2 (0,1))
+
+< ,
+
+|h| < , independently of N  N,
+
+(6.12)
+
+where  is an arbitrary compact subset of . Indeed, we will show that for each  > 0, the following choice of  :	:= min{dist(,  )/2, /(2C )} provides the desired estimate, where C is the constant from Lemma 5.1 (independent of N ). Let h be an arbitrary real number whose absolute value is less than  . We want to show that (6.12) holds for all t = T /N . This will be shown in two steps. First, we will show that (6.12) holds for the case when t  h (Case 1), and then for the case when t < h (Case 2). A short remark is in order: For a given  > 0, we will have t <  for infinitely many N , and both cases will apply. For a finite number of functions (vN ), we will, however, have that t	 . For those functions (6.12) needs to be proved for all t such that |h| <   t, which falls into Case 1 bellow. Thus, Cases 1 and 2 cover all the possibilities. Case 1: t  h. We calculate the shift by h to obtain (see Figure 4, left):
+N -1 j t j j +1 vN - vN j =1 j t-h 2 L2 (0,1)
+
+h vN -
+
+vN 2 L2 ( ;L2 (0,1))
+
+ 30
+
+=
+
+N -1
+
+=h
+j =1
+
+j j +1 vN - vN
+
+2 L2 (0,1)
+
+ hC < /2 < .
+
+The last inequality follows from |h| <	 /(2C ).
+
+Figure 4: Left panelCase 1: t  h. The graph of vN is shown in solid line, while the graph of the shifted function h vN is shown in dashed line. The shaded area denotes the non-zero contributions to the norm h vN - vN 2 L2 . Right panelCase2: t < h = t + s, 0 < s < t. The graph of vN is shown in solid line, while the graph of the shifted function h vN is shown in the dashed line. The shaded areas denote non-zero contributions to the norm h vN - vN 2 L2 . The two colors represent the contributions to the first and second integral in (6.13) separately.
+
+Case 2: t < h. In this case we can write h = lt + s for some l	N, 0 < s  t. Similarly, as in the first case, we get (see Figure 4, right):
+N -l-1 (j +1)t-s j j +l vN - vN j t j =1 (j +1)t j vN (j +1)t-s j +l+1 2 vN L2 (0,1) 2 L2 (0,1)
+
+h vN -
+
+vN 2 L2 ( ;L2 (0,1))
+
+= + -
+
+(6.13) .
+
+Now we use the triangle inequality to bound each term under the two integrals from above by l+1 j +i-1 j +i 2 - vN i=1 vN L2 (0,1) . After combining the two terms together we obtain
+N -l-1 l+1
+
+h vN -
+
+vN 2 L2 ( ;L2 (0,1))
+
+ t
+j =1 i=1
+
+j +i-1 j +i - vN vN
+
+2 L2 (0,1) .
+
+(6.14)
+
+Using Lemma 5.1 we get that the right hand-side of (6.14) is bounded by t(l + 1)C . Now, since h = lt + s we see that t  h/l, and so the right hand-side of (6.14) is bounded by l+1 hC . Since l |h| <  and from the form of  we get h vN - vN
+2 L2 ( ;L2 (0,1))
+
+ t(l + 1)C  31
+
+l+1 l+1 hC  < . l l 2
+
+Thus, if we set  = [/2, T - /2] we have shown: /2 vN - vN
+2 L2 (/2,T -/2;L2 (0,1))
+
+< ,
+i n+ 2
+
+N  N.
+2 L2 (T -/2,T ;L2 (0,1)) .
+
+To show that condition (ii) from Theorem 6.1 holds it remains to estimate /2 vN -vN From the first inequality in Lemma 5.1 (boundedness of vN
+T
+
+, i = 1, 2 in L2 (0, 1)) we have N  N.
+
+/2 vN - vN
+T -/2
+
+2 L2 (0,1)
+
+  2C < , 2
+
+Thus, we have verified all the assumptions of Theorem 6.1, and so the compactness result for (vN )N N follows from Theorem 6.1. Similar arguments imply compactness of (uN )N N . To show compactness of (N )N N we use the approach similar to that in [45], except that, due to the weaker regularity properties of N , we will have to use different embedding results (Hilbert interpolation inequalities). In the end, compactness of the sequence of lateral boundary approximation will follow due to the Arzel` a- Ascoli Theorem. As in [45], we start by introducing a slightly different set of approximate functions of u, v ,  ~ N to be continuous, linear ~N ,  and V . Namely, for each fixed t (or N  N), define u ~N , v ~N and V on each sub-interval [(n - 1)t, nt], and such that for n = 0, . . . , N : ~ N (nt, .) = uN (nt, .), v u ~N (nt, .) = vN (nt, .), ~	~N (nt, .) = N (nt, .), V N (nt, .) = V N (nt, .), See Figure 5. A straightforward calculation gives the following inequalities (see [53], p. 328) (6.15)
+
+~N . Figure 5: A sketch of u vN - v ~N 2 L2 (0,T ;L2 (0,1))
+2 L2 (0,T ;L2 (F ))
+
+t  3 t	3 t  3 t  3 32
+
+N
+
+v n+1 - v n
+n=1 N
+
+2 L2 (0,1) ,
+
+~N uN - u N -
+
+un+1 - un
+n=1 N
+
+2 L2 (F ) ,
+
+(6.16)
+n+1
+
+ ~N 2 L2 (0,T ;L2 (0,1))
+2 L2 (0,T ;L2 (S ))
+
+-
+
+n 2 L2 (0,1) ,
+2 L2 (S ) ,
+
+n=1 N
+
+~N VN -V
+
+V n+1 - V n
+n=1
+
+We now observe that
+1  n+1 -  n  n+1/2 -  n t  ~N (t) = = = v n+ 2 , t  (nt, (n + 1)t), t t
+
+  and so, since vN was defined in (6.1) as a piece-wise constant function defined via vN (t, ) = v n+ 2 , for t  (nt, (n + 1)t], we see that  a.e. on (0, T ). t  ~N = vN
+
+1
+
+(6.17)
+
+By using Lemma 5.1 (the boundedness of EN
+
+i n+ 2
+
+), we get
+
+1 (0, 1))  W 1, (0, T ; L2 (0, 1)). (~ N )N N is bounded in L (0, T ; H0
+
+We now use the following result on continuous embeddings:
+1 L (0, T ; H0 (0, 1))	W 1, (0, T ; L2 (0, 1))  C 0,1- ([0, T ]; H  (0, 1)),
+
+(6.18)
+
+for 0 <  < 1. This result follows from the standard Hilbert interpolation inequalities, see [43]. A slightly different result (assuming higher regularity) was also used in [29] to deal with a set of mollifying functions approximating a solution to a moving-boundary problem between a viscous fluid and an elastic plate. From (6.18) we see that (~ N )N N is also bounded (uniformly in N ) in C 0,1- ([0, T ]; H  (0, 1)). Now, from the continuous embedding of H  (0, 1) into H - , and by applying the Arzel` a-Ascoli Theorem, we conclude that sequence (~ N )N N has a convergent subsequence, which we will again denote by (~ N )N N , such that  ~N	~ in C ([0, T ]; H s (0, 1)), 0 < s < 1. Since (6.16) implies that (~ N )N N and (N )N N have the same limit, we have  =  ~  C ([0, T ]; H s (0, 1)), where  is the weak* limit of (N )N N , discussed in (6.8). Thus, we have	~N   in C ([0, T ]; H s (0, 1)), 0 < s < 1. We can now prove the following Lemma: Lemma 6.5. N	 in L (0, T ; H s (0, 1)), 0 < s < 1. Proof. The proof is similar to the proof of Lemma 3 in [45]. The result follows from the continuity in time of  , and from the fact that	~N   in C ([0, T ]; H s (0, 1)), for 0 < s < 1, applied to the inequality N (t) -  (t) H s (0,1) = N (t) -  (nt) +  (nt) -  (t) H s (0,1) = N (nt) -  (nt) +  (nt) -  (t) =  ~N (nt) -	(nt)
+H s (0,1) H s (0,1) H s (0,1) .
+
+ N (nt) -  (nt) +  (nt) -  (t)
+H s (0,1)
+
++  (nt) -  (t)
+
+33
+
+We summarize the strong convergence results obtained in Theorem 6.3 and Lemma 6.5. We have shown that there exist subsequences (uN )N N , (vN )N N and (N )N N such that uN vN t uN t vN N	u in L2 (0, T ; L2 (F )), v in L2 (0, T ; L2 (0, 1)), u in L2 (0, T ; L2 (F )), v in L2 (0, T ; L2 (0, 1)),  in L (0, T ; H s (0, 1)), 0  s < 1.
+
+(6.19)
+
+Because of the uniqueness of derivatives, we also have v = t  in the sense of distributions. The statements about the convergence of (t uN )N N and (t vN )N N follow directly from t uN - uN
+2 L2 ((0,T )F )
+
++ t vN - vN
+
+2 L2 ((0,T )(0,1))
+
+ C t,
+
+(6.20)
+
+which is obtained after multiplying the third equality of Lemma 5.1 by t. ~ N )N also converge to Furthermore, one can also show that subsequences (~ vN )N , (~ uN )N and (V v , u and V respectively. More precisely, ~ N  u in L2 (0, T ; L2 (F )), u v ~N  v in L2 (0, T ; L2 (0, 1)), ~N V V weakly in L (0, T ; L2 (S )) (6.21)
+
+This statement follows directly from the inequalities (6.16) and Lemma 5.1, which provides uniform boundedness of the sums on the right hand-sides of the inequalities. We conclude this section by showing one last convergence result that will be used in the next section to prove that the limiting functions satisfy weak formulation of the FSI problem. Namely, we want to show that N	 in L (0, T ; C [0, 1]), (6.22) t N   in L (0, T ; C [0, 1]). The first statement is a direct consequence of Lemma 6.5 in which we proved that N   in 1 we immediately have L (0, T ; H s (0, 1)), 0 < s < 1. For s > 2 N   in L (0, T ; C [0, 1]). (6.23)
+
+To show convergence of the shifted displacements t N to the same limiting function  , we recall that  ~N   in C ([0, T ]; H s [0, L]), 0 < s < 1, and that (~ N )N N is uniformly bounded in C 0,1- ([0, T ]; H  (0, 1)), 0 <  < 1. Uniform boundeness of (~ N )N N in C 0,1- ([0, T ]; H  (0, 1)) implies that there exists a constant C > 0, independent of N , such that  ~N ((n - 1)t) -  ~N (nt) H  (0,1)	C |t|1- . 34
+
+This means that for each  > 0, there exists an N1 > 0 such that   ~N ((n - 1)t) -  ~N (nt) H  (0,1)  , for all N  N1 . 2 Here, N1 is chosen by recalling that t = T /N , and so the right hand-side implies that we want an N1 such that 1- T  C < for all N  N1 . N 2 Now, convergence  ~N   in C ([0, T ]; H s [0, 1]), 0 < s < 1, implies that for each  > 0, there exists an N2 > 0 such that   ~N (nt) -  (t) H s (0,1) < , for all N  N2 . 2 We will use this to show that for each  > 0 there exists an N   max{N1 , N2 }, such that  t	~N (t) -  (t)
+H s (0,1)
+
+< , for all N  N  .
+
+Indeed, let t  (0, T ). Then there exists an n such that t  ((n - 1)t, nt]. We calculate  t  ~N (t) -  (t) H s (0,1) = t  ~N (t) -  ~N (nt) +  ~N (nt) -  (t) H s (0,1) =  ~N ((n - 1)t) -  ~N (nt) +  ~N (nt) -  (t) H s (0,1)   ~N ((n - 1)t) -  ~N (nt) H s (0,1) +	~N (nt) -  (t) H s (0,1) . The first term is less than /2 by the uniform boundeness of (~ N )N N in C 0,1- ([0, T ]; H	(0, 1)), while the second term is less than /2 by the convergence of  ~N to  in C ([0, T ]; H s [0, 1]), 0 < s < 1. Now, since t  ~N = (t  N ), we can use the same argument as in Lemma 6.5 to show that sequences (t	N ) and t N both converge to the same limit  in L (0, T ; H s (0, 1)), for 0 < s < 1.
+
+7
+
+The limiting problem and weak solution
+
+Next we want to show that the limiting functions satisfy the weak form (4.18) of the full fluidstructure iteration problem. In this vein, one of the things that needs to be considered is what happens in the limit as N  , i.e., as t  0, of the weak form of the fluid sub-problem (5.7). Before we pass to the limit we must observe that, unfortunately, the velocity test functions in (5.7) n depend of N ! More precisely, they depend on N because of the requirement that the transformed n N divergence-free condition   q = 0 must be satisfied. This is a consequence of the fact that we mapped our fluid sub-problem onto a fixed domain F . Therefore, we need to take special care when constructing suitable velocity test functions and passing to the limit in (5.7).
+
+7.1
+
+Construction of the appropriate test functions
+
+We begin by recalling that test functions (q, ,  ) for the limiting problem are defined by the space Q, given in (4.12), which depends on  . Similarly, the test spaces for the approximate problems 35
+
+depend on N through the dependence on N . We had to deal with the same difficulty in [45] where a FSI problem with a thin structure modeled by the full Koiter shell equations was studied. The only difference is that, due to the lower regularity of the fluid-structure interface in the present paper we also need to additionally show that the sequence of gradients of the fluid velocity converges weakly to the gradient of the limiting velocity, and pay special attention when taking the limits in the weak formulation of the FSI problem. To deal with the dependence of test functions on N , we follow the same ideas as those presented in [11, 45]. We restrict ourselves to a dense subset X of all test functions in Q that is independent of N even for the approximate problems. We construct the set X to consist of the test functions (q, ,	)  X = XF XW XS , such that the velocity components q  XF are smooth, independent of N , and   q = 0. Such functions can be constructed as an algebraic sum of the functions q0 that have compact support in   in  out	b , plus a function q1 , which captures the behavior of the solution at the boundary  . More precisely, let min and max denote the fluid domains associated with the radii Rmin and Rmax , respectively. 1. Definition of test functions (q0 , 0, 0) on (0, T )  max  S : Consider all smooth functions q with compact support in   in	out  b , and such that	 q = 0. Then we can extend q by 0 to a divergence-free vector field on (0, T )	max . This defines q0 . Notice that since N converge uniformly to  , there exists an Nq > 0 such that supp(q0 )  t N , N  Nq . Therefore, q0 is well defined on infinitely many approximate domains t N . 2. Definition of test functions (q1 , ,  ) on (0, T )max S : Define  A constant extension in the vertical	direction of  er on  : q1 := (0,  (z ))T ;    Notice divq1 = 0. q1 :=	  A divergence - free extension to min	  (see, e.g. [26], p. 127).
+2 1 (0, 1)). ([0, T ); H0 Consider   Cc
+
+
+
+on max \ min ,
+
+on min .
+
+From the construction it is clear that q1 is also defined on t N for each N , and so it can be mapped onto the reference domain  by the transformation At N . We take	H 1 (S ) such that  (t, z, 1) =  (t, z ). For any test function (q, ,  )  Q it is easy to see that the velocity component q can then be written as q = q - q1 + q1 , where q - q1 can be approximated by divergence-free functions q0 that have compact support in   in  out  b . Therefore, one can easily see that functions (q,  ) = (q0 + q1 ,  ) in X satisfy the following properties:  X is dense in the space Q of all test functions defined on the physical, moving domain  , defined by (4.12); furthermore,   q = 0, q  XF . 36
+
+ For each q  XF , define ~ = q	A . q ~ = q  A , q  XF ,   XS ,   XS } is dense in the space Q of all test The set {(~ q, ,  )|q functions defined on the fixed, reference domain F , defined by (4.17).  For each q  XF , define qN := q  At N . Functions qN are defined on the fixed domain F , and they satisfy t N  qN = 0. Functions qN will serve as test functions for approximate problems associated with the sequence ~ will serve as test functions associated with the domain  . of domains t N , while functions q Both sets of test functions are defined on F . ~ uniformly in L (0, T ; C (F )). Lemma 7.6. For every (q, ,  )  X we have qN  q Proof. By the Mean-Value Theorem we get: ~ (t, z, r)| = |q(t, z, (1 + t N )r) - q(t, z, (1 +  )r)| |qN (t, z, r) - q = |r q(t, z,  )r| | (t, z ) - N (t - t, z )|. The uniform convergence of qN follows from the uniform convergence of N , since q are smooth. We are now ready to identify the weak limit G from Lemma 6.2. Proposition 7.6. G =  u, where G, u and  are the weak and weak* limits given by Lemma 6.2. Proof. As in Lemma 6.3, it will be helpful to map the approximate fluid velocities and the limiting fluid velocity onto the physical domains. For this purpose, we introduce the following functions
+1 uN (t, .) = uN (t, .)  A- t N (t), 1 ~ (t, .) = u(t, .)  A- u  (t),
+
+N f (t, x) =
+
+f, 0,
+
+x  t N (t) , f (t, x) = x / t N (t)
+
+f , x	(t) , 0, x  /  (t)
+
+1 where A is the ALE mapping defined by (3.1),	is the weak* limit N  in L (0, T ; H0 (0, 1)) satisfying the uniform convergence property (6.22), and f is an arbitrary function defined on the physical domain. Notice, again, that superscript N is used to denote a function defined on the physical domain, while subscript N is used denote a function defined on the fixed domain F . ~ strongly in The proof consists of three main steps: (1) we will first show that N uN  u 2 ~ weakly in L2 ((0, T )  L ((0, T )  max ), then, by using step (1), we will show (2) N uN  u T T ~ = 0 F  u : q ~ for every test max ), and, finally by using (2) we will show (3) 0 F G : q ~ = q  A . function q
+
+37
+
+~ STEP 1. We will show that N uN - u the following auxiliary functions
+
+L2 ((0,T )max )
+
+ 0. To achieve this goal, we introduce
+
+1 ~ N (t, .) = uN (t, .)  A- u	(t),
+
+which will be used in the following estimate ~ N uN - u
+L2 ((0,T )max )
+
+~N  N uN - u
+
+L2 ((0,T )max )
+
+~ N - u ~ + u
+
+L2 ((0,T )max ) .
+
+The second term on the right-hand side converges to zero because of the strong convergence of uN to u on the reference domain F , namely, ~ N - u ~ u
+2 L2 (max )
+
+=
+F
+
+(1 +  )|uN - u|2  0.
+
+Figure 6: A sketch of the fluid domains in STEP 1. To show that the first term on the right-hand side converges to zero, first notice that
+T T T
+
+~ - u | =( |u
+0 max 0  (t) t N (t)
+
+N
+
+N
+
+N 2
+
++
+0  (t)t N (t)
+
+~ N - N uN |2 . )|u
+
+Here AB := (A  B ) \ (A  B ). See Figure 6. Because of the uniform convergence (6.22) we can make the measure | (t) t N (t)| arbitrary small. Furthermore, by Propostions 6.4 and 6.5 we ~ N - N uN )N N is uniformly bounded in L2 ((0, T )  max ). Therefore, have that the sequence (u for every  > 0, there exists an N0  N such that for every N  N0 we have
+T 0  (t)
+
+ ~ N - N uN |2 < . |u 2 t N (t)
+
+(7.1)
+
+To estimate the second term, we need to measure the relative difference between the function uN 1 1 ~ N , and the same function uN composed with A- composed with A-  (t), denoted by u t N (t) , denoted by uN . We will map them both on the same domain and work with one function uN , while the convergence of the L2 -integral will be obtained by estimating the difference in the ALE mappings. 38
+
+1 More precisely, we introduce the set	= A-  ( (t)  t N (t))  F . Now, we use the properties ~ N , uN to get of the ALE mapping A and the definitions of u T T
+
+~ N - N uN |2 = |u
+0  (t)t N (t) T 0
+
+1 1 2 |uN - uN	A- t N (t)  A (t) | 1+
+
+=
+0
+
+1 1 +  (t, z ) |uN (t, z, r) - uN (t, z, r)|2 1 +  (t, z ) 1 + t N (t, z )
+T
+
+=
+0
+
+r uN (t, z,  )r 1 -
+
+1 +  (t, z ) 1 + t N (t, z )
+
+2
+
+Now because of the uniform convergence (6.22) of the sequence (t N )N N , and the uniform boundedness of ( r uN L2 (F ) )N N , which is consequence of Proposition 6.5, we can take N1	N0 such that T	~ N - N uN |2 < , N  N1 . |u 2 0  (t)t N (t) ~ strongly in L2 ((0, T )	max ). This inequality, together with (7.1) proofs that N uN  u ~ weakly in L2 ((0, T )  max ). First notice u STEP 2. We will now show that N uN that from uN = t N uN and from uniform boundedness of (t N uN )N N in L2 ((0, T )  F ), established in Proposition 6.5, we get that the sequence (N uN )N N converges weakly in L2 ((0, T )  max ). Let us denote the ~ . Therefore, weak limit of (N uN )N N by G
+T T
+
+~   = lim G
+0 max
+
+N
+
+N uN  ,
+0 max
+
+   Cc ((0, T )	max ).
+
+~ = u ~. We want to show that G ~ = 0 there, and then For this purpose, we first consider the set (max \  (t)) and show that G ~ = u ~ there. the set  (t) and show that G Let	be a test function such that supp  (0, T )  max \  (t) . Using the uniform convergence of the sequence t N , obtained in (6.22), there exists an N such that N (x) = 0, N  N , x  supp. Therefore, we have
+T T
+
+~   = lim G
+0 max
+
+N
+
+N uN   = 0.
+0 max
+
+~ = 0 on (0, T )  max \  (t) . Thus, G Now, let us take a test function  such that supp  (0, T )   (t). Again using the same argument as before, as well as the uniform convergence of the sequence t N , obtained in (6.22), 39
+
+we conclude that there exists an N such that N (x) = 1, N  N , x  supp . Therefore, we have T T T ~   = lim N uN   = lim uN   . G
+0 max N  0 max N  0  (t)
+
+~ obtained in STEP 1, we have that on the set supp , From the strong convergence N uN  u ~ in the sense of distributions, and so, on the same set supp , uN  u ~ in the sense of uN  u distributions. Therefore we have
+T T T
+
+~   = lim G
+0 max
+
+N
+
+u   =
+0  (t) 0  (t)
+
+N
+
+~  . u
+
+Since this conclusion holds for all the test functions	supported in (0, T )(t) , from the uniqueness ~ = u ~ in (0, T )  (t) . of the limit, we conclude G Therefore, we have shown that N uN ~ weakly in L2 ((0, T )	max ).	u
+T T
+
+~ = 0 F  u : q ~ for every test function STEP 3. We want to show that 0 F G : q ~ = q  A , q  XF . This will follow from STEP 2, the uniform boundedness and convergence q ~ N provided by Lemma 6.2, and from the strong convergence of the test of the gradients t N u ~ provided by Lemma 7.6. More precisely, we have that for every q ~ = q  A , functions qN  q q  XF
+T T
+
+~ = lim G:q
+0 T F
+
+N
+
+t N uN : qN
+0 T 0  F
+
+= lim
+
+N
+
+0
+
+max
+
+1 N uN : q = 1 +  t  N
+N t N
+
+1 ~:q= u 1+
+
+
+T
+
+~.  u : q
+0 F
+
+Here, we have used from (3.5) that u =
+
+~ =  u. This completes proof. uN , and u
+
+Corollary 7.1. For every (q, ,	)  X we have ~ , in L2 ((0, T )  F ). t N qN   q ~ are the test functions for the velocity fields, the same arguments as Proof. Since t N qN and q in Proposition 7.6 provide weak convergence of (t N qN )N N . To prove strong convergence it is ~ L2 (F ) . This can be done, sufficient to prove the convergence of norms t N qN L2 (F )   q by using the uniform convergence of (t N )N N , in the following way:
+T
+
+
+
+t N
+
+qN 2 L2 (F )
+
+=
+0
+
+1  |q|2  1 + t N max
+N T
+
+T
+
+
+0 max
+
+1 |q|2 1+
+
+=
+0 F
+
+~ |2 =	q ~ | q 40
+
+2 L2 (F ) .
+
+The notation used here is analogous to that used in the proof of Proposition 7.6. Before we can pass to the limit in the weak formulation of the approximate problems, there is one more useful observation that we need. Namely, notice that although q are smooth functions both in the spatial variables and in time, the functions qN are discontinuous at nt because t N is a step function in time. As we shall see below, it will be useful to approximate each discontinuous  N , so that function qN in time by a piece-wise constant function, q  N (t, .) = q(nt-, .), q t  [(n - 1)t, nt), n = 1, . . . , N,
+
+where qN (nt-) is the limit from the left of qN at nt, n = 1, . . . , N . By using Lemma 7.6, and by applying the same arguments in the proof of Lemma 6.5, we get N  q ~ uniformly on [0, T ]	. q
+
+7.2
+
+Passing to the limit
+
+To get to the weak formulation of the coupled problem, take the test functions ( (t),  (t))  XW  XS as the test functions in the weak formulation of the structure sub-problem (5.4) and integrate the weak formulation (5.4) with respect to t from nt to (n + 1)t. Notice that the construction of the test functions is done in such a way that ( (t),  (t)) do not depend on N , and are continuous. Then, consider the weak formulation (5.7) of the fluid sub-problem and take the test functions (qN (t),  (t)) (where qN = q  At N , q	XF ). Integrate the fluid sub-problem (5.7) with respect to t from nt to (n + 1)t. Add the two weak formulations together, and take the sum from n = 0, . . . , N - 1 to get the time integrals over (0, T ) as follows:
+T 0
+
+1 ~ N  qN + (t uN - wN )  t N uN  qN (1 + t N ) t u 2 F 1 1 - (t uN - wN )  t N qN  uN + 2 2
+T T  vN uN  qN 0 F T 1
+
++
+0 F T
+
+(1 + t N )2D
+1
+
+t N
+
+(uN ) : D
+
+ t  N
+
+(qN ) +
+0 0 T
+
+t v ~N
+
+(7.2)
+
+T
+
++
+0 T 0
+
+z N z  +
+0 1 N Pin dt 0 0 S
+
+~N + t V
+0 T 1 N Pout dt 0 0 S
+
+aS (dN ,  )
+
+= with
+
+qz (t, 0, r)dr -
+
+qz (t, L, r)dr,
+
+t   uN = 0,
+
+vN = ((ur )N )| , N = (dN )| ,
+
+(7.3)
+
+uN (0, .) = u0 ,  (0, .)N = 0 , vN (0, .) = v0 . 41
+
+~ N are the piecewise linear functions defined in (6.15), t is the shift in time by ~N , v Here u ~N and V t to the left, defined in (6.4), t N is the transformed gradient via the ALE mapping At N ,	defined in (3.5), and vN , uN , vN , N , dN and V N are defined in (6.1). Using the convergence results obtained for the approximate solutions in Section 6, and the convergence results just obtained for the test functions qN , we can pass to the limit directly in all ~ N . To deal with this term we notice that, since qN the terms except in the term that contains t u are smooth on sub-intervals (j t, (j + 1)t), we can use integration by parts on these sub-intervals to obtain:
+T N -1 (j +1)t j ~ N  qN (1 + N )t u j =0 N -1 (j +1)t j t F
+
+~ N  qN = (1 + t N )t u
+0 F
+
+=
+j =0
+
+-
+j t F
+
+(1 + t N )~ uN	t qN (1 +  j )uj N  qN (j t+) .
+F
+
++
+F
+
++1 (1 +  j +1 -  j +1 +  j )uj N  qN ((j + 1)t-) -
+
+(7.4)
+
+Here, we have denoted by qN ((j + 1)t-) and qN (j t+) the limits from the left and right, respectively, of qN at the appropriate points. The integral involving t qN can be simplified by recalling that qN = q  AN , where N are constant on each sub-interval (j t, (j + 1)t). Thus, by the chain rule, we see that t qN = t q on (j t, (j + 1)t). After summing over all j = 0, ..., N - 1 we obtain
+N -1 (j +1)t T
+
+-
+j =0 j t F
+
+(1 + t N )~ uN	t qN = -
+0 F
+
+(1 + t N )~ uN	t q.
+
+To deal with the last two terms in (7.4) we calculate
+N -1 j +1 j +1 j +1 (1 + N - N + N )uj N  qN ((j + 1)t-) - j =0 F N -1 F j (1 + N )uj N  qN (j t+)
+
+=
+j =0 F
+
+j +1 j +1 +1 j +1 j (1 + N )uj N  qN ((j + 1)t-) - (N - N )uN  qN ((j + 1)t-) N -1
+
+-
+
+
+(1 + 0 )u0  q(0) -
+j =1
+1
+
+j (1 + N )uj N	qN (j t+) F
+
+Now, we can write ( j +1 -  j ) as v j + 2 t, and rewrite the summation indexes in the first term to obtain that the above expression is equal to
+N T j (1+N )uj N qN (j t-)- j =1 F 0 F	N - vN uN q F N -1
+
+=
+
+(1+0 )u0 q(0)-
+j =1 F
+
+j (1+N )uj N qN (j t+).
+
+42
+
+Since the test functions have compact support in [0, T ), the value of the first term at j = N is zero, and so we can combine the two sums to obtain
+N T j (1 + N )uj N  (qN (j t-) - qN (j t+)) - j =1 F F
+
+=
+
+(1 + 0 )u0  q(0) -
+0 F
+
+ N . vN uN  q
+
+Now we know how to pass to the limit in all the terms expect the first one. We continue to rewrite the first expression by using the Mean Value Theorem to obtain:
+j j +1 qN (j t-, z, r) - qN (j t+, z, r) = q(j t, z, (1 + N )r) - q(j t, z, (1 + N )r) = j j +1 = r q(j t, z,  )r(N - N ) = -tr q(j t, z,  )vN 2 r. j+ 1
+
+Therefore we have:
+N -1 j (1 + N )uj N q(j t-) - q(j t+)) = - j =1 F 0 F T -t  . (1 + N )uN r-t vN r q
+
+We can now pass to the limit in this last term to obtain:
+T -t   (1 + N )uN r-t vN r q 0 F 0 F T
+
+(1 +  )urt r q.
+
+~ = t q + rt r q we have finally obtained Therefore, by noticing that t q
+T T T
+
+~ N  qN  - (1 + t N )t u
+0 F 0 F
+
+~- (1 +  )u  t q
+0 F
+
+~ t  u	q
+
+-
+F
+
+~ (0), (1 + 0 )u0  q
+
+~ = q  A . where we recall that q Thus, we have shown that the limiting functions u,  and d satisfy the weak form of problem (3.6)-(3.13) in the sense of Definition 4.2, for all test functions that belong to a dense subset of Q . By density arguments, we have, therefore, shown the main result of this manuscript: Theorem 7.4. (Main Theorem) Suppose that the initial data v0	L2 (0, 1), u0  L2 (0 ), 1 V 0  L2 (S ), d0  H 1 (S ), and 0  H0 (0, 1) are such that 1 + 0 (z ) > 0, z	[0, 1] and compatibility conditions (1.13) are satisfied. Furthermore, let Pin , Pout  L2 loc (0, ). Then, there exist a T > 0 and a weak solution (u, , d) of problem (3.6)-(3.13) (or equivalently problem (1.1)-(1.13)) on (0, T ) in the sense of Definition 4.2 (or equivalently Definition 4.1), such that the following energy estimate is satisfied:
+t
+
+E (t) +
+0
+
+D( )d  E0 + C ( Pin
+
+2 L2 (0,t)
+
++ Pout
+
+2 L2 (0,t) ),
+
+t  [0, T ],
+
+(7.5)
+
+43
+
+where C depends only on the coefficients in the problem, E0 is the kinetic energy of initial data, and E (t) and D(t) are given by 1 1 u 2 t  L2 (F ) + 2 2 D(t) = D(u) 2 L2 ( (t))) . E (t) =
+2 L2 (0,1)
+
++
+
+1 d 2
+
+2 L2 (S )
+
++
+
+1 2
+
+z
+
+2 L2 (0,1)
+
++ aS (d, d) ,
+
+Furthermore, one of the following is true: either T =  or lim min (1 +	(z )) = 0.
+tT z [0,1]
+
+(7.6)
+
+Proof. It only remains to prove the last assertion, which states that our result is either global in time, or, in case the walls of the cylinder touch each other, our existence result holds until the time of touching. However, the proof of this argument follows the same reasoning as the proof of the Main Theorem in [45], and the proof of the main result in [11], p. 397-398. We avoid repeating those arguments here, and refer the reader to references [45, 11].
+
+8
+
+Conclusions
+
+In this manuscript we proved the existence of a weak solution to a FSI problem in which the structure consists of two layers: a thin layer modeled by the linear wave equation, and a thick layer modeled by the equations of linear elasticity. The thin layer acts as a fluid-structure interface with mass. An interesting new feature of this problem is the fact that the presence of a thin structure with mass regularizes the solution of this FSI problem. More precisely, the energy estimates presented in this work show that the thin structure inertia regularizes the evolution of the thin structure, which affects the solution of the entire coupled FSI problem. Namely, if we were considering a problem in which the structure consisted of only one layer, modeled by the equations of linear elasticity, from the energy estimates we would not be able to conclude that the fluid-structure interface is even continuous, since the displacement d of the thick structure would be in H 1/2 () at the interface. With the presence of a thin elastic fluid-structure interface with mass (modeled by the wave equation), the energy estimates imply that the displacement of the thin interface is in H 1 (), which, due to the Sobolev embeddings, implies that the interface is H older continuous 0,1/2 C (). This is reminiscent of the results by Hansen and Zuazua [32] in which the presence of a point mass at the interface between two linearly elastic strings with solutions in asymmetric spaces (different regularity on each side) allowed the proof of well-posedness due to the regularizing effects by the point mass. For a reader with further interest in the area of simplified coupled problems, we also mention [33, 49, 55]. Further research by the authors in the direction of simplified coupled problems that shed light on the physics of parabolic-hyperbolic coupling with point mass, is under way [10, 46]. Our preliminary results in [46] indicate that the regularizing feature of the interface with mass is not only a consequence of our mathematical methodology, but a physical property of this complex system. 44
+
+Acknowledgements. The authors would like to thank Prof. Enrique Zuazua for pointing out the references [32, 33, 49, 55]. Furthermore, the authors would like to thank the following research support: Muha's research was supported in part by the Texas Higher Education Board under  c's research was grant ARP 003652-0023-2009, and by ESF OPTPDE - Exchange Grant 4171; Cani supported by the National Science Foundation under grants DMS-1311709, DMS-1109189, DMS0806941, and by the Texas Higher Education Board under grant ARP 003652-0023-2009.
+
+References
+[1] R. A. Adams. Sobolev spaces. Academic Press [A subsidiary of Harcourt Brace Jovanovich, Publishers], New York-London, 1975. Pure and Applied Mathematics, Vol. 65. [2] V. Barbu, Z. Gruji c, I. Lasiecka, and A. Tuffaha. Existence of the energy-level weak solutions for a nonlinear fluid-structure interaction model. In Fluids and waves, volume 440 of Contemp. Math., pages 5582. Amer. Math. Soc., Providence, RI, 2007. [3] V. Barbu, Z. Gruji c, I. Lasiecka, and A. Tuffaha. Smoothness of weak solutions to a nonlinear fluid-structure interaction model. Indiana Univ. Math. J., 57(3):11731207, 2008. [4] H. Beir~ ao da Veiga. On the existence of strong solutions to a coupled fluid-structure evolution problem. J. Math. Fluid Mech., 6(1):2152, 2004. [5] M. Boulakia. Existence of weak solutions for the motion of an elastic structure in an incompressible viscous fluid. C. R. Math. Acad. Sci. Paris, 336(12):985990, 2003.  c, R. Glowinski, J. Tamba [6] M. Bukac, S. Cani ca, and A. Quaini. Fluid-structure interaction in blood flow capturing non-zero longitudinal structure displacement. Journal of Computational Physics, 235(0):515  541, 2013.  c, R. Glowinski, B. Muha, A. Quaini. An Operator Splitting Scheme for [7] M. Bukac, S. Cani Fluid-Structure Interaction Problems with Thick Structures. Submitted 2013.  c, B. Muha. The kinematically-coupled  -scheme for fluid-structure interac[8] M. Buka c, S. Cani tion problems with multi-layered structures. In preparation.  c, J. Tamba [9] S. Cani ca, G. Guidoboni, A. Mikeli c, C. J. Hartley, and D. Rosenstrauch. Modeling viscoelastic behavior of arterial walls and their interaction with pulsatile blood flow. SIAM J. Appl. Math., 67(1):164193 (electronic), 2006. [10] S. vCani c and B. Muha. A nonlinear moving-boundary problem of parabolic-hyperbolichyperbolic type arising in fluid-multi-layered structure interaction problems. Submitted. [11] A. Chambolle, B. Desjardins, M. J. Esteban, and C. Grandmont. Existence of weak solutions for the unsteady interaction of a viscous fluid with an elastic plate. J. Math. Fluid Mech., 7(3):368404, 2005. 45
+
+[12] C. H. A. Cheng, D. Coutand, and S. Shkoller. Navier-Stokes equations interacting with a nonlinear elastic biofluid shell. SIAM J. Math. Anal., 39(3):742800 (electronic), 2007. [13] C. H. A. Cheng and S. Shkoller. The interaction of the 3D Navier-Stokes equations with a moving nonlinear Koiter elastic shell. SIAM J. Math. Anal., 42(3):10941155, 2010. [14] C. Conca, F. Murat, and O. Pironneau. The Stokes and Navier-Stokes equations with boundary conditions involving the pressure. Japan. J. Math. (N.S.), 20(2):279318, 1994. [15] C. Conca, J. San Mart in H., and M. Tucsnak. Motion of a rigid body in a viscous fluid. C. R. Acad. Sci. Paris S er. I Math., 328(6):473478, 1999. [16] D. Coutand and S. Shkoller. Motion of an elastic solid inside an incompressible viscous fluid. Arch. Ration. Mech. Anal., 176(1):25102, 2005. [17] D. Coutand and S. Shkoller. The interaction between quasilinear elastodynamics and the Navier-Stokes equations. Arch. Ration. Mech. Anal., 179(3):303352, 2006. [18] P. Cumsille and T. Takahashi. Wellposedness for the system modelling the motion of a rigid body of arbitrary form in an incompressible viscous fluid. Czechoslovak Math. J., 58(133)(4):961992, 2008.	c, B. Muha, and M. Buka [19] S. Cani c. Stability of the kinematically coupled	-scheme for fluidstructure interaction problems in hemodynamics. Submitted, 2012, arXiv:1205.6887 [20] B. Desjardins and M. J. Esteban. Existence of weak solutions for the motion of rigid bodies in a viscous fluid. Arch. Ration. Mech. Anal., 146(1):5971, 1999. [21] B. Desjardins, M. J. Esteban, C. Grandmont, and P. Le Tallec. Weak solutions for a fluid-elastic structure interaction model. Rev. Mat. Complut., 14(2):523538, 2001. [22] J. Donea, Arbitrary Lagrangian-Eulerian finite element methods, in: Computational methods for transient analysis, North-Holland, Amsterdam,1983. [23] Q. Du, M. D. Gunzburger, L. S. Hou, and J. Lee. Analysis of a linear fluid-structure interaction problem. Discrete Contin. Dyn. Syst., 9(3):633650, 2003. [24] E. Feireisl. On the motion of rigid bodies in a viscous compressible fluid. Arch. Ration. Mech. Anal., 167(4):281308, 2003. [25] M. A. Fern andez. Incremental displacement-correction schemes for incompressible fluidstructure interaction : stability and convergence analysis. Numer. Math. 123 (1):21-65, 2013. [26] G. P. Galdi. An introduction to the mathematical theory of the Navier-Stokes equations. Vol. I, volume 38 of Springer Tracts in Natural Philosophy. Springer-Verlag, New York, 1994. Linearized steady problems.
+
+46
+
+[27] G. P. Galdi. Mathematical problems in classical and non-Newtonian fluid mechanics. In Hemodynamical flows, volume 37 of Oberwolfach Semin., pages 121273. Birkh auser, Basel, 2008. [28] R. Glowinski. Finite element methods for incompressible viscous flow, in: P.G.Ciarlet, J.L.Lions (Eds), Handbook of numerical analysis, volume 9. North-Holland, Amsterdam, 2003. [29] C. Grandmont. Existence of weak solutions for the unsteady interaction of a viscous fluid with an elastic plate. SIAM J. Math. Anal., 40(2):716737, 2008. [30] G. Guidoboni, M. Guidorzi, and M. Padula. Continuous dependence on initial data in fluidstructure motions. J. Math. Fluid Mech., 14(1):132, 2012.  c. Stable loosely-coupled-type algorithm [31] G. Guidoboni, R. Glowinski, N. Cavallini, and S. Cani for fluid-structure interaction in blood flow. J. Comput. Phys., 228(18):69166937, 2009. [32] S. Hansen and E. Zuazua. Exact controllability and stabilization of a vibrating string with an interior point mass. SIAM J. Control Optim., 33(5):13571391, 1995. [33] H. Koch and E. Zuazua. A hybrid system of PDE's arising in multi-structure interaction: coupling of wave equations in n and n - 1 space dimensions. In Recent trends in partial differential equations, volume 409 of Contemp. Math., pages 5577. Amer. Math. Soc., Providence, RI, 2006. [34] I. Kukavica and A. Tuffaha. Solutions to a fluid-structure interaction free boundary problem. DCDS-A, 32(4):13551389, 2012. [35] I. Kukavica and A. Tuffaha. Well-posedness for the compressible Navier-Stokes-Lam e system with a free interface. Nonlinearity, 25(11):31113137, 2012.	Ne [36] A. Hundertmark-Zau skov a, M. Luk a cov a-Medvidov a, and S. casov a. On the existence of weak solution to the coupled fluid-structure interaction problem for non-newtonian sheardependent fluid. submitted, 2013. [37] A. Hundertmark-Zauskova, M. Lukacova-Medvidova, G. Rusnakova. Fluid-structure interaction for shear-dependent non-Newtonian fluids. Topics in mathematical modeling and analysis. Necas Center for Mathematical Modeling. Lecture notes, Volume 7, pp. 109-158, 2012. [38] I. Kukavica, A. Tuffaha, and M. Ziane. Strong solutions for a fluid structure interaction system. Adv. Differential Equations, 15(3-4):231254, 2010. [39] D. Lengeler and M. Ru zi cka. Global weak solutions for an incompressible newtonian fluid interacting with a linearly elastic Koiter shell. arXiv:1207.3696v1, 2012. [40] D. Lengeler Global weak solutions for an incompressible, generalized Newtonian fluid interacting with a linearly elastic Koiter shell arXiv:1212.3435, 2012. 47
+
+[41] J. Lequeurre. Existence of strong solutions to a fluid-structure system. SIAM J. Math. Anal., 43(1):389410, 2011. [42] J. Lequeurre. Existence of strong solutions for a system coupling the navierstokes equations and a damped wave equation. Journal of Mathematical Fluid Mechanics, pages 123, 2012. [43] J.-L. Lions and E. Magenes. Non-homogeneous boundary value problems and applications. Vol. I. Springer-Verlag, New York, 1972. Translated from the French by P. Kenneth, Die Grundlehren der mathematischen Wissenschaften, Band 181. [44] B. Muha. A note on the trace theorem for domains which are locally subgraph of a H older continuous function. Submitted, 2013.  c. Existence of a Weak Solution to a Nonlinear FluidStructure Interaction [45] B. Muha and S. Cani Problem Modeling the Flow of an Incompressible, Viscous Fluid in a Cylinder with Deformable Walls. Arch. Ration. Mech. Anal., 207(3):919968, 2013.  c. Regularization by point mass coupling the 1D heat equation with the [46] B. Muha and S. Cani 1D wave equation. In preparation. [47] A. Quaini and A. Quarteroni, A semi-implicit approach for fluid-structure interaction based on an algebraic fractional step method, Math. Models Methods Appl. Sci. 17 (2007)957985. [48] A. Quarteroni, M. Tuveri and A. Veneziani, Computational vascular fluid dynamics: problems, models and methods. Survey article, Comput. Visual. Sci. 2 (2000), pp. 163197. [49] J. Rauch, X. Zhang, and E. Zuazua. Polynomial decay for a hyperbolic-parabolic coupled system. J. Math. Pures Appl. (9), 84(4):407470, 2005. [50] J. A. San Mart in, V. Starovoitov, and M. Tucsnak. Global weak solutions for the twodimensional motion of several rigid bodies in an incompressible viscous fluid. Arch. Ration. Mech. Anal., 161(2):113147, 2002. [51] J.Simon. Compact sets in the space Lp (0, T ; B ). Ann. Mat. Pura Appl. (4), 146:6596, 1987. [52] R. Temam. Sur la r esolution exacte et approch ee d'un probl` eme hyperbolique non lin eaire de T. Carleman. Arch. Rational Mech. Anal., 35:351362, 1969. [53] R. Temam. Navier-Stokes equations. Theory and numerical analysis. North-Holland Publishing Co., Amsterdam, 1977. Studies in Mathematics and its Applications, Vol. 2. [54] I. Vel ci c. Nonlinear weakly curved rod by -convergence. J. Elasticity, 108(2):125150, 2012. [55] X. Zhang and E. Zuazua. Long-time behavior of a coupled heat-wave system arising in fluidstructure interaction. Arch. Ration. Mech. Anal., 184(1):49120, 2007.
+
+48
+

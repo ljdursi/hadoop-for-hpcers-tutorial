@@ -1,0 +1,543 @@
+SOLVABILITY OF NAIVER-STOKES EQUATIONS IN SOME REARRANGEMENT INVARIANT SPACES. E.Ostrovskya , L.Sirotab
+a
+
+Corresponding Author. Department of Mathematics and computer science, Bar-Ilan University, 84105, Ramat Gan, Israel.
+
+arXiv:1305.5321v1 [math.AP] 23 May 2013
+
+E - mail: galo@list.ru eugostrovsky@list.ru
+b
+
+Department of Mathematics and computer science. Bar-Ilan University, 84105, Ramat Gan, Israel. E - mail: sirota3@bezeqint.net Abstract.
+
+We prove that the multidimensional dimensional initial value problem for the Navier-Stokes equations is globally well-posed in the so-called Moment and Grand Lebesgue Spaces (GLS), and give some a priory estimations for solution in this spaces. We consider separately the cases of small initial value solution (local solution) and global solution. Keywords and phrases: Multivariate Navier-Stokes (NS) equations, Riesz integral transform, rearrangement invariant, Grand and ordinary Lebesgue - Riesz spaces, initial value problem, Helmholtz-Weyl projection, divergence, Laplace operator, pseudo - differential operator, global and short-time well - posedness, lifespan of solution. 2000 AMS Subject Classification: Primary 37B30, 33K55, 35Q30, 35K45; Secondary 34A34, 65M20, 42B25.
+
+1
+
+Notations. Statement of problem.
+
+Statement of problem. We consider in this article the initial value problem for the multivariate NavierStokes (NS) equations ut - u + (u  )u = P, x  Rd , d  3, t > 0; Div(u) = 0, x  Rd , t > 0; u(x, 0) = u0 (x), x  Rd . 1 (1.1) (1.2) (1.3)
+
+Here as ordinary
+
+d
+
+x = (x1 , x2 , . . . , xk , . . . , xd )  Rd ; ||x|| :=
+
+x2 j.
+j =1
+
+and u == u(t) = u(t, ) = u(x, t) denotes the (vector) velocity of fluid in the point x at the time t, P is represents the pressure. Equally:
+d d 2 x u - j i
+
+ui /t =
+j =1 d
+
+uj xj ui + +xi P,
+j =1
+
+xj uj = 0, u(x, 0) = u0 (x),
+j =1
+
+Div u = Div u = Div{u1 , u2, . . . , ud } = in the sense of distributional derivatives. As long as
+d
+
+uk =0 k =1 xk
+
+d
+
+P =
+j,k =1 (d)
+
+Rj Rk (uj  uk ),
+
+where Rk = Rk is the k th d dimensional Riesz transform: Rk [f ](x) = c(d) lim c( d ) = -
+(d) 0+ ||y ||>
+
+||y ||-dk (y ) f (x - y ) dy,
+
+ (d+1)/2
+d+1 2
+
+, k (x) = xk /||x||,
+
+the system (1.1) - (1.3) may be rewritten as follows: ut = u + (u  )u + Q    (u  u), x	Rd , t > 0; Div(u) = 0, x  Rd , t > 0; u(x, 0) = u0 (x), x  Rd , (1.4) (1.5) (1.6)
+
+where Q is multidimensional Helmholtz-Weyl projection operator, i.e., the d  d matrix pseudo-differential operator in Rd with the matrix symbol ai,j ( ) = i,j - i j /|| ||2, i,j = 1, i = j ; i,j = 0, i = j. We will understand henceforth as a capacity of the solution (1.4) - (1.6) the vector - function u = u = {u1 (x, t), u2 (x, t), . . . , ud (x, t)} the so-called mild solution, see [24].
+
+2
+
+Namely, the vector- function u = u(t) satisfies almost everywhere in the time t the following non-linear integral - differential equation: u(t) = et u0 +
+t 0
+
+e(t-s) [(u  )u(s) + Q	 (u  u)(s)]ds, ||x - y ||2 4t
+
+(1.7)
+
+where the operator exp(s) is the classical integral operator with heat kernel: et [u0 ](x, t) = (4t)-d/2 u0 (y ) exp - dy. (1.8)
+
+Rd
+
+More results about the existence, uniqueness, numerical methods, and a priory estimates in the different Banach function spaces: Lebesgue-Riesz Lp , Morrey, Besov for this solutions see, e.g. in [1]- [33]. The first and besides famous result belong to J.Leray [22]; it is established there in particular the global in time solvability and uniqueness of NS system in the space L2 (Rd ) and was obtained a very interest a priory estimate for solution. The immediate predecessor for offered article is the article of Shangbin Cui [1]; in this article was considered the case u0	L2 (Rd )  Lp (Rd ), p > d. See also celebrate works of Y.Giga [10] - [13] and T.Kato [15] - [16]. Our purpose in this report is to generalize aforementioned results about solvability of NS system on the wide class of rearrangement invariant spaces and to obtain some useful a priory estimates for this solution. This estimates allow us to establish some new properties of solution and develop numerical methods. Grand Lebesgue Spaces. We recall here briefly the definition and some simple properties of the so-called (Bilateral) Grand Lebesgue Spaces (GLS); more detail presentment see, e.g. in [37], [47], [48], [50], [51]. Let (X, , ) be a measure space; in the considered problem X = Rd with Lebesgue measure d = dx. For a and b constants, 1  a < b  , let	=  (p), p  (a, b), be a continuous log-convex positive function such that  (a + 0) and	(b - 0) exist, with max{ (a + 0),  (b - 0)} =  and min{ (a + 0),  (b - 0)} > 0. The (Bilateral) Grand Lebesgue Space (in notation GLS = BGLS) GX (;  ; a, b) = GX ( ; a, b) = G( ; a, b) = G( ) is the space of all measurable functions h : X	R endowed with the norm ||h||G( ) = sup ||h||p/ (p),
+p(a,b) def
+
+||h||p =
+
+X
+
+|h(x)|p d(x)
+
+1/p
+
+.
+
+(1.9)
+
+The G( ) spaces with (X ) = 1 appeared in [47]; it was proved that in this case each G( ) space coincides with certain exponential Orlicz space, up to norm equivalence. Partial cases of these spaces were intensively studied, in particular, their associate spaces, fundamental functions (G( ; a, b);  ), Fourier and singular operators, conditions for convergence and compactness, reflexivity and separability, 3
+
+martingales in these spaces, etc.; see, e.g. in [37], [38], [39], [47], [40], [41], [43], [48], [50], [51] etc. These spaces are also Banach and moreover rearrangement invariant (r.i.). The BGLS norm estimates, in particular, Orlicz norm estimates for measurable functions, e.g., for random variables are used in the theory of PDE, probability in Banach spaces, in the modern non-parametrical statistics, for example, in the so-called regression problem. We note that the G( ) spaces are also interpolation spaces (the so-called spaces). However, we hope that our direct representation of these spaces is of certain convenience in both theory and applications. A natural question arises what happens if the spaces other than Lp are used in the definition. Indeed, this is possible and might be of interest, but, for example, using Lorenz spaces in this capacity leads to the same object. Remark 1.1. If we define the degenerate r (p), r = const 1 function as follows: r (p) = , p = r ; r (r ) = 1, (1.10)
+
+and agree C/ = 0, C = const > 0, then the Gr () space coincides with the classical Lebesgue space Lr . Thus, the Grand Lebesgue Spaces are direct generalization of the classical Lebesgue - Riesz spaces. Remark 1.2. We will denote in the case X = Rd by G0 X (;  ; a, b) = = G0 ( ; a, b) = G0 ( ) the subspace of the space GX (;	; a, b) = GX ( ; a, b) = G( ; a, b) = G( ) which consists on all the functions {h = h(x)}, x  Rd from this set such that G0 X ( ; a, b) Div h = 0. (1.11)
+
+Analogously, the space L0 p consists on all the functions from the space Lp with zero divergence. In what follows we will suppose Div u0 = 0; therefore, Div u( x, t) = 0 for all the values t for which the solution u(x, t) there exists. Remark 1.3. Multidimensional case. Let u = u = {u1 (x), u2 (x), . . . , ud (x)} be measurable vector - function. We can define as ordinary the G norm of the function u by the following way: ||u||G := max ||uk ||G.
+k =1,2,...,d
+
+Remark 1.4. Natural choice. Let v = v (x) = 0, x  X be some (measurable) function for which there exist two constants a, b : 1	a < b	such that p  (a, b)  ||v ||p < . The  = (v) (p) function of a view
+
+4
+
+is said to be natural function for the function v ().
+
+(v) (p) = ||v ||p, p  (a, b)
+
+Analogously, for the family of a functions v = v (x, ),   A, A is an arbitrary set, the natural function  = (v) (p) may be defined as follows: (v) (p) = sup ||v (, )||p, p  (a, b),
+A
+
+if there exists. Obviously, sup ||v (, )||G(v) = 1.
+A
+
+This approach is very convenient, e.g., in the theory of Probability and Statistics. Moment Rearrangement Invariant Spaces. Let (X = Rd , ||  ||X ) be any r.i. space, where X is linear subset on the space of all measurable function Rd  R over our measurable space (T, M, ) with norm ||  ||X. Recall the following definition, see, e.g. [53], [54], where are described some applications of these spaces in the Approximation Theory and in the Theory of Partial Differential Equations. We will say that the space X with the norm ||  ||X is moment rearrangement invariant space, briefly: m.r.i. space, or X = (X, ||  ||X )  m.r.i., if there exist a real constants a, b; 1  a < b  , and some rearrangement invariant norm <  > defined on the space of a real functions defined on the interval (a, b), non necessary to be finite on all the functions, such that f  X  ||f ||X =< h() >, h(p) = |f |p . (1.12)
+
+We will say that the space X with the norm ||||X is weak moment rearrangement space, briefly, w.m.r.i. space, or X = (X, ||||X )  w.m.r.i., if there exist a constants a, b; 1	a < b  , and some functional F, defined on the space of a real functions defined on the interval (a, b), non necessary to be finite on all the functions, such that f  X  ||f ||X = F ( h() ), h(p) = |f |p . (a, b) = supp(X ), (moment support; not necessary to be uniquely defined) and define for other such a space Y = (Y, ||  ||Y ) with (c, d) = supp(Y ) supp(X ) >> supp(Y ), iff min(a, b) > max(c, d). It is obvious that arbitrary m.r.i. space is r.i. space. 5
+def
+
+We will write for considered w.m.r.i. and m.r.i. spaces (X, ||	||X )
+
+2
+
+Some Notations, with Clarification.
+
+As ordinary, for the measurable function x  u(x), x  Rd ||u||p =
+Rd
+
+|u(x)|p dx
+
+1/p
+
+.
+
+(2.1)
+
+The so-called mixed, or equally anisotropic (p1 , p2 ) norm ||u|| p1 ,p2 for the function d 1 of "two" variables u = u(x, t), x  R , t	R+ is defined as follows: ||u|| p1 ,p2 =
+ Rd 0
+
+|u(x, t)|
+
+p1
+
+p2 /p1
+
+1/p2
+
+dt
+
+dx
+
+.
+
+(2.2)
+
+The correspondent mixed, or anisotropic Grand Lebesgue (Lebesgue - Riesz) spaces was introduced in [56]. For the positive function of two variables  = (p, r ) defined on the set D the norm of a function in this space is defined by formula ||u||G = sup ||u|| p,r . (p, r ) (2.3)
+
+(p,r )D
+
+(d) The following functional u	p (u) = p (u) in the case d = 3 was introduced and used by Shangbin Cui in [1]:
+d(p-2) d(p-2) (d) p (u) = p (u) := ||u||p ||u||2 . p(d-2) 2(p-d)
+
+(2.4)
+
+This functional is scaling-dilation invariant. Indeed, denote T [u](x) =  u(x),   R,  = 0, then
+(d) (d) p (T [u]) = p (u ).
+
+Define also W = Wd,p = Wd,p (u) :=
+Rd
+
+|u(x)|p-2 |u|2 dx; (1 + d/2) (d) (d/p) (1 + d - d/p)
+1/d
+
+KS (d, p) :=
+
+-1/2
+
+d
+
+-1/p
+
+p-1 d-p
+
+(p-1)/p
+
+.
+
+(2.5)
+
+The function KS (d, p) is the optimal (i.e. minimal) value in the famous Sobolev's inequality ||||r  KS (d, q ) ||||q , 1  q < d, see Bliss [35], (1930); Talenti, [44], (1995). 1 1 1 = - , r	1, r q d (2.6)
+
+6
+
+Further, denote Ad,p := Note that KS (d, 2d/3) = 21/d	-
+d+1 2d
+
+p+d p
+
+p+ d ( p- d)
+
+,
+
+2 B2.1 (d, p) := KS (d, 2d/3) p2 /4.
+
+(2.7)
+
+ (2 - 3/d)  (2d - 3)-3/2d
+1/d
+
+Since the number d is integer, the expression for KS (d, 2d/3) may be calculated in explicit view. For instance,   (d) = (d - 1)!, (d - 1/2) = d-1 (2d - 3)!!. 2 So, if the dimension d is even number, then KS (d, 2d/3) = 21/d   -
+d+1 2d
+
+(1 + d/2) (d) (d - 1/2)
+
+, d = 3, 4, 5, . . . .
+
+(2.8)
+
+ (2 - 3/d)  (2d - 3)-3/2d
+1/d
+
+In the opposite case, i.e. when d is odd number, KS (d, 2d/3) = 21/d   -
+d+1 2d
+
+2d-1 (d/2)! (d - 1)!   (2d - 3)!!
+
+.
+
+ (2 - 3/d)  (2d - 3)-3/2d
+1/d
+
+The behavior of the variable KS (d, 2d/3) as d	 may be obtained from the Stirling's formula: KS (d, 2d/3)  d . 2e
+
+2(d-3)/2 d!! (d - 1)! (2d - 3)!!
+
+.
+
+For example, at d = 3 (the most important case in practice) KS (3, 2) = 1  3
+3
+
+2 . 2
+
+We will use the following elementary inequality vw  A(d, p) v where p > d, v, w > 0. Therefore,
+2p p- d
+
++ 0.5 w p+d ,
+
+2p
+
+(2.9)
+
+7
+
+1+(p-d)/2 ||u||p
+
+
+
+Rd
+
+|u(x)| 1 2
+
+p -2
+
+|u(x)| dx
+
+2
+
+p+ d 2p
+
+ (2.10)
+
+A(d, p)||u||p  ~ (d) :=
+
+p(p-d+2) p- d
+
++
+
+Rd
+
+|u(x)|p-2 |u(x)|2 dx .	1 . 2p
+
+4 d/2-1 1 1 1 . I (p) :=   - (d/2) 2  2 2p c( d ) = -  (d+1)/2
+d+1 2
+
+(2.11)
+
+.
+
+k (x) = xk /||x||.
+d
+
+(2.12)
+
+x = (x1 , x2 , . . . , xk , . . . , xd )  R KR (d, p) = c(d)
+
+d
+
+ ||x|| =
+
+x2 j.
+j =1
+
+p  ~ ( d )  I ( p) , p > 1 . p-1
+
+(2.13)
+
+The explicit view for Riesz's transform has a view Rk [f ](x) = Rk [f ](x) = c(d) lim
+(d) 0+ ||y ||>
+
+||y ||-dk (y ) f (x - y ) dy.
+
+It is known, see [49], p. 415-418, that ||Rk ||(Lp  Lp )  c( d )  p  p-1 |x1 |dd
+ 0
+
+(d)
+
+t-1/p (1 + t2 )-1/2 dt = KR (d, p), p > 1.
+
+Here (d) is an unit sphere in the space Rd and dd is an element of its area. Note that the last estimate is not improvable even in the case d = 1, where the Riesz transform coincides with Hilbert transform, for which the norm estimates (Lp  Lp ) is computed by S.K.Pichorides [57]. Ultimate result in this direction belongs to T.Iwaniec and G.Martin [42]: the value ||Rk ||(Lp  Lp ) does not dependent on the dimension d and coincides with the Pichorides constant:  , p = max(p, p/(p - 1)), p > 1. 2 p
+
+||Rk ||(Lp  Lp ) = cot
+
+(2.14)
+
+T.Iwaniec and G.Martin considered also the vectorial Riesz transform. See for additional information [34], [29], chapter 2, section 4; [30], chapter 3. Put also
+2 2 C2.7 (d, p) := 4-1 p2 KS (d, 2d/3) KR (d, p) (d2 + d),
+2p
+
+C7.7 (d, p) = A(d, p)  [C2.7 (d, p)] p-d , 8
+
+(2.15)
+
+we borrow notations from [1] after estimation and specification. Introduce also the following function: Z = Za,b (x, y ; p) := x p(b-a)  y p(b-a) , 1 < a < b < ; p > 1, x, y  (0, ). This function has a following sense: if 1 < a < b < ; f  La  Lb , p  (a, b), then ||f ||p  Za,b (||f ||a, ||f ||b; p). The last inequality may be deduced from the H older's inequality. (2.17)
+a(b-p) b(p-a)
+
+(2.16)
+
+3
+
+Solution for small initial data
+
+We suppose in this section that the initial function u0 = u0 (x) belong to some Grand Lebesgue Space G such that Div u0 = 0 and d  supp . But we do not assume here that 2  supp; this case will be considered further. It is known in the case when u0  Lr , r  d and when the initial norm ||u0||r is sufficiently small, then the NS equation has a unique global (smooth) solution; see for example [1], [15] - [16]. We generalize these results on the Grand Lebesgue spaces, calculating passing the constants values. Let us denote J = p : ||u0||d < and introduce the following  - function: ~(p) =  (p), p  supp   J ;  ~(p) = 0  otherwise. ~ = . Then the Theorem 3.1. Suppose Div u0 = 0, d  supp  and supp  global in time solution of NS system u(t) there exists with monotonically decreased ~ and moreover norm ||u(t)||G0 ~ = ||u0||G. sup ||u(t)||G0
+t0
+
+1 2C7.7 (d, p)
+
+(3.1)
+
+(3.2)
+
+(3.3)
+
+9
+
+Proof. We follow Shangbin Cui [1] specifying passing the "constants" values but omitting some hard calculations. 1. If ||u0||d	1 , 2C2.7 (d, d) (3.4)
+
+then there exists and is unique the global in time solution of NS system u(t), t > 0 such that the function t  ||u(t)||d is monotonically decreasing. 2. In what follows in this section we suppose p  supp . We conclude using the estimates for Riesz transform: 1 d ||u||p p+ p dt C2.7 (d, p)  |u(x, t)|p-2 |u(x, t)|2 dx	|u(x, t)|
+p -2
+
+Rd
+
+1+(p-d)/2 ||u||p
+
+Rd
+
+ |u(x, t)|
+
+2
+
+p+ d 2p
+
+.
+
+(3.5)
+
+3. We obtain after Shangbin Cui [1] by means of constant computation and using the expression for A(d, p) : 1 d ||u||p p + 0.5 p dt |u(x, t)|p-2 |u(x, t)|2 dx
+p(p-d+2) p- d
+
+Rd
+
+C7.7 (d, p)||u||p 4. Therefore, if ||u0 ||d < then the function
+
+.
+
+(3.6)
+
+1 , 2C7.7 (d, p)
+
+t  ||u(t)||p, t  0, p  J, is monotonically decreasing, which is equivalent to the assertion of theorem 3.1.
+
+4
+
+Global solution.
+0 u0 ()  L0 2  Lb
+
+It is proved in [1] that if (4.1) for some b  d, then the Navier - Stokes equations, more precisely, the system of Navier - Stokes equations (1.1) - (1.3) has unique global in time smooth solution u = u(x) = u(x, t). But if the condition (4.1) is satisfied, we still have to take admit that the function u0 () belongs to some Grand Lebesgue space. In detail, there exists a function	= b (p) with support [2, b) such that t  0 u()	G. 10
+
+Indeed, let y2 := ||u||2 <  and yb := ||u||b < ; it follows from the H older's inequality that for any value p	(2, b) ||u||p  Z2,b (y2 , yb ; p) =: b (p). Therefore, it is more than natural to suppose in this section that the initial value function u0 = u0 (x) belongs to some Grand Lebesgue Space G, supp  = [2, b) with b > d. Theorem 4.1. Let the initial value function u0 = u0 (x) belongs to some Grand Lebesgue Space G, such that supp  = [2, b) with b > d. Define a new function
+d/p () (p) :=  (p)  max(1, 2 (u0 )). p
+
+(4.2)
+
+Proposition: sup ||u(t)||G()  1.
+t
+
+(4.3)
+
+Proof. Let u0  G, then ||u0||p <  and moreover ||u0 ||p   (p), 2  p < b. It may be deduced after some (omitted here) calculations based on the the article of Shangbin Cui [1] that
+d/p d/p sup ||u||p  max(1, 2 (u0 ))  ||u0||p  max(1, 2 (u0 ))	(p), p p t
+
+or equally sup ||u(t)||G() = sup sup
+t t
+
+||u(, t)||p  1. 2p<b () (p)
+
+(4.4)
+
+This completes the proof of theorem 4.1.
+
+5
+
+Solvability in moment rearrangement spaces.
+
+We retain the notations and assumptions of previous section. Let (X, |||  |||X ) be any moment rearrangement invariant space over Rd constructed by means of auxiliary space (V, <  >) with condition supp V = supp . Denote
+d/p h0 (p) = max(1, 2 )   (p), p  supp . p
+
+(5.1)
+
+Theorem 5.1. sup |||u(t)|||X  < h0 () > .
+t0
+
+(5.2)
+
+11
+
+Proof is very simple. It follows from theorem 4.1
+d/p ||u(t)||p  max(1, 2 )   (p) = h0 (p), t  0. p
+
+(5.3)
+
+Since the norm <  > is also rearrangement invariant, we deduce taking the norm <  > on both the sides of inequality (5.3): < ||u||p >  < h0 () >, (5.4) and this estimate is uniform on the variable t; t  0. Taking the supremum over variable t, we get to the proposition (5.2) of the regarded theorem.
+
+6
+
+Mixed norm estimates for solution.
+
+It is known, see [1], [15]- [16] that the global in time solution u(x, t) = u(t) obeys the property
+t
+
+lim ||u(t)||p = 0.
+
+We want in this section to characterize this feature on the language of anisotropic Grand Lebesgue spaces. 0 We suppose in this section that u0  L0 2  Lb , b > d or equally that the initial function u0 belongs to some G space with supp  = [2, b), d < b  . A new notations: r = r (p) = rd (p) := p(p - d + 2) , p  (d, b); D = {p, r (p)}, p-d
+1/r (p)
+
+(6.1)
+
+B2.1 (d, p) d, (p) := p
+
+  p-d+2 (d)   p-d+2 (p).
+
+2
+
+p- d
+
+(6.2)
+
+Theorem 6.1. Assume u0	G ; then ||u||Gd,  1. (6.3)
+
+Proof is at the same as before: we estimate the norm ||u||Gd, specifying passing the "constants" from the article of Shangbin Cui [1]. In detail, let p  supp  ; then
+ 0 (p) ||u(t)||r dt  p
+2p B2.1 (d, p) p- d ||u0 ||d  ||u0||p p. p
+
+(6.4)
+
+Since u0  G, ||u0||d   (d), ||u0 ||p   (p). (6.5) We get substituting into (6.4) and taking the root of degree r = r (p) 12
+
+||u|| p,r (p)
+
+B2.1 (d, p)  p
+
+1/r (p)
+
+  p-d+2 (d)   p-d+2 (p) = d, (p).
+
+2
+
+p- d
+
+It remains to divide into d, (p) and take supremum over (p, r )  D.
+
+7
+
+Concluding remarks.
+
+1. First example. We retain here the assumptions and notations of fourth sections. Suppose in addition that
+2p<b
+
+sup  1/p (p) < .
+
+(7.1)
+
+This condition is satisfied if for example b =	and  (p) = pm M (p), where m = const <	and M (p) is positive continuous slowly varying as p   function. We have under condition (7.1) () (p)	(p), therefore, the proposition of theorem 4.1 may be rewritten in the considered case as follows: sup ||u(t)||G < .
+t
+
+(7.2).
+
+2. Second example. We consider here the mixed norm estimates for solution, see sixth section. Note that d, (p)	 (p), even without the condition (7.1). Following, the proposition of theorem 6.1 has a view ||u||G < . (7.3) 3. It is known [10], [11], [15], [16] etc. that in general case, i.e. when the value  = ||u0||d is not sufficiently small, then the lifespan of solution of NS equation T may be finite (short-time solution). Perhaps, it is self-contained interest a quantitative estimate of the value T. For the non-linear Schr odinger's equation the estimate T  exp(C/) was obtained in the recent article [46].
+
+13
+
+4. At the same considerations may be provided for the NS equations with external force f = f (x, t) : ut = u + (u  )u + Q    (u  u) + f (x, t), x  Rd , t > 0; u(x, 0) = u0 (x), x  Rd . see [10] - [13], [18], [23], [33]. 5. Analogously to the content of this report may be considered a more general case of abstract (linear or not linear) parabolic equation of a view ut = Au + F (u, u; x, t) + f (x, t), u(x, 0) = a(x).
+
+The detail investigation of this case when the initial condition and external force belong to some Sobolev's space may be found, e.g. in [30] - [32], [14], [28].
+
+References
+[1] Shangbin Cui. Global well-posedness of the 3-dimensional Navier-Stokes initial value problem in L(p) L(2) with 3 < p < . arXiv:1204.5040v1 [math.AP] 23 Apr 2012 [2] Barraza O. Self-similar solutions in weak Lp - spaces of the Navier-Stokes equations. Revista Mat. Iberoamer., 12(1996), 411 439. [3] Caffarelli L., Kohn R. and Nirenberg L. Partial regularity of suitable weak solutions of the Navier-Stokes equations. Comm. Pure Appl. Math., 35, (1082), 771 - 831. [4] Calderon C. Existence of weak solutions for the Navier-Stokes equations with initial data in L(p). Trans. A.M.S., 318(1990), 179 207. [5] Escauriaza L., Seregin G., and Sverak V. L(3, ) -Solutions to the Navier-Stokes Equations and Backward Uniqueness. Uspekhi Mat. Nauk, 58( 2003), no.2, 3 44. [6] Fabes E., Johns B. and Riviere N. The initial value problem for the Navier-Stokes equations with data in L(p). Arch. Rat. Mech. Anal., 45(1972), 222 240. [7] Foias C., Guillope C. and Temam R. New a priory estimates for NavierStokes equations in dimension 3. Comm. in Part. Dif. Eq., 6, (1981), 329 359. [8] Fujita H. and Kato T. On the Navier-Stokes initial value problem I. Arch. Ration. Mech. Anal., 16(1964), 269 315.
+
+14
+
+[9] Germain P. Multipliers, paramultipliers, and weak-strong uniqueness for the Navier-Stokes equations. J. Diff. Equations., 226(2006), 373 428. [10] Giga Y. Solutions of semilinear parabolic equations in Lp and regularity of weak solutions of the Navier-Stokes system. J. Diff. Equations, 62(1986), 186 212. [11] Giga Y. and Miyakawa T. Navier-Stokes flows in R3 with measurea as initial vorticity and the Morrey spaces. Comm. P. D. E., 14(1989), 577 618. [12] Giga Y. and Sohr H. Abstract Lp - estimates for the Cauchy problem with Applications to the Navier-Stokes equations in exteroir domains. Hokkaido University, Preprint, Series 60 on Mathematics, November 1989. [13] Giga Y. and Sohr H. Abstract Lp - estimates for the Cauchy problem with Applications to the Navier-Stokes equations in exteroir domains. J. Funk. Anal., 102 (1991), 72 - 94. [14] Iwashita H. Lq - Lr estimates for solution of non-stationary Stokes equations in exterior domain and the Navier-Skokes initial value problems in Lq spaces. Math. Ann., 285, (1989), 265 - 288. [15] Kato T. Strong Lp solutions of the Navier-Stokes equations in Rm with applications to weak solutions. Math. Z., 187(1984), 471 480. [16] Kato T. and Ponce G. Commutator estimates and the Euler and NavierStokes equations. Comm. P. D. E., 41(1988), 891 - 907. [17] Kenig C.E. and Koch G.S. An alternative approach to regularity for the Navier-Stokes equations in a critical space. arXiv:0908.3349. [18] Koch H. and Tataru D. Well-posedness for the Navier-Stokes equations. Adv. in Math., 157(2001), 22 35. [19] Kozono H. and Taniuchi Y. Bilinear estimates in BMO and the NavierStokes equations. Math. Z., 235(2000), 173 194. [20] Lemarie-Rieusset P.G. Weak infinite-energy solutions for the Navier-Stokes equations in R3 , Preprint, 1998. [21] Lemarie-Rieusset P.G. Recent developments in the Navier-Stokes problems. Research Notes in Mathematics, Chapman, Hall/CRC, 2002. [22] Leray J. Sur le mouvement dun liquide visqueux emplissant lespace. Acta Math., 63(1934), 193 248. [23] Masuda K. Weak solutions of Navier-Stokes equations. T'ohoku Math. J., 36(1984), 623 646. [24] Miura H. Remarks on uniqueness of mild solutions to the Navier-Stokes equations. J. Funct. Anal., 218(2005), 110129.
+
+15
+
+[25] Planchon F. Global strong solutions in Sobolev or Lebesgue spaces to the imcompressible Navier-Stokes equations in R3 , Ann. Inst. H. Poincare Anal. Non Lineaire, 13(1996), 319 336. [26] Seregin G. A certain necessary condition of potential blow up for NavierStokes equations. arXiv:1104.3615. [27] Serrin J. The initial value problem for the Navier-Stokes equations. In: R.E. Langer, (Ed.), Nonlinear Problems, 1963, University of Wisconsin Press, Madison, 1963, pp. 69 98. [28] Solonnikov V.A. Estimates for Solutions of non-stationaty Navier - Stokes equations. J. Soviet Math., 8, (1977), 467 - 523. [29] Stein E. M. Singular Integrals and Differentiability Properties of Functions. Princeton, University Press, (1970), Princeton, New Jersey. [30] Taylor M.E. Pseudodifferential Operators. Princeton, University Press; Princeton, New Jersey, (1981) [31] Taylor M.E. Partial Differential Equations I. Linear Equations. Applied Math. Sciencies, 117, Springer, (1996). [32] Taylor M.E. Partial Differential Equations III. Non-linear Rquations. Applied Math. Sciencies, 117, Springer, (1996). [33] Temam R. Navier - Stokes Equations. Theory and Numerical Analysis. NorthHolland Publishing Company. Amsterdam, New York,Oxford, (1977).
+
+ uelos R. and Osekowski A. Sharp martingale inequalities and appli[34] Ban cationa to Riesz transforms on manifolds, Lie group and Gauss space. arXiv:1305.1492v1 [math.PR] 7 May 2013 [35] Bliss G. An integral inequality. J. London Math. Soc., (1930), vol. 5, 40 46. [36] Brascamp H.J. and E.H. Lieb E.H. Best constants in Youngs inequality, its converse and its generalization to more than three functions. Journ. Funct. Anal., 20(1976), 151 173. [37] Fiorenza A., and Karadzhov G.E. Grand and small Lebesgue spaces and their analogs. Consiglio Nationale Delle Ricerche, Instituto per le Applicazioni del Calcoto Mauro Picone, Sezione di Napoli, Rapporto tecnico n. 272/03, (2005). [38] Fiorenza A. Duality and reflexivity in grand Lebesgue spaces. Collect. Math. 51(2000), 131 - 148.
+
+16
+
+[39] Fiorenza A. Karadzhov G.E. Grand and small Lebesgue spaces and their analogs. Consiglio Nationale Delle Ricerche, Instituto per le Applicazioni del Calcoto Mauro Picine", Sezione di Napoli, Rapporto tecnico 272/03(2005). [40] Iwaniec T. and Sbordone C. On the integrability of the Jacobian under minimal hypotheses. Arch. Rat.Mech. Anal., 119(1992), 129 - 143. [41] Iwaniec T., Koskela P. and Onninen J. Mapping of Finite Distortion: Monotonicity and Continuity. Invent. Math. 144(2001), 507 - 531. [42] Iwaniec T. and Martin G. Riesz transforms and related singular integrals. J. Reine Angew. Math. 473 (1996), 25 - 5 7. [43] Jawerth B. and Milman M. Extrapolation theory with applications. Mem. Amer. Math. Soc. 440, (1991). [44] G.Talenti. Inequalities in Rearrangement Invariant Function Spaces. Nonlinear Analysis, Function Spaces and Applications. Prometheus, Prague, 5, (1995), 177 - 230.
+
+[45] German P. The second iterate for the Navier-Stokes equation. arXiv:0806.4525v1 [math.AP] 27 Jun 2008 [46] Masahiro Ikeda, Soichiro Katayama, and Hideaki Sunagawa. Null structure in a system of quadratic derivative nonlinear Schr odinger equations. arXiv:1305.3662v1 [math.AP] 16 May 2013 [47] Kozachenko Yu. V., Ostrovsky E.I. (1985). The Banach Spaces of random Variables of subgaussian type. Theory of Probab. and Math. Stat. (in Russian). Kiev, KSU, 32, 43 - 57. [48] Liflyand E., Ostrovsky E., Sirota L. Structural Properties of Bilateral Grand Lebesgue Spaces. Turk. J. Math.; 34 (2010), 207 - 219. [49] Okikiolu G.O. Aspects of the theory of bounded Integral Operators in the Lp Spaces. Academic Press; London, New Yotk; (1971). [50] Ostrovsky E.I. (1999). Exponential estimations for random Fields and its applications (in Russian). Moscow - Obninsk, OINPE. [51] Ostrovsky E. and Sirota L. Moment Banach spaces: theory and applications. HIAT Journal of Science and Engineering, C, Volume 4, Issues 1 - 2, pp. 233 - 262, (2007). [52] Ostrovsky E., Sirota L. Monte-Carlo method for multiple parametric integrals calculation and solving of linear integral Fredholm equations of a second kind, with confidence regions in uniform norm. arXiv:1101.5381v1 [math.FA] 27 Jan 2011 (2007), 167-178.
+
+17
+
+[53] Ostrovsky E., Sirota L. Nikolskii-type inequalities for rearrangement invariant spaces. arXiv:0804.2311v1 [math.FA] 15 Apr 2008 [54] Ostrovsky E., Rogover E. Strichartz - type Inequalities for Parabolic and Schr odinger Equations in rearrangement invariant Spaces. arXiv:0901.2715v1 [math.AP] 18 Jan 2009 [55] Ostrovsky E., Sirota L. Boundedness of operatore in bilateral Grand Lebesgue Spaces, with exact and weakly exact constant calculation. arXiv:1104.2963v1 [math.FA] 15 Apr 2011 [56] Ostrovsky E., Sirota L. Multiple weight Riesz and Fourier transforms in bilateral anisotropic Grand Lebesgue spaces. arXiv:1208.2392v1 [math.FA] 12 Aug 2012 [57] Pichorides S.K. On the best values of the constants in the theorems of M. Riesz, Zygmund and Kolmogorov. Studia Math. 44 (1972), 165 - 179.
+
+18
+

@@ -1,0 +1,221 @@
+Non-associative key establishment for leftdistributive systems
+Arkadius Kalka, Mina Teicher
+
+arXiv:1305.4401v1 [cs.CR] 19 May 2013
+
+Abstract We construct non-associative key establishment protocols for all LD-, multi-LD-, and other left-distributive systems.
+
+2010 Mathematics Subject Classification. 20N02, 20F36. Key words and phrases. Non-commutative cryptography, key establishment protocol, magma (grupoid), left-distributive system, braid group.
+
+1
+
+Introduction
+
+In an effort to construct new key establishment protocols (KEPs), which are hopefully harder to break, the first author introduced in his PhD thesis [Ka07] (see also [Ka12]) first non-associative generalizations of the Anshel-AnshelGoldfeld KEP [AAG99], which revolutionized the field of non-commutative public key cryptography (PKC) more than ten years ago. For an introduction into non-commutative public key cryptography we refer to the book by Myasnikov et al. [MSU11]. For further motivation and on non-associative PKC we refer to [Ka12]. It turns out (see [Ka12]) that in the context of AAG-like KEPs for magmas, left-selfdistributive systems (LD-systems) and their generalizations (like multi-LD-systems) naturally occur. Though we constructed several examples for non-associative KEPs for LD- and multi-LD-systems [Ka12], we did not provide a general method to construct a KEP that works for all LD- and multi-LD-systems. We are going to fill this gap in the present paper. Outline In section 2 we review LD-, multi-LD-, and other left-distributive systems with many examples (see also section 4.1 in [Ka12]). Section 3 describes a KEP for all LD-systems with a discussion of related base problems. Finally, Protocol 2, described and analyzed in section 4, applies not only for all multiLD-systems, but also for a big class of partial multi-LD-systems. We close with a discussion in section 5.
+
+2
+2.1
+
+LD-systems and other distributive systems
+Definition
+
+Definition 2.1. An LD-system (S, ) is a set S equipped with a binary operation	on S which satisfies the left-selfdistributivity law x	(y  z ) = (x  y )  (x  z ) 1 x, y, z  S.
+
+Definition 2.2. (Section X.3. in [De00]) Let I be an index set. A multi-LDsystem (S, (i )iI ) is a set S equipped with a family of binary operations (i )iI on S such that x i (y j z ) = (x i y ) j (x i z ) x, y, z  S is satisfied for every i, j in I . Especially, it holds for i = j , i.e., (S, i ) is an LD-system. If |I | = 2 then we call S a bi-LD-system. We begin with some examples of LD-systems taken from [De06]. 1. We begin with a trivial example. (S, ) with x  y = f (y ) is an LD-system for any function f : S  S . 2. A set S with a binary operation , that satisfies no other relations than those resulting from the left self-distributivity law, is a free LD-system. Free LD-systems are studied extensively in [De00]. 3. A classical example of an LD-system is (G, ) where G is a group equipped with the conjugacy operation x  y = x-1 yx (or x rev y = xyx-1 ). Note that such an LD-system cannot be free, because conjugacy satisfies additionaly the idempotency law x  x = x. 4. Finite groups equipped with the conjugacy operation are not the only finite LD-systems. Indeed, the socalled Laver tables provide the classical example for finite LD-systems. There exists for each n  N an unique LD-system Ln = (Z/2n Z, ) with k  1 = k + 1. The values for k  l with l = 1 can be computed by induction using the left self-distributive law. The Laver tables for n = 1, 2, 3 are L3 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 4 4 0 6 0 0 0 2 3 6 7 4 7 6 7 0 3 4 0 0 0 0 0 0 0 4 5 2 3 4 5 6 7 0 5 6 4 4 0 6 0 0 0 6 7 6 7 4 7 6 7 0 7 0 0 0 0 0 0 0 0 0
+
+L1 1 0
+
+1 0 1
+
+0 0 0
+
+L2 1 2 3 0
+
+1 2 3 0 1
+
+2 0 0 0 2
+
+3 2 3 0 3
+
+0 0 0 0 0
+
+Laver tables are also described in [De00]. Many examples for LD-, bi-LD- and multi-LD-systems are given in Dehornoy's monography [De00].
+
+2.2
+
+f -conjugacy
+
+One may consider several generalizations of the conjugacy operation as candidates for natural LD-operations in groups. Consider an Ansatz like x  y = f (x-1 )g (y )h(x) for some group endomorphisms f, g, h. Proposition 2.3. Let G be a group, and f, g, h  End(G). Then the binary operation x  y = f (x-1 )  g (y )  h(x) yields an LD-structure on G if and only if f h = f, gh = hg = hf, 2 f g = gf = f 2 , h2 = h. (1)
+
+Proof. A straightforward computation yields   (   ) = (   )  (	 ) = f (-1 )gf ( -1 )g 2 ( )gh( )h(), and f h(-1 )f g ( -1 )f 2 ()gf (-1 )g 2 ( )gh()hf (-1 )hg ( )h2 ().
+
+A comparison of both terms yields the assertion. The simplest solution of the system of equations (1) is f = g and h = id. This leads to the following definition. Definition 2.4. (LD- or f -conjugacy) Let G be a group, and f  End(G). An ordered pair (u, v )  G  G is called f -LD-conjugated or LD-conjugated, or simply f -conjugated, denoted by u -f v , if c	G such that v = c f u = f (c-1 u)c. Remark. For any non-trivial endomorphism f , the relation -f defines not an equivalence relation on G. Even the relation - defined by u - v iff f  Aut(G) s.t. u -f v is not an equivalence relation. Indeed, transitivity requires the automorphisms (relation must be symmetric!) to be an idempotent endomorphism (f 2 = f ) which implies f = id. Compare the notion of f -LD-conjugacy with the well known notion f -twisted conjugacy defined by u f v (for f  Aut(G)) iff c	G s.t. v = f (c-1 )uc =: c tw f u, which yields indeed an equivalence relation. On the other hand, the operation tw = tw f is not LD - rather it satisfies the following "near" LD-law:  tw ( tw  ) = ( tw  ) tw (f tw	) where f is short for f (). Anyway, it follows directly from the definitions that u - v if and only if f (u) f v , i.e., any f -LD conjugacy problem reduces to a twisted conjugacy problem and vice versa. Here we have to extend the notion of twisted conjugacy from f  Aut(G) to all f  End(G). Example. Let G be the n-strand pure braid group Pn . For some small integer d  1, consider the epimorphism d : Pn - Pn-d given by 'pulling out' (or erasing) the last d strands, i.e. the strands n - d + 1, . . . , n. Recall the shift map  , and note that  d (Pn-d )  Pn . Now, we define the endomorphism f : Pn - Pn by the composition f =	d  d .
+
+2.3
+
+Shifted conjugacy
+
+Patrick Dehornoy introduced the following generalization of f -conjugacy, and he points out, that once the definition of shifted conjugacy is used, braids inevitably appear [De00, De06]. Proposition 2.5. (Exercise I.3.20. in [De00]) Consider a group G, a homomorphism f : G  G, and a fixed element a  G. Then the binary operation x  y = x f,a y = f (x)-1  a  f (y )  x yields an LD-structure on G if and only if [a, f 2 (x)] = 1 for all x	G, and a satisfies the relation af (a)a = f (a)af (a). Hence the subgroup H = {f n (a) | 3
+
+n  N} of G is a homomorphic image of the braid group B = {i }i1 | i j = j i for |i - j |  2, i j i = j i j for |i - j | = 1 with infinitely many strands, i.e., up to an isomorphism, it is a quotient of B . There exists a straightforward generalization of Proposition 2.5 for multiLD-systems: Proposition 2.6. Let I be an index set. Consider a group G, a family of endomorphisms (fi )iI of G, and a set of fixed elements {ai  G | i	I }. Then (G, (i )iI ) with x i y = fi (x-1 )  ai  fi (y )  x is a multi-LD-system if and only if fi = fj =: f for all i = j , [ai , f 2 (x)] = 1 for all x  G, i  I , and ai f (ai )aj = f (aj )ai f (ai ) for all i, j  I . Proof. A straightforward computation gives x i (y j z ) = fi (x-1 )ai [fi (fj (y -1 ))fi (aj )fi (fj (z ))fi (y )]x, 1 -1 (x i y ) j (x i z ) = [fj (x-1 )fj (fi (y -1 ))fj (a- ))  i )fj (fi (x))]aj [fj (fi (x fj (ai )fj (fi (z ))fj (x)][fi (x-1 )ai fi (y )x]. A comparison of both terms yields the assertion. Note that this proof also contains proofs of Proposition 2.5 (setting |I | = 1) and of the following Corollary 2.7 (setting G = B , I = {1, 2}, s =	, 1 = , -1 2 =	, a1 = 1 and a2 = 1 ). Consider the injective shift endomorphism  : B - B defined by i	i+1 forall i  1. Corollary 2.7. (Shifted conjugacy, Example X.3.5. in [De00]) B equipped  defined by with the shifted conjugacy operations ,  x  y = x-1  1  y	x,
+-1  y = x-1  1	y  x x
+
+is a bi-LD-system. In particular, (B , ) is an LD-system.
+
+2.4
+
+Generalized shifted conjugacy in braid groups
+
+In the following we consider generalizations of the shifted conjugacy operations  in B . Therefore we set s =  p for some p  N, and we choose ai  B2p for all i  I such that ai  p (ai )aj =  p (aj )ai  p (ai ) i, j  I. (2)
+
+Since ai  B2p , we have [ai ,  2p (x)] = 1 for all x  B . Thus the conditions of Proposition 2.6 are fulfilled, and x i y = x p (y )ai	p (x-1 ) defines an multi-LDstructure on B . For |I | = 1, p = 1 and a = 1 , which implies H = B , we get Dehornoy's original definition of shifted conjugacy . It remains to give some natural solutions {ai  B2p | i	I } of the equation set (1). Note that in case |I | = 1 (notation: a1 = a), of course, every endomorphism f of B with f (1 )  B2p provides such solution a = f (1 ). 4
+
+Definition 2.8 (Definition I.4.6. in [De00]) Let, for n  2, be n = n-1	  2 1 . For p, q  1, we set p,q = p+1  (p+1 )	  q-1 (p+1 ).
+1 Since a = p,p  B2p fulfills a p (a)a =  p (a)a p (a), it provides a lot of (multi)-LD-structures on B .
+
+Proposition 2.9 (a) The binary operation x a y =  p (x-1 )a p (y )x with a = a p,p a for some a , a  Bp yields an LD-structure on BN if and only if [a , a ] = 1. (b) Let I be an index set. The binary operations x i y =  p (x-1 )ai	p (y )x with	ai = a i p,p ai for some ai , ai  Bp (i  I ) yields a multi-LD-structure on BN if      and only if [a , a ] = [ a , a i j i j ] = 1 for all i, j  I . (Note that ai and aj needn't commute for i = j .)  (c) The binary operations xi y =  p (x-1 )ai  p (y )x (i = 1, 2) with a1 = a 1 p,p a1 , -1	 a2 = a  a for some a , a , a , a  B yields a bi-LD-structure on B if and p N 2 p,p 2 1 1 2 2		only if [a 1 , a1 ] = [a2 , a2 ] = [a1 , a2 ] = [a2 , a1 ] = [a1 , a2 ] = 1. (Note that a1 and a needn't commute.) 2 We see that there exist infinitely many (multi)-LD-structures on BN . Further examples are provided by Proposition 2.10, which, of course, admits a lot of variations and generalizations. Proposition 2.10 Let be p, p1 , p2  N with p1 + p2 = p. The binary operation x a y =  p (x-1 )a p (y )x with
+-1  p1	p1 p1  a = a 1	(a2 ) (p2 ,p )p,p1 a1  (a2 )	for some a 1 , a1  Bp1 , a2 , a2  Bp2 yields an LD-structure on BN if and only if     [a 1 , a 1 ] = [ a 2 , a 2 ] = 1 .
+
+The proofs of Proposition 2.9 and 2.10 are straightforward computations. The reader is recommended to draw some pictures.
+
+2.5
+
+Yet another group-based LD-system
+
+Though we are sure that it must have been well known to experts, we haven't been able to find the following natural LD-operation for groups in the literature. For a group G, (G, ) is an LD-system with x  y = xy -1 x. Note that, contrary to the conjugacy operation , for this "symmetric decomposition" or conjugacy operation , the corresponding relation - defined by x - y iff c  G such that y = c  x) is not an equivalence relation. In particular, - is reflexive and symmetric, but not transitive. One may consider several generalizations of this symmetric conjugacy operation , as candidates for natural LD-operations in groups. Consider an Ansatz like x  y = f (x)g (y -1 )h(x) for some group endomorphisms f, g, h. Proposition 2.11. Let G be a group, and f, g, h  End(G). Then the binary operation x  y = f (x)  g (y -1 )  h(x) yields an LD-structure on G if and only if f 2 = f, f h = gh = f g, 5 hg = gf = hf, h2 = h. (3)
+
+Proof. A straightforward computation yields   (   ) = (   )  (	 ) = f ()gh( -1 )g 2 ( )gf ( -1 )h(), and f 2 ()f g ( -1 )f h()gh(-1 )g 2 ( )gf (-1 )hf ()hg ( -1 )h2 ().
+
+A comparison of both terms yields the assertion. Except for f 2 = f = g = h = h2 , the simplest solutions of the system of equations (3) are f 2 = f = g and h = id, or f = id and g = h = h2 . Corollary 2.12. (LD- or f -symmetric conjugacy) Let G be a group, and f  End(G) an endomorphism that is also a projector (f 2 = f ). Then (G, f ) -1 -1 and (G, rev )x and x rev x), are LDf ), defined by x f y = f (xy f y = xf (y systems. Proposition 2.13. Let G be a group, and f, g  End(G). (i) Then the binary operations f and f (and rev f ), defined by x f y = f (x)  -1 -1 g (y )  h(x) and x f y = f (x	y )  h(x) (x rev y = x	f (y  x-1 )), are f rev distributive over . In particular  ( ) is distributive over . In short, the following equations hold. x f (y  z ) = (x f y )  (x f z ), x f (y	z ) = (x f y )	(f z )x, y, z  G.
+
+(ii) The operations f and f (rev f ) are distributive over g if and only if f = gf = f g .
+
+3
+3.1
+
+Key establishment for all LD-systems
+The protocol
+
+Recall that a magma is a set M equipped with a binary operation, say  , which is possibly non-associative. For our purposes all interesting LD-systems are non-associative. Consider an element y of a magma (M, ) which is an iterated product of other elements in M . Such an element can be described by a planar rooted binary tree T whose k leaves are labelled by these other elements y1 , . . . , yk	M . We use the notation y = T (y1 , . . . , yk ). Here the subscript  tells us that the grafting of subtrees of T corresponds to the operation . Now, it is easy to prove by induction (over the depth of the involved trees) that any magma homomorphism  : (M, )  (N, ) satisfies  (T (y1 , . . . , yk )) = T ( (y1 ), . . . ,  (yk )) for all y1 , . . . , yk  M . Proposition 3.1. Let (L, ) be an LD-system. Then, for any element x  L, the left multiplication map x : y  x  y defines a magma endomorphism of L. Proof x (y1  y2 ) = x	(y1  y2 ) = (x	y1 )  (x  y2 ) = x (y1 )  x (y2 ). We are going to describe a KEP that applies to any LD-system (L, ). There are two public submagmas SA = s1 ,    , sm  , SB = t1 ,	, tn  of (L, ), assigned to Alice and Bob. Alice and Bob perform the following protocol steps. 6
+LD
+
+Protocol 1: Key establishment for any LD-system (L, ). 1. Alice generates her secret key (a0 , a)  SA  L, and Bob chooses his secret key b  SB 2. Alice computes the elements a  t1 , . . . , a  tn , p0 = a  a0  L, and sends them to Bob. Bob computes b  s1 , . . . , b  sm	L, and sends them to Alice. 3. Alice, knowing a0 = T (r1 , . . . , rk ) with ri  {s1 , . . . , sm }, computes from Bob's public key T (b  r1 , . . . , b  rk ) = b  T (r1 , . . . , rk ) = b  a0 .
+ And Bob, knowing b = T (u1 , . . . , uk with uj  {t1 , . . . , tn }, computes from Alice's public key	 (u1 , . . . , uk ) = a  b. T (a  u1 , . . . , a  uk ) = a  T
+
+4. Alice computes KA = a  (b  a0 ). Bob gets the shared key by KB := (a  b)  p0 = (a  b)  (a  a0 ) = KA . This protocol is an asymmetric modification of the Anshel-Anshel-Goldfeld protocols for magmas introduced in [Ka07, Ka12]. Figure 1: Protocol 1: Key establishment for any LD-system {a  (ti )}1in , a  a0 Alice a 0	SA , a {b  sj }1j m Bob b  SB
+(LD)
+
+3.2
+
+Base problems
+
+In order to break Protocol 1 an attacker has to find the shared key K = KA = KB . A successful attack on Bob's secret key b requires the solution of m-simLDP (m-simultaneous LD-Problem):  2  Input: Element pairs (s1 , s 1 ), . . . , (sm , sm )  L with si = b  si 1  i  m for some (unknown) b  L. Objective: Find b  L with b  si = s i for all i = 1, . . . , m. Even if an attacker finds Bob's original key b or a pseudo-key b (solution to the m-simLDP above), then she still faces the following problem. -MSP (-submagma Membership Search Problem): Input: t1 , . . . , tn  (L, ), b  t1 , . . . , tn  . Objective: Find an expression of b as a tree-word in the submagma t1 , . . . , tn (notation b = T (u1 , . . . , uk ) for ui  {tj }j n ). 7
+
+
+
+Proposition 3.2. Let (L, ) be an LD-system. We define the generalized msimLDP for SB  L as an m-simultaneous LD-Problem with the objective to find a b in SB = t1 , . . . , tn	such that b  si = s i for all i  m. An oracle that solves the generalized m-simLDP and -MSP for SB is sufficient to break key establishment Protocol 1. Proof. As outlined above, we perform an attack on Bob's private key. The generalized m-simLDP oracle provides a pseudo-key b  SB with b  si = s i = b  si for all i = 1, . . . , m. Observe that this implies for any element eA  SA that b  eA = b  eA . In particular, we have b  a0 = b  a0 . We feed this pseudo-key  b into a -MSP oracle for SB which returns a treeword T (u1 , . . . , ul ) = b (for some l  N and ui  {tj }j n ). Now compute
+ T (a  u1 , . . . , a  ul )  p0 LD
+
+=
+
+ (a  T (u1 , . . . , ul ))  p0 = (a  b )  (a  a0 )
+
+LD
+
+=
+
+a  (b  a0 ) = a  (b  a0 ) = K.
+
+Note that here the situation is asymmetric - an attack on Alice's secret key requires the solution of the following problem. n-modsimLDP (Modified n-Simultaneous LD-Problem):	2  Input: An element p0  L and pairs (t1 , t 1 ), . . . , (tn , tn )  L with ti = a  ti 1  i  n for some (unknown) a  L.      Objective: Find elements a 0 , a	L such that p0 = a  a0 and a  ti = ti for all i = 1, . . . , n. Also here, even if an attacker finds Alice's original key (a0, a) or a pseudo key (a 0 , a )  SA  L, then she still faces a -submagma Membership Search Problem. Proposition 3.3. Let (L, ) be an LD-system. We define the generalized nmodsimLDP for SA  L as a modified n-simultaneous LD-Problem with the   objective to find a a  L and a 0 in SA = s1 , . . . , sm  such that a  ti = ti for all i  n. An oracle that solves the generalized n-modsimLDP and -MSP for SA is sufficient to break key establishment Protocol 1. Proof. As outlined above, we perform an attack on Alice's private key. The	generalized n-simLDP oracle provides a pseudo-key (a 0 , a )  SA  L such that	  a  a0 = p0 and a  ti = ai = a  ti for all i = 1, . . . , n. Observe that this implies for any element eB  SB that a  eB = a  eB . In particular, we have a  b = a  b. We feed the first component a 0  SA of this pseudo-key into  a -MSP oracle for SA which returns a treeword T (r1 , . . . , rl ) = a 0 (for some l  N and ri  {sj }j m ). Now, we compute
+ a  T  (b  r1 , . . . , b  rl ) LD
+
+=
+
+ a  (b	T (r1 , . . . , rl )) = a  (b  a 0)
+
+LD
+
+=
+
+(a  b)	(a  a 0 ) = (a	b)  p0 = K.
+
+Both appproaches described above require the solution of a -submagma Membership Search Problem. Note that we assumed that the generalized msimLDP (resp. n-modsimLDP) oracle already provides a pseudo-key in the 8
+
+submagma SB (resp. SA ) which we feed to the -MSP oracle. But to check whether an element lies in some submagma, i.e. the -submagma Membership Decision Problem, is already undecidable in general. Fortunately, for the attacker, there are approaches which do not resort to solving the -MSP. Recall that we defined the generalized m-simLDP for SB  L as an msimultaneous LD-Problem with the objective to find a b in SB = t1 , . . . , tn  such that b  si = s i for all i  m. Proposition 3.4. An generalized simLDP oracle is sufficient to break key establishment Protocol 1. More precisely, an oracle that solves the generalized m-simLDP for SB and the n-simLDP is sufficient to break KEP1. Proof. Here we perform attacks on Alice's and Bob's private keys - though we need only a pseudo-key for the second component a of Alice's key. The n-simLDP oracle provides a  L s.t. a  tj = t j = a  tj for all j  n. And the generalized m-simLDP oracle returns the pseudo-key b  SB s.t. b  si =     s i = b	si for all i  m. Since b  SB , we conclude that a  b = a  b . Also,  a0  SA implies, of course, b  a0 = b  a0 . Now, we may compute (a	b )  p0 = (a  b )  (a  a0 ) = a  (b  a0 ) = a  (b  a0 ) = K. Recall that we defined the generalized n-modsimLDP for SA	L as an nsimultaneous LD-Problem with the objective to find a a 0 in SA = s1 , . . . , sm  for all i  n . such that a  ti = t i Proposition 3.5. An oracle that solves the generalized n-modsimLDP for SA and the m-simLDP is sufficient to break KEP1. Proof. Also here we perform attacks on Alice's and Bob's private keys. The m-simLDP oracle provides b  L s.t. b  sj = s j = b  sj for all j  m. And  the generalized n-modsimLDP oracle returns the pseudo-key (a 0 , a )  SA  L      s.t. a  ti = ti = a  ti for all i  n and a  a0 = p0 . Since a0  SA , we conclude	 that b  a 0 = b  a0 . Also, b	SB implies, of course, a  b = a  b. Now, we compute
+     a	(b  a 0 ) = a  (b  a0 ) = (a  b)  (a  a0 ) = (a  b)  p0 = K. LD LD
+
+4
+4.1
+
+Key establishment for leftdistributive systems
+The protocol
+
+Here we describe a generalization of Protocol 1 that works for all multi-LDsystems. Actually, it suffices if L is only a partial multi-LD-system, i.e. some distributive laws hold. More precisely, consider a set L equipped with a pool of binary operations OA  OB (OA and OB non-empty) s.t. the operations in OA are distributive over those in OB and vice versa, i.e. the following holds for all x, y, z  L,   OA and	OB . x	(y  z ) = (x  y )  (x  z ), and x  (y  z ) = (x  y )  (x  z ). 9 (4) (5)
+
+Note that, if OA  OB = , then (L, OA  OB ) is a multi-LD-system. Let s1 , . . . , sm , t1 , . . . , tn	L be some public elements. We denote SA = s1 ,	  , sm OA and SB = t1 ,    , tn OB , two submagmas of (L, OA  OB ). For example, an element y of SA can be described by a planar rooted binary tree T whose k leaves are labelled by these other elements r1 , . . . , rk with ri  {si }im . Here the tree contains further information, namely to each internal vertex we assign a binary operation i	OA . We use the notation y = TOA (r1 , . . . , rk ). The subscript OA tells us that the grafting of subtrees of T corresponds to the operation i  OA . Consider, for example, the element y = ((s3 2 s3 ) 4 s1 ) 1 (s2 2 s1 ). The corresponding labelled planar rooted binary tree T is displayed in the following figure. Figure 2: The element y = ((s3 2 s3 ) 4 s1 ) 1 (s2 2 s1 )  SA 1
+
+4 2 s3 s3 s1 s2 2 s1
+
+Let   OA and   OB . By induction over the tree depth, it is easy to show that, for all elements e, e1 , . . . , el  (L, OA  OB ) and all planar rooted binary trees T with l leaves, the following equations hold. e  TOB (e1 , . . . , el ) = e  TOA (e1 , . . . , el ) = TOB (e  e1 , . . . , e  el ), TOA (e  e1 , . . . , e  el ). (6) (7)
+
+Now, we are going to describe a KEP that applies to any system (L, OA  OB ) as described above. We have two subsets of public elements {s1 ,	, sm } and {t1 ,    , tn } of L. Also, recall that SA = s1 ,	, sm OA and SB = t1 ,	 , tn OB . Alice and Bob perform the following protocol steps. Protocol 2: Key establishment for the partial multi-LD-system (L, OA  OB ). 1. Alice generates her secret key (a0 , a,  )  SA  L  OA , and Bob chooses his secret key (b,  )  SB  OB . 2. Alice computes the elements a	t1 , . . . , a	tn , p0 = a  a0  L, and sends them to Bob. Bob computes b  s1 , . . . , b  sm  L, and sends them to Alice. 3. Alice, knowing a0 = TOA (r1 , . . . , rk ) with ri  {s1 , . . . , sm }, computes from Bob's public key TOA (b  r1 , . . . , b  rk ) = b  TOA (r1 , . . . , rk ) = b  a0 . 10
+
+ And Bob, knowing b = TO (u1 , . . . , uk ) with uj  {t1 , . . . , tn }, computes B from Alice's public key   (u1 , . . . , uk ) = a  b. (a  u1 , . . . , a  uk ) = a  TO TO B B
+
+4. Alice computes KA = a  (b  a0 ). Bob gets the shared key by KB := (a  b)  p0 = (a  b)  (a  a0 ) = KA .
+LD
+
+Figure 3: KEP for the partial multi-LD-system (L, OA  OB ). {a (ti )}1in , a  a0 Alice a0  SA , a,   OA {b,  sj }1j m Bob b  SB ,   OB
+
+Here the operations   OA and   OB are part of Alice's and Bob's private keys. As in Protocol 1, explicit expressions of a0  SA and b  SB as treewords T, T  are also parts of the private keys - though we did not mention  it explicitly in step 1 of the protocols. But here TOA and TO also contain all B the information about the grafting operations (in OA or OB , respectively) at the internal vertices of T , T  .
+
+4.2
+
+Base problems
+
+In order to break Protocol 2 an attacker has to find the shared key K = KA = KB . A successful attack on Bob's secret key (b,  ) requires (first) the solution of the following problem.
+ 2  Input: Element pairs (s1 , s 1 ), . . . , (sm , sm )  L with si = b  si 1  i  m for some (unknown) b  L,   OB . Objective: Find b  L and	OB such that b	 si = s i for all i = 1 , . . . , m.
+
+In order to clarify concepts we introduce the following notation, which also makes it easier to name our base problems at hand. For e  L, let e, (x) := e  x. Then, for   OA , e, is by (4) a magma homomorphism on SB . Analogeously, for   OB , e,  End(SA ) by (5). Now, we may reformulate the base problem for obtaining a pseudo-key on Bob's secret. LDEndP (LD-endomorphism Search Problem for SA ):  2  Input: Element pairs (s1 , s 1 ), . . . , (sm , sm )  L with si = b, (si ) 1  i  m for some (unknown) magma endomorphism b,  End(SA ) (with   OB ). Objective: Find magma endomorphism b ,   End(SA ) (  OB ) such that b ,  (si ) = s i for all i = 1, . . . , m. Recall that we work in the leftdistributive system (L, OA  OB ). We define the generalized LDEndP for (SA , SB ) as an LD-endomorphism Search Problem 11
+
+for SA with the objective to find a magma endomorphism b ,   End(SA ) with    OB and b in SB = t1 , . . . , tn OB . Even if an attacker finds a pseudo-key endomorphism b ,   End(SA ), then she still faces the following problem. OB -MSP (OB -submagma Membership Search Problem for SB ): Input: t1 , . . . , tn  L, b  SB = t1 , . . . , tn OB . Objective: Find an expression of b as a tree-word (with internal vertices labelled by operations in OB ) in the submagma SB (notation b = TOB (u1 , . . . , uk ) for ui  {tj }j n ). Proposition 4.1. An oracle that solves the generalized LDEndP for (SA , SB ) and OB -MSP for SB is sufficient to break key establishment Protocol 2. Proof. As outlined above, we perform an attack on Bob's private key. The generalized LDEndP for (SA , SB ) oracle provides a pseudo-key endomorphism b ,   End(SA ) with b  SB ,    OB such that b ,  (si ) = s i = b, (si ) for all i = 1, . . . , m. Observe that this implies for any element eA  SA that b ,  (eA ) = b, (eA ). In particular, we have b ,	(a0 ) = b, (a0 ). Since b  SB , we may feed b into a OB -MSP oracle for SB which returns a tree-word  TO (u1 , . . . , ul ) = b (for some l  N and ui  {tj }j n ). Now, we compute B
+  (u1 , . . . , ul ))	p0 (a  u1 , . . . , a  ul )   p0 = (a  TO TO B B LD
+
+=
+
+(a  b )   (a  a0 ) = a	(b   a0 ) = a  (b  a0 ) = K.
+
+LD
+
+On the other hand, an attack on Alice's secret key requires (first) the solution of the following problem. modLDEndP (Modified LD-endomorphism Search Problem for SB ): 2   Input: Element pairs (t1 , t 1 ), . . . , (tn , tn )  L with ti = a, (ti ) 1  i  n for some (unknown) magma endomorphism a,  End(SB ) (with   OA ). Furthermore, an element p0  a, (SA ), i.e. p0 = a, (a0 ) for some a 0  SA .  Objective: Find (a 0 , a , )  L  End(SB ) (  OA ) such that a , (ti ) = ti  for all i = 1, . . . , n and a , (a0 ) = p0 . We define the generalized modLDEndP for (SB , SA ) as a modified LD-endomorphism Search Problem for SB with the objective to find (a 0 , a , )  SA  End(SB )  (	OA ) such that a , (ti ) = t i for all i = 1, . . . , n and a , (a0 ) = p0 .  Even if an attacker finds a pseudo-key (a0 , a , )  SA  End(SB ) for Alice's secret, then she still faces a OA -submagma Membership Search Problem for SA . Proposition 4.2. An oracle that solves the generalized modLDEndP for (SB , SA ) and OA -MSP for SA is sufficient to break key establishment Protocol 1. Proof. As outlined above, we perform an attack on Alice's private key. The generalized modLDEndP oracle provides a pseudo-key (a 0 , a , )  SA End(SB )  such that a , (ti ) = t i = a, (ti ) for all i = 1, . . . , n and a , (a0 ) = p0 . Observe that this implies for any element eB  SB that a , (eB ) = a, (eB ). In  particular, we have a , (b) = a, (b). Since a 0  SA , we may feed a0 into a
+
+12
+
+ OA -MSP oracle for SA which returns a tree-word TO (r1 , . . . , rl ) = a 0 (for some A l  N and ri  {sj }j m ). Now, we may compute	(r1 , . . . , rl )) (b	r1 , . . . , b	rl ) = a  (b  TO a  TO A A LD
+
+=
+
+   a  (b  a 0 ) = (a  b)  (a  a0 ) = (a  b)  p0 = K.
+
+LD
+
+Now, we describe approaches to break Protocol 2 which do not resort to solving a submagma-MSP. Proposition 4.3. An generalized LDEndP oracle is sufficient to break key establishment Protocol 2. More precisely, an oracle that solves the generalized LDEndP for (SA , SB ) and the LDEndP for SB is sufficient to break KEP1. Proof. Here we perform attacks on Alice's and Bob's private keys - though we do not require a pseudo-key for the first component a0 of Alice's key. The LDEndP oracle for SB provides a , s.t. a , (tj ) = t j = a, (tj ) for all j  n. And the generalized LDEndP oracle for (SA , SB ) returns the pseudo-key endomorphism b ,  with b  SB s.t. b ,	(si ) = s i = b, (si ) for all i  m. Since b  SB , we conclude that a , (b ) = a, (b ). Also, a0  SA implies, of course, b ,  (a0 ) = b, (a0 ). Now, we compute (a  b )   p0 = (a  b )	 (a  a0 ) = a  (b   a0 ) = a  (b  a0 ) = K. Alternatively, one may choose the following approach. Proposition 4.4. An oracle that solves the generalized modLDEndP for (SB , SA ) and the LDEndP for SA is sufficient to break KEP1. Proof. Also here we perform attacks on Alice's and Bob's private keys. The LDEndP oracle for SA provides b ,   End(SA ) s.t. b ,  (sj ) = s j = b ,  (sj ) for all j  m. And the generalized modLDEndP oracle for (SB , SA ) returns the  pseudo-key (a 0 , a , )	SA  End(SB ) s.t. a , (ti ) = ti = a , (ti ) for all	i  n and a , (a0 ) = p0 . Since a0  SA , we conclude that b ,  (a 0 ) = b, (a0 ). Also, b  SB implies, of course, a , (b) = a, (b). Now, we compute
+     a	(b   a 0 ) = a	(b  a0 ) = (a  b)  (a  a0 ) = (a  b)  p0 = K. LD LD
+
+5
+
+Discussion
+
+We leave this section short and confine our selves to some few remarks, mainly on shifted conjugacy in braid groups. For further discussion and open problems we refer the reader to section 5.2 in [Ka12]. (1) Note that in the non-associative setting the case m = n = 1 is particular interest, i.e. we may abandon simultaneity in our base problems since the submagmas generated by one element are still complicated objects. (2) Consider the infinite braid group (B , ) with shifted conjugacy as LDoperation. Then the LD-Problem (m = n = 1) is the shifted conjugacy problem (see e.g. [De06]) which was first solved in [KLT09]. If we replace shifted conjugacy by generalized shifted conjugacy, then the corresponding LD-problem still 13
+
+reduces to a subgroup conjugacy problem for a standard parabolic subgroup of a braid group. Such problems were first solved (in a more general framework) in [KLT10]. Though these solutions provide only deterministic algorithms with exponential worst case complexity, they may still affect the security of Protocol 1 if we use such LD-systems in braid groups as platform LD-systems. (3) Here we point out that the deterministic algorithms from [KLT09, KLT10] do not affect the security of Protocol 2 if we consider the following natural partial multi-LD-system (B , OA  OB ) in braid groups. Let p = 2q be odd. Let any   OA be of the form x  y =  p (x-1 ) (y )x with  =  p,p  for some  ,	 Bq . Analogously, any	 OB is of the form x  y =  p (x-1 ) (y )x with	=   p,p   for some   ,	   q (Bq ). Since  ,  commute with   ,	 , (B ,  ,  ) is for any   OA and   OB a bi-LD-system. The deterministic algorithms from [KLT09, KLT10] do not apply because the operations are part of the secret. Actually, the attacker has then to solve (still in the case n = 1) a very special decomposition problem, namely, given t, t  B such that t =  p (a-1 )~ p,p  (t)a for some a  B ,  ~  Bq   p (Bq ), find a,  ~ or some pseudokeys in the same domain. (4) The decomposition problem mentioned above appears to be inherently quadratic, i.e. we do not see how it may be linearized such that linear algebra attacks as the linear centralizer attack of B. Tsaban [Ts12] apply. It shares this feature with Y. Kurt's Triple Decomposition Problem (see section 4.2.5. in [MSU11]). Acknowledgements. The first author acknowledges financial support by The Oswald Veblen Fund and by the Minerva Foundation of Germany.
+
+References
+[AAG99] Iris Anshel, Michael Anshel and Dorian Goldfeld, An algebraic method for public-key cryptography, Mathematical Research Letters 6 (1999), 1-5. [De00] Patrick Dehornoy, Braids and Self-Distributivity, Progress in Math. 192 Birkhuser (2000). [De06] Patrick Dehornoy, Using shifted conjugacy in braid-based cryptography. In: L. Gerritzen, D. Goldfeld, M. Kreuzer, G. Rosenberger and V. Shpilrain (Eds.), Algebraic Methods in Cryptography, Contemporary Mathematics 418, AMS (2006), 65-73. [Ka07] Arkadius Kalka, Representations of braid groups and braid-based cryptography, PhD thesis, Ruhr-Universitt Bochum (2007). www-brs.ub.ruhr-uni-bochum.de/netahtml/HSS/Diss/KalkaArkadiusG/ [Ka12] Arkadius Kalka, Non-associative public key cryptography, preprint (2012), submitted. http://arxiv.org/abs/1210.8270. [KLT09] Arkadius Kalka, Eran Liberman, and Mina Teicher , A Note on the Shifted Conjugacy Problem in Braid Groups, Groups - Complexity - Cryptology 1 (2) (2009), 227-230.
+
+14
+
+[KLT10] Arkadius Kalka, Eran Liberman, and Mina Teicher, Solution to the subgroup conjugacy problem for Garside subgroups of Garside groups, accepted, to be published in: Groups  Complexity  Cryptology (2010). [MSU11] A.G.Myasnikov, V. Shpilrain and A.Ushakov, Non-commutative Cryptography and Complexity of Group-theoretic Problems, Amer. Math. Soc. Surveys and Monographs, 2011. [Ts12] Boaz Tsaban, Polynomial time solutions of computational problems in noncommutative-algebraic cryptography, preprint: http://arxiv.org/abs/1210.8114 2012. E-mail addresses: arkadius.kalka@rub.de, teicher@macs.biu.ac.il DEPARTMENT OF MATHEMATICS, BAR-ILAN UNIVERSITY, RAMAT GAN, ISRAEL
+
+15
+

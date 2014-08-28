@@ -1,0 +1,1 @@
+/home/hadoop-user/spark-1.0.2-bin-hadoop2/examples/src/main/python/wordcount.py

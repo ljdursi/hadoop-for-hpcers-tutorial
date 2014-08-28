@@ -1,0 +1,476 @@
+Efficient Solution of Backward Jump-Diffusion PIDEs with Splitting and Matrix Exponentials.
+Andrey Itkin
+Numerix LLC, 150 East 42nd Street, 15th Floor, New York, NY 10017, USA and Polytechnic Institute of New York University, 6 Metro Tech Center, RH 517E, Brooklyn NY 11201, USA aitkin@poly.edu
+
+arXiv:1304.3159v1 [q-fin.CP] 10 Apr 2013
+
+April 12, 2013
+
+Abstract We propose a new, unified approach to solving jump-diffusion partial integrodifferential equations (PIDEs) that often appear in mathematical finance. Our method consists of the following steps. First, a second-order operator splitting on financial processes (diffusion and jumps) is applied to these PIDEs. To solve the diffusion equation, we use standard finite-difference methods, which for multi-dimensional problems could also include splitting on various dimensions. For the jump part, we transform the jump integral into a pseudo-differential operator. Then for various jump models we show how to construct an appropriate first and second order approximation on a grid which supersets the grid that we used for the diffusion part. These approximations make the scheme to be unconditionally stable in time and preserve positivity of the solution which is computed via a matrix exponential. The paper demonstrates that the proposed method is computationally efficient, accurate and simple to implement.
+
+1
+
+Introduction
+
+Partial integro-differential equations (PIDEs) naturally appear in mathematical finance if an underlying stochastic process is assumed to be a combination of diffusion and jumps.
+Opinions expressed in this paper are those of the author, and do not necessarily reflect the views of Numerix LLC.
+
+
+1
+
+A wide class of L evy processes fall into this category. In modern popular models such as stochastic volatility or, e.g., hybrid models, jumps could accompany any stochastic factor, thus increasing the overall complexity of the problem. For more details about jump-diffusion processes, see Cont and Tankov (2004), Sato (1999). Unsurprisingly, most of these PIDEs cannot be solved in closed form. At the same time, a numerical counterpart must be efficient. This is especially important if such a jump-diffusion model is used not only for pricing (given the values of the model parameters), but for their calibration as well. While the solution of the diffusion part (PDE) has been numerously discussed in the literature and various methods were proposed (see, e.g., Andersen and Andreasen (2000), Brennan and Schwartz (1978), Cont and Voltchkova (2003), Duffy (2006), Hout and Foulon (2010), Tavella and Randall (2000)), little can be found for the jump part, which according to the L evy-Khinchine formula is represented by a non-local integral. Various methods were suggested to address the construction of an efficient algorithm for solving these type of PIDEs (see, e.g., a discussion of these methods and problems related to their implementation in Carr and Mayo (2007), Itkin and Carr (2012), Strauss (2006)). In particular, they include a discretization of the PIDE that is implicit in the differential terms and explicit in the integral term (Cont and Voltchkova (2003)), Picard iterations for computing the integral equation (d'Halluin et al. (2005, 2004)) and a secondorder accurate, unconditionally-stable operator splitting (ADI) method that does not require an iterative solution of an algebraic equation at each time step (Andersen and Andreasen (2000)). Various forms of operator splitting technique were also used for this purpose (Itkin and Carr (2012)). In this paper, we will review operator splitting on financial processes in more detail. Assuming that an efficient discretization of the PIDE in time was properly chosen, the remaining problem is a fast computation of the jump integral, as it was observed to be relatively expansive. We mention three different approaches to numerical computation of this integral.1 The first approach assumes a direct approximation of the integral on an appropriate grid and then applies some standard quadrature method, such as Simpson's rule or Gaussian quadrature. This approach is computationally expensive for two reasons. First, usually the "jump" grid is not the same as the "diffusion" grid. Therefore, after the integral is computed, its values at the jump grid should be re-interpolated to the diffusion grid. Second, the integral is defined on an infinite domain, so either the domain has to be truncated or a non-uniform grid has to be used. Moreover, the complexity becomes greater if an implicit discretization of the integral is used, because it requires the solution of a dense system of linear equations of a large size. Therefore, most often an explicit discretization is utilized, which brings some constraints on the time steps to guarantee stability of the scheme. However, an exponential change of variables reduces the expense of evaluating the integral at all points. This change converts the integral term into a correlation integral, which can be evaluated at all the grid points simultaneously using a Fast Fourier Transform (FFT). This approach has been suggested by many authors (Andersen and Andreasen (2000), Tavella and
+For some models it can be computed analytically, so in what follows we do not take these models into account.
+1
+
+2
+
+Randall (2000), Wilmott (1998)). Still, this could be expensive because a large number of FFT nodes may need to be used for better accuracy. Another issue is that using FFT to compute a product of matrix A and vector requires A to be circulant, while the matrix obtained after discretization of the jump integral is not that type. Therefore, a direct (naive) usage of FFT for this purpose produces undesirable so-called "wrap-around" errors. A common technique to eliminate these errors is to embed A, which is actually a Toeplitz matrix, into a circulant matrix. This, in turn, requires doubling the initial vector of unknowns, which makes the algorithm slower (Itkin and Carr (2012)). Also as noticed in the latter paper for GTSP/CGMY/KoBoL models, the FFT algorithm loses its accuracy when the parameter	of the CGMY model tends to zero.2 The second approach to computing the jump integral utilizes an alternative representation of this integral in the form of a pseudo-differential operator, which puts the entire PIDE in the form of a fractional PDE. This problem was considered in Cartea and del CastilloNegrete (2007) and Itkin and Carr (2012). A recent survey of the existing literature on this subject and techniques for computation of the jump integral using the Grunwald-Letnikov approximation (which is of the first order in space) is given in Andersen and Lipton (2012). As it is known from Abu-Saman and Assaf (2007), Meerschaert and Tadjeran (2004, 2006), Sousa (2008), Tadjeran et al. (2006), a standard Grunwald-Letnikov approximation leads to unconditionally unstable schemes. To improve this, a shifted Grunwald-Letnikov approximation was proposed, which allows construction of an unconditionally stable scheme of the first order in space.3 However, solving pricing equations to second order in the space variable is almost an industry standard, and therefore this method requires further investigation to address this demand. The third method4 exploits a nice idea first proposed in Carr and Mayo (2007). Carr and Mayo found that for some L evy models, the solution of the integral evolutionary equation5 is equivalent to the solution of a particular PDE. The problem is then to find a proper space-differential operator (kernel) to construct such a PDE. Carr and Mayo demonstrated the advantage of this approach for the Merton and Kou models, and showed which parabolic equations provide the necessary solution. Later in Itkin and Carr (2012), this idea was further generalized to the class of pseudo-parabolic equations as applied to a class of L evy processes, known as GTSP/CGMY/KoBoL models. These pseudo-parabolic equations could be formally analytically solved via a matrix exponential. Itkin and Carr then discuss a numerical method for efficiently computing this matrix exponential. When the parameter	of the GTSP/CGMY/KoBoL model is an integer, this method uses a finite-difference scheme similar to those used for solving parabolic PDEs, and the matrix of this FD scheme is banded. Therefore, in this case, the computation of the jump integral:
+The CGMY model in this limit becomes the VG model (Madan and Seneta (1990)). A second-order approximation could in principle be constructed as well, but this would result in a massive calculation for the coefficients. Therefore, this approach was not further elaborated on. 4 We also have to mention one more method proposed by Lipton and Sepp (2009) as applied to the Stern model. Though it is not evident how to generalize this method for other models, it provides a very efficient computational algorithm for the Stern model. 5 This equation naturally arises at some step of the splitting procedure, if splitting is organized by separating diffusion from jumps.
+3 2
+
+3
+
+ Is provided on the same grid as was constructed for the diffusion (parabolic) PDE. Outside of this domain (if ever needed, e.g. for European options), the PIDE grid is further extended to an infinite domain,6 but no interpolation is required afterwards.	Has linear (O(N )) complexity in the number of the grid nodes N , since the results (e.g., option prices) are given by solving a linear system of equations with a banded matrix. In the case of a real parameter , Itkin and Carr suggested computing the prices using the above algorithm at three values of an integer  closest to the given real , and then interpolating using any interpolation of the second order. In this paper we use a different flavor of this idea. First, we use an operator-splitting method on the financial processes, thus separating the computation of the diffusion part from the integral part. Then, similar to Itkin and Carr (2012), we represent the jump integral in the form of a pseudo-differential operator. Next we formally solve the obtained evolutionary partial pseudo-differential equations via a matrix exponential. We then show that the matrix exponential can be efficiently computed for many popular L evy models, and that the efficiency of this method is not worse than that of the FFT. The proposed method is almost universal, i.e., allows computation of PIDEs for various jump-diffusion models in a unified form. We also show that this method is relatively simple to implement. The rest of the paper is organized as follows. In section 2 we briefly discuss a general form of a backward PIDE for the class of L evy models. In Section 3, we introduce a splitting technique for nonlinear operators. In section 4, we present our general approach to the solution of the PIDE using a splitting and matrix exponential approach. An explicit construction of various FD schemes of the first and second order is presented in the next section. There we consider the following jump models: Merton, Kou and GTSP (also known as CGMY or KoBoL). The results presented in the last two sections are new, and to the best of our knowledge have not been discussed in the literature. Our technique utilizes some results from matrix analysis related to definitions of M-matrices, Metzler matrices and eventually exponentially positive matrices. In section 6, we present numerical examples that demonstrate the efficiency and accuracy of the proposed method. The final section concludes.
+
+2
+
+L evy Models and Backward PIDE
+
+To avoid uncertainty, let us consider the problem of pricing equity options written on a single stock. As we will see, this specification does not cause us to lose any generality, but it makes the description more practical. We assume an underlying asset (stock) price St be driven by an exponential of a L evy process St = S0 exp(Lt ), 0  t  T, (1)
+
+where t is time, T is option expiration, S0 = St |t=0 , Lt is the L evy process L = (Lt )0tT with a nonzero Brownian (diffusion) part. Under the pricing measure, Lt is given by Lt = t + Wt + Yt ,
+6
+
+,   R,
+
+ > 0,
+
+(2)
+
+In other words the PIDE grid is a superset of the corresponding PDE grid.
+
+4
+
+with L evy triplet (, ,  ), where Wt is a standard Brownian motion on 0  t  T and Yt is a pure jump process. We consider this process under the pricing measure, and therefore e-(r-q)t St is a martingale, where r is the interest rate and q is a continuous dividend. This allows us to express  as (Eberlein (2009))  =r-q- 2 - 2 ex - 1 - x1|x|<1	(dx),
+R
+
+where  (dx) is a L evy measure which satisfies ex  (dx) < .
+|x |> 1
+
+We leave  (dx) unspecified at this time, because we are open to consider all types of jumps including those with finite and infinite variation, and finite and infinite activity. 7 To price options written on the underlying process St , we want to derive a PIDE that describes time evolution of the European option prices C (x, t), x  log(St /S0 ). Using a standard martingale approach, or by creating a self-financing portfolio, one can derive the corresponding PIDE (Cont and Tankov (2004)) rC (x, t) = 1 C (x, t) + r - 2 t 2 +
+R
+
+C (S, t) 1 2  2 C (S, t) +  x 2 x2 C (x + y, t) - C (x, t) - (ey - 1) C (x, t)	(dy ) (3) x
+
+for all (x, t)	R  (0, T ), subject to the terminal condition C (x, T ) = h(x), (4)
+
+where h(x) is the option payoff, and some boundary conditions which depend on the type of the option. The solutions of this PIDE usually belong to the class of viscosity solutions (Cont and Tankov (2004)). We now rewrite the integral term using the following idea. It is well known from quantum mechanics that a translation (shift) operator in L2 space could be represented as Ta = exp a so Ta f (x) = f (x + a).
+We recall that a standard Brownian motion already has paths of infinite variation. Therefore, the L evy process in Eq.(2) has infinite variation since it contains a continuous martingale component. However, here we refer to the infinite variation that comes from the jumps.
+7
+
+ x
+
+,
+
+5
+
+Therefore, the integral in Eq. (3) can be formally rewritten as [C (x + y, t) -C (x, t) - (ey - 1)
+R
+
+J
+R
+
+exp y
+
+ x
+
+C (x, t)  (dy ) = J C (x, t), x  - 1 - (ey - 1)  (dy ). x
+
+(5)
+
+In the definition of operator J (which is actually an infinitesimal generator of the jump process), the integral can be formally computed under some mild assumptions about existence and convergence if one treats the term /x as a constant. Therefore, operator J can be considered as some generalized function of the differential operator x . We can also treat J as a pseudo-differential operator. With allowance for this representation, the whole PIDE in the Eq.(3) can be rewritten in operator form as  C (x,  ) = [D + J ]C (x,  ), (6) where  = T - t and D represents a differential (parabolic) operator 1 D  -r + r -  2 2	1 2 + 2 2 , x 2 x (7)
+
+where the operator D is an infinitesimal generator of diffusion. Notice that for jumps with finite variation and finite activity, the last two terms in the definition of the jump integral J in Eq.(3) could be integrated out and added to the definition of D. In the case of jumps with finite variation and infinite activity, the last term could be integrated out. However, here we will leave these terms under the integral for two reasons: i) this transformation (moving some terms under the integral to the diffusion operator) does not affect our method of computation of the integral, and ii) adding these terms to the operator D negatively influences the stability of the finite-difference scheme used to solve the parabolic equation DC (x, t) = 0. This equation naturally appears as a part of our splitting method, which is discussed in the next section.
+
+3
+
+Operator Splitting Technique
+
+To solve Eq. (6) we use splitting. This technique is also known as the method of fractional steps (see Dyakonov (1964), Samarski (1964), Yanenko (1971)) and sometimes is cited in financial literature as Russian splitting or locally one-dimensionally schemes (LOD) (Duffy (2006)). The method of fractional steps reduces the solution of the original k -dimensional unsteady problem to the solution of k one-dimensional equations per time step. For example, consider a two-dimensional diffusion equation with a solution obtained by using some finite-difference method. At every time step, a standard discretization on space variables is applied, such that the FD grid contains N1 nodes in the first dimension and N2 nodes in the second dimension. Then the problem is solving a system of N1  N2 linear equations, and the 6
+
+matrix of this system is block-diagonal. In contrast, utilization of splitting results in, e.g., N1 systems of N2 linear equations, where the matrix of each system is banded (tridiagonal). The latter approach is easy to implement and, more importantly, provides significantly better performance. The previous procedure uses operator splitting in different dimensions. Marchuk (1975) and then Strang (1968) extended this idea for complex physical processes (for instance, diffusion in the chemically reacting gas, or the advection-diffusion problem). In addition to (or instead of) splitting on spatial coordinates, they also proposed splitting the equation into physical processes that differ in nature, for instance, convection and diffusion. This idea becomes especially efficient if the characteristic times of evolution (relaxation time) of such processes are significantly different. For a general approach to splitting techniques using Lie algebras, we refer the reader to Lanser and Verwer (1999). Decomposing the total (compound) operator L for problems of interest seems natural if, say, L can be represented as a sum of k noncommuting linear k k operators i=1 Li . In this case the operator equation Lf (t) = i=1 Li f (t) = 0, with f (t) being the unknown dependent variable, can be formally integrated via an operator exponential, i.e., k f (t) = eLt f (0) = e i=1 Li t f (0). Due to the noncommuting property, the latter expression can be factorized into a product of operators f (t) = eLk ...eL1 f (0). This equation can then be solved in N steps sequentially by the following procedure: f (1) = eL1 f (0), f (2) = eL2 f (1) , . . . f (k) = eLk f (k-1) , f (t) = f (k) . This algorithm is exact (no bias) if all the operators commute. If, however, they do not commute, the above algorithm provides only a first-order approximation in time (i.e., O(t)) to the exact solution. To get the second-order splitting for noncommuting operators, Strang proposed a new scheme, which in the simplest case (k = 2) is (Strang (1968)) f (t) = eLt f (0) = e(L1 +L2 )t f (0)  eL1 2 eL2 t eL1 2 f (0) + O(t2 ).
+t t
+
+(8)
+
+For parabolic equations with constant coefficients, this composite algorithm is secondorder accurate in t provided the numerical procedure that solves a corresponding equation at each splitting step is at least second-order accurate.
+
+7
+
+For nonlinear operators, the situation is more delicate. As shown in Koch and Thalhammer (2011), the theoretical analysis of the nonlinear initial value problem u (t) = F (u(t)), 0tT
+
+for a Banach-space-valued function u : [0, T ]	X given an initial condition u(0) could be done using calculus of Lie derivatives. A formal linear representation of the exact solution is u(t) = EF (t, u(0)) = etDF u(0), 0  t  T,
+
+where the evolution operator and Lie derivatives are given by etDF v = EF (t, v ), etDF Gv = G(EF (t, v )), DF v = F (v ), DF Gv = G (v )F (v ) 0  t  T,
+
+for an unbounded nonlinear operator G : D(G)  X  X . Using this formalism, Koch and Thalhammer (2011) showed that Strang's second-order splitting method remains unchanged in the case of nonlinear operators. Using this result for Eq.(6) gives rise to the following numerical scheme: C (1) (x,  ) = e C (x,  +  ) = e
+ 2
+
+D
+
+C (x,  ), C (2) (x,  ).
+
+(9)
+
+C (2) (x,  ) = e J C (1) (x,  ),
+ 2
+
+D
+
+Thus, instead of an unsteady PIDE, we obtain one PIDE with no drift and diffusion (the second equation in Eq.(9)) and two unsteady PDEs (the first and third ones in Eq.(9)). In what follows, we consider how to efficiently solve the second equation, while assuming that the solution of the first and the third equations can be obtained using any finitedifference method that is sufficiently efficient. To this end, in various examples given in the next sections we will explicitly mention what particular method was used for this purpose. In this paper, we do not discuss the uniqueness and existence of the solution for the PIDE; to do so would move us to the definition of a viscosity solution for this class of integro-differential equations. For more details, see Cont and Tankov (2004) and Arisawa (2005). Lastly, let us mention that J = (-ix ), where (u) is the characteristic exponent of the jump process. This directly follows from the L evy-Khinchine theorem.
+
+4
+
+Solution of a Pure Jump Equation
+
+We begin with the following observation. By definition of the jump generator J , under some mild constraints on its existence, J could be viewed as a function of the operator x . Therefore, solving the integral (second) equation in Eq.(9) requires a few steps. First, an appropriate discrete grid G(x) has to be constructed in the truncated (originally infinite) space domain. This grid could be nonuniform. An important point is that in the 8
+
+space domain where the parabolic equations of Eq.(9) are defined, this grid should coincide with the finite-difference grid constructed for the solution of these parabolic equations.8 This is to avoid interpolation of the solution that is obtained on the jump grid (the second step of the splitting algorithm) to the diffusion grid that is constructed to obtain solutions at the first and third splitting steps. To make this transparent, let the parabolic equation be solved at the space domain [x0 , xk ], x0 > -, xk <  using a nonuniform grid with k + 1 nodes (x0 , x1 , ..., xk ) and space steps h1 = x1 - x0 , ..., hk = xk - xk-1 . The particular choice of x0 and xk is determined by the problem under consideration. We certainly want |x0 | and |xk | not to be too large. The integration limits of J in Eq.(5) are, however, plus and minus infinity. Truncation of these limits usually is done to fit memory and performance requirements. On the other hand, we want a fine grid close to the option strike for better accuracy. Therefore, a reasonable way to construct a jump grid is as follows. For x0  x  xk , the jump grid coincides with the grid used for solution of the parabolic PDEs. Outside of this domain, the grid is expanded by adding nonuniform steps; i.e., the entire jump grid is x-K , x1-K , ...x-1 , x0 , x1 , ..., xk , xk+1 , ..., xk+M . Here K > 0, M > 0 are some integer numbers that are chosen based on our preferences. Since contribution to J from very large values of x is negligible, the outer gridpoints x-K , x1-K , ...x-1 and xk+1 , ..., xk+M can be made highly nonuniform. One possible algorithm could be to have the steps of these grids be a geometric progression. This allows one to cover the truncated infinite interval with a reasonably small number of nodes. Second, the discretization of x should be chosen on G(x). We want this discretization to: 1. Provide the necessary order of approximation of the whole operator J in space. 2. Provide unconditional stability of the solution of the second equation in Eq.(9). 3. Provide positivity of the solution. Let x denote a discrete analog of x obtained by discretization of x on the grid G(x). Accordingly, let us define the matrix J (x ) to be the discrete analog of the operator J on the grid G(x). The following proposition translates the above requirements to the conditions on J (x ). Proposition 4.1 The finite-difference scheme C (x,  +  ) = e J (x ) C (x,  ) (10)
+
+is unconditionally stable in time  and preserves positivity of the vector C (x,  ) if there exists an M-matrix B such that J (x ) = -B . Proof By definition of an M-matrix (see Berman and Plemmons (1994)), the class of Mmatrices contains those matrices whose off-diagonal entries are less than or equal to zero,
+8
+
+So the PIDE grid is a superset of the PDE grid.
+
+9
+
+while all diagonal elements are positive. All eigenvalues of an M-matrix have a positive real part. Therefore, if B is an M-matrix, all eigenvalues of J (x ) have a negative real part. Therefore, e J (x ) < 1 (in the spectral norm), and thus the scheme Eq.(10) is unconditionally stable. Now since B is an M-matrix, J is a Metzler matrix (Berman and Plemmons (1994)). An exponential function of the Metzler matrix is a positive matrix. Therefore, if C (x,  ) is positive, the scheme Eq.(10) preserves the positivity of C (x,  +  ). This proposition gives us a recipe for the construction of the appropriate discretization of the operator J . In the next section, we will give some explicit examples of this approach. Once the discretization is performed, all we need is to compute a matrix exponential e J (x ) , and then a product of this exponential with C (x,	). The following facts make this method competitive with those briefly described in the introduction. We need to take into account that: 1. The matrix J (x ) can be precomputed once the finite-difference grid G(x) has been built. 2. If a constant time step is used for computations, the matrix A = e J (x ) can also be precomputed. 3. If the above two statements are true, the second splitting step results in computing a product of a matrix with time-independent entries and a vector. The complexity of this operation is O(N 2 ), assuming the matrix A is N  N , and the vector is N	1. However, N in this case is relatively small.9 One can compare this with the FFT algorithm proposed in Andersen and Andreasen (2000) to compute the correlation integral. This translates into computation of two matrix-by-vector products. This algorithm is 2c  O(N log2 N ), where c is some coefficient. However, N is relatively high in this case. Typical values are N = 4096. On top of that, as was discussed in the introduction to avoid "wrap-around" effects this number must be doubled, i.e., N = 8192. Also a post-solution interpolation is required.10 Finally, for some models (CGMY, VG), the computation of the integral in a neighborhood of x = 0 requires special treatment (Cont and Voltchkova (2003)). Overall, the total complexity of FFT with allowance for all these remarks becomes almost the same, or even worse than that of the proposed matrix exponential algorithm. The above consideration is sufficiently general in the sense that it covers any particular jump model where jumps are modeled as an exponential L evy process. Clearly, for some models computation of the jump integral can be readily simplified. For instance, Merton's model, which we discuss in the next section, allows another approach with a better performance. Below we discuss this approach in more detail as it seems to be general enough and applicable to some other models as well.
+9 10
+
+Typical values are N = 100 - 200. In more advanced approaches, this step could be eliminated; see Parrot (2009).
+
+10
+
+5
+
+Examples for Some Popular Models
+
+In this section, we review some popular jump models known in the financial literature. Given a model, our goal is to construct a finite-difference scheme, first for x , and then for J (x ), that satisfies the conditions of Proposition 4.1.
+
+5.1
+
+Merton Model
+1 (x - J )2 dx,  (dx) =   exp - 2 2J 2J
+
+Merton (1976) considered jumps that are normally distributed with the L evy density (11)
+
+where , J and J are parameters of the model. Considering the pure jump part of the Merton model, one can see that it exhibits finite activity, i.e., a finite number of jumps within any finite time interval. Plugging Eq.(11) into the definition of the operator J in Eq.(5) and fulfilling a formal integration gives J =  eJ dx + 2 J dx - dx - 1 ,
+1 2 2
+
+ = eJ +
+
+2 J 2
+
+- 1,
+
+(12)
+
+2 2 where dx  /x, d2 x	 /x . The corresponding evolutionary pure jump equation to be solved is
+
+C (2) (x,  ) = AC (1) (x,  ),
+
+A = exp  eJ dx + 2 J dx - dx - 1
+
+1
+
+2 2
+
+.
+
+(13)
+
+A matrix exponential method for this model with the exponential operator11 as in Eq.(13) has already been considered in Tangman et al. (2011) using a different derivation (from Carr and Mayo (2007)). They also discuss in more detail various modern methods for computing the matrix exponentials. Recall that the diffusion equations in Eq.(9) have to be solved up to some order of approximation in time  . Suppose for this purpose we want to use a finite-difference scheme that provides a second-order approximation, O(( )2 ). However, Eq.(13) gives an exact solution of the corresponding pure jump equation (the second step in Strang's splitting scheme). Since Strang's scheme guarantees only second-order accuracy (O(( )2 )) to the exact solution of the full PIDE, the second step could be computed to the same order of accuracy. Suppose first that we require only an O( ) approximation. To this end we can use the (1,0) P ade approximation of e J , e J  1 +	J + O( ), which actually is a well-known Euler explicit scheme. Now the product J C (1) (x,  ) = -(dx + 1)C (1) (x,  ) + eJ dx + 2 J dx C (1) (x,  )
+11
+1 2 2
+
+It is actually a double exponential operator.
+
+11
+
+can be efficiently computed if one observes that vector z (x,  ) = eJ dx + 2 J dx C (1) (x,  ) is a solution of z (x, s) = s 1 2 2 dx z (x, s) J dx + J 2
+1 2 2
+
+for 0  s  1 and z (x, 0) = C (1) (x,  ). This PDE is actually a heat equation and can be solved with complexity O(N ). In other words, we just rederived the result and method first obtained in Carr and Mayo (2007). If one needs a second-order approximation in time, one can use a (1,1) P ade approximation of e J , 1 1+ 2  J e	J  + O(( )2 ), 1 1 - 2	J so that C (x,  ) at this step is a solution of 1 1 -	J 2 C (2) (x,  ) = 1 1 +  J 2 C (1) (x,  ).
+
+Since after discretization of J is performed, the discrete matrix J (x) in the right-hand side of this equation is dense, a straightforward attempt to solve this matrix equation is not efficient. However, it could be solved by using Picard iteration.12 To start the iteration, one needs to compute a product J (x)C (1) (x,  ). At every iteration i, one computes a product (2) (2) J (x)Ci-1 (x,  ), where Ci (x,  ) is the ith approximation of C (2) (x,  ) obtained after i iterative steps. Both these products can be computed by solving a kind of a heat equation (as was mentioned above) with complexity O(N ).
+
+5.2
+
+Kou Model
+
+The Kou model, proposed in Kou and Wang (2004), is a double exponential jump model. Its L evy density is  (dx) =  p1 e-1 x 1x0 + (1 - p)2 e2 x 1x<0 dx, (14)
+
+where 1 > 1, 2 > 0, 1 > p > 0; the first condition was imposed to ensure that the stock price S (t) has finite expectation. Using this density in the definition of the operator J in Eq.(5) and carrying out the integration (recalling that we treat /x as a constant) gives J =  -1 + 0 a + p1 (1 - a)-1 + (1 - p)2 (a + 2 )-1 , 1-p p + , -2 < Re(a) < 1 . a  x , 0 = 1 - 1 1 + 2
+12
+
+(15)
+
+See, for instance, d'Halluin et al. (2005), where conditions were derived on approximation to J for convergence of these iterations.
+
+12
+
+The inequality -2 < Re(a) < 1 is an existence condition for the integral defining J and should be treated as follows: the discretization of the operator a = x should be such that all eigenvalues of matrix A, a discrete analog of a, obey this condition. Below we assume that  > 0. The construction of the finite-difference scheme in the case  < 0 can be done in a similar way. Let us first consider discretizing a using first-order approximation in hi , i = 1, . . . , N , where {hi } are the step sizes of the nonuniform space grid. Observe that if 1 I - A is an Mmatrix13 , then its inverse is a positive matrix. Therefore, a one-sided forward discretization of a, which we denote as AF : C/x = [C (x + h, t) - C (x, t)]/h, should be chosen for this term. In contrast, for the term 2 I + A to be an M-matrix, a one-sided backward discretization of a, denoted as AB , on the same grid needs to be applied. As now both M1 = p1 (1 I - AF )-1 and M2 = (1 - p)2 (2 I + AB )-1 are positive matrices, we need the matrix M0 = 0 A - I (where A is some discretization of a) to be a Metzler matrix in order to make the entire sum J (x ) = (M0 + M1 + M2 ) a Metzler matrix. As 0 > 0, this means that M0 = 0 AF - I . Thus, by construction, we have proved the following proposition: Proposition 5.1 Suppose that discretization of Eq.(15) is done using first-order approximation of a in hi , i = 1, . . . , N . Also suppose that the following scheme is performed: the operator a in the second and third terms in the right-hand side of Eq.(15) are approximated using one-sided forward differences, and the operator a in the fourth term is approximated using a one-sided backward difference. Then the matrix J (x ) = (M0 + M1 + M2 ), a discrete counterpart of the operator J , is a Metzler matrix. According to Proposition 4.1, all that remains to prove is that the diagonal elements of J (x ) are negative, because then J (x ) is an M-matrix with a negative sign. In doing so, first observe that both AF and AB are triangular with nonzero elements on the diagonal. For simplicity, let us consider a uniform grid in x with step size h. Also let us represent M1 in the form M1 = p1 h(1 hI - U F )-1 , where the matrix U F is nonzero only on the main diagonal (where all elements are -1) and the first upper diagonal (where all elements are 1). Accordingly, we represent M2 as M2 = (1 - p)2 h(2 hI + U B )-1 , with U B = (U F )T . Obviously all eigenvalues of U F are -1, and those of U B are 1. Therefore, the diagonal elements of M1 are p1 h/(1 h + 1), and those of M2 are (1 - p)2 h(2 h + 1). Thus, the diagonal elements of J (x ) are J (x )i,i =  -1 - h h 0 + p1 + (1 - p)2 , h h1 + 1 h2 + 1 i = 1, . . . , N ]. (16)
+
+Now the last two terms can be made as small as necessary by choosing a sufficiently small value of h,14 so that J (x )i,i < 0 for all i = 1, . . . , N . Thus, by Proposition 4.1, our scheme is
+I here denotes a unit matrix. The upper limit for H can be found by equating the right-hand side of Eq.(16) to zero and solving the resulting equation for h.
+14 13
+
+13
+
+unconditionally stable, preserves positivity of the solution and is of first-order approximation in h. The same result can be readily obtained in the case of a nonuniform grid. The discretization of a is constructed in a similar way; instead of a constant grid step size h, variable step sizes hi should be used. Again, after an appropriate approximation of x is chosen, J (x ) can be precomputed just once. The following proposition extends this method to construct a second order approximation scheme for the operator J . Proposition 5.2 Suppose that the following discretization scheme is performed: J (x ) + A2 =  - I + 0 AC + A2 + (1 - p)2 p1 + F 1 I - A 2 I + AB , (17)
+
+1 p1 (AF )2 (1 - p)2 (AB )2 + - h 2 (1 I - AF )2 (2 I + AB )2
+
+where  > 0 is a constant, AC is a centered finite-difference approximation of a of secondorder in h on the grid G(x) and A2 is a centered finite-difference approximation of a2  x,x of second-order in h. Then J (x ) + A2 is the negative of an M-matrix and approximates the operator J + x,x with O(h2 ) accuracy. Proof For simplicity, let us consider a uniform grid with a step size h as generalization for the nonuniform grid is straightforward. 1. Approximation. Rewriting Eq.(17) in terms of the operator a and taking a series expansion in h, we find that  - 1 + 0 a + a2 + p1 (a + 1 ha2 ) (1 - p)2 1 p1 2 + - h 1 ha2 ) 2 + (a - 1 ha2 ) 2 (1 - (a + 2 ha2 ))2 1 - (a + 1 2 2 +
+1 (1 - p)2 (a - 2 ha2 ) (2 + (a - 1 ha2 ))2 2
+
+= J + x,x + O(h2 ),
+
+regardless of what kind of second-order approximation of a2 in h we chose. 2. Stability and positivity of the solution. Observe that under the conditions of Eq.(15), 1 I - AF is an M-matrix, and therefore its inverse is a positive matrix (see Berman and Plemmons (1994)). Moreover, (1 I - AF )-2 is also a positive matrix. The same is true for 2 I + AB and its inverse and inverse squared. Now, according to the previous item, we have freedom in choosing the discrete representation of a2 . Let us rewrite the last three terms in the Eq.(17) in the form M3 = h (1 - p)2 1 p1 (U F )2 (1 - p)2 (U B )2 p1 + - + 1 hI - U F 2 hI + U B 2 (1 hI - U F )2 (2 hI + U B )2 14 ,
+
+and the first three terms in the form M4 = -I +  0 F (U + U B ) + 2 U F U B . 2h h
+
+As h  0, the matrix M3 is positive. That is because (-U F )-1 is upper triangular with all elements on the main and upper diagonals equal to 1, and (U B )-1 is lower triangular with all elements on the main and lower diagonals equal to 1. Therefore, the diagonal elements of M3 as h  0 are di = [p1 + (1 - p)2 ]/2 > 0. On the other hand, M4 is a tridiagonal matrix with negative elements on the main diagonal and positive elements at the first upper diagonal. Since the dominant elements at the first lower diagonal are proportional to 1/h2 and positive, it is always possible to choose small enough h such that all elements on this diagonal are positive, and thus the total matrix J (x ) is the negative of an M-matrix. Then, based on Proposition 4.1, the stability and positivity of the solution follow. Using Proposition 5.2, it is easy to construct an appropriate scheme for obtaining the solution of the pure jump equation in Eq.(9). As the jump operator in this equation doesn't contain the term x,x , the trick is to borrow it from the diffusion part. For instance, in 1 2  x,x . Therefore, we can split the whole operator the diffusion equation there is a term 2  2 x,x ) in D, while moving the other half to the J + D by leaving half of this term (i.e., 1 4 jump operator. Therefore, the operator in the exponent at the second splitting step becomes 1 2  x,x . A comparison of this expression with the analogous term in Proposition 5.2 J +4 immediately gives rise to the explicit representation  =  2 /(4). Finding a good choice of the step size h is determined by two conditions. The first one requires that all elements of M4 on the first lower diagonal must be positive. This condition is equivalent to 0  > . 2 h 2h The second condition is needed to guarantee that all diagonal elements of J (x ) are negative. This gives 2 p1 + (1 - p)2 -1 - 2 + < 0. h 2 The solution of both inequalities provides the value of h .
+
+5.3
+
+CGMY Model
+
+Computation of jump integrals under the CGMY model (also known as the KoBoL model, or more generally as generalized tempered stable processes (GTSPs)) was considered in detail in Itkin and Carr (2012) using a similar approach. GTSPs have probability densities symmetric in a neighborhood of the origin and exponentially decaying in the far tails. After this exponential softening, the small jumps keep their initial stable-like behavior, whereas the large jumps become exponentially tempered. The L evy measure of GTSPs is given by (y ) = L e-R |y| e-L |y| 1 +  1y>0 , y<0 R |y |1+L |y |1+R 15 (18)
+
+where R , L > 0, R , L > 0 and R , L < 2. The last condition is necessary to provide
+1
+
+y 2 (dy ) <  ,
+-1 |y |>1
+
+(dy ) < .
+
+(19)
+
+The next proposition follows directly from Proposition 7 of Itkin and Carr (2012).15 Proposition 5.3 The PIDE  C (x,  ) =  is equivalent to the PDE  C (x,  ) = (LR + LL )C (x,  ),  R R LR = R (-R ) {(R - a)R - R + [ R - (R - 1)R ] a} , R < 2, Re(R - a) > 0, R > 1, L L L- = L (-L ) {(L + a)L - L + [ L - (L + 1)L ] a} , L < 2, Re(L + a) > 0, L > 0, (20)
+
+
+C (x + y,  ) - C (x,  ) -
+-
+
+ C (x,	)(ey - 1) (y )dy x
+
+where  is the gamma function and Re() of an operator refers to the spectrum of the discretization of that operator. In special cases, this equation changes to LR = R log(R ) - log (R - a) + log R = 0, R(R - a) > 0, R(R ) > 1, LL = L log(L ) - log (L + a) + log L = 0, R(L + a) > 0, R(L ) > 0, and LR = R (R - a) log(R - a) - R log(R ) + a log(R - 1) - 2R coth-1 (1 - 2R ) R = 1, Re(R - a) > 0, R > 1, L + a - a(1 + L ) log LL = L (L + a) log L L = 1, Re(L + a) > 0, L > 0, (22) L + 1 L L + 1 L a R - 1 R a (21)
+
+where the logarithm of the differential operator is defined in the sense of Bakas et al. (1993).
+In Itkin and Carr's paper, jump integrals were defined on half-infinite positive and negative domains, while here they are defined on the whole infinite domain.
+15
+
+16
+
+There are a few ways to proceed in this case. First, one can use an extra Strang's splitting; instead of directly solving Eq.(20), solve it in three sweeps. At every step, only one operator, either LR or LL enters the equation. Thus, the construction of the appropriate discrete operator is simplified. The second approach is based on the observation that eigenvalues of the sum of two M-matrices are also positive. This result follows from Wayl's inequality (see Bellman (1960)). Therefore, if every operator in the right-hand side of Eq.(20) is represented by the negative of an M-matrix, the sum of those operators is also the negative of an Mmatrix. However, the discretization of these operators, while on the same grid, could differ, thus adding some flexibility to the construction of the numerical scheme. As shown in Itkin and Carr (2012), the computation of the matrix exponential could be fully eliminated by using the following approach. First, they show that for I  Z the solution of the pure jump equation could be reduced to the solution of a system of linear equations where the matrix in the left-hand side of the system is banded. Therefore, the complexity of this solution is O(N ). Then to compute the matrix exponential for a real , first choose three closest values of I  Z. Given the solutions at these I , we can interpolate them to give the solution for . Therefore, the complexity of this solution is that of interpolation. This approach, however, does not work well if 0 <  < 2, since we do not have a solution at  = 2. To proceed in such a way would then require extrapolation instead of interpolation. It is well known that extrapolation is not a reliable procedure, and so in what follows we apply the general approach of this paper to the GTSP models. 5.3.1 Case 1: 1 < R < 2.
+
+Proposition 5.4 If 1 < R < 2, then the discrete counterpart LR of the operator LR is the negative of an M-matrix if LR = R (-R ) R I - A B
+R R R - (R - 1)R ] AF . + [ R - R
+
+The matrix LR is an O(h) approximation of the operator LR . Proof In this case, (-R ) > 0. The last three terms in the curly braces form the negative of an M-matrix. Now, due to the existence conditions in Eq.(20), the step size h must be	chosen such that R > 1/h, and therefore R - AB R is a nonnegative matrix. Therefore, if h also obeys the condition
+R R (R - 1/h)R - R - [ R - (R - 1)R ] 1/h < 0,
+
+then LR is the negative of an M-matrix. But this inequality is always true for h > 0. That the approximation is first order follows from the definition of AF and AB . Therefore, according to Proposition 4.1, the above scheme is unconditionally stable and preserves the positivity of the solution.
+
+17
+
+5.3.2
+
+Case 2: R < 0.
+
+Proposition 5.5 If R < 0, then the discrete counterpart LR of the operator LR is the negative of an M-matrix if LR = R (-R ) R I - AB
+R R R - R + [ R - (R - 1)R ] AB .
+
+The matrix LR is an O(h) approximation of the operator LR . Proof The proof looks the same as that of Proposition 5.4 if one takes into account that R R - (R - 1)R < 0 if R < 0. 5.3.3 Case 3: 0 < R < 1.
+
+The most difficult case is when 0 < R < 1. This is because (R ) < 0 in this range of R , so construction of the finite-difference scheme based on Proposition 4.1 experiences some problems. Therefore, we must consider another approach, which is closely related to the concept of an "eventually positive matrix"; see Noutsos and Tsatsomeros (2008). Below we reproduce some definitions from this paper necessary for our further analysis. Definition An N  N matrix A = [aij ] is called  eventually positive, denoted by A > 0, if there exists a positive integer k0 such that Ak > 0 for all k > k0 ; we denote the smallest such positive integer by k0 = k0 (A) and refer to k0 (A) as the power index of A;  exponentially positive if for all t > 0, etA =
+ tk Ak k=0 k! v
+
+> 0;
+
+ eventually exponentially positive if there exists t0  [0, ) such that etA > 0 for all t > t0 . We denote the smallest such nonnegative number by t0 = t0 (A) and refer to it t0 (A) s the exponential index of A. We also need the following Lemma from Noutsos and Tsatsomeros (2008): Lemma 5.6 Let A  RN N . The following are equivalent: 1. A is eventually exponentially positive. 2. A + bI is eventually positive for some b  0. 3. AT + bI is eventually positive for some b	0. Based on the above definitions and Lemma 5.6, we can prove the following proposition. Proposition 5.7 Suppose 0 < R < 1 and consider the following discrete approximation of the operator LR : LR = R (-R ) R I - AC
+R R R - R + [ R - (R - 1)R ] AB .
+
+Then the matrix LR (i) is an O(h) approximation of the operator LR , (ii) has all negative eigenvalues and (iii) is eventually exponentially positive. 18
+
+Proof We prove each statement separately. Proof of (i): This follows from the fact that AC approximates the operator a to second order in h, while B does the same to first order. Proof of (ii): As (-R ) < 0, the matrix
+R R M1 = R (-R ) -R + [ R - (R - 1)R ] AB
+
+is the negative of an M-matrix, with negative elements on the main diagonal and positive elements on the first lower diagonal, while all other elements are zero. The term M2 =  R (-R ) R I - AC R evaluates to a dense matrix with negative elements on the main and first lower diagonal and positive elements on the first upper diagonal. The condition R > i (AC ), i = 1 . . . , N is always valid since R(i ) = 0 for i = 1, . . . , N . Denote the elements on the first lower diagonal of M1 as di -1 (M1 ), i = 1, . . . , N - 1. i i i Note that d-1 (M2 ) < 0 while d-1 (M1 ) > 0. Therefore, d-1 (M2 + M1 ) < di -1 (M1 ). For the elements on the main diagonal (we mark them with index 0) the opposite is true; i.e., i di 0 (M2 + M1 ) > d0 (M1 ). Also observe that for small enough h, we have M1  1/h while M2  1/h R and 0 < R < 1. Hence LR could be made strictly diagonally dominant by a proper choice of h. Moreover, all diagonal elements of LR are negative. Therefore, according to Gershgorin's circle theorem (Golub and Van Loan (1983)), all eigenvalues of LR have a negative real part. Proof of (iii): Observe that LR has the following properties for sufficiently small values of h: 1. Elements on the main diagonal are negative. 2. Elements on the first lower and upper diagonals are positive. 3. Other elements are small in absolute values as compared with that on the above three diagonals and can have various signs. To prove the statement of (iii), use Lemma 5.6 to choose b large enough such that elements i on the main diagonal of A + bI are all positive. Then di 0 (A + bI ) > 0, d-1 (A + bI ) > 0 and di 1 (A + bI ) > 0 for all i = 1, . . . , N . Also, |(A + bI )ij | |(A + bI )ij | |(A + bI )ii |, j > i + 1, or j < i - 1, |(A + bI )i,i-1 |, j > i + 1, or j < i - 1. (23)
+
+Taking the square of A + bI propagates large positive values on the diagonals d0 , d1 , d-1 to the diagonals d2 , d-2 , so the elements on these diagonals become positive. That is because of the above inequalities in Eq.(23). Therefore, (A + bI )N -1 is a positive matrix. Thus, by Lemma 5.6, A is eventually exponentially positive. Our experiments show that one can choose 0 = h sufficiently small, as in the proof of Proposition 5.7, to get e LR > 0 for all   0 . Strictly speaking, the above scheme is not unconditionally stable because of this condition on  . However, in contrast to, for example, explicit finite difference schemes, this condition is not restrictive. Indeed, it only sets the lower limit for  , while for an explicit FD scheme the convergence condition determines the upper boundary of the time step. 19
+
+5.3.4
+
+Case 4: R = 0.
+
+When R = 0, the CGMY model reduces to the VG model (Madan et al. (1998)). The jump operator JL + JR is given in Eq.(21). For the following, we rewrite the jump operator as LR = R - log 1 - a R + a log R - 1 R .
+R - 1 R
+
+When R is not too close to 1, it makes sense to move the term R log
+
+a to
+
+-1 the diffusion part DR , and then approximate it as J1 = R log R AB (to first order R approximation in h). This guarantees that if D is an appropriate discrete approximation of D (e.g., D is the negative of an M-matrix), then D + J1 is also the negative of an M-matrix -1 < 0, and thus J1 is also the negative of an M-matrix). (because log R R Once we move the first term in Eq.(21) into the diffusion operator, the second (remaining) term in Eq.(21) could be directly exponentiated to give
+
+e JR,2 =
+
+R R I - a
+
+  R
+
+.
+
+A discrete approximation of this term to first order in h is Q=e
+ LR,2
+
+=
+
+R R I - A F
+
+  R
+
+.
+
+(24)
+
+R As (R I - AF ) is an M-matrix, R I- is a positive upper triangular matrix with all the AF diagonal elements satisfying ii < 1, i = 1, . . . , N . Accordingly, Q is an upper triangular matrix satisfying the same property for its diagonal elements. Thus, the spectral norm of Q is Q < 1. Therefore, the proposed approximation is unconditionally stable and preserves positivity of the solution. In the case when R is close to 1, moving J1 into the diffusion discrete operator D could result in needing a very small h to make the discrete diffusion operator stable. Otherwise, one will face a convection-dominated problem that requires special treatment; see, e.g., Duffy (2006). Therefore, we consider another approach below. R Let us again take the operator JR,2 , and recall that R log R I- is an upper triangular AF positive matrix. By construction, each nondiagonal element is less than the main diagonal R element. This inspires the following representation. Set B = R I- , so16 AF
+
+log B = log [b1,1 (I + K )] , where K is an upper triangular matrix with zero elements on the main diagonal and all other elements ki,j < 1, i < j , i, j = 1, . . . , N . Then log B = log(b1,1 )I + K -
+16
+
+K2 K3 + + ... . 2 3
+
+Again for simplicity, we consider only a uniform grid here.
+
+20
+
+Due to the last condition on the elements of K , this series converges to a positive upper triangular matrix with zeros on the main diagonal. Accordingly, since 0 < b1,1 < 1, the matrix log B is the negative of an M-matrix. This immediately implies that the discrete operator JR = B + J1 is the negative of an M-matrix. Therefore, according to Proposition 4.1, the above scheme is unconditionally stable and preserves positivity of the solution. We have proven the following proposition. Proposition 5.8 Suppose R = 0. Let us discretize the operator LR as LR = L log R - 1 R AB + log R R I - AF .
+
+Then LR is an O(h) approximation of the operator LR , while the whole scheme is unconditionally stable and preserves positivity of the solution. 5.3.5 Approximations of LL
+
+Approximations to LL can be constructed in a way similar to those corresponding to LR . Below we will present a few propositions that specify our construction. Proofs of these propositions are omitted because they are very similar to that for LR . Proposition 5.9 If 1 < L < 2, then the discrete counterpart LL of the operator LL is the negative of an M-matrix if LL = L (-L ) L I + AF
+L L L - (L + 1)L ] AB . + [ L - L
+
+LL is an O(h) approximation of the operator LL . Proposition 5.10 If L < 0, then the discrete counterpart LL of the operator LL is the negative of an M-matrix if LL = L (-L ) L I + AF
+L L L - L + [ L - (L + 1)L ] AF .
+
+LL is an O(h) approximation of the operator LR . Proposition 5.11 Suppose 0 < L < 1 and consider the following discrete approximation of the operator LL : LL = L (-L ) L I + AC
+L L L - L + [ L - (L + 1)L ] AF .
+
+Then t matrix LL (i) is an O(h) approximation of the operator LL , (ii) has all negative eigenvalues and (iii) is eventually exponentially positive. Proposition 5.12 If L = 0, then the discrete counterpart LL of the operator LL is the negative of an M-matrix if LL = L log L + 1 L AF + log L L I + AB .
+
+LL is an O(h) approximation of the operator LL . 21
+
+5.3.6
+
+Second-Order Approximation in h
+
+The second-order approximations of LR and LL could be constructed in a manner similar to the one described in Proposition 5.2. To give an example, consider the case when R = 0. Proposition 5.13 Suppose that the following discretization scheme is in order: LR + A2 = R log  log where  = - h 2 R
+R -1 R 2
+
+R - 1 R
+
+AB + log
+
+R R (AF )2 1 h - R I - AF 2 (R I - AF )2
+
+,
+
+(25)
+
+. Then LR + A2 is the negative of an M-matrix and approxi-
+
+mates LR + x,x to O(h ). Proof The proof is also similar to that of the Proposition 5.2. 1. Approximation. Rewriting Eq.(25) in terms of the operator a and expanding it into a series on h, we find that LR + A2 = R log R - 1 R a + log R R I - a + x,x + O(h2 ).
+R R I -AF
+
+2. Positivity and stability of the solution. Since (R I - AF ) is an M-matrix, positive matrix. As R (AF )2 1 R (U F )2 1 h = h , 2 (R I - AF )2 2 (R hI - U F )2 the diagonal elements of the matrix H= are R 1 R (AF )2 - h R I - AF 2 (R I - AF )2 i,i (H ) = hR
+
+is a
+
+R + 1/2 . (R + 1)2 Thus, a value of h can be found (not too small, but not too large as well)17 such that H is a positive upper-triangular diagonally dominant matrix. Then log H is the negative of an M-matrix (see Proposition 5.8). Thus, LR + A2 is the negative of an M-matrix as well. As in Proposition 5.2, we can borrow the term x,x from the diffusion operator when 1 2 doing Strang's splitting. Again, suppose that in the diffusion equation there is a term 2	x,x . Therefore, we can construct splitting of the whole operator LR + D by leaving under D just a portion  of this term, i.e., 1  2 x,x , and moving the other portion, 1 (1 -  ) 2 x,x , to the 2 2 jump operator. Therefore, the whole operator in the exponent at the second step of splitting becomes LR + 1 (1 -	) 2 x,x . Comparison of this expression with the analogous term in 2 Proposition 5.13 gives rise to the explicit representation  =1-h
+17
+
+R log 2
+
+R R - 1
+
+.
+
+This strongly depends on how close R is to 1. Our experiments show that for R = 1.1, a relative step size h = 0.95 is fine, while for R = 1.01 this should be changed to h=1.
+
+22
+
+Test 1
+
+T 1
+
+K r q C/P 100 0.05 0.0 C
+
+     J J 0.3 -0.5 1.5 0.1 5 0.3 0.1
+
+Table 1: Initial parameters used in test calculations.
+
+6
+
+Numerical Examples
+
+In the first test we used our numerical approach to compute prices of European vanilla options under the Bates model (a jump-diffusion model with Merton's jumps). This solution was compared with the semi-analytical solution obtained by using an inverse Fourier Transform (FFT) since the characteristic function for the Bates model is known in closed form; see, e.g., Cr epey (2000). For the diffusion step we used the method described in detail in Hout and Foulon (2010). A nonuniform space grid was constructed in both x and v dimensions which contained 100 nodes in x  [0, Smax ], Smax = 40 max(S0 , K ), and 40 nodes in v  [0, vmax ], vmax = 5v0 . Here K is the strike, S0 , v0 are the initial levels of the stock price and instantaneous variance. For the jump step this grid was extended to Sup = 104 . Further increase of Sup does not influence the option price much, so this boundary was chosen based on a practical argument. The steps of the jump grid when outside of the diffusion grid (where they both coincide with each other) grew according to geometric progression hi = h  g i , where h = (Smax - Smin )/N is an average step size for the diffusion grid, g is the growth factor, which in our experiments was chosen as g = 1.03. The total jump grid thus contained 237 nodes, 75 of which were the diffusion grid nodes. The initial parameters used in the test are given in Table 1. We computed European option prices under the Bates model in two ways. The first approach utilizes the fact that the characteristic function of the Bates model is known in closed form. Therefore, pricing of European options can be done using any FFT algorithm. Here we used a standard version of the Carr and Madan (1999) method with a constant dumping factor  = 1.25 and N = 8192 nodes. The second approach (FDE) uses an algorithm described in this paper, i.e., splitting and matrix exponentials, where the diffusion (Heston) equation was solved using the method of fractional steps described in Hout and Foulon (2010). In Fig. 1 absolute and relative differences in prices obtained in our experiments are presented as a function of moneyness M = S0 /K . It is seen that FDE provides a very reasonable accuracy compared to the almost exact solution obtained with the FFT method. To see how much of the observed numerical error could be attributed to the Heston model itself, e.g., to the FD algorithm for computing a pure diffusion part, we repeated this test with no jumps and presented these results in Fig. 2. In the second test we considered a model similar to Bates, but with jumps simulated using the VG model. We used the parameters in Table 1. In addition, the VG model parameters were chosen as:	= 0.1,	= 0.4,	= 3, which translates18 to R = 1.5098, L =
+18
+
+For explicit formulae to provide this translation, see Madan et al. (1989).
+
+23
+
+Figure 1: Absolute and relative differences in call option price as a function of moneyness M for the Bates model computed using an FFT algorithm (FFT) and the algorithm of this paper (FDE).
+
+Figure 2: Absolute and relative differences in call option price as a function of moneyness M for the Heston model computed using an FFT algorithm and FDE.
+
+2.7598, R = L = 0.33. The grid was constructed as it was in the previous test. However the upper boundary of the jump grid was moved to 105 , and Smax = 20 max(S0 , K ). Again we computed European option prices in two ways. As the characteristic function of the VG model is known in closed form, the characteristic function of our model is a product of that for the Heston and VG models. We then used an FFT algorithm proposed by Alan Lewis, and as applied to the VG model discussed in detail in Itkin (2005). The second approach uses the FDE algorithm described in this paper. In Fig. 3, the absolute and relative differences in prices obtained by these two methods are presented as a function of the moneyness M = S0 /K . Here FDE behaves worse than in the case of the Bates model, because we used just the first order approximation in h. Still, the relative difference with the exact solution is less than 0.5%, and for M  0.5 the difference rises to only 1.7%.
+
+7
+
+Conclusion
+
+In this paper (which is a further extension of our paper Itkin and Carr (2012)) we proposed a new method to solve jump-diffusion PIDEs. This method exploits a number of ideas, namely: 1. First, we transform a linear non-local integro-differential operator (jump operator) into a local nonlinear (fractional) differential operator. Thus, the whole jump-diffusion operator J + D is represented as a sum of the linear and non-linear parts.
+
+24
+
+Figure 3: Absolute and relative differences in call option price as a function of moneyness M under the Heston+VG model computed using Lewis's FFT algorithm and FDE.
+
+2. Second, operator splitting on financial processes19 is applied to this operator, namely splitting a space operator into diffusion and jumps parts. For nonlinear operators, this approach was elaborated on based on the definition of Lie derivative (see Koch and Thalhammer (2011)). The described splitting scheme provides a second-order approximation of J + D in time. 3. At the third step various finite-difference approximations of the non-linear differential operator J are proposed for the Merton, Kou and GTSP (a.k.a., CGMY or KoBoL) models. We demonstrated how to construct these approximations to (i) be unconditionally stable, (ii) be of first- and second-order approximation in the space grid step size h and (iii) preserve positivity of the solution. The results are presented as propositions, and the corresponding proofs are given based on modern matrix analysis, including a theory of M-matrices, Metzler matrices and eventually exponentially positive matrices. Numerical examples in the paper illustrate good efficiency and accuracy of this method. Moreover, the performance of the method is not worse than that of FFT (see the discussion in the introduction). All these results seem to be new. Also, to the best of our knowledge, all the approaches to solving jump-diffusion PIDE known in the literature were either O(h) or O( ), while the proposed methods include finite-difference schemes of the second order approximation, i.e., O(h2 ) + O( 2 ). The method is naturally applicable to both uniform and nonuniform grids,
+This is similar to splitting on physical processes, e.g., convection and diffusion, which is well-known in computational physics.
+19
+
+25
+
+and is easy for programming. The method also does not require final reinterpolation (as in the FFT method), because the jump grid includes the PDE grid as a subset. Also notice that the present approach allows pricing some exotic, e.g., barrier options as well. In addition, it respects not just European (vanilla) payoffs but also digital, American and Bermudan ones.
+
+Acknowledgments
+I thank Peter Carr, Igor Halperin and Alex Lipton for stimulating discussions and useful comments. I am indebted to Gregory Whitten, Steven O'Hanlon, Ben Meyvin and Serguei Issakov for supporting this work, and to Nic Trainor for editing the manuscript. I assume full responsibility for any remaining errors.
+
+References
+Abu-Saman, A. M. and Assaf, A. M. (2007). Stability and convergence of Crank-Nicholson method for fractional advection dispersion equation. Advances in Applied Mathematical Analysis, 2(2):117125. Andersen, L. and Andreasen, J. (2000). Jump diffusion processes: volatility smile fitting and numerical methods for option pricing. Review of Derivatives Research, 4:231262. Andersen, L. and Lipton, A. (2012). Asymptotics for exponential Levy processes and their volatility smile: Survey and new results. Available at http://arxiv.org/abs/1206.6787. Arisawa, M. (2005). Viscosity solutions approach to jump processes arising in mathematical finances. In Proceedings of 10th International conference in mathematical finances. Also available at http://www.econ.kyoto-u.ac.jp/daiwa/workshops/2005paper/Arisawa. pdf. Bakas, I., Khesin, B., and Kiritsis, E. (1993). The logarithm of the derivative operator and higher spin algebras of w type. Communications in Mathematical Physics, 151(2):233 243. Bellman, R. (1960). Introduction to matrix analysis. McGrawHill. Berman, A. and Plemmons, R. (1994). Nonnegative matrices in mathmatical sciences. SIAM. Brennan, M. and Schwartz, E. (1978). Finite difference methods and jump processes arising in the pricing of contingent claims. Journal of Financial and Quantitative Analysis, 13(3):461474. Carr, P. and Madan, D. (1999). Option valuation using the fast Fourier transform. Journal of Computational Finance, 2:6173. 26
+
+Carr, P. and Mayo, A. (2007). On the numerical evaluation of option prices in jump diffusion processes. The European Journal of Finance, 13(4):353372. Cartea, A. and del Castillo-Negrete, D. (2007). Fractional diffusion models of option prices in markets with jumps. Physica A, 374:749763. Cont, R. and Tankov, P. (2004). Financial modelling with jump processes. Financial Matematics Series, Chapman & Hall /CRCl. Cont, R. and Voltchkova, E. (2003). A finite difference scheme for option pricing in jump diffusion and exponential L evy models. Technical Report 513, Rapport Interne CMAP.  Cr epey, S. (2000). Computational finance. Evry University, France, available at http: //grozny.maths.univ-evry.fr/pages_perso/crepey/papers/me_crepey.pdf. d'Halluin, Y., Forsyth, P. A., and Labahn, G. (2005). A semi-Lagrangian approach for American Asian options under jump diffusion. SIAM Journal on Scientific Computing, 27:315345. d'Halluin, Y., Forsyth, P. A., and Vetzal, K. R. (2004). A penalty method for American options with jump diffusion processes. Numerische Mathematik, 97:321352. Duffy, D. (2006). Finite Difference Methods in Financial Engineering: A Partial Differential Equation Approach. The Wiley Finance Series. Dyakonov, E. (1964). Difference schemes with a separable operator for general second order parabolic equations with variable coefficient. Zhurnal Vychislitelnoi Matematiki i Matematicheskoi Fiziki, 4(2):278291. Eberlein, E. (2009). Jump-type L evy processes. In Andersen, T. G., Davis, R. A., Krei, J.P., and Mikosch, T., editors, Handbook of Financial Time Series, pages 439455. Springer Verlag. Golub, G. and Van Loan, C. (1983). Matrix Computations. The Johns Hopkins University Press, Baltimore. Hout, K. J. I. and Foulon, S. (2010). ADI finite difference schemes for option pricing in the Heston model with correlation. International journal of numerical analysis and modeling, 7(2):303320. Itkin, A. (2005). Pricing options with VG model using FFT. available at http://arxiv. org/abs/physics/0503137. Itkin, A. and Carr, P. (2012). Using pseudo-parabolic and fractional equations for option pricing in jump diffusion models. Computational Economics, 40(1):63104.
+
+27
+
+Koch, O. and Thalhammer, M. (2011). Embedded exponential operator splitting methods for the time integration of nonlinear evolution equations. Technical report, Institute for Analysis and Scientific Computing, Vienna University of Technology. Kou, S. and Wang, H. (2004). Option pricing under a double exponential jump diffusion model. Management Science, 50(9):11781192. Lanser, D. and Verwer, J. (1999). Analysis of operator splitting for advection-diffusionreaction problems from air pollution modelling. Journal of Computational and Applied Mathematics, 111(1-2):201216. Lipton, A. and Sepp, A. (2009). Credit value adjustment for credit default swaps via the structural default model. The Journal of Credit Risk, 5(2):123146. Madan, D., Carr, P., and Chang, E. (1998). The variance gamma process and option pricing. European Finance Review, 2:79105. Madan, D., Milne, F., and Shefrin, H. (1989). The multinomial option pricing model and its Brownian and Poisson limits. Review of Financial Studies, 2:251265. Madan, D. and Seneta, E. (1990). The variance gamma (V.G.) model for share market returns. Journal of Business, 63(4):511524. Marchuk, G. (1975). Methods of Numerical Mathematics. Springer-Verlag. Meerschaert, M. M. and Tadjeran, C. (2004). Finite difference approximations for fractional advection-dispersion flow equations. Journal of Computational and Applied Mathematics, 172:6577. Meerschaert, M. M. and Tadjeran, C. (2006). Finite difference approximations for two-sided space-fractional partial differential equations. Applied Numerical Mathematics, 56:8090. Merton, R. C. (1976). Option pricing when underlying stock returns are discontinuous. Journal of Financial Economics, 3(1):125144. Noutsos, D. and Tsatsomeros, M. J. (2008). Reachability and holdability of nonegative states. SIAM J. Matrix Anal. Appl., 30(2):700712. Parrot, K. (2009). PDE methods for option pricing under jump diffusion processes. Available at http://www.thalesians.com/archive/public/thalesians/seminars/slides/ Thalesians_Parrott_20091118.pdf. Samarski, A. (1964). Economical difference schemes for parabolic equations with mixed derivatives. Zhurnal Vychislitelnoi Matematiki i Matematicheskoi Fiziki, 4(4):753759. Sato, K.-I. (1999). L evy Processes and Infinitely Divisible Distributions. Cambridge Studies in Advanced Mathematics 68. Cambridge University Press, Cambridge. 28
+
+Sousa, E. (2008). Finite difference approximations for a fractional advection diffusion problem. Technical Report 08-26, Departamento de Matematica, Universidade de Coimbra. Strang, G. (1968). On the construction and comparison of difference schemes. SIAM J. Numerical Analysis, 5:509517. Strauss, A. K. (2006). Numerical Analysis of Jump-Diffusion Models for Option Pricing. PhD thesis, Virginia Polytechnic Institute and State University. Tadjeran, C., Meerschaert, M., and Scheffler, H.-P. (2006). A second-order accurate numerical approximation for the fractional diffusion equation. Journal of Computational Physics, 213:205213. Tangman, D. Y., Peer, A. A. I., Rambeerich, N., and Bhuruth, M. (2011). Fast simplified approaches to Asian option pricing. The Journal of Computational Finance, 14(4):336. Tavella, D. and Randall, C. (2000). Pricing Financial Instruments. The Finite-Difference Method. Wiley series in financial engineering. John Wiley & Sons, Inc., New York,. Wilmott, P. (1998). Derivatives. Wiley, New York. Yanenko, N. (1971). The method of fractional steps. Springer-Verlag.
+
+29
+

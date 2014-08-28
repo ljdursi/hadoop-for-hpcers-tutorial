@@ -1,0 +1,412 @@
+MULTI-RECEIVER AUTHENTICATION SCHEME FOR MULTIPLE MESSAGES BASED ON LINEAR CODES
+
+arXiv:1305.4444v1 [cs.CR] 20 May 2013
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+Abstract. In this paper, we construct an authentication scheme for multi-receivers and multiple messages based on a linear code C . This construction can be regarded as a generalization of the authentication scheme given by Safavi-Naini and Wang [8]. Actually, we notice that the scheme of Safavi-Naini and Wang is constructed with Reed-Solomon codes. The generalization to linear codes has the similar advantages as generalizing Shamir's secret sharing scheme to linear secret sharing sceme based on linear codes [1, 6, 5, 7, 9]. For a fixed message base field Fq , our scheme allows arbitrarily many receivers to check the integrity of their own messages, while the scheme of Safavi-Naini and Wang has a constraint on the number of verifying receivers V q. And we introduce access structure in our scheme. Massey [5] characterized the access structure of linear secret sharing scheme by minimal codewords in the dual code whose first component is 1. We slightly modify the definition of minimal codewords in [5]. Let C be a [V, k] linear code. For any coordinate i  {1, 2,    , V }, a codeword c in C is called minimal respect to i if the codeword c has component 1 at the i-th coordinate and there is no other codeword whose i-th component is 1 with support strictly contained in that of c. Then the security of receiver Ri in our authentication scheme is characterized by the minimal codewords respect to i in the dual code C  . Authentication scheme, linear codes, secret sharing, minimal codewords, substitution attack.
+
+1. Introduction 1.1. Background. One of the important goals of cryptographic scheme is authentication, which is concerned with the approaches of providing data integrity and data origin validation between two communication entities in computer network. Traditionally, it simply deals with the data authentication problem from a single sender to a single receiver. With the rapid progress of network communication, the urgent need for providing data authentication has escalated to multi-receiver and/or multi-sender scenarios. However, the original point-to-point authentication techniques are not suitable for multi-point communication. In the multi-receiver authentication model, a sender broadcasts an authenticated message such that all the receivers can independently verify the authenticity of the message with their own private keys. It requires a security that malicious groups of up to a given size of receivers can not successfully impersonate the transmitter, or substitute a transmitted message. Desmedt et al. [4] gave an authentication scheme of single message for multireceivers. Safavi-Naini and Wang [8] extended the DFY scheme [4] to be an authentication scheme of multiple messages for multi-receivers. The receivers independently verify the authenticity of the message using each own private key. So multi-receiver authentication scheme involves a procedure of secret sharing.
+This research is supported by the National Key Basic Research Program of China (Grant No. 2013CB834204), and the National Natural Science Foundation of China (Nos. 61171082, 10990011 and 60872025). The author Jun Zhang is also supproted by the Chinese Scholarship Council under the State Scholarship Fund during visiting University of California, Irvine.
+1
+
+2
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+To introduce the linear secret sharing scheme based on linear codes, we recall some definitions in coding theory. Let FV q be the V -dimensional vector space over the finite field Fq with q elements. For any vector x = ( x1 , x2 ,	  , xV )  FV q , the Hamming weight Wt( x) of x is defined to be the number of non-zero coordinates, i.e., Wt( x) = # {i | 1 i V, xi 0} .
+
+A linear [V, k] code C is a k-dimensional linear subspace of FV q . The minimum distance d(C ) of C is the minimum Hamming weight of all non-zero vectors in C , i.e., d(C ) = min{Wt(c) | c  C \ {0}} . is called a [V, k, d] linear code if C has minimum distance d. A A linear [V, k] code C  k V vector in C is called a codeword of C . A matrix G  Fq is call a generator matrix of C if rows of G form a basis for C . A well known trade-off between the parameters of a linear [V, k, d] code is the Singleton bound which states that d V -k+1. FV q
+
+A [V, k, d] code is called a maximum distance separable (MDS) code if d = V - k + 1. The dual code C  of C is defined as the set x  FV q | x  c = 0 for all c  C , where x  c is the inner product of vectors x and c, i.e., x	c = x1 c1 + x2 c2 +    + xV cV . The secret sharing scheme provides security of a secret key by "splitting" it to several parts which are kept by different persons. In this way, it might need many persons to recover the original key. It can achieve to resist the attack of malicious groups of persons. Shamir [9] used polynomials over finite fields to give an (S , T ) threshold secret sharing scheme such that any T persons of the S shares can uniquely determine the secret key but any T - 1 persons can not get any information of the key. A linear secret sharing scheme based on a linear code [5] is constructed as follows: encrypt the secret to be the first coordinate of a codeword and distribute the rest of the codeword (except the first secret coordinate) to the group of shares. McEliece and Sarwate [7] pointed out that the Shamir's construction is essentially a linear secret sharing scheme based on Reed-Solomon codes. Also as a natural generalization of Shamir'construction, Chen and Cramer [1] constructed a linear secret sharing scheme based on algebraic geometric codes. The qualified subset of a linear secret sharing scheme is a subset of shares such that the shares in the subset can recover the secret key. A qualified subset is call minimal if any share is removed from the qualified subset, the rests cannot recover the secret key. The access structure of a linear secret sharing scheme consists of all the minimal qualified subsets. A codeword v in a linear code C is said to be minimal if v is a non-zero codeword whose leftmost nonzero component is a 1 and no other codeword v whose leftmost nonzero component is 1 has support strictly contained in the support of v. Massey [5, 6] showed that the access structure of a linear secret sharing scheme based on a linear code are completely determined by the minimal codewords in the dual code whose first component is 1. Proposition 1 ([5]). The access structure of the linear secret-sharing scheme corresponding to the linear code C is specified by those minimal codewords in the dual code C	whose first component is 1. In the manner that the set of shares specified by a minimal codeword
+
+MULTI-RECEIVER AUTHENTICATION SCHEME FOR MULTIPLE MESSAGES BASED ON LINEAR CODES
+
+3
+
+whose first component is 1 in the dual code is the set of shares corresponding to those locations after the first in the support of this minimal codeword. In both schemes of Desmedt et al. [4] and Safavi-Naini and Wang [8], the key distribution is similar to that in Shamir's secret sharing scheme [9], using polynomials. Both schemes are (V, k) threshold authentication scheme, i.e., any malicious groups of up to k - 1 receivers can not successfully ( unconditional secure in the meaning of information theory) impersonate the transmitter, or substitute a transmitted message to any other receiver, while any k receivers or more receivers can successfully impersonate the transmitter, or substitute a transmitted message to any other receiver. Actually, in the proof of security of the authentication scheme of Safavi-Naini and Wang, the security is equivalent to the difficulty to recover the private key of other receivers. So the security essentially depends on the security of key distribution. In this paper, we use general linear codes to generalize the scheme of Safavi-Naini and Wang. One advantage is that our scheme allows arbitrarily many verifying receivers for a fixed message base field Fq , while the scheme of Safavi-Naini and Wang has a constraint on the number of verifying receivers V q. We introduce the concept of minimal codeword respect to each coordinate, which helps to characterize the capability of resisting substitution attack in our authentication scheme, similarly to the linear secret sharing scheme [6]. It guarantees higher security for some important receivers.
+
+1.2. Our Construction and Main Results. In a multi-receiver authentication model for multiple messages, a trusted authority choose random parameters as the secret key and generates shares of private keys secretly. Then the trusted authority transmits a private key to each receiver and secret parameters to the source. For each fixed message, the source computes the authentication tag using the secret parameters and sends the message adding with the tag. In the verification phase, the receiver verify the integrity of each tagged message using his private key. There are some malicious receivers who collude to perform an impersonation attack by constructing a fake message, or a substitution attack by altering the message content such that the new tagged message can be accepted by some other receiver or specific receiver. In this subsection, we present our construction of an authentication scheme based on a linear code for multi-receivers and multiple messages. It will be shown that the ability of our scheme to resist the attack of the malicious receivers is measured by the minimum distance of the dual code and minimal codewords respect to specific coordinate in the dual code. Let C  FV 2. And assume that the q be a linear code with minimum distance d (C ) minimum distance of the dual code C  is d(C  ) 2. Fix a generator matrix G of C
+
+ g1,1	   g  2,1   G=	.   .	  . gk ,1
+
+g1,2 g2,2 . . . gk ,2
+
+  .. .
+
+g1,V g2,V . . . gk ,V
+
+	  .
+
+Then make G public. Our scheme is as follows.
+
+4
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+Then the trusted authority distributes each receiver Ri the i-th column of B as his private key, for i = 1, 2,	  , V .  Authentication tag: For message s  Fq , the source computes the tag map L = [L1 , L2 ,    , Lk ] : Fq s  Fk q	[L1 ( s), L2 ( s),    , Lk ( s)] ,
+M
+
+ Key distribution: The trusted authority computes  b0,1 b0,2	b0,V	  b1,1 b1,2    b1,V    B = AG =   . . . ..   . . .  . . .    . b M,1 b M,2    b M,V
+
+ Key generation: A trusted authority randomly chooses parameters   a0,1 a0,2	a0,k	      a1,1 a1,2    a1,k        ( M+1)k	 A=  Fq .   . . . .    . . . .	 . . . .       a M,1 a M,2    a M,k	      .
+
+where the map Li (i = 1, 2,    , k) is defined by Li ( s) =
+j=0
+
+a j,i s j .
+
+Instead of sending the message s  Fq , the source actually sends the authenticated messages x of the form1
++k x = [ s, L( s)]  F1 . q k t	Verification:The receiver Ri accepts the message [ s, L( s)] if tM =0 s b t , i = j=1 L j ( s)g j,i . Under the integrity of the tagged message, one can easily verify the following M M k k M k
+
+st bt,i =
+t =0 t =0
+
+st
+j=1
+
+at, j g j,i =
+
+(
+j=1 t=0
+
+at, j st )g j,i =
+j=1
+
+L j ( s)g j,i .
+
+t Here, we call the result tM =0 s bt,i the label of Ri for message s. If we take C to be the Reed-Solomon code, i.e., the generator matrix G is of the form   1 1  1	       x1 x2	xV	   2  2 2   x x    x	V 1 2 (1.1) G= ,       . . . .	   . . . .   . . .	k.-1  k -1 k -1 x1 x2	 xV
+
+for pairwise distinct x1 , x2 ,    , xV  Fq , then the scheme is the scheme of Safavi-Naini and Wang [8]. The security of the above authentication scheme is summarized in the following theorems.
+
+1In general, we can first use a hash function h : {0, 1}  F to hash the message s, then send the tagged q message [ s, L(h( s))].
+
+MULTI-RECEIVER AUTHENTICATION SCHEME FOR MULTIPLE MESSAGES BASED ON LINEAR CODES
+
+5
+
+Theorem 2. The scheme we constructed above is a unconditionally secure multi-receiver authentication code against a coalition of up to (d(C  ) - 2) malicious receivers in which every key can be used to authentication up to M messages. More specifically, if we consider what a coalition of malicious receivers can successfully make a substitution attack to one fixed receiver Ri . To characterize this malicious group, we slightly modify the definition of minimal codeword in [5]. Definition 1. Let C be a [N, k] linear code. For any i	{1, 2,	  , N }, a codeword c in C is called minimal respect to i if the codeword c has component 1 at the i-th location and there is no other codeword whose i-th component is 1 with support strictly contained in that of c. Then we have Theorem 3. For the authentication scheme we constructed, we have (i): The set of all minimal malicious groups that can successfully make a substitution attack to the receiver Ri is determined completely by all the minimal codewords respect to i in the dual code C  . (ii): All malicious groups that can not produce a fake authenticated message which can be accepted by the receiver Ri are one-to-one corresponding to subsets of [V ] \ {i} such that each of them together with i does not contain any support of minimal codeword respect to i in the dual code C  , where [V ] = {1, 2,    , V }. Compared with Safavi-Naini and Wang's scheme, our scheme has an important advantage. The scheme of Safavi-Naini and Wang is a (V, k) threshold authentication scheme, so any coalition of k malicious receivers can easily make a substitution attack to any other receiver. While in our scheme, by Theorem 3, sometimes it can withstand the attack of coalitions of k or more malicious receivers to some fixed important receiver Ri . And it is in general NP-hard to find one (or list all) coalition(s) of malicious receivers with the minimum members that can make a substitution attack to the receiver Ri . So in this sense, our scheme has better security than the previous one. The rest of this paper is organized as follows. In Section 2, we give the security analysis of our scheme. In Section 3, we show the relationship between the security of our scheme and parameters of the linear code.
+
+2. Security Analysis of Our Authentication Scheme In this section, we present the security analysis of our scheme. From the verification step, we notice that a tagged message [ s, v1 , v2 ,	 , vk ] can be accepted by the receiver Ri k t if and only if tM =0 s b t , i = j=1 v j g j,i . So in order to make a substitution attack to Ri , it M t suffices to know the label t=0 s bt,i for some s  Fq not sent by the transmitter, then it is k t trivial to construct a tag (v1 , v2 ,    , vk ) such that tM =0 s b t , i = j=1 v j g j,i . Indeed, we will find that the security of the above authentication scheme depends on the hardness of finding the key matrix A from a system of linear equations. Suppose a group of K malicious receivers collaborate to recover A and make a substitution attack. Without loss of generality, we assume that the malicious receivers are R1 , R2 ,    , RK . Suppose
+
+6
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+s1 , s2 ,    , s M have been sent. Each Ri has some information about the key A:
+
+		 and
+
+1 1 . . . 1
+
+s1 s2 . . . sM
+
+s2 1 s2 2 . . . s2 M
+
+  .. .
+
+M s1 M s2 . . .
+
+sM M
+
+  L1 ( s1 )	      L1 ( s2 )        A=   .	  .   .       L1 ( s M )
+
+L2 ( s1 ) L2 ( s2 ) . . . L2 ( s M )
+
+  .. .
+
+Lk ( s1 ) Lk ( s2 ) . . . Lk ( s M )
+
+
+
+ g1,i	   g2,i    A  .   .	. gk ,i
+
+  b0,i		 b1,i	     =	 .     .	 . b M,i
+
+	  .
+
+The group of malicious receivers combines their equations, and they get a system of linear equations
+
+(2.1)
+
+
+
+
+
+1 1 . . . 1
+
+s1 s2 . . .
+
+s2 1 s2 2 . . .
+
+  .. .
+
+M s1 M s2 . . .
+
+s M s2	  sM M M  g1,1 g1,2	    g2,1 g2,2	    A  . . ..	. .  . . .    gk ,1 gk ,2
+
+  L1 ( s1 ) L2 ( s1 )	 Lk ( s1 )	     L1 ( s2 ) L2 ( s2 )    Lk ( s2 )	       A =   . . . ..	  . . .   . . . .	L1 ( s M ) L2 ( s M )	 Lk ( s M )    g1,K  b0,1 b0,2	  b0,K		   g2,K  b1,1 b1,2    b1,K		= .    . . . . ..	. . . .   . .  . . .	      gk , K b M,1 b M,2    b M,K
+
+	  ,
+
+Lemma 4. Let P be the subspace of Fk q generated by {g j | j = 1, 2,	, K }, where g j represents the j-th column of the generator matrix G. Suppose K0 = dim P k - 1. Then there exists exact qk-K0 matrices A satisfying the system of equations (2.1). Proof. Denote
+
+SM
+
+	 =
+
+1 1 . . . 1
+
+s1 s2 . . . sM
+
+s2 1 s2 2 . . . s2 M
+
+  .. .
+
+M s1 M s2 . . .
+
+sM M
+
+	  .
+
+MULTI-RECEIVER AUTHENTICATION SCHEME FOR MULTIPLE MESSAGES BASED ON LINEAR CODES
+
+7
+
+where I M+1 is the identity matrix with rank ( M + 1) and T is the column vector of constants in System (2.1) with proper order. Notice that the space generated by rows of S M is conM +1 tained in the space Fq generated by gi, j I M+1 if gi, j 0. So the rank of the big matrix of coefficients in System (2.2) equals to M  k + K0 which is less than k( M + 1), the number of variables. So System (2.2) has qk( M+1)-kM-K0 = qk-K0 solutions, i.e., System (2.1) has qk-K0 solutions. Remark 1. In [8], they gave a constructive proof of Lemma 4 in the case that G is of the form (1.1). The method here can be used for a general class of systems of linear equations over a field F: D  X = C1 X  Z = C2 where X is a m  n matrix of variables, the coefficient matrices D  F gm with rank m - 1 and Z  F nh with rank n - 1, the constant matrices C1  F gn and C2  F mh . Then solutions of the system in F mn has (m - g)(n - h)-dimensional hypersurface in the space F mn . Note that if C [n, k, d = n - k + 1] is an MDS code, e.g., Reed-Solomon code, then whenever K k - 1 the vectors in any K -subset of columns of G are linearly independent. By Lemma 4, the security of our authentication scheme follows. Theorem 5. The scheme we constructed above is an unconditionally secure multi-receiver authentication scheme against a coalition of up to (d (C  ) - 2) malicious receivers in which every key can be used to authentication up to M messages. Proof. Suppose the source receiver has sent messages s1 , s2 ,	 , s M . It is enough to consider the case that K = d(C  ) - 2 malicious receivers R1 ,    , RK have received the M messages, since in this case they know the most information about the key matrix A.
+
+Rewrite the matrix A of variables ai, j as a single column of k( M + 1) variables. Then System (2.1) becomes   a0,1	     a1,1	    .	   .	 .     SM		  a M , 1      S    M		 a     0,2	.     .     .	 a     1,2		    . S M	 .	. (2.2)  =T		g I g I    g I 1 , 1 M + 1 2 , 1 M + 1 k , 1 M + 1	      a  M , 2	      g1,2 I M+1 g2,2 I M+1    gk,2 I M+1	   .	     .	   . . .  .    .     . . . .	 .     . . .	     a	  0 , k      g1,K I M+1 g2,K I M+1    gk,K I M+1    a1,k	    .	 .    .       a M,k
+
+8
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+M What they try to do is to guess the label b0,K +1 +b1,K +1 s M+1 +b2,K +1 s2 M+1 +  +b M,K +1 s M+1 for some s M+1 { s1 , s2 ,    , s M } and construct a vector (v1 , v2 ,	 , vk ) such that k M vi gi,K +1 = b0,K +1 + b1,K +1 s M+1 + b2,K +1 s2 M+1 +	 + b M,K +1 s M+1 . i=1
+
+Then the fake message [ s M+1 , v1 , v2 ,    , vk ] can be accepted by RK +1 . Because any K = d(C  ) - 2 columns of the generator matrix G is linearly independent over Fq , otherwise there exist x1 ,    , xK  Fq such that K j=1 x j g j = 0 where g j is the j-th column of G, then the dual code C  will have a codeword ( x1 ,	 , xK , 0,    , 0) with  Hamming weight d(C  ) - 2 which is a contradiction. By Lemma 4, there exists qk-d(C )+2 matrices A satisfying the system of equations (2.1). For any s M+1 { s1 , s2 ,    , s M }, we define the label map  sM+1 : {Solutions of System (2.1)} - A  Fq  g1,K +1      g2,K +1	 M  (1, s M+1 , s2 .  M +1 ,	, s M +1 ) A   .  .    g k , K +1	    .
+
+Then we claim:
+
+(1):  sM+1 is surjective. k-d (C )+1 1 . (2): for any y  Fq , the number of the inverse image of y is #- s M +1 (y) = q So the information held by the colluders allows them to calculate q equally likely different labels for s M+1 and hence their probability of success is 1/q which is equal to that of M guessing a label b0,K +1 + b1,K +1 s M+1 + b2,K +1 s2 M+1 +    + b M,K +1 s M+1 for s M+1 randomly from Fq . And hence we finish the proof of the theorem. Next, we prove our claim. As K + 1 = d(C  ) - 1, g1 , g2 ,	 , gK +1 is linearly independent over Fq , otherwise the dual code C  will have a codeword with Hamming weight d(C  ) - 1 which is impossible by the definition of minimum distance of a code. Then choose k - K - 1 = k - d(C	) + 1 extra columns of G such that they combining with g1 , g2 ,    , gK +1 form a basis of Fk q . Without loss of generality, we assume the first k columns of G is linearly
+( M+1)(k-d (C independent of Fq . For any P  Fq
+
+
+)+1)
+
+, the system of linear equations				   L1 ( s1 ) L1 ( s2 ) . . . L2 ( s1 ) L2 ( s2 ) . . .	 .. .  b0,K b1,K . . . b M,K Lk ( s1 ) Lk ( s2 ) . . . Lk ( s M )	    ,		       ,
+
+(2.3)
+
+  M   1 s1 s2	 s1    1	2 M	 1 s2 s2    s2		   A=	 . . . . .	. . . . .     . . . . . 	   1 s M s2    sM   M M       g1,1 g1,2    g1,K 	      g2,1 g2,2    g2,K 	   A  =   . . .  .	. . . .     . . . .	       gk ,1 gk ,2    gk , K	     g1,K +2 g1,K +3	g1,k		   g g2,k    2,K +2 g2,K +3		 A  =	. . .  .      . . . .	 .  . . .	    g k , K +2 g k , K +3    g k , k
+
+L1 ( s M ) L2 ( s M ) b0,1 b0,2    b1,1 b1,2	. . .. . . . . . b M,1 b M,2
+
+P,
+
+MULTI-RECEIVER AUTHENTICATION SCHEME FOR MULTIPLE MESSAGES BASED ON LINEAR CODES
+
+9
+
+has q solutions by Lemma 4, saying A1 , A2 ,	, Aq . The solutions A1 , A2 ,	  , Aq are also solutions of System (2.1). Next, we show { sM+1 (A j ) | j = 1, 2,    , q} = Fq . Otherwise, there are two solutions A j1 and A j2 such that  g1,K +1	   g2,K +1    M  (1, s M+1 , s2 .  M+1 ,    , s M+1 ) A j1   .	.    g k , K +1 				  1 1 . . . 1 1 1 . . . 1 1 1 . . . 1 s1 s2 . . . s M +1 s1 s2 . . . s M +1 s2 1 s2 2 . . . s2 M +1 s2 1 s2 2 . . . s2 M +1   .. .    .. .    g1,K +1		g2,K +1       M   = (1, s M+1 , s2  .	M+1 ,	 , s M+1 ) A j2    .   .       g k , K +1
+M s1 M s2 . . .
+
+Then we have
+
+	  .
+
+=
+
+sM M +1 M s1 M s2 . . . sM M +1
+
+But matrices
+
+		    A	j 1				   A   j2
+
+g1,1 g2,1 . . . gk ,1 g1,1 g2,1 . . . gk ,1
+
+g1,2 g2,2 . . . gk ,2 g1,2 g2,2 . . . gk ,2
+
+  .. .	  .. .
+
+g1,k g2,k . . . gk ,k g1,k g2,k . . . gk ,k
+
+			   .
+
+s1 s2 . . . s M +1
+
+s2 1 s2 2 . . . s2 M +1
+
+  .. .
+
+M s1 M s2 . . .
+
+sM M +1
+
+are invertible. So A j1 = A j2 which contradicts to the condition A j1 A j2 . And hence, the statement (1) holds. ( M+1)(k-d (C )+1) Next, we prove (2). Any one solution of System (2.1) gives one P  Fq , while corresponding to such a P there are q solutions of System (2.1) from the proof of (1).  In this way, we partition solutions of System (2.1) into qk-d(C )+1 parts such that each part contains q elements. Also from the proof of (1), the image of each part under  sM+1 is Fq . 1 k-d (C )+1 So for any y  Fq , the number of the inverse image of y is #- . s M +1 (y) = q
+
+	  ,
+
+ g1,1	   g2,1      .	 .     . gk ,1
+
+g1,2 g2,2 . . . gk ,2
+
+  .. .
+
+g1,k g2,k . . . gk ,k
+
+Remark 2. From the proofs of Lemma 4 and Theorem 5, the coalition of malicious receivers B can successfully make a substitution attack to the receiver Ri if and only if gi is contained in the subspace of Fk q generated by {g j | j	B}, where g j represents the j-th column of the generator matrix G. In this case, they can recover the private key of Ri . This is the motivation of the next section. Next, we give a toy example to illustrate Lemma 4 and Theorem 5.
+
+10
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+Example 1. Let Fq = F5 . The M = 3 messages sent are s1 = 1, s2 = 2, s3 = 4. The C is a systematic code with the generator matrix	    G=	       1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 1 2 3 4 2 2 2 1 0 1 4 3 3 0 1 0 2 4 2 4	    .
+
+One can check that the dual code C  has minimum distance d(C  ) = 5. The trusted 5 authority randomly chooses A  F4 5 , for instance,  3      0   A=	  0 3 2 4 1 3 2 3 2 0 0 0 3 1 2 2 1 3	       .      4 3 0 0 1 3 0 4 0 3 0 0
+
+Then the trusted authority computes
+
+and distributes the i-th column of B to the receiver Ri as his private key. Suppose R1 , R2 , R3 are corrupted and they have seen the authenticated messages	  x1  1 1		 x = 2	     2 2    x3 3 4 0 2 3 1 4 4	 4 3	 0 4  ,    4 3
+
+ 3 2	  0 4	B = AG =       0 1 3 3
+
+2 3 2 0
+
+0 0 3 1
+
+2 2 1 3
+
+2 1 2 4
+
+then they want to substitute one of the authenticated messages during the transmission by a new codeword [ s, L( s)] that can be accepted by one of the other receivers. They have information about the key matrix A:					    1 1      1 2    1 3 1 4 4 1 0 0 0 0 1 3 2 0 1 0 0 0     1		2 A =	    4  0    3	   0	   0	1  =	      0 0     3 0 0 0 0 0 0 0 1 0 0 0 4 0 0 3 4 2 4 1 3 2 4 1 0 4 4  2	   3	  2	0 3 4 3        ,
+
+(2.4)
+
+This system of linear equations has 25 solutions  3 0	   4 1	       2 0 0 1 0 3 1 3 3 2 4 0 2 3 4 4	 0	     0	    + a1	  0   4
+
+	  A
+
+.
+
+0 0 1 0
+
+  0 0		0 0	 + a2	       0 0   0 1
+
+0 0 0 4
+
+0 0 0 1
+
+0 0 0 4
+
+
+
+MULTI-RECEIVER AUTHENTICATION SCHEME FOR MULTIPLE MESSAGES BASED ON LINEAR CODES 11
+
+(0, 4, 3, 2, 0, 2) (4, 4, 4, 2, 0, 0) (3, 4, 0, 2, 0, 3) (2, 4, 1, 2, 0, 1) (1, 4, 2, 2, 0, 4)
+
+(0, 3, 1, 1, 4, 3) (4, 3, 2, 1, 4, 1) (3, 3, 3, 1, 4, 4) (2, 3, 4, 1, 4, 2) (1, 3, 0, 1, 4, 0)
+
+(0, 2, 4, 0, 3, 4) (4, 2, 0, 0, 3, 2) (3, 2, 1, 0, 3, 0) (2, 2, 2, 0, 3, 3) (1, 2, 3, 0, 3, 1)
+
+(0, 1, 2, 4, 2, 0) (4, 1, 3, 4, 2, 3) (3, 1, 4, 4, 2, 1) (2, 1, 0, 4, 2, 4) (1, 1, 1, 4, 2, 2)
+
+(0, 0, 0, 3, 1, 1) (4, 0, 1, 3, 1, 4) (3, 0, 2, 3, 1, 2) (2, 0, 3, 3, 1, 0) (1, 0, 4, 3, 1, 3)
+
+where a1 , a2  F5 . For s4 = 4 and any i = 4, 5,    , 9, we have the label map	s4 ,Ri : {Solutions of System (2.4)} A - Fq	    2 M  (1, s M+1 , s M+1 ,	, s M+1 )A	   g1,i g2,i . . . gk ,i	   .
+
+
+
+Let  s4 = ( s4 ,R4 ,  s4 ,R5 ,	  ,  s4 ,R9 ). Then the images of  s4 are Notice that for any i 4,  s4 ,Ri is surjective and for any y	Fq , the number of the inverse 1 image of y is #- s4 (y) = 5. One can check the properties of  s4 ,Ri about surjection and uniform distribution of the images for s4 = 0 also hold. Actually, we can verify that even the coalition of R1 , R2 , R3 , R4 can successfully generate a fraudulent codeword [ s4 , L( s4 )] for any other Ri still only in a probability 1/5 which is the success probability of randomly choosing a label from F5 for a fake message. 3. Code-based Authentication Scheme and Minimal Codewords In the previous section, we considered that any coalition of K malicious receivers can not obtain any information about any other receiver's label to make a substitution attack. To consider a weak point, we propose that for a fixed receiver Ri , what a coalition of malicious receivers that can not get any information of the label of Ri . By Theorem 5, we have seen that any coalition of up to (d(C  ) - 2) malicious receivers can not generate a valid codeword [ s, L( s)] for Ri in a probability better than guessing a label from Fq randomly for the fake message s. Denote [V ] = {1, 2,    , V } and P = {R1 , R2 ,	  , RV }. Without any confusion, we identify the index set {1, 2,    , V } and the receiver set {R1 , R2 ,    , RV }. Definition 2. A subset of V - 1 receivers P \ {Ri } is call an adversary group to Ri if their coalition can not obtain any information of the label of Ri when they want to make a substitution attack to Ri . Define ti (C ) to be the largest integer i such that any subset A	P \ {Ri } with cardinality i is an adversary group to Ri . Definition 3. A subset of P \ {Ri } that can successfully make a substitution attack to Ri is call a substitution group to Ri . Moreover, a substitution group is call minimal if any one receiver is removed from the group, then the rests can not obtain any information of the label of Ri . Define ri (C ) to be the smallest integer i such that any subset B	P \ {Ri } with cardinality i is a substitution group to Ri .
+| A| For any A	[V ], A is the projection of FV q to Fq defined by
+
+A (( x1 , x2 ,	  , xV )) = ( x j ) jA , for any ( x1 , x2 ,	, xV )	And denote by i = {i} for short. For any receiver Ri , the substitution groups to Ri are completely characterized as follows. FV q.
+
+12
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+Proposition 6. For any receiver Ri , the following conditions are equivalent: (i): B  P \ {Ri } is a substitution group to Ri ; (ii): gi is contained in the subspace of Fk q generated by {g j | j  B}, where g j represents the j-th column of the generator matrix G; (iii): there exists a codeword c  C  such that i (c) = 1
+c
+
+and
+
+ B c ( c) = 0 ,
+
+where B = (P \ {Ri }) \ B is the complement of B in P \ {Ri }; (iv): there is an Fq -linear map fB,i :	B (C ) - Fq such that fB,i ( B(c)) = i (c) for all c  C; (v): there is no codeword c  C such that i (c) = 1 and  B (c) = 0 .
+
+Proof. By Remark 2, conditions (i) and (ii) are equivalent. First, we show that there exists a codeword c  C  such that i (c) 0. If not, that is, for any codeword c  C  , it holds i (c) = 0. Then the unit vector with the unique nonzero component 1 on the i-th coordinate belongs to C , which contradicts to the assumption d(C ) 2. So there exists a codeword c  C  such that i (c) = 1 by the linearity of C . The rest of the proof that conditions (ii) and (iii) are equivalent is clear. (iii)=(iv). For any codeword y  C  with i (y) = 1 we have  j (y) j (c) + i (c) = 0
+j B
+
+and
+
+ Bc (y) = 0 ,
+
+for any codeword c  C . So define fB,i :  B(C )  Fq by setting fB,i ( B (c)) = -
+j B
+
+ j (y) j (c),
+
+for all c  C . Then fB,i satisfies the condition. (iv)=(iii). From the proof of "(iii)=(iv)", we see that the required codeword in C  is actually the coefficients of the map  B,i = i - f B,i . (iv)=(v). If the statement (v) does not hold, then there exists a codeword c  C such that  i ( c) = 1 and  B ( c) = 0 , which contradicts to fB,i ( B (c)) = i (c). (v)=(iv). A map fB,i :  B (C ) - Fq satisfying fB,i ( B (c)) = i (c) for all c  C is always linear over Fq by the linearity of C . So if the map fB,i :  B (C ) - Fq satisfying fB,i ( B (c)) = i (c) for all c  C does not exist, then there exist two different codewords c, c  C such that  i ( c)  i ( c ) and  B ( c) =  B ( c ) .
+
+MULTI-RECEIVER AUTHENTICATION SCHEME FOR MULTIPLE MESSAGES BASED ON LINEAR CODES 13
+
+That is, the codeword x = c - c  C satisfies  i ( x) =	i ( c - c ) which contradicts to (v). By Proposition 6, adversary groups to Ri can be completely characterized by Proposition 7. For any receiver Ri , the following conditions are equivalent: (i): A	P \ {Ri } is an adversary group to Ri ; (ii): gi is not contained in the subspace of Fk q generated by {g j | j  A}; (iii): there is no codeword c  C  such that  i ( c) = 1 i (c) = 1 Corollary 8. and max{ri (C ) | i = 1, 2,    , V } = V - d(C ) + 1, (ii): For any i = 1, 2,    , V, we have d(C  ) - 2 and min{ti (C ) | i = 1, 2,    , V } = d(C  ) - 2 . Proof. (i) Suppose B  P \ {Ri } is any substitution group to Ri . By Proposition 6 (iii), there is a codeword c  C  such that i (c) = 1 Then we have d(C  ) So ri (C ) | B| d(C  ) - 1 . For any B  P\{Ri } with cardinality V -d(C )+1, it is obvious that any codeword c  C with i (c) = 1 (in the proof of Proposition 6, we have seen that such a codeword does exist.) has  B (c) 0. Otherwise, the minimum distance d(C ) V - (V - d(C ) + 1) = d(C ) - 1. So by Proposition 6 (v), it follows ri (C ) V - d(C ) + 1 . Let c be a codeword in C with minimum Hamming weight. Denote by S the support of c. Let B = [V ] \ S . Then by Proposition 6 (v), B is not a substitution group to Ri for any i  S . So max{ri (C ) | i = 1, 2,	 , V } And hence max{ri (C ) | i = 1, 2,    , V } = V - d(C ) + 1 . To prove min{ri (C ) | i = 1, 2,	, V } - 1 = d(C  ) - 1, it suffices to show ri (C ) = d(C  ) - 1 max{ri (C ) | i  S } | B| + 1 = V - d(C ) + 1 . wt(c) | B| + 1 . and  Bc (c) = 0 . ti (C ) ri (C ) - 1 , min{ri (C ) | i = 1, 2,    , V } - 1 = d(C  ) - 1 . d(C  ) - 1 and and Ac (c) = 0 ; A (c) = 0 . V - d(C ) + 1 , (iv): there exists a codeword c  C such that 0 and  B ( x) =	B ( c - c ) = 0 ,
+
+(i): For any i = 1, 2,	  , V, we have ri (C )
+
+14
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+for some i = 1, 2,    , V . Let y be a codeword in C  with minimum Hamming weight. Denote by T the support of y. For any i  T , T \ {i} is a substitution group to Ri with cardinality d(C  ) - 1. On the other hand, by Proposition 6 (ii), any subset of P \ {Ri } with cardinality d(C  ) - 2 could not be a substitution group to Ri . So ri (C ) = d(C  ) - 1 for any i  T . (ii) ti (C ) ri (C ) - 1 by the definition. For any B  P \ {Ri } with cardinality there is no codeword c  C  such that i (c) = 1
+
+
+d(C  ) - 2,
+
+and
+
+ Bc (c) = 0 .  Bc (c) = 0 .
+
+If not, then there is a codeword c  C such that i (c) = 1 and Then C  has a codeword c with Hamming weight | B| + 1( d(C  ) - 1) which is impossible. So by Proposition 7, B is an adversary group to Ri . And hence d(C  ) - 2 Since d(C  ) - 2 we have d(C  ) - 2 So min{ti (C ) | i = 1, 2,	  , V } = d(C  ) - 2 . By Corollary 8, it is natural to get Corollary 9. For any receiver Ri , we have (i): Subsets of P \ {Ri } with cardinality (V - d(C ) + 1) are substitution groups to Ri . (ii): Subsets of P \ {Ri } with cardinality (d(C  ) - 2) are adversary groups to Ri . (iii): For MDS codes C, subsets of P \ {Ri } with cardinality (d(C  ) - 2) are all the adversary groups to Ri . There is a gap in Corollary 9 in general we do not known whether a subset of size in the gap is a substitution group to Ri or not for general code-based authentication scheme. Actually, it is NP-hard to list all substitution groups to Ri in general. Even for authentication scheme based on algebraic geometric codes from elliptic curves, it is already NP-hard (under RP-reduction) to list all substitution groups to Ri [2, 3]. By Proposition 6, we obtain the main result of this section, a generalization of Proposition 1: Theorem 10. For the authentication scheme we constructed, we have (i): The set of all minimal substitution groups to the receiver Ri is determined completely by all the minimal codewords respect to i in C  . (ii): All adversary groups to the receiver Ri are one-to-one corresponding to subsets of [V ] \ {i} such that each of them together with i does not contain any support of minimal codeword respect to i in C  . min{ti (C ) | i = 1, 2,    , V } min{ri (C ) | i = 1, 2,	, V } - 1 = d(C  ) - 2 . ti (C ) ri (C ) - 1 , ti (C ) .
+
+MULTI-RECEIVER AUTHENTICATION SCHEME FOR MULTIPLE MESSAGES BASED ON LINEAR CODES 15
+
+(2 2 1 0 1 0 4 0 0) (3 0 2 0 1 0 2 2 0) (1 0 1 4 1 0 2 0 3) (0 2 0 4 1 0 4 3 3) (4 3 3 0 1 0 0 4 0) (4 2 0 0 1 1 0 0 3)
+
+(0 1 0 3 1 2 0 2 2) (0 0 3 1 1 0 2 4 2) (0 0 1 0 1 1 3 2 3) (4 0 0 3 1 0 2 3 1) (3 1 4 2 1 2 0 0 0) (4 0 4 0 1 3 0 2 4)
+
+(0 3 0 0 1 3 3 4 4) (0 4 0 1 1 1 2 0 0) (0 2 2 0 1 4 3 0 2) (0 0 2 3 1 3 0 3 0) (0 3 1 3 1 0 0 0 1) (0 1 4 0 1 0 3 1 0) Table 1.
+
+(3 0 0 4 1 1 3 0 1) (0 0 4 4 1 2 4 0 4) (1 0 0 1 1 3 0 4 1) (1 4 0 0 1 0 1 3 0) (0 0 0 2 1 4 1 1 1)
+
+(2 0 0 0 1 2 4 2 1) (4 0 2 4 1 4 1 0 0) (2 0 3 4 1 3 0 0 2) (3 3 0 2 1 0 0 3 4) (2 4 0 4 1 4 0 1 0)
+
+{ 1, 2, 3, 7 } { 1, 3, 7, 8 } { 1, 3, 4, 7, 9 } { 2, 4, 7, 8, 9 } { 1, 2, 3, 8 } { 1, 2, 6, 9 }
+
+{ 2, 4, 6, 8, 9 } { 2, 6, 7, 8, 9 } { 3, 4, 7, 8, 9 } { 2, 4, 6, 7 } { 3, 6, 7, 8, 9 } { 2, 3, 6, 7, 9 } { 1, 4, 7, 8, 9 } { 3, 4, 6, 8 } { 1, 2, 3, 4, 6 } { 2, 3, 4, 9 } { 1, 3, 6, 8, 9 } { 2, 3, 7, 8 } Table 2.
+
+{ 1, 4, 6, 7, 9 } { 3, 4, 6, 7, 9 } { 1, 4, 6, 8, 9 } { 1, 2, 7, 8 } { 4, 6, 7, 8, 9 }
+
+{ 1, 6, 7, 8, 9 } { 1, 3, 4, 6, 7 } { 1, 3, 4, 6, 9 } { 1, 2, 4, 8, 9 } { 1, 2, 4, 6, 8 }
+
+{ 1, 2, 3, 8, 9 } { 2, 3, 6, 8, 9 } { 1, 2, 4, 7, 8 } { 2, 3, 6, 7, 8 } { 2, 3, 4, 6, 9 } { 1, 2, 3, 7, 9 } { 3, 4, 6, 7, 9 } { 1, 6, 7, 8, 9 } { 1, 4, 6, 8, 9 } { 2, 3, 7, 8, 9 }
+
+{ 2, 3, 4, 6, 7 } { 1, 3, 6, 8, 9 } { 1, 2, 4, 7, 9 } { 1, 3, 6, 7, 8 } { 4, 6, 7, 8, 9 } { 2, 6, 7, 8, 9 } { 1, 2, 3, 6, 7 } { 1, 2, 3, 6, 9 } { 2, 4, 6, 8, 9 } { 1, 2, 3, 4, 6 }
+
+{ 3, 4, 6, 8, 9 } { 2, 4, 6, 7, 9 } { 1, 2, 6, 7, 8 } { 2, 3, 6, 7, 9 } { 1, 3, 4, 6, 8 } { 1, 2, 6, 8, 9 } { 1, 3, 4, 6, 9 } { 1, 2, 7, 8, 9 } { 2, 3, 4, 7, 9 } Table 3.
+
+{ 1, 3, 4, 6, 7 } { 1, 4, 6, 7, 8 } { 1, 2, 6, 7, 9 } { 1, 2, 4, 6, 8 } { 1, 2, 4, 6, 9 } { 1, 4, 7, 8, 9 } { 3, 4, 6, 7, 8 } { 2, 3, 4, 8, 9 } { 1, 3, 4, 7, 8 }
+
+{ 1, 2, 3, 4, 7 } { 2, 4, 6, 7, 8 } { 1, 2, 3, 4, 9 } { 1, 2, 4, 6, 7 } { 2, 4, 7, 8, 9 } { 2, 3, 4, 6, 8 } { 1, 2, 4, 8, 9 } { 2, 3, 4, 7, 8 } { 1, 2, 3, 6, 8 }
+
+{ 3, 4, 7, 8, 9 } { 1, 4, 6, 7, 9 } { 1, 3, 6, 7, 9 } { 1, 2, 3, 4, 8 } { 1, 2, 3, 7, 8 } { 3, 6, 7, 8, 9 } { 1, 3, 4, 8, 9 } { 1, 3, 4, 7, 9 } { 1, 3, 7, 8, 9 }
+
+Example 2. Continue with Example 1, minimum codewords respect to 5 in C  are list in Table 1. Since coordinate 5 is in the support of any minimal codeword respect to 5, we exclude 5 from all supports of these codewords. Then we get supports of minimal codewords excluding 5, see Table 2. So any substitution group to the receiver R5 must contain at least one set in Table 2. And subset of P \ {R5 } that does not contain any one set in Table 1 can not make a substitution attack to the receiver R5 successfully in a probability better than 1/5 (1/5 is the success probability of randomly choosing a label from F5 for a fake message) using their knowledge of the key matrix A. From Table 2, notice that most subsets of P\{R5 } with cardinality 4 can not generate a fake message that can accepted by R5 successfully in a probability better than 1/5, even subsets of P \ {R5 } with cardinality 5 can not, such as shown in Table 3. While in the scheme of Safavi-Naini and Wang with a [9, 5] Reed-Solomon code (the field must have cardinality 9), any subset of P \ {R5 } with cardinality 5 can successfully recover the private key of R5 and hence they can easily make a substitution attack to R5 .
+
+16
+
+JUN ZHANG, XINRAN LI AND FANG-WEI FU
+
+4. Conclusion In this paper, we construct an authentication scheme for multi-receivers and multiple messages based on linear code C [V, k, d]. There are many advantages. Compared with schemes based on MACs or digital signatures which depend on computational security. Our scheme is an unconditional secure authentication scheme, which can offer robustness against a coalition of up to (d(C  ) - 2) malicious receivers. Similarly as the generalization of Shamir's secret sharing scheme to linear secret sharing sceme based on linear codes, compared with the scheme of Safavi-Naini and Wang [8] which has a constraint on the number of verifying receivers that can not be larger than the size of the finite field. Our scheme allows arbitrary receivers for a fixed message base field. And, for some important receiver, coalitions of k or more malicious receivers can not yet make a substitution attack on the receiver more efficiently than randomly guessing a label from the finite field for a fake message. While the authentication scheme of Safavi-Naini and Wang is a (V, k) threshold authentication scheme, any k of the V receivers can easily produce a fake message that can be accepted by the receiver. References
+[1] H. Chen and R. Cramer. Algebraic geometric secret sharing schemes and secure multi-party computation over small fields. In Proceedings of 26th Annual IACR CRYPTO, Santa Barbara, Ca., USA, Springer Verlag LNCS, vol. 4117, pages 516531, 2006. [2] H. Chen, S. Ling, and C. Xing. Access structures of elliptic secret sharing schemes. Information Theory, IEEE Transactions on, 54(2):850 852, feb. 2008. [3] Qi Cheng. Hard problems of algebraic geometry codes. IEEE Transactions on Information Theory, 54:402 406, 2008. [4] Y. Desmedt, Y. Frankel, and M. Yung. Multi-receiver/multi-sender network security: efficient authenticated multicast/feedback. In INFOCOM '92. Eleventh Annual Joint Conference of the IEEE Computer and Communications Societies, IEEE, pages 2045 2054 vol.3, may 1992. [5] J. L. Massey. Minimal codewords and secret sharing. In Proceedings of the 6th Joint Swedish-Russian International Workshop on Information Theory, pages 276279, 1993. [6] J. L. Massey. Some applications of coding theory in cryptography. In Codes and Ciphers: Cryptography and Coding IV, pages 3347, 1995. [7] R. J. McEliece and D. V. Sarwate. On sharing secrets and Reed-Solomon codes. Commun. ACM, 24(9):583 584, September 1981. [8] R. Safavi-Naini and H. Wang. New results on multi-receiver authentication codes. In Advances in Cryptology  EUROCRYPT '98, LNCS, pages 527541. Springer-Verlag, 1998. [9] A. Shamir. How to share a secret. Commun. ACM, 22(11):612613, November 1979. Chern Institute of Mathematics, Nankai University, Tianjin, P.R. China E-mail address: zhangjun04@mail.nankai.edu.cn; xinranli@mail.nankai.edu.cn; fwfu@nankai.edu.cn
+

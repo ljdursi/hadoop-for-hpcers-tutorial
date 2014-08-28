@@ -1,0 +1,17 @@
+#!/bin/bash
+
+filename="part-00000"
+prefix="timestep"
+nsteps=20
+cat ${prefix}-0/${filename} | awk 'BEGIN {FS=":"} {printf $2 " "} END {print ""}' > data
+for iter in $( seq 0 $nsteps )
+do
+    nextiter=$((iter+1))
+    mkdir ${prefix}-${nextiter}
+    cat ${prefix}-${iter}/${filename} | ./map.py | sort | ./reduce.py > ${prefix}-${nextiter}/${filename}
+    if ! ((iter % 5)) 
+    then
+        cat ${prefix}-${nextiter}/${filename} | awk 'BEGIN {FS=":"} {printf $2 " "} END {print ""}' >> data
+    fi
+done
+gnuplot plot.gp

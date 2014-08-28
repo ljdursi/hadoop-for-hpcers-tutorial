@@ -1,0 +1,1529 @@
+Reducing the debt: is it optimal to outsource an investment?
+G-E. Espinosa , C. Hillairet , B. Jourdain , M. Pontier May 22, 2013
+
+arXiv:1305.4879v1 [math.PR] 21 May 2013
+
+Abstract We deal with the problem of outsourcing the debt for a big investment, according two situations: either the firm outsources both the investment (and the associated debt) and the exploitation to a private consortium, or the firm supports the debt and the investment but outsources the exploitation. We prove the existence of Stackelberg and Nash equilibria between the firm and the private consortium, in both situations. We compare the benefits of these contracts. We conclude with a study of what happens in case of incomplete information, in the sense that the risk aversion coefficient of each partner may be unknown by the other partner. Keywords: Outsourcing, Public Debt, Public-Private-Partnership, Nash equilibrium, Stackelberg equilibrium, Optimization, Stochastic control, Partial information MSC 2010: 60H30, 91B06, 91B50, 93E20
+
+1
+
+Introduction
+
+With the significant increase in recent years of public debt in many developed countries, together with the associated concerns related to possible defaults of some of them, the question of financing public projects is more than ever at the center of economic and political considerations. To overcome this problem, leveraging on the private sector appears at first glance as a good idea. This type of Public-Private Partnership (PPP) was initiated in the United Kingdom in 1992, under the name Private Financing Initiative (PFI), and has widely been used since then, so that it represented one third of all public investments made in the UK during the period 2001-2006. It has also been used in many other countries, in particular in Europe, Canada and in the United States, to finance hospitals, prisons or stadiums among others. It is also recommended by the OECD. We refer among many others to [3] for an overview of the extent of PPPs in Europe and in the US, the website of the European PPP Expertise Center (EPEC) or the website of the National Council for Public-Private Partnerships, and to [7] for a global overview made by the OECD. However, as emphasized by the recent discussions in the UK, although the benefits of this type of partnership are mainly admitted, there are still many concerns about its drawbacks (see [8] for a detailed overview). Even though some drawbacks are of political, social or behavioral natures, others are purely economic and are the ones that we are interested in. More precisely, we would like to answer the following question: from an economic point of view, and taking into account the constraints that a country faces when issuing a new amount of debt, is it optimal for this country to finance a public project via a private investment? Although already of a big interest, this question does not need to be restricted to debt emission by a country but can be generalized to any economic agent, be it a country or a firm. Indeed, any firm has some constraints on its debt level
+
+Universit e Paris-Est, CERMICS (ENPC), 6 et 8 avenue Blaise Pascal, F-77455 Marne La Vall ee, email: ge espinosa@yahoo.fr. This research benefited from the support of the Eurostars E!5144-TFM project.  CMAP, Ecole Polytechnique, email: caroline.hillairet@polytechnique.edu. This research benefited from the support of the Chaires "D eriv es du Futur" et "Finance et D eveloppement durable".	Universit e Paris-Est, CERMICS (ENPC), INRIA, 6 et 8 avenue Blaise Pascal, F-77455 Marne La Vall ee, email: jourdain@cermics.enpc.fr. This research benefited from the support of the Chaire "Risques Financiers", Fondation du Risque.  IMT, Universit e Paul Sabatier, email: pontier@math.univ-toulouse.fr
+
+
+
+for several reasons. In some cases, banks will simply not allow a company to borrow enough money to sustain a very expensive project. But even if it is not the case, since the debt level appears on the company's accounts, issuing too much debt will affect the opinion and confidence of investors, and in particular deteriorate its rating. This can lead to a higher credit spread when issuing new bonds, difficulties to increase the capital of the firm, a drop of the company's stock price, dissatisfaction of shareholders or in the worst case, bankruptcy. We can cite some concrete examples where the dilemma between investing directly or resorting to outside investment can occur: owning or renting offices or factories, owning or leasing trucks, trains or planes, some industrial machines or some office materials (such as computers). Therefore we will consider in this paper the problem of outsourcing from the debt point of view. Since the question of outsourcing some operations has already been widely studied and our aim is only to study the relevance of outsourcing an investment in order to reduce the debt of a firm (or economic agent), we will compare two situations where the operations are always outsourced. In the first one, the firm outsources both the investment/debt and the operations, while in the second one, the firm supports the debt and the investment but outsources the operations. In [5], Iossa, Martimort and Pouyet give some results on the comparison of the costs and benefits associated to PPP. Hillairet and Pontier [4] propose a study on PPP and their relevance, assuming the eventuality of a default of the counterparty, but they do not take into account the government debt aversion. However, the attractivity for government of PPP contracts relies obviously on the short term opportunity gain to record infrastructure assets out of the government's book. To our knowledge, there does not exist any references in Mathematics area. In Economics, a narrow strand of literature is dedicated to the discussion of Build-Operate-Transfer (BOT) concession contracts, which is a frequent form of PPP. Under BOT contracts the private sector builds and operates an infrastructure project for a well defined concession period and then transfers it to public authorities. The attractiveness of BOT contracts to governments stems from the possibility to limit governmental spending by shifting the investment costs to a private consortium. In [1], Auriol and Picard discuss the choice of BOT contracts when governments and consortia do not share the same information about the cost parameter during the project life. They summarize the government's financial constraint by its "shadow" cost of public funds, which reflects the macro-economic constraints that are imposed on national governments' surplues and debt levels by supranational institutions such as the I.M.F. Using linear demand functions and uniform cost distributions, they compute theoretical values of shadow costs that would entice governments to choose BOT concessions contracts. Our approach is different from the modelization and the resolution point of view. The present paper is organised as follows. In Section 2 we set the problem of outsourcing between two firms and we define the optimization problems in Situation 1, in which the firm outsources both the investment/debt and the operations, and in Situation 2 , in which the firm supports the debt and the investment but outsources the operations. Section 3 provides the main results. Section 4 is devoted to the proofs of existence and characterization of Nash and Stackelberg equilibria in Situation 1, then Section 5 does the same in Situation 2. Section 6 concerns the proofs of the comparison results between the two situations and the results obtained in incomplete information.
+
+2
+2.1
+
+Problem formulation
+Costs and revenue
+
+Consider two firms. Firm I is the one who wants to reduce its debt and therefore considers the possibility of outsourcing an investment to a second firm J . In any case, firm J is the one that will support the operational cost of the project, on o 0 the time horizon T . Let (Ct ) such that the operational cost on the time-interval [t, t + dt] is Ct dt, be given by : (2.1) where  t is the "business as usual" cost, such that Et represents the "average" benchmark cost (it takes into account the price of commodities, employees, rents...). We assume that t is not dt  dP a.e. constant, that there exists k > 0 such that t	k (for all t, P-a.s) and that
+T o Ct = t - (et ) -  (a),
+
+(2.2)
+
+  R, E
+0 T 0 s
+
+es ds < +.
+
+e ds is infinitely differentiable. For instance, we may consider Notice that this implies that the function   E that t = (t, Pt ) where  is a function bounded from below by k and also bounded from above, and Pt is a Markov process with the following dynamics: (2.3) dPt = diag(Pt ) (t, Pt )((t, Pt )dt + dWt ),
+
+where W is a d-dimensional Brownian motion,  : R+  Rd  Rd and  : R+  Rd  Rdd are measurable in time and Lipschitz in space uniformly in time,  is bounded.  et is non-negative and represents the effort made in order to reduce the operational cost between t and t + dt, such as logistics improvements, research and development, maintenance or more efficient or less workers, and will in general have a social impact for firm I ,    R represents the impact of the quality of the investment on the reduction of operational costs. We do not impose any restriction on the sign of delta, since, as suggested in [5], both signs can make sense depending on the situation. Indeed, when constructing a building, using more expensive material usually bring less maintenance costs and therefore a positive delta. On the contrary, for a hospital, using more sophisticated (and expensive) machines can bring bigger maintenance costs and a negative delta.  a= A T where A  0 is the effort done on the (initial) quality of the investment, improving the social value of the project. Depending on  , A affects positively, negatively or does not affect the operational cost. The reason why we work with a instead of A is that a has the same dimension as the effort et ,   : R+  R+ and  : R+	R+ are C 1 , increasing and strictly concave functions, satisfying the Inada conditions  (0) = + and  () = 0,	(0) = + and   () = 0. We also assume that () +	+  ()  k , where o +  + = max(, 0), which ensures that Ct  0; as a consequence, (x, y )  R2 + , (x) +	(y ) < k. We assume  -1  -1 furthermore that ( ) (x)  ( ) (x) for x  0 for technical reasons and to make the computations lighter even if we could relax it. The function e is a control for firm J , while a is a control for the firm that supports the investment, I or J depending on the situation. In a sense,  represents the trend on the cost. The minimal investment required by the project is C0 > 0 and the total investment is the sum C0 + A of this minimal 0 investment and of the initial effort. Introducing D = C T , the total investment is equal to (D + a)T . The total investment is assumed to be entirely covered by issuing a debt with horizon T at time 0. To take into account the possibility that the cost of borrowing is in general not the same for different firms, we denote the respective non-negative constant interest rates of firms I and J by rI and rJ . For t  [0, T ), the amount to be reimbursed by the borrower K  {I, J } between t and t + dt is (1 + rK )(D + a)dt. Finally, we need to add the remaining costs coming from the effort et as well as the maintenance costs denoted by mt : (2.4)
+m Ct = e t + mt .
+
+The maintenance costs mt are non-negative and will have a social impact for firm I . Since firm I gives to firm J either a rent or the right to exploit the project on [0, T ], in both cases we can consider a process Rt which corresponds to the endowment for firm J and the rent or shortfall for firm I , on [t, t + dt]. This process is computed using a reasonably simple rule, decided at t = 0 and subject to a control of firm I . In reality, in such contracts, the endowment can be indexed on the price of commodities in the case of transportation or on a real-estate index for the rent of a building. Since firm I wants to have a project of good quality as well as a well maintained project, o we assume that Rt is non-negative and depends on both Ct and the maintenance cost in the following way: (2.5)
+o Rt =	+ Ct + g (mt ),
+
+with   0,   R,	 0 and g is a C 1 , increasing and strictly concave function on R+ , such that g  (0) =  and g	() = 0. Moreover, we assume that (2.6) m0 := inf {m > 0 : g (m) > 0} < +.
+
+The constants ,  and  are controls of firm I . We do not put any randomness in the coefficients ,  and	of R since we consider that they are defined at time t = 0 by a contract between firms I and J . All the randomness in R comes from o the operational cost term Ct . Still, this model allows for an indexation on a benchmark such as the price of commodities or inflation through this dependence with respect to operational costs.
+
+2.2
+
+Optimization problems
+
+Let  be the discount factor that relates the preferences for today of both1 firms I and J . We assume that the risk aversions of firm I and J are represented respectively by the exponential utility functions U (x) = -e-ux and V (x) = -e-vx , x  R,
+1
+
+We take the same discount factor for both firms since it does not change the reasoning while it adds some notational complexity.
+
+with u, v > 0. We consider two different situations: in Situation 1, firm J supports the debt and takes care of the exploitation; its controls are a, e and m, whereas the controls of firm I are ,  and  . In Situation 2, firm J only takes care of the exploitation, its controls are e and m, whereas the controls of firm I are a, ,  and	. Firm I is the one that chooses between the two situations. The optimization problems for firm J respectively in Situation 1 and 2 are v 1 = sup(a,e,m) J 1 (a, e, m) and v 2 = sup(e,m) J 2 (e, m) respectively, where:
+T
+
+J 1 (a, e, m) = E
+0 T
+
+V  + ( - 1)(s - (es ) -  (a)) - es + g (ms ) - ms - (1 + rJ )(D + a)  (ds) V  + ( - 1)(s - (es ) -  (a)) - es + g (ms ) - ms  (ds)
+0
+
+J 2 (e, m) = E
+
+ 1[0,T ] (s)ds. 1 - e-T In these optimization problems, we have assumed that the controls of firm I are given (they have no reason to be the same in the two cases). We look for controls in the following admissible sets : a is a non-negative constant, e and m are adapted and non-negative processes. The eventuality that firm J does not accept the contract will be taken into account in the constraints of the optimization problem for firm I .  (ds) := e-s On the other hand, we consider that the project has an initial "social" value ba (a) for firm I , and a good maintenance also represents a social benefit bm (m). The benefits of the efforts on operational costs are modelled through the function be . We also introduce a penalization function f representing the aversion for debt emission of firm I . Those functions satisfy the following hypotheses	ba : R+  R+ is a C 1 , increasing and concave function. (ba ) (0) > 0, possibly infinite, (ba ) () = 0 and ba () < .  bm : R+  R+ is a C 1 , increasing and concave function, such that (bm ) () = 0.  be : R+	R+ is a C 1 , increasing and concave function, such that (be ) (0) =  and (be ) () = 0	f is an increasing and strictly convex function, satisfying f  () = . Therefore we write the optimization problem for firm I in both situations as u1 = sup(,, ) I 1 (, ,  ) and u2 = sup(a,,, ) I 2 (a, , ,  ) where:
+T
+
+denoting the probability measure
+
+I 1 (, ,  ) = E ba (a) +
+0 2 a
+
+e-s U bm (ms ) + be (es ) -  -	(s - (es ) -  (a)) - g (ms ) ds
+
+I (a, , ,  ) = E b (a) - f (1 + rI )(D + a)T
+T
+
++
+0
+
+e-s U bm (ms ) + be (es ) -  -	(s - (es ) -  (a)) - g (ms ) ds .
+
+Hypotheses on ba and f imply that F (a) := ba (a) - f ((1 + rI )(D + a)T ) is strictly concave, satisfies F  () = - and F () = -. Finally we assume that F  (0) > 0, possibly infinite. The admissible sets are: - in Situation 1,   0,   R,   0 and such that
+T
+
+(2.7)
+
+E
+0
+
+V  + ( - 1)(s - (es ) -  (a)) - es + g (ms ) - ms - (1 + rJ )(D + a)  (ds)
+
+ V (0);
+
+- in Situation 2, a  0,   0,   R,   0 and such that
+T
+
+(2.8)
+
+E
+0
+
+V  + ( - 1)(s - (es ) -  (a)) - es + g (ms ) - ms  (ds)
+
+ V (0).
+
+The constraint ensures that firm J will accept the contract, since it is better or equal for it than doing nothing. Depending on the power balance between the two firms, different kinds of equilibria can be relevant. In fact, we will look for the existence of two different equilibria between the two firms: a Nash equilibrium and a Stackelberg equilibrium where I is the leader. The first situation corresponds for example to an industrial group which wants to outsource its trucks/trains to a big transport company. The second one corresponds for example to a government which outsources the construction of a stadium.
+
+Remark 2.1 We could also consider Stackelberg equilibria with firm J as the leader, which corresponds for instance to a small firm wanting to outsource to a big company. In Situation i  {1, 2}, since s - (es ) -  (a) > 0, I i is decreasing w.r.t.	, while J i is increasing w.r.t.  . Therefore if firm J is the leader, for any choice of its controls, firm I 's optimal controls will always saturate the constraint J i  V (0), and therefore we obtain a Stackelberg equilibrium. As a consequence, in this framework, Stackelberg equilibria with firm J leader is not relevant from an economical perspective.
+
+3
+
+Main results
+
+The best responses of firm J to given controls of firm I turn out to be easily derived. That is why we first present them, before stating our main results concerning Nash and Stackelberg equilibria where these best responses appear. The proofs of the main results are postponed in Sections 4, 5 and 6.
+
+3.1
+
+Best responses of firm J in Situations 1 and 2
+
+Let us first consider Situation 1 and suppose that (, ,  ) is given in R+  R  R+ . For firm J the optimization problem is  by  and t by t, and since U is increasing it writes: sup{(1 -  )(e) - e} + sup {g (m) - m} + sup{ (1 -  ) (a) - (1 + rJ )a}.
+e0 m0 a 0
+
+Since  ,  and g are strictly concave, the first order conditions characterize the points maximizing each function between braces and, with the convention that ( )-1 () = 0 for  = , , g , we have : (3.1) m = (g  )-1 (1/ ) ; e = ( )-1 1 (1 -  )+ ; a = (  )-1 1 + rJ ( (1 -	))+ .
+
+Let us now consider Situation 2 and suppose that (a, , ,  ) is given. Similarly we obtain that (3.2) m = (g  )-1 (1/ ), e = ( )-1 1 (1 -  )+ .
+
+To describe the Nash and Stackelberg equilibria, we introduce the continuous mappings Ce : R  R and Be : R  R+	R defined for any e  R+ by 1 ln E v
+T
+
+(3.3) (3.4)
+
+Ce ( ) :=
+
+ev(1- )(s -(e))  (ds),
+0
+m
+
+Be (, m) := eu(Id-b
+
+)(m) u(Id-be )(e) +uCe ( )
+
+T
+
+e
+
+e
+
+E
+0
+
+e-s eu (s -(e)) ds.
+
+If e is taken as the optimal effort e ( ), we denote Ce ( ) and Be ( ) respectively as (3.5) (3.6) C ( ) := 1 ln E v
+T 0
+m
+
+ev(1- )(s -e e
+
+
+
+( ))
+
+ (ds),
+T
+
+B (, m) := eu(Id-b
+
+)(m) u(Id-be )e ( ) uC ( )
+
+e
+
+E
+0
+
+e-s eu (s -e
+
+
+
+( ))
+
+ds.
+
+3.2
+
+Nash equilibria
+v u+v
+
+In the case of the Nash equilibria, we will see that the optimal  is (3.6) simplify as : (3.7) (3.8) for  = v , u+v Be (, m) B (, m) = =
+
+and the mapping Be and B defined in (3.4) and
+
+1 - e-T u(Id-bm )(m) u(Id-be )(e) (u+v)Ce ( ) e e e  1 - e-T u(Id-bm )(m) u(Id-be )(e ( )) (u+v)C ( ) e e e .
+
+To describe the Nash equilibria, we also need the following technical results about the function g .
+g (m ) g (m ) Moreover, the function G : m  g Lemma 3.1 We have limm g	(m) - m = +.  (m) - m is decreasing on [0, m0 ] (where m0 is defined in (2.6)) and increasing from -m0 to + on [m0 , +) thus admitting an inverse G-1 : [-m0 , +)  [m0 , +).
+
+^  Proposition 3.1 In Situation 1, there exists an infinite number of Nash equilibria, namely the vectors (^ , , ^, e ^, m, ^ a ^) defined by (u + v )(1 + rJ ) u+v v , e ^ = ( )-1 ( ), a ^ = (  )-1 u+v u +u u ^) + (1 + rJ )(D + a  (^ a) - G(m ^ ),  ^ = C ( ^) + e ^- u+v ^=
+u ^) + (1 + rJ )(D + a ^ 1 (rJ ) := [0, G-1 (C ( for m ^ varying in M ^) + e ^ - u+ a))]. v  (^ The corresponding optimal values for firms J and I are respectively V (0) and a) u(1+rJ )(D+^ a) 1 (m ^ m I^ ^ ) = ba (^ a) - e-u(^ e B (, ^ ),
+
+,  ^=
+
+1 , g  (m ^)
+
+^) and B (, ^ m with C ( ^ ) defined in (3.5) and (3.8). Remark 3.1  Although there exists an infinite number of Nash equilibria, the controls	, e and a are the same in all these equilibria. v ^) - u  (^ ^	Since  ^s - (^ e) -  (^ a)  0, one has C ( a)  0 so that [0, G-1 (( )-1 ( u+ rJ 0 M1 (rJ ). u+v u ) + D )]   It is natural to wonder whether there exists in Situation 1 a Nash equilibrium among the infinite family of such ^ 1 . This function depends on the Nash equilibrium only equilibria exhibited in Proposition 3.1 which maximizes I m through the term b (m ^)-m ^ which has to be maximized. The function m ^  bm (m ^)-m ^ being concave, it admits a ^ unique maximum on the interval M1 (rJ ) where m ^ associated with a Nash equilibrium varies. Proposition 3.2 Let F (a) = ba (a) - f ((1 + rI )(D + a)T ). For constant e, m  0 arg max F (a) - e-u(a) Be (
+a 0
+
+v , m) =  . u+v
+
+^  Moreover, in Situation 2, there exists an infinite number of Nash equilibria namely the vectors (^ , , ^, e ^, m, ^ a ^) defined by (3.9) (3.10) (3.11) ^= m ^  0,
+v u+v ,
+
+e ^ = ( )-1
+
+u+v u
+
+,  ^=
+
+1 g  (m ^),
+
+^ m ^) , a ^  arg maxa0 F (a) - e-u(a) B (, ^) + e  ^ = C ( ^-
+u a) u+v  (^
+
+- G(m ^ ),
+
+u v ^) + e and such that C ( ^ - u+ a) - G(m ^ )  0, condition satisfied when m ^  G-1 (( )-1 ( u+ ^+ ^>0 v  (^ u )). Moreover,  and if   0, then a ^ > 0 and is unique for each m ^. The corresponding optimal values for firms J and I are respectively V (0) and a) ^ 2 (m ^ m I ^ ) = ba (^ a) - f [(1 + rI )(D + a ^)T ] - e-u(^ B (, ^ ).
+
+Remark 3.2 Notice that the order the different controls are determined is important, since some of them depend on the ^ depends on no other control and therefore should be determined first, leading to the value of e ^. Then other ones. Indeed  one should fix m ^ , in order to have  ^, which allows then to determine a ^, and once this is done, we can find  ^ . Although  ^ and  ^ essentially play the same role, the fact that  ^ only depends on m ^ makes this order important. If one chooses  ^ first, then the determination of a ^ is not clear, since then a ^ depends on m ^ , while m ^ depends on a ^ and  ^. The following Proposition gives the monotonicity of the optimal initial effort a ^1 in Situation 1 (respectively a ^2 in Situation 2), function of the interest rate rJ (respectively rI ). Proposition 3.3 The application rJ  a ^1 (rJ ) is non increasing. At least in case  > 0, the application rI  a ^2 (rI ) is non increasing. ^  ^  ^ 2 (rI ) denote the set of m Let M ^	0 for which there exists (^ , , ^, e ^, a ^) such that (^ , , ^, e ^, m, ^ a ^) is a Nash equilibrium -1  -1 u+v ^ 1 (rJ )  ^ in Situation 2. By Proposition 3.2 and Remark 3.1, [0, G (( ) ( u ))]  M rI 0 M2 (rI ) . ^1 (m ^2 (m We now compare the respective optimal values I ^ ) and I ^ ) for firm I in Situations 1 and 2 for the same maintenance effort m ^ . We are going to exhibit cases in which Situation 1 (meaning outsourcing/PPP) (respectively Situation 2, meaning debt issuance/MOP) is the more profitable for firm I.
+
+^ 1 (rJ )  Proposition 3.4 Let rate rJ	0 be fixed and m ^ M (3.12) rI
+
+rI 0
+
+^ 2 (rI ) . In case of rate rI satisfying M - 1,
+
+a1 (rJ )) a1 (rJ )) ^ m ^ )eu(^ eu(1+rJ )(D+^ -1 f -1 B (,
+
+(D + a ^1 (rJ ))T
+
+^2 (m ^1 (m we have I ^)  I ^ ) and the better contract for firm I is the second one, meaning debt issuance. Condition (3.12) has a clear economical interpretation. The right-hand-side does not depend on rI . Therefore for a fixed rJ , debt issuance is the best choice for firm I as soon as its interest rate rI is small enough. Note the impact of the function f modeling its debt aversion : the larger f , the smaller the threshold on rI in condition (3.12). ^ 1 (rJ )  Proposition 3.5 We assume  > 0. Let rate rJ  0 be fixed (thus a ^1 (rJ ) is fixed) and m ^ M In case of rate rI satisfying
+a1 (rJ )) ^ m (1 + rI )f  [(1 + rI )(D + a ^1 (rJ ))T ] > (ba ) (^ a1 (rJ )) + u  (^ a1 (rJ ))B (, ^ )e-u(^ , rI 0
+
+^ 2 (rI ) . M
+
+(3.13)
+
+or   (^ a2 (rI )) > (u + v )(1 + rJ ) u
+
+and (3.14)
+a2 (rI )) a2 (rI )) ^ m eu(1+rJ )(D+^ -1 ^ )eu(^ (1 + rI )(D + a ^2 (rI ))T  f -1 B (,
+
+^1 (m ^2 (m one has I ^)  I ^ ) and the better contract for firm I is the first one, meaning outsourcing. The economical interpretation of condition (3.13) is also natural. Indeed, the right-hand-sides of the inequalities do not depend on rI whereas the left-hand-sides are increasing functions of rI . Hence (3.13), leading to optimality of outsourcing for firm I , is satisfied as soon as its interest rate rI is large enough. Unfortunately, we have not been able to check that the second condition (3.14) for optimality is satisfied for large rI . Besides, we see that the more convex f is, the smaller is the threshold on rI in the first inequality of condition (3.13).
+
+3.3
+
+Stackelberg equilibria
+
+Depending on Situation 1 or 2 and on the sign of  , the optimal  will be characterized as solution of different equations. To specify those equations, we need to introduce the functions (3.15) h() = E E
+T 0
+
+e-s s es ds e-s es ds
+
+T 0
+
+,
+
+(3.16)
+
+S ( ) :=
+
+ 1-
+
++ (be )  ( )-1
+
+1 (1- )+ 1 (1- )+
+
+(1 -  )2   ( )-1
+
+,
+
+(3.17)
+
+S ( ) :=  (1 -
+
+1 + rJ	)2 (  )((  )-1
+1+rJ ( (1- ))+
+
+where k ( ) is a positive function of  defined as follows: (3.18) k ( ) := eu(Id-b
+e
+
+, (1 + rJ )  + 1- ue(Id-bm))((bm ) )-1 (1) k ( ) )
+T
+
+(ba ) ((  )-1
+
+1+rJ ( (1- ))+
+
+)
+
+)e ( ) -ua ( ) u(1+rJ )(D+a ( )) uC ( )
+
+e
+
+e
+
+e
+
+E
+0
+
+e-s eu
+
+s -e ( )
+
+ds
+
+with e ( ) and a ( ) defined in (3.1) and C ( ) in (3.5). We consider the following equations (3.19) h(u ) - h(v (1 -  )) = S ( ),
+
+(3.20)
+
+h(u ) - h(v (1 -  )) = S ( ) + S ( ),
+
+(3.21)
+
+h(u ) - h(v (1 -  )) = S ( ).
+
+Proposition 3.6 In Situation 1, there exists at least one Stackelberg equilibrium with firm I as the leader. Moreover, if ^  there exists a Stackelberg equilibrium (^ e, m, ^ a ^,  ^ , , ^) with  ^ > 0, then it is characterized by : e ^ = ( )-1 1 ^)+ (1 -  , a ^ = (  )-1 1 + rJ ^))+ ( (1 -  ,m ^ = (bm )
+-1
+
+(1),  ^ = 1/g  (m ^ ),
+
+^) + (1 + rJ )(D + a ^) (^  ^ = C ( ^) + e ^ - (1 -  a) - G(m ^ ). ^ is a solution of (3.20) and is less than v . If  > 0 then	u+v ^ is a solution either of (3.19) (that is less than If  < 0 then
+v u+v )
+
+or of (3.21) (that is bigger than one).
+
+Proposition 3.7 In Situation 2, there exists at least one Stackelberg equilibrium with firm I as the leader. Moreover, if ^  there exists a Stackelberg equilibrium (^ e, m, ^ a ^,  ^ , , ^) with  ^ > 0, then it satisfies: 1 m  -1  -1 ^ ,m ^ = (b ) (1),  ^ = 1/g  (m ^ ),	is a solution of (3.19), e ^ = ( )
+^)+ (1-
+
+^ m ^) + e ^) (^ a ^  arg maxa0 F (a) - e B (, ^ ) and	^ = C ( ^ - (1 -  a) - G(m ^ ), where the mappings C and B are defined by (3.5)-(3.6). ^ < v . Moreover, if   0, then arg maxa0 F (a) - e-u(a) B (, ^ m In particular,	^ ) is a singleton and a ^ > 0. u+v
+-u (a)
+
+^ when	According to the next Lemma, Equation (3.19) which appears in the characterization of  ^ > 0 in both Situations 1 and 2 always admits a solution. ^ Moreover, all solutions are smaller than Lemma 3.2 Equation (3.19) admits at least one solution .
+v u+v .
+
+3.4
+
+Incomplete information
+
+In this section we consider the previous equilibrium problems when the firms do not have a perfect knowledge of the preferences of the other firm. More precisely, we still assume that the firms' utility functions are U (x) = -e-ux and V (x) = -e-vx respectively, but firm I perceives v as a random variable that we will denote V (and knows its distribution), which is independent of	and takes values in (0, +), and firm J perceives u as a random variable that we will denote U (and knows its distribution), which is independent of  as well. According to Section 3.1, firm J optimal controls are functions of the controls ,  fixed by firm I that do not depend on the risk aversion parameters u. Therefore, equations (3.1) and (3.2) still hold in incomplete information and incomplete information on the risk aversion parameter u has no impact on the equilibria. In contrast, the uncertainty on the parameter v has an impact as the acceptation of the contract by firm J depends on it. To model the social need of the investment, we introduce a (social) penalty p  R  {+} that firm I gets if firm J does not accept the contract.
+
+3.4.1
+
+Stackelberg equilibrium, firm I is leader
+
+We first introduce the events Ai , i = 1, 2 : "firm J accepts the contract" in Situation i. The optimization problem for firm I is (3.22)
+1 1 1 u1 I := -p  sup {I (, ,  )P A (, ,  ) - p(1 - P A (, ,  ) )}, (,, )
+
+in Situation 1 and in Situation 2, it becomes : (3.23) The functions
+T
+
+u2 I := -p
+
+sup {I 2 (a, , ,  )P A2 (a, , ,  ) - p(1 - P A2 (a, , ,  ) )}.
+(a,,, )
+
+I 1 (, ,  ) =E ba (a ( )) -
+0 T
+
+e-s e-u
+
+[bm -g](m ( ))+[be +](e ( ))-- (s - (a ( )))
+
+ds
+
+I 2 (a, , ,  ) = F (a) - E
+0
+
+e-s e-u
+
+[bm -g](m ( ))+[be +](e ( ))-- (s - (a))
+
+ds
+
+where, e , m and a have been defined in (3.1), are the social gain that firm I respectively gets in Situations 1 and 2 if firm J accepts the contract. Notice that the supremum is taken with -p to modelize the possibility for firm J not to
+
+enter the game and that p = + corresponds to the case where firm I absolutely wants that firm J accepts the contract. In order to characterize the acceptance set Ai , we introduce
+(3.24) ~1 (v, , ,  ) := E J
+0 T
+
+e -v
+
++[(1- )-Id]e ( )+( -1)(s - (a ( )))+[g -Id](m ( ))
+
+ev(1+rJ )(D +a
+
+
+
+( ))
+
+ (ds)
+
+(3.25)
+
+~2 (v, a, , ,  ) := E J
+0
+
+T
+
+e -v
+
++[(1- )-Id]e ( )+( -1)(s - (a))+[g-Id](m ( ))
+
+ (ds).
+
+~i are strictly ~i (v,	  ) are differentiable. Since their derivatives v  v J According to hypothesis (2.2), the functions v  J i ~ decreasing, the functions J (v,	) are strictly convex and continuous. Taking into account the admissible conditions (2.7),(2.8) in the case of power utility functions , firm J accepts the contract ~i (V, .)	1, thus Ai = { ; J ~i (V ( ), .)  1}. if and only if J We define the value function of the problem with complete information that firm J 's risk aversion is equal to v u1 (v ) := u2 (v ) := We have the following result: Proposition 3.8 Let (3.26) We have
+i wI i wI := -p  sup{ui (v )P(V  v ) - p 1 - P(V  v ) }. v>0
+
+sup
+~1 (v,,, )1} {(,, )R+ RR+ :J
+
+I 1 (, ,  ) I 2 (a, , ,  )
+
+sup
+~2 (v,a,,, )1} {(a,,, )R+ R+ RR+ :J
+
+
+
+ui I
+
+i and when either p < + or v  (0, +), P(V > v ) = 0 then wI = ui I.
+
+Proposition 3.8 has an important interpretation. Indeed, it means that in order to solve (3.22) or (3.23), firm I first solves its problem for any given v as if the information was complete or in other words as in Section 3.3, and then "chooses" the level v that would bring the greatest social expectation in (3.26). Theorem 3.1 Let v0 := inf {v > 0 : P(V  v ) > 0}. If limvv+ ui (v )  -p then the fact that the two firms do not enter 0 into any contract is a Stackelberg equilibrium in Situation i. Otherwise, if v1 := sup{v > 0 : P(V > v ) > 0} < + then the optimization problem (3.26) has a solution v	(0, v1 ]  [v0 , v1 ] (equal to v1 when p = +) and any Stackelberg equilibrium for the problem with complete information and risk aversion v  for firm J is a Stackelberg equilibrium for the problem with incomplete information.
+
+3.4.2
+
+Nash equilibrium
+
+We did not succeed in finding sufficient conditions for the existence of a Nash equilibrium with incomplete information. Nevertheless, we obtain necessary conditions that are similar for both situations: ^  Proposition 3.9 Assume existence of a Nash equilibrium c ^ = (^ a,  ^ , , ^, e ^, m ^ ) such that the value for firm I is greater than -p and let v ^ := sup{v > 0 : J (v, c ^)	1} with J (v, c ^) defined in Situations 1 and 2 respectively as
+T
+
+J (v, a, , , , e, m) := E
+0
+
+e -v
+
++( -1)(s -(e)- (a))-e+g(m)-m-(1+rJ )(D+a)
+
+ (ds),
+
+T
+
+J (v, a, , , , e, m) := E
+0
+
+e -v
+
++( -1)(s -(e)- (a))-e+g(m)-m
+
+ (ds).
+
+1+rJ ^ = (  )-1 ((1 ^ = g (1 Then v ^ > 0, e ^ = ( )-1 (1-1 ^)+ ,  ^))+ . m ^ ) and, in Situation 1, a	- If v ^ < +, then c ^ is a Nash equilibrium for the problem with complete information and risk aversion v ^ for firm J and for each v < v ^, P(V  v ) < P(V  v ^). If v ^ = +, then for each v  (0, +), P(V  v ) < 1.
+
+Remark 3.3 If there is a vector (v1 , . . . , vn ) of elements of (0, +) such that n k=1 P(V = vk ) = 1, one deduces that if there exists a Nash equilibrium for the problem with incomplete information, then i such that v ^ = vi .
+
+4
+4.1
+
+Proofs in Situation 1
+Best responses and Nash equilibrium in Situation 1
+Firm I
+T ,,
+
+4.1.1
+
+Let a, e and m be given and constant. Then we get the following optimization problem for firm I : sup E ba (a) -
+0
+
+e-s e
+
+-u
+
+bm (m)+be (es )-- (s -(es )- (a))-g(m)
+
+ds
+
+such that   0,	 0, and
+T
+
+(4.1)
+
+E
+0
+
+e
+
+-v
+
++( -1)(s -(es )- (a))-es +g(m)-m-(1+rJ )(D+a)
+
+ (ds)  1.
+
+v Proposition 4.1 Let a  0, e  0 and m	0 be given and constant, and let   := u+ v . Then there exist optimal triplets v (, ,  ) for the above problem. Moreover (, ,  ) is optimal if and only if it satisfies:  =   := u+ v  (0, 1) and u   + g (m) = Ce ( ) - u+v  (a) + e + m + (1 + rJ )(D + a) with   0 and   0, where
+
+(4.2)
+
+Ce (  ) =
+
+1 ln E v
+
+T
+
+ev(1-
+0
+
+
+
+)(s -(e))
+
+ (ds) >  +
+
+u  (a). u+v
+
+To prove the proposition, we need the following lemma : Lemma 4.1 The function h() = solution  . Proof of Lemma 4.1 We compute:
+T
+T -s E 0 e s es ds T -s s E 0 e e ds
+
+is increasing, thus the equation h(u ) = h(v (1 -  )) admits the unique
+
+E
+0
+
+e-s es ds
+
+2
+
+T
+
+T s dsE e-s 2 se
+
+T
+
+h () = E
+0
+
+e-s es ds - E
+0 0
+
+e-s s es ds
+
+2
+
+> 0,
+
+using Cauchy-Schwarz inequality. The inequality is strict since  is not constant dt  dP a.e.. Therefore  satisfies v h(u ) = h(v (1 -  )) if and only if u = -v ( - 1), so that the only solution is   := u+ v	(0, 1).  Proof of Proposition 4.1 Let a, e and m be given, we introduce:
+T
+
+K (, ,	) := -E
+0
+
+e-s e-u
+T
+
+bm (m)+be (e)-- (s -(e)- (a))-g(m)
+
+ds  (ds)  1 .
+
+E := (, ,  )  R3 ; E
+0
+
+e -v
+
++( -1)(s -(e)- (a))-e+g(m)-m-(1+rJ )(D+a)
+
+We will first solve the problem of maximization of K on E , forgetting about the constraints   0 and   0, and we will then see that it allows to solve the original constrained problem. Let us therefore consider the following problem: sup(,, )E K (, ,  ). Since K is concave and E is a closed convex set, the first order conditions for the Lagrangian associated to this problem are also sufficient conditions. The Lagrangian is given by:
+T
+
+L(, , , ) := - E
+0 T
+
+e-s e-u
+
+bm (m)+be (e)-- (s -(e)- (a))-g(m)
+
+ds  (ds) - 1 .
+
+- E
+0
+
+e -v
+
++( -1)(s -(e)- (a))-e+g(m)-m-(1+rJ )(D+a)
+
+Hypothesis (2.2) implies that L is differentiable and (4.3) (4.4) (4.5) L = -E	L = -E	L = -E
+T T
+
+ue-s e-u() ds + E
+0 T 0
+
+ve-v()	(ds) = 0,
+T
+
+ue-s e-u() (s - (e) -  (a))ds + E
+0 T T 0
+
+ve-v() (s - (e) -  (a)) (ds) = 0,
+
+ue-s e-u() g (m)ds + E
+0 0
+
+ve-v() g (m) (ds) = 0.
+
+Since g (m) is a constant, equation (4.3) implies equation (4.5). Furthermore, since (s - (e) -  (a)) > 0, then  > 0 and the constraint is always saturated. This is natural since K is decreasing w.r.t. ,  and  , while
+T
+
+(, ,  )  -E
+0
+
+e -v
+
++( -1)(s -(e)- (a))-e+g(m)-m-(1+rJ )(D+a)
+
+ (ds)
+
+is increasing w.r.t. ,	and  . Therefore, at an interior point of E denoted (, ,  ), for sufficiently small  > 0, for example (,  - ,  ) is still in E , while K (,  - ,  ) > K (, ,  ), so that (, ,  ) cannot be a maximum of K . Therefore we also have:
+T
+
+(4.6)
+
+E
+0
+
+e -v
+
++( -1)(s -(e)- (a))-e+g(m)-m-(1+rJ )(D+a)
+
+ (ds) = 1.
+
+Combining (4.3) and (4.4), we get:
+T T T T
+
+E
+0
+
+e-s s eus dsE
+0
+
+e-s e-v( -1)s ds = E
+0
+
+e-s eus dsE
+0
+
+e-s s e-v( -1)s ds.
+v u+v
+
+This equation is equivalent to h(u ) - h(v (1 -  ) = 0 which admits the unique solution   = 4.1). Using then (4.6), we compute: e-v(+g(m)) =
+T
+
+
+ (0, 1) (cf. Lemma
+
+e-v(e+m+(1+rJ )(D+a)) E
+
+
+T 0
+
+ev(1-  )(s -(e)-(a))  (ds)
+u
+
+.
+
+We have E 0 ev(1- )(s -(e)-(a))  (ds) = ev(Ce ( )- u+v (a)) , so since	u    (0, 1) and t - (e) -  (a) > 0 dt  dP-a.e, ev(Ce ( )- u+v (a)) > 1 and Ce (  ) - necessary and sufficient condition for optimality: (4.7)  + g (m) = Ce (  ) -
+
+u u+v  (a)
+
+> 0, and we have the
+
+u  (a) + e + m + (1 + rJ )(D + a). u+v
+
+u Since Ce (  ) - u+ v	(a) + e + m + (1 + rJ )(D + a) > 0, the set u {(,  )  [0, +)2 ,  + g (m) = Ce (  ) - u+ v  (a) + e + m + (1 + rJ )(D + a)} = , and therefore the optimal (, ,  ) for the problem: sup K (, ,  ), (,, )E (R+ RR+ )
+
+are exactly the elements of (, ,  )  R+  R  R+ ;  = u v ,  + g (m) = Ce ( ) -  (a) + e + m + (1 + rJ )(D + a) . u+v u+v
+
+4.1.2
+
+Nash equilibrium
+
+Proof of Lemma 3.1 The function g is assumed to be increasing, strictly concave and such that g  (0) = , g  () = 0 and (2.6) holds. Since g is increasing and concave, we compute for any x  [0, m]:
+m
+
+g (m) - g (x) =
+x
+
+g  (u)du  (m - x)g  (m).
+
+Since g is strictly concave and g  () = 0, g  (m) > 0 and we have for m  x: g (m) g (x) -m  - x. g  (m) g (m) By (2.6) and monotonicity of g , for x > m0 , g (x) > 0 and limm+ Since G (m) =
+ (m ) - (gg g (m))2
+
+
+g (x ) g  (m )
+
+- x = + so that limm+
+
+g (m ) g  (m )
+
+- m = +.
+
+has the same sign as g (m) by strict concavity of g , one easily concludes.
+
+Proof of Proposition 3.1 The characterization conditions for a Nash equilibrium follows from optimal expressions (3.1) and Proposition 4.1. Thus, the only thing to check is that there exists an infinite number of solutions. On the one hand, (s - (^ e) -  (^ a)) > 0 and (1 + rJ )(D + a ^) + e ^ > 0, thus ^) + (1 + rJ )(D + a C ( ^) + e ^- (1 + rJ )(D + a ^) + e ^+
+1 v u a) u+v  (^
+
+=
+
+ln E
+
+T 0
+
+exp( uuv e) -  (^ a))) (ds) > 0. +v (s - (^
+
+Therefore there exists infinitely many couples (, m)  R2 + such that + g (m) u ^) + (1 + rJ )(D + a - m = C ( ^) + e ^-  (^ a) g  (m) u+v
+u a) u+v  (^
+
+^) + (1 + rJ )(D + a namely the couples (C ( ^) + e ^- u  (^ a ))]. u+v
+
+^) + (1 + rJ )(D + a - G(x), x) where x  [0, G-1 (C ( ^) + e ^-
+
+4.2
+
+Stackelberg equilibrium in Situation 1, firm I is leader
+
+We give in this subsection the proof of Proposition 3.6. Firm I has to find (, ,  ) maximising
+T
+
+ba (a ( )) - E
+0
+
+e-s e-u
+
+bm (m ( ))+be (e ( ))-- (s -(e ( ))- (a ( )))-g (m ( ))
+
+ds.
+
+Since the inverse function of m ( ) = (g  )-1 (1/ ) is the increasing bijection   (m) = maximisers are the triplets (, ,   (m)) with (, , m) maximising
+T
+
+1 g  (m )
+
+from R+ onto itself, the
+
+I 1 (, , m) := ba (a ( )) - E
+0
+
+e-s e
+
+g -u bm (m)+be (e ( ))-- (s -(e ( ))- (a ( )))- g  (m )
+
+ds
+
+under the constraint J 1 (, , m) = E e
+g  -v (+( -1)(s -(e ( ))- (a ( )))-e ( )+ g  (m)-m-(1+rJ )(D +a ( ))
+
+ (ds)  1,
+
+where, by a slight abuse of notations, we still denote by I 1 and J 1 the functions obtained by the change of variable (, ,  )	(, , m). We also recall the application C : R  R defined in (3.5) C ( ) = Setting (4.8) A := (, , m)  R+  R  R+ ; J 1 (, , m)  1}, 1 ln E v
+T 0
+
+ev(1- )(s -e
+
+
+
+( ))
+
+ (ds).
+
+the optimization problem for firm I then writes: sup I 1 (, , m).
+(,,m)A
+
+We will prove the existence of a maximizer for this problem, and therefore of a Stackelberg equilibrium, by checking that we can restrict the set A to a compact subset. Notice first that A = . In fact, one can easily check that for any   R and m  0, one can choose  large enough so that (, , m)	A.
+
+  R, not depending on Lemma 4.2 We have sup(,m)R2 I 1 (, , m)  - when	. Moreover, there exists  + ]} is attained, and v > 0, such that the supremum over A is attained if and only if the supremum over A  {	(-,  both supremum are equal. To prove this lemma, we need the following result which applies to functions  and  : Lemma 4.3 For any increasing, strictly concave C 1 and bounded function ,  (x) = (1/x) when x   and y ( )-1 (y )  0 when y  0.
+
+Proof. Integrating by parts, we get for x  1,
+x
+
+(4.9)
+1
+
+u (du) = x (x) -  (1) - (x) + (1)
+
+where  (du) denotes the negative measure equal to the second order distribution derivative of . Since  is increasing x and concave, the terms -x (x) and 1 u (du) are non-positive on [1, +). The boundedness of  then implies their x boundedness on [1, +). Since 1 u (du) and (x) are monotonic and bounded, they admit finite limits when x  . By (4.9), x (x) admits a finite limit as well, denoted . Since  is bounded,	is integrable on [1, +), which implies	= 0 and gives the result. Let x = ( )-1 (y ). When y  0, x goes to  and y ( )-1 (y ) =	(x)x goes to 0.  Proof of Lemma 4.2 Since bm is such that bm  () = 0, limm+ m - bm (m) = + thus, using the first assertion in Lemma 3.1, (4.10) Hence e
+u
+g g
+
+m+ (m)-bm (m) u
+g g
+
+lim
+
+g (m) - bm (m) = +. g
+
+goes to infinity when m   and there exists a constant c > 0 not depending on v > 0 such that
+
+for any m  0, e  c. For any   1, e ( ) = 0 and since I 1 is decreasing w.r.t. , we have for (, m)  R2 +, I 1 (, , m)   (4.11) I 1 (0, , m) ba (a ( )) - ce-ub
+e
+
+(m)-bm (m)
+
+T (0)
+
+E
+0
+
+e-s eu (s -(0)-(a
+
+
+
+( )))
+
+ds
+
+ - when   .
+1+rJ ( (1- ))+
+
+Indeed, if  > 0, then a ( ) = (  )-1
+a
+
+= 0 for   1 and the result is obvious.
+
+Otherwise for	0, b (a ( )) = o( ) when    (indeed ba (x) = o(x) when x   and a ( ) = o( ) when   ,  see Lemma 4.3), s - (0) -  (a ( )) > s - (+) -  +  (+) > 0. Therefore eu (s -(0)-(a ( ))) goes to - faster than ba (a ( )) goes to + and, by Fatou Lemma,
+T
+
+lim inf E
+  0
+
+e-s eu (s -(0)-(a
+
+
+
+( )))-ln(ba (a ( )))
+
+ds =
+
+  R such that so that (4.11) holds. As a consequence, there exists
+ +)R+ (,,m)R+ (,
+
+sup
+
+I 1 (, , m) <
+
+sup
+(,,m)A
+
+I 1 (, , m)
+
+]} is attained. Moreover, if the and the supremum over A is attained if and only if the supremum over A  {  (-,  supremum are attained, they are equal.   We now decompose the optimisation on A  {  (-,  ]} according to the positivity of . Lemma 4.4 Let (4.12) (4.13) ]  R+ ; J 1 (, , m) = 1 , B := (, , m)  R+  (-,  ], m  0, J 1 (0, , m)  1 . C := (0, , m);   (-,
+
+The supremum over A is attained if and only if the supremum over B  C is attained. Proof. Since I 1 is decreasing w.r.t.  and J 1 is continuous, if  > 0 and J 1 (, , m) < 1, then there exists  > 0 such that I 1 ( - , , m) > I 1 (, , m), while J 1 ( - , , m)  1. Therefore the supremum over A  { > 0} is the same as the supremum over ]	R+ ; J 1 (, , m) = 1 . ~ := (, , m)  (0, +)  (-,  B ~), we easily conclude. Noticing then that A is closed and that B := Cl(B
+
+Lemmas 4.5 and 4.6 are devoted to the supremum over B . In Lemma 4.5, we check that the supremum is attained on a compact subset K not depending on v > 0. In Lemma 4.6, we derive optimality conditions satisfied by a maximizer with positive .
+
+Lemma 4.5 The function k ( ) defined in (3.18), which depends on v > 0 through the function C ( ) defined in (3.5),  such that k ( ) is bounded from below by a positive satisfies k ( )   uniformly in v > 0 when   -. There exists   constant uniformly in v > 0 for	 (-,  ]. Moreover, in set B ,  is a continuous function of (, m) and there exists a compact K  B not depending on v > 0 such that supB I 1 = supK I 1 . In particular the supremum on B is attained. Proof. Let us consider supB I 1 . Recall the definition of C ( ) given by (3.5). Since J 1 (, , m) = 1 on B , we know that  = (, m) := C ( ) - (1 -  ) (a ( )) + e ( ) + m - so that (4.14) I 1 ((, m), , m) = ba (a ( )) - eu(Id-b
+m
+
+g (m) + (1 + rJ )(D + a ( )), g
+
+)(m)
+
+k ( ).
+
+In I 1 ((, m), , m), we have ba (a ( )) minus the product of two positive functions, the first one depending only on m m, the second one, k , only on  . Since (bm ) () = 0, eu(Id-b )(m)   when m  , therefore the first function is bounded from below by a positive constant c and goes to infinity when m goes to infinity. Let us now examine k . Using Jensen's inequality in (3.5) we get
+T
+
+(4.15)
+
+C ( )  (1 -  )
+0
+
+Es -   ( )-1 (
+
+
+1 ) (ds) (1 -  )+
+
+and using again Jensen's inequality and eu(1+rJ )(D+a k ( )  eu(Id-b
+e
+
+( ))
+
+ 1, we see that
+T
+
+)(e ( )) u
+
+e
+
+T 0
+
+Es -(e ( ))- (a ( )) (ds) 0
+
+e-s ds.
+
+Using Es  (x) +  +  (y ) for any x, y , we deduce that
+(1- )+ e-s ds where the right-hand-side does not depend on v > 0 and goes to infinity when k ( )  e 0	- since be (x) = o(x) when x   (recall that (be ) () = 0). Finally using ba (x) = o(x) and ( )-1 (x)  (  )-1 (x) for x	0, we conclude e  -1 1 1 + rJ ) - ceu(Id-b )( ) ( 1- ) +  (1 -	)
+
+u(Id-be )( )-1 (
+
+1
+
+)
+
+T
+
+T
+
+I 1 (, , m)  ba  (  )-1 (
+
+e-s ds	- when	 -.
+0
+
+ ^ m ^ m Lemma 4.6 Let (^ , , ^ ) with	^ > 0 be such that the maximum on B is attained at (^ , , ^ ). Then necessarily (4.16) m ^ = [(bm ) ]-1 (1) > 0,
+
+and there are two different cases, depending on the sign of  :	If  > 0, ^) - h(v (1 -	^)) = S ( ^) + S ( ^), and  ^ < 1. (3.20) h(u  If  < 0, ^) - h(v (1 -  ^)) = S ( ^), and  ^ < 1, (3.19) h(u or ^) - h(v (1 -  ^)) = S ( ^), and  ^  1. (3.21) h(u with S and S defined in (3.16) and (3.17). ^ m ^ m Proof. Let (^ , , ^ ) be such that the maximum on B is attained at (^ , , ^ ). Since (bm ) (0) = +, m  m - bm (m) is decreasing in a neighborhood of 0, so that from (4.14), m ^ > 0. Assume moreover that  ^ > 0. Then the mapping 1 ^ (, m)  I ((, m), , m) admits a local maximum at (, m ^ ) and therefore the first order conditions are satisfied, ie  1  1 ^ m ^ m ^ m ^ m I (  ( , ^ ) , , ^ ) = I (  ( , ^ ) , , ^ ) = 0. The second one gives  m (4.17) m ^ = [(bm ) ]-1 (1) > 0.
+
+^ is more tricky and depends on the externality  . The computation of
+
+1)  > 0:
+
+ 1 ^ ^ ), , ^ m ^)  I ((, m
+
+=
+s ev(1- )s  (ds) ev(1- )s  (ds)
+
+ m T E ^)   -eu(Id-b )(m E 0 u s - E	 1+rJ (ba )  a ( )  (1- )2   a ( )
+
+e-s eu
+
+s +C ( )
+
+ds if	1
+T -s v(1- )s
+
+Thus using the function h defined in (3.15)
+
+E 0 e ds s e T rJ )	 e	-E 0 u	(1+   -1 (a ) ( ) - 1- (e ) ( ) - (b )	e ( )(e ) ( ) + s - E T e-s ev(1- )s ds   0   e     eu(Id-bm )(m ^ ) -s u (Id-b )e ( )- a ( ))+ (s -e ( ))+(1+rJ )(D+a ( ))+C ( ) e e ds if  < 1.
+
+ 1 ^ m ^ m I ((, ^ ), , ^ ) = 0 iff  with S ( ) :=
+
+h(u ) - h(v (1 -  )) = 0 if   1 h(u ) - h(v (1 -  )) = S ( ) + S ( ) if  < 1.
+ 1-
+
++ (be )  ( )-1
+
+1 1- 1 1-
+
+(1 -  )2   ( )-1 (1 + rJ )
+
+.
+
+S ( ) :=
+
+1 + rJ	(1 -  )2 (  )(a( ))
+
+(ba ) (a( ))  + u(Id-bm )(m ^ ) k ( ) 1- ue
+
+^ < 1 and we study the equation (3.20) As seen in Lemma 4.1, for   1, h(u ) - h(v (1 -	)) > 0, thus  h(u ) - h(v (1 -	)) = S ( ) + S ( ), for  < 1. The left hand side is positive for  > 2)	< 0:
+ 1 ^ ^ ), , ^ m ^)  I ((, m v u+v .
+
+^< S and S are negative for   [0, 1] thus
+
+v u+v .
+
+=
+
+Thus,
+
+ 1+rJ  (ba )  a ( ) (1- ) 2   a ( )	E T e-s s ev(1- )s ds T  (1+rJ )     -E 0 u  -1 (a ) ( ) + s - E 0 T e-s e  v(1- )s ds	0  e   u(Id-bm )(m ^ ) -s u -b (0)- a ( ))+ (s -(0))+(1+rJ )(D+a ( ))+C ( ) e e e ds if   1  T -s v(1- )s  E ds e  e  T s    e	   -E u - 1- (e ) ( ) - (b )  e ( )(e ) ( ) + s - E 0 T e-s ev(1-)s ds	 0  0	e   m  ^ ) -s u (Id-b )e ( )- (0)+ (s -e ( ))+(1+rJ )D+C ( ) eu(Id-b )(m e e ds if  < 1.  1 ^ m ^ m I ((, ^ ), , ^ ) = 0 iff  h(u ) - h(v (1 -	)) = S ( ) if	1 h(u ) - h(v (1 -  )) = S ( ) if  < 1.
+v u+v )
+
+Thus the optimal  on B is either the solution of equation (3.19) (which is less than h(u ) - h(v (1 -  )) = S ( ), for	 1.
+
+or the solution of
+
+ The next lemma is devoted to the optimisation over C . Lemma 4.7 The supremum of (, , m)  I 1 (, , m) is attained on C defined in (4.13). Proof. Let us then consider supC I 1 . We have  = 0 on C . Since g is concave and positive for sufficiently large m, and g (m )   R not (bm ) () = 0, the mapping m	bm - g	(m) is decreasing for sufficiently large m. Thus there is a constant m 1 depending on v > 0 such that for any	R, m  I (0, , m) is decreasing for m  m  . Therefore, writing C1 := C  {m  [0, m  ]} and C2 := C  {m  m  and J 1 (0, , m) = 1}, the supremum of I 1 over C is attained iff the supremum of I 1 over C1	C2 is attained.
+
+(i) We prove that C1 is compact. The condition J 1 (0, , m)  1 is equivalent to C ( ) - (1 -  ) (a ( )) + e ( ) + m - g (m) + (1 + rJ )(D + a ( ))  0. g
+
+g  Since C ( )-(1- ) (a ( ))  0 (cf. (4.15) and e  k - +  a ), it implies e ( )+m- g  (m)+(1+ rJ )(D + a ( ))  0.   Since lim - e ( ) = + and a ( )  0, while m  [0, m	], this implies that there exists   R not depending on ]  [0, m  being defined in Lemma 4.2. Since C1 is closed, it is compact and therefore  ],  v > 0, such that C1  {0}  [,	the supremum over C1 is attained. g (m ) (ii) On C2 , we have C ( ) - (1 -  ) (a ( )) + e ( ) + (1 + rJ )(D + a ( )) = g  (m) - m = G(m). We use Lemma 3.1 and the inverse G-1 . Since C ( ) - (1 -  ) (a ( )) + e ( ) + (1 + rJ )(D + a ( )) > 0, for any   R, H ( ) := G-1 C ( ) - (1 -  ) (a ( )) + e ( ) + (1 + rJ )(D + a ( )) > 0 is well-defined. Thus we have supC2 I 1 = 1 sup (-, ] I 0, , H ( ) . We now prove that I 1 (0, , H ( ))  - uniformly in v > 0 when   -. When   -, e ( )  , while a ( )	0, C ( ) - (1 -  ) (a ( ))  0, so that C ( ) - (1 -  ) (a ( )) + e ( ) + (1 + rJ )(D + a ( ))	uniformly in v > 0, and therefore m = H ( )  , and is the only solution to C ( ) - (1 -  ) (a ( )) + e ( ) + (1 + rJ )(D + a ( )) = G(m) for - sufficiently large. g H (  ) We recall that bm (m) = (m), e ( ) = (- ) and be  e ( ) = (- ), a ( ) = (- ) when	-, g  H ( ) - H ( ) = C ( ) - (1 -  ) (a ( )) + e ( ) + (1 + rJ )(D + a ( )), therefore, using (4.15) in a second time, we get for all v > 0 :
+
+-u bm  H ( ) + be (e ( )) -  (s - (e ( )) -  (a ( ))) -
+
+g  H ( ) g   H ( )
+
+= -u bm  H ( ) - H ( ) + (be - Id)(e ( )) -  (s - (e ( )) -  (a ( ))) - C ( ) + (1 -  ) (a ( ))
+
+T
+
+(4.18)
+
+ -u
+0
+
+Es  (ds) - s
+
++ o(- ), for -	 ,
+
+where the o(- ) is uniform in v > 0. Since  is not dt  dP constant,
+T
+
+(4.19)
+
+ > 0 and D  [0, T ]   s.t. (dt	dP)(D)	, s.t. s +
+0
+
+Es  (ds) on D.
+
+Using (4.18), we compute for - sufficiently large not depending on v > 0 :
+T
+
+I 1 (0, , H ( ))  ba (a ( )) - E
+0
+
+1D e-s e-
+u 2
+
+u 2
+
+(
+
+T 0
+
+e-s Es	(ds)-s )
+
+ds
+
+ ba (a ( )) - e-T e-
+
+.
+
+Since ba (a ( )) = o(- ) when	-, the right-hand-side goes to - uniformly in v > 0 when   -, so that the supremum over C2 is attained.  ^ m In conclusion, the maximum of I 1 over A is attained at (^ , , ^ ) which belongs either to B or to C , and a Stackelberg ^ m ^ m equilibrium exists. Moreover if  ^ > 0, then (^ , , ^ )  B and the maximum of I 1 over B is attained at (^ , , ^ ). The equilibrium characterization given in the statement of the Proposition 3.6 then follows from Lemma 4.6. Proof of Lemma 3.2 Let us recall (3.19) : h(u ) - h(v (1 -  )) = S ( ). By Lemma 4.1, as	goes from - to +, the left-hand-side of this v equation is increasing from h(-) - h(+) < 0 to h(+) - h(-) > 0 and is null for  = u+ v. For  < 1, we have ( (e ))2 S ( ) = ( (e ) + (be ) (e ) - 1)    (e ) so that, by concavity of , the sign of S ( ) is equal to the one of 1 -  (e ) - (be ) (e ). Remember that when  goes from - to 1, e ( ) is decreasing from + to 0,  and be are concave, so	1 -  (e ( )) - (be ) (e ( )) is decreasing, from 1 ( (+) = (be ) (+) = 0) to - ( (0) = (be ) (0) = +). Since  + (be ) is monotonic, there exists a unique 0 such that  (0 ) + (be ) (0 ) = 1, so  < 0  S ( ) > 0,  > 0	S ( ) < 0. As a consequence, there exists a solution ^ to (3.19). For	0, S ( ) is negative since in (3.16), the numerator is positive whereas the denominator is negative by	v v ^  concavity of . Hence 0 < 0. Moreover S ( u+ v ) < 0, so any solution  belongs to (0 , u+v ).
+
+5
+5.1 5.2
+
+Proofs in Situation 2
+Best responses and Nash equilibrium in Situation 2 Firm I
+
+Since we are interested in equilibrium, let now e  0 and m  0 be given and constant. We recall that F (a) = ba (a) - f ((1 + rI )(D + a)T ) is assumed to be strictly concave, F  (0) > 0, possibly infinite, and F  () = -. Then we get the following optimization problem: sup
+a,,,
+
+F (a) - E
+
+T 0
+
+e-s e-u
+
+bm (m)+be (e)-- (s -(e)- (a))-g(m)
+
+ds
+
+(5.1) and E We have the following result:
+T 0
+
+such that a  0,   0,   0, e
+-v +( -1)(s -(e)- (a))-e+g(m)-m
+
+ (ds)  1.
+
+v Proposition 5.1 Let e  0 and m  0 be given and constant, and let   := u+ v . Then, for Be defined in (3.7), -u (a)  Be ( , m) = . Moreover, there exists optimal controls and (a, , ,  ) is optimal if and arg maxa0 F (a) - e only if it satisfies:	=   , a  arg maxa0 F (a) - e-u(a) Be (	, m) and
+
+ + g (m) = Ce (  ) -
+
+u  (a) + e + m u+v
+
+with   0 and   0, where Ce has been defined in (3.3). Last, if	 0, then a > 0 and is unique. Remark 5.1 Notice that we have	(0, 1) and  +	> 0. Proof. Let a  0 be given for the moment, we introduce:
+T
+
+K (, ,	) = Ka (, ,  ) := -E
+0 T
+
+e-s e-u
+
+bm (m)+be (e)-- (s -(e)- (a))-g(m)
+
+ds
+
+Ea := (, ,  )  R3 ; E
+0
+
+e -v
+
++( -1)(s -(e)- (a))-e+g(m)-m
+
+ (ds)  1 .
+
+Remark that K is the same function as the one defined in the beginning of the proof of Proposition 4.1, while for Ea the term (1 + rJ )(D + a) does not appear in the constraint (compared to the function E of the proof of Proposition 4.1). We will first solve, for fixed a, the problem of maximization of K on Ea , following the same steps as in Section 4.1 : the optimal (, ,  ) for the problem sup K (, ,  ),
+(,, )Ea (R+ RR+ )
+
+are exactly the elements of (, ,  )  R+  R  R+ ;  = and the constraint is always saturated :
+T
+
+v u ,  + g (m) = Ce ( ) -  (a) + e + m u+v u+v
+
+(5.2) Then, from (5.2), using	=
+
+E
+0 v u+v ,
+
+e -v
+
++( -1)(s -(e)- (a))-e+g(m)-m
+
+ (ds) = 1.
+
+we get: e v ( eu(
+
+
++  g(m)) +  g(m))
+
+= ev(e+m+Ce (
+
+
+
+u )- u+ v  (a))
+
+, ,
+
+
+
+= eu(e+m+Ce (
+
+
+
+u )- u+ v  (a))
+
+and Ka ( ,   ,	 ) = -e-u(b
+m m
+
+(m)+be (e)-e-m) 1
+
+- e-T (u+v)Ce (  ) -u(a) e e .
+ -T
+
+Recalling (cf. (3.7)) that Be (  , m) = e-u(b (m)-m+b (e)-e) e(u+v)Ce ( ) 1-e , we have for any a  0, sup,, Ka = -e-u(a) Be (  , m). Let us then consider supa0 F (a)-e-u(a) Be (  , m). Since Be (  , m) > 0, F (a)-e-u(a) Be (  , m)
+
+e
+
+F (a), and limx F (x) = - implies that a  F (a) - e-u(a) Be (  , m) attains its maximum on R+ , either at a = 0 or at a point where the first order condition is satisfied. More precisely, if	 0, then it is a strictly concave function, increasing for small a, so that there exists a unique maximum a > 0 that is the unique solution of: F  (a) + uBe (	, m)  (a)e-u(a) = 0. If  < 0, then the function is decreasing for small a, since   (0) = +, so that a = 0 is a local maximum. So the maximum is attained either at a = 0 or at a solution of F	(a) + uBe (  , m)  (a)e-u(a) = 0. In any case, we have characterized the optimal controls for the optimization problem of firm I .
+
+5.2.1
+
+Nash equilibrium
+
+From the previous results, the proof of Proposition 3.2 follows easily. Proof of Proposition 3.2 The first assertion is a consequence of Proposition 5.1. The characterization conditions (3.9) and (3.10) also follow from the same proposition and the optimal expressions (3.2). Thus, the only thing to check is that there exists an infinite number of solutions. Since s - (e) -  (a) > 0 for any u ^) + e ^) - u  (^ a) > 0. As a consequence C ( ^ - u+ a) - G(m ^ )  0 as soon as m ^  G-1 (^ e) with (a, e), we have C ( u+v v  (^  -1 u+v -u (a) ^ m) =  is an immediate consequence of Proposition e ^ = ( ) ( Be (, ). The fact that arg maxa0 F (a) - e
+u
+
+5.1.
+
+
+
+5.3
+
+Stackelberg equilibrium in Situation 2, firm I is leader
+
+The best response for firm J is given by (3.2), but now the optimization problem for firm I has changed. We recall the continuous mappings m : R+  R+ , e : R  R+ , C : R  R and B : R	R+  R, (3.2), (3.5), (3.6): e ( ) = ( )-1 C ( ) = 1 ln E v 1 (1 -  )+
+T 0
+m
+
+, m ( ) = (g  )-1 (1/ ).
+
+
+ev(1- )(s -e e
+
+( ))
+
+ (ds),
+T
+
+B (, m) = eu(Id-b
+
+)(m) u(Id-be )e ( ) uC ( )
+
+e
+
+E
+0
+
+e-s eu (s -e
+
+
+
+( ))
+
+ds.
+
+We are now ready to prove the existence of a Stackelberg equilibrium, as stated in Proposition 3.7. Proof of Proposition 3.7. Given  and  , the optimal controls for firm J are given by e and m . Once again, since  = between m ^ and  ^ on R+ , we only deal with m. Writing:
+T
+
+1 g  (m )
+
+yields a bijection
+
+(5.3) (5.4) (5.5)
+
+I 2 (a, , , m) := F (a) - E
+0 T
+
+e-s e
+
+g -u bm (m)+be (e ( ))-- (s -(e ( ))- (a))- g  (m )
+
+ds,
+
+J 2 (a, , , m) := E
+0
+
+e
+
+g -v +( -1)(s -(e ( ))- (a))-e ( )+ g  (m )- m
+
+ (ds),
+
+A := (a, , , m)  R+  R+  R  R+ ; J 2 (a, , , m)  1 ,
+
+the optimization problem for firm I then writes: sup I 2 (a, , , m).
+(a,,,m)A
+
+We will prove the existence of a maximizer for this problem, and therefore of a Stackelberg equilibrium, by proving that we can restrict the set A to a compact subset. Notice first that A = . Indeed, since J 2 (a, , 1, 0) = e-v , for any a  0 and	> 0, (a, , 1, 0)  A. In fact, one can easily check that for any a  0,	R and m  0, one can choose  large enough so that (a, , , m)  A. The proof will use the following lemmas very similar to Lemmas 4.2, 4.4, 4.5, 4.6 and 4.7. Nevertheless, we cannot deduce the following from the previous ones because the involved functions are not defined on the same spaces.
+
+  R not depending on v such that the supremum over A is attained if and Lemma 5.1 There exists a   (0, +) and  ]} is attained. only if the supremum over {(a, , , m)  A such that a  [0, a ],	(-,  Proof. We have I 2 (a, , , m)  F (a). Since limx F (x) = - (cf. beginning of Subsection 5.2) there exists a  > 0, such that the supremum over A is the same as the supremum over A  {a  [0, a ]}. Notice that I 2 is decreasing w.r.t. , so that I 2 (a, , , m)  I 2 (a, 0, , m). Using (4.10), we get e
+u
+g g
+
+u
+
+g g
+
+(m)-bm (m)
+
+ + when m  +. Therefore, there
+
+ c. exists a constant c > 0 such that for any m  0, e On the other hand, for any   1, since e ( ) = 0, we compute:
+T
+
+(m)-bm (m)
+
+I 2 (a, , , m)	I 2 (a, 0, , m)  F (a) - c E
+0
+
+e-s eu (s -(0)-(a)) ds
+
+which goes to - when   , uniformly in a  [0, a	].  Lemma 5.2 Let (5.6) (5.7) ]  R+ ; J 2 (a, , , m) = 1 , B := (a, , , m)  [0,  a]  R+  (-,  ], m  0, J 2 (a, 0, , m)	1 . C := (a, 0, , m); a  [0,  a],   (-,
+
+The supremum over A is attained if and only if the supremum over B  C is attained. Proof. Since I 2 is decreasing w.r.t.  and J 2 is continuous, if  > 0 and J 2 (a, , , m) < 1, then there exists  > 0 such that I 2 (a,  - , , m) > I 2 (a, , , m), while J 2 (a,  - , , m)  1. Thus in case of optimum satisfying  > 0, the constraint is saturated.
+
+Lemma 5.3 In set B ,  is a continuous function of (a, ,  ), so there exists a compact K  B not depending on v > 0 such that supB I 2 = supK I 2 , and in particular the maximum on B is attained. Proof. Let us consider supB I 2 . Recall the definition of C given by (3.5). Since J 2 (a, , , m) = 1 on B , we have + therefore we have: (5.8) sup
+(a,,,m )B
+
+g (m) = (a, , m) = C ( ) - (1 -  ) (a) + e ( ) + m, g
+
+I 2 (a, , , m )= sup{(a,,m )[0,a ]R+ ; ](-, = sup{(a,,m )[0,a ]R+ ; ](-,
+
+(a,,m )0}
+
+F (a) - e-u(a) B (, m )
+m
+
+(a,,m )0}
+
+F (a) - eu(Id-b
+
+)(m ) -u (a) ~
+
+e
+
+k ( )
+
+with ~( ) = eu(Id-be )e ( ) euC ( ) E k
+0
+
+T
+
+e-s eu
+
+s -e ( )
+
+ds.
+
+In (5.8), we have F (a) minus the product of three positive functions, the first one depending only on m, the second one m only on a and the third one, k , only on  . Using (4.10), eu(m-b (m))   when m  , therefore the first function is bounded from below by a positive constant and goes to infinity when m goes to infinity. Since a  [0, a ] and  is bounded, the second one is also bounded from below by a positive constant. ~( )	uniformly in v > 0 when   -, which concludes the proof. As in Lemma 4.5, we prove that k  ^  Lemma 5.4 Assume that there exists a Stackelberg equilibrium (^ e, m, ^ a ^,  ^ , , ^ ) with  ^ > 0. Then necessarily (5.9) (5.10)  ^= ^<	1 g  (m ^) , where m ^ = [(bm ) ]-1 (1) > 0,
+
+v ^ is a solution of (3.19). and  u+v
+
+^ m Proof. The maximum on B is attained at (^ a,  ^ , , ^ ). Since (bm ) (0) = +, m  m - bm (m) is decreasing in a neighborhood of 0, so that from (5.8), m ^ > 0. Assume moreover that  ^ > 0. Then the mapping (, m)	I 2 (^ a, (^ a, , m), , m) ^ ^ m ^ m admits a local maximum at (, m ^ ) and therefore the first order conditions are satisfied, ie /I 2 (^ a, (^ a, , ^ ), , ^) = 2 ^ m ^ m /mI (^ a, (^ a, , ^ ), , ^ ) = 0. This partial derivative with respect to m yields m ^ = [(bm ) ]-1 (1) > 0 so  ^= On the other hand, using  (e ( )) =
+1 1- ,
+
+1 . g  (m ^)
+
+we compute:
+
+Then:
+
+~ ( ) > 0 for	1. As a consequence the equation As seen in Lemma 4.1, for   1, h(u ) - h(v (1 -  )) > 0, therefore k  ~ ( ) = 0 admits  ^ (Lemma 3.2) as a solution:  I = k ^<  u ^ is a solution of (3.19). and  u+v	Lemma 5.5 The supremum of (a, , , m)  I 2 (a, , , m) is attained on C by (5.7). Proof. We have	= 0 on C . Since g is concave and positive for sufficiently large m, and (bm ) () = 0, the application g bm - g  > 0 such that I 2 is decreasing w.r.t. m on [m,  +).  is decreasing for sufficiently large m. Thus there exists m Thus in case m  m,  the optimum has to saturate the constraint. Therefore, writing C1 := {(a, 0, , m)  C : m  [0, m	]} ; C2 := {(a, 0, , m)  C : m	m  and J 2 (a, 0, , m) = 1}, the supremum of I 2 over C is attained iff the supremum of I 2 over C1  C2 is attained. (i) We prove that C1 is compact. The condition J 2 (a, 0, , m)  1 is equivalent to g C ( ) - (1 -	) (a)+ e ( )+ m - g  (m)  0. Since C ( ) - (1 -  ) (a)	0 (consequence of (4.15) and s - (x)   (y )), g  it implies e ( ) + m - g (m)  0. Since lim - e ( ) = +, while m  [0, m  ], this implies that there exists   R, ]  [0, m such that C1  [0,  a]	{0}  [,   ] where m  and  do not depend on v . Since C1 is closed, it is compact and therefore the supremum over C1 is attained.
+g (m ) (ii) On C2 , we have C ( ) - (1 -  ) (a) + e ( ) = g  (m) - m = G(m). We recall that the restriction of G to (m0 , ) is an increasing bijection from (m0 , ) onto (G(m0 ), )  (0, ) and denote by G-1 its inverse. Since C ( ) - (1 -  ) (a ( )) + e ( ) > 0, for any   R, H ( ) := G-1 C ( ) - (1 -  ) (a) + e ( ) > 0 is well-defined. We thus have 2 supC2 I 2 = sup(a )[0,a ] I a, 0, , H ( ) . ](-, We now prove that when	 -, I 2 (a, 0, , H ( ))  - uniformly in (a, v )  [0, a ]  Kv where Kv is a given compact subset of (0, +). Using (4.18) and (4.19) and the continuity of C ( ) in v , we obtain that for all v	Kv , for - sufficiently large: T
+
+   E	~ k ( ) = E
+
+ T -s v(1- )s ds - E 0 e s e = -h(v (1 -  )) if   1 T -s v(1- )s  E e e ds 0 C ( ) =   e ( ) - (e ) ( ) - h(v (1 -  )) if  < 1.
+T 0 T 0
+
+u s - h(v (1 -	)) eu u -
+   1- (e ) ( )
+
+s +C ( )
+
+e-s ds if   1
+
+- (be )  e ( )(e ) ( ) + s - h(v (1 -  )) e-s ds if  < 1.
+
+eu
+
+(Id-be )e ( )+ (s -e ( ))+C ( )
+
+I 2 (a, 0, , H ( ))  ba (a) - E
+0
+
+1D e-s e-
+
+u 2
+
+(
+
+T 0
+
+Es  (ds)-s )
+
+ds  ba (a) - e-T e-
+
+u 2
+
+.
+
+Since ba (a) is bounded when a	[0, a ], the last term goes to - when	- uniformly in a  [0, a ], so that the supremum over C2 is attained.  End of the proof of Proposition 3.7. In conclusion, the maximum over A is attained, either on B or C , and a Stackelberg equilibrium exists. Moreover if	> 0, then we have the characterization given in the statement of Proposition.
+
+Remark 5.2 Notice that I 2 is not in general concave w.r.t  or	. Consider for example bm (x) = x0.8 /0.8 and g (x) = x0.5 /0.5. ^. Then any Stackelberg equilibrium Corollary 5.1 Assume that equation (3.19) admits a unique solution, namely  ^ (^ e, m, ^ a ^,  ^ , ,  ^ ) with  ^ > 0 is defined as follows: -1 1	-1 ^ m ^) - (1 - e ^ = ( ) ^ = (bm ) (1),  ^ = 1/g (m ^ ), a ^	arg maxa0 F (a) - e-u(a) B (, ^ ) and  ^ = C ( ^ , m 1- ^) (^  a) + e ^+ m ^ - ^g (m ^ ), where C and B are defined by (3.5)-(3.6). Proof. Indeed, using Lemma 5.2, for any a  0, the mapping a : (,  )  I 2 (a, (a, ,	), ,  ) attains its maximum on R  R+ (we allow here (a, ,  ) to be negative). The derivative of the application m  m - bm (m), m  1 - (bm ) (m)  - in a neighborhood of 0, so that this maximum is attained only at points such that  > 0. As a consequence, the first order conditions are satisfied and therefore using Lemma 5.3, any global maximum (,  ) satisfies (5.9)-(5.10), and in particular is unique since (3.19) admits a unique ^  solution. Thus, (, ^ ) is the only global maximum of a on R  R+ (for any a  0). Then, since I 2 is decreasing w.r.t  (Lemma 5.1) we have: sup a (,  ) = sup I 2 (a, , ,  ),
+(, )RR+ (,, )RRR+ ; J 2 (a,,, )1
+
+and any maximum of the second problem satisfies  = (a, ,  ) ie I 2 (a, , ,  ) = 1. Therefore, for any a  0, the second ^  ^  problem also admits a unique maximizer which is ((a, , ^ ), , ^ ). Let us write: ~ := (a, , ,  )  R+  R  R  R+ ; J 2 (a, , ,  )  1 . A ~. Since  ^  It is immediate that A  A ^ = (^ a, , ^) > 0 it is then clear that the only Stackelberg equilibria are the one stated at the beginning of this Corollary. In particular, if   0, they are unique.
+
+6
+6.1
+
+Comparison and Incomplete information
+Comparison between both Nash equilibria
+u+v v , e ^ = ( )-1 ( ), a ^1 = (  )-1 u+v u  ^1 + (u + v )(1 + rJ ) +u 1 , g  (m ^)
+
+We summarize Nash equilibria in both situations : in Situation 1, Nash equilibrium is defined as ^=  , m ^  0,	^=
+
+g (m ^) u ^) +	(^ a1 ) = (1 + rJ )(D + a ^1 ) + m ^ +e ^ + C (  g (m ^) u+v
+a1 )- (^ a1 )] ^1 (m ^ m I ^ ) = ba (^ a1 ) - B (, ^ )eu[(1+rJ )(D+^ ,
+
+which leads to the optimal value for firm I :
+
+where we recall ^ m B (, ^ ) = e-u(b and evC () = E
+^
+m
+
+^) 1 (m ^ )- m ^ +be (^ e)-e ^) (u+v )C (
+
+e
+
+- e-T
+
+T
+
+exp(
+0
+
+uv (s - (^ e))) (ds) . u+v
+
+In Situation 2, we can express the Nash equilibrium as ^=  v u+v ^ m ^) , , e ^ = ( )-1 ( ), a ^2  arg max ba (a) - f [(1 + rI )(D + a)T ] - e-u(a) B (, a 0 u+v u  ^2 + u 1 g (m ^) ^), m +  (^ a2 ) = m ^ +e ^ + C ( ^  0,  ^=  , g  (m ^) u+v g (m ^)
+
+which leads to the optimal value for firm I :
+a2 ) ^ m ^2 (m I ^ ) = ba (^ a2 ) - f [(1 + rI )(D + a ^2 )T ] - B (, ^ )e-u(^ .
+
+We prove Proposition 3.3 about the respective dependence of the initial investments a ^1 and a ^2 in Situations 1 and 2 on rJ and rI :
+
+Proof of Proposition 3.3 The monotonicity property of the function rJ  a ^1 (rJ ) is a trivial consequence of the definition of a ^1 , since by hypothesis the function   is non increasing. In case  < 0, a ^1 (rJ ) = 0. The second assertion is a consequence of the characterization of a ^2 (rI ) as the unique solution of the equation (see the end of the proof of Proposition 5.1) H (^ a2 (rI ), rI ) = 0 where (6.1) Thus
+da ^2 drI (rI )
+
+^ m H (a, rI ) = (ba ) (a) + u	(a)B (, ^ )e-u(a) - (1 + rI )T f  [(1 + rI )(D + a)T ].
+I a2 (rI ), rI ). Notice that = - ra H (^
+
+H
+
+rI H = -T f  [(1 + rI )(D + a)T ] - T 2 (1 + rI )(D + a)f  [(1 + rI )(D + a)T ] < 0 since f is convex non decreasing. Therefore the sign of (6.2)
+da ^2 drI
+
+is the one of
+
+^ m a H = (ba ) (a) + uB (, ^ )e-u(a) [  (a) - u (  (a))2 ] - (1 + rI )2 T 2 f	[(1 + rI )(D + a)T ] < 0
+
+since ba ,  and f are increasing and convex.
+
+We now prove a sufficient condition under which the best situation is the second one (debt issuance/MOP), as stated in Proposition 3.4. Proof of Proposition 3.4 ^2 (m The key of the proof is the remark that, since in Situation 2, a is a control of firm I , the optimal value I ^ ) obtained ^  ^	by this firm in any Nash equilibrium (^ , , ^, e ^, m, ^ a ^2 (rI )) is larger than I 2 (^ , , ^, e ^, m, ^ a ^1 (rJ )). Hence ^  ^1 (m ^2 (m ^1 (m I ^)-I ^)  I ^ ) - I 2 (^ , , ^, e ^, m, ^ a ^1 (rJ ))
+a1 (rJ )) u(1+rJ )(D+^ a1 (rJ )) ^ m = f ((1 + rI )((D + a ^1 (rJ ))T )) - B (, ^ )e-u(^ (e - 1).
+
+Condition (3.12) is equivalent to non-positivity of the right-hand-side.
+
+
+
+In the case  > 0, we now prove a sufficient condition under which the best situation is the first one (outsourcing/PPP), as stated in Proposition 3.5. Proof of Proposition 3.5 Let m ^ be the same parameter in both situations, as stated in Propositions 3.1 and 3.2. By a slight abuse of notations, we introduce the function ^ m I 1 : a	ba (a) - B (, ^ )eu((1+rJ )(D+a)-(a)) ^1 (m which is such that I ^ ) = I 1 (^ a1 (rJ )). Let us check that (3.13) implies that I 1 (^ a2 (rJ )) < I 1 (^ a1 (rJ )). Since  > 0, the second condition in (3.13) implies that a ^1 (rJ ) > a ^2 (rI ) by the definition of a ^1 (rJ ) and the monotonicity of   . In terms of the function H defined by (6.1), the first condition in (3.13) writes H (^ a1 (rJ ), rI ) < 0 . Since H (^ a2 (rI ), rI ) = 0 and the function a  H (a, rI ) is decreasing by (6.2), this also implies that a ^1 (rJ ) > a ^2 (rI ). Since a  eu((1+rJ )(D+a)-(a)) is convex by composition of the convex function a  u ((1 + rJ )(D + a) -  (a)) with the increasing and convex exponential function, I 1 is concave from the concavity of ba . Now I 1 (^ a1 (rJ )) = ba	(  )-1
+
+
+(u + v )(1 + rJ ) u
+
+^ m + B (, ^ )eu((1+rJ )(D+a)-(a)) v (1 + rJ ) > 0.
+
+^1 (m From the concavity of I 1 and the inequality a ^1 (rJ ) > a ^2 (rI ), we deduce that I 1 (^ a2 (rJ )) < I 1 (^ a1 (rJ )) = I ^ ). As a consequence, ^1 (m ^2 (m ^2 (m I ^)-I ^ ) > I 1 (^ a2 (rJ )) - I ^)
+a2 (rI )) u(1+rJ )(D+^ a2 (rI )) ^ m = f ((1 + rI )((D + a ^2 (rI ))T )) - B (, ^ )e-u(^ (e - 1).
+
+Condition (3.14) is equivalent to the non-negativity of the right-hand-side, which concludes the proof.
+
+
+
+6.2
+
+Incomplete information
+
+In the incomplete information framework, the firms do not have a perfect knowledge of the preferences of the other firm. More precisely, we still assume that the firms' utility functions are U (x) = -e-ux and V (x) = -e-vx respectively, but firm I perceives v as a random variable V with a certain (known) distribution, which is independent of  and takes values in (0, +). The penalty that firm I gets if firm J does not accept the contract is denoted by p  R  {+}.
+
+6.2.1
+
+Stackelberg equilibrium in incomplete information, firm I is leader
+
+The optimization problem for firm I in Situation i is (cf (3.22) and (3.23))
+i i i i i i ui I := -p	sup{I (c )P A (c ) - p(1 - P A (c ) )}, ci
+
+where ci is the control of firm I in Situation i : c1 = (, ,  ) and c2 = (a, , ,  ) and Ai is the event "firm J accepts ~i (V, ci )  1 (cf. Definitions (3.24) and (3.25)), therefore the contract". Firm J accepts the contract if and only if J i i i ~ A = { ; J (V ( ), c )  1}. The next lemma aims at expliciting this acceptance set. Since, from (3.24) and (3.25), ~i (0, ci ) = 1 and v  J ~i (v, ci ) is strictly convex and continuous on R+ , one has J Lemma 6.1 For c1 = (, ,  )  R+  R	R+ (respectively for c2 = (a, , ,  )  R+  R+  R  R+ ), v (ci ) := sup{v  i i i i i ~ ~ ~ 0 : J (v, c )	1} belongs to [0, +]. If v (c )  [0, +), then {v  0 : J (v, c )  1} = [0, v (c )] and J ( v (ci ), ci ) = 1. If i i ~(v, c )  1} = [0, +). v (c ) = +, then {v	0 : J Recall that ui (v ) := sup
+~i (v,ci )1} {c i : J i is the value function of the problem with complete information that firm J 's risk aversion is equal to v , and wI = i -p  supv>0 {u (v )P(V  v ) - p 1 - P(V  v ) } as defined in Proposition 3.8. We are now able to prove Proposition 3.8
+
+I i (ci )
+
+Proof of Proposition 3.8 i i We first prove that ui I  wI . We only need to do so when wI > -p which implies that
+i wI =
+
+sup
+v>0:ui (v )P(V v )-pP(V >v )>-p
+
+ui (v )P(V  v ) - pP(V > v ) .
+
+Let v > 0 be such that ui (v )P(V  v )-pP(V > v ) > -p and c ^i (v ) be an optimal control for ui (v ), so that ui (v ) = I i (^ ci (v )). i i i ~ Since J (v, c ^ (v ))  1, by Lemma 6.1 one has {V  v }  A (^ c (v )) and when p < +, ui (v )P(V  v ) - pP(V > v ) = (ui (v ) + p)P(V  v ) - p  (ui (v ) + p)P Ai (^ ci (v )) - p = I i (^ ci (v ))P(Ai (^ ci (v )) - p(1 - P(Ai (^ ci (v ))	ui I. When p = +, the left-most side of the above inequalities is still not greater than the right-most side as 1 = P(V  v ) = P(Ai (^ ci (v ))). i Since v > 0 such that ui (v )P(V  v ) - pP(V > v ) > -p is arbitrary, we get ui I  wI .
+i i Finally we prove that wI  ui I in case uI > -p. Let   (0, ui I +p 2 )
+
+and ci be an -optimal control for ui I . Since ui I -p	-p, 2
+
+I i (ci )P Ai (ci ) - p(1 - P Ai (ci ) )  ui I - >
+
+~i (v, ci )  1}, one deduces that one has P Ai (ci ) > 0. Since V > 0 and Ai (ci ) = {V  v (ci )} for v (ci ) = sup{v  0 : J i v (c )  (0, )  {}. ~i (v, ci )  1, one has ui (v )  I i (ci ). For any v  (0, +) such that J i ~i (  If v (c )  (0, +) then, by Lemma 6.1, J v (ci ), ci ) = 1 so that
+i wI  ui ( v (ci ))P(V	v (ci )) - pP(V > v (ci ))  I i (ci )P(V  v (ci )) - pP(V > v (ci ))
+
+= I i (ci )P(Ai (ci )) - p(1 - P(Ai (ci ))  ui I - .
+i  If v (ci ) = +, then P Ai (ci ) = 1 and for all v > 0, wI  I i (ci )P(V  v ) - pP(V > v ) and the same conclusion as before holds by taking the limit v   in this inequality under the assumption that either p < + or P(V > v ) = 0 for i v large enough. Since  > 0 is arbitrarily small, we get wI  ui I , which ends the proof.
+
+Lemma 6.2 The function v  ui (v ) is non-increasing and continuous on R+ .
+
+Proof. We do the proof for Situation 2. The same holds (with the control (, ,  ) instead of (a, , ,  )) for Situation ~2 (v, a, , ,  )	1}. By Lemma 6.1, one has Av  Av when 1. For v	0, let Av = {(a, , ,  )  R+  R+  R  R+ : J  2 v  v . Therefore v  u (v ) is non-increasing. (i) Let us check the right-continuity of u2 i.e. that lim inf v v+ u2 (v  )  u2 (v ). According to Proposition 3.7, there exists (a, , ,  )  Av such that u2 (v ) = I 2 (a, , ,  ). ~2 (v, a, , ,  ) < 1 and by continuity of v   J ~2 (v  , a, , ,  ), (a, , ,  )	Av for v  close enough to v so that Either J the conclusion holds. ~2 (v, a, , ,  ) = 1 so that for v  > v , J ~2 (v  , a, , ,	) > 1, and Or J 1 2  ~ ~2 (v  , a, v , ,  )) = 1 and v =  + v ln(J (v , a, , ,	)) > 0 is such that J 2 2 limv v+ I (a, v , ,  ) = I (a, , ,  ). (ii) For the left-continuity, we consider a sequence (vn )n of positive numbers increasing to a finite limit v . According to Proposition 3.7, there exists (an , n , n , n )	Avn such that u2 (vn ) = I 2 (an , n , n , n ). By Lemma 5.3 and the proof of Lemma 5.5, (an , n , n , n ) stays in a compact subset of R+  R+	R  R+ so one may extract a subsequence that ~2 , one we still index by n for simplicity such that (an , n , n , n ) tends to (a ,  ,  ,  ). By continuity of I 2 and J ~2 (vn , an , n , n , n ) so that (a ,  ,  ,  )	Av and therefore ~2 (v , a ,  ,  ,  ) = limn J has J 2 2 limn I (an , n , n , n ) = I (a ,  ,  ,  )  u2 (v ). With the monotonicity of u2 , we conclude that this function is continuous.  We prove the existence of a Stackelberg equilibrium with incomplete information, firm I leader. Proof of Theorem 3.1 i i Let v0 := inf {v > 0 : P(V	v ) > 0}. If limvv+ ui (v )  -p, then vI = wI = - p. 0 i If not, limvv+ u (v ) > -p and we assume that v1 := sup{v > 0 : P(V > v ) > 0} < +. 0 (i) If p = +, then the optimization problem (3.26) clearly admits the solution v  = v1 . (ii) If p < + then there exists v > v0 close enough to v0 such that (ui (v ) + p)P(V  v ) > 0. We deduce existence of a solution to the optimization problem (3.26): since u1 (resp. u2 ) is bounded from above by supaR+ ba (a) < + (resp. supaR+ F (a) < +) and V takes its values in (0, +), one has limv0 (ui (v ) + p)P(V	v ) = 0. The function v  (ui (v ) + p)P(V  v ) being upper-semicontinuous on the closed set {v	[, v1 ] : ui (v ) + p  0} for each  > 0, we conclude that the optimization problem (3.26) has a solution v   (0, v1 ] if v0 = 0 and in [v0 , v1 ] otherwise. ~i (v  , c Moreover ui (v	) > -p. Let c ^i (v  ) be an optimal control for ui (v	) such that ui (v  ) = I i (^ ci (v  )). Since J ^i (v	))  1, by Lemma 6.1 one has {V	v  }  Ai (^ ci (v  )) and
+i wI = ui (v  )P(V  v  ) - pP(V > v  ) = (ui (v  ) + p)P(V  v  ) - p
+
+ (ui (v  ) + p)P Ai (^ ci (v  )) - p = I i (^ ci (v  ))P(Ai (^ ci (v  ))) - p(1 - P(Ai (^ ci (v  )))  ui I. With Proposition 3.8, we conclude that (^ ci (v  )) solves problem (3.22), (3.23).
+
+6.2.2
+
+Nash equilibrium in incomplete information
+
+We consider both situations. The proofs are quite similar. Let
+T
+
+I (a, , , , e, m) := E ba (a) -
+0
+
+e-s e-u
+
+bm (m)+be (e)-- (s -(e)- (a))-g(m)
+
+ds
+
+respectively
+T
+
+I (a, , , , e, m) := E F (a) -
+0
+
+e-s e-u
+
+bm (m)+be (e)-- (s -(e)- (a))-g(m)
+
+ds,
+
+and J (v, a, , , , e, m) := E
+0
+
+T
+
+e -v
+
++( -1)(s -(e)- (a))-e+g (m)-m-(1+rJ )(D+a)
+
+ (ds)
+
+respectively
+T
+
+J (v, a, , , , e, m) := E
+0
+
+e -v
+
++( -1)(s -(e)- (a))-e+g (m)-m
+
+ (ds).
+
+For firm I , given the controls (a, e, m) of firm J (respectively (e, m)), the problem is to find (, ,	) (respectively (a, , ,  ) ) maximizing I (a, , , , e, m)P(J (V, a, , , , e, m)  1) - pP(J (V, a, , , , e, m) > 1). As in Lemma 6.1, we have Lemma 6.3 For c = (a, , , , e, m)	R+  R+	R  R+  R+  R+ , v (c) := sup{v	0 : J (v, c)  1} belongs to [0, +]. If v (c)  [0, +), then {v  0 : J (v, c)  1} = [0, v (c)] and J ( v (c), c) = 1. If v (c) = +, then {v  0 : J (v, c)  1} = [0, +). ^  Proof of Proposition 3.9 Assume the existence of a Nash equilibrium c ^ = (^ a,  ^ , , ^, e ^, m ^ ) such that the value for firm I is greater than -p. This implies that I (^ c) > -p and 0 < P(J (V, c ^)  1). Since by Lemma 6.3, P(J (V, c ^)  1) = P(V  v (^ c)), one has v (^ c) > 0. We detail below the proof in Situation 1. The one in Situation 2 follows the same scheme, replacing the sets of control parameters (, ,  ) and (a, e, m) respectively by (a, , ,  ) and (e, m).  Assume that v (^ c) < + and let v  (0, v (^ c)] be such that P(V	(v, v (^ c)]) = 0. For (, ,  ) such that J (v, a ^, , , , e ^, m ^ )  1: either I (^ a, , , , e ^, m ^ )  -p and therefore I (^ a, , , , e ^, m ^ ) < I (^ c), or I (^ a, , , , e ^, m ^ ) > -p and since P(J (V, a ^, , , , e ^, m ^ )  1)  P(V  v ) = P(V  v (^ c)) = P(J (V, c ^)  1), then: I (^ a, , , ,e ^, m ^ )P(V  v (^ c)) - pP(V > v (^ c))	I (^ a, , , , e ^, m ^ )P(J (V, a ^, , , , e ^, m ^ )  1) - pP(J (V, a ^, , , , e ^, m ^ ) > 1)  I (^ c)P(J (V, c ^)  1) - pP(J (V, c ^) > 1) = I (^ c)P(V  v (^ c)) - pP(V > v (^ c)), where the last but one inequality follows from the fact that c ^ is a Nash equilibrium for the problem with incomplete information. This implies that I (^ a, , , , e ^, m ^ )	I (^ c). Since by Lemma 6.3, J (v, c ^)  1, we deduce that c ^ is a Nash equilibrium for the problem with complete information and risk aversion v for firm J . By Proposition 3.2, we deduce ^ = v so that the only v	(0, v (^ c)] such that P (V  (v, v (^ c)]) = 0 is v (^ c) = v ^. that  u+v  The same line of reasoning permits to conclude that in case v (^ c) = +, v	(0, +), P(V  (v, +)) > 0.
+
+References
+[1] E. AURIOL, P.M. PICARD, Government outsourcing: Public contracting with private monopoly, The Economic Journal, 119 (October 2011), pp 1464-1493. [2] E. AURIOL, P.M. PICARD, A theory of BOT concession contracts. Journal of Economic Behaviour and Organization, 2834, (2011). [3] E. ENGEL, R. FISCHER, A. GALETOVIC, Public-Private Partnerships to Revamp U.S. Infrastructure, Discussion Paper (2011). [4] C. HILLAIRET, M. PONTIER, A Modelisation of Public Private Parternships with failure time, Laurent Decreusefond and Jamal Najim ed. Springer Proceedings in Mathematics and Statistics, Vol 22, (2012), pp 91-117. [5] E. IOSSA, D. MARTIMORT, J. POUYET, Partenariats Public-Priv e, quelques r eflexions, Revue  economique, 59 (3), (2008). [6] E. IOSSA E., P.E. REY, Building reputation for contract renewal: Implications for performance dynamics and contract duration, preprint (2011). [7] OECD: From Lessons to Principles for the use of Public-Private Partnerships, (2011), available at http://www.oecd.org/gov/budgeting/48144872.pdf. [8] World Bank Institute, Public-Private Partnerships - Reference Guide, (2012), available http://www.ppiaf.org/sites/ppiaf.org/files/publication/Public-Private-Partnerships-Reference-Guide.pdf. at
+

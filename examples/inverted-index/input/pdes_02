@@ -1,0 +1,421 @@
+ON THE EXISTENCE OF STEADY PERIODIC CAPILLARY-GRAVITY STRATIFIED WATER WAVES
+
+arXiv:1305.5802v1 [math.AP] 24 May 2013
+
+DAVID HENRY AND BOGDANVASILE MATIOC Abstract. We prove the existence of small steady periodic capillary-gravity water waves for general stratified flows, where we allow for stagnation points in the flow. We establish the existence of both laminar and non-laminar flow solutions for the governing equations. This is achieved by using bifurcation theory and estimates based on the ellipticity of the system, where we regard, in turn, the mass-flux and surface tension as bifurcation parameters.
+
+1. Introduction In the following paper we prove the existence of small-amplitude two-dimensional steady periodic capillary-gravity stratified water waves, where we do not exclude stagnation points from the flow. Stratified water waves are heterogeneous flows where the density varies as a function of the streamlines. Physically, stratification is a very interesting phenomenon, and fluid density may be caused to fluctuate by a plethora of factors  for example, salinity, temperature, pressure, topography, oxygenation. Mathematically, allowing for heterogeneity adds severe complications to the governing equations, making their analysis even more intractable. For capillary-gravity waves, the effects of surface tension are incorporated in the governing equations by adding a term proportional to the curvature of the wave profile into the surface boundary condition, which also complicates matters significantly. Nevertheless, as we have shown in our paper [20], the remarkably nice regularity properties which have been recently proven to hold for a wide-variety of homogeneous flows [5, 18, 19, 27, 28], in the main apply also to these stratified flows. The first results concerning the existence of small-amplitude waves for stratified flows were obtained by Dubreil-Jacotin [13], in 1937. Interestingly, prior to this Dubreil-Jacotin successfully adapted the famous Gerstner's water wave [1, 17], which is one of the few examples of explicit solutions for the full governing equations which exist, and which describes a rotational water wave in a homogeneous fluid, to the setting of a stratified fluid in [11]. More recently, rigorous results concerning the existence of small and large amplitude stratified flows were obtained via bifurcation methods in [34], building on techniques first applied to rotational homogeneous flows in [6]. The existence of small and large amplitude waves for stratified flows with the additional complication of surface tension was then addressed in [36], building on from local existence results for rotational capillary-gravity waves contained in [32]. All of the above existence results are heavily dependent on the absence of stagnation points for steady water waves. The condition which ensures the lack of stagnation points for a steady wave moving with constant speed c is that all particles in the fluid have a horizontal
+2010 Mathematics Subject Classification. 35Q35; 76B70; 76B47. Key words and phrases. Stratified water waves; Existence; Streamlines.
+1
+
+2
+
+D. HENRY AND B.V. MATIOC
+
+velocity less than c. This is a physically reasonable assumption for water waves, without underlying currents containing strong non-uniformities, and which are not near breaking [24]. Nevertheless, stagnation points are a very interesting phenomenon and ideally we would not wish to exclude them from our picture. Stagnation points have long been a source of great interest and fascination in hydrodynamical research, dating back to Kelvin's work concerning "cat's eyes" and Stokes conjecture on the wave of greatest height (see [2, 29] for a thorough survey of Stokes' waves). Note that the physical meaning of a stagnation point is that of a fixed particle in the frame of reference moving with the wave-speed. However, there are stagnation points where u = c, v = 0 but the wave does not actually stagnate there, for example the Stokes' wave of greatest height [2, 29]. Of course, allowing for the presence of stagnation points adds yet another major complication to the mathematical picture (see the survey in [8]) and we merely mention here that there have been two recent works [9,33] where different approaches were used to show the existence of small amplitude waves with constant vorticity where stagnation points or critical layers occur. Mathematically rigorous work concerning the existence of small-amplitude waves for stratified flows which also admitted critical points was recently begun by one of the authors and his collaborators in [14]. Here the authors proved the existence of small amplitude waves for stratified flows which have a linear density distribution, and were also able to provide an explicit picture of the critical layers which were present in the resulting flows. In the following work, we prove the existence of small amplitude waves for stratified flows which have a more general density distribution function than that of [14] and under conditions which could not be treated in [36]. The generality of the flows we admit complicates the analysis immensely, and the resulting governing equations which emerge take the form of an overdetermined semi-linear elliptic Dirichlet problem. We then use and adapt various tools from the theory of elliptic equations and Fourier multiplier theory to prove, using the Crandall-Rabinowitz local bifurcation theorem, the existence of small amplitude water waves. The outline of the paper is as follows. In Section 2 we describe the Long-Yih [25, 30, 37] mathematical model for stratified capillary-gravity water waves, where we formulate the governing equations equations in terms of the pseudo-streamfunction. Then, in Section 3, we establish the existence of laminar flow solutions for the governing equations. Finally, in Section 4, we prove, for a fixed volume of fluid, the existence of non-laminar flow solutions for the governing equations using bifurcation theory and estimates based on the ellipticity of the system, culminating in our main results, Theorem 4.3 and Theorem 4.6. 2. The mathematical model We now present the Long-Yih [25,30,37] formulation of the governing equations for the motion of a two-dimensional inviscid, incompressible fluid with variable density. The equations will be formulated in terms of the velocity field (u, v ) of the fluid, P the pressure distribution function,  the variable density function, and g the gravitational constant of acceleration, in the fluid domain	:= {(x, y ) : x  S and -1 < y <  (t, x)}.
+
+The symbol S stands for the unit circle, and functions on S are identified with 2 -periodic functions on R. The function  describing the wave profile is assumed to satisfy  (t, x) > -1
+
+ON STRATIFIED CAPILLARY-GRAVITY WATER WAVES
+
+3
+
+for all (t, x). For obvious reasons, we assume henceforth that the density  > 0. Taking y = 0 to represent the location of the undisturbed water surface we assume for any fixed time t that  (t, x) dx = 0.
+S
+
+(2.1)
+
+Restricting our investigations to steady travelling wave solutions of the governing equations enables us to express the problem in a moving reference frame where the flow is steady i.e. time independent, thereby simplifying the water wave problem. We do this by supposing that there exists a positive constant c, called the wave speed, such that all functions have an (x, y, t) dependence of the form (x - ct, y ): Under the assumption of constant temperature and zero viscosity, prescribed by the steady state two-dimensional Euler equations	 (ux + vy ) + x (u - c) + y v = 0 (u - c)ux + vuy = -Px  (u - c)vx + vvy = -Py - g  (t, x) =  (x - ct), (, u, v, P )(t, x, y ) = (, u, v, P )(x - ct, y ). the motion of the fluid is in  , in	, in  .
+
+(2.2a)
+
+with the constant P0 being the atmospheric pressure and  the coefficient of surface tension. The first kinematic surface condition in (2.2b) implies a non-mixing condition, namely that the wave surface consists of the same fluid particles for all times, while the last kinematic boundary condition in (2.2b) ensures that the bottom of the ocean is impermeable. The contribution of the surface tension is felt on the free surface where it exerts a force which is proportional to the curvature of the surface at any given point, the constant of proportionality being the coefficient of surface tension [21, 24]. Letting V = (u - c, v ) denote the velocity field in the moving frame of reference, the steady continuity equation simplifies to divV = 0 in	(2.2c) when we make the supposition that V   = 0, (2.2d) a condition which ensures that the density  is non-diffusive [25, 30, 37]. This assumption is	 very important in our analysis, since it means that   ( (u - c), v ) = 0, and this relation enables us to define the associated pseudo-streamfunction	by   x	= - v and y  = (u - c) in  . (2.3)
+
+The appropriate boundary conditions for waves propagating on a fluid domain lying on an impermeable flat bed for which surface tension plays a significant role are given by  on y =  (x),  v = (u - c)    2 3 / 2 (2.2b) P = P0 -  /(1 +  ) on y =  (x),  v = 0 on y = -1,
+
+The level sets of this function are indeed the streamlines of the steady flow: for suppose the path of a fluid particle in the steady flow is parametrised by the curve (x(s), y (s)), where x (s) = u(x, y ) - c, y  (s) = v (x, y ) then   (x(s), y (s)) = x x (s) + y y  (s) = 0.
+
+4
+
+D. HENRY AND B.V. MATIOC
+
+Therefore the function	is constant along each streamline. We can see directly that  is defined for  > 0 by the expression
+y
+
+ (x, y ) :=  +
+-1
+
+
+
+(x, s)(u(x, s) - c) ds,
+
+(x, y )   .
+
+Since  is constant on the free surface we have the freedom to choose  such that  = 0 on y =  (x). We then have (x)  (x, s)(c - u(x, s)) ds, =
+-1
+
+This condition is known to be physically plausible for waves that are not near breaking (see for instance the discussions in [5,21,24]). For fluid motions where (2.4) holds we observe that (2.4) implies that  > 0. Mathematically, condition (2.4) is very useful because it enables us to reexpress the water wave problem in terms of new (q, p) variables which transform the unknown fluid domain  into a fixed rectangular domain  := S  (-, 0). Furthermore, streamlines in  are mapped to straight horizontal lines in the new domain  , and we see below that this provides us with a convenient method of analysing how certain quantities change either along fixed streamlines or as we vary the streamlines. The mapping is defined by the Dubreil-Jacotin [12] semi-hodograph transformation (q, p) := H (x, y ) := (x, - (x, y )), (x, y )   . (2.5)
+
+where  is a constant called the mass flux. We note that a further assumption which is often invoked is that there are no stagnation points within the fluid domain, a condition we can express as  (2.4) y  = (u - c) < 0.
+
+If (2.4) holds true then the mapping H :    , is an isomorphism which allows us to reformulate the problem in terms of the pseudostream function. We note that the nondiffusive condition on the density , (2.2d), implies that the density function is constant on each streamline, since v (u - c)x + vy = = 0. u-c u-c This means that we can formulate the density as a function of p,  = (p) where we set (p) =   H -1 (q, p) for all p  [-, 0], and we call this new version  of the density function the streamline density function. Furthermore, Bernoulli's theorem states that the quantity q   H -1  H = x + y E := P +  (u - c)2 + v 2 + gy 2 (2.6)
+
+is constant along streamlines, that is q E  H -1 = 0 for fixed p. Particularly, when p = 0, we obtain | |2   on y =  (x), + g(0)y = Q - 2 (1 +	2 )3/2 for some constant Q  R, where Q is known as the hydraulic head of the flow. Moreover, a direct calculation shows that  - gy  H = -p (E  H -1 )  H in  .
+
+ON STRATIFIED CAPILLARY-GRAVITY WATER WAVES
+
+5
+
+This is the Long-Yih equation for steady stratified water waves [25, 30, 37], and we infer that since q E  H -1 = 0 there exists a function  =	(p), called Bernoulli's function, such that -p (E  H -1 ) =  in  . Summarising,  solves the following problem  = f (y,	)  = 0	=  | |2   + g(0)y = Q - 2 (1 +	2 )3/2 in  , on y =  (x), on y = -1, on y =  (x), (2.7a) (2.7b) (2.7c) (2.7d)
+
+(y,  )	[-1, 1]  R. f (y,  ) := gy (- ) +  (- ),  More explicitly, we have f = [uy - vx ] -  (u - c)2 + v 2 /2, and in the case of a homoge neous fluid (i.e. constant density	= ) then f (y,	) =  (- ) =  (- ), with  denoting the vorticity function of the homogeneous fluid, and we get the usual governing equations for capillary-gravity flows with vorticity, [32, 36]. We also note, from the divergence structure of the curvature operator, that, fixing the volume of fluid to be equal to that when the fluid interface is at rest  = 0, cf. (2.1), the head Q can be determined from (2.7d): Q=
+S
+
+where for convenience we define f : [-1, 1]  R	R to be the function
+
+| |2 (x,  (x)) dx, 2
+
+(2.7e)
+
+if we normalise the integral such that S 1 dx = 1. We observe that if we are given functions , (- ),  (- ) which solve the Long-Yih equation (2.7a), then the corresponding functions (u, v, P ) we obtain from the relations (2.3), (2.6) respectively, will satisfy equations (2.2a) and (2.2c), see [30]. This is irrespective of whether the non-stagnation condition (2.4) holds, and therefore in the following we make no such assumption on the fluid flow when studying the system (2.7). 3. Laminar flow solutions to system (2.7) The stratified capillary-gravity water wave problem (2.7) is an over-determined semilinear Dirichlet system, with an additional boundary condition to be satisfied on the wave surface, which determines the effect of surface tension, given by equations (2.7d) and (2.7e). In Theorem 3.3 we prove that the semilinear system (2.7a)(2.7c) is well-posed. In particular, this Theorem is used to establish the existence of laminar-flow solutions to the full system (2.7). We then introduce an operator formulation of system (2.7) in Section 4 which allows us to address the question concerning whether non-trivial (that is, non-laminar) solutions exist which also satisfy the additional boundary conditions (2.7d)-(2.7e). We do this by means of the Crandall-Rabinowitz local bifurcation theorem, which owing to its importance in subsequent developments we now state: Theorem 3.1 ( [10]). Let X, Y be Banach spaces and let F  C k (R  X, Y ) with k  2 satisfy: (a) F (, 0) = 0 for all   R;
+
+6
+
+D. HENRY AND B.V. MATIOC
+
+(b) The Frchet derivative x F (  , 0) is a Fredholm operator of index zero with a onedimensional kernel: Ker(x F (  , 0)) = {sx0 : s  R, 0 = x0  X }; (c) The tranversality condition holds: Then   is a bifurcation point in the sense that there exists 0 > 0 and a branch of solutions with F (, x) = 0, (0) =   , (0) = x0 , and the maps s  (s)  R, (, x) = {((s), s(s)) : s  R, |s| < 0 }  R  X, s  s(s)	X, x F (  , 0)[(1, x0 )]  Im(x F (  , 0)).
+
+are of class C k-1 on (-0 , 0 ). Furthermore there exists an open set U0  R  X with (  , 0)  U0 and {(, x)  U0 : F (, x) = 0, x = 0} = {((s), s(s)) : 0 < |s| < 0 }. Throughout the remainder of this paper we shall assume that the following conditions hold: (A1)  > 0; (A2)   C 4- (R),   C 3- (R), and ,	BC 2 (R); (A3)	f (y,  )  0 for all (y,  )  [-1, 1]  R. Here, BC 2 (R) is the subspace of C 2 (R) which contains only functions with bounded derivatives up to order 2, while, given m	N with m  1, C m- (R) := {h  C m-1 (R) : h(m-1) is Lipschitz continuous }. Remark 3.2. Though it is possible to consider fluids having streamline density function which is not monotone, the assumption (A3) restricts our considerations to fluids having a nonincreasing Bernoulli function. Furthermore, we mention that for the particular case of fluids with constant density then condition (A3) is equivalent to the condition   (- )0 for the vorticity function. In this context, we note that this type of condition appears in studying (linear) stability properties of homogeneous flows with a free surface, cf. the discussion in [6]. Let thus   (0, 1) be fixed for the remainder of this paper, and given m  N and	> -1, m+ ( ) denote the subspace of C m+ ( ) consisting only of functions which are we let Cper   2 -periodic in the x-variable. Theorem 3.3. Assume that (A1)-(A3)   R, the semilinear Dirichlet problem    =	=   = are satisfied. Given   C 2+ (S) with | | < 1 and f (y,  ) in  , 0 on y =	(x),  on y = -1 (3.1)
+
+2+ ( ). possesses a unique solution   Cper
+
+ON STRATIFIED CAPILLARY-GRAVITY WATER WAVES
+
+7
+
+We note that when  = 0 and  := 0 then, for any	 R, Theorem 3.3 ensures the 2+ () of problem (3.1), which in this case existence and uniqueness of a solution	Cper depends only upon y . Therefore, the pair (,  ) := (0,  ) is a solution of (2.7) for all	R. Moreover, we obtain that the function  verifies the following identity
+0 t -1 0 t
+
+ (y ) = -y - y
+
+-1
+
+f (s,  (s)) ds dt -
+t
+
+f (s,  (s)) ds dt,
+y -1
+
+y  [-1, 0]. (3.2)
+
+Particularly, by differentiation we have
+  (y ) = - - 0 -1 y
+
+f (s,  (s)) ds dt +
+-1 -1
+
+f (s,  (s)) ds,
+
+y  [-1, 0].
+
+(3.3)
+
+2+ ( ) are two solutions Proof of Theorem 3.3. We prove the uniqueness first. If 1 , 2	Cper  of (3.1), then  := 1 - 2 is a solution of the equation
+
+ = f (y, 1 ) - f (y, 2 )
+
+in
+1
+
+satisfying  = 0 on   . Using the mean value theorem, we have: f (y, 1 ) - f (y, 2 ) = c(x, y ) with c(x, y ) :=
+0
+
+ f (y, 2 + t(1 - 2 )) dt.
+
+Invoking (A3), the weak elliptic maximum principle yields the desired uniqueness result.  ( ), In order to prove the existence part, we use a fixed point argument. Given   Cper  2+  we denote by T   Cper ( ) the unique solution of the linear Dirichlet problem    = f (y, ) in  ,	= 0 on y =  (x), (3.4)	 =  on y = -1.
+
+2+ ( )	 By (A2), the operator T is well-defined and continuous. Moreover, Cper   Cper ( )  ( )  C  ( ) is therefore completely continuous. is a compact embedding, and T : Cper   per Since any solution of (3.1) is a fixed point of T , Leray-Schauder's theorem [16, Theorem 10.3] yields the following result.
+
+If there exists a constant M > 0 and  ~  (0, 1) such that
+ ~ ( ) Cper
+
+M
+
+(3.5)
+
+2+ ( ) and   [0, 1] satisfying	= T , then T possesses a fixed for all	 Cper  point.
+
+We prove now (3.5). First, we bound the supremum bound of  independently of . Indeed, using apriori bounds for inhomogeneous Dirichlet problems, cf. [16, Theorem 3.7], we obtain,
+
+That  is a solution of	= T , may Dirichlet problem:	=  =   =
+
+be re-expressed by saying that	is a solution of the f (y,  ) in  , 0 on y =  (x),  on y = -1.
+
+(3.6)
+
+8
+
+D. HENRY AND B.V. MATIOC
+
+by taking into account that   [|y | < 1], the following estimate
+Cper ( )
+
+ sup | | + e2 sup |f (y,  )|  C,
+
+(3.7)
+
+where C := || + e2 g  BC (R) +	BC (R) . We may regard now the right-hand side of the first equation in (3.6) as a function in L ( ). Then, taking into account that the Dirichlet data in (3.6) are constant, we infer from the de Giorgi and Nash estimates, cf. [16, Theorem 8.29], that there exists  ~  (0, 1) such that equation (3.5) is satisfied. 4. Non-laminar solutions 4.1. The functional analytic setting. The next aim is to show that there exist non-trivial (that is, non-laminar) solutions of the stratified water wave problem (2.7), and in order to achieve this we must recast the water wave problem (2.7) using an operator formulation. We will then apply the Crandall-Rabinowitz theorem to prove the local existence of solutions bifurcating from the laminar flows. We can show the local existence of non-laminar solutions, firstly fixing the mass-flux constant  and then using the coefficient of surface tension  as a bifurcating parameter, and then secondly fixing  and using  as a bifurcating parameter. m+ (S), m  N, of C m+ (S) consisting of even To this end, we introduce the subspaces Ce,k m+ functions which are 2/k-periodic and have integral mean zero, and we define Ce,k (), as m +	the subspace of Cper () containing only even and 2/k-periodic functions in the x variable. The evenness condition imposes a symmetry on the free-surface (and on the underlying flow). In the absence of stratification and of stagnation points (but allowing for vorticity), one can show that the mere monotonicity of the free-surface between trough and crest ensures this symmetry, cf. [3, 4]. To some extent, this result also applies to stratified flows, cf. [35]. By considering only functions  with integral mean zero we incorporate the volume constraint (2.1) in the spaces we work with. The bottom of the fluid being located at y = -1, we take the wave profile	from the set
+2+ Ad := {  Ce,k (S) : | | < 1}.
+
+Given	Ad, we define the mapping  :  = S  (-1, 0)   by the relation  (x, y ) := (x, (y + 1) (x) + y ), (x, y )  . This mapping has the benefit of flattening the unknown free-boundary fluid domain into a fixed rectangle, similar to [14,33]. The operator  is a diffeomorphism for all   Ad, and we use this property to transform problem (2.7) onto the rectangle . Therefore, corresponding to the semilinear elliptic operator in (2.7a) we introduce the transformed elliptic operator 2+  () with ()	Ce,k A : Ad Ce,k ~) := ( ~  -1 )   - f (y,  ~	-1 )	, A(,	 ~)  Ad C 2+ (). (,  e,k ~) = A0 ( ) ~ + b(,  ~), where To ease notation we decompose A(,  A0 ( ) := 11 -
+
+1 + (1 + y )2  2 (1 +  )  - 2 2 2(1 + y )  12 +  - (1 + y ) 2 , 22 1+ (1 +  )2 (1 +  )2 ~) := -f ((1 + y ) + y,  ~). b(,
+
+(4.1)
+
+ON STRATIFIED CAPILLARY-GRAVITY WATER WAVES
+
+9
+
+Furthermore, corresponding to the equation (2.7d), we introduce the boundary operator 2+  (S) by the relation B : Ad Ce,k ()  Ce,k ~) := B (,  ~  -1 )|2   tr |( 1  = 2 2
+2  ~1 tr  ~2 + 1 +  tr	~2 , ~2 - 2 tr	tr  2 1 1+ (1 +  )2
+
+with tr denoting the trace operator with respect to S = S  {0}. Having introduced this notation, we remark that the laminar flow solutions (,  ) = (0,	),   R, correspond to the trivial solutions (, ,  ) = (, , 0) of the equation (, ,  ) = 0 (4.2)
+ (S) is given by where	: (0, )  R  Ad	Ce,k
+
+(, ,  ) := B (, T (,  )) -
+
+  + g(0) - (1 +  2 )3/2
+
+S
+
+B (, T (,  )) dx,
+
+That T is well-defined between these spaces follows easily from the weak elliptic maximum principle, as in the uniqueness proof of Theorem 3.3. Moreover, problems (2.7) and (4.2) are 1 equivalent, that is (, ,  ) is a solution of (4.2) if and only if (,  := T (,	)  -  ) is a solution of (2.7). Following ideas from [15, Theorem 2.3], we establish now a preliminary result concerning the regularity of T .
+2+ ()). Lemma 4.1. We have T  C 2 (R  Ad, Ce,k 2+  ()  (C 2+ (S))2 be the operator defined by Proof. Letting L : R  Ad Ce,k ()	Ce,k e,k
+
+2+ and T : R  Ad  Ce,k () is the solution operator  ~) = 0 in  A(,  ~ = 0 on   ~ =  on
+
+to the semilinear Dirichlet problem , y = 0, y = -1. (4.3)
+
+where tr- is the trace with respect to S = S  {-1}, the assumption (A2) guarantees that L is of class C 2 . Moreover, it holds that for all (,	)  R  Ad . We show now that the operator  ~ L(, , T (,	)) is an isomorphism, 2+ 2+ 2  that is	~ L(, , T (,  ))  Isom(Ce,k (), Ce,k ()  (Ce,k (S)) ), for all (,  )  R  Ad . The implicit function theorem leads us then to the claim. It is not difficult to see that for all ~ w  C 2+ (), we have , e,k ~ ~  ~ L(, ,  )[w ] = (A0 ( )w +  ~ b(,  )w, tr0 w, tr- w ), where ~ by (A3). Consequently, the operator  ~ L(, ,  )[w ] satisfies the weak-maximum principle [16], and using standard arguments for elliptic operators on the existence and uniqueness of ~ ~  ~ b(,  ) = - f ((1 + y ) + y,  )  0, L(, , T (,  )) = 0
+
+~) := (A(,  ~), tr0 , ~ tr-  ~ - ), L(, ,
+
+10
+
+D. HENRY AND B.V. MATIOC
+
+~ ~ solutions it follows that  ~ L(, ,	)[w ] is an isomorphism for all (, ,  ). This completes the proof. ~), we conclude that Since B depends analytically on (,
+   C 2 ((0, )  R  Ad, Ce,k (S)).
+
+(4.4)
+
+This is the starting point to our bifurcation analysis. 4.2. Caracterisation of  (, , 0) as a Fourier multiplier. In order to prove that local bifurcation occurs using the Crandall-Rabinowitz Theorem 3.1 we need to determine first the Frchet derivative of  with respect to . In this section, we show that  (, , 0) is in fact a Fourier multiplier, and this allows us to analyse its Fredholm properties in a rather neat fashion by examining the behaviour of its symbols (m (, )), which we determine below. This examination of the symbols will be the essence of the technical proofs of Theorems 4.3, 4.6 in Section 4.3. To this end we fix (, ) and, recalling that T (, 0) =	, we obtain
+  (, , 0)[ ] = B (0,  )[ ] +  ~ B (0,  )[ T (, 0)[ ]] -  + g(0)
+
+-
+
+S
+
+ B (0,	)[ ] +	~ B (0,  )[ T (, 0)[ ]] dx
+
+2+ for all   Ce,k (S). Taking into account that  depends only upon y , we have the following relations: 2  B (0,  )[ ] = - (0)	and  ~ B (0,  )[w ] =  (0) tr w2 .
+
+Moreover, differentiating the equations of (4.3) with respect to , we see that	T (, 0)[ ] is the solution of the Dirichlet problem: A0 (0)w +	~ b(0,	)w = - A0 (0)[ ] -  b(0,  )[ ] in , w = 0 whence
+   + [2f (y,  ) + g (1 + y ) (- )] in , w -  f (y,  )w = (1 + y )
+
+on  ,
+
+(4.5)
+
+w = 0
+
+on  .
+
+(4.6)
+
+We consider now the Fourier series expansions of  and w:
+
+
+=
+m=1
+
+am cos(mkx),
+
+w :=
+m=1
+
+am wm (y ) cos(mkx),
+
+and find that
+
+
+(1 + where
+
+   y )
+
++ [2f (y,  ) + g(1 + y ) (- )] =
+
+
+
+am bm (y ) cos(mkx)
+m=1
+
+ bm (y ) := 2f (y,  (y )) + g(1 + y ) (- (y )) - (mk)2 (1 + y ) (y ).
+
+ON STRATIFIED CAPILLARY-GRAVITY WATER WAVES
+
+11
+
+Inserting these expressions into (4.7) and comparing the coefficients of cos(mkx) on both sides of the equations, we conclude that wm is the unique solution of the boundary value problem  - ((mk )2 +  f (y,	))w wm m = bm , -1 < y < 0,   (4.7) wm (0) = wm (-1) = 0. Though we can not solve (4.7) explicitly, we will see later on that elliptic maximum principles may be use to study the properties of the solution of (4.7). Understanding the behaviour of the solutions of (3.2) and (4.7) is the key point in our analysis. Summarising, we find that the Frchet derivative of  (, , 0) is the Fourier multiplier
+
+
+ (, , 0)
+m=1
+
+am cos(mkx) =
+m=1
+
+m (, )am cos(mkx),
+
+(4.8)
+
+and the symbol (m (, ))m1 is given by the expression Clearly, by virtue of Lemma 4.1, m is of class C 2 in (, ). It is well-known that realization  : C 2+ (S)	C  (S) of the Laplace operator is the generator of an analytic and continuous semigroup in L(C	(S)). Moreover,  is a Fourier multiplier with symbol (-k2 )kZ and the 2+ 1+ operator   +  (, , 0)  L(Ce,k (S), Ce,k (S)), cf. Lemma 4.1. This shows, in view of Proposition 2.4.1 (i) in [26], that - (, , 0) is itself the generator of an analytic strongly  (S)). Particularly, we infer from Theorem III.8.29 in [22] that continuous semigroup in L(Ce,k the spectrum of  (, , 0) coincides with its point spectrum, that is ( (, , 0)) := {m (, ) : m  1}. (4.10) 4.3. Main existence results. We now prove our main existence results, first using the coefficient of surface tension  as a bifurcation parameter (the  in the Crandall-Rabinowitz Theorem 3.1) and secondly using the mass-flux  as a bifurcation parameter. We make the following additional assumption on the system (2.7): (A4) 2f (y,  ) + g(1 + y ) (- )  0 for all y  [-1, 0]  (-, 0]. Remark 4.2. We note that for homogeneous fluids,  constant, condition (A4) states that the vorticity function is negative,  (- )  0. For an analysis of the bearing that such a condition has on the underlying flows cf. the discussions in [8, 31]. Theorem 4.3. Let  and  be given such that (A1)-(A4) are satisfied and fix k	1. There exists -  R such that for all	 - , we may find a sequence ( m )m1  (0, ) decreasing to zero with the following properties: (i) Given m  1, there exist a curve (m , m ) : (-, )  (0, )  Ad which is continuously differentiable and consists only of solutions of the problem (4.2), that is (m (s), , m (s)) = 0 for all |s| < . (ii) We have the following asymptotic relations m (s) =  m + O(s), Moreover, for fixed   - , all the solutions of (4.2) close to ( m , , 0) are either laminar flows or belong to the curve (m , , m ). m (s) = -s cos(mkx) + O(s2 ) for s	0.
+2   m (, ) :=  (mk)2 + g(0) -  (0) +  (0)wm (0).
+
+(4.9)
+
+12
+
+D. HENRY AND B.V. MATIOC
+
+Remark 4.4. If we replace (A4) by then the conclusion of Theorem 4.3 remains true with the modification that in this case we find +  R such that the assertions (i) and (ii) of the theorem hold for all   + . In this case we obtain travelling wave solutions of the original problem (2.2), which have positive mass flux. For our second main result we require, in addition to (A1)-(A4), that (B1)  f  0 on [-1, 0]  (-, 0]; (B2) 2 f (y,  ) - g(1 + y ) (- )  0 for all (y,  )  [-1, 0]	(-, 0]; (B3)  f (y, 0)	2 for all y  [-1, 0]. (A4 ) 2f (y,  ) + g(1 + y ) (- )	0 for all (y,  )  [-1, 0]  [0, )
+
+Remark 4.5. For the particular setting of homogeneous flows ( constant), we can see that (B1) requires that the vorticity function   (- )  0, (B2) is simply equivalent to (A3), and (B3) requires that on the surface	 (0)  -2. Theorem 4.6. Let  and  be given such that (A1)-(A4) and (B1)-(B3) are satisfied and let  > 0 be fixed. There exists a positive integer K  N and for all k  K a sequence (m )m1  R with m  - and:
+
+(i) Given m  1, there exist a curve (m , m ) : (-, )  R  Ad which is continuously differentiable and consists only of solutions of the problem (4.2), that is (, m (s), m (s)) = 0 for all |s| < . (ii) We have the following asymptotic relations m (s) = m + O(s), m (s) = -s cos(mkx) + O(s2 ) for s  0.
+
+Moreover, all the solutions of (4.2) close to (, m , 0) are either laminar flows or belong to the curve (, m , m ). Remark 4.7. We note that for s sufficiently small, it follows directly from Theorem 4.3 (ii) and Theorem 4.6 (ii) that the resulting non-laminar solutions have a wave surface profile m which has minimal period 2/mk, m has a unique crest and trough per period, and m is strictly monotone from crest to trough. Before proving the theorems, we consider more closely the functions  . Since by Lemma 4.1 the mapping	  is of class C 2 , we differentiate the equations of (4.3), when  = 0, with respect to  and find that	 is the solution of the Dirichlet problem:   u =  f (y,  )u in , u = 0 on y = 0, (4.11)  u = 1 on y = -1.
+  (-1) < 0 (0) < 0 and
+
+Invoking (A3), we obtain that	(0)	  (-1), and since   is not constant Hopf's principle ensures that for all   R.
+
+ON STRATIFIED CAPILLARY-GRAVITY WATER WAVES
+
+13
+
+ (0) is a decreasing function and, recalling (A2) and (3.3), we obtain Consequently,	that and there exists a threshold value   R with   (0)
+
+= 0 and
+
+ (0) > 0, for  < ,
+
+ (0) < 0, for  > .
+
+(4.12)
+
+Proof of Theorem 4.3. Fix k  N, k  1. For each m  N, m	1, and	 R, we let  m () =:  m := -
+2 (0) +   (0)w	(0) g(0) -  m  , (mk)2
+
+(4.13)
+
+be the solution of the equation m (, ) = 0. We first show that if  is small, then  m are all positive. To this end, we claim that the right hand side bm of (4.7)1 is non-positive for all m  N, provided  is small enough.   Indeed, recalling (3.3), we see that  -  uniformly in y  [-1, 0], so that there exists -	 with the following properties:
+  0
+
+and
+
+The claim follows now from (A4) and the fact that   0 for all	- . Let thus   - be fixed. The weak elliptic maximum principle applied to (4.7) ensures that wm attains its  (0) < 0 for minimum on the boundary, that is wm  0, and Hopf's principle leads us to wm all m  N. Consequently,  m > 0 for all m  1 and m (,  m ) = 0. Next we prove that ( m ) is a decreasing sequence. Recalling (4.13), it suffices to show  (0)/(mk )2 that wm is non-decreasing. In order to do this, we consider the parameter m1 dependent problem  2f (y,  ) + g(1 + y ) (- )    - (1 + y ) , -1 < y < 0, u - ( +  f (y,	))u =	u (0) = u (-1) = 0. (4.15) which is obtained by replacing (mk)2 in (4.7) by   (0, ) and dividing by this variable the equations of (4.7). Particularly, wm = (mk)2 u(mk)2 , and the arguments presented above show that u  0 for all  > 0. Clearly, the solution u of (4.15) depends smoothly upon . Differentiating the equations in (4.15) with respect to  yields that v :=	u is the solution of  2f (y,  ) + g(1 + y ) (- )   v - ( +  f (y,  ))v = u -  0, -1 < y < 0, 2	v (0) = v (-1) = 0. (4.16)  (0) =  (u (0)) > 0 for all	 1. Whence, v  0 and Hopf's principle implies that v	(0)/(mk )2 Particularly, the sequence wm is increasing. m1 We have thus shown that m ( p , ) = 0 if and only if m = p  1. Consequently, we have and so	( m , , 0) is a Fredholm operator of index zero. Moreover, in virtue of (4.9), the transversality condition (3.1) of Theorem 3.1 is fulfilled too / Im	( m , , 0).  ( m , , 0)[cos(mkx)] = 2(mk)2 cos(mkx)  (4.18) Ker  ( m , , 0) = span{cos(mkx)},
+ (S), (4.17) Im  ( m , , 0)  {cos(mkx)} = Ce,k
+
+2 (0) g(0)
+
+for all   - .
+
+(4.14)
+
+14
+
+D. HENRY AND B.V. MATIOC
+
+Gathering (4.4), (4.17), and (4.18) we may apply Theorem 3.1 to equation (4.2) and obtain the desired existence result. We finish by proving that ( m ) converges to zero. We apply the estimate from Theorem 3.7 in [16] to the Dirichlet problem (4.15), when  = (mk)2 , and obtain that sup wm /(mk)2
+m C ([-1,0])
+
+< .
+
+(4.19)
+
+Letting um := wm /(mk)2 , we re-write (4.7) as follows
+2 u m - (mk ) um = Bm (y ), -1 < y < 0, um (0) = um (-1) = 0,
+
+(4.20)
+
+where Bm (y ) := ( f (y,  (y ))wm (y ) + bm (y ))/(mk)2 is, by (4.19), a bounded sequence in C ([0, 1]). The general solution of (4.20) is um (y ) = sinh(mky ) sinh(mk)
+0 -1
+
+sinh(mk(s + 1)) Bm (s) ds + mk
+
+y 0
+
+sinh(mk(y - s)) Bm (s) ds, mk
+
+and particularly u m (0) = mk sinh(mk)
+0 -1
+
+sinh(mk(s + 1)) Bm (s) ds  sup Bm mk m
+
+C ([-1,0])
+
+cosh(mk) . mk sinh(mk)
+
+2  Consequently, u m (0) = wm (0)/(mk ) m 0. This proves our claim.
+
+We prove now our second main existence result, Theorem 4.6. Though it is independent of Theorem 4.3, the assertions of the latter are satisfied and we shall make use of some of the relations derived in its proof. Proof of Theorem 4.6. Let	> 0 be fixed, and let  and - be the constants defined by  (0) < 0 (4.12) and (4.14), respectively. Given m  N, m  1, and   - , it holds that wm and, by (3.3) and (A2), we get lim- m (, ) = - and m (, ) =  (mk)2 + g(0) > 0. Therefore, m ( ) =: m := min{ <	: m (, ) = 0} is a well-defined constant for all m  N. In order to apply Theorem 3.1 we have to make sure that m (, n ) = 0 for all m = n and that  m (, m ) = 0 for all m  1. We first claim that m m -. To prove this, we assume that (m )m has a bounded subsequence (which we denote again by (m )m ). From the arguments in Theorem 4.3, where we established that ( m ) converges to zero, we deduce, due to the boundedness of (m )m ,  (0)/(mk )2  0. Our claim follows by dividing (4.9) by (mk )2 and letting m  . that wm This shows (also for k = 1) that indeed m m -. Whence, we may choose K  N such that if k  K, then m  - for all m  1. We prove now that if k  K and m  1, then m is the unique point within (-, - ] such that m (, ) = 0. To this end, we differentiate m with respect to  and observe that, for   - ,
+      (0) wm (0) > 0 (0)wm (0) +  (0) +   (0)	m (, ) = -2
+
+ON STRATIFIED CAPILLARY-GRAVITY WATER WAVES
+
+15
+
+ (0)  0. We show now that this is indeed the case. Differentiating both provided  wm equations of (4.7) with respect to , yields that u :=  wm is the solution of the following boundary value problem	 u - ((mk)2 +  f (y,  (y )))u =  f (y,	(y )))	wm	+ (2 f (y,  (y )) - g(1 + y ) (- ))    (y ),  -1 < y < 0, -(mk)2 (1 + y )      u(0) = u(-1) = 0. (4.21) It is not difficult to see that    (y ) = -1 - 0 -1 t y
+
+ f (s,	(s))  (s) ds dt +
+-1 -1
+
+ f (s,	(s))  (s) ds,
+
+and gathering (A3), (B1), (B3),   0, and    [0, 1] we conclude that
+  (0) = -1 + (y )      0 0 t 0 0
+
+ f (s,	(s))  (s) ds dt
+-1 t
+
+ -1 +
+
+-1
+
+ f (s, 0) ds dt  0.
+
+Since	- , we conclude from (B1) and (B2) that the right-hand side of (4.21)1 is positive.  (0) > 0. This Consequently, u  0 and Hopf's principle implies that u (0) > 0, that is  wm proves that m is the unique solution of m (, ) = 0 in (-, - ], and shows moreover that  m (, m ) > 0 for all m  1. Finally, we prove that if k  K, then n = m for all m = n. Let thus m > n  1. We assume by contradiction that n = m =: . Then, since 0 = m (, ) = n (, ), we conclude	(0)  (0)w  (0)	 (0)wm	n 2 (mk)2  +  = ( nk ) > 0.  + (mk)2 (nk)2
+ (0)/(mk )2 ) is increasing and we have But, for fixed	 - , the sequence (wm  (0)w  (0)  (0)w	(0)   n m >  + > 0. (mk)2 (nk)2
+
++
+
+This shows that in fact m (, ) > n (, ), which is a contradiction. Therefore Ker  (, m , 0) = span{cos(mkx)},
+ (S), (4.22) Im  (, m , 0)  {cos(mkx)} = Ce,k
+
+implying that  (, m , 0) is a Fredholm operator of index zero. Summarising, if k  K, then m (, n ) = 0 if and only if m = n, and  m (, m ) > 0 for all m  1. Thus, we may apply Theorem 3.1 and obtain the desired result. Acknowledgement. The authors would like to thank the organisers of the programme "Nonlinear Water Waves", Erwin Schrdinger Institute (Vienna), AprilJune 2011, where work on this paper was undertaken. DH would like to acknowledge the support of the Royal Irish Academy.
+
+16
+
+D. HENRY AND B.V. MATIOC
+
+References
+[1] A. Constantin: On the deep water wave motion, J. Phys. A 34 (2001), 14051417. [2] A. Constantin: The trajectories of particles in Stokes waves, Invent. Math. 166 (2006), 523535. [3] A. Constantin, M. Ehrnstrm and E. Wahln: Symmetry of steady periodic gravity water waves with vorticity, Duke Math. J. 140 (2007), 591603. [4] A. Constantin and J. Escher: Symmetry of steady periodic surface water waves with vorticity, J. Fluid Mech. 498 (2004), 171181. [5] A. Constantin and J. Escher: Analyticity of periodic travelling free surface water waves with vorticity, Ann. Math. 173 (2011), 559568. [6] A. Constantin and W. Strauss: Exact steady periodic water waves with vorticity, Comm. Pure Appl. Math. 57(4) (2004), 481527. [7] A. Constantin and W. Strauss: Stability properties of steady water waves with vorticity, Comm. Pure Appl. Math. 60 (2007), 911950. [8] A. Constantin and W. Strauss: Rotational steady water waves near stagnation, Philos. Trans. Roy. Soc. London Ser. A 365 (2007), 22272239. [9] A. Constantin and E. Varvaruca: Steady periodic water waves with constant vorticity: regularity and local bifurcation, Arch. Rational Mech. Anal. 199 (2011), 3367. [10] M. G. Crandall and P. H. Rabinowitz: Bifurcation from simple eigenvalues, J. Funct. Anal. 8 (1971), 321340. [11] M.-L. Dubreil-Jacotin: Sur les ondes de type permanent dans les liquides htrognes, Atti Accad. Naz. Lincei Rend. 6 (1932), 814819. [12] M.L. Dubreil-Jacotin: Sur la dtermination rigoureuse des ondes permanentes priodiques d'ampleur finie, J. Math. Pures et Appl. 13 (1934), 217291. [13] M.L. Dubreil-Jacotin: Sur les thormes d'existence relatifs aux ondes permanentes priodiques a deux dimensions dans les liquides htrognes, J. Math. Pures et Appl. 9 (1937), 4367. [14] J. Escher, A.-V. Matioc, and B.-V. Matioc: On stratified steady periodic water waves with linear density distribution and stagnation points, J. Differential Equations 251 (2011), 29322949. [15] J. Escher, A.-V. Matioc, and B.-V. Matioc : Classical solutions and stability results for Stokesian Hele-Shaw flows, Ann. Scuola Norm. Sup. Pisa Cl. Sci., IX (2) (2010), 325349. [16] D. Gilbarg and T. S. Trudinger: Elliptic Partial Differential Equations of Second Order, Springer Verlag, New York, 1998. [17] D. Henry: On Gerstner's water wave, J. Nonlinear Math. Phys. 15 (2008), 8795. [18] D. Henry: Analyticity of the free surface for periodic travelling capillary-gravity water waves with vorticity, J. Math. Fluid Mech., 14 (2) (2012), 249254. [19] D. Henry: Analyticity of the streamlines for periodic travelling free surface capillary-gravity water waves with vorticity, SIAM J. Math. Anal. 42 (2010), 31033111. [20] D. Henry and B. Matioc: On the regularity of steady periodic stratified water waves, Comm. Pure Appl. Anal., 11 (4) (2012), 14531464. [21] R. S. Johnson: A Modern Introduction to the Mathematical Theory of Water Waves, Cambridge Univ. Press, Cambridge, 1997. [22] T. Kato: Perturbation Theory for Linear Operators, Springer-Verlag, Berlin Heidelberg, 1995. [23] Lord Kelvin: Vibrations of a columnar vortex, Phil. Mag. 10 (1880), 155168. [24] J. Lighthill: Waves in fluids, Cambridge University Press, Cambridge, 1978. [25] R. R. Long: Some aspects of the flow of stratified fluids. Part I : A theoretical investigation, Tellus 5 (1953), 4257. [26] A. Lunardi: Analytic Semigroups and Optimal Regularity in Parabolic Problems, Birkhuser, Basel, 1995. [27] B.-V. Matioc: Analyticity of the streamlines for periodic travelling water waves with bounded vorticity, Int. Math. Res. Not. 17 (2011), 38583871. [28] B.-V. Matioc: On the regularity of deep-water waves with general vorticity distributions, Quart. Appl. Math., LXX (2) (2012), 393405. [29] J. F. Toland: Stokes waves, Topol. Meth. Nonl. Anal. 7 (1996), 148.
+
+ON STRATIFIED CAPILLARY-GRAVITY WATER WAVES
+
+17
+
+[30] R. E. L. Turner: Internal waves in fluids with rapidly varying density, Ann. Scuola Norm. Sup. Pisa Cl. Sci. 8 (1981), 513573. [31] E. Varvaruca: On some properties of traveling water waves with vorticity, SIAM J. Math. Anal. 39 (2008), 16861692. [32] E. Wahln: Steady periodic capillary-gravity waves with vorticity, SIAM J. Math. Anal. 38 (2006), 921943. [33] E. Wahln: Steady water waves with a critical layer, J. Differential Equations 246 (2009), 24682483; [34] S. Walsh: Stratified steady periodic water waves, SIAM J. Math. Anal. 41(3) (2009), 10541105. [35] S. Walsh: Some criteria for the symmetry of stratified water waves, Wave Motion 46 (2009), 350362. [36] S. Walsh: Steady periodic gravity waves with surface tension, preprint. [37] C.-S. Yih: Exact solutions for steady two-dimensional flow of a stratified fluid, J. Fluid Mech. 9 (1960), 161174. School of Mathematical Sciences, Dublin City University, Glasnevin, Dublin 9, Ireland. E-mail address : david.henry@dcu.ie Institut fr Angewandte Mathematik, Leibniz Universitt Hannover, Welfengarten 1, 30167 Hannover, Germany. E-mail address : matioc@ifam.uni-hannover.de
+

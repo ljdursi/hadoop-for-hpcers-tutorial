@@ -1,0 +1,17 @@
+Try creating a directory in HDFS, and copying the data.dat file in this 
+
+hdfs dfs -mkdir /user/hadoop-user/hdfs-test
+hdfs dfs -ls /user/hadoop-user
+hdfs dfs -ls /user/hadoop-user/hdfs-test
+hdfs dfs -put data.dat /user/hadoop-user/hdfs-test
+hdfs dfs -ls /user/hadoop-user/hdfs-test
+
+Then try using the python script (which uses the pywebhdfs python module)
+to read the second 500 bytes of the file:
+
+python readfile.py 
+
+Finally, remove the file and the directory
+
+hdfs dfs -rm /user/hadoop-user/hdfs-test/data.dat
+hdfs dfs -rmdir /user/hadoop-user/hdfs-test

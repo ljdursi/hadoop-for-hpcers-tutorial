@@ -1,0 +1,1249 @@
+A Nonlinear Constrained Optimization Framework for Comfortable and Customizable Motion Planning of Nonholonomic Mobile Robots  Part I
+Shilpa Gulati Chetan Jhurani Benjamin Kuipers
+
+arXiv:1305.5024v1 [cs.RO] 22 May 2013
+
+Abstract
+In this series of papers, we present a motion planning framework for planning comfortable and customizable motion of nonholonomic mobile robots such as intelligent wheelchairs and autonomous cars. In this first one we present the mathematical foundation of our framework. The motion of a mobile robot that transports a human should be comfortable and customizable. We identify several properties that a trajectory must have for comfort. We model motion discomfort as a weighted cost functional and define comfortable motion planning as a nonlinear constrained optimization problem of computing trajectories that minimize this discomfort given the appropriate boundary conditions and constraints. The optimization problem is infinite-dimensional and we discretize it using conforming finite elements. We also outline a method by which different users may customize the motion to achieve personal comfort. There exists significant past work in kinodynamic motion planning, to the best of our knowledge, our work is the first comprehensive formulation of kinodynamic motion planning for a nonholonomic mobile robot as a nonlinear optimization problem that includes all of the following	a careful analysis of boundary conditions, continuity requirements on trajectory, dynamic constraints, obstacle avoidance constraints, and a robust numerical implementation. In this paper, we present the mathematical foundation of the motion planning framework and formulate the full nonlinear constrained optimization problem. We describe, in brief, the discretization method using finite elements and the process of computing initial guesses for the optimization problem. Details of the above two are presented in Part II (Gulati et al., 2013) of the series.
+
+1
+
+Introduction
+
+Autonomous mobile robots such as intelligent wheelchairs and autonomous cars have the potential to improve the quality of life of many demographic groups. Recent surveys have concluded that many users with mobility impairments find it difficult or impossible to operate existing power wheelchairs because they lack the necessary motor skills or cognitive abilities (Fehr et al., 2000; Simpson et al., 2008). Assistive mobile robots
+ Corresponding author. This work was performed as part of Shilpa's Ph.D. (Gulati, 2011) in the Mechanical Engineering Department at the University of Texas, Austin, TX 78712, USA. Shilpa now works at Bosch Research and Technology Center, 4009 Miranda Ave Suite 150, Palo Alto, CA 94304, USA. Email: shilpa.gulati@gmail.com  Tech-X Corporation, 5621 Arapahoe Ave, Boulder, CO 80303, USA. Email: chetan.jhurani@gmail.com  Electrical Engineering and Computer Science Department, University of Michigan, Ann Arbor, MI 48109 USA. Email: kuipers@umich.edu
+
+such as smart wheelchairs and scooters that can navigate autonomously benefit such users by increasing their mobility (Fehr et al., 2000). Autonomous cars have the potential to increase the mobility of a significant proportion of the elderly whose driving ability is reduced due to age-related problems (Silberg et al., 2012). The motion of an autonomous mobile robot should be comfortable to be acceptable to human users. Moreover, since the feeling of comfort is subjective, different users should be able to customize the motion according to their comfort. Motion planning is a challenging problem and has received significant attention. See (Latombe, 1991; Hwang and Ahuja, 1992; Choset et al., 2005; LaValle, 2006, 2011a,b). However, most of the existing motion planning methods have been developed for robots that do not transport a human user and issues such as comfort and customization have not been explicitly addressed. In this paper we focus on planning comfortable motion for nonholonomic mobile robots such that the motion can be customized by different users. Our key contributions are as follows:  We model user discomfort as a weighted cost functional. This is informed by studies of human comfort in road and railway vehicle literature that indicate that human discomfort increases with the magnitude of acceleration and jerk and that comfortable levels of these quantities have different magnitudes in the direction of motion and perpendicular to the direction of motion (Suzuki, 1998). Thus, our cost functional is a weighted sum of the following three physical quantities: total travel time, tangential jerk, and normal jerk.	Minimum jerk cost functionals have previously been used in literature (Zefran, 1996; Arechavaleta et al., 2008) for optimal motion planning. What is new here is the separation of tangential and normal components, and computing the weights using the technique of dimensional analysis (Langhaar, 1951) that allows us to develop a straightforward procedure for varying the weights for customization.  We develop a framework for planning comfortable and customizable motion. Here, we present a precise mathematical formulation of kinodynamic motion planning of a nonholonomic mobile robot moving on a plane as a nonlinear constrained optimization problem. This includes an in-depth analysis of conditions under which the cost-functional is mathematically meaningful, analysis of boundary conditions, and precise formulation of constraints necessary for motion comfort and for obstacle avoidance. To the best of our knowledge, such a formulation is absent from the literature. The idea of computing optimal trajectories that minimize a cost functional is not new and has been used for planning optimal trajectories for wheeled robots (Dubins, 1957; Reeds and Shepp, 1990; Balkcom and Mason, 2002; Bianco and Romano, 2005) and manipulators (Fernandes et al., 1991;  Shiller, 1994; Zefran, 1996; Arechavaleta et al., 2008). All of these formulations make several limiting assumptions, such as known travel time, or known path, or boundary conditions on configuration but not its derivatives. None of these approaches consider obstacles. The closest existing work to	ours in terms of problem formulation and numerical solution method is (Zefran, 1996), but obstacle avoidance constraints are not part of this formulation. The trajectories planned by our framework have several useful properties  they exactly satisfy boundary conditions on position, orientation, curvature, speed and tangential acceleration, satisfy kinematic and dynamic constraints, and avoid obstacles while minimizing discomfort. Further, our framework is capable of planning a family of trajectories between a given pair of boundary conditions and can be customized by different users to obtain a trajectory that satisfies their comfort requirements.  We represent obstacles as star-shaped domains with piecewise C 2 boundary. This choice allows treatment of non-convex obstacles without subdividing them into a union of convex shapes. This reduces the number of constraints imposed due to obstacles and leads to a faster optimization process. Such a representation of obstacles is not very common in robotics where most collisiondetection algorithms assume polygonal obstacles, and detect collisions between non-convex polygons by subdividing them into convex polygons (Quinlan, 1994; Mirtich, 1998; Lin and Manocha, 2004). 2
+
+ We use the Finite Element Method to discretize the above infinite-dimensional problem into a finite dimensional problem. The finite element method is not unknown in trajectory planning but it is not very common. However, it is a natural choice for problems like ours and we strongly believe that using it provides us insight, flexibility, and reliability that is not easily obtained by choosing other discretization methods.  Our method can be used independently for motion planning of nonholomic mobile robots. It can also be a used as local planner in sampling-based methods (LaValle, 2006) since the trajectories computed by our method exactly satisfy boundary conditions, kinodynamic constraints, continuity requirements, and avoid obstacles.
+
+2
+
+Background and related work
+
+In this section, we characterize motion comfort by analyzing studies in ground vehicles, elevator design, and robotics. We then review existing motion planning methods and identify their strengths and limitations in planning comfortable motion. 2.1 Comfort
+
+Comfort - What is it? Comfort has both psychological and physiological components, but it involves a sense of subjective well-being and the absence of discomfort, stress or pain (Richards, 1980). Studies to characterize comfort in ground vehicles such as automobiles and trains have shown that the feeling of comfort in a vehicle is affected by various characteristics of the vehicle environment including dynamic factors (such as acceleration and jerk), ambient factors (such as temperature and air quality), and spatial factors (such as seat quality and leg room) (Richards, 1980). In this work we focus on comfort due to dynamic factors alone. Passenger discomfort increases as the magnitude of acceleration increases (Suzuki, 1998; Jacobson et al., 1980; Pepler et al., 1980; F orstberg, 2000; Chakroborty and Das, 2004). This is because an increase in magnitude of acceleration implies increase in magnitude of force experienced by a passenger. Two separate components of acceleration effect discomfort  tangential component along the direction of motion and normal component perpendicular to the direction of motion (Jacobson et al., 1980; Pepler et al., 1980; F orstberg, 2000). The normal component is zero in a straight line motion but becomes important when traversing curves. The actual values of comfortable bounds of the two components may be different (Suzuki, 1998), may vary across people, may depend on the mode of transportation, and may depend on the passenger's position (Pepler et al., 1980; F orstberg, 2000). Hence, guidelines for ground transportation design prescribe maximum values of accelerations (Suzuki, 1998; Chakroborty and Das, 2004; Iwnicki, 2006), or maximum values of comfort indices that are functions of accelerations (ISO, 1997; CEN, 1999). Discomfort also increases as the magnitude of jerk increases (Pepler et al., 1980; F orstberg, 2000). This is because a high rate of change of jerk implies a high rate of change of magnitude or direction or both of the forces acting on the passenger. Upper bounds on jerk for comfort have been proposed for road (Chakroborty and Das, 2004) and railway vehicles (Suzuki, 1998). In elevator design, motion profiles are designed for user comfort by choosing profiles with smooth accelerations and low jerk (Hall et al., 1970; Krapek and Bittar, 1993; Spielbauer and Peters, 1995). From a geometric standpoint, it has been known for more than a century that sharp changes in curvature of roads and railway tracks can be dangerous and can cause passenger discomfort (Laundhart, 1887; Glover, 1900; Lamm et al., 1999). For a point mass moving on a path, the normal acceleration at a point is given by v 2 where  is the curvature of the path and v is the speed at that point. If curvature is not continuous, then normal acceleration cannot be continuous unless the speed goes to zero at the point of discontinuity. 3
+
+This is clearly undesirable for comfort. In robotics, the desire to drive a robot with non-zero speed from start to goal has led to the development of methods for planning continuous curvature paths (Lamiraux and Laumond, 2001; Fraichard and Scheuer, 2004; Bianco and Romano, 2004, 2005; Piazzi et al., 2007). To summarize, in a motion planning context, a trajectory should have the following properties for comfort. First, the acceleration should be continuous and bounded. Second, jerk should be bounded. Third, the geometric path should have curvature continuity so that is is possible to travel from start to end without stopping. Fourth, a trajectory should exactly satisfy appropriate end point boundary conditions boundary conditions on position, orientation, curvature, speed, and acceleration since many tasks require precise these (for example, positioning at a desk for an intelligent wheelchair, parking in a tight parking space for a car). Fifth, it should be possible to join multiple trajectories such that the combined trajectory has the above properties. This means that a trajectory should satisfy the above described boundary conditions on both ends.
+
+2.2
+
+Motion planning
+
+There exists a large body of work on motion planning. Before reviewing this work, we define some terms. The space of all possible positions and orientations of a robot is called configuration space. The space of all possible configurations and their first derivatives is called state space. A trajectory is a time-parameterized function of configuration. A control trajectory is a time-parameterized function of control inputs. Motion planning is the problem of finding either a trajectory, or a control trajectory, or both, given the initial and final configuration, and possibly their first and higher derivatives, such that the geometric path does not intersect any obstacles, and the trajectory satisfies kinematic and dynamic constraints. Kinematic constraints refer to constraints on configuration and dynamic constraints refer to constraints on velocity and its higher derivatives. These constraints arise from physics, engineering limitations, or comfort requirements. A variety of methods have been used to solve various aspects of the motion planning problem. Path Planning methods focus on the purely geometric problem of finding a collision-free path. Another set of methods, stemming from differential geometric control theory, focus on computing control inputs that steer a robot to a specified position and orientation or that make a robot follow a specified path. Kinodynamic motion planning methods, consider both dynamics and obstacles and focus on computing collision-free trajectories that satisfy kinematic and dynamic constraints. See (Hwang and Ahuja, 1992; Latombe, 1991; Choset et al., 2005; LaValle, 2006) for excellent presentation of all three kinds of methods, (Laumond et al., 1998) for differential geometric control methods, and (Donald et al., 1993; Fraichard, 1996; LaValle and Kuffner, 2001a; Hsu et al., 2002) for kinodynamic planning. In this work, we use motion planning in the sense of (Donald et al., 1993), that is, we speak of kinodynamic motion planning, consistent with the informal definition presented above. Sampling-based methods Sampling-based methods have found widespread acceptance and practical use for motion planning. These methods are used for both path planning (LaValle, 1998; Kavraki et al., 1996; LaValle and Kuffner, 2001b) and for motion planning (Canny, 1988; Barraquand and Latombe, 1989; Donald et al., 1993; Fraichard, 1996; LaValle and Kuffner, 2001b,a; Hsu et al., 2002). See (LaValle, 2006) for an in-depth discussion. The main idea in all sampling-based methods is to sample the state space (Donald et al., 1993; LaValle and Kuffner, 2001a) or state-time space (Erdman and Lozano-P erez, 1987; Barraquand and Latombe, 1990; Fraichard, 1996; Hsu et al., 2002) to construct a directed graph called a roadmap from the start state to the goal region. The vertices of this graph are points in the obstacle free region of the appropriate space (state space or state-time space) and the edges are trajectory segments that satisfy kinodynamic constraints. The sequence of control inputs associated with the edges of the roadmap is the control trajectory. Among the most computationally efficient methods here are the ones that add vertices to the graph by randomized 4
+
+sampling. Randomized sampling-based algorithms follow two paradigms  multiple-query and single-query. In the multiple-query paradigm, a roadmap is constructed once and used to answer multiple path planning queries. These algorithms are particularly computationally efficient in an unchanging environment since a single roadmap can be used to answer multiple queries. Some of the most well-known algorithms that follow this paradigm are Probabilistic Roadmaps (PRMs) and its variants (Kavraki et al., 1996). In the single-query paradigm, a roadmap is constructed for each query. Some of the most well-known algorithms that follow this paradigm are Randomly Exploring Dense Trees (RDT) (LaValle, 2006) and its variants (Hsu et al., 2002; Karaman and Frazzoli, 2011). These methods start with a roadmap rooted at the start state and iteratively add vertices by randomized sampling of the appropriate space. Different variants differ in the way they add a new vertex to the roadmap. We describe RDT in some detail here. A new vertex is added as follows (i) a sample point qnew is chosen from a randomized sequence (ii) a vertex qcurr in the graph that is closest to the sample point, according to a distance metric, is selected (iii) all controls from a set of discretized controls are applied to qcurr and the system is allowed to evolve for a fixed time t (iv) out of all the new points that can be reached via collision-free trajectories satisfying differential constraints, the point nearest qcurr is chosen and added to the graph. This process is continued till a vertex in the goal region is added to the graph. The closeness of the end point of the trajectory to the goal state increases as the resolution increases, but in general, it is not possible to find a trajectory that exactly reaches the goal state. If it is desired to reach a goal state exactly, then a boundary value problem has to be solved between the end state of the solution trajectory and the goal state. This is a non-trivial problem since the solution must avoid obstacles and satisfy kinodynamic constraints. Some sampling-based methods are bidirectional, that is, they simultaneously grow roadmaps from the start state as well as the goal state. In this case, a solution trajectory exactly satisfies the boundary conditions. However, like before, a boundary value problem has to be solved to connect the two roadmaps. Since a fixed value of control input is applied for a finite length of time at each step, the planned path lacks curvature continuity and has to be smoothed in a post-processing step. Curvature continuity can be attained at the cost of increasing the dimensionality of the state space, and has been demonstrated only for a path planning problem (Scheuer and Laugier, 1998). Similarly, for achieving acceleration continuity the dimensionality of the state space has to be increased resulting in increased computational complexity. Recently, sampling-based algorithms described above have been shown to almost always converge to solution that has non-optimal cost (Karaman and Frazzoli, 2011) and a new algorithm, RRT* was proposed for planning asymptotically optimal paths. Results in a two dimensional configuration space showed that algorithm is computationally efficient. While promising, these results are very recent, and extending this work to kinodynamic motion planning is yet to be carried out. Another set of sampling-based methods can compute optimal trajectories by constructing a grid over the state space or state-time space and searching this discrete grid using graph-search algorithms such as A* (Canny, 1988; Barraquand and Latombe, 1989; Fraichard, 1996). This grid is called the state-lattice. Each pair of neighboring vertices of the grid are connected to each other by a trajectory that satisfies kinodynamic constraints. Three key choices effect the solution quality. First, the choice of discretization determines the closeness of the solution to the true optimum and the speed of computing the solution. Second, the choice of a neighborhood (e.g. k-nearest) for a vertex determines the connectivity of the space. Third, the choice of a method for computing trajectory segments between vertices determines the quality of the solution trajectory. Computing trajectory segments between adjacent states involve solving a non-trivial boundary value problem. For continuity of curvature, velocity and acceleration between connected trajectory segments, the state space should include curvature, and the first and second derivative of configuration. This results in increase in dimensionality of the search space and hence increase in computational time. For this reason, lattice-based methods have been shown to plan trajectories, with some but not all of the properties 5
+
+necessary for comfort (Section 2.1) in autonomous driving applications. Continuous curvature trajectories are demonstrated in (Pivtoraiko et al., 2009), continuous velocity but not continuous curvature trajectories are demonstrated in (Likhachev and Ferguson, 2009). Trajectories with continuous curvature, speed, and acceleration are demonstrated in (McNaughton et al., 2011) Here the problem is tractable because the sampling can be restricted to the road on which the vehicle drives. Efficiently planning trajectories that satisfy all properties of comfort as described in Section 2.1 in less structured environments very much remains an open problem.
+
+Optimal-control based methods The problem of planning trajectories that are optimal with respect to some performance measure and also avoid obstacles has been shown to very hard (Canny and Reif, 1987), even in relatively simple cases. However, for many applications, we do require that a solution trajectory be optimal with respect to some performance measure such as time, path length, energy etc. Optimal control methods (Bryson and Ho, 1975; Troutman, 1995) have traditionally been used for computing optimal trajectories for systems subject to dynamic constraints in the absence of obstacles and have been widely applied in aerospace engineering and control-systems engineering. The formulation consists of constructing a cost functional representing the cumulative cost over the duration of motion and minimizing the cost functional to find a desired state trajectory or control trajectory or both. A functional is an operator that maps a function to a real or complex number. Sufficient conditions for a solution of the minimization problem are given by the Hamilton-Jacobi-Bellman (HJB) equation. HJB is a second-order partial differential equation with end-point boundary conditions. Analytic solutions of the HJB equation for linear systems with quadratic cost have long been known (Bryson and Ho, 1975). For general nonlinear systems, the HJB equation has to be solved numerically. Necessary conditions for optimality are derived using Pontryagin's principle and consist of a set of first-order ordinary differential equations. These differential equations convert the optimization problem into a twopoint boundary value problem. The system of differential equations can either be solved analytically (where possible) or numerically using methods such as the shooting method or finite-difference methods. Analytical solution to the problem of finding minimum length paths for Dubins (Dubins, 1957) car and Reeds and Shepp (Reeds and Shepp, 1990) car (see (Sou` eres and Boissonnat, 1998)) was found using such an approach. Dubins car is only allowed to move forward while Reeds and Shepp car is also allowed to move backward. These paths are comprised of straight line and arc segments and minimize the distance traveled by the mid-point of the rear axle. Each path segment is traversed at a fixed speed, so the trajectories corresponding to these paths are also time-optimal for a given speed. More recently, shortest paths for a differential drive wheeled robot were developed by including a rotation cost in the cost functional (Balkcom and Mason, 2002) (since a differential drive robot can turn in place). Such minimum-time paths lack curvature continuity and require frequent stopping and reorienting of wheels. More complex problems generally require a numerical solution. One frequently used numerical method is the shooting method where the two point boundary value problem is converted into an initial value problem. Shooting methods have been used for trajectory planning for nonholonomic mobile robots (Howard and Kelly, 2007; Ferguson et al., 2008). However, in shooting methods, it is challenging to specify a good initial guess of the unknown parameters that produces a final state reasonably close to the specified state. In general, the trajectories computed do not exactly satisfy end point boundary conditions. Instead of solving the differential equations representing necessary conditions, approximation methods that discretize the infinite-dimensional problem into a finite-dimensional one and optimize the cost functional directly in this finite-dimensional space can be used. Such methods have been used for planning optimal trajectories of robots. In (Fernandes et al., 1991), control inputs that minimize total control energy to 6
+
+travel between a given pair of boundary states are computed. Here Fourier basis functions are used for	discretization. In (Zefran, 1996), trajectories that minimize the integral of square of L2 norm of end-effector 2 jerk and the square of L norm of time derivatives of joint torque vector, subject to torque constraints, are computed. Here a finite-element discretization is used. Other discretizations are also possible, such as B-spline (Bobrow et al., 2001) and spectral (Strizzi et al., 2002) discretization. Very few of the existing optimal control approaches include obstacle-avoidance. Not only do obstacle avoidance constraints make the optimal control problem highly nonlinear, but also each obstacle divides the set of feasible solutions into disjoint regions. One of the earliest methods that included dynamic constraints and obstacle-avoidance for motion planning of autonomous vehicles used a two step approach  first an obstacle free path was found and then an optimal speed on this path was computed (Shiller and Dubowsky, 1991; Shiller and Gwo, 1991). Because of path-velocity decomposition, the resulting trajectory is, in general, not optimal. Obstacles were included as hard constraints for a two-dimensional translating robot in (Tominaga and Bavarian, 1990). Learning methods Optimal control methods require an accurate model of the kinematics and dynamics of the robot as well as models of the robot's interactions with the world. Such models are not always available. Further, it is not straightforward to develop an appropriate cost functional for a given task. Even if such models and cost functionals are available, searching through the high dimensional configuration space of the robot (e.g. in the case of humanoid robots) for an optimal trajectory can be computationally expensive. One set of learningbased methods use the key observation that, in practice, robot trajectories are restricted to a manifold by the task and by the kinodynamic constraints. The dimension of this manifold is, in general, lower than the dimension of the configuration space. These methods aim to learn the structure of this manifold from observed data of the robot's movement (Ramamoorthy and Kuipers, 2008). Another set of methods aim to learn motion primitives for a specific task using observed data from human movements (Schaal et al., 2003). A detailed discussion of these methods is beyond the scope of this work and the interested reader is referred to the following works for more details: (Full and Koditschek, 1999; Schaal et al., 2003; Calinon and Billard, 2009; Ramamoorthy and Kuipers, 2008; Havoutis, 2012). Summary Trajectories computed by sampling-based methods, in general, lack continuity of curvature and acceleration. While these problems can be solved by increasing the dimensionality of state space at the cost of increased computational complexity, the problems of lack of optimality and not satisfying the goal boundary conditions exactly still remain. Optimal control methods have primarily been demonstrated for trajectory planning in the absence of obstacles. Further, a comprehensive formulation of kinodynamic motion planning problem for nonholonomic mobile robots that includes obstacle avoidance is absent. Thus, none of the existing methods can be directly applied to planning comfortable and trajectories. To this end, we develop a motion planning framework to compute trajectories that result in comfortable motion.
+
+3
+
+Overview of the approach
+
+At the root of our framework is the assumption that user discomfort can be quantified as a cost functional, and that trajectories that minimize this discomfort and avoid obstacles will result in user-acceptable motion. We outline the main steps of our approach below.  Formulate user discomfort as a mathematically meaningful cost functional. Based on existing lit7
+
+erature, and making the assumption that a user would like to travel as fast as is consistent with comfort, we define a measure of discomfort as a weighted sum of the following three terms: total travel time, time integrals of squared tangential jerk and squared normal jerk. Each weight used in the discomfort measure to add different quantities is the product of two factors. The first factor has physical units so that the physical quantities with different dimensions can be added together. It is a fixed function of known length and velocity scales. The second factor is a dimensionless parameter that can be varied according to user preferences. The dimensional part is derived using the standard technique of dimensional analysis (Langhaar, 1951).  Define the problem. We formulate our motion planning problem as follows: "Given the appropriate boundary conditions, kinodynamic constraints, the weights in the cost functional, and a representation of obstacles, find a trajectory that minimizes the cost functional, satisfies boundary conditions, respects constraints, and avoids obstacles". This description is transformed into a precise mathematical problem statement using a general nonlinear constrained optimization approach.  Choose a parameterization of the trajectory. Mathematically, one can use different functions to fully describe a trajectory. We express the trajectory by an orientation and a velocity as functions of a scaled arc-length parameter where the scaling factor is an additional scalar unknown to be solved for. This leads to a relatively simple expression for discomfort. We use a scaled arc-length parameterization Thus, we do not assume that the path length is known until the problem is solved.  Analyze the boundary conditions. A complete analysis of boundary conditions shows that for the optimization problem to be well-posed, we need to impose boundary conditions on position, orientation, curvature, speed, and tangential acceleration on each end. Further, we find that three different types of boundary conditions on speed and tangential acceleration on each end describe all types of motion tasks of interest such as starting/ending at rest or not.	Choose a representation of obstacles. To incorporate obstacle avoidance, we make the assumption that each obstacle can be modeled as a star-shaped domain with a boundary that is a piecewise smooth curve with continuous second order derivative. If an obstacle is not star-shaped, our framework can still handle it if it can be expressed as a finite union of piecewise smooth star-shaped domains. It is assumed that a representation of each obstacle is known in polar coordinates where the origin lies in the interior of the kernel of the star-shaped domain. Since each obstacle is assumed star-shaped, the constraint that the trajectory stay outside obstacles can be easily cast as an inequality. To efficiently incorporate obstacle avoidance constraints, we have to introduce position on the path as an additional unknown. This leads to a sparse Hessian of constraint inequalities, which otherwise would be dense. The position as an unknown is redundant in that it can be computed from the two primary unknowns (orientation and speed). Hence that relation is included as an extra equality constraint.  Discretize the problem. We use finite elements to convert the infinite-dimensional minimization problem to a finite dimensional one. For discomfort to be mathematically meaningful and bounded, both speed and orientation must have square-integrable second derivatives. We use a uniform mesh and cubic Hermite polynomial shape functions on each element for speed and orientation. Starting or stopping with zero speed is a special case that requires that speed have an infinite derivative (with respect to scaled arc-length) with a known strength on the corresponding boundary point. In this case we use singular shape functions for speed only on elements adjacent to the corresponding boundary. In the non-discretized version of the optimization problem the obstacle avoidance constraint can be expressed as the condition that each point on the trajectory should be outside each obstacle. We discretize this into a finite dimensional set of inequalities by requiring that some fixed number of points on the trajectory be outside each obstacle.  Compute an appropriate initial guess. A good initial guess is necessary for efficiently solving any nonlinear optimization problem. In general, there exist infinitely many trajectories between any 8
+
+given pair of boundary conditions. Based on our analysis of this non-uniqueness, we compute a set of four good quality initial guesses by solving another, simpler, optimization problem. These initial guesses do not incorporate obstacle-avoidance constraints. Four discomfort minimization problems, corresponding to these four initial guesses, are solved to find four trajectories. The lowest cost trajectory can be chosen as the final solution.  Implement and solve. We use Ipopt, a robust large-scale nonlinear constrained optimization library (W achter and Biegler, 2006) to solve the discretized problem.
+
+4
+
+Organization of this paper
+
+This paper is organized as follows. Section 5 presents some preliminary material on the motion of nonholonomic mobile robot on a plane and on parametric curves. Section 6 lays out the mathematical foundation of our framework, and is followed by the numerical solution method in Section 7 and computing an initial guess in Section 8. Evaluation of the framework and results are presented in Section 9, followed by concluding remarks and direction for future work in Section 10.
+
+5
+
+Preliminary material
+
+In this section, we present the notation and some preliminary material that is relevant to our formulation. We begin by an analysis of motion of a nonholonomic mobile robot moving on a plane. We then provide a brief introduction to parametric curves and arc-length parameterization of curves.
+
+5.1
+
+Motion of a nonholonomic mobile robot moving on a plane
+
+The configuration of a rigid body moving on a plane at any time t can be completely specified by specifying the position vector r(t) = {x(t), y (t)} and orientation (t) of a body-fixed frame with respect to a fixed reference frame. Suppose the rigid body starts from an initial configuration at time t = 0 and reaches a final configuration at time t =  . To fully specify the motion of the body it is necessary to specify the functions x(t), y (t) and (t) on I = [0,  ]. If this body is a physical system, it cannot change its position instantaneously. Further, since forces of infinite magnitude cannot be applied in the real world, the acceleration of the body must be finite. Hence x(t), y (t), and (t) must be at least C 1 on I . If this rigid body has directional wheels, its motion should obey the following nonholonomic constraint x  sin  - y  cos	= 0. (1)
+
+Here dot, (), represents derivative with respect to t. For motion planning, it is common to model a mobile robot as a wheeled rigid body subject to above nonholonomic constraint, and we will do the same. A motion of such a body can be specified by specifying a travel time  and a trajectory r(t) for t  [0,  ]. The  (t) is zero, which orientation (t) can be computed from Equation (1). Essentially, (t) = arctan2( r(t)). If r means the velocity is zero, then this equation cannot be used. If the instantaneous velocity is zero at t = t0 , and non-zero in a neighborhood of t0 , then (t0 ) can be defined as a limtt0 arctan2( r(t)). 5.2 Parametric curves and the arc-length parameterization
+
+We present a brief introduction to parametric curves and the arc-length parameterization. The reader can refer to any book on differential geometry of curves for more details. 9
+
+Let qa < qb and I = [qa , qb ]	R. A planar parametric curve is a mapping r : I  R2 . If components of r are of class C 1 , the vector space of functions with continuous first derivatives, the tangent vector at r(q ) for q	[qa , qb ] is r (q ). In this section, we denote derivatives with respect to the parameter q by a prime ( ). Let the length of a curve be denoted by , where
+qb
+
+=
+qa
+
+||r (q )|| dq.
+
+(2)
+
+Define a function s = s(q ), which is the length of the curve between [qa , q ]. Then,
+q
+
+s(q ) =
+qa
+
+||r (q )|| dq.
+
+(3)
+
+Note that the integrand ||r (q )|| is non-negative throughout I . We make an assumption that it is zero only at a finite number of q 's in I . If q represented time, the physical interpretation is that the velocity is equal to zero only at a finite number of discrete instants in time. This assumption implies that s is an increasing function of q . That is, if q2 > q1 , then s(q2 ) > s(q1 ). This, in turn, means that for any given s  [0, ], a unique q = q (s) can be found that corresponds to that s. If components of r are of class C 1 , then ||r (q )|| ds is defined and is a continuous function. Obviously, is continuous, and thus s = s(q ) is also in C 1 . Thus, dq ds dq = ||r (q )||. With the assumption above that ||r (q )|| can be zero only at a finite number of q 's, it is possible to introduce the arc-length parameterization. For s	[0, ] define r(s) = r(q ) where s = s(q ). (4)
+
+The function r is well-defined because for each s  [0, ] a unique q can be found. Using the chain-rule for differentiation, dr dr dq = . ds dq ds Now
+dr dq
+
+exists and is continuous and
+
+dq ds
+
+=
+
+1
+ds dq
+
+=
+
+1 ||r (q )||
+
+also exists (and is continuous) if ||r (q )|| is not zero.
+
+Thus, at points where ||r (q )|| > 0, dr ds = ||r (q )|| / ||r (q )|| = 1.
+
+dr On points where ||r (q )|| = 0, ds cannot be computed by the expression above. However, the choice that makes it continuous for all s is 1. This is analogous to computing the limiting value of the orientation when velocity is zero as shown earlier in this section. dr Symbolically, the curve has been parameterized by the arc-length. Since ds = 1, the tangent vector computed in the new parameterization is a unit vector. The tangent vector is T(s) and the unit normal vector is N(s), where
+
+T(s) = N(s) = See Figure 1. The signed curvature (s) is defined as
+
+dr ds
+dT ds dT ds
+
+(5)
+
+(s) = 10
+
+d ds
+
+(6)
+
+N y r 0 x
+
+
+T
+
+Figure 1: Tangent and Normal to a curve
+
+where (s) is the tangent angle.
+
+6
+
+Formulating motion planning as a constrained optimization problem
+
+This section presents the mathematical formulation of our framework for planning comfortable and customizable motion of a planar nonholonomic mobile robot. The steps involved are: (1) formulating a discomfort cost functional (Section 6.1) (2) dimensional analysis of cost functional (Section 6.2) (3) formulating an informal problem statement (Section 6.3) (4) choosing an appropriate parameterization of the trajectory (Section 6.4), (5) choosing the function space to which the trajectory should belong for the cost functional to be well-defined (Section 6.5), (6) analysis of boundary conditions to determine the boundary conditions that should be imposed for the problem to be well-posed (Section 6.6), (7) choosing a representation of obstacles and imposing constraints for obstacle avoidance (Section 6.7), and finally, (8) formulating the full infinite-dimensional constrained optimization problem (Section 6.8). 6.1 The discomfort cost functional
+
+In Section 2.1, we saw that for motion comfort, it is necessary to have continuous and bounded acceleration along the tangential and normal directions. It is possible that the actual values of the bounds on the tangential and normal components are different. It is also desirable to keep jerk small and bounded. We model user discomfort as a weighted sum of the following three terms: total travel time, time integral of squared tangential jerk and time integral of squared normal jerk. Travel time is included because we make the justifiable assumption that a user would prefer to reach a goal as fast as is consistent with comfort. Thus, longer travel time implies greater discomfort. We will see later in Section 6.5 that this cost functional is mathematically meaningful only when both tangential and normal acceleration are continuous. Thus, we get continuous accelerations by construction. To keep accelerations within comfortable bounds, we impose explicit constraints on the maximum and minimum values. We construct a cost functional J as follows:
+
+
+J =  + wT
+0
+
+... ( r  T)2 dt + wN
+0
+
+
+
+... ( r  N)2 dt.
+
+(7)
+
+... ... Here  is the total travel time and r is the position of robot at time t  [0,  ]. r represents the jerk. r  T and ... r	N are the tangential and normal components of jerk respectively. We assume that r(t) is smooth enough for the cost functional to be well-defined. This means (at least) that the acceleration vector is continuous 11
+
+and normal and tangential components of jerk are square integrable. The term  is necessary. If it is not included in the functional, the optimal solution is to reach the destination at  =  traveling at essentially zero speed in the limit (except perhaps at the end-points where the speed is already specified). Thus, minimizing just the integral terms will not lead to a good solution. The weights (wT and wN ) are non-negative known real numbers. We separate tangential and normal jerk to allow a choice of different weights (wT and wN ). The weights serve two purposes. First, they act as scaling factors for dimensionally different terms. Second, they determine the relative importance of the terms and provide a way to adjust the robot's performance according to user preferences. For example, for a wheelchair, some users may not tolerate high jerk and prefer traveling slowly while others could tolerate relatively high jerks if they reach their destination quickly. The typical values of weights will be chosen using dimensional analysis.
+
+6.2
+
+Dimensional analysis of cost functional and determination of characteristic weights
+
+Choosing the weights in an ad hoc manner does not provide weights that lead to similar comfort levels independent of the input (the boundary conditions). Moreover, since the different components of the total discomfort are different physical quantities, choice of weights should reflect this. In other words, for the total discomfort to make physical sense, the weights cannot be dimensionless numbers but should have physical units. We determine the weights using dimensional analysis (Langhaar, 1951). If the weights are chosen without the dimensional analysis step, the optimal trajectory will be different just by specifying the input in different physical units. In addition, using the same numerical weights for different tasks will not lead to similar quantitative discomfort level. All the physical quantities in the cost functional (time, jerk) depend on only two units - length L and time T . From Equation (7) we see that J has dimensions L0 T 1 due to the first term ( ). Thus wT should have dimensions T 6 /L2 . Similarly, the dimensions of wN is T 6 /L2 . Alternatively, since T = L/V , wT and wN has dimensions L4 /V 6 . We now determine the base values of weights analytically. The main idea behind determining the base values is that the correct base values should keep the maximum speed below the maximum allowable speed. A user can then customize the weights by multiplying the base values by a dimensionless constant that indicates user preference.
+
+Weight for tangential and normal jerk We first determine wT . Consider a one dimensional motion with a trajectory that starts from origin and travels a distance L > 0 in an unknown time  > 0. The starting and ending speeds and accelerations are zero. We choose the exact form of the trajectory to be a quintic polynomial in time t  [0,  ]. This choice uniquely determines the trajectory. The reason we have chosen a quintic is that it minimizes integral of squared jerk (a third derivative), just like a cubic spline minimizes integral of squared second derivative. Additionally, we choose the quintic to satisfy the boundary conditions. Let s(t) be the distance traveled in time t. It is easily seen that the quintic s(t) = Lt3 6t2 - 15t + 10 2 5 12
+
+satisfies all the boundary conditions. For such a trajectory, the discomfort functional is
+
+
+J =  + wT
+0
+
+720L2 wT ... 2 s (t) dt =  + . 5
+
+We do not know	and wT yet. We first choose a  that minimizes J for all wT . This means  = 3600L2 wT
+1 /6
+
+.
+
+Obviously, choosing a large value of wT will increase  , which is natural because doing so penalizes jerk and would slow down the motion. We now choose a wT so that the maximum speed during the motion is V , a dimensional velocity scale. It can be seen that the maximum speed occurs at t =  /2 and it is 225 2048 Hence we choose wT = 225 2048
+1 /3
+
+L4 wT
+2
+
+1/6
+
+.
+
+L4 . V6
+
+(8)
+
+The base value for the weight corresponding to the normal jerk (wN ) is chosen to be the same. We emphasize that both wT and wN will be present in a real problem and the maximum speed constraint is imposed explicitly rather than relying on weights. The analysis done here is to get dimensional dependencies of the base weight and reasonable proportionality constants using a simple problem that can be treated analytically. If a different problem is chosen, these base values will change. Factoring the weights for customization In the preceding discussion, we determined the base values of weights using simple analytical problems. We will refer to these base values as wT and wN . Let R be the minimum turning radius of the robot. For any given input, we determine the characteristic length L as max(L, R ) where L is the straight line distance between the start and end points. The characteristic speed V is the maximum allowable speed of the robot. The base values of weights are then computed as wT = wN = 225 2048
+2
+
+L4  . V6
+
+(9)
+
+The weights for the actual problem are chosen as a multiple of these base weights where the multiplying factors fT and fN are chosen by a user. wT = fT wT , wN = fN wN . 6.3 Problem statement (10)
+
+We formulate motion planning as a constrained optimization problem as follows: Given the appropriate boundary conditions on position, orientation, and derivatives of position and orientation, bounds on curvature, speed, tangential and normal accelerations, the weight factors fT and fN (Equation (9)), and a representation of obstacles, find a trajectory that minimizes the cost functional representing user discomfort Equation (7) such that the trajectory satisfies boundary conditions, respects bounds, and avoids obstacles We model the robot as a rigid body moving on a plane, subject to the nonholonomic constraint of Equa13
+
+r0 0 x
+
+r
+
+
+
+q
+
+q0
+y r0 0 x
+(a)
+
+q0
+0
+
+y r
+
+0
+
+
+
+q
+
+0
+
+q
+x
+(b)
+
+Figure 2: Illustration of the optimization problem. (a) The initial configuration of the robot at time t = 0 is given by the position r0 and orientation 0 . The final configuration at time t =  is given by the position r and orientation  . The speed at an end point, when non-zero, q0 is necessarily along the vector q. (b) There exist infinitely many trajectories that satisfy boundary conditions and y 0 respect constraints, illustrated by the solid and dotted curves. Infinitely many of such trajectories will not result in comfortable motion, illustrated by the dotted curves. Our objective is to find a trajectory r(t) that additionally  minimizes the cost functional of Equation (7) and results in comfortable motion. Such a trajectory is illustrated by the solid curve. q
+
+0
+
+x
+
+
+
+tion (1), and assume that the robot moves with non-zero speed except at a finite number of points. Let the robot start from r0 at t = 0 and reach r in time  (Figure 2). From the discussion in Section 5.1, we see that to fully specify the motion of the robot, we need only to specify a curve r(t) on t  [0,  ] such that the curve is at least C 1 continuous. Henceforth, in this chapter, we will use trajectory to refer to a function of robot position with respect to time. We now transform the above problem description into a precise mathematical problem statement using a general nonlinear constrained optimization approach.
+
+6.4
+
+Parameterization of the trajectory
+
+Mathematically, one can use different primary variables to describe a trajectory. For example, assuming the trajectory starts at zero time, one way to describe a trajectory is to provide the final time and the position vector as a function of time in between. Another way is to provide the final time and specify the orientation and velocity as functions of time. Another way is to represent the geometric path separately, using either position vector or orientation as a function of arc-length. The velocity at each point on the path is provided separately in this case. We have found that making the assumption that speed be non-zero except at boundaries and expressing the trajectory solely in terms of speed and orientation as functions of a scaled arc-length parameter leads to relatively simple expressions for all the remaining physical quantities (such as accelerations and jerks). We shall see below, that with this parameterization, the primary variables (speed and orientation) and their derivatives enter the cost functional polynomially. This would not have been the case if everything were expressed in terms of r as a function of time as we did in our previous work (Gulati et al., 2009). In the following discussion, we implicitly assume that all the quantities have sufficient smoothness for expressions to be mathematically meaningful. In some cases, the derivatives appear not as point-wise values but inside an integral sign. In such a case we will assume that the integrands belong to an appropriate space of functions so that the integrals are well-defined. We explicitly state the requirements on the regularity when posing the optimization problem later in Section 6.5. 14
+
+Scaled arc-length parameterization
+
+Let u  [0, 1]. The trajectory is parameterized by u. The starting point is given by u = 0 and the ending point is given by u = 1. Let r = r(u) denote the position vector of the robot in the plane. Let v = v (u) be the speed. Both r and v are functions of u. Let  denote the length of the trajectory. Since only the start and end positions are known,  cannot be specified in advance. It has to be an unknown that will be found by the optimization process.
+s Let s  [0, ] be the arc-length parameter. We choose u to be a scaled arc-length parameter where u =  so that the unknown constant  is not used in defining an unknown sized interval (as would be the case if u was chosen as the arc-length parameter).
+
+In the following discussion we will see that the trajectory, r(t), t  [0,  ] is completely specified by the trajectory length , the speed v = v (u), and the orientation or the tangent angle  = (u) to the curve.  is a scalar while speed and orientation are functions of u. These are the three unknowns, two functions and one scalar, that will be determined by the optimization process. Since speed is the rate of change of arc length, we have v (u) = Using u =
+s
+
+ds . dt
+
+(11)
+
+in the above equation, we get du v (u) = . dt
+u
+
+(12)
+
+This gives, t = t(u) =
+0
+
+ du. v (u)
+
+(13)
+
+If v (u) is zero only at a finite number of points in [0, 1], then t(u) is well defined for all u  [0, 1]. Equation (13) is a key relation and gives us the means to convert between the time domain and scaled arc-length domain. We now introduce the third unknown  the orientation or the tangent angle to the curve  = (u). Using the results of Section 5.2, we can show that ||r (u)|| = . The tangent vector r (u) to the curve r(u) is given by r (u) = ||r (u)|| T(u) = T(u) where T(u) is the tangent function. T(u) = {cos((u)), sin((u))} . The braces {} enclose the components of a 2D vector. Thus, r(u) can be computed via the following integrals.
+u u
+
+(14)
+
+(15)
+
+(16)
+
+r(u) = r(0) +
+0
+
+cos (u) du,
+0
+
+sin (u) du .
+
+(17)
+
+Now, if (u) is known, r(u) can be computed from Equation (17). If v (u) and  are known, t(u) can be computed from Equation (13). Using these two, we can determine the function r(t), t  [0,  ]. 15
+
+We now have all the basic relations to use chain-rule to derive expressions for all the physical quantities needed to pose the constrained optimization problem. We drop explicit references to u as a function parameter to keep the expression concise. We compute first, second, and third derivatives of r with respect to time. These expressions are easily derived in one or two steps of chain rule differentiation and so we do not present the intermediate steps in detail. = v {cos , sin } v  (v {cos , sin } + v {- sin , cos }) r =  v ... r = (v 2 + vv - v 2  2 ) {cos , sin } 2 v + (3vv  + v 2  ) {- sin , cos } 2  r (18) (19)
+
+(20)
+
+From the equations above, the expressions for tangential acceleration aT and normal acceleration aN are aT =  rT= aN =	rN= The tangential jerk jT is and the normal jerk jN is v2 ... jN = r  N = 2 (3v  + v ). (24)  Here N is the direction normal to the tangent (rotated  2 anti-clockwise). The signed curvature is given by (u) = The angular speed  is given by v .  We can use the Equations 23 and 24. to express the total discomfort  (u) =
+
+
+vv  v2	.
+
+(21) (22)
+
+v ... jT = r  T = 2 (v 2 + vv - v 2  2 )
+
+(23)
+
+ .
+
+(25)
+
+(26)
+
+J (r,  ) =
+0
+
+dt + wT
+0
+
+... ( r  T)2 dt + wN
+0
+
+
+
+... ( r  N)2 dt
+
+(27)
+
+in terms of v , , and . First, we express the travel time  in terms of the primary unknowns.
+1
+
+=
+
+dt =
+0
+
+dt du = du
+
+1 0
+
+ du. v
+
+(28)
+
+Using a similar change of variables in the integration (t  u), the total discomfort can be written as
+1
+
+J (v, , ) =
+0
+
+ du + wT v
+
+1 0
+
+v (v 2 + vv - v 2  2 )2 du + wN 3
+
+1 0
+
+v3 (3v	+ v )2 du. 3
+
+(29)
+
+The first integral (J ) is the total time, the second integral (JT ) is total squared tangential jerk, and the third integral (JN ) is total squared normal jerk.
+
+16
+
+Note that except for the term due to total travel time, the primary variables v and  and their derivatives enter the total discomfort expression polynomially. The discomfort J is now a function of the primary unknown functions v , , and a scalar , the trajectory length. All references to time t have disappeared. However, once the unknowns are found via optimization, we must compute a mapping between t and u. This can be done using Equation (13).
+
+6.5
+
+Function spaces for v and  for a finite discomfort
+
+Now that we have a concrete expression for the discomfort J in Equation (29), it can be used to define the function spaces to which v and  can belong so that the discomfort is well-defined (finite). This will, in turn, lead to conditions on the physical quantities for safe and comfortable motion. We have two distinct cases depending on whether the speed is zero at an end-point on not.
+
+Conditions for positive speeds Let  = [0, 1] and H 2 () be the Sobolev space of functions on  with square-integrable derivatives of up to order 2. Let f :   R. Then f	H 2 ()
+ def
+
+dj f dxj
+
+2
+
+dx <   j = 0, 1, 2.
+
+(30)
+
+First, we show that if v,   H 2 (), then the integrals of squared tangential and normal jerk are finite. Using the Sobolev embedding theorem (Adams and Fournier, 2003) it can be shown that if f  H 2 (), then f  C 0 () and by extension f  C 1 (). Here C j () is the space of functions on	whose up to j th derivatives are bounded and continuous. Thus, if v,   H 2 (), then all the lower derivatives are bounded and continuous. Physically this means that quantities like the speed, acceleration, and curvature are bounded and continuous - all desirable properties for comfortable motion. Expanding all the jerk related terms in Equation (29), bounding all the non-second derivative terms by a constant using the results from the Sobolev embedding theorem, we immediately see that the jerk part of discomfort is finite if v,	H 2 (). This is a sufficient condition only and not a necessary one as we shall see below. We also need that the inverse of v be integrable so that J is finite. This is trivially true if v is uniformly positive, that is, v	v > 0 for some constant positive v throughout the interval [0, 1]. However, v can be zero at one or both end-points because of the imposed conditions. Section 6.6 analyzes the boundary conditions in detail. Here we assume that speed on both end-points is positive. The cases with zero end-point speed are treated below in Section 6.5. Thus, consider the case that v is positive on both end-points. Since v is speed and always non-negative, it can approach zero from above only. We make a justifiable assumption that v can be zero only at end-points if at all and not in the interior. Otherwise, the robot would stop and then start again. This is costly for discomfort since it increases travel time and leads to acceleration and deceleration. Of course, we can choose a motion in which v = 0 in the interior and it can still be a valid motion with finite discomfort. The assumption is that the trajectory that actually minimizes discomfort will not have a halt in between. Thus, if v > 0 on end-points, it remains uniformly positive in the interior and the discomfort is finite. 17
+
+Conditions for zero speed on boundary
+1 Consider the case in which v (0) = 0. The case v (1) = 0 can be treated in a similar manner. If v (0) = 0, v 1 must not blow up faster than up where p < 1. This is to keep J finite. This can be seen as follows. Lets  assume v (u) = up for some p > 0 (so that v (0) = 0). This implies that J = 1- p provided p < 1, otherwise it is not defined. 1 (1-2p) p For simplicity, assume a 1D motion so that (u)  0. Then JT =  provided p > 3 3 5p-3 5 . Taking 3 p all conditions into account, if v (0) = 0, the discomfort is finite if v (u) behaves like u where 5 < p < 1. p) p is defined and finite only if p > 3/2. This conflicts with the However, in such a case, 0 v 2 du = (-1+ 2p-3 2 assumption that v  H (). Thus, we can have a finite discomfort even if v  / H 2 (). We see that the 1 3 2 3 <p<1 reason for this is the zero speed boundary condition, which leads to 0 v v du being finite for 5 1 2 even though 0 v du (which is the highest order term in JT ) is not finite for such a range of p. 1 (1-2p) p If we look at the integral JT =  carefully, we see that it can be finite even if p < 3 3 5p-3 5 , provided 1 2 p = 2 . This is a special case because vv + v is identically zero for such a p and tangential jerk discomfort is finite for a 1-D motion.
+2 2 2 2
+
+1
+
+2 2
+
+For a mathematically meaningful problem we must treat zero speed boundary conditions separately from non-zero speed boundary condition. This analysis will be done in more detail in Sections 6.6 and 7 which are focused on boundary conditions and appropriate singular finite elements respectively.
+
+Summary To summarize, the total discomfort is finite if v,   H 2 () and the inverse of v is integrable. Inverse of v is integrable if v is uniformly positive in [0, 1]. If zero speed boundary conditions are imposed, we will have to choose v outside H 2 (). In such a case, at u = 0, it is sufficient that v approaches zero as up where 3 5 <p<1 1 or p = 2 . For the right end point, where u = 1, replace u with (1 - u) in the condition. We do not lose higher regularity of v throughout the interval  just because v  / H 2 (). Assume v > 0 in the interior, as justified above. Then v  v > 0 in  = [, 1 -  ] where  =  (v ) > 0. Thus v  H 2 ( ) is necessary to keep total discomfort finite. This implies continuity and boundedness of velocity and acceleration in	 > 0.
+def
+
+6.6
+
+Analysis of boundary conditions
+
+The expression for the cost functional J in Equation (29) shows that the highest derivative order for v and  is two. Thus, for the boundary value problem to be well-posed we need two boundary conditions on v and  at each end-point - one on the function and one on the first derivative. We also have to impose that the robot move from a specific starting point to a specific ending point. This condition is a set of two equality constraints on  and  based on Equation (17). If the motion is from positions r0 to r , then
+1 1
+
+r - r0 =
+0
+
+cos  du,
+0
+
+sin  du .
+
+(31)
+
+We now relate the mathematical requirement on v and  boundary values above to expressions of physical quantities. We do this for the starting point only. The ending point relations are analogous. 18
+
+Positive speed on boundary First, consider the case when v > 0 on the starting point. The speed v needs to be specified, which is quite natural. The u-derivative of v , however, is not tangential acceleration. The tangential acceleration is the t-derivative and is given by Equation (21). It is vv  . Here v is known but  is not. Thus specifying tangential acceleration gives us a constraint equation and not directly a value for v (0). This is imposed as an equality constraint. Similarly, fixing a value for  on starting point is natural. We "fix" the values of  (0) by fixing the signed curvature  =   . As before, this leads to an equality constraint relating  (0) and  if  = 0. Since choosing a meaningful non-zero value of  is difficult, it is natural to impose  = 0. In this case  (0) = 0 can be imposed easily.
+
+Zero speed on boundary We now discuss the v = 0 case. If v (0) = 0, then, as seen in Section 6.5, v (u) must behave like up for 1 2 1 3 q 5 < p < 1 or p = 2 near u = 0 and v (u)  u for - 5 < q < 0 or q = - 2 respectively. This means the limu0 v (u) is infinite. This leads to a difficulty in analyzing the expression for the tangential acceleration p ( vv  ) without using limits. We prove that if v  u at boundary, then the tangential acceleration is 0 if 3 1 < p < 1 and it is finite but non-zero if p = . If v (u)  up , then, vv  u2p-1 . If 3 5 2 5 < p < 1, it means 1 1 < 2 p - 1 < 1. Thus as u	0, vv  0 because of the allowable range of p . If p = 5 2 , vv behaves like a 1 positive constant as u	0. Hence p = 2 corresponds to non-zero tangential acceleration. We still have to decide with what strength does v (u) tend to infinity at an end-point. If v = 0 and a = 0, it is clear that v (u)  u-1/2 . If v = 0 and a = 0, the analysis above has only shown that limu0 v (u)v (u) = 0, and limu0 v (u) = . In this case, we need to use the time domain. The reason we have such a singularity is because of working in the arc-length domain. Consider starting from origin with zero speed and acceleration at zero time (t) in 1D. Expanding the distance traveled (s) as a function of time, we see that 1 1 s(t) = 0 + 0t + 0t2 + jt3 + . . . . 2 6 Here j > 0 is the jerk at t = 0. We ignore the higher order terms. Then, to the lowest power of t, the speed as a function of t is 1 v (t) = jt2 . 2 Eliminating t to relate v and s, we get 62/3 1/3 2/3 j s . v= 2 Now s = u because u is the scaled arc-length parameter. Using this we get v = Cu2/3 , where all the 2 constants are absorbed in C . Thus, v (u)  up for p = 3 . This value of p is within the acceptable range of 3 p, the open interval ( 5 , 1). This also tells us that v (u)  u-1/3 is the appropriate strength of the singularity. (32)
+
+Summary To summarize, we must specify following boundary conditions at both end points: position, orientation, curvature, and speed. If a specified speed is non-zero, the tangential acceleration must be specified. If the speed is zero, the tangential acceleration can be zero. If tangential acceleration is non-zero, it must be positive if it is the starting point or must be negative if it is the ending point. 19
+
+{x, y } y
+
+()  {x0 , y0 } x
+
+Figure 3: Notation for star-shaped obstacles. A non-convex star-shaped obstacle is shown with its "center" {x0 , y0 } and a distance function  = (). The distance function gives a single point on the boundary for   [0, 2 ]. The robot trajectory must lie outside the obstacle.
+
+6.7
+
+Obstacle avoidance
+
+For safe motion, it is necessary that the robot avoid obstacles while navigating. Simply speaking, obstacles are regions in the plane of motion through which the geometric path must not pass. Obstacles can be represented in a variety of ways. For example, convex polygons, rectangular cells, simple closed shapes like ellipses, or level sets of implicitly defined simple functions of two arguments are some possibilities.
+
+Modeling obstacles as star-shaped domains We have chosen to model the "forbidden" region formed by the obstacles as a union of star-shaped domains with boundaries that are closed curves with piecewise continuous second derivative. A set in Rn is called a star-shaped domain if there exists at least one point x0 in the set such that the line segment connecting x0 and x lies in the set for all x in the set. Intuitively this means that there exists at least one point in the set from which all other points are "visible". We will refer to such a point x0 as a center of the star-shaped domain. The choice of using star-shaped domains is made so that each point on the boundary of an obstacle can be treated as coming from a well-defined function in polar coordinates centered within the particular obstacle. See Figure 3. This also allows treatment of non-convex obstacles without subdividing them into a union of convex shapes. A big advantage is that we reduce the number of imposed constraints since the number of inequality constraints is proportional to the number of obstacles. This leads to a faster optimization process. This approach is a special case of using level sets of an implicitly defined function as an obstacle boundary. What is different here is that given the description of the boundary in polar coordinates, which is easy to specify for common shapes, we construct an implicit function (see the following section). This is done based on the assumption that the boundary encloses a star-shaped region. The piecewise smoothness property is required to impose the obstacle constraint in a numerical optimization method. Since up to second derivative of constraint can be required, the obstacle boundary should also be smooth to that order (or at least piecewise smooth). If an obstacle is not star-shaped, our framework can still handle it if it can be expressed as a finite union of piecewise smooth star-shaped domains. Efficient algorithms to decompose any polygon into a finite number of star-shaped polygons exist (Avis and Toussaint, 1981). 20
+
+Incorporating constraints for obstacle avoidance We now derive a function for the inequality constraint that a given point in the plane is not inside the boundary of one star-shaped obstacle. It is easy to extend this to multiple points and multiple obstacles by just repeating the inequality with different parameters. Let an obstacle be specified by its boundary in polar coordinates that are centered at r0 = {x0 , y0 }. Each   [0, 2 ) gives a point on the boundary using the distance () from the obstacle origin. The distance function  must be periodic with a period 2 . See Figure 3. Suppose we want a point r = {x, y } to be outside the obstacle boundary. Define C (r) as C (r) = ||r - r0 ||2 - (arctan2(r - r0 )) (33)
+
+where the subscript 2 refers to the Euclidean norm. It is obvious that C (r)  0  the point r is outside the obstacle. This can be seen using a 1D graph of (). For example, let an obstacle be represented as shown in Figure 4(a). Figure 4(b) shows the same obstacle flattened out as a 1D curve. Then C (r) is positive in the top region and negative below. The star-shaped property leads to a single-valued curve () when flattened like this. The vector r is related to the primary variables in our optimization problem using Equation (17).
+
+Derivatives of obstacle avoidance constraint We will need derivatives of C (r) with respect to r for incorporating C (r)  0 as a constraint in the trajectory optimization problem. Here r is any point on the path that we want to lie outside a given obstacle. We can derive the following expressions for first and second derivatives of C (r). The derivatives of  below are evaluated at  = arctan2(r - r0 ). To simplify the expressions, x, y, r refer to the offsets from obstacle origin r0 instead of absolute positions in the plane. r {-y, x} C = -  () 2 r ||r||2 ||r||2 2C 1 = 3 2 r ||r||2  () ||r||2 y2 -xy	( ) -xy 2xy - 2 2 2 4 x ||r||2 y - x y 2 - x2 -2xy (34)
+
+1-
+
+(35)
+
+Obviously, the second derivative is a 2  2 matrix. The constraint function C (r) is piecewise differentiable for all r except at a single point r = r0 . If r = r0 by chance, which is easily detectable, we know that the r is inside the obstacle and can perturbed to avoid this undefined behavior. Note that C (r) remains bounded inside the obstacle. It is the derivatives that are not bounded as r  r0 Figure 4(c) shows a surface plot of C (r) for the obstacle shown in Figure 4(a). The contours of constant values are shown in Figure 4(d).
+
+Incorporating robot shape The discussion on obstacle avoidance constraints so far has assumed that the robot is a point. In reality, the robot is not a point. To impose obstacle avoidance constraints in this case, the robot can be modeled as a closed curve that encloses the projection of its boundary in the plane of motion. We can choose a set of points on this curve and impose the constraint that all these points be outside all obstacles. The distance between any pair of points can be smaller than the smallest obstacle. We have currently not implemented this and this is part of future work. 21
+
+  1 3 sin 3
+0.6 0.4 0.2
+
+  1 3 sin 3
+ 1
+
+1 2
+
+0.0 0.2 0.4 0.6
+
+0.4
+
+0.2
+
+0.0
+
+0.2
+
+0.4
+
+0.6
+
+0 0
+
+ 2
+
+
+
+3 2
+
+ 2
+
+(a) Obstacle shape
+
+(b) Obstacle as a 1-D curve
+
+(c) Surface plot of constraint
+
+(d) Level sets of constraint
+
+Figure 4: Obstacle and constraint plots. The figures show an obstacle in polar coordinates in (a), and its 1-D representation in (b). The region with darker shade is the interior and a feasible trajectory must not pass through it. The surface plot of the corresponding constraint function C (r) of Equation (33) is shown in (c) and its level set is shown in (d). The arrow marks the zero level set, which is the obstacle boundary.
+
+22
+
+6.8
+
+The full nonlinear constrained optimization problem
+
+We now summarize the nonlinear and constrained trajectory optimization problem taking into account all input parameters, all the boundary conditions, and all the constraints. This is the "functional" form of the problem (posed in function spaces). We will present an appropriate discretization procedure valid for all input combinations in the next chapter. Minimize the discomfort functional J , where
+1
+
+J (v, , ) =
+0
+
+ du + wT v
+
+1 0
+
+v (v 2 + vv - v 2  2 )2 du + wN 3
+
+1 0
+
+v3 (3v	+ v )2 du, 3
+
+given the following boundary conditions for both starting point and ending point  position (r0 , r ),  orientation (0 ,  ),  signed curvature (0 ,  ),	speed (v0  0, v  0),  tangential acceleration (aT ,0 , aT , ), and constraints on allowable range of  speed (vmin = 0, vmax ),	tangential acceleration (aT ,min , aT ,max ),  normal acceleration (aN ,min , aN ,max ),  angular speed (min , max ),  curvature, if necessary (min = 0, max ), and  number of obstacles Nobs ,
+obs  locations of obstacles {ci }N i=1 obs  representation of obstacles that allows computation of {i ()}N i=1 , for   [0, 2 )
+
+and  an initial guess for (v (u), (u), ), in u	[0, 1],  weights wT > 0 and wN > 0. 23
+
+Figure 5: Finite-element mesh for the optimization problem. The figure at the top shows the finite-element mesh consisting of n elements and n + 1 nodes. There are 4 primary unknowns at each node  speed, orientation, and their derivatives with respect to the scaled-arc length parameter u. The figure on the bottom left shows how dynamic constraints are imposed. P points are chosen in the interior of each element, and speed, angular speed, curvature, and tangential and normal accelerations are computed at each of these points in terms of the primary unknowns. Bounds are then imposed as constraints on these computed values. The figure on the bottom right shows how obstacle constraints are imposed. Addition variables (x, y ) representing position are introduced at M points in the interior of each element and at each node. Each (x, y ) pair is related to each of its neighboring pairs by a constraint. For obstacle avoidance, a constraint is imposed on each (x, y ) pair so that it is stays outside all obstacles.
+
+The constraint on starting and ending position requires that
+1 1
+
+r - r0 =
+0
+
+cos  du,
+0
+
+sin  du
+
+Staying outside all obstacles requires that ||r(u) - ci ||2 - i (arctan2(r(u) - ci ))  0  i  1, . . . , Nobs , and  u  [0, 1] where r(u) = r(0) +
+0 u u
+
+cos  du,
+0
+
+sin  du .
+
+As a post-processing step, we compute time t as a function of u using
+u
+
+t = t(u) =
+0
+
+ du v (u)
+
+and convert all quantities (v, , r, and their derivatives) from u domain to t domain.
+
+7
+
+Numerical solution
+
+The optimization problem posed in Section 6.8 is infinite dimensional since it is posed on infinite dimensional function spaces. This means that we must discretize it as a finite dimensional problem before it can be solved numerically. We saw in Section 6.6 that we must be able to impose two kinds of boundary conditions. In the first kind, the problem is set in the Sobolev space of functions whose up to second derivatives are square integrable. In the second kind, we must allow functions that are singular at the boundary (with a known strength) but still lie in the same Sobolev space in the interior. Keeping the problem setting and requirements 24
+
+mentioned above in mind, it is natural to use the Finite Element Method (FEM) to discretize it. For the first kind of boundary conditions, where speed is non-zero at both boundaries, v (u) must belong to H 2 (). It is natural to use the basis functions in C 1 (), the space of functions that are continuous and have continuous first derivatives. In accordance with standard FEM practice (Hughes, 2000), we choose the cubic Hermite shape functions to discretize v (u). For the second kind of boundary conditions, when either one or both the boundary points have zero speed specified, we must allow functions that are singular at the boundary (with a known strength) but still belong to H 2 () in the interior. We use special shape functions for v (u) on the boundary element where speed is zero so that v (u) has the appropriate strength of singularity at the boundary, and use regular cubic Hermite shape functions in the interior. For both kinds of boundary conditions, we use cubic Hermite shape functions for (u) on all elements. With the above choice of shape functions, an n element mesh for the problem consists of the following unknowns at each node  v, v , ,	resulting in a total of 4(n + 1) unknowns. In addition, the path length  is also an unknown. For optimization, the values of the objective function, its gradient and Hessian, the values of constraints, and the gradient and Hessian of each constraint are required. For efficiency, it is desirable that objective function and constraint Hessians be sparse. We show in the second paper of this series that the Hessian of obstacle avoidance constraints can be kept sparse if we introduce 2N N additional unknowns in the form of position r(ui ) = {x(ui ), y (ui )}i=1 at N points on the mesh and a constraint r(ui ) - r(ui-1 ) =
+ui ui-1
+
+cos  du,
+
+ui ui-1
+
+sin  du
+
+between each pair of r(ui-1 ) and r(ui ). We
+
+choose uniformly separated N points and let N = nM + (n + 1) so that obstacle avoidance constraints are imposed at M points in the interior of each element and at each of the n + 1 nodes. With the discretization above, the infinite dimensional problem of Section 6.8 is converted into a finitedimensional nonlinear constrained optimization problem. The objective now is to determine the values of the 4(n + 1) + 2N + 1 unknowns that minimize the discomfort cost functional and satisfy the boundary conditions and constraints described in (Section 6.8). To impose boundary conditions, we impose constraints on some of the degrees of freedom and eliminate some of the degrees of freedom at the end points. To impose dynamic constraints, we compute the speed v , tangential acceleration aT , normal acceleration aN , angular speed  , and curvature  in terms of the unknowns at P points in the interior of each element and impose bounds on these quantities as constraints. See Figure 5. To numerically compute the integrals in the cost functional and constraints, we use Gauss quadrature formulas with 12 integration points. In our implementation, the number of elements in the finite element mesh, n = 32, number of intervals per element for obstacle avoidance constraints, M = 20, the number of points per element on which to impose dynamic constraints P = 12. The rationale for choosing these particular values is discussed in the second paper in this series.
+
+8
+
+Initial guess for the optimization problem
+
+Because of the non-linearity in the optimization problem, and the presence of both inequality and inequality constraints, it is crucial that a suitable initial guess of the trajectory be computed and provided to an optimization algorithm. Many software packages can generate their own "starting points", but a good initial guess that is within the feasible region can easily reduce the computational effort (measured by number of function and derivative evaluation steps) many times. Not only that, reliably solving a nonlinear constrained optimization problem without a high quality initial guess can be extremely difficult. Because of these reasons, we invest considerable mathematical and computational effort to generate a high quality initial guess of the trajectory. Our optimization problem is to find the scalar  and the two functions  and v that minimize the discomfort. We compute the initial guess of trajectory by computing  and  first and then computing v by solving a separate optimization problem. We emphasize that the initial guess computation process must deal with 25
+
+arbitrary inputs and reliably compute the initial guesses. 8.1 Initial guess of path
+
+To compute initial guess for (u) and  for any pair of specified initial and final orientations (0 ,  ), we solve an auxiliary (but simpler) nonlinear constrained optimization problem for the four pairs of orientations (0 ,	), (0 ,  ), (0 ,  + 2 ), and (0 ,  - 2 ). We minimize
+1
+
+J (, ) =  + w
+0
+
+ 2 du
+
+(36)
+
+where w := max(L, R), and  must satisfy the boundary conditions, the two equality constraints of Equation (31), and the curvature constraint | (u)|  max u  [0, 1]. We do not impose obstacle related constraints in this problem. Here L is the distance between start and end positions and R is the minimum allowed radius of curvature. Note that this is a geometric and time is absent. This method of computing four different initial guesses is based on a special kind of non-uniqueness of paths. This particular kind of non-uniqueness arises because a single physical orientation  can correspond to multiple numerical values of  (  2n n  N). This is because	is continuous and cannot jump to a different value in between. Of course, this optimization problem needs its own initial guess, and we use paths similar to Dubins curves to compute a suitable initial guess. Our method generates two different initial guesses for the auxiliary problem for the pair (0 ,	), leading to 4 initial guesses of (u) for the discomfort minimization problem.  is the length of the paths computed above. The non-uniqueness in paths and the computation of initial guess is discussed in greater detail in the second paper (Part II) of this series. 8.2 Initial guess of speed
+
+For the case when both end-points have non-zero speed, we compute initial guess of v (u) by solving an auxiliary optimization problem. We minimize
+1
+
+J (v ) =
+0
+
+v 2 du
+
+(37)
+
+1 0 , v (1) = av and inequality subject to boundary constraints v (0) = v0 > 0, v (1) = v1 > 0, v (0) = av 0 1 constraints vmin (u)  v (u)  vmax (u) and Amin (u)  v (u)  Amax (u). The expressions for v (0) and v (1) come from the relation in Equation (21). The length  is computed when the initial guess for  is computed. Here we choose vmin (u) = min(v0 , v1 )/2 and vmax (u) is a constant that comes from the hardware limits. The function Amin (u) is chosen to be the constant 10amin / min(v0 , v1 ) where amin is the minimum allowed physical acceleration. Amax (u) is chosen similarly using amax .
+
+If both end-points have zero speeds, the function v (u) = vmax (4u(1 - u))
+2/3
+
+(38)
+
+satisfies the boundary conditions and singularities and has a maximum value of vmax . This case does not require any optimization. If only one of the end-points has a zero speed boundary condition, we split the initial guess for v into a sum of two functions. The first one takes care of the singularity and the second takes care of the non-zero speed boundary condition on the other end-point. We now maintain only the vmax constraint because v (u) is unbounded and vmin = 0 naturally. If the right end-point has zero speed, we choose v (u) = vsingular (u) + vnon-singular (u) 26 (39)
+
+16 1/3 2 vmax u2 (1 - u)2/3 . (40) 9 This function has the correct singularity behavior and its maximum value is vmax /2. The non-singular part is computed via optimization so that the sum is always less than vmax . For the other case, when left end-point has zero speed, the singular part (using symmetry) is vsingular (u) = 16 1/3 2 vmax (1 - u)2 u2/3 . 9 8.3 Summary
+
+where
+
+For any given pair of orientations, we compute four initial guesses of path (u) and corresponding path lengths . To compute initial guess of speed v (u), we treat zero speed and non-zero speed boundary conditions differently. When speed is zero at both ends, we use Equation (38). When speed is non-zero at either ends, we use Equation (39). In this case, we compute vnon-singular (u) by solving the optimization problem Equation (37). In this case, four initial guesses of speed are computed corresponding to each guess of .
+
+9
+
+Evaluation and results
+
+The motion planning framework described in this paper is expected to reliably plan trajectories for different types of boundary conditions. These trajectories should satisfy dynamic constraints and the corresponding geometric paths should not intersect obstacles. Further, this framework should reliably compute trajectories between a given pair of boundary conditions for a range of weights, wT and wN , so that users can customize the motion by changing these weights. In the following discussion, we refer to optimization problem of Section 6.8 as the discomfort minimization problem. We begin by describing the input to the discomfort minimization problem. Some quantities in the input such as dynamic bounds are fixed, while others such as boundary conditions and obstacle locations and shapes are problem dependent. We also provide some implementation details. Next, we present illustrative examples showing the various steps of the solution method, and demonstrate some of the strengths of our method such as the ability to plan trajectories for a wide variety of boundary conditions and obstacle shapes. We then analyze how varying the weight factors fT and fN affect the solution trajectory. Our objective is to find qualitative relationships between these weight factors and each of the terms in the discomfort measure (total travel time, integral of squared tangential jerk, and integral of squared normal jerk). These relationships should provide guidelines for user customization. Next, to evaluate the reliability of our method, we construct a set of problems by varying boundary conditions and find the success rate. We also analyze the run-time and number of iterations to solve the discomfort minimization problem. 9.1 Experimental setting
+
+The input to the discomfort minimization problem described in Section 6.8 consists of: 1. Number of elements, n, for finite element discretization. We choose n = 32 based on a numerical experiment based on convergence to the "exact" solution of the infinite dimensional optimization 27
+
+problem as the maximum finite element size is reduced. Details are in the second paper (Part II) of this series. 2. Number of intervals per element M , to compute the {x, y } pairs for imposing obstacle constraints (see Section 6.7 and Section 7). We choose M = 20 when obstacles are present, otherwise the choice is irrelevant. 3. Values of bounds on curvature, speed, angular speed, tangential acceleration, and normal acceleration (See Section 6.8). Curvature bound should be determined from the robot's geometry. We choose the value for a typical assistive wheelchair. While we assume a point robot and do not consider robot shape for obstacle-avoidance, we do include curvature constraints based on the dimensions of a typical wheelchair. All other bounds should be chosen for comfort. In the absence of relevant comfort studies for assistive robots, we choose bounds on linear and angular speed based on our experience with an intelligent wheelchair (Gulati and Kuipers, 2008; Gulati et al., 2009; Murarka et al., 2009) and studies of comfort in ground vehicles (see Section 2.1). All these values are shown in Table 1. Quantity Curvature (1/m) Speed (m/s) Angular speed (rad/s) Tangential acceleration (m/s2 ) Normal acceleration (m/s2 ) Lower Bound -1.8 0.0 -1.57 -1.0 -1.0 Upper Bound 1.8 3.0 1.57 1.0 1.0
+
+Table 1: Lower and upper bounds on curvature, speeds, and accelerations used in experiments. Curvature bounds are based on a minimum turning radius of 0.55 m.
+
+4. Non-dimensional multiplying factors for weights, fT > 0 and fN > 0. Both these values are set to 1 unless mentioned otherwise. 5. Representation of obstacles as star-shaped domains with piecewise C 2 boundary (see Section 6.7). In our experiments, we use circular, elliptical, and star-shaped polygonal obstacles. See Figures 11 and 12. 6. Boundary conditions on position, orientation, curvature, speed and tangential acceleration (see Section 6.6). These are problem specific and we describe these for each of the experiments. We have implemented our code in C++. We use Ipopt, a robust large-scale nonlinear constrained optimization library (W achter and Biegler, 2006), also written in C++, to solve the optimization problem. We explicitly compute gradient and Hessian for the optimization problem in our code instead of letting Ipopt compute these using finite difference. This leads to greater robustness and faster convergence. We set the Ipopt parameter for relative tolerance as 10-8 and set the maximum number of iterations to 500. After optimization, the outputs are the nodal values of v , v , , and  , and the curve length  (see Section 7). The functions v (u) and (u), u  [0, 1] are known in terms of these nodal values. We use Equation (13) to construct a table of u values for u  [0, 1] and the corresponding t values for t  [0,  ]. The value of any of the quantities of interest (orientation, speed, etc.) at any time t	[0,  ] is computed using this table by linear interpolation. 9.2 Illustrative examples
+
+We begin by presenting an example that illustrates the optimization process. In Figure 6, the initial position is {0, 0} and final position is {-1, -4}. The initial and final orientations are both zero. The speed and tangential acceleration at both ends are also zero. 28
+
+First, four initial guesses of path ((u), u  [0, 1] and ) are computed as described in Section 8.1. These four initial guesses are shown in Figure 6. The first two guessed have  = 0, the third guess has  = -2 , and the fourth guess has  = 2 . An initial guess of speed, v (u), is computed as described in Section 8.2. In this example, speed at both ends is zero and hence v (u) is computed using Equation (38). Thus we get the same function v (u) for all guesses of path. See Figure 7. The discomfort minimization problem is solved for each of these four initial guesses. The four solution paths that minimize discomfort are shown in Figure 8. The travel time and costs for the four solution paths are shown in Table 2. The path corresponding to Solution 1 has the minimum cost, and is thus in agreement with our intuitive notion of the best path among these four. Notice the circular arcs at the start and end of the path of Solution 2. These arcs have a constant radius equal to the minimum turning radius of the robot because of curvature constraints. If curvature constraints are not imposed, these arcs have a smaller radius and the path has a smaller length. Note that it is not always true that all four solutions are distinct since two or more problems starting from different initial guesses may converge to the same solution. The solution speeds are shown in Figure 9. The final speeds in Solution 1 and Solution 2 are symmetric about t =  2 because of the inherent "symmetry" due to zero orientation, speed, and acceleration at both ends. The final speeds in Solution 3 and Solution 4 are mirror images of each other about t =  2 because the final orientations in these two are -2 and 2 respectively. The figures also show that the initial guesses of the paths and speeds are quite good, which is important for nonlinear optimization. In Figure 10, we introduce five elliptical obstacles for the same boundary conditions. All four initial guesses of path and solution paths are shown. The initial guesses of path and speed do not consider obstacles and hence are identical to those in Figures 8 and 9 respectively. Four distinct solution paths are found. The travel time and total cost for all four solutions is shown in Table 3, and is greater than for the problem of Figure 8 (see Table 2). The minimum cost path is that of Solution 1 which again agrees with our intuition. Notice how the path of Solution 3 passes above the lowermost elliptical obstacle, while the path of Solution 4 passes below the uppermost elliptical obstacle. Our experience with this and other examples shows that once the optimization algorithm takes a step that brings an iterate to one side of the obstacle, further iterations keep it on the same side. We believe that this is because paths passing an obstacle on different "sides" cannot be transformed to each other via a continuous deformation of the path and lie in disjoint feasible regions. The iterates in the optimization process cannot jump from one feasible region to a different feasible region in general.
+
+29
+
+Solution 1 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) Solution 3 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) y (m)
+Solution1
+
+Solution 2 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) Solution 4 2 0 2 4 6 3 2 10 1 2 x (m)
+
+Figure 6: Four initial guess of path. Problem input is as follows: initial position = {0, 0}, orientation = 0, speed = 0, tangential acceleration = 0; final position = {-1, -4}, orientation = 0, speed = 0, tangential acceleration = 0. The four initial guesses of path are computed using the method described in Section 8.1 so that final orientation in (a),(b),(c) and (d) is 0, 0, -2 and 2 respectively. All quantities have appropriate units in terms of meters and seconds. Initial and final positions are shown by markers and orientations are indicated by arrows. While the path is parameterized by u, for ease of visualization, we show markers at equal intervals of time. Thus distance between markers is inversely proportional to speed.
+
+3.0 2.5 2.0 v (m/s) 1.5 1.0 0.5 0.0 0.00 0.25
+
+3.0 2.5 2.0 v (m/s) 1.5 1.0 0.5 0.0 0.00
+
+Solution2
+
+0.50 t/
+
+0.75
+
+1.00
+
+0.25
+
+0.50 t/
+
+0.75
+
+1.
+
+Solution3 Solution4 Figure 7: Initial guess of speed for problem of Figure 6. 3.0 3.0 In this case, because of zero speed boundary condition on both ends, the same initial guess of speed is produced for each path guess. When speed is non-zero 2.5 on one or both ends, four distinct guesses of speed 2.5 may be produced.
+30
+
+2.0 v (m/s) 1.5 v (m/s)
+
+2.0 1.5
+
+Solution 1 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) Solution 3 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) y (m)
+31
+
+Solution 2 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) Solution 4 2 0 2 4 6 3 2 10 1 2 x (m)
+
+Figure 8: Solution paths of the problem of Figure 6. Final (optimal) path for each solution is shown as solid curve. Initial guess is shown as dashed curve. The number of DOFs for the discomfort minimization problem were 1403 and number of constraints were 3232. The total cost and travel time for the four solutions are shown in Table 2.
+
+3.0 2.5 2.0 v (m/s) 1.5 1.0 0.5 0.0 0.00 3.0 2.5 2.0 v (m/s) 1.5 1.0 0.5 0.0 0.00 0.25 0.25
+
+Solution1
+
+3.0 2.5 2.0 v (m/s) 1.5 1.0 0.5 0.0 0.00 3.0 2.5 2.0 v (m/s) 1.5 1.0 0.5 0.0 0.00
+
+Solution2
+
+0.50 t/ Solution3
+
+0.75
+
+1.00
+
+0.25
+
+0.50 t/ Solution4
+
+0.75
+
+1.00
+
+0.50 t/
+
+0.75
+
+1.00
+
+0.25
+
+0.50 t/
+
+0.75
+
+1.00
+
+Figure 9: Solution speeds of the problem of Figure 6. Final (optimal) speed for each solution is shown as the solid curve. Initial guess is shown as the dashed curve.
+
+Solution Number 1 2 3 4
+
+Travel time (s) 6.3 10.0 7.9 7.9
+
+Total cost (s) 6.5 11.0 8.0 8.0
+
+Table 2: Travel time and total cost for problem of Figure 6.
+
+32
+
+Solution 1 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) Solution 3 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) y (m)
+33
+
+Solution 2 2 0 y (m) 2 4 6 3 2 10 1 2 x (m) Solution 4 2 0 2 4 6 3 2 10 1 2 x (m)
+
+Figure 10: Solution paths to a problem with five elliptical obstacles. The boundary conditions of this problem are identical to the problem of Figure 6. Four distinct solution paths in the neighborhood of the four initial guesses are found. Initial guesses are the dotted curves while the final solutions are the solid curves. This problem had 3195 constraints for obstacle-avoidance in addition to the constraints in Figure 6. The total cost and travel time for the four solutions are shown in Table 3.
+
+Solution Number 1 2 3 4
+
+Travel time (s) 7.0 11.7 9.1 10.3
+
+Total cost (s) 7.1 11.9 9.4 10.4
+
+Table 3: Travel time and total cost for problem of Figure 10.
+
+Figure 11 show an example where the initial and final speeds are both non-zero. This scenario exemplifies one of the common navigation tasks for an autonomous mobile robot  that of navigating in a corridor or sidewalk or driving in a lane on a road. We show only one solution out of four in this case. Figure 11(a) has two rectangular obstacles, signifying a wall. In the sequence Figure 11(b)(f), one obstacle is added at a time, and each time a path is found that avoids all the obstacles. Figure 12 shows an example when the initial speed is non-zero and the initial acceleration is positive. There are four rectangular and two star-shaped obstacles. This is a particularly difficult case because it involves a non-zero speed and high acceleration(0.5 m/s2 , half the maximum allowable acceleration) at the beginning and a narrow passage between obstacles. In this case, only one of the four initial guesses resulted in a solution. Notice the loop in the path near the start. This is because the initial speed and acceleration are non-zero, and hence a sharp 90 degree left turn is not possible without violating dynamic bounds. If dynamic bounds are removed, another path, without a loop, starting from another initial guess is also found as a solution. This path does not have a loop. Also notice how the path just touches the vertices of obstacles so that its length is as small as is consistent with comfort.
+
+34
+
+3 y(m) 0 3 0 3 y(m) 0 3 0 3 y(m) 0 3 0 5 10 x(m)
+(e)
+
+3 y(m) 5 15 0 3 0 3 y(m) 0 3 0 3 y(m) 0 3 0 5 10 x(m)
+(f)
+
+10 x(m)
+(a)
+
+20
+
+5
+
+10 x(m)
+(b)
+
+15
+
+20
+
+5
+
+10 x(m)
+(c)
+
+15
+
+20
+
+5
+
+10 x(m)
+(d)
+
+15
+
+20
+
+15
+
+20
+
+15
+
+20
+
+Figure 11: Obstacle avoidance in a corridor-like setting with non-zero speed at both ends. Problem input is as follows: initial position = {0, 0}, orientation = 0, speed = 1, tangential acceleration = 0; final position = {20, 0}, orientation = 0, speed = 1, tangential acceleration = 0. One of the four solution paths is shown. Initial guess is shown as the dashed curve while solution is shown as the solid curve. (a) Only two rectangular obstacles, comprising the corridor walls are present. The solution path is a straight line. (b) Addition of a circular obstacle results in a path that passes below the obstacle. Another solution path that passes above the obstacle and is symmetric to this path about the center line would also be a solution with same cost. (c),(d),(e),(f) One more obstacle is added and the same problem is solved starting from the same initial guess as in (a). All quantities have appropriate units in terms of meters and seconds.
+
+35
+
+60 50 40 30 y (m) 20 10 0 10 2030 20 10 0 x (m) 10 20 30
+
+Figure 12: Illustrative example showing passage through narrow space between star-shaped obstacles with non-zero speed at both ends and high positive acceleration at start. Problem input is as follows: initial position = {-5, -5}, orientation = 0, speed = 1, tangential acceleration = 0.5; final position = {2.5, 45}, orientation = /2, speed = 1, tangential acceleration = 0. Four rectangular and two star-shaped obstacles are present. Initial guess is shown as the dashed curve while solution is shown as the solid curve. The loop in the solution at the beginning of the path is because the initial acceleration is high and hence it is not possible to make a sharp turn without violating dynamic constraints. All quantities have appropriate units in terms of meters and seconds.
+
+36
+
+9.3
+
+Effect of weights on discomfort
+
+In this section we analyze the effect of the two dimensionless factors fT and fN on the individual terms comprising the cost functional (travel time, integral of squared tangential jerk, and integral of squared normal jerk) (see Equation (7)). This analysis provides us with guidelines for choosing the values of weights for customization by human users. Henceforth, for conciseness, we will refer to the three terms  travel time, integral of squared tangential jerk, and integral of squared normal jerk as  , JT and JN respectively. Thus, the cost functional of Equation (7) is J =	+ fT JT + fN JN For this experiment, we construct a problem with identical boundary conditions as that of the example in Figure 6. In order to delineate the effect of weights, we remove all constraints and solve the unconstrained problem for a range of factors fT and fN for each of the four initial guesses. fT is varied from 2-13 to 213 in a geometric sequence, each subsequent value being obtained by multiplying the current value by 10. For each value of fT , fN is varied from 2-13 to 213 in a similar manner. Thus each weight roughly ranges between 0.0001 and 10000. This results in 4	27  27 = 2916 problems out of which 97% were successfully solved. We show plots corresponding to only one of these four solutions. Plots for the remaining solutions are similar, although the number of problems that converge is different for each initial guess. Figures 13, 14, and 15 show  , JT and JN respectively. In each figure, part (a) shows log of the respective quantity as a function of fT and fN on a log-log-log scale. Part (b) is a top view of the surface plot above. Part (c) shows slices of this surface plot at fN = 1 and fT = 1 respectively. The "holes" in the surface plots correspond to the problems that did not converge to a solution. In general, the surfaces are rougher and there are more failures when fN is much larger than fT . This indicates that the problem becomes less "stable" as the weight factors are too imbalanced. (In reality there are more holes in the surfaces than there are non-convergent problems. This is an unfortunate artifact of the plotting software that we use. In the surface plot, a vertex corresponds to a problem rather than a cell. Thus, one non-convergent problem causes all the cells that share that vertex to be removed. The actual non-convergent problems correspond to the empty cells of Figure 16). In this experiment, the ratio of tangential jerk weight to normal jerk weight has been varied by nearly 8 orders of magnitude and we get solutions in almost all cases. From Figure 13, we see that the travel time increases with increase in weights. This is expected since large weights mean that the contribution of travel time to total discomfort is relatively low compared to the contribution of the terms due to jerk. We also see that  monotonically increases with fT . For low values of fN ,  does not change appreciably with fN . As the value of fN increases beyond a threshold,  monotonically increases with fN . The rate of increase of  with respect to fT is higher than it is with respect to fN . From Figure 14, we observe that log JT decreases linearly with log fT while it is almost constant with respect to log fN . Thus, the integral of squared tangential jerk, JT , is related to fT by a power law. From Figure 15 we see that for low values of fT , JN does not change appreciably with fT . As the value of fT increases beyond a threshold, JN monotonically decreases with fT . A similar behavior is observed with respect to fN although the threshold value appears lower than that for fT . Once the values exceed the threshold, the rate of change of JN with respect to both fN and fT is almost the same. Thus, we see that the integral of squared tangential jerk, JT is a function of fT alone, and travel time changes more rapidly by changing fT compared to fN . Integral of squared normal jerk, JN is a function of both fT and fN . Whenever a relationship exist between fT or fN and any of the quantities travel time, integral of squared tangential jerk, and integral of squared normal jerk, it is of the form of a power law. 37
+
+10000
+
+2.5 2.5 log(travel time) 2 1.5 1 0.5 0 10000 1 1 10000 2 1.5
+fN
+1
+
+2.5 2 1.5 1 0.5 0 0.0001 0.0001
+
+1 0.5 0
+
+fN
+
+0.0001
+
+0.0001
+(a)
+
+fT
+
+1
+
+10000
+
+fT
+(b)
+2.4 2.2 2 log(travel time) 0.01 0.1 1 fT 10 100 1000 10000 1.8 1.6 1.4 1.2 1 0.8 0.0001 0.001 0.01 0.1 1 fN 10 100 1000 10000
+
+2.4 2.2 2 log(travel time) 1.8 1.6 1.4 1.2 1 0.8 0.0001 0.001
+
+(c)
+
+(d)
+
+Figure 13: Effect of weights on travel time. (a) Surface plot of log  as a function of fT and fN on a log-log scale. (b) Top view of the surface plot. (c) Slice of the surface plot at fN = 1. (d) Slice of the surface plot at fT = 1.
+
+From this analysis, we can draw some useful guidelines for customizing weights for comfort even though the effect of weight on discomfort is nonlinear. Since JT is a function of fT alone, we can devise experiments that allow a user to choose fT that keeps tangential jerk to an acceptable level. For example, we can devise experiments that consist primarily of straight line motion, and has zero speeds on both ends. In such a motion, normal component of jerk will make none or minimal contribution to discomfort. Hence, it would be easy to set fT . Next, we can devise experiments that consist of at least some curved segments. The user can choose fN to keep normal jerk during this curved motion to an acceptable level. Because of power law relationships, the weights should be varied in a geometric manner rather than a linear manner for faster customization. Figure 16 shows the number of iterations taken by Ipopt to find a solution. Apart from a few isolated outliers that require large number of iterations, it is clear that the number of iterations is small in the region where fT is not too small compared to fN and both factors are not too small either. If fN is much larger than fT , the problems still converge in most cases but require many iterations. Most of the failures are when fN is too large compared to unity. Hence, we recommend that for customization fN should not be too large compared to fT and both should be not too small compared to unity. 38
+
+12 12 10 log(integral of squared tangential jerk) 8 6 4 2 0 -2 0.0001 1 1 10000 0.0001 2 0 -2 10000 10 8 6
+
+10000
+
+12 10 8 6
+
+fN
+
+4
+
+1
+
+4 2 0 -2
+
+0.0001 0.0001
+
+fT
+
+1
+
+10000
+
+fT
+
+fN
+(b)
+12 log(integral of squared tangential jerk) 10 8 6 4 2 0 -2 0.0001 0.001 0.01 0.1 1 fN 10 100 1000 10000
+
+(a)
+12 log(integral of squared tangential jerk) 10 8 6 4 2 0 -2 0.0001 0.001 0.01 0.1 1 fT 10 100 1000 10000
+
+(c)
+
+(d)
+
+Figure 14: Effect of weights on integral of squared tangential jerk. (a) Surface plot of log(integral of squared tangential jerk) as a function of fT and fN on a log-log scale. (b) Top view of the surface plot. (c) Slice of the surface plot at fN = 1. (d) Slice of the surface plot at fT = 1.
+10000 12 10 12 10 log(integral of squared normal jerk) 8 6 4 2 0 -2 0.0001 1 1 10000 fN 10 8 6 8 6 12
+
+fN
+
+4 2 0 -2 0.0001 10000
+
+1
+
+4 2 0 -2
+
+0.0001 0.0001
+
+fT
+
+1
+
+10000
+
+fT
+
+(a)
+6 log(integral of squared normal jerk) 5 4 3 2 1 0 -1 -2 -3 0.0001 0.001 0.01 0.1 1 fT 10 100 1000 10000 log(integral of squared normal jerk) 6 5 4 3 2 1 0 -1 -2 -3 0.0001 0.001 0.01 0.1
+
+(b)
+
+39
+
+1 fN
+
+10
+
+100
+
+1000
+
+10000
+
+(c)
+
+(d)
+
+1/8192
+
+126 28 41 47
+
+61 32
+
+24 78
+
+19 24
+
+35 22
+
+19 62 20 18 17 20 26 55
+
+30 78 27 19
+
+63 58 21 16
+
+31 31 39
+
+11
+
+45
+
+18 10 12 11 12 23 19 20 18
+
+11 12 20 11 12 19 11 12 20 11 12 25 11 12 29 12 12 24
+
+17 17 17 17 17 17
+
+17 17 17 17 17 17 17 17 17 17 17 17
+
+30 66 54 0
+
+18 18 18
+
+28 19 60 28 19 51 37 19 49
+
+44 26 41 262 16 45 59 21 179 12 24 57 18 12 24 47 23 9 16 9 14 10 12 13 11 12 9 12
+
+30 211 21 79 38 29 28 26 55 33 86
+
+23 204 29 20 19 19 17 22 22 24
+
+18 231 19 19 80 19 19 31 19 19
+
+62 431 37 18 231 15 22 25
+
+41 121 214 19 11 18 18 64 16 19 55 18 43 45 23 25 40 22 15 20 28 11 14 14 13 22 16 23 74 35 49 36 35 27 12 18 35 63 19 11 15 41 17 14 13 13 18 51 11 11 25 12 10 15 16 24 17 62 11 95 11 16 20 19 68 33 24 28 34 32 20 73 27 25 84 84 33
+
+17 17 17 173 18 17 17 17 220 18 92 31 33 26 31
+
+37 111 52 25 65
+
+16 16 20 358 17 17 17 18 17 14 38 17 57 17
+
+18 374 19 19 18 18 18 19 61 19 19 18 19 19 18 19 19 25 19 19
+
+21 174 71 85 35 42
+
+23 213 14 56 20 26 52 34 14 30 58 18 23 26 28
+
+16 35 21 225 34 41 19 26 17 22 31 15 20 23 15 15 18 15 14 11 16 14 15 12 15 12 14 18 24 22 47 84 19 23 45 19
+
+105 42 149 47 32 25 88 f_N
+1
+
+100 17 13 15 17 18
+
+33 65 35 74
+
+20 27 54 58
+
+44 46 42 34
+
+70 147 36 17 103 19 107 19 19 14 13 13 14 16 12 13 12 13 19 17 16 23 28 17 23 24 27 19 36 24 31 20 19 23 19 38 25 18 22 0
+
+12 160 12 34 39 24 16 18 37 33 33 31 12 14 14 18 13 15
+
+84 45 90
+
+45 163 58 49 40 21 29 33 25
+
+31 356 52 69 135 76 83
+
+12 20 167 40 12 18 16 13 16 20 13 16 16 16 18 17 14 12 13 14 13 15 15 13 16 31 16 15 32 20 56
+
+22 172 147 23 19 18 39 0 14 13 14 14 22 30
+
+74 115 91
+
+39 314 83
+
+15 153 13 17 13 18 26 88 44 38 20 257 12 14 25 19 29 50 18 24 12 87 21 13 20 22 32 68 19 19
+
+24 67 239 21 32 39
+
+138 124 176 159 154 38 137 43 103 223 81 190 56 72 111 112 155 41 73 82 81 82 89 38 42
+
+22 231 26 30 21 21 14 13 16 23 21 23 21 22 26 21 23 21 15 20 21 16 15 20
+
+78 104 39 86 52 77
+
+70 113 113 99 78 130 103 55 67
+
+38 149 47 59
+
+64 299 38 95 43 54 108 97 52 38
+
+459 186 78
+
+56 131 46
+
+56 102 37 44 50
+
+49 20 112 20 36 68 42 46 42 32 0 0 36 25 41 80
+
+102 87 101 71 125 112 142 258 199 123 86 127 41 285 66
+
+99 113 158 44 134 78 205 73 76 78 124 434 55 0 0 0 184 199 255 0 0 0 80 83 0 64 47 0 48 106 1 f_T
+
+22 25 63 351 123 51 14 15 31 75 52 29 60 36 43 0 24 23 19 19 17 20 19 32 8192
+
+118 216 175 103 8192 94 1/8192 85
+
+56 278 43 0 121 64
+
+85 116 78
+
+135 71
+
+Figure 16: Number of iterations for the range of weight factors. The green cells indicate smaller number of iterations compared to red cells. It is clear that the least number of iterations are taken in the region where both factors are greater than 1/32 and one factor is roughly within 1/16 to 16 times the other. The empty cells correspond to problems that failed to converge.
+
+9.4
+
+Reliability
+
+To evaluate the reliability of our method, we construct a set of 7500 problems with different boundary conditions and solve the full constrained optimization problem corresponding to each of the 4 initial guesses for each problem. We do not include obstacles in this test. We generate the problem set as follows. Fix the initial position as {0, 0} and orientation as 0. Choose final position at different distances along radial lines from the origin. Choose 10 radial lines that start from 0 degrees and go up to 180 degrees in equal increments. The distance on the radial line is chosen from the set {1, 2, 4, 8, 16}. The angle of the radial line and the distance on the line determines the final position. Choose 30 final orientations starting from 0 up to 360 degrees (360 degrees not included) in equal increments. The speed, v , and tangential acceleration, aT , at both ends are varied by choosing {v, aT } pairs from the set {{0, 0} , {1, -0.1} , {1, 0} , {1, 0.1} , {3, 0}}. Thus we have 10 radial lines, 5 distances on each radial line, 30 orientations, 5 {v, aT } pairs, resulting in 10  5  30  5 = 7500 cases. Each problem has 189 degrees of freedom, 2018 constraints, out of which 66 are equality constraints and 1952 are inequality constraints. For computation of initial guess of path, we set the maximum number of iterations to 100. For discomfort minimization problem we set the maximum number of iterations to 200. An average of 3.6 solution paths were found for each problem. This average would be higher if we set the maximum number of iterations even higher. However, since we wanted to evaluate how reliably our method 40
+
+performed in a reasonable amount of computation time, we kept the maximum number of iteration as 200. All the problems were solved on a computer with an Intel Core i7 CPU running at 2.67 GHz, 4 GB RAM, and 4 MB L-2 cache size. Histogram of run-time for computing the solution of the discomfort minimization problem is shown in Figure 17 respectively. In this histogram, we have removed 1% of cases that lie outside the range of the axis shown for better visualization. This histogram shows both successful and unsuccessful cases. For each of the 7500 problems, each of the successful initial guesses was used to compute a solution of the discomfort minimization problem. For all the problems, at least one successful solution was computed. Table 4 shows the number of problems for which one, two, three, or four solutions were successfully computed. From Figure 17 we see that 99% or more of the solutions of the full problem are computed in less than 4 seconds. To get an estimate of the percentage of outliers, we fit a Gaussian to each of the four guesses. The results are shown in Table 5. This is a simplified approximation and should be seen just as an indicator of reliability of the method. Time taken to compute the solution is further visualized in Figure 18 that shows a normalized cumulative histogram. Histograms of number of iterations for computing final solution are shown in Figure 19. On average, 90% all four solutions were computed in 100 iterations or less.
+
+Solution 1 800 700 600 500 400 300 200 100 0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 0.0 Run time (s)
+(a) 99% solved within 4 s.
+
+Solution 2 800 700 600 500 400 300 200 100 0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 0.0 Run time (s)
+(b) 99% solved within 4 s.
+
+Frequency
+
+Solution 3 800 700 600 500 400 300 200 100 0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 0.0 Run time (s)
+(c) 99% solved within 4 s.
+
+Frequency
+
+Frequency
+41
+
+Frequency
+
+Solution 4 800 700 600 500 400 300 200 100 0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 0.0 Run time (s)
+(d) 100% solved within 4 s.
+
+Figure 17: Histogram of time taken to compute solution of discomfort minimization problem. This includes both successful and unsuccessful cases. Total 7500 cases.
+
+1.0 Fraction of solved problems 0.8
+
+Solution 1 Fraction of solved problems
+
+1.0 0.8
+
+Solution 2
+
+0.6
+
+0.6
+
+0.4 0.2 2 4 6 8 Run time (s) 10 12
+
+0.4 0.2 2 4 6 8 Run time (s) 10 12
+
+0.00
+
+0.00
+
+(a) 99% solved within 4 s.
+
+(b) 99% solved within 4 s.
+
+1.0 Fraction of solved problems 0.8
+
+Solution 3 Fraction of solved problems
+
+1.0 0.8
+
+Solution 4
+
+0.6
+
+0.6
+
+0.4 0.2 2 4 6 Run time (s) 8 10
+
+0.4 0.2
+
+0.00
+
+0.0 0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 Run time (s)
+(d) 100% solved within 4 s.
+
+(c) 99% solved within 4 s.
+
+Figure 18: Normalized cumulative histogram of time taken to compute solution of discomfort minimization problem. This includes both successful and unsuccessful cases. Total 7500 cases.
+
+Percentage of problems 0.39 6.20 34.45 58.96
+
+Number of successful solutions 1 2 3 4
+
+Table 4: Percentage of problems with one, two, three, or four successfully computed solutions. At least one solution was found for all of the 7500 problems while all four solutions were found for almost 60% of the problems.
+
+Solution 1 2 3 4
+
+Gaussian (,  ) (0.668, 0.751) (0.686, 0.795) (0.612, 0.564) (0.662, 0.344)
+
+Percentage of outliers 3.56 2.74 3.35 2.64
+
+Table 5: Estimating the percentage of outliers in computation time for the discomfort minimization problem. Mean and standard deviation of the Gaussian fitted to the data of Figure 17. Points that lie outside [ - 3,  + 3 ] are outliers.
+
+42
+
+500 400 Frequency 300
+
+Solution 1
+
+500 400 Frequency 300
+
+Solution 2
+
+200 100 00 50 100 150 Number of iterations 200
+
+200 100 00 50 100 150 Number of iterations 200
+
+(a) 89% solved in 100 iterations or less
+
+(b) 88% solved in 100 iterations or less
+
+500 400 Frequency 300
+
+Solution 3
+
+500 400 Frequency 300
+
+Solution 4
+
+200 100 00 50 100 150 Number of iterations 200
+
+200 100 00 50 100 150 Number of iterations 200
+
+(c) 93% solved in 100 iterations or less
+
+(d) 94% solved in 100 iterations or less
+
+Figure 19: Histogram of number of iterations to compute solution of discomfort minimization problem. Total number of problems is 7500. The peak at 200 iterations is due to failed cases since maximum number of iterations was set to 200.
+
+9.5
+
+Discussion of results and limitations
+
+Results show that our framework is capable of reliably planning trajectories between a large variety of boundary conditions and for a range of weights. 97% of 2916 unconstrained problems for a fixed boundary condition but varying weights were solved successfully when weights were varied by 8 orders of magnitude. Out of a set of 7500 examples with varying boundary conditions, and all dynamic constraints imposed, 3.6 solution paths, on average, were found per example. At least one solution was found for all of the problems and four solutions were found for roughly 60% of the problems. The time taken to compute the solution to the discomfort minimization problem was less than 10 seconds for all the cases, 99% of all problems were solved in less than 4 seconds, and roughly 90% were solved in less than 100 iterations. We also saw that our framework can plan trajectories with a variety of boundary conditions that avoid obstacles. We presented concrete examples for circular, elliptical, and star-shaped obstacles. Thus, our framework, with some more speedups in run-time, can be implemented for efficient and robust motion-planning of nonholonomic mobile robots. We will discuss possible way of achieving speedups in computational time in Section 10.1. One of the limitations of our current implementation is that if the initial guess of path passes through obstacles, it may take a large number of iterations for the optimization algorithm to converge to a solution, and sometimes a solution may not even be found. We have observed 43
+
+this on some example cases and this will need a more careful analysis in the future. One way to deal with this issue is to generate initial guesses of path that are obstacle free and this is part of future work. There are many tasks in which an autonomous mobile robot must back up and then move towards the goal. For example, if an assistive robot is positioned at a user's desk, it cannot move forward. To go anywhere it must back up first. Such tasks can be handled with the help of a high-level planner that breaks this sequence into two and provides a set of two boundary conditions in sequence to our framework  one for backing up and one for the goal. The intermediate waypoint can also be chosen by an optimization process. In our method, we impose obstacle avoidance constraints on a discrete set of points on the path. Thus, we cannot guarantee that segments of the path between these points will not intersect obstacles. In practice, if the points are chosen to be close enough, so that distance between these points is smaller than most obstacles, the path would be collision-free. Even so, sharp pointed corners of obstacles can intersect the path. This is a problem that will arise with any discretization. This can be handled in two ways. First, when we incorporate robot's body for obstacle-avoidance an extra margin of safety can be added. Second, obstacles can be represented with a piecewise smooth boundary curve that encloses the obstacle shape such that sharp corners are smoothed out.
+
+10
+
+Concluding remarks and directions for future research
+
+We make two main contributions in this work. First, we characterize comfort for a user of an autonomous nonholonomic mobile robot. Among the various contributing factors to comfort, we focus on dynamic factors. For comfortable motion, a trajectory should have the following properties  it should satisfy boundary conditions on position, orientation, speed and tangential acceleration at the start and end points, have continuous acceleration, the geometric path should avoid obstacles, have curvature continuity, and should satisfy boundary conditions on curvature. In addition, the trajectory should respect bounds on curvature, speed, angular speed, and tangential and normal accelerations. While human user studies are required to validate this characterization of comfort, we believe that we have taken an important first step in formalizing motion comfort for autonomous mobile robots. Second, we develop a nonlinear constrained optimization based motion planning framework to plan trajectories such that the trajectories minimize discomfort and have all the properties described above. To the best of our knowledge, this is the first comprehensive formulation of kinodynamic motion planning for a planar nonholonomic mobile robot that includes all of the following	a careful analysis of boundary conditions and continuity requirements on trajectory, dynamic constraints, obstacle avoidance constraints, and a robust numerical method that computes solution trajectories in a few seconds. One of the strengths of our framework is that it is easy to incorporate additional kinematic and dynamic constraints, and additional terms can also be incorporated in the discomfort functional. Of course, care has to be taken to keep the problem mathematically meaningful. We believe that our work is an important step in developing autonomous robots that are acceptable to human users. For application to real-world robotic systems, some important extensions to our framework will be required. First, our current implementation achieves obstacle avoidance for a point robot. We have described a method for incorporating robot shape, and this will have to be implemented. Second, our results show that time taken to find a solution is of the order of seconds. This will have to be reduced for real-time planning. We discuss these, and several other extensions, below.
+
+10.1
+
+Directions for future research
+
+Incorporating robot shape for obstacle avoidance. We described a general method to incorporate 44
+
+arbitrary shaped robot body in Section 6.7. This method consists of modeling the robot as a closed curve that encloses the projection of its boundary in the plane of motion, choosing a set of points on this curve, and imposing the constraints that all these points be outside all obstacles. If m points are chosen on the boundary and there are n obstacles, this method will result in m  n constraints. A more efficient approach may be possible when the robot can be modeled by a simple shape such as a circle or a convex polygon. Since most mobile robots, in practice, have simple shapes, it is worthwhile to explore these shapes as special cases for obstacle avoidance. Incorporating moving obstacles. One way to incorporate moving obstacles is to frequently update a map of the world and use this updated map to re-plan a new trajectory starting from the current state. For comfort of a human user, it may be useful to develop models that estimate a moving obstacle's trajectory, and use this trajectory during planning. This could result in paths that have fewer changes in direction (compared to those found by fast-re planning) and are perceived to be more comfortable. Such obstacle models have been previously employed for motion planning (Fiorini and Shiller, 1998). Culling obstacles intelligently. In our method, we choose a set of points on the path, and impose the constraint that all obstacles be outside all points on the path. In our earlier approaches, we have experimented with culling these obstacles intelligently so that the number of obstacle constraints is reduced. If the trajectory is well-behaved, that is, if the geometric path does not have too many self intersections, and if one iterate does not vary too wildly from the previous, then we may be able to achieve a reduction in the number of constraints. First, we can remove, in advance, all obstacles that are too far from the initial guess of path. Second, for every point, we impose the constraint that it be outside obstacles within its "neighborhood" rather than being outside all obstacles. Under the above described conditions, if a point is outside obstacles in its neighborhood, it can be expected to be outside all other obstacles that are far from it. In our experiments with our current approach, we have observed that the above conditions hold if the initial guess of path is outside obstacles. Computing initial guesses that avoid obstacles We have observed that the solution to the discomfort minimization problem converges slowly if the initial guess of path passes through an obstacle. We believe that we can achieve fast convergence if the initial guess of path lies outside obstacles even if it does not respect continuity and kinodynamic constraints. Many of the existing path planning approaches can be used to compute an initial guess of path that has the above properties. Reducing computational time. For real-time implementation, it would be necessary to achieve a reduction in the computational time so that the problem is solved in a few milliseconds. Many steps can be taken to achieve this. First, we have observed that when an initial guess of path is inside an obstacle, it takes longer for the optimization algorithm to converge to a solution. Therefore, it would be worthwhile to invest some effort in generating an initial guess of path that is outside obstacles. This would reduce the number of iterations required to find a solution. Second, intelligently culling obstacles and efficiently implementing obstacle avoidance constraints for special robot shapes, as discussed earlier, could result in significant reduction in the number of constraints and faster computations in every iteration. Third, a multi-step optimization procedure can be tried. A coarser finite element mesh with fewer elements can be used to find a solution which would serve as an initial guess for a problem with a finer mesh. Finally, parallelism inherent in the problem can be exploited and parts of the program can be executed on a 45
+
+GPU. For example, computation of constraint values, gradients and Hessians can be parallelized. Other such parallelisms should also be exploited. In addition, many other code optimizations can also be implemented.
+
+Evaluating the "goodness" of discomfort measure. We have formulated a measure of discomfort based on comfort studies in ground vehicles such as automobiles and trains. To the best of our knowledge, no such studies have been conducted for assistive robots. Since discomfort is subjective, the best way to assess comfort is to ask a user. Hence, to validate this discomfort measure, human user studies should be conducted with enough users to yield statistically significant data. We provide some guidelines on how such a study may be conducted in Section 10.2 below.
+
+Motion planning for non-planar surfaces. The motion planning framework presented in this work was developed for planning trajectories for a nonholonomic mobile robot moving on a plane. This assumption holds, for the most part, in indoor environments. For navigating in an urban outdoor environment, this framework can be extended by parameterizing the path as a space curve rather than a 2D curve and formulating the cost functional and constraints to take into account the 3D geometry of the surface on which the robot moves.
+
+10.2
+
+Implementation of the motion planning framework for human users
+
+A human user study can be conducted to either confirm that the measure of discomfort is good by showing that multiple human users can achieve comfort after choosing the weights, or failing that, to provide additional insight into what might be missing. Below are some guidelines on implementing the framework on an assistive robot and conducting such a study.  Our motion planning framework requires a representation of the local environment to plan trajectories. An occupancy-grid based representation can be used. In such a representation, obstacles are represented as occupied cells in the grid. See (Thrun et al., 2005) for a detailed discussion of such a representation. For efficient motion planning, these cells should be grouped together, where possible, into a single star-shaped polygon. When such a grouping yields an obstacle that is not star-shaped, it should be decomposed into a union of star-shaped polygons. An efficient algorithm for doing so can be found in (Avis and Toussaint, 1981).  A goal state consisting of position, orientation, curvature, speed, and magnitude of tangential acceleration, is required as input to the motion planning framework. Position and orientation may be provided by a human user through some input device (e.g by clicking on a map as in (Murarka and Kuipers, 2009)). Curvature should be set to zero. Speed may be specified as zero if it is desired to stop at the final position, otherwise is should be a speed that is typically found comfortable by the user. Tangential acceleration should be set to zero. For navigating in large-scale space, a high-level planner such as that used in (Murarka and Kuipers, 2009) could be used for generating intermediate way points. Such a planner usually provides only position and orientation. The rest of the quantities can be provided according to the guidelines above.  All necessary bounds should also be provided as input. The bounds in Table 1 may be used as a start if the study is conducted for an intelligent wheelchair, while the references cited in Section 2.1 can be used for the bounds if the study is conducted for an autonomous car.  A controller that can track the planned trajectory should be implemented. We have achieved good tracking accuracy, in our previous work (Murarka et al., 2009), with a feedback-linearization based controller described in (Luca et al., 1998). 46
+
+ Before performing human user experiments, the framework should be comprehensively tested in the environment in which the users will evaluate it. If the environment is likely to have moving obstacles, fast re-planning should be implemented. This requires trajectories to be computed in at most a tenth of second. A relatively safe indoor environment with no drop-offs and other hazards should be chosen and common failure cases should be identified via experimentation.  In the first step of the study, a user should be asked to manually operate the assistive robot on a variety of tasks. A speed that the user typically operates at should be determined from these tasks.  Although a more detailed study than that described in Section 9.3 could yield an empirical relationship between weights and the individual terms in our discomfort measure, such a study is not an absolute prerequisite to performing human user studies. The two dimensionless factors corresponding to the weights for integral of squared tangential jerk and squared normal jerk are the parameters that should be varied in the experiments.  First, the weight factor for tangential jerk should be determined. To do this, the following experiment can be conducted. Set start and end boundary conditions such that motion is along a straight line. Set initial and final speed and acceleration to zero. Use the motion planning framework to plan trajectories for this task for a range of weight factors for tangential jerk. Ask the user to compare discomfort for every pair of weights. This comparison should include subjective questions on overall comfort as well as questions comparing the level of tangential jerk, and asking whether the time of travel was satisfactory. Vary the total length of the path and repeat the experiment for multiple lengths. Based on these experiments, fix a value of this weight factor.  Next, the weight factor for normal jerk should be determined. To do this, the following experiment can be conducted. Set start at end boundary conditions such that most of the motion is along a curved path. One way to achieve this is by choosing final position very close to the start position such that the robot has to travel along a curve to reach the goal. Follow a procedure similar to the one described above (for tangential jerk) to determine the weight factor for normal jerk.	Once the weight factors are determined, a set of motion tasks with a variety of boundary conditions should be performed and user should be asked to rate comfort.  If the motion for the above tasks is found to be comfortable, then it can be concluded that the measure of discomfort, in fact, captures user discomfort. If not, a set of questions designed to learn what might be missing should be asked.  In all cases, all quantitative information such as speed, acceleration, jerk, travel time, length of path etc., should be collected.
+
+11
+
+Acknowledgements
+
+This work has taken place in the Intelligent Robotics Lab at the Artificial Intelligence Laboratory, The University of Texas at Austin. Research of the Intelligent Robotics lab was supported in part by grants from the National Science Foundation (IIS-0413257, IIS-0713150, and IIS-0750011), the National Institutes of Health (EY016089), and from the Texas Advanced Research Program (3658-0170-2007).
+
+References
+Adams, R. A. and Fournier, J. F. (2003). Sobolev spaces. Elsevier. Arechavaleta, G., Laumond, J.-P., Hicheur, H., and Berthoz, A. (2008). An optimality principle governing human walking. IEEE Transactions on Robotics, 24:514. 47
+
+Avis, D. and Toussaint, G. (1981). An efficient algorithm for decomposing a polygon into star-shaped polygons. Pattern Recognition, 13(6):395398. Balkcom, D. J. and Mason, M. T. (2002). Time optimal trajectories for differential drive vehicles. International Journal of Robotics Research, 21(3):199217. Barraquand, J. and Latombe, J.-C. (1989). On nonholonomic robots and optimal maneuvering. Revue dIntelligence Artificielle, 3(2):77103. Barraquand, J. and Latombe, J.-C. (1990). Robot motion planning: A distributed representation approach. International Journal of Robotics Research, 10:7289. Bianco, C. G. L. and Romano, M. (2004). Smooth motion generation for unicycle mobile robots via dynamic path inversion. IEEE Transactions on Robotics, 20(5):884  891. Bianco, C. G. L. and Romano, M. (2005). Bounded velocity planning for autonomous vehicles. In IEEE/RSJ International Conference on Intelligent Robots and Systems, pages 685690. Bobrow, J. E., Martin, B., Sohl, G., Wang, E. C., Park, F. C., and Kim, J. (2001). Optimal robot motions for physical criteria. Journal of Robotic Systems, 18(12):785795. Bryson, A. E. and Ho, Y.-C. (1975). Applied Optimal Control : Optimization, Estimation, and Control. Hemisphere Publishing Corporation. Calinon, S. and Billard, A. (2009). Statistical learning by imitation of competing constraints in joint space and task space. Advanced Robotics, 23(15):20592076. Canny, J. (1988). Complexity of robot motion planning. MIT press. Canny, J. and Reif, J. (1987). New lower bound techniques for robot motion planning problems. In IEEE Symposium on Foundations of Computer Science, pages 4960. CEN (1999). Railway applications - ride comfort for passengers - measurements and evaluation. ENV 12299. Chakroborty, P. and Das, A. (2004). Principles of Transportation Engineering. PHI Learning Pvt. Ltd. Choset, H., Lynch, K. M., Hutchinson, S., Kantor, G., Burgard, W., Kavraki, L. E., and Thrun, S. (2005). Principles of Robot Motion: Theory, Algorithms, and Implementations. MIT Press. Donald, B., Xavier, P., Canny, J., and Reif, J. (1993). Kinodynamic motion planning. Journal of the ACM, 40(5):10481066. Dubins, L. E. (1957). On curves of minimal length with a constraint on average curvature and with prescribed initial and terminal positions and tangents. American Journal of Mathematics, 79:497516. Erdman, M. and Lozano-P erez, T. (1987). On multiple moving objects. Algorithmica, 2(4):477521. Fehr, L., Langbein, W. E., and Skaar, S. B. (2000). Adequacy of power wheelchair control interfaces for persons with severe disabilities: A clinical survey. Journal of Rehabilitation Research and Development, 37(3):353360. Ferguson, D., Howard, T. M., and Likhachev, M. (2008). Motion planning in urban environments: Part I. In IEEE/RSJ International Conference on Intelligent Robots and Systems, pages 10631069. Fernandes, C., Gurvits, L., and Li, Z. X. (1991). A variational approach to optimal nonholonomic motion planning. In IEEE International Conference on Robotics and Automation, pages 680685. Fiorini, P. and Shiller, Z. (1998). Motion planning in dynamic environments using velocity obstacles. International Journal of Robotics Research, 17(2):760772. F orstberg, J. (2000). Ride comfort and motion sickness in tilting trains: Human responses to motion environments in train experiment and simulator experiments. PhD thesis, KTH Royal Institute of Technology. Fraichard, T. (1996). Dynamic trajectory planning with dynamic constraints: A state-time space approach. In IEEE/RSJ International Conference on Intelligent Robots and Systems, pages 13941400. Fraichard, T. and Scheuer, A. (2004). From Reeds and Shepp's to continuous-curvature paths. IEEE Transactions on Robotics and Automation, 20(6):10251035. Full, R. and Koditschek, D. (1999). Templates and anchors: neuromechanical hypotheses of legged locomotion on land. Journal of Experimental Biology, 202(23):33253332. 48
+
+Glover, J. (1900). Transition curves for railways. In Minutes of Proceedings of the Institution of Civil Engineers, pages 161179. Gulati, S. (2011). A framework for characterization and planning of safe, comfortable, and customizable motion of assistive mobile robots. In Ph.D. Thesis. Gulati, S., Jhurani, C., and Kuipers, B. (2013). A nonlinear constrained optimization framework for comfortable and customizable motion planning of nonholonomic mobile robots  part ii. Submitted to The International Journal of Robotics Research. Gulati, S., Jhurani, C., Kuipers, B., and Longoria, R. (2009). A framework for planning comfortable and customizable motion of an assistive mobile robot. In IEEE/RSJ International Conference on Intelligent Robots and Systems, pages 42534260. Gulati, S. and Kuipers, B. (2008). High performance control for graceful motion of an intelligent wheelchair. In IEEE International Conference on Robotics and Automation, pages 39323938. Hall, D. L., Loshbough, R., and Robaszkiewicz, G. D. (1970). Jerk, acceleration, and limited pattern generator for an elevator system. U.S. Patent number: 3523232. Havoutis (2012). Motion planning and reactive control on learnt skill manifolds. PhD thesis, The University of Edinburgh. Howard, T. M. and Kelly, A. (2007). Optimal rough terrain trajectory generation for wheeled mobile robots. The International Journal of Robotics Research, 26(2):141166. Hsu, D., Kindel, R., Latombe, J.-C., and Rock, S. (2002). Randomized kinodynamic motion planning with moving obstacles. Int. J. Robotics Research, 21(3):233255. Hughes, T. J. (2000). The Finite Element Method: Linear Static and Dynamic Finite Element Analysis. Dover Publications. Hwang, Y. K. and Ahuja, N. (1992). Gross motion planning  a survey. ACM Computing Surveys, 24(3):219  291. ISO (1997). Mechanical vibration and shock	evaluation of human exposure to whole body vibrations - part 1: General requirements. ISO 2631-1.2(E). Iwnicki, S. (2006). Handbook of Railway Vehicle Dynamics. CRC Press. Jacobson, I. D., Richards, L. G., and Kuhlthau, A. R. (1980). Models of human comfort in vehicle environments. Human factors in transport research, 20:2432. Karaman, S. and Frazzoli, E. (2011). Sampling-based algorithms for optimal motion planning. The International Journal of Robotics Research, 30(7):846894. Kavraki, L. E., Svestka, P., Latombe, J.-C., and Overmars, M. (1996). Probabilistic roadmaps for path planning in high dimensional configuration spaces. IEEE Transactions on Robotics and Automation, 12(4):566580. Krapek, K. J. and Bittar, J. (1993). Elevator motion profile selection. U.S. Patent number: 5266757. Lamiraux, F. and Laumond, J.-P. (2001). Smooth motion planning for car-like vehicles. IEEE Transactions on Robotics and Automation, 17(4). Lamm, R., Psarianos, B., and Mailaender, T. (1999). Highway design and traffic safety engineering handbook. McGraw-Hill. Langhaar, H. L. (1951). Dimensional Analysis and Theory of Models. Wiley. Latombe, J.-C. (1991). Robot Motion Planning. Kluwer Academic Press. Laumond, J.-P., Sekhavat, S., and Lamiraux, F. (1998). Guidelines in nonholonomic motion planning for mobile robots. In Laumond, J.-P., editor, Robot Motion Planning and Control, pages 153. Springer-Verlag, Berlin. Laundhart (1887). Theory of the alignment. Schmorl & von Seefeld publishing house. LaValle, S. M. (1998). Rapidly-exploring random trees: A new tool for path planning. Technical Report 98-11, Computer Science Department, Iowa State University. 49
+
+LaValle, S. M. (2006). Planning Algorithms. Cambridge University Press. LaValle, S. M. (2011a). Motion planning: The essentials. IEEE Robotics and Automation Society Magazine, 18(1):7989. LaValle, S. M. (2011b). Motion planning: Wild frontiers. IEEE Robotics and Automation Society Magazine, 18(2):108118. LaValle, S. M. and Kuffner, J. J. (2001a). Randomized kinodynamic planning. International Journal of Robotics Research, 20(5):378400. LaValle, S. M. and Kuffner, J. J. (2001b). Rapidly-exploring random trees: Progress and prospects. In Donald, B. R., Lynch, K. M., and Rus, D., editors, Algorithmic and Computational Robotics: New Directions, pages 293308. A. K. Peters, Wellesley, MA. Likhachev, M. and Ferguson, D. (2009). Planning long dynamically feasible maneuvers for autonomous vehicles. The International Journal of Robotics Research, 28(8):933945. Lin, M. C. and Manocha, D. (2004). Collision and proximity queries. In Goodman, J. E. and O'Rourke, J., editors, Handbook of Discrete and Computational Geometry, 2nd Ed., pages 787807. Chapman and Hall/CRC Press, New York. Luca, A. D., Oriolo, G., and Samson, C. (1998). Feedback control of a nonholonomic car-like robot. In Laumond, J.-P., editor, Robot Motion Planning and Control, pages 171253. Springer-Verlag, Berlin. McNaughton, M., Urmson, C., Dolan, J., and Lee, J. W. (2011). Motion planning for autonomous driving with a conformal spatiotemporal lattice. In IEEE International Conference on Robotics and Automation, pages 48894895. Mirtich, B. (1998). Efficient algorithms for two-phase collision detection. In Gupta, K. and del Pobil, A., editors, Practical Motion Planning in Robotics: Current Approaches and Future Directions, pages 203223. Wiley, New York. Murarka, A., Gulati, S., Beeson, P., and Kuipers, B. (2009). Towards a safe, low-cost, intelligent wheelchair. In Workshop on Planning, Perception and Navigation for Intelligent Vehicles (PPNIV), pages 4250. Murarka, A. and Kuipers, B. (2009). A stereo vision based 3D mapping algorithm for detecting ramps, drop-offs, and obstacles for safe local navigation. In IEEE/RSJ International Conference on Intelligent Robots and Systems, pages 16461653. Pepler, R. D., Sussman, E. D., and Richards, L. G. (1980). Passenger comfort in ground vehicles. Human factors in transport research, 20:7684. Piazzi, A., Bianco, C. G. L., and Romano, M. (2007).  3 splines for the smooth path generation of wheeled mobile robots. IEEE Transactions on Robotics, 23(5). Pivtoraiko, M., Knepper, R., and Kelly, A. (2009). Differentially constrained mobile robot motion planning in state lattices. Journal of Field Robotics, 26(3):308333. Quinlan, S. (1994). Efficient distance computation between non-convex objects. In IEEE International Conference on Robotics and Automation, pages 3324  3329. Ramamoorthy, S. and Kuipers, B. (2008). Trajectory generation for dynamic bipedal walking through qualitative model based manifold learning. In IEEE International Conference on Robotics and Automation, pages 359366. Reeds, J. A. and Shepp, L. A. (1990). Optimal paths for a car that goes both forward and backward. Pacific Journal of Mathematics, 145(2):367393. Richards, L. G. (1980). On the psychology of passenger comfort. Human factors in transport research, 20:1523. Schaal, S., Ijspeert, A., , and Billard, A. (2003). Computational approaches to motor learning by imitation. Philosophical Transactions: Biological Sciences, 1431(358):537547. Scheuer, A. and Laugier, C. (1998). Planning sub-optimal and continuous-curvature paths for car-like robots. In IEEE International Conference on Intelligent Robots and Systems, pages 25371. 50
+
+Shiller, Z. (1994). Time-energy optimal control of articulated paths with geometric path constraints. In International Conference on Robotics and Automation. Shiller, Z. and Dubowsky, S. (1991). On computing the global time-optimal motions of robotic manipulators in the presence of obstacles. IEEE Transactions on Robotics and Automation, 7(6):785797. Shiller, Z. and Gwo, Y.-R. (1991). Dynamic motion planning of autonomous vehicles. IEEE Transactions on Robotics and Automation, 7(2):241249. Silberg, G., Wallace, R., Matuszak, G., Plessers, J., Brower, C., and Subramanian, D. (2012). Self-driving cars: The next revolution. Technical report, KPMG Center for Automotive Research. Simpson, R. C., LoPresti, E. F., and Cooper, R. A. (2008). How many people would benefit from a smart wheelchair? Journal of Rehabilitation Research and Development, 45(1):5372. Sou` eres, P. and Boissonnat, J. (1998). Optimal trajectories for nonholonomic mobile robots. In Laumond, J.-P., editor, Robot Motion Planning and Control, pages 93170. Springer-Verlag, Berlin. Spielbauer, H.-K. J. and Peters, M. (1995). Elevator start jerk removal. U.S. Patent number: 5424498. Strizzi, J., Ross, I. M., and Fahroo, F. (2002). Towards real-time computation of optimal controls for nonlinear systems. In AIAA Guidance, Navigation, and Control Conference. Suzuki, H. (1998). Research trends on riding comfort evaluation in japan. Proceedings of the Institution of Mechanical Engineers	Part F	Journal of Rail and Rapid Transit, 212(1):6172. Thrun, S., Burgard, W., and Fox, D. (2005). Probabilistic Robotics. MIT Press. Tominaga, H. and Bavarian, B. (1990). Global robot path planning using exact variational methods. In IEEE International Conference on Systems, Man and Cybernetics, pages 617619. Troutman, J. L. (1995). Variational Calculus and Optimal Control: Optimization with Elementary Convexity. Springer, 2 edition.  Zefran, M. (1996). Continuous Methods for Motion Planning. PhD thesis, University of Pennsylvania, Philadelphia, PA. W achter, A. and Biegler, L. T. (2006). On the implementation of a primal-dual interior point filter line search algorithm for large-scale nonlinear programming. Mathematical Programming, 106(1):2557.
+
+51
+

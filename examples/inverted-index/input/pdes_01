@@ -1,0 +1,834 @@
+A Bellman approach for regional optimal control problems in RN
+
+arXiv:1305.5813v1 [math.AP] 24 May 2013
+
+G. Barles
+
+A. Briani May 27, 2013
+
+E. Chasseigne
+
+Abstract This article is a continuation of a previous work where we studied infinite horizon control problems for which the dynamic, running cost and control space may be different in two halfspaces of some euclidian space RN . In this article we extend our results in several directions: (i) to more general domains; (ii) by considering finite horizon control problems; (iii) by weaken the controlability assumptions. We use a Bellman approach and our main results are to identify the right Hamilton-Jacobi-Bellman Equation (and in particular the right conditions to be put on the interfaces separating the regions where the dynamic and running cost are different) and to provide the maximal and minimal solutions, as well as conditions for uniqueness. We also provide stability results for such equations.
+
+Key-words: Optimal control, discontinuous dynamic, Bellman Equation, viscosity solutions. AMS Class. No: 49L20, 49L25, 35F21.
+
+1
+
+Introduction
+
+This article is a continuation of [6] where we studied infinite horizon control problems for which the dynamic, running cost and control space may be different in two half-spaces of some euclidian space RN . This study was made through the Bellman approach and our main results where to identify the right Hamilton-Jacobi-Bellman Equation (and in particular the right conditions to be put on the hyperplane separating the regions where the dynamic and running cost are different) and to provide the maximal and minimal solutions, as well as conditions for uniqueness. The aim of the present paper is three-fold: (i) to extend these results to more general domains; (ii) to consider also finite horizon control problems; (iii) last but not least, to weaken the controlability assumption made in [6]. We also emphasize the stability properties for such equations which are a little bit different from the classical ones.
+ Laboratoire de Math ematiques et Physique Th eorique (UMR CNRS 6083), F ed eration Denis Poisson (FR CNRS 2964), Universit e Fran cois Rabelais, Parc de Grandmont, 37200 Tours, France. This work was partially supported by the ANR HJnet ANR-12-BS01-0008-01 and by EU under the 7th Framework Programme Marie Curie Initial Training Network "FP7-PEOPLE-2010-ITN", SADCO project, GA number 264735SADCO.
+
+1
+
+To be more specific, we recall that, in the classical theory (see for example Lions [27], Fleming & Soner [21], Bardi & Capuzzo Dolcetta [4]), Hamilton-Jacobi-Bellman Equation for finite horizon control problems in the whole space RN have the form ut + H (x, t, Du) = 0 where the Hamiltonian H is typically given by H (x, t, p) := sup
+A
+
+in RN  (0, T ) ,
+
+(1.1)
+
+- b(x, t, )  p - l(x, t, ) .
+
+(1.2)
+
+The control space A is assumed to be compact, the dynamic b and running cost l are supposed to be continuous functions which are Lipschitz continuous in x, so that H is continuous and has suitable properties ensuring existence and uniqueness of a solution to (1.1). In this paper, as we already mentioned above, we have different dynamics and running costs in different regions. In other words, the functions b and l are not assumed to be continous anymore when crossing the boundaries of the different regions, which implies that the Hamiltonian H in (1.2) also presents discontinuities. Hence, getting suitable comparison and uniqueness results for (1.1) in this setting is not obvious at all and the aim of this paper is to give precise answers to these questions. To be more precise, we are going to decompose RN using a collection (i )iI of regular open subsets of RN such that each point x  RN either lies inside one (and only one) i , or is located on the boundary of exactly two sets i . Because of the (regularity) assumptions we are going to use, we can in fact reduce this collection to two domains 1 , 2 : we refer to Section 6 for comments on this reduction. More precisely we assume that (H ) RN = 1  2  H with 1  2 =  and H =  1 =  2 is a W 2, -hypersurface in RN . For x	H we denote by ni (x) the unit normal vector pointing outwards i , for i = 1, 2. Of course, n1 () = -n2 () on H. In each i (i = 1, 2), we have a "classical" finite-horizon control problem and the equation can be written as ut + Hi (x, t, Du) = 0 in i  (0, T ) , (1.3) for some T > 0, where Hi is given by Hi (x, t, p) := sup {-bi (x, t, i )  p - li (x, t, i )} .
+i Ai
+
+(1.4)
+
+The bi , li are at least continuous functions defined on RN  (0, T )  Ai , the control space Ai being compact metric spaces; precise assumptions will be given later on. Of course, one has to write down an equation on the whole space RN (and in particular on H) and this can be done using viscosity solutions' theory ([32], [5], [4]). One can consider Equation (1.1) with H = Hi on i and use Ishii's definition of viscosity solutions for discontinuous Hamiltonians (cf. [25]) which reads (u )t + H (x, t, Du ) = 0 and (v )t + H	(x, t, Dv ) = 0 in RN  (0, T ) in RN  (0, T ) 2 for subsolutions u for supersolutions v ,
+
+where the "upper-star" denotes the upper semi-continuous envelope while the "lower-star" denotes the lower semi-continuous envelope. Following this means that we have to complement Equations (1.3) by min{ut + H1 (x, t, Du), ut + H2 (x, t, Du)}  0 on H  (0, T ) , max{ut + H1 (x, t, Du), ut + H2 (x, t, Du)}  0 on H  (0, T ) . (1.5) (1.6)
+
+A first question we address in [6] is to investigate the uniqueness properties for (1.1) or equivalently (1.3)-(1.5)-(1.6). Unfortunately, and this leads us to describe the second aspect of [6], one can define (in general) several value functions for the associated control problem(s) and all the natural value functions satisfy (1.3)-(1.5)-(1.6). We are not going to describe these different control problems in the introduction : we refer the reader to Section 2. But we just mention that the differences mainly concern the "admissible" control or dynamics on the interface H: this set can be chosen in different way creating such non-uniqueness and (to our point of view) there is no criterion to declare one of these value functions more natural than the others. There are more and more articles on Hamilton-Jacobi-Bellman Equations or control problems on multi-domains (also called stratified domains). We start by recalling the pioneering work by Dupuis [19] who use similar methods to construct a numerical method for a calculus of variation problem with discontinuous integrand. Problems with a discontinuous running cost were addressed by either Garavello and Soravia [22, 23], or Camilli and Siconolfi [14] (even in an L -framework) and Soravia [33]. To the best of our knowledge, all the uniqueness results use a special structure of the discontinuities as in [17, 18, 24] or an hyperbolic approach as in [3, 16]. Recent works on optimal control problem on stratified domains are the ones of Bressan and Hong [12] but also Barnard and Wolenski [9] and Rao and Zidani [28] (who mention a forthcoming work with Siconolfi [29]): in these three last works, uniqueness results are provided by a completely different method than ours, which relies on control arguments. The advantage of their methods is to allow them to handle more general stratified domains (non-smooth domains with multiple junctions) but with more restrictive controlability assumptions and without the stability results we can provide. We finally remark that problems on network (see [31],[2], [13]) share the same kind of difficulties : indeed one has to take into account the junctions as we have to deal with the interface H. The paper is organized as follows: in Section 2, we introduce the main ingredients and assumptions for the control problem(s) and following [6] we recall how to define the dynamic and cost in a proper way. We define two different value functions (U- and U+ ). The difference with [6] is that U- , U+ are not necessarily continuous since we have weakened the controlability assumption and the first consequence is that the connections with the Bellman Equation (1.3)-(1.5)-(1.6) in Section 3 has to be stated in terms of discontinuous viscosity solutions (cf. Theorem 3.3). Then, still in Section 3, we provide properties, satisfied either by U+ or by general sub and supersolutions which play a key role in order to obtain comparison results. Uniqueness-comparison properties are described in Section 4: we slightly modify the approach of [6] by emphasizing the role of a "local comparison result" which is given in the Appendix. As in [6] this "local comparison result" relies on the regularization of the subsolutions but this is a little bit more technical here since the controlability assumption is replaced by a weaker hypothesis ("controlability in the normal direction" on H). In Section 5, we study the stability properties of the problems we have introduced in Section 3: for the problem satisfied by U- , it is a "classical" stability result, but contrarily to the standard results in viscosity solutions' theory, we face a difficulty because of the discontinuity 3
+
+on H, difficulty which is solved in an unusual way by the controlability assumption in the normal direction. For the problem satisfied by U+ , we prove the stability of controlled trajectories and costs, a rather delicate result since we have to show that the limit of trajectories with "regular strategies" (a notion which is defined in Section 2) is a trajectory with a "regular strategy". In this second case, we have no pde approach and therefore this is the only kind of results we may hope to have. Finally Section 6 is devoted to describe several extensions, in particular to time-dependent multi-domains problems. Acknowledgements -- We would like to thank Nicoletta Tchou for several constructive remarks on the preliminary versions of this paper.
+
+2
+
+The optimal control problem
+
+The control problem -- We fix T > 0 and consider that, on each domain i (i = 1, 2) we have a controlled dynamic given by bi : i  [0, T ]  Ai  RN , where Ai is the compact metric space where the control takes its values. We have also a running cost li : i	[0, T ]  Ai  R. Throughout the paper, we make the following assumption on the initial cost: (Hg ) The function g is bounded and continuous in RN . Our main assumptions for the control problem are the following
+N (H1 C ) For any i = 1, 2, Ai is a compact metric space and bi : i  [0, T ]  Ai  R is a continuous bounded function. More precisely there exists Mb > 0, such that for any x  RN , s  [0, T ] and i  Ai , i = 1, 2, |bi (x, s, i )|  Mb .
+
+Moreover there exists Lb  R such that, for any z, z   i , s, s	[0, T ] and i  Ai , i = 1, 2, |bi (z, s, i ) - bi (z, s , i )|	Lb (|z - z  | + |s - s |) .
+N is a uniformly continuous, bounded (H2 C ) For any i = 1, 2, the function li : i  [0, T ]  Ai  R function. More precisely there exists Ml > 0, such that for any x  RN , s  [0, T ] and i  Ai , i = 1, 2, |li (x, s, i )|  Ml .
+
+Moreover there exists a modulus of continuity ml : [0, +)  [0, +) such that, for any z, z   i , s, s  [0, T ] and i  Ai , i = 1, 2, |li (z, s, i ) - li (z, s , i )|  ml (|z - z  | + |s - s |) . (H3 C ) For each i = 1, 2, z	i , and s  [0, T ], the set and convex. bi (z, s, i ), li (z, s, i ) : i  Ai is closed
+
+4
+
+(H4 C ) There is a  > 0 such that for any i = 1, 2, z  H and s	[0, T ] Bi (z, s)  ni (z )  [-, ] where Bi (z, s) := bi (z, s, i ) : i	Ai .
+2 Assumption (H1 C ) and (HC ) are the classical hypotheses used in control problems. Hypothesis (H4 C ) expresses some controllability condition but only in the normal direction when the point x belongs to the boundaries shared by the sets i . In the sequel, we refer to (HC ) as the intersection 4 of all the four hypotheses (H1 C )(HC ).
+
+(2.1)
+
+Boundary dynamics -- In order to define the controlled dynamics and trajectories which may stay for a while on the common boundary H, we introduce the boundary dynamic as follows: if s  [0, T ], z  H we set bH z, s, a) = bH z, s, (1 , 2 , ) := b1 (z, s, 1 ) + (1 - )b2 (z, s, 2 ) , where   [0, 1], 1  A1 , 2  A2 . For any z  H and s  [0, T ] we denote by A0 (z, s) := a = (1 , 2 , ) : bH z, s, (1 , 2 , )  n1 (z ) = 0 , and the associated cost on H is lH (z, s, a) = lH z, s, (1 , 2 , ) := l1 (z, s, 1 ) + (1 - )l2 (z, s, 2 ) . Notice that the dynamic and cost on H are not symmetric if one swaps the indices 1 and 2 (although this could be overcome by changing also ). Trajectories -- We are going to define the trajectories of our optimal control problem by using the approach through differential inclusions which is rather convenient here. This approach has been introduced in [34] (see also [1]) and has become now classical. Our trajectories Xx,t () = (Xx,t )1 , (Xx,t )2 , . . . , (Xx,t )N () are Lipschitz continuous functions which are solutions of the following differential inclusion	x,t (s)  B (Xx,t (s), t - s) for a.e. s  [0, t) ; X where B (z, s) := Bi (z, s) co B1 (z, s)  B2 (z, s) if z  i , if z	H , (2.3) Xx,t (0) = x (2.2)
+
+the notation co(E ) referring to the convex closure of the set E  RN . We point out that if the definition of B (z, s) is natural when z  i , it is dictated by the assumptions to obtain the existence of a solution to (2.2) for z  H (see below). As we see, our controls a() can take two forms: either a(s) belongs to one of the control sets Ai ; or it can be expressed as a triple (1 , 2 , )	A1  A2	[0, 1]. Hence, in order to define globally a control, we introduce the compact set A := A1  A2	[0, 1] 5
+
+and define a control as being a function of L (0, t; A) which can be seen as a subset of A := L (0, T ; A). Let us define Ei := s  (0, t) : Xx,t (s)  i , EH := s  (0, t) : Xx,t (s)  H ,
+
+where actually these sets depend on (x, t) but we shall omit this dependence for the sake of notations. We then have the following
+2 3 Theorem 2.1. Assume (H ), (H1 C ), (HC ) and (HC ). Then
+
+(i) For each x	RN , t	[0, T ) there exists a Lipschitz function Xx,t : [0, t]  RN which is a solution of the differential inclusion (2.2). (ii) For each solution Xx,t () of (2.2), there exists a control a()  A such that for a.e. s  (t, T )  x,t (s) = X
+i=1,2
+
+bi Xx,t (s), t - s, i (s) 1Ei (s) + bH Xx,t (s), t - s, a(s) 1EH (s)
+
+(2.4)
+
+where a(s) = 1 (s), 2 (s), (s) if Xx,t (s)  H. (iii) If e() = n1 () or n2 () we have bH Xx,t (s), t - s, a(s)  e Xx,t (s) = 0 In other words, a(s)  A0 (Xx,t (s), t - s) for a.e. s  EH . Proof. The proof is done exactly as in [6], the only minor modification consisting in adding the time variable in the vector field b. Regular and Singular dynamics -- It is worth remarking that, in Theorem 2.1, a solution Xx,t () can be associated to several controls a(). So, to set properly the control problem we introduce the set Tx,t of admissible controlled trajectories starting from x, Tx,t := Xx,t (), a()  Lip(0, t; RN )  A such that (2.4) is fulfilled and Xx,t (0) = x for a.e. s  EH .
+
+Given (z, s)  H  [0, t], we call singular a dynamic bH (z, s, a) with a = (1 , 2 , )  A0 (z, s) when b1 (z, s, 1 )  n1 (z ) < 0 , b2 (z, s, 2 )  n2 (z ) < 0 .
+
+Conversely, the regular dynamics are those for which the bi (z, s, i )	ni (z )  0 (i = 1, 2). The set of regular controls is denoted by Areg 0 (z, s) := a = (1 , 2 , )  A0 (z, s) ; bi (z, s, i )  ni (z )  0, i = 1, 2 , and the regular trajectories are defined as
+reg Tx,t :=
+
+Xx,t (), a()  Tx,t : for a.e. s  EH , a(s)  Areg X (s), t - s 0
+
+.
+
+6
+
+The cost functional  Our aim is to minimize a finite horizon cost functional such that we respectively pay li if the trajectory is in i , and lH if it is on H. The final cost is given by g. More precisely, the cost associated to (Xx,t (), a)  Tx,t is
+t
+
+J (x, t; (Xx,t , a)) :=
+0
+
+ Xx,t (s), t - s, a(s) ds + g Xx,t (t)
+
+(2.5)
+
+where the Lagrangian is given by  Xx,t (s), t - s, a(s) :=
+i=1,2
+
+li Xx,t (s), t - s, i (s) 1Ei (s) + lH Xx,t (s), t - s, a(s) 1EH (s) . (2.6)
+
+The value functions  For each x  RN and t  [0, T ), we define the following two value functions U- (x, t) := U+ (x, t) :=
+(Xx,t ,a)Tx,t
+
+inf
+
+J x, t; (Xx,t , a) J x, t; (Xx,t , a) .
+
+(2.7) (2.8)
+
+reg (Xx,t ,a)Tx,t
+
+inf
+
+A first key result is the Dynamic Programming Principle (the proof being standard once we have the definition of trajectories, we skip it).
+2 3 - + Theorem 2.2. Assume (H ), (H1 C ), (HC ) and (HC ). Let U , U be the value functions defined in (2.7) and (2.8). Then for each (x, t)  RN  [0, T ), and each   (0, t), we have
+
+U- (x, t) = U+ (x, t) =
+
+ (Xx,t ,a)Tx,t
+
+inf
+
+ Xx,t (s), t - s, a(s) ds + U- (Xx,t ( ), t -  )  Xx,t (s), t - s, a(s) ds + U+ (Xx,t ( ), t -	) .
+
+(2.9) (2.10)
+
+0
+
+reg (Xx,t ,a)Tx,t
+
+inf
+
+0
+
+We will prove that both value functions are continuous, but here it is not so immediate since we only assume controlability in the normal directions. We postpone this proof which uses some comparison for the semi-continuous envelopes.
+
+3
+
+The pde formulation of the problem
+
+In order to describe what is happening on the hypersurface H, we shall introduce two "tangential reg Hamiltonians", namely HT , HT . We introduce some notations to be clear on how they are defined. We shall consider the tangent bundle T H := z H {z }  Tz H where Tz H is the tangent space to H at z (which is essentially RN -1 ). Thus, if   C 1 (H), and x  H, we denote by DH (x) the gradient of  at x, which belongs to Tx H. Also, the scalar product in Tz H will be denoted by u, v (we drop the reference to Tz H for simplicity, since no confusion has to be feared in the sequel). In this definition, both vectors u, v 7
+
+should belong to Tz H for this definition to make sense. Hence, to be precise we should use the orthogonal projection Pz : RN  Tz H when at least one of the vectors u, v lives in RN , but we shall omit this point when writing bH (x, t, a), DH (x, t) . Indeed, for any control a in A0 (x, t) or Areg 0 (x, t), bH (x, t, a) can be identified with Px bH (x, t, a) since bH (x, t, a) has no component on the normal direction to H, by definition. To avoid confusions, the notation u  v will refer only to the usual euclidian scalar product in RN .
+reg reg The Hamiltonians HT , HT will be written as HT /HT (x, t, p) where ((x, p), t)	T H  [0, T ]. They are defined as follows:
+
+HT (x, t, p) := sup
+A0 (x,t) reg HT (x, t, p) := Areg 0 (x,t)
+
+- bH (x, t, a), p - lH (x, t, a) , - bH (x, t, a), p - lH (x, t, a) ,
+
+(3.1) (3.2)
+
+sup
+
+where A0 (x, t), Areg 0 (x, t) have been defined above.
+reg The definition of viscosity sub and super-solutions for HT and HT have to be understood on H as follows:
+
+Definition 3.1. A bounded usc function u : H  [0, T ]  R is a viscosity subsolution of ut (x, t) + HT (x, t, DH u) = 0 on H  [0, T ]
+
+if, for any   C 1 (H [0, T ]) and any maximum point (x, t) of (z, s)  u(z, s) - (z, s) in H [0, T ], one has t (x, t) + HT x, t, DH (x, t)  0 . Notice that of course, (x, DH (x, t))  T H, so that this is coherent with the definition of HT . reg A similar definition holds for HT , for supersolutions and solutions. Of course, if u is defined in a bigger set containing H  [0, T ] (typically RN  [0, T ]), we have to use u|H[0,T ] (the restriction of u to H  [0, T ]) in this definition, a notation that we will omit when not necessary. For the sake of clarity we introduce now a global formulation involving a complementary Hamiltonian on the interface H. To begin with, we recall that a subsolution (resp. a supersolution of (1.1) when H (x, t, p) = H1 (x, t, p) if x  1 and H (x, t, p) = H2 (x, t, p) if x  2 is a bounded usc function u (resp.a bounded lsc function v ) which satisfies   in 1	(0, T ) , ut + H1 (x, t, Du)  0 (3.3) ut + H2 (x, t, Du)  0 in 2  (0, T ) ,   ut + min{H1 (x, t, Du), H2 (x, t, Du)}  0 in   (0, T ) ,	 in 1  (0, T ) , vt + H1 (x, t, Dv )  0 . (3.4) resp. vt + H2 (x, t, Dv )  0 in 2  (0, T ) ,   vt + min{H1 (x, t, Dv ), H2 (x, t, Dv )}  0 in	(0, T ) Recall that since each bi is defined on i  (0, T )  R, then Hi is well-defined on   (0, T ). Next we have the following definition. 8
+
+Definition 3.2. We say that a bounded usc function u is a subsolution of ut + H- (x, t, Du) = 0 in RN  (0, T ) resp. if it satisfies (3.3) and ut (x, t) + HT (x, t, DH u)  0 resp.
+reg ut (x, t) + HT (x, t, DH u)  0
+
+(3.5) (3.6)
+
+ut + H+ (x, t, Du) = 0 in RN  (0, T )
+
+on on
+
+H  [0, T ] , H	[0, T ] ,
+
+in the sense of Definition 3.1. A lsc function v is a supersolution of (3.5) or (3.6) if it satisfies (3.4). Notice that in this definition, a complementary condition is required only for the subsolution, nothing more is added for the supersolution.
+
+3.1
+
+Properties of U+ and U-
+
+We shall prove later on that both U+ and U- are continuous, but for the moment we have to treat them a priori as discontinuous viscosity solutions of some problem. We recall that, for any bounded function v , the lower and upper semi-continuous envelope are defined by v (x, t) := lim inf v (z, s) ,
+(z,s)(x,t)
+
+v  (x, t) := lim sup v (z, s) .
+(z,s)(x,t)
+
+Then, as we mention in the introduction the definition of viscosity solution for discontinuous solutions is modified by taking (U- ) instead of U- for the supersolution condition, and (U- ) instead of (U- ) for the subsolution condition. We claim that the value functions U- and U+ are viscosity solutions of the Hamilton-JacobiBellman problem (1.3)-(1.5)-(1.6), while they fulfill different inequalities on the hyperplane H. Theorem 3.3. Assume (Hg ), (H ) and (HC ). Then value functions U- and U+ are both viscosity solutions of ut + H (x, u, Du) = 0. Moreover, U- is a subsolution of ut + H- (x, t, Du) = 0 while U+ is a subsolution of ut + H+ (x, t, Du) = 0. Proof. The proof follows the arguments of [6, Thm 2.5] with some adaptations due to the fact that U- , U+ can be discontinuous. We briefly show how to adapt the arguments. In order to prove that (U- ) is a supersolution we consider a point (x, t) where (U- ) -  reaches its minimum,  being a smooth test function. If x belongs to some i , the proof is classical since everything can be done in i around the time t. Thus we assume that x  H and that the minimum is strict in B (x, r )  (t - , t +  ) for some r,	> 0. There exists a sequence (xn , tn )  B (x, r )  (t - , t +	) which converges to (x, t) such that U- (xn , tn )  (U- ) (x, t) and by the dynamic programming principle, U- (xn , tn ) =
+ (Xxn ,tn ,a)Txn ,tn
+
+inf
+
+0
+
+ Xxn ,tn (s), tn - s, a(s) ds + U- Xxn ,tn ( ), tn -  9
+
+,
+
+where  <  . Using that (i) U- (xn , tn ) = (U- ) (x, t)+on (1) where on (1)  0, (ii) U- Xxn ,tn ( ), tn -   U-	Xxn ,tn ( ), tn -  and the maximum point property, we obtain
+
+
+(xn , tn ) + on (1)
+
+(Xxn ,tn ,a)Txn ,tn
+
+inf
+
+0
+
+ Xxn ,tn (s), tn - s, a(s) ds +  Xxn ,tn ( ), tn -
+
+.
+
+Now we use the expansion of (Xxn ,tn ( ), tn -	), and noting X () = Xxn ,tn () for the sake of  notations, we rewrite the inequality as on (1)  sup(X,a) 0 [](s) ds where [](s) := - l1 (X (s), tn - s, 1 (s)) - b1 (X (s), tn - s, 1 (s))  D(X (s), tn - s) + t (X (s), tn - s) 1E1 (s) + +  - l2 (X (s), tn - s, 2 (s)) - b2 (X (s), tn - s, 2 (s))	D(X (s), tn - s) + t (X (s), tn - s) 1E2 (s) - lH (X (s), tn - s, a(s)) - bH (X (s), tn - s, a(s))  D(X (s), tn - s) + t (X (s), tn - s) 1EH (s) t (X (s), tn - s) + H1 X (s), tn - s, D(X (s), tn - s) 1E1 (s) 1E2 (s) 1EH (s) .
+
++ t (X (s), tn - s) + H2 X (s), tn - s, D(X (s), tn - s) + t (X (s), tn - s) + HT X (s), tn - s, D(X (s), tn - s)
+
+Using that H1 , H2 , HT  max(H1 , H2 ) (only on H for HT ), letting n	and then dividing by  and sending  to zero, we obtain max t + H1 , t + H2 x, t, D(x, t)  0 , which is the viscosity supersolution condition. The proof for (U+ ) is exactly the same, with HT reg reg replaced by HT , which satisfies also HT	max(H1 , H2 ) on H. For the subsolution condition, we have to consider maximum points of (U- ) - ,  being again a smooth function. If such maximum point are in 1 or 2 , the proof is again classical. Hence we consider the case when (U- ) -	reaches a strict local maximum at (x, t) with x  H, t  (0, T ). Then there exist a sequence (xn , tn )	(x, t) such that U- (xn , tn )	(U- ) (x, t) and our first claim is that we can assume that xn	H. Indeed, if xn  1 , we use assumption (H4 C ) : there exists i such that b1 (x, t, 1 )  n1 (x) = . Considering the trajectory with the constant control 1  (s) = b1 (Y (s), tn - s, 1 ) , Y Y (0) = xn ,
+
+1 , the first exit time of the trajectory Y from  tends to 0 as n  +. it is easy to show that n 1 1 ), t -  1 ), we have ~n ) = (X (n By the Dynamic Programming Principle, denoting (~ xn , t n -
+1 n
+
+U (xn , tn )
+0
+
+~n ) = U- (~ ~n ) + on (1),  Y (s), tn - s, 1 ds + U- (~ xn , t xn , t
+
+~n )  (U- ) (x, t) and x where on (1)  0. Therefore U- (~ xn , t ~n  H . 10
+
+Assuming that xn  H, we can use again the Dynamic Programming Principle U- (xn , tn )
+0
+
+ Xxn ,tn (s), tn - s, a(s) ds + U- (Xxn ,tn ( ), tn -  ,
+
+with constant controls a(s) = i with bi (x, t, i )  ni (x) < 0. Arguing as above we get t (x, t) - bi (x, t, i )  D(x, t) - li (x, t, i )  0 .
+4 Moreover, combining Assumptions (H3 C ) and (HC ), one proves easily that this inequality holds for any i with bi (x, t, i )	ni (x)	0.
+
+Taking these informations into account, if we assume by contradiction that min t (x, t) + H1 x, t, D(x, t) ; t (x, t) + H2 x, t, D(x, t) > 0,
+
+this means that there exists 1 , 2 with if b1 (x, t, 1 )  n1 (x) > 0 and b2 (x, t, 1 )	n2 (x) > 0 such that, for i = 1, 2 t (x, t) - bi (x, t, i )  D(x, t) - li (x, t, i ) > 0 . For (y, s) close to (x, t) and for such 1 , 2 , we set  (y, s) := Then we solve the ode x  (s) =  (x(s), t - s)b1 (x(s), t - s, 1 ) + (1 -  (x(s), t - s))b2 (x(s), t - s, 2 ) . By our hypotheses on b1 and b2 , the right-hand side is Lipschitz continuous so that the CauchyLipschitz applies and gives a solution x(s). Moreover, by our choice of  , it is clear that 0    1 and that x  (s)  n1 (x(s)) = 0, which implies by Gronwall's lemma that s	x(s) remains on H, at least until some time  > 0. Using again the Dynamic Programming Principle and the usual arguments, we are lead to  (x, t) t (x, t) - b1 (x, t, 1 )  D(x, t) - l1 (x, t, 1 ) + (1 -  (x, t)) t (x, t) - b2 (x, t, 2 )  D(x, t) - l2 (x, t, 2 ) a contradiction. Finally the HT -inequality follows from the same arguments : in particular, if b1 (x, t, 1 )  n1 (x) < 0 and b2 (x, t, 1 )  n2 (x) < 0, the above	-argument can be applied readily. The same proof works also for (U+ ) , except that some situation cannot occur since we are only considering regular dynamics. Our next result is a (little bit unusual) supersolution property which is satisfied by U+ on H, which is done exactly as in of [6, Thm 2.7] once we have the following extension result 11 0, b2 (y, s, 2 )  n2 (y ) . b1 (y, s, 1 )  n1 (y ) + b2 (y, s, 2 )  n2 (y )
+
+Lemma 3.4. Let us assume that (H ) holds and let   C 1 H  [0, T ] . Then there exists a ~  C 1 RN  [0, T ] such that  ~ =  in H  [0, T ]. function  Proof. The proof is rather classical so that we omit it. We are going to consider control problems set in either i or its closure. For the sake of clarity i () the we use the following notation. If x  i , and i ()  L ([0, T ]; Ai ), we will denote by Yx,t solution of the following ode  i (s) = bi (Y i (s), t - s, i (s)) Y x,t x,t ,
+i Yx,t (0) = x .
+
+(3.7)
+
+Theorem 3.5. Assume (Hg ), (H ) and (HC ). Let	 C 1 H	[0, T ] and suppose that (x, t) is a minimum point of (z, s)  (U+ ) (z, s) - (z, s) in H  [0, T ]. Then we have either
+i (s)	for all s ]0,  ] and A) there exist  > 0, i  {1, 2} and a control i () such that, Yx,t i  0
+
+(U+ ) (x, t)  or B) it holds
+
+i i li (Yx,t (s), t - s, i (s)) ds + (U+ ) (Yx,t ( ), t -  )
+
+(3.8)
+
+reg t (x, t) + HT x, t, DH (x, t)  0.
+
+(3.9)
+
+reg Proof. Since x  H, by assumption (H3 C ), there exists a regular optimal control a()  Tx,t such that
+
+U+ (x, t) =
+0
+
+t
+
+ Xx,t (s), t - s, a(s) ds + g(Xx,t (t)) .
+
+Moreover, by the Dynamic Programming Principle, we have, for any  > 0 U+ (x, t) =
+0
+
+ Xx,t (s), t - s, a(s) ds + U+ (Xx,t ( ), t -  ) .
+
+We argue depending on whether or not there exists a sequence (k )k converging to 0 such that k > 0 and Xx,t (k )  H. If it is NOT the case then this means that we are in the case A) since, for  small enough, the trajectory Xx,t () stays necessarily either in 1 or in 2 on ]0,  ]. Therefore we can assume for i () and take  =  in the above equality. instance that Xx,t () = Yx,t On the contrary, if IT IS the case, we can use the minimum point property: assuming without loss of generality that (x, t) = U+ (x, t), we extend  to RN  [0, T ] thanks to Lemma 3.4 and write, for k large enough, ~(x, t)
+0 k
+
+~(Xx,t (k ), t - k ) .	Xx,t (s), t - s, a(s) ds +
+
+The rest of the proof is the same as [6, Thm 2.7]: we obtain a contradiction by assuming
+reg t (x, t) + HT x, t, DH (x, t)  - < 0 ,
+
+using the normal controllability condition (H4 C ) instead of the more general (and usual) one which was used in [6]. 12
+
+reg Remark 3.6. Notice that the alternative above with HT only holds for U+ , and not for any reg arbitrary supersolution (see Theorem 3.9 where HT is used and not HT ).
+
+3.2
+
+Properties of sub and supersolutions
+
+Theorem 3.7. Assume (H ) and (HC ). If u : RN  [0, T ]	R is a bounded viscosity subsolution of ut + H (x, t, Du) = 0, then u is a subsolution of ut + H+ (x, t, Du) = 0. Proof. It is enough to check the subsolution condition only on H since the property clearly holds in each i by definition. We recall that u |H[0,T ] is the restriction of u to H  [0, T ]. Let () be a C 1 -function on H ) a maximum point of u |H[0,T ] -	on H  [0, T ]. Our aim is then to prove that, for any and ( x, t ) we have a  Areg x, t 0 ( , a  0 . , a , DH ( ) - lH x ) - bH x , t , t x, t t ( x, t (3.10)
+
+This proof follows [6, Thm. 3.1] so that we only mention here the modifications. First, we extend ~ given by Lemma 3.4. Then for   1 and (z, s)  H  [0, T ] we consider the function  by  ~(z, s) -  dH (z ) - (z, s)  u(z, s) -  dH (z )2 - |z - x|2 - |s - t| := u(z, s) -  (z, s) , 2 (3.11)
+
+where dH () is the signed distance function from H which is positive in 1 and negative in 2 . Note that dH is at least C 1 because of (H ) and D dH = -n1 = n2 on H. , 1 )  n1 ( Writing a = (1 , 2 , ), we assume that we are in the situation when b1 ( x, t x) < 0 (and the same for index 2), since the case of non-strict inequalities can be recovered by hypothesis (H4 C) as in Thm. 3.3 (recall that a being a regular control, the opposite signs are forbidden). We choose >  where	 is a solution of the following equation (which has a solution under the assumption above of strict signs): ~t ( ~( ) - b1 ( , 1 )  D  ) +  , 1 ) = 0 .  x, t x, t x, t n2 ( x) - l1 ( x, t The rest of the proof follows the cited reference: thanks to the penalization terms, for  small enough, u -  reaches its max at some point (x , t )  2  [0, T ]. Then, using the equation in 2  [0, T ] or on H leads to ~t ( ~( ) - b2 ( , 2 )  D	) +  n2 ( , 2 )  o (1) .  x, t x, t x, t x) - l2 ( x, t We let	tend to zero first, and then  to  . Using the specific value of   leads to ~t ( ~( ) - bH ( , a)  D  ) - lH ( , a)  0 ,  x, t x, t x, t x, t , a) has no component on the normal direction to H and by that we interpret as (3.10) since bH ( x, t ~ construction, DH (|H ) = DH . The following lemma follows directly from [6, Lem. 3.2] 13
+
+Lemma 3.8. Assume (H ) and (HC ). Let v : RN  [0, T ]  R be a lsc supersolution of vt + H (x, t, Dv ) = 0 and u : RN  [0, T ]  R be a Lipschitz continuous subsolution of ut + H (x, t, Du) = 0. Then, if x  i (i  {1, 2}), we have for all   [0, t]
+i
+
+v (x, t)  inf and
+
+i (),i
+
+0
+
+i i li Yx,t (s), t - s, i (s) ds + v Yx,t (  i ), t - (  i )
+
+,
+
+(3.12)
+
+i
+
+u(x, t)  inf
+
+i (),i
+
+0
+
+i i (s), t - s, i (s) ds + u(Yx,t (  i ), t - (  i ) li Yx,t
+
+,
+
+(3.13)
+
+i is the solution of the ode (3.7) and the infima are taken on all stopping time  such that where Yx,t i i ( )	  and	   i from  and	Yx,t i where i is the first exit time of the trajectory Yx,t i i i i i i is the one from i .
+
+The following important result highlights the following fundamental alternative: given x  H either there exists an optimal strategy consisting in entering in 1 or 2 , or all the optimal strategies consist in staying on H at least for a while. Theorem 3.9. Assume (H ) and (HC ). Let v : RN  [0, T ]  R be a lsc supersolution of vt + H (x, t, Dv ) = 0. Let   C 1 H  [0, T ] and (x, t) be a minimum point of (z, s)  v (z, s) - (z, s). Then, the following alternative holds: A) either there exist  > 0, i  {1, 2} and a sequence xk  i converging to x such that v (xk , t)  v (x, t) and, for each k, there exists a control k i () such that the corresponding trajectory i (s)	for all s  [0,	] and Yx i k ,t
+
+
+v (xk , t)
+0
+
+i i li Yx (s), t - s, k i (s) ds + v Yxk ,t ( ), t -  ; k ,t
+
+(3.14)
+
+B) or there holds t (x, t) + HT x, t, DH (x, t)  0. (3.15)
+
+Proof. As in [6, Thm. 3.3], we are going to prove that if A) does not hold, then necessarily the second possibility holds. Up to a standard modification of , we may assume that the max is strict. For  > 0 we consider the function
+2 ~(z, s) - dH (z ) + dH (z ) , v (z, s) -  2
+
+where dH () is the distance function from H as in the proof of Theorem 3.7. There are two cases: either for  small enough, the minimum point (x , t ) lies on H  [0, T ] and this leads directly to (3.15) as in [6, Thm. 3.3]; or we may assume that for instance, x  i for  small enough. In this second case, the argument by contradiction in [6, Thm 3.3. - 2nd case] applies, using Lemma 3.8.
+
+14
+
+4
+
+Uniqueness result
+
+We first prove a local comparison result which is based on auxiliary results in the appendix. To this end, we denote by Q(x0 ,t0 ) (r, h) the open cylinder Q(x0 ,t0 ) (r, h) := B (x0 , r )  (t0 - h, t0 ) where 0 < t0 - h < t0 < T , whose parabolic boundary is given by p Q(x0 ,t0 ) (r, h) := B (x0 , r )  {t0 - h}  B (x0 , r )	[t0 - h, t0 ) . In the sequel, we assume that x0  H and that, thanks to (H ), r is small enough in order that ~ :=  B (x0 , r )) , we have there exists a W 2, -diffeomorphism	= (x0 ,r) such that by setting	~.  H  B (x0 , r ) = {xN = 0}
+0 We denote this assumption by (Hx  ). 0 Theorem 4.1. Assume (Hx  ) and (HC ). If u and v are respectively a bounded usc subsolution and a bounded lsc supersolution of wt + H- (x, t, Dw) = 0 in Q(x0 ,t0 ) (r, h) . Then
+
+(u - v )+
+
+L (Q(x0 ,t0 ) (r,h))
+
+ (u - v )+
+
+L (p Q(x0 ,t0 ) (r,h))
+
+(4.1)
+
+Proof. We make the change of variable : u ~(x, t) := u(-1 (x), t , v ~(x, t) := v -1 (x), t . The ~ =  ~  (t0 - h, t0 ), for an functions u ~, v ~ are respectively sub and supersolution of (6.1) with Q - ~ Hamiltonian H associated to ~ li (x, t, ) := li -1 (x), t,  bi (x, t, ) := D (-1 (x))bi -1 (x), t,  , ~ ~ , t  [t0 - h, t0 ] . for x
+
+~. ~ b, L ~b, M ~ l, m These dynamics and costs satisfy (HC ) for some new constants denoted by M ~ l,	We apply Lemma 6.1 which gives (6.2) which is exactly the result we want by making the change back. We now turn to one of our main results, which is the Theorem 4.2. Assume (H ) and (HC ). Let u be a bounded, Lipschitz continuous subsolution of ut + H- (x, t, Du) = 0 in RN  (0, T ) and v be a bounded, lsc supersolution of vt + H- (x, t, Dv ) = 0 in RN  (0, T ). If u(x, 0)	v (x, 0) in RN , then u  v in RN  (0, T ). Proof of Theorem 4.2. We first prove the Lemma 4.3. For K > 0 large enough,	(x, t) := -Kt - (1 + |x|2 )1/2 satisfies t + H- (x, t, D )  -1. Proof. We just estimate as follows: t + H- (x, t, D )  -K + Mb |D | + Ml  -K + Mb + Ml . Hence taking K  Mb + Ml + 1 yields the result.
+
+15
+
+Using the function  of Lemma 4.3, we introduce, for   (0, 1) close to 1, the function u (x, t) := u(x, t) + (1 - ) (x, t). Because of the convexity properties of H1 , H2 , HT , it satisfies (u )t + H- (x, t, Du )  -(1 - ). Then we consider M := sup
+RN [0,T ]
+
+u (x, t) - v (x, t) .
+
+Since u (x, t)	- as |x|   (uniformly with respect to t  [0, T ]) and v is bounded, this "sup" is actually a "max" and it is achieved at (x0 , t0 ). Notice also that M  M := supRN [0,T ] u(x, t) - v (x, t) ) as   1. We argue by contradiction, assuming that M > 0, which implies that M > 0 for  close enough to 1. From now on, we assume that we have chosen such a  and therefore M > 0. Next we remark that t0 > 0 since u (x, 0) - v (x, 0)  0 in RN and we first treat the case when 0 x0  H. In that way, since (H ) holds, we can choose r > 0, small enough in order that (Hx  ) holds. On the other hand, we choose any h such that t0 - h  0, say h = t0 . The next step consists in introducing the function u  (x, t) := u (x, t) + (1 - )2 t - t0 - |x - x0 |2 . We claim that u  is a subsolution of ( u )t + H- (x, t, D u  ) = 0 for  close enough to 1. Indeed, a direct computation gives ( u )t + H- (x, u  , D u  )  (u )t + H- (x, u , Du ) + (1 - )2 {1 + 2Mb r }  -(1 - ) + (1 - )2 {1 + 2Mb r }  0 for  sufficiently close to 1. Thus, we use Theorem 4.1 with the pair of sub/supersolution ( u , v ) and we obtain in particular M = u (x0 , t0 ) - v (x0 , t0 ) = u  (x0 , t0 ) - v (x0 , t0 )  ( u - v )+
+L (p Q(x0 ,t0 ) (r,h)) .
+
+However, on the parabolic boundary ( u - v ) < M . Indeed, on B (x, r )  (t0 - h, t0 ), we have u  (x, t) - v (x, t) = u (x, t) - v (x, t) + (1 - )2 t - t0 - r 2  M - (1 - )2 r 2 , while on B (x0 , r )  {t0 - h}, u	(x, t) - v (x, t) = u (x, t) - v (x, t) + (1 - )2 t - t0 - |x - x0 |2  M - (1 - )2 h . This gives a contradiction. We can argue in the same way if x0  1 or x0	2 : in fact this is even easier since we may choose r such that either B (x0 , r )  1 or B (x0 , r )  2 ; with this choice we only deal with classical Hamilton-Jacobi Equations without discontinuities and we have just to apply classical results. The contradiction shows that M  0 and the proof is complete. As a consequence, we have the following 16
+
+Theorem 4.4. Assume (Hg ), (H ) and (HC ). Then (i) The value function U- is continuous and the unique solution of ut + H- (x, t, Du) = 0 in RN  (0, T ) , u(x, 0) = g(x) in RN . (4.2) (4.3)
+
+(ii) U- is the minimal supersolution of (1.3)-(1.5)-(1.6)-(4.3) and U+ is the maximal subsolution of (1.3)-(1.5)-(1.6)-(4.3). Proof. The proof of (i) is a direct consequence of Theorem 3.3 and 4.2 : indeed (U- ) and (U- ) are respectively sub and supersolution of (4.2) by Theorem 3.3 and since (U- ) (x, 0) = (U- ) (x, 0) = g(x) in RN , Theorem 4.2 implies that (U- )  (U- ) in RN  [0, T ], which implies that U- is continuous because (U- )  U-  (U- ) in RN  [0, T ] and therefore (U- ) = U- = (U- ) in RN  [0, T ]. As a consequence U- being both upper and lower semicontinuous, it is continuous. The uniqueness is a direct consequence of Theorem 4.2. For (ii), the first part is also a direct consequence of Theorem 4.2 since any supersolution of (1.3)-(1.5)-(1.6)-(4.3) is a supersolution of (4.2)-(4.3). Finally, for U+ , we follow the same idea as for U- above and of [6] : if u is a subsolution of (1.3)-(1.5)-(1.6)-(4.3), then by Theorem 3.7, it satisfies
+reg ut + HT (x, t, Du)	0 on H ,
+
+and in order to compare it with the supersolution (U+ ) , we use Theorem 3.5 (instead of Theorem 3.9 for the supersolutions in the case of H- ) together with the regularization of the appendix (done on H+ and not H- ). We skip the details since it is a straightforward adaptation of the proof of Theorems 4.1-4.2. Notice that, as a consequence, we have (U+ )	(U+ ) in RN [0, T ] since (U+ ) is a subsolution of (1.3)-(1.5)-(1.6)-(4.3), which implies the continuity of U+ . Remark 4.5. We emphasize the key role of Theorem 3.5: U+ is the only supersolution of the H+ equation for which we have such a property and this is why we do not have a complete comparison result for this equation (contrary to the H- one).
+
+5
+
+Stability
+
+  In this section we prove stability results when we have a sequence of dynamics and costs b i , li , g converging locally uniformly. Let us begin with a standard stability result for sub/super solutions. 1 3    Theorem 5.1. Assume (H ) and that, for all	> 0, b 1 , b2 , l1 , l2 satisfy (HC )-(HC ) with constants   uniforms in . Let Hi (i = 1, 2) and HT be defined as in (1.4) and (3.1) respectively with these dynamics and costs. If    N (b 1 , b2 , l1 , l2 )	(b1 , b2 , l1 , l2 ) locally uniformly in R  [0, T ]  A ,
+
+g  g locally uniformly in RN , 17
+
+then the following holds (i) if, for all  > 0, v is a lsc supersolution of
+N ut + H-  (x, t, Du) = 0 in R	(0, T ),
+
+(5.1)
+
+then v = lim inf  v is a lsc supersolution of ut + H- (x, t, Du) = 0 in RN  (0, T ), where H- is defined as in (1.4) and (3.1) through the functions (b1 , b2 ) and (l1 , l2 ). (ii) If, for  > 0, u is an usc subsolution of (5.1) and if b1 , b2 satisfy (H4	= lim sup u C ) then u is a subsolution of (5.2). We point out the unusual form of this stability result : if for supersolutions, the half-relaxed limit result holds true, it is not the case anymore in general for the subsolution. This is related to the HT inequality which sees only the subsolutions on H. For exemple, if H = {x  RN : xN = 0} and if u (x) = sin(xN /), then lim sup u (x, 0)  1 on H while u (x, 0)	0. In this example it is clear that the lim sup u comes from the value of u outside H and it is clear that one cannot recover an HT -inequality which sees only the values on H. Assumption (H4 C ) prevents these pathological situations to hold. Proof. This proof follows almost completely from standard arguments for stability results on viscosity solutions (see, for instance [5]): we apply the standard stability results in RN for the Hamiltonian defined in the introduction, and in H for HT . Since we can flatten the boundary this last result is essentially a result in RN -1 . The only case that need to be detailed is the proof of (ii) and more precisely u  fulfilling the inequality ut + HT (x, t, Du)  0 on H. To do so, we use the
+ converges to H locally uniformly. Lemma 5.2. Under the assumptions of Theorem 5.1 (ii), HT T
+
+(5.2)
+
+We postpone the proof and return to the proof of Theorem 5.1 (ii). We first remark that, thanks to (H ), we can argue as in the proof of uniqueness and suppose that we are working with 0 H = {xN = 0} (see assumption (Hx  ) and its consequences). (y  , 0, s) - (y	, s) in If   C 1 (H  [0, T ]) and if (x 0 , t0 ) is a strict local maximum point of u H  [0, T ], our aim is to prove that
+  t (x 0 , t0 ) + HT (x0 , 0), t0 , DH (x0 , t0 )  0 .
+
+(5.3)
+
+ ) converging to (x By the definition of lim sup u , there exists a sequence ( x , t 0 , 0, t0 ) such that  - 1 / 2  u (x0 , 0, t0 ) = lim u ( x , t ). If ( x )N = 0, we set K = |( x )N | , otherwise K = -1 . Notice that K	+ as   0. We consider the function  (x, t) := u (x, s) - (x , s) - K |xN |. By classical techniques, using  )  u that  ( x , t (x , 0, t0 ) - (x , t0 ) (this key property justifies the choice of K ), one proves easily that there exists a sequence (x , t ) of maximum points of  which converges to (x 0 , 0, t0 ). 18
+
+If x  1  {x  RN : xN > 0}, x  |xN | is smooth in a neighborhood of x and, since u is an usc subsolution of (5.1), we have
+  t (x	, 0, t ) + H1 (x , t , DH (x , 0, t ) + K eN )	0
+
+but, recalling that K  + as   0, this inequality cannot hold for  small enough because of  4 (H4 C ). To be more precise, since the bi converge locally uniformly to bi which statisfy (HC ), we ~ in Lemma 6.3 which proves the claim. can take a uniform  =  In the same way x cannot be in 2 . As a consequence, x is on H and is a maximum point  -inequality of (y  , s)  u (y  , 0, s) - (y  , s). But u is an usc subsolution of (5.1), therefore the HT holds and we conclude in the classical way using Lemma 5.2.
+, Now we prove Lemma 5.2. By the definition of HT  HT (x, t, p) := sup	- b H (x, t, a), p - lH (x, t, a) .
+
+A0 (x,t)
+
+If x  H, t  (0, T ) and if (x , t ) is a sequence in H	(0, T ) converging to (x, t) and if p  p, we use this definition to write
+    HT (x , t , p ) = - b H (x , t , a ), p - lH (x , t , a )  - bH (x , t , a), p - lH (x , t , a)
+
+(5.4)
+
+for any a  A0 (x , t ). Again by definition, we have
+  b H (x , t , a ) =  b1 (x , t , 1 ) + (1 -  )b2 (x , t , 2 ) ,
+
+and extracting subsequences, we can assume that b ). In the same H (x , t , a ) converges to bH (x, t, a  (x , t , a)  l (x, t, a way, lH  ). It remains to show that	H HT (x, t, p) = - bH (x, t, a ), p - lH (x, t, a ) . This can be done using Inequality (5.4) and the arguments of Lemma 6.5 : if HT (x, t, p) = - bH (x, t, a ^), p - lH (x, t, a ^) , we can build a sequence a ~  A0 (x , t ) such that
+ (x , t , a ~ )  - bH (x, t, a ^), p - lH (x, t, a ^) . - b ~ ), p - lH H (x , t , a
+
+Passing to the limit in the inequality (5.4) with a = a ~ , we have the desired conclusion. We now turn to the stability of the minimal and maximal solutions. To do so, we denote by  [resp. T reg, ] the set of admissible [resp. admissible and regular] trajectories associated to the Tx,t x,t    dynamics b i , i = 1, 2. We also define the costs functionals J as in (2.5), but with  and g .
+ , the following Lemma 5.3. Under the assumptions of Theorem 5.1, if for any  > 0, (X  , a )  Tx,t holds
+
+19
+
+i) There exists a subsequence (X n , an )n converging to an admissible trajectory (X, a)  Tx,t. More precisely, X n  X uniformly in [0, T ] and J (x, t; (X n , an ))  J (x, t, (X, a)) uniformly in [0, T ] .
+
+reg, ii) If, moreover, (X  , a )  Tx,t for any	> 0 (i.e., the trajectories are regular), then we have reg a subsequence for which the limit trajectory is also regular: (X, a)  Tx,t .
+
+iii) The results in i) (and ii) ) hold true also if we assume that for each  > 0, the trajectories (X  , a )  Tx ,t ( Txreg ), and we assume that (x , t )  (x, t) as	0.  ,t Proof. The proof of i) is almost standard and we only provide it for the reader's convenience. On the contrary, the proof of ii) reveals unexpected difficulties (but which come from the particular features of the control problem). Proof of i) -- Since we want to pass to the limit both on the dynamic and the cost, we rewrite the differential inclusion in a different way, taking into account both at the same time. We fix (x, t). Since the trajectories go backward in time, we introduce the variable  (s) := t - s, starting at	(0) = t. Then, for any	> 0, using the admissible trajectory (X  , a ) we set Y  (s) :=
+0  , l . In order to take into acount both X  where the Lagrangian  is defined as in (2.6), but with l1 2 and Y  at the same time and the function  (), we consider the mixed variable Z := (X, Y,  )  RN  R  [0, T ], and translate the differential inclusion in terms of Z . s
+
+ X  ( ),  ( ), a ( ) d
+
+To do so, we use (H3 C ) and introduce, for i = 1, 2, the sets BL i (Z ) := BL (Z ) :=
+ b i (X, , i ), li (X, , i ), -1 : i  Ai ,
+
+BL i (Z )  co BL 1 (Z )  BL2 (Z )
+
+if X  i , if X	H .
+
+It turns out that the triple Z	:= (X  , Y  ,  ) is a solution of the differential inclusion   (s)  BL Z  (s) Z for a.e. s  [0, t) , with Z  (0) = (x, 0, t) .
+
+  We first notice that since the b i , li are uniformly bounded, the Z are equi-Lipschitz and equibounded on [0, T ]. Therefore we can extract a subsequence (denoted by Z n ) which converges uniformly on [0, T ] to some Z = (X, Y,	). Moreover, for any given  > 0 and for  > 0 small enough, we have, for any s  (0, t)
+
+BLn (Z n )  BL(Z ) + BN +2 , where BN +2 is the unit ball in RN +2 , centered at the origin. Using this information, it is immediate  (s)  BL Z (s) . In particular the limit trajectory is admissible: there exists a control a() that Z such that X, a)  Tx,t. (See Filippov's Lemma [1, Theorem 8.2.1] or the proof of Theorem 2.1 in [6]). 20
+
+We deduce also that necessarily, Y n (s)  Y (s) =
+0 s
+
+ X ( ),  ( ), a( ) d
+
+uniformly in [0, t] .
+
+Finally, since g   g locally uniformly in RN and X n  X uniformly on [0, T ], we deduce that J (x, t; (X n , an )) converges to J (x, t, (X, a)) uniformly with respect to t  [0, T ]. Proof of ii) -- The difficulty comes from two facts: the first one is that we have to deal with	weak convergences in the b i , bH -terms but the problem is increased by the fact that some pieces of the trajectory X () on H can be obtained as limits of trajectories X  () which lie either on H, 1 or 2 . In other words, the indicator functions 1{X  H} () do not converge to 1{X H} (), and similarly the 1{X  i } () do not converge to 1{X i } (). We proceed in three steps. Step 1. We first recall that   (s) = X
+i=1,2	   b i X (s),  (s), i (s) 1{X  i } (s) + bH X (s),  (s), a (s) 1{X  H} (s)
+
+converges weakly (i.e. in L (0, T ) weak) to  (s) = X
+i=1,2
+
+bi X (s),  (s), i (s) 1{X i } (s) + bH X (s),  (s), a(s) 1{X H} (s) ,
+
+(5.5)
+
+for some control a() such that (X, a)  Tx,t. This weak convergence does not create any difficulty if X (s) is in i for i = 1, 2 but it is a little bit more complicated if X (s)  H since the term bH X (s),  (s), a(s) 1{X H} (s) is a weak limit of
+     b i X (s),  (s), i (s) 1{X  i } (s)1{X H} (s) + bH X (s),	(s), a (s) 1{X	H} (s)1{X H} (s) , i=1,2
+
+and we have to check that both terms cannot generate singular strategies. In order to examine carefully the mechanism of the weak convergence on H, we write, for 0    t X  ( )-x =
+i=1,2 0    b i X (s),  (s), i (s) 1{X  i } (s) ds+  0	b H X (s),  (s), a (s) 1{X  H} (s) ds ,
+
+and we use a slight modification of the procedure leading to relaxed control as follows. We write
+ 0   b 1 X (s),  (s), 1 (s) 1{X  1 } (s) ds =  0 A1   b 1 X (s),  (s), 1 1 (s, d1 ) ds ,
+
+ (s, ) stands for the measure defined on A by	(s, E ) =   (E )1  where 1 1 1 {X 1 } (s), for any 1   Borelian set E  A1 . Similarly we define 2 and H for the other terms. Notice that H is a bit more complex measure since it concerns controls of the form a = (1 , 2 , ) on A, but it works as for 1 so we omit the details.
+
+These measures are uniformly bounded in  since they all have a total mass less than (or equal to) one. Hence, up to successive extractions they all converge weakly to some measures 1 , 2 , H .  +   +   = 1, we obtain in the limit  +  +  = 1. Using that (also Since the total mass is 1 1 2 H 2 H 21
+
+up to extraction form the proof of i) above), X  converges uniformly on [0, t] and the local uniform convergence of the b i , we get that
+  b 1 X (s),  (s), 1 1 (s, d1 ) - 0
+
+b1 X (s),  (s), 1 1 (s, d1 ), weakly in L (0, T ) .
+A1
+
+A1
+
+Introducing 1 (s) :=
+
+tion argument (see [1, Theorem 8.1.3]), the last integral can be written as b1 X (s),  (s),  1 (s) 1 (s)   for some control 1  L (0, T ; A1 ). The same procedure for the other two terms provides the con trols  2 (), a () and functions 2 (), H (). In principle, those controls can be different from 1 (),   2 () and a() but this will not be a problem since  1 (), 2 (), a () are just intermediate controls which are used to prove that the strategy a() is regular. Step 2. We then deal with the bi -terms. If di (x) denotes the distance from x to i then di (X  ) is a sequence of Lipschitz continuous functions which converges uniformly to di (X ) and, up to an additional extraction of subsequence, we may assume that the derivatives converges d weakly in L (weak convergence). As a consequence, ds di (X  ) 1{X H} converges weakly to d ds di (X ) 1{X H} .
+d di (X  ) . Using the extension of ni In order to use this convergence we have to compute ds outside H in such a way that Ddi (x) = -ni (x)1{xj } , together with the regularity of i and Stampacchia's Theorem we have
+
+A1
+
+1 (s, d1 ) and using the convexity of A1 to gether with measurable selec-
+
+d   (s)  ni (X	(s))1{X   } (s) di (X  ) = X j ds
+
+for almost all s  (0, T ).
+
+  (s)  Indeed, on one hand , the distance function is regular outside H while, on the other hand, X ni (X  (s)) = 0 a.e. on H. Therefore the above convergence reads, for i = j ,   (s)  ni (X	(s))1{X   } (s)1{X H} (s) - X  (s)  ni (X (s))1{X  } (s)1{X H} (s) = 0 X j j   (s), in L (0, T ) weak, or equivalently using the above expression of X
+    b j X (s),	(s), j (s)  nj (X (s))1{X  j } (s)1{X H} (s) - 0 in L (0, T ) weak  .
+
+This implies that for i = 1, 2 bi X (s),  (s),	i (s)  ni (X (s)) i (s) = 0 a.e. on {X (s)  H} , (5.6)
+
+which means that, in these terms, the involved dynamics are regular since they are tangential (provided we take the  i as controls).
+reg Step 3. We are now ready to prove that (X, a)  Tx,t , i.e. the dynamic in the bH -term of (5.5) is regular. To do so, we introduce the convex set of regular dynamics for z  H and 0  s  t that we denote by N K (z, s) := bH z, s, a , a  Areg 0 (z, s)  R .
+
+We notice that, for any z  H and s  [0, T ], K (z, s) is closed and convex, and the mapping (z, s)  K (z, s) is continuous on H for the Hausdorff distance. Then, for any  > 0, we consider 22
+
+the subset of [0, t] consisting of all times for which one has singular ( -enough) dynamics for the control a(), namely
+ := Esing
+
+s  [0, t] : X (s)  H and dist bH X (s), t - s, a(s) ; K X (s), t - s
+
+
+
+ | > 0. and we argue by contradiction, assuming that, for some	> 0, |Esing  , since K (X (s), t - s) is closed and convex, there exists an hyperplane If we take s  Esing separating bH X (s), t - s, a(s) from K (X (s), t - s) and we may construct an affine function s : RN  R of the form s (z ) = c(s)  z + d(s) such that
+
+s bH X (s), t - s, a(s)
+
+  -1 if s  Esing ,
+
+s  +1 on K X (s), t - s .
+
+Since the mapping s  bH X (s), t - s, a(s) is measurable and s	K X (s), t - s is continuous (this can be seen as a consequence of Remark 6.7), we can assume that the coefficients c(s), d(s) are in L (they are bounded because the distance	> 0 is fixed). Hence we may consider the integral I  :=
+0 t
+
+  (s) 1E  (s) ds . s (X sing
+
+  as   0 and the fact On the one hand, since s is an affine function, by weak convergence of X	 = bH when s  E , we have that X sing I
+0 t
+
+ (s) 1	(s) ds = s (X E
+sing
+
+t
+
+s bH X (s), t - s, a(s)
+0
+
+ | < 0. 1E  (s) ds  -|Esing
+sing
+
+On the other hand, we can also use the decomposition  I = +
+0 t 0 t
+ c(s)1Esing (s)
+
+i=1,2
+
+   c(s)1Esing (s)b H (X (s), t - s, a (s))1{X  H} (s) ds +
+
+   ds b i X (s), t - s, i 1{X  i } (s) t 0
+
+
+
+(5.7)
+
+ d(s)1Esing (s) ds .
+
+Notice that, in the second term above, a () is a regular control for the trajectory X  , and we want to keep this property in the limit as   0. To do so the key remark is the following: fix  > 0 and	s  [0, t] for each a (s)  Areg ~ (s)  Areg 0 (X (s), t - s) there exists a a 0 (X (s), t - s) such that
+   b ~ (s)) = o (1), H (X (s), t - s, a (s)) - bH (X (s), t - s, a
+
+where o (1) represents any quantity which goes to zero as   0. Indeed, for  > 0, we can apply Remark 6.7 for each s fixed and a measurable selection argument (see Filippov's Lemma [1,  Theorem 8.2.10]) to obtain the existence of the control a (s)	Areg 0 (X (s), t - s) and then deduce  the estimate by recalling that X converges uniformly to X . Moreover, by construction and using again a measurable selection argument (see Filippov's Lemma [1, Theorem 8.2.10]), there exists a control a (s)  K (X (s), t - s) such that c(s)bH (X (s), t - s, a (s)) =
+aK (X (s),t-s)
+
+min
+
+c(s)bH (X (s), t - s, a).
+
+23
+
+Therefore, using the two above informations, we have
+t 0   1E  (s)c(s)b H (X (s), t-s, a (s))1{X  H} (s) ds
+sing
+
+t 0
+
+1E  (s)c(s)bH (X (s), t-s, a (s))1{X  H} (s) ds+o (1).
+sing
+
+(5.8)
+
+0
+
+lim I	+
+
+Now we can pass to the weak limit in (5.7)-(5.8) using the measures i and H . We obtain
+t 0 t 0 t
+ d(s)1Esing (s) ds   1Esing (s)s
+
+c(s)1E	(s)
+sing
+
+bi X (s), t - s, i (s) i (s, di ) +
+
+i=1,2 Ai
+
+A
+
+bH (X (s), t - s, a (s))H (s, da) ds
+
+
+
+=
+0
+
+bi X (s), t - s, i (s) i (s, di ) +
+A
+
+i=1,2 Ai
+
+Next we remark that, by (5.6), for i = 1, 2
+
+bH (X (s), t - s, a (s))H (s, da) ds .
+
+Ai
+
+bi X (s), t - s, i (s) i (s, di ) = bi X (s),  (s),  i (s) i (s)  K (X (s), t - s)
+
+and bH (X (s), t - s, a (s))  K (X (s), t - s) by construction. Therefore, since 1 + 2 + H = 1 and K (X (s), t - s) is convex, we have
+ | > 0 which is a contradiction with the fact that lim I  = We end up with lim0 I   |Esing   -|Esing | < 0 by assumption. This proves that for any  > 0, |Esing | = 0 and we deduce that for almost any s, the limit dynamic bH X (s), t - s, a(s) is regular, which ends the proof.
+
+s
+
+bi X (s), t - s, i i (s, di ) +
+
+i=1,2 Ai
+
+A
+
+bH (X (s), t - s, a )H (s, da )  1
+
+Proof of iii) -- This result follows by remarking that the arguments above holds true also is we consider a sequence (x , t )  (x, t) as   0. We decided not to write it directly in the general case for the sake of simplicity. Remark 5.4. Through the above proof, it can be easily seen that this stability result extends to the case when the domain depend on  : indeed the proof is done using (H ), reducing to the case when   0 H = {xN = 0} through Assumption (Hx  ). To extend the result, we have to suppose that the 1 , 2 x0 1 1 converges in a C -sense to 1 , 2 which means that the  in (H ) have to converge in C . Note that, this convergence has to be assumed W 2, if the required result is the convergence of solutions (instead of only sub or supersolution). Finally, we have a stability result for the maximal and minimal solutions: Theorem 5.5. Let us assume the hypotheses of Theorem 5.1. Then the associated value functions + - + U-  and U converge respectively to U and U . 24
+
+- Proof. Let us first remark that the convergence of U-  to U follows classically from the stability and comparison results Theorem 5.1 and Theorem 4.4. Moreover, the same results ensure us that + U+  lim sup U+  . Indeed, we only now that U is the maximal subsolution of (5.2), therefore the stability can be applied only to the subsolutions inequality. N In order to conclude we need to prove that U+ (x, t)  lim inf  U+	(x, t) for all (x, t)  R  [0, T ]. reg For each  > 0, there exists a (X  , a )	Tx ,t such that    U+  (x , t ) = J (x , t ; (X , a )) + and we first consider a subsequence (X n , an ) such that lim inf U+  (x , t ) = lim Un (xn , tn ). + Then we use Lemma 5.3, parts iii): up to another extraction, we may assume that Un (xn , tn ) = reg J n (xn , tn ; (X n , an ))	J (x, t; (X, a)) for some (X, a)  Tx,t . Hence,
+
+lim inf U+  (x , t ) = J (x, t; (X, a))  which ends the proof.
+
+reg (X,a)Tx,t
+
+inf
+
+J (x, t; (X, a)) = U+ (x, t) ,
+
+6
+
+Further Remarks and Extensions
+
+The simplified (but relevant) framework we describe above can be extended in several directions and we start by remarks concerning the different regions (1 , 2 ). Because of the regularity assumptions we impose on the interfaces, there is no difference between (H ) and using a possibly infinite number regular open subsets (i )i with either 1  i  K or i  N and satisfying the following assumptions (H ) For all i = j , i  j =  and RN =
+
+
+i i
+
+; for any z   := RN \
+i,j
+
+i i
+
+, there exist
+
+exactly two indices i, j such that z  i  j := {i,j } . Moreover  := controllable case and W 2, in the non-controllable case.
+
+{i,j } is C 1 in the
+
+Concerning the regularity assumption on , we point out that, since our key arguments are local, we are always in a two-domains framework and even in a two-mains framework with a flat interface. This is why we have chosen to present the paper with just two domains 1 and 2 . On the other hand, this regularity is used through some change of variable and it is necessary in order that the transformed Hamiltonians satisfy the right assumptions to prove the comparison result. In the controllable case, the solutions are Lipschitz continuous and it could be enough to have continuous bi 's and a C 1 change preserves this property. On the contrary, in the non-controllable case, the solutions may be just semi-continuous and the Lipschitz continuity of the bi 's is necessary. Here we need a W 2, change to preserve this property. Because of the same argument, the i may depend on t and (this is an other way to formulate it) even we may assume that the i are domains in RN  (0, T ) with the same regularity assumption  as the one we use above (one has just to use (H ) with RN being replaced by RN  (0, T )). This is a consequence of the fact that, through our change of variable, t and the tangential coordinates t N on  play the same role. A corollary of this remark is that if ni () = (nx i , ni )  R  R is the unit 25
+
+normal vector pointing outwards defined on  i , then we have to assume nx i = 0. This is required N to avoid, for example, the pathological situation of i  R  (0, T ). As far as the control problem is concerned, it is clear from the proof that we can take into account without any difficulty : (i) general discount factors (ci (x, t, i )), (ii) infinite horizon control problem with multiple domains in the non-controllable case (extending the results of [6]) and (iii) the case where one has an additional control problem on  : here it suffices to check that the proof of Theorem 3.9 (of [6, Thm. 3.3]) extends to this case. To do so, we make two remarks (a) The control problem on  is associated to an Hamiltonian G and (3.15) should be replaced by max(t (x, t) + HT x, t, DH (x, t) , t (x, t) + G x, t, DH (x, t) )  0 . (b) The proof is going to consider (in the flat boundary case)
+ () := max{t (x, t) + H1 (x0 , v (x0 ), DH (x 0 ) + eN ), t (x, t) + H2 (x0 , v (x0 ), DH (x0 ) + eN ),
+
+t (x, t) + G x, t, DH (x, t) + eN )} but t (x, t) + G x, t, DH (x, t) + eN ) = t (x, t) + G x, t, DH (x, t)) since the G-Hamiltonian takes only into account the tangential part of the gradient and this quantity can be assumed to be strictly negative, otherwise we would be done. Therefore we see that the G-term plays no role in the proof. To conclude, let us mention that the (interesting) cases of non-smooth  where the different regions can be separated by triple junction or the case of chessboard situations are still (far) out of the scope of this article.
+
+Appendix: the flat interface case
+In this appendix, we assume that we are in a local "flat" situation. More precisely, we denote ~ a bounded open subset of RN (we actually have in mind the image of a ball B (x, r ) by a by  ~ and consider diffeomorphism  which purpose is to flatten the interface). We assume that 0   ~ 1 = {xN > 0}   ~,  ~ 2 = {xN < 0}   ~.  ~ 1   ~2 =  ~  {xN = 0}, so that	~ = ~1	~ 2  . Following Section 4, We use the notations  :=   ~ :=  ~	(t0 - h, t0 ) and p Q ~= ~  {t0 - h}	~  (t0 - h, t0 ) for 0 < h < t0 < T , we denote by Q N its parabolic boundary. We also denote by eN the N -th unit vector in R . reg ~ i and we define H ~ i, H ~ T , H~ For i = 1, 2, we are given dynamics ~ bi and costs ~ li in each  exactly as we did for the same Hamiltonians without the tilde. With the convention of Section 3, this allows us to consider the problem ~ - (x, t, Dw) = 0 in Q ~. w ~t + H (6.1)
+T
+
+In all the following we assume that the dynamics and costs ~ bi , ~ li satisfy (HC ) with constants ~ ~ ~ ~ denoted with a tilde: Mb , Lb , Ml , m ~ l and  . Of course, this is the case after our reduction to the flat case if the bi and li satisfy (HC ). We have the following comparison result for (6.1). 26
+
+Lemma 6.1. Assume that the dynamics ~ bi and costs ~ li satisfy (HC ). If u ~ is an usc subsolution of (6.1) and v ~ a lsc supersolution of (6.1), then (~ u-v ~)+
+~) L (Q
+
+ (~ u-v ~)+
+
+~) . L (p Q
+
+(6.2)
+
+Proof. As in [6] the first steps consist in regularizing the subsolution. To do so, depending on the ~ Moreover, for the sake of context, we write either x or (x , xN ) where x  RN -1 for a point in .  simplicity, we will use both notations: H (x, t, p) or H (x , xN , t, p). Step 1 -- We first define the sup-conv in time and in the x -variable for u ~ as follows u ~ (x, t) := max
+y ,t Q
+
+u ~(y  , xN , t ) - exp(Kt)
+
+|x - y	|2 |t - t |2 + 2 2
+
+for some (large) positive constant K to be chosen later. By the definition of the supremum, if it is achived at y  , t , we have u ~(y	, xN , t ) - exp(Kt)
+  2  2
+
+|x - y	|2 |t - t |2 + 2 2
+
+=u ~(x, t) ,
+
+t| y| + |t-  2||u|| . Since we want to use viscosity inequalities for u at and therefore |x - 2 2   ~ and thanks to the above inequality, in order to do it, (y , xN , t ), we need these points to be in Q we have to restrict (x, t) to be in
+
+~  := x   ~ : dist(x,  ) ~ > (2||u Q ~|| )1/2	t0 - h + (2||u ~|| )1/2 , t0 - (2||u ~|| )1/2 ) . Our result on u ~ is the ~ - (x, t, D u ~ Lemma 6.2. The Lipschitz continuous function u ~ satisfies (~ u )t + H ~ )	m() in Q for some m() converging to 0 as  tends to 0. Proof. We first remark that u ~ is Lipschitz continuous with respect to time t and to the x -variable by the classical properties of the sup-convolution. Moreover, it is Lipschitz continuous also with respect to the xN -variable thanks to the coerciveness of the Hamiltonian (see also Lemma 6.3 below). ~ - -equation, we consider a test-function  and a point To check that it is a subsolution of the H (x, t) where u ~ -  reaches a local maximum. Then considering a maximum in (z, s) of u ~ (z, s) - t |2 | z  -y	| 2	+ |s- - (z, s) leads us to consider a maximum in (z, s, y , t ) of u ~(y , zN , t ) - exp(Ks) 2 2 (z, s). If |x - y  |2 |t - t |2 u ~ (x, t) := u ~(y  , xN , t ) - exp(Kt) + , 2 2 (we still write y  , t for the variables where the max is attained for simplicity of notations) we deduce several things : first, we have a max in z  and s which gives Dx (x , xN , t) = 2(y  - x ) exp(Kt) , 2 2(t - t) t (x , xN , t) = exp(Kt) - K exp(Kt) 2 27
+
+|x - y	|2 |t - t |2 + 2 2
+
+.
+
+~ 1 , the proof being similar Then, if xN > 0, we write down the viscosity inequality for u ~ and H ~ ~ for H2 if xN < 0 and HT if xN = 0 thanks to Lemma 6.5 below.  y  |2 t |2 Using as test function (y  , xN , t )	(x , xN , t ) + exp(Kt) |x - + |t- , we have 2 2
+  2(t - t) ~ 1 y  , xN , t , 2(y - x ) exp(Kt) + x (x , xN , t ) eN exp(Kt) + H N 2 2
+
+ 0.
+
+(6.3)
+
+Notice that, combining the previous results, we have t (x, t) + K exp(Kt) |x - y  |2 |t - t |2 + 2 2 ~ 1 y  , xN , t , D  0 . +H
+
+In order to obtain the right inequality, we have to change y  in x and t in t. The only difficulty to do it, compared to the usual arguments, is the xN (x , xN , t )-term in (6.3) which we need to control. This is done using the Lemma 6.3. Assume that the dynamics ~ bi and costs ~ li satisfy (HC ). Then, there exists a constant  ~M such that, for i = 1..2 and p = (p , pN ), we have C ~|pN | - CM (1 + |p |) , ~ i (x, t, p)   H
+1 2 ~ ~ ~ where  is given by assumption (H4 C ) and CM = max{Mb , Ml } in (HC ) and (HC ) .
+
+We postpone the proof of Lemma 6.3 and conclude the proof of Lemma 6.2. Using the lemma for (6.3) yields
+   ~-1 C ~M 2|y - x | exp(Kt) + 1 + 2|t - t| exp(Kt) xN    2 2
+
+.
+
+(6.4)
+
+On the other hand, by the Lipschitz continuity of ~ b1 and the continuity of ~ l1 , (in (H2 C )) we have ~ 1 (y  , xN , t , p) - H ~ 1 (x, t, p)  L ~ b (|y  - x | + |t - t|)|p| + m |H ~ l (|y  - x | + |t - t|) . ~ 1 x, t, D  r.h.s , where Hence t (x, t) + H r.h.s := -K exp(Kt) |x - y  |2 |t - t |2 + 2 2 +m ~ l (|y  - x | + |t - t|) . ~ b (|y  - x | + |t - t|) +L 2|y  - x | exp(Kt) + xN  2
+
+Therefore, thanks to (6.4), r.h.s  -K exp(Kt) + |x - y	|2 |t - t |2 + 2 2
+  ~ b exp(Kt) |y  - x | + |t - t| 2|y - x | +L 2
+
+   ~ b exp(Kt) L ~M 2|y - x | + 2|t - t| |y  - x | + |t - t| C ~ 2 2  ~ bC ~M L |y  - x | + |t - t| + m ~ b |y	- x | + |t - t| . + ~
+
+28
+
+Since by construction |y  - x | + |t - t|  2(2||u ~|| )1/2  the last line gives the m() which appears in the statement of Lemma 6.2. For the other terms, tedious but straightforward computations and the use of Cauchy-Schwarz inequality show that they give a negative contribution provided K is big enough. And the proof of Lemma 6.2 is complete. ~ 1 , it is similar Now we turn to the proof of Lemma 6.3. We provide the proof in the case of H 4 ~ for H2 . The (partial) controlability assumption (HC ) implies the existence of controls 1 , 2  A1 such that ~ > 0 , -~ ~. -~ b1 (x, t, 1 )  eN =  b1 (x, t, 2 )  eN = - ~ 1 (x, t, p) assuming that pN > 0 (the other case is treated similarly). Now we compute H ~ 1 (x, t, p)  -~ H b1 (x, t, 1 )  p - ~ l1 (x, t, 1 )   -~ b1 (x, t, 1 )  (p + pN eN ) - ~ l1 (x, t, 1 ) ~ N -~  p b1 (x, t, 1 )  p - ~ l1 (x, t, 1 )  ~ ~ ~  pN - CM |p | - CM , the last line coming from the boundedness of ~ b1 and ~ l1 . This concludes the proof. Step 2 -- We then define u ~ ~   where  (x , t) is a standard (positive) mollifying kernel  := u N - 1 defined on R  [0, T ] as follows  (x , t) = where	C  (RN -1  [0, T ]),
+RN -1 [0,T ]
+
+x t  ( , ), N -1   1
+
+(y )dy = 1, and supp{} = BRN -1 [0,T ] (0, 1).
+
+We assume that the support of  is the ball B (0, ) so that again, we define the convolution only in ~ , := x   ~ : dist(x,  ) ~ > (2||u Q ~|| )1/2  +	t0 - h + (2||u ~|| )1/2  + , t0 - (2||u ~|| )1/2  . ~- ~ , . Lemma 6.4. The function v := u ~ ~)  0 in Q  - m()t satisfies vt + H (x, t, D v We skip the proof of this lemma which is analogous to the corresponding one in [6] since u ~ is Lipschitz continuous. ~ . At the level (, ) Step 3 -- We are now able to prove the comparison result for u ~ and v ~ in Q	~ , . First, we point out that for any	> 0, u we have to argue in Q ~ - t is C 1 with respect to ~ , it is both a test-function for the time t and the x1 , . . . , xN -1 variables and therefore on	Q v -inequality and it satisfies a strict subsolution inequality in the classical sense. Thanks to Theorem 3.9 we can argue as in [6, Theorem 4.1] and conclude that v - (~ u  - t) cannot achieved a minimum  ~ ~1  Q ~ , and	~2  Q ~ , the point in	 Q, . Moreover, since u ~ - t is a strict subsolution, in   conclusion follows by standard arguments. Thus v - (~ u - t) cannot achieve a minimum point in ~ Q, and this immediately yields (~ u ~)+  - t - v
+~ , ) L (Q
+
+ (~ u ~)+  - t - v 29
+
+~ , ) . L (p Q
+
+Letting  tend to 0 we obtain (~ u ~)+ L (Q u ~)+ L (p Q ~ , ) . In order to prove the ~ , )  (~ -v -v final result, we have to pass to the limit as   0 and then as   0. Letting  tend to 0 is easy since u ~ is continuous (we may even argue in a slightly smaller domain/cylinder). Therefore (~ u - m()t - v ~)+
+~) L (Q
+
+ (~ u - m()t - v ~)+
+
+~) . L (p Q
+
+~  . For all 0 <   0 we have Fix now 0 > 0 and (y, s)  Q 0 (~ u (y, s) - m()t - v ~(y, s))+  (~ u - m()t - v ~)+
+~) . L (p Q
+
+(6.5)
+
+Let us observe that by the properties of the sup-convolution and the fact that u ~ is upper-semiu-v ~)+ L (p Q continuous we have that lim sup0 (~ u - m()t - v ~)+ L (p Q ~ ) . Therefore, ~  )  (~ by the pointwise convergence of u ~  u ~, passing to the limsup in (6.5) we deduce (~ u(y, s) - v ~(y, s))+  (~ u-v ~)+ Since 0 is arbitrary we get (~ u-v ~)+
+~) L (Q ~) L (p Q
+
+~ . (y, s)  Q 0 and the result is proved.
+
+ (~ u-v ~)+
+
+~) L (p Q
+
+Let us now prove the needed regularity properties on the tangential Hamiltonian HT . We do it for a non-flat boundary for the sake of completeness. Lemma 6.5. Assume (H ) and (HC ). The tangential Hamiltonian defined in (3.1) satisfies the following Lipschitz properties with respect z  H and pH |HT (z, t, pH ) - HT (z, t, qH )|  Mb |pH - qH | . Moreover, for any z, z   H and t, t	[0, T ] |HT (z, t, pH ) - HT (z  , t , pH )|  M |(z, t) - (z  , t )||pH | + m(|(z, t) - (z  , t )|) ,
+2 where, if Mb , Ml , Lb , ml ,  are given by (H1 C ) and (HC ),
+
+(6.6)
+
+(6.7)
+
+M := (Lb + 2Mb (Lb + Mb Ln )-1 ) , Ln being the Lipschitz constant of n1 and  -1 )t + ml (t) m(t) = (Lb + 2Ml C for t  0 .
+
+Proof. The proof easily follows from Lemma 6.6 below and standard arguments. Lemma 6.6. Assume (H ) and (HC ). For any (z, t), (z  , t )  H  [0, T ] and for each control  := Lb + Mb Ln a  A0 (z, t), there exists a control a  A0 (z	, t ) such that, if C  -1 )|(z, t) - (z, t )| |bH (z, t, a) - bH (z  , t , a ))|  (Lb + 2Mb C  -1 |(z, t) - (z, t )| + ml (|(z, t) - (z, t )|) . |lH (z, t, a) - lH (z	, t , a ))|  2Ml C
+
+30
+
+Proof. Let us consider a control a  A0 (z, t), i.e. bH (z, t, a)  n1 (z ) = 0. Fix (z  , t )  H  [0, T ], we have two possibilities. If bH (z  , t , a)  n1 (z	) = 0 the conclusion easily follows because a = a  A0 (z  , t ) and |bH (z, t, a) - bH (z  , t , a)|  Lb |(z, t) - (z  , t )| , |lH (z, t, a) - lH (z , t , a)|  ml (|(z, t) - (z , t )|) .
+
+
+(6.8) (6.9)
+
+Otherwise bH (z  , t , a)  n1 (z  ) = 0. Let us suppose, for example, that bH (z  , t , a)  n1 (z ) > 0 (for the other sign the same argument will apply so we will not detail it). We first remark that by (H1 C)  |(z, t) - (z  , t )| |bH (z  , t , a)  n1 (z  )| = |bH (z  , t , a)  n1 (z	) - bH (z, t, a)  n1 (z )|  C (6.10)
+
+ := Lb + Mb Ln . By the controllability assumption in (H4 ) there exists a control a1  A with C C such that bH (z  , t , a1 )  n1 (z  ) = -n1 (z  ) . We then set   := bH (z  , t , a)	,  n1 (z  ) +
+
+ since	 ]0, 1[, by the convexity assumption in (H3 C ) , the exists a control a such that
+
+ (bH (z  , t , a), lH (z  , t , a)) + (1 -  )(bH (z  , t , a1 ), lH (z	, t , a1 )) = (bH (z  , t , a ), lH (z	, t , a )). By construction bH (z  , t , a )  n1 (z  ) = 0, therefore a  A0 (z	, t ). Moreover, since (1 -  ) = by (6.10), we have  -1 |(z, t) - (z  , t )| , |bH (z  , t , a) - bH (z  , t , a )|  (1 -  )|bH (z  , t , a) - bH (z  , t , a1 )|  2Mb C and the same inequality holds for lH , replacing Mb by Ml . Hence, thanks to (6.8)-(6.9), we obtain  -1 )|(z, t) - (z	, t )| |bH (z, t, a) - bH (z  , t , a ))|  (Lb + 2Mb C	-1 |(z, t) - (z  , t )| + ml (|(z, t) - (z  , t )|) . |lH (z, t, a) - lH (z  , t , a ))|  2Ml C and this concludes the proof.
+reg Remark 6.7. The results of Lemma 6.5 and 6.6 still hold in the case of HT , changing the constants in (6.6) and (6.7) and in the result of Lemma 6.6. The simplest way to prove it is the following : we only do it for b1 , b2 but a correct argument would require a proof in (b1 , l1 ), (b2 , l2 ). We first remark that if
+
+bH (z  , t , a)  n1 (z	) bH (z  , t , a)  n1 (z  ) +
+
+bH z, t, a) = b1 (z, t, 1 ) + (1 - )b2 (z, t, 2 ) , and if |(z, t) - (z  , t )| is small enough, we may assume without loss of generality that, for i = 1, 2,  -1 )|(z, t) - (z  , t )| . bi (z, t, 1 )  ni (z )  3(Lb + 2Mb C 31 (6.11)
+
+Indeed, by the controllability assumption in (H4 ^ i  Ai such that bi (z, t,  ^i )  C ), there exists a control    ni (z ) = ni (z ). Then, by taking |(z, t) - (z , t )| small enough, we can always assume that 3(Lb +  -1 )|(z, t) - (z  , t )| is between bi (z, t,  2Mb C ^i )  ni (z ) and bi (z, t, i )	ni (z ). We can then choose i  [0, 1] such that  -1 )|(z, t) - (z  , t )| . (i bi (z, t, i ) + (1 - i )bi (z, t,  ^i ))  ni (z ) = 3(Lb + 2Mb C Finally Assumption (H3 ~ i such that C ) ensures that there exists controls  bi (z, t,	~i ) = i bi (z, t, i ) + (1 - i )bi (z, t,  ^i ) . To obtain a new bH z, t, a ~), we choose  ~	[0, 1] such that [~ b1 (z, t,  ~1 ) + (1 -  ~)b2 (z, t,  ~2 )]	n1 (z ) = 0 . To conclude we remark that a careful examination of the estimate on   in the proof of Lemma 6.6 reg shows that, if we start from a control a ~  A0 (z, t) verifying (6.11) the associated control a ~  reg     A0 (z , t ) is in fact in A0 (z , t ). Remark 6.8. If the bi are only assumed to be continuous, we have similar estimates involving the modulus of contuity mb instead of the Lipschitz constant Lb (as we did for the li with ml ).
+
+References
+[1] J-P. Aubin and H. Frankowska, Set-valued analysis. Systems & Control: Foundations & Applications, 2. Birkhuser Boston, Inc., Boston, MA, 1990. [2] Y. Achdou, F. Camilli, A. Cutri, and N. Tchou, Hamilton-jacobi modeling on networks, Preprint. [3] Adimurthi, S. Mishra and G. D. Veerappa Gowda, Explicit Hopf-Lax type formulas for Hamilton-Jacobi equations and conservation laws with discontinuous coefficients. (English summary) J. Differential Equations 241 (2007), no. 1, 1-31. [4] M. Bardi, I. Capuzzo Dolcetta, Optimal control and viscosity solutions of Hamilton-JacobiBellman equations, Systems & Control: Foundations & Applications, Birkhauser Boston Inc., Boston, MA, 1997. [5] G. Barles, Solutions de viscosit e des	equations de Hamilton-Jacobi, Springer-Verlag, Paris, 1994. [6] G. Barles, A. Briani and E. Chasseigne, A Bellman approach for two-domains optimal control problems in RN , to appear COCV (2013). [7] G. Barles and E. R. Jakobsen. On the convergence rate of approximation schemes for HamiltonJacobi-Bellman equations. M2AN Math. Model. Numer. Anal. 36(1):3354, 2002. [8] G. Barles and B. Perthame: Exit time problems in optimal control and vanishing viscosity method. SIAM J. in Control and Optimisation, 26, 1988, pp. 1133-1148.
+
+32
+
+[9] R. Barnard and P. Wolenski: (arXiv:1208.4742).
+
+Flow Invariance on Stratified Domains. Preprint
+
+[10] A-P. Blanc, Deterministic exit time control problems with discontinuous exit costs. SIAM J. Control Optim. 35 (1997), no. 2, 399434. [11] A-P. Blanc, Comparison principle for the Cauchy problem for Hamilton-Jacobi equations with discontinuous data. Nonlinear Anal. 45 (2001), no. 8, Ser. A: Theory Methods, 10151037. [12] A. Bressan and Y. Hong, Optimal control problems on stratified domains, Netw. Heterog. Media 2 (2007), no. 2, 313-331 (electronic). [13] F. Camilli and D. Schieborn : Viscosity solutions of Eikonal equations on topological networks, Calc. Var. Partial Differential Equations, 46 (2013), no.3, 671686. [14] F Camilli and A. Siconolfi, Time-dependent measurable Hamilton-Jacobi equations, Comm. in Par. Diff. Eq. 30 (2005), 813-847. [15] F.H. Clarke, Optimization and nonsmooth analysis, Society of Industrial Mathematics, 1990. [16] G. Coclite and N. Risebro, Viscosity solutions of Hamilton-Jacobi equations with discontinuous coefficients. J. Hyperbolic Differ. Equ. 4 (2007), no. 4, 771795. [17] C. De Zan and P. Soravia, Cauchy problems for noncoercive Hamilton-Jacobi-Isaacs equations with discontinuous coefficients. Interfaces Free Bound. 12 (2010), no. 3, 347368. [18] K. Deckelnick and C. Elliott, Uniqueness and error analysis for Hamilton-Jacobi equations with discontinuities. Interfaces Free Bound. 6 (2004), no. 3, 329349. [19] P. Dupuis, A numerical method for a calculus of variations problem with discontinuous integrand. Applied stochastic analysis (New Brunswick, NJ, 1991), 90107, Lecture Notes in Control and Inform. Sci., 177, Springer, Berlin, 1992. [20] A.F. Filippov, Differential equations with discontinuous right-hand side. Matematicheskii Sbornik, 51 (1960), pp. 99128. American Mathematical Society Translations, Vol. 42 (1964), pp. 199231 English translation Series 2. [21] W.H. Fleming, H.M. Soner, Controlled Markov Processes and Viscosity Solutions, Applications of Mathematics, Springer-Verlag, New York, 1993. [22] M. Garavello and P. Soravia, Optimality principles and uniqueness for Bellman equations of unbounded control problems with discontinuous running cost. NoDEA Nonlinear Differential Equations Appl. 11 (2004), no. 3, 271-298. [23] M. Garavello and P. Soravia, Representation formulas for solutions of the HJI equations with discontinuous coefficients and existence of value in differential games. J. Optim. Theory Appl. 130 (2006), no. 2, 209-229. [24] Y. Giga, P. G` orka and P. Rybka, A comparison principle for Hamilton-Jacobi equations with discontinuous Hamiltonians. Proc. Amer. Math. Soc. 139 (2011), no. 5, 1777-1785. 33
+
+[25] H. Ishii: Hamilton-Jacobi Equations with discontinuous Hamiltonians on arbitrary open sets. Bull. Fac. Sci. Eng. Chuo Univ. 28 (1985), pp 33-77. [26] H. Ishii : Perron's method for Hamilton-Jacobi Equations. Duke Math. J. 55 (1987), pp 369384. [27] Lions P.L. (1982) Generalized Solutions of Hamilton-Jacobi Equations, Research Notes in Mathematics 69, Pitman, Boston. [28] Z. Rao and H. Zidani : Hamilton-Jacobi-Bellman Equations on multi-domains. Preprint. [29] Z. Rao, A. Siconolfi and H. Zidani : Stationary Hamilton-Jacobi-Bellman Equations on multidomains. In preparation. [30] R.T. Rockafellar, Convex analysis. Princeton Mathematical Series, No. 28 Princeton University Press, Princeton, N.J. 1970 xviii+451 pp. [31] C. Imbert, R. Monneau, and H. Zidani,Hamilton-jacobi modeling of traffic on a divergent junction, Preprint. [32] H.M. Soner, Optimal control with state-space constraint I, SIAM J. Control Optim. 24 (1986), no. 3, 552-561. [33] P. Soravia, Degenerate eikonal equations with discontinuous refraction index, ESAIM Control Op- tim. Calc. Var. 12 (2006). [34] T. Wasewski, Syst` emes de commande et  equation au contingent, Bull. Acad. Pol. Sc., 9, 151155, 1961.
+
+34
+

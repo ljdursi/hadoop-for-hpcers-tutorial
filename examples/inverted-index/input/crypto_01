@@ -1,0 +1,36 @@
+Post-quantum security of encrypted key exchange protocol
+Li Yang, Rui-Rui Zhou
+
+arXiv:1305.5640v1 [quant-ph] 24 May 2013
+
+State Key Laboratory of Information Security, Institute of Information Engineering, Chinese Academy of Sciences, Beijing 100093, China
+
+Abstract We investigate the post-quantum security of the encrypted key exchange(EKE) protocol based on some basic physical paraments, and show that the EKE protocol with a 64 bits password will be secure against a quantum adversary. Keywords: encrypted key exchange, pose-quantum security, physical security The encrypted key exchange (EKE) protocol combines the asymmetric and symmetric encryption algorithms to ensure two parties sharing a secret key[1] . Here we analyze the post-quantum security of the EKE protocol. Suppose two participants Alice and Bob preshare a password P , they want to establish a secret key m by the using of EKE protocol. A simple EKE protocol is as follows: Step 1: Alice randomly generates two random strings m and a, and computes ma , then uses the password P to encrypt it by a given symmetric encryption algorithm and sends EP [ma ] to Bob: Alice - Bob : EP [ma ] (1)
+
+Step 2: Bob decrypts EP [ma ] and then randomly generates a string b and computes mab , then he encrypts it with the password P and sends EP [mab ] to Alice: Bob - Alice : EP [mab ] (2)
+
+
+Corresponding author. Email address: yangli@iie.ac.cn (Li Yang)
+
+Step 3: After receiving EP [mab ]], Alice uses the password P to extract 1 mab , then she computes mb = (mab ) a and sends EP [mb ] to Bob: Alice - Bob : EP [mb ] Step 4: Bob decrypts EP [mb ], then he gets the secret string m: m = (mb )b .
+-1
+
+(3)
+
+(4)
+
+For an EKE protocol, the attacker(Eve) can get all the ciphertexts transmitted in the protocol such as EP [ma ], EP [mab ], EP [mb ]. As the password P is not available to Eve, he may perform a password-guessing attack as follows to get m: Eve generates a candidate password P , he uses it to decrypt EP [ma ], EP [mab ], EP [mb ] and obtains a = log(mb ) (mab ) , m = ((ma ) )(a ) , b = log(ma ) (mab ) , m = ((mb ) )(b ) ,
+-1 -1
+
+(5) (6)
+
+then he checks whether the candidate is correct by checking whether m is equal to m . The complexity of this kind of attack depends on the length of the password P . Suppose the length of the password P is x, and the attacker has a quantum computer to execute the attack. For each candidate P , Eve has to execute the discrete logarithm computation twice. We use T to denote the cycle of a discrete logarithm computation. It's well known that the time to perform an elementary logic operation is at least 10-14 s[2] , that is, op 10-14 . (7)
+
+The cycle of a discrete logarithm computation computation T can be denoted as T = n  op , (8) where n denotes the number of quantum gate operations executed serially in a discrete logarithm computation, it can be seen that the value of n depends on the development of paralization of discrete logarithm algorithm. Although we cannot get the accurate value of n, a rough estimation for n is no less than 105 , thus T 105  op 105  10-14 = 10-9 , (9) 2
+
+that is, the cycle of a discrete logarithm computation is no less than 10-9 seconds. Now let's consider the concept physical security of protocol[3] . Let a quantum computer can execute the discrete logarithm computation no more than N times during 100 years, we have 232 N = -9 < 262 . 10 (10)
+
+While the length of P is 91 bits, even if he has 109 (< 230 ) quantum computers, the adversary cannot extract the secret key m within 100 years. Suppose the size of a quantum computer is about one meter, then the maximal number of the quantum computer that any adversary may have on earth is 4  6372  106 = 5.1	1014 < 259 , (11) with all these quantum computers the attacker can executes the discrete logarithm computation no more than 249+62 = 2111 times within 100 years. The security of this EKE protocol depends on the length of the password P. When the length of P is 112, the attacker has to call the computer for 2112 times, and then is beyond the attacker's maximal calculating ability. Our conclusion is: the attacker cannot break EKE protocol during 100 years even if he has quantum computers. 112 bits is long enough to achieve this level of security, though it is less than the common length of the key string in the block cipher(128 bits). References [1] S.M.Bellovin and M.Merritt, Encrypted Key Exchange: Password-Based Protocols Secure Against Dictionary Attacks, Proceedings of the 1992 IEEE Computer Society Conference on Research in Security and Privacy, 1992, pp.72-84 [2] Michael A. Nielsen and Isaac L. Chuang, Quantum computation and quantum information, Higher Education Press, 2008, pp.278-279 [3] Li Yang, Chong Xiang and Bao Li, Qubit-string-based bit commitment protocols with physical security, arXiv: quant-ph/1011.5099v3
+
+3
+

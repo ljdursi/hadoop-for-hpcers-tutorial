@@ -1,0 +1,236 @@
+Mon. Not. R. Astron. Soc. 000, 15 (XXXX)
+
+Printed 27 May 2013
+
+A (MN L TEX style file v2.2)
+
+A simple scaling for the minimum instability time-scale of two widely spaced planets
+Dimitri Veras1 , Alexander J. Mustill2 1
+2 Universidad
+
+Institute of Astronomy, University of Cambridge, Madingley Road, Cambridge CB3 0HA Aut onoma de Madrid, Departamento de F isica Te orica C-XI, 28049 Madrid, Spain
+
+arXiv:1305.5540v1 [astro-ph.EP] 23 May 2013
+
+Accepted 2013 May 20. Received 2013 May 18; in original form 2013 April 8
+
+ABSTRACT
+
+Long-term instability in multi-planet exosystems is a crucial consideration when confirming putative candidates, analyzing exoplanet populations, constraining the age of exosystems, and identifying the sources of white dwarf pollution. Two planets which are Hill stable are separated by a wide-enough distance to ensure that they will never collide. However, Hill stable planetary systems may eventually manifest Lagrange instability when the outer planet escapes or the inner planet collides with the star. We show empirically that for two nearly coplanar Hill stable planets with eccentricities less than about 0.3, instability can manifest itself only after a time corresponding to x initial orbits of the inner planet, where -0.18 log10 x	5.2 [/(MJupiter/M )] and  is the planet-star mass ratio. This relation applies to any type of equal-mass secondaries, and suggests that two low-eccentricity Hill stable terrestrial-mass or smaller-mass planets should be Lagrange stable throughout the main sequence lifetime of any white dwarf progenitor. However, Hill stable giant planets are not guaranteed to be Lagrange stable, particularly within a few tens of percent beyond the critical Hill separation. Our scaling represents a useful "rule of thumb" for planetary population syntheses or individual systems for which performing detailed long-term integrations is unfeasible. Key words: planets and satellites: dynamical evolution and stability	chaos  celestial mechanics
+
+1
+
+INTRODUCTION
+
+Stability claims in multi-planet systems are often illusory. Computational and analytic limitations continue to stymie attempts to fully characterize even just two-planet systems over their entire main sequence lifetimes. For example, despite highly focused, long-term numerical simulations of the Solar System, the collisional fate of the inner planets remains unknown (Batygin & Laughlin 2008; Laskar & Gastineau 2009). Kaib et al. (2011) do integrate the 5-planet 55 Cnc system for over 10 Gyr, but only with subsets of planets, owing to their tight orbits. Also, despite success at self-consistently integrating two-planet systems with the slow Bulirsch-Stoer algorithm over the entire main sequence lifetime for stars with masses 3M (Veras et al. 2013), nearly all observed exoplanets orbit stars with masses < 3M 1 , 2 . We can reduce our reliance on numerical simulations by appealing to special analytical solutions of the three-body prob-
+
+lem. One solution of particular interest to planetary dynamicists defines a boundary beyond which the orbits of two planets can never cross. This boundary, which was largely broached to the astronomical community by Gladman (1993), has become known as the "Hill stability boundary", and has been the subject of extensive study (see Georgakarakos 2008 for a recent review). However the Hill stable boundary does not indicate whether the inner planet may collide with the star or whether the outer planet can escape the system. If a system is "Lagrange stable", then both planets remain bound, never cross orbits, and suffer no collisions. Despite recent work that explicitly explores the difference between Hill and Lagrange stability (Barnes & Greenberg 2006, 2007; Raymond et al. 2009; Kopparapu & Barnes 2010; Veras et al. 2013), identification of the Lagrange stability boundary in astrophysical contexts remains largely elusive. No exact analytical solution exists despite much progress in the analysis of the escape of the outer body (Chapter 11 of Marchal 1990; Anosova 1996; Li et al. 2009) and the dependence on mass of Lagrange stability (Kholshevnikov & Kuznetsov 2011) in Hill stable systems. Here, we obtain an explicit user-friendly scaling for this dependence. In doing so, we help provide insight into
+
+
+
+E-mail: veras@ast.cam.ac.uk  E-mail: alex.mustill@uam.es 1 See the Extrasolar Planet Encyclopedia at http://exoplanet.eu/. 2 See the Exoplanet Data Explorer at http://exoplanets.org/. c XXXX RAS
+
+2
+
+Veras & Mustill
+coordinates would blur the stability boundaries. Our treatment of Hill stability is more general than the typically-used criterion from Gladman (1993) partly because his equation 14 restricts the secondary masses to be much smaller than the primary mass. Hill stability ensures that planet-planet collisions never occur in our simulations. However, planet-star collisions do occur, and we can compare the frequency of these collisions with the frequency of systems featuring planetary escape. This comparison will be of interest to, for example, investigators seeking a possible dynamical trigger (Bonsor et al. 2011; Debes et al. 2012; Veras et al. 2013) for the accretion processes which cause abundant metal pollution in white dwarf atmospheres (e.g. Zuckerman et al. 2003) and likely accompany the associated dusty debris discs (e.g. Farihi et al. 2009) and gaseous debris discs (e.g. G ansicke et al. 2008). Furthermore, planets scattered onto orbits with small pericentres may become tidally circularised before colliding with the star, which has been proposed as an origin of the hot Jupiter population (Ford & Rasio 2006). We sample systems from the Hill stability boundary out to a semimajor axis ratio which well exceeds (a2 /a1 )crit . Because we do not know where this critical boundary lies a priori, we perform broad preliminary sweeps of phase space to help focus our more detailed simulations. Also, the duration of our simulations must exceed tL . Figure 9 of Veras et al. (2013) suggests that for a1 = 10 au, m = 1MJ , e1 = e2 = 0.1 and parent star masses of M = {5M , 4M , 3M }, then tL  {7  107 yr, 5  107 yr, 2  107 yr}. Hence, in these cases instability occurs after x  {5	106 , 3  106 , 1  106 } (orbits of the inner planet) for planet-star mass ratios of   {1.9  10-4 , 2.4	10-4 , 3.2  10-4 }. These values provide useful guides for our initial conditions.
+
+the location of the fuzzy Lagrange stability separation boundary and hint at its dependence on orbital parameters. We describe the initial conditions and results of our simulations in Section 2, briefly discuss the results in Section 3 and conclude in Section 4.
+
+2
+
+NUMERICAL SIMULATIONS
+
+We first must identify the approximate location of the Lagrange stability boundary in order to motivate the construction of initial conditions for identifying a scaling. Unfortunately, we can never be sure if instability will manifest itself in a system because of the finiteness of the duration of numerical simulations. We consider an inner and an outer planet with the same mass m, eccentricities e1 and e2 , and semimajor axes a1 and a2 . The star mass is M such that   m/M . Instability "occurs", in the sense that a planet achieves a hyperbolic orbit ("escape") or collides with the star, at time t = tL , where tL is most naturally measured in number of orbits; we denote x as the number of initial inner planet orbits. There is a critical ratio (a2 /a1 )crit beyond which there is a dramatic tail-off of unstable systems. Barnes & Greenberg (2006) found that this ratio resides within just a few percent of the critical Hill stablility ratio for the extrasolar systems 47 Uma and HD 12661. Our preliminary simulations suggest that identifying (a2 /a1 )crit becomes more difficult for higher values of e1 and e2 , when the boundary is "leakier" (chaotically diffuse). The likely reason is that the range of potential initial velocities increases with higher e, and hence the initial locations on the osculating planetary orbits become more important. These velocities are intrinsically linked to Lagrange stability (e.g. Sosnyts'kyi 2005). Hence, we restrict our analysis to low eccentricities in order to achieve a robust result. Our goal is to obtain a function for tL or x as a function of .
+
+2.1
+
+Numerical integrator
+
+2.3
+
+Fiducial simulations
+
+To carry out the simulations, we use the conservative BulirschStoer integration routine (bs2) from a modified version of the MERCURY integration package (Chambers 1999). The modification is in the collision detection subroutine mce cent and is described in Section 3.3 of Veras et al. (2013). This modification is necessary for accurately simulating very massive (up to about 100MJ ) secondaries which may achieve highly eccentric orbits. We use a tolerance parameter of 10-12 , which yields typical preinstability energy and angular momentum errors of less than 10-4 and 10-6 respectively, even for our longest simulations.
+
+2.2
+
+Preliminary Considerations
+
+We consider only Hill-stable systems. We compute the Hill stability boundary according to the procedure in Veras et al. (2013), which utilizes formulae from both Donnison (2006) and Donnison (2011). These formulae, which are re-expressed versions of the general equations from Marchal & Bozis (1982), allow the Hill boundary to be computed implicitly in terms of arbitrary eccentricities and inclinations, and the masses of the three bodies, all expressed in Jacobi coordinates. Allowing for arbitrary eccentricities and utilizing Jacobi coordinates is crucial, particularly for high  where application of astrocentric
+
+Let us choose a higher mass ratio of  = 1MJ /1M  9.54  10-4 and integrate our systems for much longer, for x = 5  107 . We also sample mass ratios one and two orders of magnitude higher, so that we can characterize instabilities at shorter times. We set M = 1M and the stellar radius to be one Solar radius in all cases. The entire integration is assumed to take place on the main sequence. We also set a1 = 1 au unless otherwise indicated. We choose the other parameters as follows. We sample 4 different initial values of eccentricity ({0.0, 0.1, 0.2, 0.3}) for both e1 and e2 . We assume the two planets are nearly coplanar, and assign them each a random inclination up to 0.01 . We extract their longitudes of ascending nodes from a uniform random distribution, as we do their mean anomalies and arguments of pericentres. Therefore, the maximum initial mutual inclination between the planets is 0.02 . In each set of simulations, we sample 60 different values of (a2 /a1 ) uniformly from the Hill stability limit to a value equal to Hill limit multiplied by a factor of [1 + k(1 + e1 )(1 + e2 )], where k = 0.25 or k = 0.30 for m = 1MJ or m > 1MJ respectively. These values were chosen based on extensive preliminary simulations and in order to best showcase our result. For each value of (a2 /a1 ), we simulate 4 different systems, each with randomized orbital angles.
+c XXXX RAS, MNRAS 000, 15
+
+A simple scaling for two-planet instability
+
+3
+
+Instability Times in log10 (x) vs. Initial Semimajor Axis Ratio
+8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 2:1 5:2 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2.00 5:2 3:1 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 1.85 1.95 2.05 2.15 2.25 2.35 1.35 1.40 5:3 7:4 1.45 1.50 2:1 1.55 1.60 1.65 8:5 5:3 7:4 2:1 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 8.0 1.40 1.45 1.50 1.55 1.60 1.65 1.70 1.75 7:4 2:1 5:2 5:3 7:4 2:1 8.0 2:1 5:2 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 8.0 7.5 7.0 6.5 6.0 5.5 5.0 1.60 1.70 5:2 1.80 1.90 3:1 2.00 4.5 8.0 1.85 1.95 3:1 2.05 2.15 2.25 2.35 4:1 1.75 1.85 5:2 1.95 3:1 2.05 2.15 2.25 5:2 3:1
+
+e1 0.0 e2 0.0
+
+e1 0.1 e2 0.0
+
+7.5 7.0 6.5 6.0 5.5 5.0 4.5
+
+e1 0.2 e2 0.0
+
+e1 0.3 e2 0.0
+
+1.55 1.60 1.65 1.70 1.75 1.80 1.85 1.90 1.95 2:1 5:2 3:1 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 8.0 7.5 7.0 6.5 6.0 5.5 5.0
+
+e1 0.0 e2 0.1
+
+7.5 7.0 6.5 6.0 5.5 5.0
+
+e1 0.1 e2 0.1
+
+e1 0.2 e2 0.1
+
+e1 0.3 e2 0.1
+
+4.5 1.45 1.50 1.55 1.60 1.65 1.70 1.75 1.80 1.85 5:2 3:1 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5 1.95 2.05 2.15 2.25 2.35 2.45 1.65 1.75 3:1 1.85 1.95 2.05 4:1
+
+e1 0.0 e2 0.2
+
+e1 0.1 e2 0.2
+
+e1 0.2 e2 0.2
+
+7.5 7.0 6.5 6.0 5.5 5.0
+
+e1 0.3 e2 0.2
+
+4.5 8.0 7.5 7.0 6.5 6.0 5.5 5.0 4.5
+
+1.75
+
+1.85 3:1
+
+1.95
+
+2.05
+
+2.15 4:1
+
+2.25
+
+2.35
+
+4.5 8.0 7.5 7.0 6.5 6.0 5.5 5.0
+
+1.95 2.05 2.15 2.25 2.35 2.45 2.55 2.65 4:1
+
+e1 0.0 e2 0.3
+
+e1 0.1 e2 0.3
+
+e1 0.2 e2 0.3
+
+e1 0.3 e2 0.3
+
+2.05 2.15 2.25 2.35 2.45 2.55 2.65 2.75
+
+4.5
+
+2.25 2.35 2.45 2.55 2.65 2.75 2.85 2.95 3.05
+
+Figure 1. Bounding instability for low-eccentricity Hill-stable m = 1MJ planets. Each panel represents a different combination of initial eccentricities. The value of the left y-axis in all plots represents the critical Hill separation, rounded up to the nearest hundredth in semimajor axis ratio. Orange dots refer to systems that feature outer planet escape, whereas red diamonds illustrate that the inner planet collided with the star. The horizontal blue lines bound the instability by providing the minimum instability time. The vertical blue lines are arbitrarily drawn at the largest initial separation within which are included the vast majority of unstable systems over 5  107 inner planet orbits. The plot primarily demonstrates that the minimum instability times are largely independent of initial eccentricity.
+
+2.3.1
+
+Results
+
+The result for our  = 1MJ /1M simulations is presented in Fig. 1. Although simulations were run over the entire horizontal extent of each plot, only unstable systems are marked with orange dots (escape) or red diamonds (planet-star collision). The horizontal blue line indicates the minimum instability time, and the vertical blue line provides a rough estimate of (a2 /a1 )crit . The pink horizontal line indicates the duration of the simulation (x = 5  107 ). The upper axes display all 1st- to 3rd-order mean motion commensurable locations present for the semimajor axes ratio sampled. Noteworthy observations include  The minimum instability time occurs at 105 x 105.5 in each plot except for the e1 = e2 = 0 case, where nearly every Hill stable system is Lagrange stable.
+c XXXX RAS, MNRAS 000, 15
+
+ Instability occurs in a continuous manner for increasing (a2 /a1 ) until (a2 /a1 )crit . However, in three cases (e1 = 0.0, e2 = 0.1 ; e1 = 0.0, e2 = 0.3 ; e1 = e2 = 0.3), a few instances of instability occur well beyond this boundary. If the cause is proximity to mean motion commensurabilities, they must be weak (higher than 3rd-order).  The value of (a2 /a1 )crit does not appear to be robust for the highest eccentricity cases, where e1 = 0.3 or e2 = 0.3, because the critical value seems to be limited by the integration duration.  The predominant outcome of instability exhibited is planetary escape. The occurrence of collisions seems to be a strong function of (a2 /a1 ), as evidenced by the red diamonds appearing in vertical strips in the (e1 = 0.1, e2 = 0.0 ; e1 = e2 = 0.1 ; e1 = 0.0, e2 = 0.2 ; e1 = 0.1, e2 = 0.2) cases.
+
+4
+
+Veras & Mustill
+Min im u m In stability Tim es
+
+Log 10 inner planet orbits
+
+8.0 7.0 6.0 5.0 e 1 0.0, e 2 0.1
+2 4.0 e 1 1 0.1, e 2 0.0
+
+o ffset
+
+e 1 0.0, e 2 0.2 e 0.0, e 0.3 e1 e1 e1 e1 e1 e1 e1 e1 e1 0.1, e 2 0.1, e 2 0.1, e 2 0.2, e 2 0.2, e 2 0.2, e 2 0.2, e 2 0.3, e 2 0.3, e 2 0.1 0.2 0.3 0.0 0.1 0.2 0.3 0.0 0.1
+best fit lin e
+
+8.0 7.0 6.0 5.0 4.0 3.0 2.0 10 50 100
+
+3.0 2.0
+
+a 1 10 au a 1 1.0 au a 1 0.1 au e 1 0.3, e 2 0.2 e 1 0.3, e 2 0.3
+
+0.1
+
+0.5
+
+1
+
+5 MJ M
+
+Figure 2. Minimum instability times as a function of the secondary/primary mass ratio for two equal-mass Hill-stable secondaries. Simulations for a1 = 0.1 au and a1 = 10 au were computed for	= 1MJ /M , but are shown slightly offset for clarity. The main result of this paper, a fit to the straight-line trend of the circle symbols apparent in this figure, is given in equation 1.
+
+ The existence of the minimum instability time-scale does not guarantee that systems will become unstable at or close to that value: instability may be delayed beyond 100tL . Outcomes of the simulations for	= 10MJ /1M and	= 100MJ /1M also exhibit the trends stated in the last four above bullets. However, the minimum instability times of these simulations are distinctly different, and suggest a simple scaling with . 2.4 Additional simulations
+
+and diamonds are offset from the circles for  = 1MJ /M by 0.1MJ /M in each direction. The minimum instability time appears to be insensitive to the choice of a1 . A least-squares fit to all of the a1 = 1.0 au points on the plot suggests the following scaling: log 10 x  5.2  MJ /M
+-0.18
+
+.
+
+(1)
+
+To help establish our scaling result, we obtain more minimum instability times with additional simulations for m = 50MJ , 5MJ , 0.5MJ , 0.3MJ , and 0.1MJ , and for a1 = 0.1 au and 10 au. We need to consider different values of a1 because unlike Hill stability, Lagrange stability will not necessarily be scalable with a1 . The reason is a stellar collision requires the planet to hit a target whose solid angular size decreases with the square of the distance, and escape requires the outer planet to have sufficient energy or momentum to leave the influence of the star's gravitational potential. For each simulation set, we ran a total of 80 simulations, sampling 4 orbital configurations for each of 20 values of (a2 /a1 ) very close to the Hill limit (within a tenth in semimajor axis ratio, evenly spaced) to help ensure that instability will occur. For the lowest-mass cases, we extended the duration of some simulation sets until one simulation featured instability. For the highest-mass cases, we shortened the interval between outputs to obtain representative values. 2.4.1 Results
+
+Regarding the meaning of x, the duration of one orbit is derived from the value of a1 , which is the initial value of the inner semimajor axis. The value of a1 may change with time if the planets become locked in a mean motion resonance. Regardless, the usefulness of equation 1 relies on the relation being measured with respect to initial parameters. We emphasize that this scaling is approximate, but nevertheless provides a reliable order-of-magnitude lower bound for instability timescales over at least 4 orders of magnitude in mass ratio. The scaling also satisfies the perfectly circular case, which is not plotted because in some of those simulation ensembles all systems remained stable.
+
+3
+
+DISCUSSION
+
+We combined the results of these simulations with those of our fiducial simulations to produce Fig. 2. The different symbols on the figure refer to different values of a1 ; for clarity, the squares
+
+We may extrapolate the scaling to determine the maximum planet-star mass ratio for which a Hill-stable two-planet system is guaranteed to remain Lagrange stable over the entire main sequence lifetime of a star. We compute main sequence lifetimes from the SSE code (Hurley et al. 2000). Figure 3 plots the result, and demonstrates that Hill stable terrestrial-mass planets are always Lagrange stable for a > 0.1 au, whilst Hill-stable Jovian-mass planets are never guaranteed to be Lagrange stable for a < 10 au. The fate of Super-Earths would depend on the details of the system in question. Barnes & Greenberg (2006) suggest that Hill stability may be used as a proxy for stability over the main sequence. Our
+c XXXX RAS, MNRAS 000, 15
+
+A simple scaling for two-planet instability
+Maxim um Stable Main Sequence Planet Mass
+M
+
+5
+
+50
+Maxim u m Plan et Mass
+
+10 AU 1.0 AU 0.1 AU
+
+50 20 10 5 2
+
+e1 , e2 < 0.3 and 0.1 au a1 10 au. The implications are that Hill stability may be equated with Lagrange stability only for objects that are less massive than roughly 1M , whereas Hillstable Jovian-mass planets are always susceptible to eventual instability along the main sequence.
+
+20 10 5 2 1.0 1.5 2.0 3.0 5.0 7.0
+
+ACKNOWLEDGMENTS We thank the referee, Richard Greenberg, for his useful perspective and suggestions for clarifications, resulting in an improved manuscript. We also thank Sverre J. Aarseth for fruitful discussions. This work made use of facilities funded by the European Union through ERC grant number 279973. AJM is supported by Spanish grant AYA 2010/20630.
+
+Stellar Mass M
+Figure 3. Maximum planet mass for which an equal mass two-planet Hill-stable system will remain Lagrange stable (bound and ordered) throughout the entire main sequence lifetime. Jovian-mass planets are always susceptible to instability for a < 10 AU.
+
+REFERENCES Anosova, J. 1996, AP&SS, 238, 223 Barnes, R., & Greenberg, R. 2006, ApJL, 647, L163 Barnes, R., & Greenberg, R. 2007, ApJL, 665, L67 Batygin, K., & Laughlin, G. 2008, ApJ, 683, 1207 Bonsor, A., Mustill, A., & Wyatt, M. 2011, arXiv:1102.3185 Chambers, J. E. 1999, MNRAS, 304, 793 Debes, J. H., Walsh, K. J., & Stark, C. 2012, ApJ, 747, 148 Donnison, J. R. 2006, MNRAS, 369, 1267 Donnison, J. R. 2011, MNRAS, 415, 470 Farihi, J., Jura, M., & Zuckerman, B. 2009, ApJ, 694, 805 Ford, E, B., & Rasio, F. A. 2006, ApJL, 638, L45 G ansicke, B. T., Koester, D., Marsh, T. R., RebassaMansergas, A., & Southworth, J. 2008, MNRAS, 391, L103 Georgakarakos, N. 2008, Celestial Mechanics and Dynamical Astronomy, 100, 151 Gladman, B. 1993, Icarus, 106, 247 Hurley, J. R., Pols, O. R., & Tout, C. A. 2000, MNRAS, 315, 543 Kaib, N. A., Raymond, S. N., & Duncan, M. J. 2011, ApJL, 742, L24 Kholshevnikov, K. V., & Kuznetsov, E. D. 2011, Celestial Mechanics and Dynamical Astronomy, 109, 201 Kopparapu, R. K., & Barnes, R. 2010, ApJ, 716, 1336 Laskar, J., & Gastineau, M. 2009, Nature, 459, 817 Li, P. J., Fu, Y. N., & Sun, Y. S. 2009, A&A, 504, 277 Marchal, C. 1990, Studies in Astronautics, Studies in Aeronautics, 4. Amsterdam: Elsevier, 1990 Marchal, C., & Bozis, G. 1982, Celestial Mechanics, 26, 311 Raymond, S. N., Barnes, R., Veras, D., et al. 2009, ApJL, 696, L98 Sonyts'kyi, S.P. 2005, Ukranian Mathematical Journal, 57, 1341 Veras, D., Mustill, A. J., Bonsor, A., & Wyatt, M. C. 2013, MNRAS, 431, 1686 Zuckerman, B., Koester, D., Reid, I. N., H unsch, M. 2003, ApJ, 596, 477
+
+results suggest that this correlation is robust for orbiting bodies which are less massive than a terrestrial-mass. Their tentative conclusion that two planets with a semimajor axis ratio larger than about 120 per cent of the Hill stability limit is Lagrange stable is consistent with the parameter space explored in our Fig. 1. However, the effect of external perturbations, such as from star-planet tides or other planets in the same system, remain unclear, and a potential future avenue of study. Three other potential extensions may include (1) testing the robustness of equation 1 for highly eccentric planets and significantly inclined planets, (2) developing an analytic explanation for the dependencies in equation 1, and (3) better defining (a2 /a1 )crit . Our preliminary simulations suggest that equation 1 remains valid for highly eccentric planets, whereas (a2 /a1 )crit breaks down quickly as e increases beyond 0.3. The scaling in equation 1 is not unique given the scatter in the points in Fig. 2, but was chosen for simplicity. In order to motivate analytical studies, we note that the exponent of -0.18 is very close to -2/11  -0.181, and could easily instead be fit to -1/5 = -0.200 or -1/6  -0.167 for different coefficients and different sets of model simulations. Finally, Fig. 1 hints that for a given value of (a2 /a1 ), there may exist a maximum number of orbits at which a system could manifest Lagrange instability. This possibility is best visualized for the e2 = 0.0 cases. This boundary is likely to be diffuse, but may provide a useful metric to help describe system stability. Unfortunately, computational limitations continue to inhibit such explorations.
+
+4
+
+CONCLUSION
+
+Characterizing the stability of exoplanetary systems has become a vital component of discovery papers and population synthesis models. However, no analytical formulation exists for the Lagrange stability boundary of a two-planet system in time nor space. Here, we have empirically identified this boundary in time (equation 1), finding a minimum time-scale for instability as a function of planet mass, and demonstrated that the boundary is independent of semimajor axis and eccentricity at least for
+c XXXX RAS, MNRAS 000, 15
+

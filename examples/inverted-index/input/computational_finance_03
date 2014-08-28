@@ -1,0 +1,914 @@
+Fast Estimation of True Bounds on Bermudan Option Prices Under Jump-diffusion Processes
+arXiv:1305.4321v1 [q-fin.CP] 19 May 2013
+Helin Zhu Fan Ye Enlu Zhou Department of Industrial and Enterprise Systems Engineering University of Illinois May 21, 2013
+Abstract Fast pricing of American-style options has been a difficult problem since it was first introduced to financial markets in 1970s, especially when the underlying stocks' prices follow some jump-diffusion processes. In this paper, we propose a new algorithm to generate tight upper bounds on the Bermudan option price without nested simulation, under the jump-diffusion setting. By exploiting the martingale representation theorem for jump processes on the dual martingale, we are able to explore the unique structure of the optimal dual martingale and construct an approximation that preserves the martingale property. The resulting upper bound estimator avoids the nested Monte Carlo simulation suffered by the original primal-dual algorithm, therefore significantly improves the computational efficiency. Theoretical analysis is provided to guarantee the quality of the martingale approximation. Numerical experiments are conducted to verify the efficiency of our proposed algorithm. Key words: jump-diffusion processes, Bermudan option, duality theory, Monte Carlo simulation.
+
+1
+
+1
+
+Introduction
+
+Pricing American-style derivatives (which is essentially an optimal stopping problem) has been an active and challenging problem in the last thirty years, especially when the underlying stocks' prices follow some jump-diffusion processes, as they become more and more critical to investors. To present time, various jump-diffusion models for financial modelling have been proposed to fit the real data in financial markets, including: (i) the normal jumpdiffusion model, see Merton (1976); (ii) the affine jump-diffusion models, see Duffie et al. (2000); (iii) the jump models based on Levy processes, see Cont and Tankov (2003); (iv) the double exponential, mixed-exponential and hyper-exponential jump-diffusion models, see Kou (2002), Cai and Kou (2011), and Cai and Kou (2012). All these models are trying to capture some interesting features of the market behaviour that cannot be well explained by pure-diffusion models, such as the heavy-tail risk suffered by the market. In general, closed-form expressions for the American-style derivatives can hardly be derived under these jump-diffusion models due to the multiple exercise opportunities and the randomness in the underlying asset price caused by both jumps and diffusions. Hence, various numerical methods have been proposed to tackle the American-style option pricing problems under the jumpdiffusion models, including: (i) solving the free boundary problems via lattice or differential equation methods, see Amin (1993), K ellezi and Webber (2004), Feng and Linetsky (2008), Fang and Oosterlee (2009), Feng and Lin (2012); (ii) quadratic approximation and piecewise exponential approximation methods, see Pham (1997), Gukhal (2001), Kou and Wang (2004). A thorough study on jump-diffusion models for asset pricing has been done by Kou (2008). More broadly, an elegant overview of financial models under jump processes is provided in Cont and Tankov (2003).
+
+Another class of widely-used methods are based on Monte Carlo simulation, and they have been successfully implemented on Bermudan option pricing problems under the purediffusion models, see Bossaerts (1989), Tilley (1993), Longstaff and Schwartz (2001), Tsitsiklis and van Roy (2001). In particular, Longstaff and Schwartz (2001), Tsitsiklis and van Roy (2001) propose to approximate the continuation values by regression on certain basis functions set (called "function basis"), which leads to good suboptimal exercise strategies and lower bounds on the exact option price. Moreover, their methods bypass "the curse of dimensionality" and scale well with the number of underlying variables, working efficiently for high-dimensional problems under the pure-diffusion models. Though these methods can be naturally adapted to option pricing problems under the jump-diffusion setting, two key questions regarding the effectiveness of these methods remain to be addressed: (i) how to choose the function bases for regression. (ii) how to measure the quality of the lower bounds. The second question is partially addressed by the dual approach proposed independently by Rogers (2002), Haugh and Kogan (2004), and Anderson and Broadie (2004). They are able to generate the upper bounds on the option price by solving the associated dual problem, which is obtained by subtracting the payoff function by a dual martingale adapted to a proper filtration. In theory, if the dual martingale is the Doob-Meyer martingale part of the option price process, namely the "optimal dual martingale", then the resulting upper bound equals the exact option price. In practice, the optimal dual martingale is not available, but good approximations of it can generate tight upper bounds. With the access to the upper bounds, the quality of suboptimal exercise strategies or lower bounds could be 2
+
+measured empirically by looking at the duality gaps, which are the differences between the lower bounds and the upper bounds. A multiplicative version of dual approach based on multiplicative Doob-Meyer decomposition is proposed by Jamshidian (2007). A thorough comparison between the additive dual approach and the multiplicative dual approach can be found in Chen and Glasserman (2007). Glasserman (2004) provides an elegant and thorough overview on the duality theory for option pricing problems. A lot work has been done following the duality theory. To name a few, Bender (2011), Chandramouli and Haugh (2012), and Bender et al. (2011) develop the multilevel primaldual approach for optimal stopping problems with multiple stopping times. Belomestny and Schoenmakers (2012) optimize the cost of simulation by considering a multilevel Monte Carlo technique for the primal-dual approach. Desai et al. (2012) consider an additional path-wise optimization procedure in constructing the dual martingales for optimal stopping problems. Ye and Zhou (2013b) apply the primal-dual approach with particle filtering techniques to optimal stopping problems of partially observable Markov processes. Rogers (2007), Brown et al. (2010) generalize the duality theory to general discrete-time dynamic programming problems and provide a broader interpretation of the dual martingale. From Brown et al. (2010)'s perspective, the dual martingale can be regarded as the penalty for the access to the future information (information relaxation) and different degrees of relaxation result in different levels of upper bounds. In particular, the dual martingales constructed by Haugh and Kogan (2004), Anderson and Broadie (2004) can be interpreted as perfect information relaxation, which means the option holder has access to all the future prices of the underlying assets. Ye and Zhou (2012) consider a parameterized path-wise optimization technique in constructing the penalties for general dynamic programming problems. Ye and Zhou (2013a) also develop the duality theory for general dynamic programming problems under a continuoustime setting. The numerical effectiveness of the primal-dual approach has been demonstrated in pricing multidimensional American-style options. The algorithm generates good suboptimal exercise strategies and good lower-upper bound pairs with sufficiently small duality gaps. A possible deficiency of the algorithm is the heavy computation (quadratic in the number of exercisable periods), caused by the nested simulation in constructing the dual martingale. To address the computational issue, Belomestny et al. (2009) propose an alternative algorithm to generate approximations of the optimal dual martingale via non-nested simulation under the Wiener process setting. By exploiting the martingale representation theorem on the optimal dual martingale driven by Wiener processes, they are able to approximate the optimal dual martingale through regressing the integrand on some function bases at finite number of time points. The resulting approximation preserves the martingale property and generates a true upper bound on the option price. More importantly, their algorithm avoids the nested simulation and is linear in the number of exercisable periods. In this paper, we will generalize Belomestny et al. (2009)'s idea of "true martingale" to Bermudan option pricing problems under jump-diffusion processes and provide a new perspective in understanding the structure of the optimal dual martingale, which facilitates us to construct good approximations of it. According to our knowledge, we are among the first to ever consider estimating the upper bounds on American-style option price under the jump-diffusion models. In a greater detail, we have made the following contributions. 3
+
+ Under the jump-diffusion setting, we explore the structure of the optimal dual martingales in the dual representation of both the Bermudan and American option prices (Theorem 3.1 and Theorem 3.2), which is the underpinning of our proposed approach of generating tight upper bounds.  Motivated by Belomestny et al. (2009), we propose a new algorithm, which is referred as the "true martingale algorithm" (T-M algorithm), to compute the upper bounds on the Bermudan option price under the jump-diffusion models. The resulting approximation (called "true martingale approximation") preserves the martingale property, and therefore generates true upper bounds on the Bermudan option price. Moreover, compared with the primal-dual algorithm proposed by Anderson and Broadie (2004) (A-B algorithm), our proposed T-M algorithm avoids the nested Monte Carlo simulation and scales linearly with the exercisable periods, and hence achieves a higher computational efficiency.  We prove that the true martingale approximation converges to the objective martingale in the mean square sense provided that the time discretization goes to zero by bounding the empirical difference between the approximation and the objective martingale (Theorem 3.4).  We investigate the numerical effectiveness of Longstaff and Schwartz (2001)'s leastsquares regression approach (L-S algorithm) for Bermudan option price under the jump-diffusion models. In particular, we find that by incorporating the European option price under the corresponding pure-diffusion model (referred as the "non-jump European option") into the function basis of the L-S algorithm, the quality of the induced suboptimal exercise strategies and the lower bounds can be significantly improved.  Motivated by the explicit structure of the optimal dual martingale (Theorem 3.1), we propose a function basis that can be employed in our proposed algorithm to obtain upper bounds on the option price. This function basis is also derived based on the nonjump European option price, which is critical to the true martingale approximation and hence the quality of the true upper bounds. By implementing our algorithm together with the A-B algorithm on several sets of numerical experiments, the numerical results demonstrate that both methods can generate tight and stable upper bounds on option price of the same quality; however, we observe that our algorithm is much more efficient than the A-B algorithm in practice due to the relief from nested simulation. To summarize, the rest of this paper will be organized as follows. In section 2, we describe the Bermudan option pricing problems under general jump-diffusion models and review the dual approach. We develop the true martingale approach and provide error analysis and convergence analysis of it in section 3. Section 4 focuses on the detailed T-M algorithm and its numerical advantages. Numerical experiments are conducted in section 5 to verify the computational efficiency of the T-M algorithm. Conclusion and future directions are given in section 6.
+
+4
+
+2
+2.1
+
+Model Formulation
+Preliminaries
+
+In this subsection, we will introduce some standard definitions in jump processes that will appear throughout the paper. They can be found in Cont and Tankov (2003). Definition 2.1 (Poisson random measure (Definition 2.18 in Cont and Tankov (2003)). Let (, F , P) be a probability space, G  Rd+1 and  be a given (positive) Radon measure on (G, G ). A Poisson random measure on G with intensity  is an integer-valued random measure: P :  G	N (, A)  P (, A) such that: (i) For (almost all)   , P (, ) is an integer-valued Radon measure on G; (ii) for each measurable set A  G , P (, A) is a Poisson random variable with parameter (A): P r P (, A) = k =e
+k -(A) ((A))
+
+k!
+
+,
+
+ k  N;
+
+(iii) for disjoint measurable sets A1 , ..., An  G , the variables P (, A1 ), ..., P (, An ) are independent. To parallel with the Wiener measure, we further define the associated compensated Poisson random measure as follows. Definition 2.2 (compensated Poisson random measure). Assuming P (, ) is a Poisson random measure with the intensity Radon measure (), then the corresponding compensated Poisson random measure can be constructed by subtracting P (, ) by its intensity measure: ~ :  G  R P ~ (, A) = P (, A) - (A). (, A)  P ~ (, A)] = 0 and V ar [P ~ (, A)] = From Definition 2.2, one can easily obtain that, for A	G , E [P ~ V ar [P (, A)] = (A). Therefore, we call P (, A) a compensated Poisson random variable. Clearly, compensated Poisson random variables parallel to normal random variables with mean zero. To connect Poisson random measure with jump processes, we summarize some results obtained by Cont and Tankov (2003) in the following Theorem 2.1. Theorem 2.1. Suppose a Poisson random measure P (ds, dy ) on G = [0, T ]  Rd with the intensity measure (ds  dy ) is described as the counting measure associated with a random configuration of points (Tn , Yn )  G: P= (Tn ,Yn ) ,
+n 1
+
+where (Tn ( ), Yn ( ))	[0, T ]  Rd corresponds to an observation made at time Tn ( ) and described by a random variable Yn ( ). f (s, y ) is a -measurable function. Then
+t
+
+X (t)
+
+=
+0 Rd
+
+f (s, y )P (ds, dy ), 5
+
+0  t  T,
+
+is a jump process whose jumps happen at the random times Tn and have amplitudes given by f (Tn , Yn ). Furthermore, the corresponding compensated jump process ~ (t) X
+t
+
+=
+0 Rd
+
+~ (ds, dy ), f (s, y )P
+
+0  t  T,
+
+Basically, Definitions 2.1 and 2.2, Theorem 2.1 summarize the basic properties possessed by Poisson random measure, and characterize the close connection between Poisson random measures and jump processes, hence providing an intuitive understanding towards the construction of the Poisson random measures induced by jump processes. Overall, the compensated Poisson random measure possesses zero-mean and independent increment properties. With these useful tools, we next formally describe the Bermudan option pricing problem under a general jump-diffusion model.
+
+is a martingale adapted to the augmented filtration generated by P .
+
+2.2
+
+Primal problem
+
+In this paper, we consider a special case of asset price models-jump-diffusion processes, i.e., the asset price X (t) satisfies the following stochastic differential equation (SDE): dX (t) = b (t, X (t)) dt +  (t, X (t)) dW (t) +
+Rd
+
+J (t, X (t) , y )P (dt, dy) ,
+
+(2.1)
+
+where t  [0, T ], X (t) = [X1 (t), ..., Xn (t)] is a random process with a given initial deterministic value X (0) = X0  Rn , W (t) = [W1 (t), ..., Wnw (t)] is a standard vector Wiener process, P (dt, dy ) is the Poisson random measure defined on [0, T ]	Rd  Rd+1 with the intensity measure (dt  dy ), the coefficient b,  and J are functions b : R  Rn  Rn ,	: R  Rn  Rn  Rnw and J : R  Rn	Rd  Rn satisfying mild continuity conditions (such as uniformly Lipschitz continuous or Holder continuous). Throughout F = {Ft : 0  t  T } is the augmented filtration generated by the Wiener process W (t) and the Poisson random measure P . We consider a Bermudan option based on X (t) that can be exercised at any date from the time set  = {T0 , T1 , ..., TJ }, with T0 = 0 and TJ = T . Given a pricing measure Q and the filtration F , when exercising at time Tj	, the holder of the option will receive a discounted payoff: HTj := h (Tj , X (Tj )) , (2.2) where h (Tj , ) is a Lipschitz continuous function. Our problem is to evaluate the price of the Bermudan option, that is, to find P rimal : V0 = sup E [h (, X ( )) |X (0) = X0 ] ,
+
+
+(2.3)
+
+where  is an exercise strategy (in this case, a stopping time adapted to the filtration {FTj : j = 0, ..., J }) taking values in , and V0 denotes the Bermudan option price at time T0 given the initial asset price X0 . As we stated in the previous section, Longstaff and Schwartz (2001) manage to construct a ~ suboptimal exercise strategy  ~ and generate a lower bound V0 on the exact option price V0 via a least-squares regression-based approach. We omit the details of their approach and focus on the following dual approach. 6
+
+2.3
+
+Review of Dual Approach
+
+Let M = {MTj : j = 0, ..., J } with M0 = 0 be a martingale adapted to the filtration {FTj : j = 0, ..., J } and M represents the set of all such martingales. Anderson and Broadie (2004), Haugh and Kogan (2004) show that the dual problem: Dual : inf E max HTj - MTj |X (0) = X0 (2.4)
+
+M M
+
+0j J
+
+yields the exact option price V0 . Moreover, if we let MTj in (2.4) be the Doob-Meyer	, then the martingale part of the discounted Bermudan price process VT , denoted by MT j j infimum in (2.4) is achieved. Precisely, we have: V0 = E max
+ |X (0) = X0 . HTj - MT j
+
+0j J
+
+(2.5)
+
+In practice, the optimal dual martingale is not accessible to us. Nevertheless, we can still obtain an upper bound with an arbitrary M	M via V0up (M ) = E
+0j J
+
+max HTj - MTj |X (0) = X0 .
+
+(2.6)
+
+It is reasonable to expect that, if MTj is the martingale induced by a good approximation, VTj ,  of the option price process VTj , then MTj is close to the optimal dual martingale MT and the j up  resulting upper bound V0 (M ) should be close to the exact option price V0 . Specifically, suppose V = {VTj : j = 0, ..., J } is some approximation of V	= {VTj : j = 0, ..., J }. Consider the following Doob-Meyer decomposition: VTj = V0 + MTj + UTj , j = 0, ..., J , (2.7)
+
+where V0 is the approximation of the Bermudan option price at time T0 and UTj is the residual predictable process. Then we can obtain the martingale component MTj in principle via the following recursion: M0 = 0, (2.8) MTj+1 = MTj + VTj+1 - ETj VTj+1 . where ETj [] means the conditional expectation is taken with respect to the filtration FTj , i.e., ETj [] = ETj |FTj .
+
+Haugh and Kogan (2004), Anderson and Broadie (2004) both use the above theoretical result as the starting point of their algorithms to the upper bounds. The difference between their approaches lies in the ways of generating dual martingales. Haugh and Kogan (2004) try to first approximate V  directly by regressing it on certain function basis and then induce the dual martingale by inner simulation, while Anderson and Broadie (2004) try to first approximate the optimal exercise strategy   by a suboptimal exercise strategy	~, then ~ generate the approximation V	of the option price and the corresponding dual martingale by inner simulation. Nevertheless, due to the nested simulation in approximating the conditional expectation in (2.8), both of their algorithms lose the martingale property. Thus the resulting upper bounds are not guaranteed to be true upper bounds. Furthermore, the nested simulation requires huge computational effort. Under limited computational resources, this 7
+
+approach might not be realistic. To overcome these deficiencies, we next develop a new approach to generate a martingale approximation that preserves the martingale property, in a non-nested simulation manner. We expect the resulting upper bounds to be true upper bounds and the computational effort to be significantly reduced.
+
+3
+
+True Martingale Approach via Non-nested Simulation
+
+In this section, we will develop an approach that is fundamentally different from previous approaches by Haugh and Kogan (2004), Anderson and Broadie (2004). By exploiting the special structure of martingales jointly driven by Wiener measure and Poisson random measure, we are able to construct an approximation of M without nested simulation, and thus preserves the martingale property. The following generalized martingale representation theorem provides the intuitive idea in understanding the unique structure of such martingales. Theorem 3.1 (Martingale Representation Theorem ). Fix T > 0. Let {W (t) : 0  t  T } be a nw -dimensional Wiener process and P be a Poisson random measure on [0, T ]  Rd with intensity (dt  dy ), independent from W (t). If M = {MTj : j = 0, ..., J } is a locally square-integrable (real-valued) martingale adapted to the filtration {FTj : j = 0, ..., J } with deterministic initial value M0 = 0, then there exist a predictable process  :   [0, T ]  Rnw and a predictable random function  :   [0, T ]  Rd  R such that
+Tj Tj
+
+MTj =
+0
+
+s dW (s) +
+0 Rd
+
+~ (ds, dy) ,  (s, y )P
+
+j = 0, ..., J ,
+
+(3.1)
+
+~ is the compensated Poisson random measure induced by P . where P Proof. According to Proposition 9.4 in Cont and Tankov (2003), for the random variable MT , there exist a predictable process  :   [0, T ]  Rnw and a predictable random function  :   [0, T ]  Rd  R such that
+T T
+
+MT =
+0
+
+s dW (s) +
+0 Rd
+
+~ (ds, dy) ,  (s, y )P
+
+~ is the compensated Poisson random measure induced by P . Given that M is a where P martingale adapted to the filtration {FTj : j = 0, ..., J }, and according to the zero-mean and independent increment properties of Wiener measure W and compensated Poisson random ~ , we have measure P
+Tj Tj
+
+MTj = E MT |FTj =
+
+s dW (s) +
+0 0 Rd
+
+~ (ds, dy ) ,  (s, y)P
+
+for j = 0, ..., J .
+
+Theorem 3.1 can be interpreted as a generalization of the martingale representation theorem for martingales driven by Wiener processes. Indeed, if the intensity (dt  dy ) equals zero, then Theorem 3.1 reduces to the classic martingale representation theorem. Moreover, ~ possesses the similar to the Wiener measure W , the compensated Poisson random measure P 8
+
+zero-mean and independent increment properties, which are essential for the true martingale approximation to preserve the martingale property, as we will elaborate on this point later. Nevertheless, Theorem 3.1 fails to provide an intuitive understanding towards the explicit relationship between t ,  (t, y ) and the martingale M itself. We complement this deficiency of Theorem 3.1 by explicitly expressing the integrands as functions of the process that induces the martingale in the following Theorem 3.2. Theorem 3.2. Suppose Xt follows (2.1) and induces the jump measure PX , which is a Poisson random measure. Consider the American option price process (continuous-time) (Vt )0tT with payoff of the form h(, ) in (2.2). Assuming Vt = v a (t, X (t)) is a C 2 function in X and its two partial derivatives are bounded by a constant, then the martingale component of (Vt - V0 )0tT , denoted by (Mt )0tT with M0 = 0, is given by:
+t
+
+Mt =
+0
+
+v a (s- , Xs- ) dWs + X
+
+t 0 Rd
+
+v a s- , Xs- + y - v a s- , Xs-
+
+~X (ds, dy ) , P
+
+0  t  T, (3.2)
+
+~X (ds, dy ) is the compensated Poisson random measure induced by PX . where P
+
+Proof. Apply Proposition 8.16 in Cont and Tankov (2003) to jump process Xt and we can immediately obtain the result above. Remark 3.1. In practice, the asset price process Xt , which is usually an exponential of a compound Poisson process (see the numerical example (5.1)), induces a very complicated jump measure PX that can hardly be simulated numerically. To apply Theorem 3.2, we can introduce an intermediate bridge function S () such that S (t) = S (X (t)) induces a relatively easy-to-simulate Poisson random measure PS without significantly increasing the complexity of function v a (, ). In the numerical example we consider later, we will choose a specific function S () to achieve this goal. Theorem 3.2 implies that t is close to the derivative of the Bermudan option price, while  (t, y ) is close to the Bermudan option price increment caused by the jump. If we want to approximate these integrands, we should start with the derivative and the increment of certain option price that is close to Bermudan option price, such as the European option price. Specifically, in constructing the T-M algorithm, we will try to use least-squares regression method to approximate the integrands. Therefore we should incorporate the derivative and the increment of the European option price into the function bases for t and  (t, y ) respectively. Moreover, Remark 3.1 indicates that the choice of the Poisson random measure PS (or function S ()) is essential to simplify the representation of the martingale. In fact, the choice of S () should balance the tradeoff between the complexity of PS and the complexity of function v (, ). Inspired by Theorem 3.1 and Theorem 3.2, and following Belomestny et al. (2009)'s work, if one tries to approximate the martingale MTj , a natural idea is to first estimate the integrands t and  (t, y ) in the following expression:
+Tj Tj
+
+MTj =
+0
+
+t dW (t) +
+0 Rd
+
+~ (dt, dy) , j = 0, ..., J ,  (t, y )P
+
+(3.3)
+
+at a finite number of time and space points. Then an approximation of MTj will be represented via t and  (t, y ) using the Ito sum (similar to the Riemann sum). 9
+
+We introduce a partition  = {tl : l = 0, 1, ..., L} on [0, T ] such that t0 = 0, tL = T and   , and a partition A = {Ak : k = 0, 1, ..., K} on Rd such that {[tl , tl+1 ]  Ak } are K
+
+measurable disjoint subsets and
+k =1
+
+Ak = Rd . Therefore, P ([tl , tl+1 ]  Ak ) =
+
+tl+1 tl
+
+Ak
+
+P (ds, dy )
+
+~ ([tl , tl+1 ]  Ak ) = is a Poisson random variable (regarded as Poisson increment), and P tl+1 ~ (ds, dy ) is the corresponding compensated Poisson random variable with intenP tl Ak sity  ([tl , tl+1 ]  Ak ) (regarded as compensated Poisson increment). We denote the magnitude of partitions  and A as | | and |A| respectively, i.e., | | = max (tl - tl-1 ) and
+0<lL
+
+|A| = max
+
+1k K
+
+f (y ) dy . Ak
+
+From (2.7), we have VTj+1 - VTj = MTj+1 - MTj + UTj+1 - UTj , j = 0, ..., J . Combining with the Ito sum of MTj+1 in (3.3), we have VTj+1 - VTj
+Tj tl <Tj +1
+
+(3.4)
+
+tl (W (tl+1 ) - W (tl ))
+K
+
++
+Tj tl <Tj +1 k =1
+
+~ ([tl , tl+1 ]  Ak ) + UT - UT ,  (tl , yk ) P j +1 j
+
+(3.5)
+
+where yk  Ak is a representative value, and we will keep using this notation thereafter. Multiplying both sides of (3.5) by the Wiener process increment (W (tl+1 ) - W (tl )) and taking conditional expectations with respect to the filtration Ftl , we obtain tl  1 Et (W (tl+1 ) - W (tl )) VTj+1 , Tj  tl < Tj +1 , tl+1 - tl l (3.6)
+
+where we use the F -predictability of U , the independent increment property of W (t) and the independence between W and P . Similarly, if we multiply both sides of (3.5) by the compensated Poisson random variable ~ ([tl , tl+1 ]  Ak ) and take the conditional expectations with respect to the filtration Ft , we P l can obtain
+ (tl , yk )  1	([tl , tl+1 ]  Ak ) ~ ([tl , tl+1 ]  Ak ) VT Etl P j +1 , Tj  tl < Tj +1 , 1  k  K, (3.7)
+
+where we again use the F -predictability of U , the independent increment property of P and the independence between P and W . Motivated by expressions (3.6) and (3.7), we denote the approximation of tl and	(tl , yk ) A by , and  ,A (tl , yk ) respectively, which are defined as follows: tl
+A , := tl
+
+1 Etl ( Wl ) VTj+1 , Tj  tl < Tj +1 ,  l
+
+(3.8)
+
+and
+ ,A (tl , yk ) := 1  ([tl , tl+1 ]  Ak ) ~ ([tl , tl+1 ]  Ak ) VT Etl P j +1 , Tj  tl < Tj +1 , 1  k  K, (3.9)
+
+10
+
+ where	l and  Wl represent the increments of time t and the Winer process W (t) re spectively, i.e.  l = (tl+1 - tl ) and  Wl = (Wl+1 - Wl ). Therefore, we can construct an ,A approximation of MTj , denoted by MTj , as follows: K ,A MT := j 0tl <Tj A  , tl ( Wl ) + 0tl <Tj k =1
+
+~ ([tl , tl+1 ]  Ak ).	,A (tl , yk ) P
+
+(3.10)
+
+,A The construction procedure of MT can be summarized in the following Algorithm 1. j
+
+Algorithm 1 Construction of the Martingale Approximation M ,A Step 1: Express MTj as an integral of (t) and  (t, y ) via (3.3). A Step 2: Approximate tl by , via (3.8) and  (tl , yk ) by  ,A (tl , yk ) via (3.9) respectively. tl ,A Step 3: Construct the approximation of MTj , denoted by MT , via (3.10). j Under the pure-diffusion models, Belomestny et al. (2009) construct the approximation of  MTj , denoted by MT to preserve the martingale property. Here we generalize their techj niques to the approximation of the jump part of the martingale under the jump-diffusion models. We observe that, similar to regarding t as a random function of time, we can regard  (t, y ) in (3.5) as a random function of both time and space variables. By properly constructing the Poisson random measure and partitioning the supporting space Rd with respect to the Poisson random measure, we are able to construct the Ito sum to approximate the jump part of MTj .
+,A Notice that M ,A = {MT : j = 0, ..., J } remains to be a martingale adapted to the j filtration {FTj : j = 0, ..., J }, based on its structure. We formally state this result in the following theorem.
+
+Theorem 3.3 (True Martingale ). If an approximation of M , denoted by M ,A , is constructed using Algorithm 1, then M ,A is still a martingale adapted to the filtration {FTj : j = 0, ..., J }. Proof. To show M ,A is a martingale adapted to the filtration {FTj : j = 0, ..., J }, it is sufficient to show that for 0  j1 < j2  J , E MTj2 |FTj1 = MTj1 .
+A and  ,A (tl , yk ) are function of tl and Xtl . Hence, For 0	l  L and 1  k  K, , tl ~ ([tl , tl+1 ]	Ak ). According to the zero-mean they are independent from both  Wl and P  ~ property of  Wl and P ([tl , tl+1 ]  Ak ), we have   K
+
+E MTj2 |FTj1
+
+=E =
+
+A  , tl ( Wl )
+
++
+
+0tl <Tj2
+
+0tl <Tj2 k =1 K
+
+A  , tl ( Wl )
+
++
+0tl <Tj1 k =1
+
+0tl <Tj1
+
+~ ([tl , tl+1 ]  Ak )  ,A (tl , yk ) P
+
+~ ([tl , tl+1 ]  Ak ) FT   ,A (tl , yk ) P j1
+
+= MTj1 .
+
+11
+
+According to Theorem 3.3, if we plug M ,A in (2.6), it is easy to see that V0up M ,A is a true upper bound on the Bermudan option price V0 in the sense that V0up M ,A is an unbiased expectation for a valid upper bound. Moreover, if we adopt the L-S algorithm to solve the primal problem (2.3), we will obtain a suboptimal exercise strategy  ~. Exercising  ~ along a certain number of sample paths yields an approximation VTj of the Bermudan option price at time Tj via VTj = ETj H ~j means the stopping time  ~ takes value greater ~j , where  than or equal to j . Due to the tower property of conditional expectations, we can rewrite (3.8) and (3.9) as
+A , := tl
+
+1 Etl ( Wl )H ~j +1 ,  l
+
+Tj  tl < Tj +1 ,
+
+(3.11)
+
+and
+ ,A (tl , yk ) := 1  ([tl , tl+1 ]  Ak ) ~ ([tl , tl+1 ]  Ak ) H Etl P ~j +1 , Tj  tl < Tj +1 , 1  k  K. (3.12)
+
+Through this we avoid the computation of conditional expectations in (3.8) and (3.9), which ,A would incur nested simulation in implementation. Therefore, we can estimate MT in (3.10) j via non-nested simulation, and hence significantly improve the computational efficiency. A natural question that arises after we obtain M ,A is how good it approximates the objective martingale M . In the remainder of this section, we will focus on the limiting behaviour of M ,A as | | goes to zero, and bound the distance between M ,A and M with | |. Precisely, we have the following theorem.
+,A Theorem 3.4. Let MTj be the martingale component of VTj = v Tj , XTj and MT be its j approximation obtained via Algorithm 1, where v (Tj , ) are Lipschitz continuous functions. Then there exists a constant C > 0 such that
+
+E
+
+0j J
+
+,A max |MT - MTj |2  C | |. j
+
+Proof. Fix Tj . Consider tl such that Tj  tl < Tj +1 and k such that 1	k  K. According to (3.8) and (3.9), we have:
+A , = tl
+
+1 Etl ( Wl ) VTj+1  l ( i) 1 =	Etl ( Wl ) VTj+1 - ETj [VTj+1 ] l (ii) 1 =  Etl ( Wl ) MTj+1 - MTj l
+(iii)
+
+1 =  Etl l
+tl
+
+tl+1
+
+Tj +1
+
+Tj +1
+
+dWs
+tl tl+1 Tj
+
+s dWs +
+Tj Rd
+
+~ (ds, dy)  (s, y)P
+
+(iv)
+
+1 =  Etl l
+
+s ds ,
+
+where the equality (i ) follows the independent increment property of W (t), equality (ii ) uses (2.8), equality (iii ) uses (3.3), and equality (iv ) follows the Ito's isometry and the independence between W and P . 12
+
+Similarly, we have
+ ,A (tl , yk ) = 1 Et  ([tl , tl+1 ]  Ak ) l 1 (i) Et =  ([tl , tl+1 ]	Ak ) l 1 (ii) = Et  ([tl , tl+1 ]  Ak ) l
+(iii)
+
+~ ([tl , tl+1 ]  Ak ) VTj+1 P ~ ([tl , tl+1 ]  Ak ) VTj+1 - ETj [VTj+1 ] P ~ ([tl , tl+1 ]  Ak ) MTj+1 - MTj P
+tl+1 tl tl+1 tl Ak
+
+=
+
+1
+
+ ([tl , tl+1 ]	Ak ) 1	([tl , tl+1 ]  Ak )
+
+Etl
+
+~ (ds, dy ) P
+
+Tj+1
+
+Tj+1
+
+s dWs +
+Tj Tj Rd
+
+~ (ds, dy )  (s, y )P
+
+(iv )
+
+=
+
+Etl
+Ak
+
+ (s, y) (ds  dy ) ,
+
+~ , equality (ii ) uses (2.8), where equality (i ) follows the independent increment property of P equality (iii ) uses (3.3), and equality (iv ) follows Ito's isometry and the independence between P and W . Furthermore, from (2.8) and (3.3), we have: VTj+1 - ETj VTj+1 = MTj+1 - MTj
+Tj +1
+
+Tj +1 Tj Rd
+
+=
+Tj
+
+s dW (s) +
+
+~ (ds, dy) .  (s, y )P
+
+(3.13)
+
+If we reorganize (2.1) and (3.13) together as the following Forward-Backward SDE (FBSDE) on [Tj , Tj +1 ] Xt = XTj +
+t Tj
+
+b(s, Xs )ds +
+Tj +1 t
+
+t Tj
+
+ (s, Xs )dWs +
+Tj +1 t R
+
+Yt := v Tj +1, XTj -
+
+s dWs -
+
+~ (ds, dy ) J (s, X (s) , y)P , ~ d  (s, y )P (ds, dy )
+Rd
+
+t Tj
+
+then according to the results obtained by Bouchard and Elie (2008) (see Theorem 2.1 in Bouchard and Elie (2008)), we have
+tl+1
+
+and E
+K
+
+E
+
+Tj tl <Tj +1
+
+tl
+
+A 2  |s - , tl | ds  Cj | |,
+
+(3.14)
+
+tl+1 tl Ak
+
+Tj tl <Tj +1 k =1
+
+| (s, y ) -  ,A (tl , yk ) |2  (ds  dy )  Cj | |,
+
+
+
+(3.15)
+
+13
+
+for some constant Cj . Therefore, we have E = 4E
+j =0 Tj tl <Tj +1 K tl+1 tl Ak tl+1 tl tl+1 tl tl ,A ,A - MT |2 max |MT - MTj |2  4E |MT j J -1 tl+1 A dW (t) t - , tl 2 (i)
+
+0j J
+
++
+Tj tl <Tj +1 k =1 (ii) J -1
+
+ (t, y ) -
+
+,A
+
+~ (dt, dy) (tl , yk ) P
+
+= 4
+j =0
+
+ C | |,
+
++E
+
+
+
+E
+
+
+
+(3.16)
+
+Tj tl <Tj +1 K
+
+A 2  |s - , tl | ds Ak
+
+Tj tl <Tj +1 k =1
+
+| (s, y ) -  ,A (tl , yk ) |2  (ds  dy )
+
+where the inequality (i) follows Doob's Lp maximal inequality, equality (ii) follows Ito's
+J -1
+
+isometry and the independence between P and W , and C = 8
+
+Cj .
+j =0
+
+According to the relationship between M and V0up (M ) in (2.6), we can immediately obtain the following corollary on the quality of uppers bounds. Corollary 3.1. Under the assumptions of Theorem 3.4, we have |V0up (M ,A ) - V0up (M ) |2  C | |. Corollary 3.1 implies that, if we want to obtain a tight upper bound V0up (M ,A ), we have to partition [0, T ] sufficiently small. Another key procedure to ensure the successful A implementation of our algorithm is to find a good way to approximate ,A = {, :l= tl ,A ,A 0, ..., L} in (3.11) and  = { (tl , yk ) : l = 0, ..., L, k = 0, ..., K} in (3.12) sufficiently well with the least computational effort. In next section, we will approximate ,A and  ,A via a least-squares regression-based approach and describe the detailed algorithm towards the upper bounds on the Bermudan option price.
+
+4
+
+True Martingale Algorithm
+
+We will formally describe the T-M algorithm based on the construction of the martingale approximation M ,A in section 3. The outline of the T-M algorithm consists of four steps in order: generating a suboptimal exercise strategy  ~, approximating the integrands ,A and  ,A , constructing the martingale approximation M ,A , and generating true upper bounds ^ ,A on the option price. V0up M First, let's start with generating the suboptimal exercise strategy  ~. It not only provides the lower bound, but also plays an important role in approximating the integrands ,A and  ,A . 14
+
+We adopt the least-squares regression-based approach proposed by Longstaff and Schwartz (2001) to generate the suboptimal exercise strategy  ~ and the corresponding approximation  of option price process VTj at time Tj , of the form
+  ,A T = v Tj , X  , V j Tj
+
+(4.1)
+
+  ,A   A are employed to simulate the discretized asset price process {X  where    , A }.
+
+Second, let us approximate the integrands ,A and  ,A . To avoid confusion, we denote
+,A =  tl
+1 Etl  l   ,A ( Wl ) v Tj +1 , XT j +1 1 ([tl ,tl+1 ]Ak ) Etl
+
+,A (tl , yk ) =
+
+  ,A ~ ([tl , tl+1 ]  Ak ) v Tj +1 , X	P Tj +1
+
+, Tj  tl < Tj +1
+
+, Tj  tl < Tj +1 , 1  k  K
+
+A and  ,A (tl , yk ) respectively, under the discretized asset price as the counterparts of , tl    ,A XT . Inspired by Longstaff and Schwartz (2001)'s least-squares regression approach to j +1 approximating the continuation values, we apply a similar regression technique to approxA  and  ,A . Specifically, the function bases chosen to regress  , ,A (tl , yk ) imate  and  tl  ,A are row function vectors W tl , Xt l   ,A P i (tl , yk , Xtl )
+
+=
+
+  ,A W i (tl , Xtl )
+
+
+
+i=1,...,I1
+
+ ,A and P tl , yk , Xt l
+
+
+
+=
+
+bases. If we simulate N independent samples of Wiener increments  Wl , denoted by { n Wl : l = 1, ...L, n = 1, ..., N }, and N independent samples of Poisson increments P ([tl , tl+1 ]  Ak ), denoted by {Pn ([tl , tl+1 ]  Ak ) : l = 1, ..., L, k = 1, ..., K, n = 1, ..., N },   ,A and based on which we construct the sample paths of the asset price {Xt } , l ,n l=0,...,L,n=1,...,N ^t ,k , for Tj  tl < Tj +1 and 1	k  K, then we can obtain the regressed coefficients  ^ tl and  l via  N 2      ,A   ,A	W n Wl	 t , X -  H X ^ tl = arg min	l  ~ t ,n j +1 Tj +1 ,n l l RI1 n=1 , (4.2) N 2 ~n ([tl ,tl+1 ]Ak )    P   ,A	,A P  ^ H tl , yk , Xtl ,n   tl ,k = arg min ~j +1 XTj +1 ,n -	([tl ,tl+1 ]Ak )
+ RI2 n=1
+
+i=1,...,I2
+
+respectively, where I1 and I2 are the dimensions of the function
+
+where we employ the tower property to avoid nested simulation, as described in (3.11) and A , ,A (tl , yk ), (3.12). Therefore we can compute the approximations of the integrands  and  tl ^,A (tl , x) and  ^,A (tl , yk , x) respectively, via denoted by  ^,A (tl , x) = W (tl , x)   ^ tl ,A P ^ ^t ,k  (tl , yk , x) =  (tl , yk , x)  l . (4.3)
+
+^, we construct an approximation of M ,A , denoted by M ^ ,A , by Next, with fixed  ^ and  ^,A and  ^,A of the integrands with the Euler scheme of combining the approximation	system (2.1). Precisely, we have
+^ ,A := M Tj
+0tl <Tj   ,A ^,A tl , X   ( Wl ) + tl K 0tl <Tj k =1   ,A ^,A tl , yk , X  ~ ([tl , tl+1 ]  Ak ). (4.4)  P tl
+
+15
+
+^ ,A remains to be a martingale adapted to the filtration {FT : j = 0, ..., J }. Obviously, M j up ,A ^ Consequently, V0 M is a true upper bound on the Bermudan option price V0 . To this ^ ,A . A natural end we have finished the construction of the true martingale approximation M ^ ,A approximates the objective martingale MT given that the question is that how good M j Euler scheme of the asset-price process and the regression (4.2) both incur bounded errors. We address this question in the following theorem.
+  ,A T = v Tj , X  Theorem 4.1. Consider V , for j = 1, 2, ..., J , where v (Tj , ) are Lipschitz j Tj	 ,A continuous functions, XT is the Euler discretization of XTj corresponding to partitions   j     and A  A. Let MTj be the martingale component of VTj . Assume that for 0  l  L - 1 and 1  k  K, ^,A (tl , x) -  ,A (tl , x) 2    1 ^,A (tl , yk , x) -  ,A (tl , yk , x) 2	  1  for some positive number , then there exists a constant C > 0 such that
+
+E
+
+0j J
+
+ (| | + ) . ^ ,A - M  T |2  C max |M j Tj
+
+Proof. To avoid confusion of notations, we denote
+K
+
+ ,A := M Tj
+0tl <Tj
+
+A  ,  tl ( Wl ) + 0tl <Tj k =1
+
+,A (tl , yk ) P ~ ([tl , tl+1 ]  Ak ).
+
+Then, we have E
+(ii)
+
+0j J
+
+^ ,A - M  T |2 ^ ,A - M  T | 2	4E | M max |M j T Tj
+
+(i)
+
+^ ,A - M  ,A |2 + |M  ,A - M ,A |2 + |M ,A - MT |2 + |MT - M  T |2  16E |M T T T T T =16[() + () + (  ) + (  )],
+
+where inequality (i) follows Doob's Lp maximal inequality and inequality (ii) follows Cauchy's inequality. From the assumption, we have ^ ,A - M  ,A |2 ( ) = E | M T T
+J -1
+
+tl+1 tl tl+1 tl
+
+=
+
+j =0
+
+  [0, T ]  Rd + T . From Theorem 3.4, we have
+
++E
+
+
+
+E
+
+Tj tl <Tj +1 K
+
+A A 2 ^, , ds | - tl tl | Ak
+
+
+
+Tj tl <Tj +1 k =1
+
+^,A (tl , yk ) -  ,A (tl , yk ) |2  (ds  dy ) |
+
+,A (  ) = E |MT - MT |2  C | |.
+
+16
+
+As for term (  ), we have  (  ) = E
+(ii) (i) J j =1 J
+
+2
+
+  ,A   ,A v Tj , XTj - v Tj , XT - ETj-1 v Tj , XTj - v Tj , XT j j  2 (iii)
+
+
+
+ L
+
+E
+j =1
+
+  ,A XTj - XT j
+
+ |  | |,  L |  L
+
+ are some constants. Here equality (i) follows (2.8), inequality (ii) follows where L and L the Lipschitz continuity of v (Tj , ) and inequality (iii) follows the mild continuity conditions that b,  and J satisfy. To this point the term left to estimate is (). Notice that, for Tj  tl < Tj +1 and 1  k  K,
+  ,A - v Tj +1 , XTj+1 Etl ( Wl ) v Tj +1 , XT j +1   2
+
+1  l
+
+  ,A - v Tj +1 , XTj+1 =Etl ( Wl ) Etl+1 v Tj +1 , XT j +1 2	,A Tj +1 , XT j +1
+
+- Etl v
+
+- v Tj +1 , XTj+1
+2
+
+1  l
+ 2
+
+  ,A - v Tj +1 , XTj+1 Etl Etl+1 v Tj +1 , XT j +1
+
+  ,A - v Tj +1 , XTj+1 - Etl v Tj +1 , XT j +1
+
+,
+
+and similarly
+  ,A ~ ([tl , tl+1 ]  Ak ) v Tj +1 , X	Etl P Tj +1 - v Tj +1 , XTj +1	 ,A Etl Etl+1 v Tj +1 , XT - v Tj +1 , XTj+1 j +1  2 2
+
+1  ([tl , tl+1 ]  Ak )
+ 2
+
+  ,A - Etl v Tj +1 , XT - v Tj +1 , XTj+1 j +1
+
+.
+
+Hence,
+J -1
+
+() =
+
+j =0 Tj tl <Tj+1 J -1
+
+  ,A - v Tj +1 , XTj+1 E Etl ( Wl ) v Tj +1 , XT j +1 K
+
+
+
+2
+
+1  l
+2
+
++
+j =0 Tj tl <Tj+1 k=1 J -1
+
+  ,A ~ ([tl , tl+1 ]  Ak ) v Tj +1 , X	E Etl P Tj+1 - v Tj +1 , XTj+1	2
+
+1  ([tl , tl+1 ]  Ak )
+
+2
+
+E
+j =0 J
+
+  ,A - v Tj +1 , XTj+1 v Tj +1 , XT j +1   ,A - XTj XT j  2
+
+ 2L
+
+E
+j =1
+
+ |  | |.  2L  |  2L
+
+Therefore, E
+0j J
+
+^ ,A - M  T |2	16[() + () + (	) + (  )] max |M j Tj
+
+ |  | + C |  | + 2L  | |]  16[	[0, T ]  Rd + T  + 2L  (| | + ), C 17
+
+ = 16 max 4L  + C,  [0, T ]  Rd + T . where C ^ ,A Finally, let's estimate V0up M  independent via (2.5) by simulating a new set of N is
+   ,A ^ ,A  }. Precisely, an unbiased estimator for V up M sample paths {Xn : n = 1, ..., N 0 given as follows:
+
+^ up M ^ ,A = 1 V 0  N
+
+ N
+
+n=1
+
+0j J
+
+   ,A ^ ,A , max h Tj , XT -M Tj ,n j ,n
+
+(4.5)
+
+  ,A ^ ,A denotes the realization of M ^ ,A along the sample path X  where M Tj ,n Tj Tj ,n . We can formally summarize these steps in the following Algorithm 2.
+
+Algorithm 2 True Martingale Algorithm Step 1: Apply the L-S algorithm to generate a suboptimal exercise strategy  ~.  Step 2: Simulate N independent samples of Wiener increments  Wl and N independent samples of Poisson increments P ([tl , tl+1 ]  Ak ), for l = 0, ..., L-1 and k = 1, ..., K; construct	,A the sample paths of the asset price {Xt } . l ,n l=0,...,L,n=1,...,N ^ = { ^(tl , k )}l=0,...,L,k=0,...,K via leastStep 3: Obtain the parameters  ^ = { ^ tl }l=0,...,L and	  ,A squares regression (4.2) with exercising  ~ along the sample paths {Xt } . l ,n l=0,...,L,n=1,...,N    ,A	Step 4: Simulate a new set of N independent sample paths {Xtl ,n }l=0,...,L,n=1,...,N  ; compute ,A ,A ,A ^ ^ ^  and  via (4.3); construct the martingale approximation M via (4.4); obtain an up ^ ,A ^ unbiased estimator V0 (M ) for the true upper bound on the Bermudan option price V0 via (4.5).
+
+5
+
+Numerical Experiments
+
+In this section, we will conduct numerical experiments to illustrate the computational efficiency of our proposed T-M algorithm on a Bermudan option pricing problem under a jump-diffusion model. The exact model we consider here falls into the class of jump-diffusion models (see Merton (1976) and Kou (2002)) reviewed in section 1. Specifically, the asset prices evolve as follows:	P (t) dX (t) = (r -  ) dt + dW (t) + d	(Vi - 1) , (5.1) X (t- ) i=1
+
+where r is the constant discount factor,  is the constant dividend,  is the constant volatility, X (t) = [X1 (t), ..., Xn (t)] represents the asset price with a given initial price X0 , W (t) = [W1 (t), ..., Wn (t)] is a Wiener process, P (t) is a Poisson process with intensity , and {Vi } is a sequence of independent identically distributed (i.i.d.) nonnegative random variables such that J = log(V ) is the jump amplitude with p.d.f. f (y ). Here J can follow a normal distribution (see Merton (1976)) or a double-exponential distribution (see Kou (2008)) or various other reasonable distributions. For simplicity, we assume J follows a onedimensional (d = 1) normal distribution N (m, 2 ). We also assume W (t), P (t) and J are 18
+
+mutually independent. To connect dynamics (5.1) with the jump-diffusion model (2.1) we have mainly focused on, we should construct a function of X (t), denoted by S (t) = S (X (t)) such that dynamics (5.1) can be easily transformed to an equivalent dynamics jointly driven by the Wiener measure and a Poisson random measure PS . The following proposition provides an intuitive criterion in selecting such a function by explicitly defining the intensity function  (dt  dy ) for the unique Poisson random measure induced by a compound Poisson process. Proposition 5.1 (Proposition 3.5 in Cont and Tankov (2003) ). Let S (t)t>0 be a compound Poisson process with intensity  and jump size distribution f . Then the Poisson random measure PS induced by S (t)t>0 on [0, ]Rd has intensity measure  (dt  dy) = f (y ) dydt. According to Proposition 5.1, for a compound Poisson process S (t), the compensated ~S induced by S (t) can be simulated by P ~S = PS - f (y ) dydt. Poisson random measure P Although X (t) given by (5.2) is not a compound process, S (t) = log(X (t)) is a compound Poisson process, and thus its Poisson random measure PS (t, y ) can be easily simulated according to Proposition 5.1. Moreover, the simplicity of function S () guarantees that the function g in Theorem 3.2 can be easily determined, which is essential for the construction of bases W and P , as we will elaborate on this point later. Now if we incorporate PS into the asset-price dynamics (5.1), we can obtain an equivalent dynamics as dX (t) = (r -  ) dt + dW (t) + X (t- ) y PS (t, y ) . (5.2)
+
+Rd
+
+Unfortunately, the solution to asset dynamics (5.1) or (5.2) is not uniquely determined in the risk-neutral sense, caused by the incompleteness of the market under the jump-diffusion setting. However, we can construct different pricing measures Q s  P such that the discounted ^ (t) is a martingale under Q s (c.f. Chapter 10 in Cont and Tankov (2003)). Here we price X will adopt the construction method proposed by Merton (1976). That is, changing the drift of the Wiener process but leaving other components of (5.1) unchanged to offset the jump results in a risk-neutral measure QM , which is a generalization of the unique risk-neutral measure under the Black-Scholes model. Therefore, the solution under QM can be easily derived and efficiently simulated. Precisely, the solution to the asset-price dynamics (5.1) is given by:
+P (t)
+
+X (t) = X0 exp	t + W
+M 1 2  2 Ji
+
+M
+
+M
+
+(t) +
+i=1
+
+Ji ,
+
+t > 0,
+
+(5.3)
+
+where  = r -  - - E e - 1 is the new drift, W M (t) is a standard vector Wiener process and Ji s are the i.i.d. random variables according to J . Given the equivalence of (5.1) and (5.3), we can simulate X (t) under the risk-neutral measure QM by simulating S (t) and its associated Poisson random measure PS . Specifically, we perform the Euler scheme on an equidistant partition   with |  | = 0.01 and a continuously d  equi-probabilistic partition on R with |A| = 0.1 to simulate the Wiener increments {Wtl }, the Poisson random measure increments P ([tl , tl+1 ]	Ak ), and the resulting sample paths of X (t) = exp(S (t)) according to (5.3).
+
+19
+
+We consider a Bermudan Min-Puts on the n assets with price vector {X1 (t) , ..., Xn (t)}. In particular, at any time t	 = {T0 , T1 , ..., TJ }, the option holder has the right to exercise the option to receive the payoff h (X (t)) = (SK - min (X1 (t) , ..., Xn (t)))+ , where SK represents the strike price. The maturity time of the option is T = 1 and can be exercised at 11 equally-spaced time points, i.e., Tj = j  T /10, j = 0, ..., 10. Our objective is to solve the Bermudan option pricing problem by providing a lower bound and an upper bound on the exact option price.
+
+5.1
+
+Suboptimal Exercise Strategies and Lower Bounds
+
+First, let's adopt the L-S algorithm to generate a suboptimal exercise strategy  ~ by regressing the continuation values, and compute the corresponding benchmark lower bound. It turns out this algorithm will be very effective if one can construct good function bases for regression in the sense that the function bases should capture sufficient features of the continuation values. In particular, Anderson and Broadie (2004) propose a function basis consisting of all monomials of underlying asset prices with degrees less than or equal to three, the European min-put option with maturity T, its square and its cube. Numerical results show that this function basis works extremely well for Bermudan option pricing problems under the purediffusion models. The reason is that European option price under the pure-diffusion models can be fast computed via its closed-form, and capture sufficient features of the Bermudan option. For the Bermudan option pricing problem under the jump-diffusion model (5.1), the corresponding European option still has a closed-form expression. Specifically, under jumpdiffusion model (5.1), the explicit form of the European option on X at time t with maturity T , denoted by C M (t, X ; T ), is given by: C (t, X ; T ) = EQM [h(XT )|Ft] =
+M
+
+k 0
+
+e-(T -t) ((T - t))k BS Ck (0, Xk ; T - t) , k!
+2 ) 2
+
+(5.4)
+
+2 where k =  2 + k2 / (T - t), Xk = X exp k (m + BS C (0, X ;  ) = E H (Xe(r-- n
+2 ) +W 2
+
+- [exp(m +
+
+2 ) 2
+
+- 1](T - t) and
+
+)
+n
+
+=-
+
+l=1 -r
+
+e- Xl  2  SK
+
+z2 exp - 2 (-,dl -]
+n
+
+l =1,l =l
+
+N
+
+ ln X Xl  -z-
+
+l
+
+dz
+
+(5.5)
+
++e with
+
+1-
+
+l=1
+
+1 - N dl +
+2 2
+
+,
+
+dl +
+
+- r-- ln SK Xl	=
+
+ ,
+
+ l dl - = d+ -	 ,
+
+20
+
+BS and N denoting the c.d.f. of standard normal distribution, C (0, X ;  ) denoting the European option under the Black-Scholes model with maturity  , volatility  and initial price X . Unfortunately, it is extremely difficult to compute C M (t, X ; T ) in (5.4) exactly because of the infinite sum in (5.4). A natural modification is to approximate it numerically by finite truncation the summation in (5.4) and some approximation of the integral in (5.5). Naturally, we try to approximate it directly by an European option under a closely-related pure-diffusion model. Surprisingly, this most intuitive one, i.e., the European option under the pure-diffusion model derived simply by removing the jump part of (5.1) works extremely well in our numerical experiments. To avoid confusion, we refer to it as "non-jump European option".
+
+Now the function basis we choose includes all monomials of underlying asset prices with degrees less than or equal to three, the non-jump European option with maturity T, its square and its cube. With this basis, we implement the least-squares regression algorithm, and obtain suboptimal exercise strategies  ~ s and the corresponding lower bounds, as shown in Table 5.1.
+
+5.2
+
+Benchmark Upper Bounds
+
+After obtaining the suboptimal exercise strategies  ~ s, we adopt the A-B algorithm with nested Monte Carlo simulation to compute the benchmark upper bounds. We report the numerical results in Table 5.1, in which we can see that the A-B algorithm yields extremely tight upper bounds with small duality gaps. This observation indicates two facts. First, the suboptimal exercise strategies  ~ s constructed with the new function basis are nearly optimal, which are crucial for the successful implementation of the T-M algorithm because ^. Moreover, we will construct we also need  ~ s to estimate the regression coefficients	^ and  W P the function bases  and  using the new function basis as a starting point, therefore the effectiveness of the new function basis is a positive indicator for the sufficiency of bases W and P in terms of capturing features. Second, the A-B algorithm is still very effective under the jump-diffusion models, regardless of the considerable computational effort caused by the nested simulation.
+
+5.3
+
+Upper Bound by True Martingale Approach
+
+Next, we will address the computational inefficiency suffered by the A-B algorithm by implementing our proposed T-M algorithm (Algorithm 2) described in section 4. Notice that we have addressed almost all the implementation details except the choices of the partitions  and A, and the bases W and P . First of all, the choice of the partition	is essential to balance the tradeoff between the quality of the true martingale approximation and the computational efficiency. It has to be sufficiently small to reduce the overall mean square error between the true martingale approximation and the objective martingale, but not too small so that the computational effort for obtaining martingale approximation M ,A is much less than the computational effort for obtaining the inner sample paths in the A-B algorithm. In fact, a good way to achieve this tradeoff is to perform the regression on a rough partition in the beginning, and then interpolate them piece-wisely constant to a finer partition. To maximize the effect of this two-layer 21
+
+regression-interpolation technique, we choose to perform the regression procedure on the original exercisable dates  = {T0 , T1 , ..., TJ - 1} and interpolate the regression coefficients piece-wisely constant to the partition   of the Euler scheme. Secondly, the choice of the partition A is less restrictive than the choice of  since | | will dominate the error between the martingale approximation and the original martingale (see Theorem(3.4)) regardless of . Therefore the compensated Poisthe choice of A. For the sake of convenience, we let A = A ~ son increments {P ([tl , tl+1 ]  Ak )} in (4.2) are obtained immediately from the simulation of   ,A X , and	([tl , tl+1 ]  Ak ) in (4.2) equals   0.01  0.1 (see Proposition 5.1). Specifically, ^T ,k , j = 0, ..., J - 1, k = 1, ..., K} via the regreswe obtain { ^ Tj , j = 0, ..., J - 1} and { j ^t ,k =  ^T ,k for tl  [Tj , Tj +1), k = 1, ..., K. sion (4.2), and set  ^ tl =  ^ Tj for tl  [Tj , Tj +1 ) and  j l Finally, the choice of the bases W and P affects the accuracy of the martingale approx^ ,A . According to Theorem 3.2, the bases W should capture sufficient features imation M of the derivative of the Bermudan option price, while the bases P should capture sufficient features of the increment of the Bermudan option price caused by the jump. As we showed earlier, the non-jump European option is a good basis function for the Bermudan option price. Therefore, if we apply Ito's lemma on the non-jump European option, we expect the resulting integrands to be good starting points for the bases W and P . Precisely, for 0  j  J , we have C M (t, Xt ; Tj ) : = EQM h(XTj )|Ft
+Tj
+
+= h(XTj ) -
+Tj
+
+t
+
+C M (u, Xu- ; Tj ) M Xu- dWu X
+
+(5.6)
+
+-
+
+t
+
+Rd
+
+~S (du, dy ) . C M (u, Xu-  ey ; Tj ) - C M (u, Xu- ; Tj ) P
+
+Therefore, the function basis W (t, Xt- ) should include the derivative of C BS (t, Xt- ; ), while the function basis P (t, y, Xt- ) should include C BS (t, Xt-  ey ; ) - C BS (t, Xt- ; ). After simple numerical tests, we find out (see Basis 4 in Table 5.3), for t  [Tj , Tj +1) and 1  k  K, C BS (t,Xt- ;Tj +1 ) C BS (t,Xt- ;T ) W (t, Xt- ) consisting of 1, Xt- and Xt- , P (t, yk , Xt- ) consistX X ing of 1, C BS (t, Xt-  eyk ; Tj +1) - C BS (t, Xt- ; Tj +1) and C BS (t, Xt-	eyk ; T ) - C BS (t, Xt- ; T ) yield the tightest upper bounds, where yk  Ak is a representative value. We report the numerical results on the lower bounds by the L-S algorithm, the benchmark upper bounds by the A-B algorithm and the true upper bounds by the T-M algorithm in Table 5.1. The small gaps between the lower bounds and the true upper bounds indicate that the T-M algorithm is quite effective in terms of generating tight true upper bounds. The small length of the confidence intervals of the true upper bounds indicates that T-M algorithm generates good approximations of the optimal dual martingales. The CPU time ratios indicate that T-M algorithm achieves a much higher numerical efficiency compared with the A-B algorithm. It is instructive to theoretically compare the computational complexity of the T-M algorithm and the A-B algorithm, since the CPU time ratios in Table 5.1 are quite different for 1-dimensional problems and 2-dimensional problems. We can use EE + ES to represent the total CPU time, where EE represents the CPU time for evaluating the European option 22
+
+Table 5.1: Bounds (with 95% confidence intervals) for Bermudan Min-put options n 1 1 1 1 1 1 2 2 2 2 2 2  1 1 1 3 3 3 1 1 1 3 3 3 X0 36 40 44 36 40 44 36 40 44 36 40 44 Lower Bound Upper Bound Benchmark U-B CPU Time Ratio (L-S algorithm) (T-M algorithm) (A-B algorithm) (T-M vs A-B) 5.842  0.031 3.791  0.028 2.383  0.024 7.702  0.043 5.817  0.039 4.352  0.036 8.133	0.033 5.691  0.034 3.765  0.028 9.786  0.045 7.680  0.043 5.941  0.040 5.970  0.031 3.910  0.033 2.443	0.028 7.899  0.030 5.996  0.047 4.480  0.044 8.308  0.045 5.785  0.040 3.842  0.036 10.038  0.061 7.900  0.060 6.118  0.058 5.899  0.038 3.856	0.036 2.417  0.033 7.810  0.053 5.894  0.050 4.440  0.040 8.243  0.040 5.755  0.043 3.804  0.038 9.989	0.057 7.845  0.057 6.065  0.058  1:400	1:400  1:400  1:400  1:400  1:400  1:9	1:9  1:9  1:9  1:9  1:9
+
+The payoff of the min-put option is: (SK - min(X1 (t), ..., Xn (t)))+ . The parameters are: SK = 40, r = 4%,  = 0,  = 20%, m = 6%,  = 20%, T = 1, J = 10. The jump intensity  is 1 or 3 and the initial price is X0 = (X, ..., X ) with X =36, 40 or 44, as shown in the table. We use N = 5  104 sample paths to estimate the regression coefficients to determine the suboptimal exercise strategy, ^. We use N1 = 105 sample and we use N = 5  104 sample paths to estimate the coefficients  ^ and	paths to determine the lower bounds. For the implementation of the A-B algorithm, we use N2 = 103 outer sample paths and N3 = 5  102 inner sample paths to determine the benchmark upper bounds and the confidence intervals of appropriate length. For the implementation of the T-M algorithm, we  = 2.5  103 sample paths to determine the true upper bounds and the confidence intervals of use N appropriate length.
+
+prices and ES represents the CPU time for exercising the strategy along all the sample paths. Simple numerical tests show that when n = 1, the term ES will dominate the total CPU time because the European option price can be evaluated extremely fast, since the integral in (5.5) reduces to the c.d.f. of a standard normal distribution. Therefore, the CPU time ratio will be in the order of number ratio of sample paths, which is consistent with the result ( 1:400). However, when n  2, the term EE will be dominant over ES because the evaluation of the European option price consumes over 95% of the total CPU time, caused by the evaluation of the integral in (5.5). Hence, we should compare the total evaluation times of the European option price for both algorithms to estimate the CPU time ratio. For the A-B algorithm, the total evaluation times is in the order of (N2  N3  J  J ), which is quadratic in the number of exercisable periods J and will be significantly amplified by the two-layer simulation. For the T-M algorithm, the total evaluation times is in the order of	L  K), which is linear in the number of exercisable periods, since L is a linear function (N of J (in our case L = 10J ) and K is usually quite small (in our case K = 10). Therefore T-M algorithm can achieve a higher order of computational efficiency, which is verified by the numerical results. We can expect that the CPU time ratios (T-M algorithm versus A-B algorithm) to further decrease when the number of exercisable periods increases, and remain 23
+
+stable if we increase the dimension of the problem. An interesting experiment has been conducted to exhibit the quality differences between the upper bounds generated by different bases W and P , and we report the results in Table 5.2. Specifically, the upper bounds of different levels of quality are generated using various bases that are presented in Table 5.3. To summarize, the simplest basis, i.e., {1} (Bases 1), results in very poor upper bounds; the standard basis one can come up with, i.e., the polynomials (Bases 2), improves the upper bounds significantly. But the gap is still too large; however, the upper bounds get almost no improvement after we use the non-jump European options as the basis (Bases 3), which indicates that the non-jump European option does not further provide useful features. Finally, the basis W consisting of the deltas of the non-jump European options and the basis P consisting of the non-jump European option increments (Bases 4) yield desirable upper bounds. These results verify the theoretical analysis about the structure of the optimal dual martingales, as shown in Theorem 3.2. Table 5.2: Upper Bounds for different function bases Bases 1 Bases 2 Bases 3 Bases 4 6.730  0.069 6.283  0.042 6.228  0.048 5.970  0.031 4.789  0.074 4.228  0.039 4.127	0.047 3.910  0.033 3.344  0.073 2.734  0.038 2.665  0.044 2.443  0.028 8.829  0.091 8.338  0.059 8.167	0.062 7.899  0.030 7.086  0.101 6.377  0.060 6.277  0.067 5.996  0.047 5.681  0.100 4.953  0.057 4.752	0.061 4.480  0.044
+
+ X0 1 1 1 3 3 3 36 40 44 36 40 44
+
+Table 5.3: Explicit description of function Bases in Table 5.2 Bases Bases Bases Bases Bases 1 2 3 4
+W (t, x) with t  [Tj -1 , Tj ) P (t, yk , x) with t  [Tj -1 , Tj ), 1  k  K
+
+{1, C BS (t, x; T ) , C BS (t, x; T ) } BS C BS (t,x;Tj +1 ) (t,x;T ) {1, x, C x x} x
+
+{1 } {1, x, x2 , x3 }
+
+2
+
+{1, C BS (t, x; T ) , C BS (t, x; T )
+
+{1 } {1, x, x2 , x3 }
+
+2
+
+}
+
+{1, C BS t, x  eyk ; Tj +1 - C BS t, x; Tj +1 , C BS (t, x  eyk ; T ) - C BS (t, x; T )}
+
+Another interesting experiment has been conducted to investigate the individual performance of the two terms in (4.4) since each term individually is a well-defined true martingale (adapted to the filtration {FTj : j = 0, ..., J }). Specifically, if ^ ,A = M Tj
+0tl <Tj   ,A ^,A tl , Xt ( Wl ) +  l K	 ,A ^,A tl , yk , Xt ~ ([tl , tl+1 ]  Ak ) P  l
+
+0tl <Tj k =1
+
+= (T erm 1) + (T erm 2), then both Term 1 and Term 2 are martingales adapted to the filtration {FTj : j = 0, ..., J }. Therefore both of them will induce true upper bounds. Results in Table 5.4 show that taking 24
+
+out either one of these two terms yields significantly poorer upper bounds with much worse confidence intervals, which implies that the effort we have spent on the regression coefficients ^, and the construction of the martingale M ,A is necessary and time-worthy.  ^ and  Table 5.4: Upper Bounds by one term in the True Martingale  X0 Term 1 Term 2 Complete Martingale 1 1 1 3 3 3 36 40 44 36 40 44 6.863  0.059 4.450  0.056 2.750  0.050 7.930  0.073 5.184  0.072 3.125	0.064 5.970  0.031 3.910  0.033 2.443  0.028 7.899  0.030 5.996  0.047 4.480  0.044
+
+10.101	0.099 9.304  0.070 7.776  0.103 7.047  0.070 5.747  0.098 5.244  0.066
+
+6
+
+Conclusion and Future directions
+
+In this paper, we propose a true martingale algorithm (T-M algorithm) to fast compute the upper bounds on Bermudan option price under the jump-diffusion models, as an alternative approach for the classic A-B algorithm proposed by Anderson and Broadie (2004), especially when the computational budget is limited. The theoretical analysis of our algorithm proves and the numerical results verify that our algorithm generates stable and tight upper bounds with significant reduction of computational effort. Moreover, we explore the structure of the optimal dual martingale for the dual problem and provide an intuitive understanding towards the construction of good approximations of the optimal dual martingale over the space of all adapted martingales. Furthermore, from the information relaxation point of view (see Brown et al. (2010)), we can gain an intuitive understanding towards the structure of the optimal penalty function. It inspires us to construct good penalty functions over the space of "feasible penalty functions" for general dynamic programming problems, which is still an open area to explore (see Ye and Zhou (2012) for some initial exploration).
+
+References
+Amin, K. 1993. Jump diffusion option valuation in discrete time. The Journal of Finance 48(5) 18331863. Anderson, L., M. Broadie. 2004. Primal-dual simulation algorithm for pricing multidimensional American options. Management Science 50(9) 1222  1234. Belomestny, D., C. Bender, J. Schoenmakers. 2009. True upper bounds for Bermudan products via non-nested Monte Carlo. Mathematical Finance 19 53  71. Belomestny, D., J. Schoenmakers. 2012. Multilevel dual approach for pricing american style derivatives. Working Paper.
+
+25
+
+Bender, C. 2011. Dual pricing of multi-exercise options under volume constraints. Finance and Stochastics 15(1) 126. Bender, C., J. Schoemakers, J. Zhang. 2011. Dual representations for general multiple stopping problems. Working Paper. Bossaerts, P. 1989. Simulation estimators of optimal early exercise. Working Paper, Graduate School of Industrial Administration, Carnegie Mellon University . Bouchard, B., R. Elie. 2008. Discrete-time approximation of decoupled forwardbackward sde with jumps. Stochastic Processes and their Applications 118(1) 5375. Brown, D., J. Smith, P. Sun. 2010. Information relaxations and duality in stochastic dynamic programs. Operations Research 58(4) 758  801. Cai, N., S. Kou. 2011. Option pricing under a mixed-exponential jump diffusion model. Management Science 57(11) 20672081. Cai, N., S. Kou. 2012. Pricing asian options under a hyper-exponential jump diffusion model. Operations Research 60(1) 6477. Chandramouli, S., M. Haugh. 2012. A unified approach to multiple stopping and duality. Operations Research Letters . Chen, N., P. Glasserman. 2007. Additive and multiplicative duals for american option pricing. Finance and Stochastics 11 153	179. Cont, R., P. Tankov. 2003. Financial modelling with jump processes , vol. 2. Chapman & Hall/CRC. Desai, V., V. Farias, C. Moallemi. 2012. Pathwise optimization for optimal stopping problems. Management Science . Duffie, D., J. Pan, K. Singleton. 2000. Transform analysis and asset pricing for affine jumpdiffusions. Econometrica 68(6) 13431376. Fang, F., C. Oosterlee. 2009. Pricing early-exercise and discrete barrier options by fourier-cosine series expansions. Numerische Mathematik 114(1) 2762. Feng, L., X. Lin. 2012. Pricing bermudan options in lvy process models. Working Paper. Feng, L., V. Linetsky. 2008. Pricing options in jump-diffusion models: An extrapolation approach. Operations Research 56(2) 304325. Glasserman, P. 2004. Monte Carlo Methods in Financial Engineering . Springer. Gukhal, R. 2001. Analytical valuation of american options on jump-diffusion processes. Mathematical Finance 11(1) 97115. Haugh, M., L. Kogan. 2004. Pricing American options: A duality approach. Operations Research 52(2) 258  270. Jamshidian, F. 2007. The duality of optimal exercise and domineering claims: A doob-meyer decomposition approach to the snell envelope. Stochastics 79 27  60. K ellezi, E., N. Webber. 2004. Valuing bermudan options when asset returns are l evy processes. Quantitative Finance 4(1) 87100. Kou, G. 2002. A jump-diffusion model for option pricing. Management Science 48(8) 10861101. Kou, G. 2008. Jump-diffusion models for asset pricing in financial engineering. Chapter 2 of Handbooks in Operations Research and Management Science . Kou, G., H. Wang. 2004. Option pricing under a double exponential jump diffusion model. Management Science 11781192. Longstaff, F., E. Schwartz. 2001. Valuing American options by simulation: A simple least-squares approach. The Review of Financial Studies 14(1) 113  147.
+
+26
+
+Merton, R. 1976. Option pricing when underlying stock returns are discontinuous. Journal of Financial Economics 3(1) 125144. Pham, H. 1997. Optimal stopping, free boundary, and american option in a jump-diffusion model. Applied Mathematics and Optimization 35(2) 145164. Rogers, L. 2002. Monte Carlo valuation of American options. Mathematical Finance 12(3) 271  286. Rogers, L. 2007. Pathwise stochastic optimal control. SIAM J.Control Optimization 46(3) 1116  1132. Tilley, J. 1993. Valuing American options in a path simulation model. Transactions of the Society of Actuaries 45 83  104. Tsitsiklis, J., B. van Roy. 2001. Regression methods for pricing complex American-style options. IEEE Transactions on Neural Networks 12(4) 694	703. Ye, F., E. Zhou. 2012. Parameterized penalties in the dual representation of markov decision processes. Decision and Control (CDC), 2012 IEEE 51st Annual Conference on . IEEE, 870 876. Ye, F., E. Zhou. 2013a. Information relaxation and duality in controlled markov diffusions. Working Paper. Ye, F., E. Zhou. 2013b. Optimal stopping of partially observable markov processes: A filteringbased duality approach. IEEE Transactions on Automatic Control. To Appear.
+
+27
+

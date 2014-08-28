@@ -1,0 +1,223 @@
+Momentum-based Balance Control for Torque-controlled Humanoids
+Alexander Herzog1 , Ludovic Righetti1,2 , Felix Grimminger1 , Peter Pastor2 and Stefan Schaal1,2
+
+arXiv:1305.2042v1 [cs.RO] 9 May 2013
+
+Abstract-- In this contribution we propose a reformulation of a momentum-based balance controller originally proposed by Lee and Goswami. The advantage of our formulation is that we can guarantee that the control will satisfy any constraint in contact forces, joint accelerations and torque commands. Moreover, the formulation leads to an interesting insight into how equations of motion can be decoupled to significantly simplify the design of controllers based on the full robot dynamics. Finally, we present balancing experiments on a torque controlled humanoid robot. To the best of our knowledge, it is the first time that this momentum-based balance controller is implemented on a real robot, using a pure torque control approach.
+
+I. INTRODUCTION We expect autonomous legged robots to perform complex tasks in constant interaction with an uncertain and changing environment (e.g. in a disaster relief scenario). Therefore, we need to design algorithms that can generate precise but compliant motions while optimizing the interactions with the environment. In this context, the ability to balance in face of unexpected disturbances is a pre-requisite for agile biped robots whether they are locomoting or performing manipulation tasks. As robots with torque control capabilities are becoming increasingly available [1], [2], [3], torque control algorithms are required for exploiting such capabilities. Indeed, such algorithms often offer high motion performance while guaranteeing some level of compliance [3], [4], [5], [6]. In addition, they also allow to directly control contact interactions with the environment [7], [8], [1]. Recent contributions have demonstrated the relevance of torque control balancing approaches [9], [10], [11], [12]. All these approaches try to regulate the position of the center of mass (CoM) of the robot to ensure that the robot does not fall while ensuring that contact forces are physically admissible. We can essentially distinguish two approaches. Passivity-based approaches were originally proposed in [9] and recently extended in [11]. They compute admissible contact forces and control commands under quasi-static assumptions. The great advantage of such approaches is that they do not require a precise dynamic model of the robot.
+This research was supported in part by National Science Foundation grants ECS-0326095, IIS-0535282, IIS-1017134, CNS-0619937, IIS0917318, CBET-0922784, EECS-0926052, CNS-0960061, the DARPA program on Autonomous Robotic Manipulation, the Army Research Office, the Okawa Foundation, the ATR Computational Neuroscience Laboratories, and the Max-Planck-Society. 1 Autonomous Motion Department, Max Planck Institute for Intelligent Systems, T ubingen, Germany.
+
+first.lastname@tuebingen.is.mpg.de
+2 CLMC
+
+Lab, University of Southern California, Los Angeles, USA.
+
+Moreover, robustness is generically guaranteed due to the passivity property of the controllers. However, the quasistatic assumption does not allow to take into account very dynamic motions like side stepping. On the other hand, there are balance controllers based on the full dynamic model of the robot [10], [12]. The advantage of such approaches is that they are well suited for very dynamic motions. However, the need of a precise dynamic model makes them harder to implement. Moreover, it is generally required to simplify the optimization process to meet time requirements of fast control loops. Recently, Lee and Goswami [10], [13] have proposed to control both the robot CoM motion (i.e. its linear momentum) and its angular momentum. Desired momentum rates are converted into admissible contact forces for each contact point, which are then used to compute desired joint accelerations and torque commands. To keep the computational cost low, the controller solves three small sequential optimization problems. A potential issue is that an optimization procedure may violate the constraints imposed by the previous optimization. Typically, when computing desired accelerations, one cannot guarantee that the constraints on contact forces will be satisfied. Simulation results were very convincing but to the best of our knowledge, the approach has never been implemented on a real robot. In this contribution, we propose to avoid this potential issue by reformulating the control problem as a single and simpler optimization procedure while satisfying low computational cost requirements to allow the implementation of the controller on fast real-time control loops. The new formulation allows us to impose arbitrary constraints on joint accelerations, contact forces and torque commands to ensure physical consistency (e.g. joint limits, actuator saturation, center of pressure constraints, etc...). With the new formulation, it is only necessary to optimize accelerations and contact forces without an explicit optimization of the command torques. This surprising insight can then be exploited more generally to significantly simplify existing controllers. For example, it becomes clear that any task space control approach [5], [6] can be written as an optimization problem that does not explicitly include the torque commands but merely joint accelerations and contact forces. This significantly simplifies the optimization process of such approaches. Finally, we implement this momentumbased controller on a hydraulic torque controlled robot. It is, to the best of our knowledge, the first time this approach is implemented on a torque controlled robot. Notably, we show results with pure torque control where no explicit joint position control is used. The robot experiments demonstrate
+
+a balancing controller that is robust to unknown disturbances while retaining a certain level of compliance. II. PROBLEM FORMULATION Lee and Goswami proposed in [13], [10] to regulate the momentum of the robot in order to control its balance. The momentum is decomposed in linear and angular momentum hlin h= h . The linear momentum is defined by ang	cog hlin = mx and the angular momentum is hang = Icog  cog (2) (1)
+
+where xcog is the position of the center of mass in an inertial frame, m is the total mass of the robot, Icog is the moment of inertia of the robot taken at the center of mass in world frame and  cog is the angular velocity of the robot at its center of mass in a world frame. The idea is to regulate the momentum by computing a desired momentum rate of change via PD control  ref h m(xcog,des - xcog ) + 0	des D(hdes - h) + h P
+
+In order to find joint accelerations that generate a momentum rate as close as possible to the desired one another optimization problem is solved, which takes into account additional constraints, i.e. joint limits and non moving stance feet. The computation of the inverse dynamics then follows. Several optimization procedures are used such that the computation is fast enough to run in a control loop. The main drawback of such an approach is that there is no guarantee that one optimization procedure does not degrade the optimization found in the previous stage. For example, when computing the desired accelerations, there are no guarantees that the resulting momentum given these accelerations will not violate constraints such as CoP or friction cones. In the following, we propose a controller that computes a control command with a single optimization algorithm while being fast enough to run in a real-time torque control loop (typically 1KHz). III. BALANCE CONTROLLER WITH MOMENTUM CONTROL Assuming rigid-body dynamics, we can write the equations of motion of a robot as  ) = ST  + JT M(q) q + N(q, q c (6)
+
+=
+
+(3)
+
+where P and D are positive-definite gain matrices. Typically, this can be used to regulate the position of the center of mass while damping its linear velocity and the angular momentum. Given the desired momentum, it is then necessary to see if this momentum is physically realizable. It means that the desired momentum should be such that the contact forces that will realize it are possible given their limits (i.e. unilateral contacts with friction cone limits), the limits of the robot (e.g. joint limits), stability considerations (i.e. position of the center of pressures (CoP) of each contact surface), and physical consistency (i.e. does a desired momentum which satisfies the previous constraints obey the laws of motion?). The approach taken in [13], [10] is to decompose the problem and sequentially 1) compute admissible GRFs and CoPs and admissible momentum (as close as possible to the desired one), 2) compute resulting admissible joint accelerations and 3) compute the resulting torque command. The admissible contact forces are computed using Newton-Euler equations  lin h  rot h =
+i
+
+T T where q = [qT j , x ] denotes the configuration of the robot. n qj	R is the vector of joint positions and x  SE(3) denotes the position and orientation of a frame fixed to the robot with respect to an inertial frame. M(q) is the rigid  ) is the vector of all body dynamics inertia matrix, N(q, q forces (Coriolis, centrifugal, gravity, friction, etc...), S = [Inn 0] represents the underactuation, Jc is the Jacobian of the contact constraints and  are the generalized contact forces. We can decompose the equations of motion into
+
+) Mu (q) q + Nu (q, q ) Ml (q) q + Nl (q, q
+
+= =
+
+ + JT c,u , JT c,l
+
+(7) (8)
+
+fi + mg ((xcog - xi )  fi +  i )
+i
+
+(4) (5)
+
+=
+
+where fi and  i are external forces and torques acting at points xi . For instance these could be ground reaction forces acting at the ankles. The authors then solve two small optimization problems to compute first the GRFs and then the CoPs together with an admissible momentum rate close to the desired one in the least-square sense.
+
+where Eq. (7) is just the first n equations of Eq. (6) and eq. (8) is the last 6 equations. The latter can be interpreted as the Newton-Euler equations of the whole system [14]. Therefore, if we express x relative to the center of mass of the whole system, Eq. (8) is physically equivalent to Eqs. (4), (5). Then satisfying the one is equivalent to satisfying the other w.l.g.  = h was derived that In [15] a linear mapping A(q)q maps joint velocities to the system momentum expressed at the CoM. The matrix A is called the centroidal momentum matrix. The time derivative of this expression substituted into Eq. (4), (5), yields  = D + d, q +A  =h Aq I33 ... mg D= , d= [xcog - xi ] I33 . . . 0, (9)
+
+where D  R66k , d  R6 with k the number of external forces, are constructed from Eq. (4), (5) and [ ] maps a vector to a skew symmetric matrix, s.t. [x]  = x  . Eq. (9) relates joint accelerations and generalized forces to the dynamical momentum of the system and hence is equivalent to Eq. (8). A remarkable feature of the decomposition in Eqs. (7), (8) is that the torques	only occur in Eq. (7) and are exactly  ,  in the form determined by q  ) - JT  = Mu (q) q + Nu (q, q c,u  (10)
+
+to approximate the cones as pyramids for the problem to remain a QP. This is our third constraint. To be able to execute the generated control commands on a robot we add torque saturation constraints  min	 max . this constraint can be rewritten as a linear inequality in accelerations and contact forces using Eq. (10). Similarly we can include constraints in joint accelerations to take into account joint limits. B. Objective Function The objective of the proposed balance controller is composed as f =  -h  ref h RT i i
+i
+
+ , , such that solutions One can then optimize solely over q are consistent with the equations of motion (Eq. 6) by using only Eq. (9). Control commands are then simply computed using Eq. (10). The optimization problem can be formalized as  ,) q , , h min. f (
+ , q
+
+Kh
+
+-q  ref + q
+
+NA
+
++ (13)
+
+K,i ,
+
+s.t.
+
+Eq.(9),  ,  ) = 0, eq ( q , , h  ,  )  0, ineq ( q , , h
+
+(11)
+
+with an objective function f , equality and inequality expressions eq, ineq . The proposed decomposition of the equations of motions allows to express the problem as  and torques  , although functions of momentum rates h  , . This is possible due to the we optimize only over q linear substitution rules in Eq. (9), (10). The formulation in Eq. (11) provides a template for optimization problems that will ensure consistency with the equations of motions, where  ,  is required. Since the problem is optimizing only over q solved in one single optimization problem, it guarantees to satisfy all constraints and find the optimum among the full set of possible solutions. It is important to note that this is a general formulation that is not limited to balance control and that it can be used for example to simplify the optimization in task space controllers [5]. In the following we construct a quadratic program (QP) for the purpose of momentum control for balancing. A. Contact Constraints and Hardware Limitations In order to make sure that joint accelerations are found that result in stationary endeffectors, we express the constraint that the feet do not move xc = const. by differentiating it twice. We get the following equality constraint c q +J  =0 Jc q (12)
+
+ ref is a reference momentum rate as defined in where h Eq. 3, K the weighted distance with positive definite  ref  Rn+6 are reference generalized weight matrix K. q joint accelerations which are used to resolve the remaining degrees of freedom. i are the generalized forces acting at the ankles and Ri are the rotation matrices of the feet. NA  R(n+6)(n+6) is the null space projector of the momentum matrix A. Accelerations can be decomposed in the part that maps to the range of A, i.e. the part that results in a change of the momentum and a part that remains in the kernel of A, i.e. does not affect the momentum. Using NA in the 2 weighted distance (note that NA = NT A = NA ), allows to weight accelerations changing the momentum against those that do not. Given that A is always highest possible rank, we can compute NA = Inn - AT (AAT )-1 A, where we have to invert a 6	6 matrix AAT . It is interesting to note  ref can that given the matrix A, a desired momentum rate h be considered as an operational space task. IV. EXPERIMENTAL SETUP A. Sarcos Humanoid Robot The experiments were done on the lower part of the Sarcos Humanoid Robot [2] (Fig. 1). It consists of two legs and a torso. The legs have 7 DOFs each and the torso has 3 DOFs. Given that the torso supports a negligible mass because it is not connected to the upper body of the robot, we froze these DOFs during the experiments. The legs of the robot are 0.82m high. Each foot is 0.09m wide and 0.25m long, which is rather small for a biped. Note also that the front of the foot is made of a passive joint that is rather stiff, located 10cm before the tip of the foot. The total robot mass is 51kg. The robot is actuated with hydraulics and each joint consists of a Moog Series 30 flow control servo valve with a piston on which a load cell is attached to measure the force at the piston. A position sensor is also located at the joint. Each foot has a 6-axis force sensor and we mounted an IMU on the pelvis of the robot from which we measure
+
+where Jc is the jacobian of the constraints. For the dynamics to be consistent, the CoPs at the endeffectors need to reside in the interior of the feet support polygons. This can be expressed as a linear inequality by expressing the ground reaction force at the zero moment point. This constitutes our second constraint. For the feet not to slip we constraint the GRFs to stay inside of the friction cones. Although, this can be expressed as a convex function in form of cone-inequalities, we chose
+
+20 Torque [Nm] Torque [Nm]
+
+0
+
+10 Left Hip F/E 1 Time [s] 2 3
+
+10 Left Knee 1 Time [s] 2 3
+
+0 0 10 Torque [Nm] 0 10 20 0
+
+20 0 10 Torque [Nm] 5 0 5 0
+
+Left Ankle F/E 1 Time [s] 2 3
+
+Left Ankle A/A 1 Time [s] 2 3
+
+Fig. 2. Example of torque tracking performance during a balancing experiment. The left hip flexion/extension, left knee and left ankle flexion/extension and adduction/abduction joints are shown. Both desired (blue) and actual (green) torques are shown. Fig. 1. The lower part of the Sarcos Humanoid on which experiments were conducted. Credit: Luke Fisher Photography.
+
+angular velocities, linear accelerations and the orientation of the robot in an inertial frame. An offboard computer sends control commands to the robot at 1KHz. B. Low-level torque control For each actuator, we implemented a torque feedback controller that ensures that each joint produces the desired force generated by the balance controller. The controller essentially computes desired valve commands given a desired torque, the valve commands representing a desired flow. The controller we implemented is very much inspired from the work in [3], [16], with the difference that we implemented a simpler version where piston velocity feedback has a constant gain. The control law is v = P ID(Fdes , F ) + K x  piston + c (14)
+
+where v is the valve command, P ID is a PID control according to desired force command and force measured from the load cells, K is a positive gain, x	piston is the piston velocity (computed from the joint velocity) and c is a constant bias. This controller design allowed us to achieve good torque tracking performance and was essential in getting good performance in the balance controller. Figure 2 illustrates the torque tracking performance during a balancing task. V. EXPERIMENTS We evaluated the controller presented in Sect. III on the Sarcos Humanoid described in Sect. IV. The balancing performance of the robot was tested in different scenarios where we applied external forces as we will explain in this section. A summary of the experiments is shown in the attached movie1 . In all scenarios we controlled the biped to track a CoM located at a fixed offset relative to the feet  des = 0 in order to damp out disturbances on the and set h system. The reference joint accelerations were set from a PD
+1
+
+An extended version is also available on http://youtu.be/dW-hC04VaFs
+
+ ref = P D(qdes ) to track a fixed posture. control command q The torques resulting from our optimization were forwarded directly as control command. The dynamic model used in the experiments is the CAD model of the robot, with a simple correction of the robot total mass that was put in the base of the robot. Note that we do not use any joint space PID controller. In our first experiment we pushed the robot impulsively with a stick. Various contact points and force directions were chosen. To ensure that the robot is really balancing, the same experiment was conducted when running a simple inverse dynamics algorithm with contact forces optimization that was presented in [7]. As expected, the balance controller showed a better balancing performance and did not fall over as it was the case for [7] as can be seen in Fig. 3. When pushing the robot with a constant force at various parts, it stayed in balance and adapted its positions in a compliant manner. We also tested the controller when the feet were not co-planar, but one foot was put on top of a block as can be seen on the movie. In the planar posture, even pushes with a rather high magnitude were absorbed and the robot kept standing. The change in momentum was damped out quickly and the CoM was tracked after an initial disturbance as can be seen in Fig. 4. The CoPs remained inside of the support polygons and were tracked well. We notice from Figure 4 that the CoP predictions are approximately correct (within 2cm error). However, one can expect that a higher precision might be needed to achieve dynamic motions which could be achieved with an inertial parameters estimation procedure [17]. For our next experiment we put the biped on a rolling platform and rotated and moved it with a rather fast change of directions. Although, the CoM was moving away from its desired position initially, the momentum change was damped out and the robot kept standing and recovered CoM tracking. The stationary feet indicated that forces were applied that were consistent with our CoP boundaries. In an additional scenario the biped was standing on a balancing board. We ran the experiment with two configurations for the robot: in one case the robot is standing such that the
+
+Y CoP position [m]
+
+0.1
+
+Y CoP position [m]
+
+board motion happens in the sagittal plane and in the other case the motion happens in the lateral plane. Figure 5 shows results when the motion happens in the lateral plane. In this case, the slope was varied in a range of [-9.5 ; 9.5 ]. Even for quite rapid changes in the slope, the feet remained flat on the ground. Compared to the push experiment the CoPs were moving in a wider range, but still remained in the interior of the foot soles with a margin. In this case, we notice a discrepancy in the predicted contact forces and the real ones, making the case for a better dynamics model. Yet, the robot was still able to balance. When we increased the pushes on the robot, eventually the momentum could not be damped out fast enough anymore and the robot reached a situation where the optimization could not find solutions anymore and the biped fell. In these cases the constraint that the feet have to be stationary was too restrictive. A higher level controller that takes into account stepping [18], [19] becomes necessary to increase the stability margin. As a general observation, we did not attempt to optimize any part of our software and yet it took approximately 0.4ms to solve the optimization problem at each control cycle, when the program was executed on a Intel i7-2600 3.4GHz processor. This is already fast enough for the 1KHz control loop of the robot. VI. DISCUSSION A. Relation to other balancing approaches As we discussed earlier, our approach is a slight reformulation of the momentum-based controller presented by Lee and Goswami [10], [13]. Our formulation has the great advantage to solve a single optimization problem instead of several ones and can therefore guarantee that the control law will be consistent with all the constraints (joint limits, accelerations, torque saturation, CoP limits and contact force limitations). Furthermore, we search over the full set of possible solutions and thus we are guaranteed to find the optimum, where [10], [13] optimize over sub-parts of the variables sequentially. The reformulation of the algorithm also helps us to understand the relation with the work of Stephens et al. [12]. Indeed, we see that both controllers are in fact very similar. In [12], the authors write the whole optimization procedure using Eq. (6) with constraints similar to what we have. However, the optimization problem being complicated, they actually solve a simpler problem were the contact forces are first determined and then desired accelerations and torques are computed through a least-square solution. From that point of view, torque saturation and limits on accelerations are not accounted for. Our formulation allows to solve also a simpler optimization problem but that is exactly consistent with the equations of motion and therefore no tradeoff is necessary. The difference with passivity-based approaches rely mainly with the fact that we do not make a quasi-static assumption. Therefore, our controller should allow us to create dynamic motions while balancing. It is a subject that we are currently investigating. Despite the fact that the momentum-based controller relies on more complex models,
+
+CoG Error [m]
+
+0.03 0.02 0.01 0 0.01 0 5 1 2 3 4
+
+X
+
+Y
+
+Z
+
+5
+
+Lin. Mom. [N.s]
+
+X
+
+Y
+
+Z
+
+0
+
+Ang. Mom. [Nm.s]
+
+5 0 1
+
+1
+
+2
+
+3
+
+4
+
+5
+
+X
+
+Y
+
+Z
+
+0 1 2 0 1 2 3 4 5
+
+Time [s]
+
+Predicted CoP Measured CoP 0.15 0.15
+
+Predicted CoP Measured CoP
+
+0.1
+
+0.05
+
+0.05
+
+0
+
+0
+
+-0.05 -0.04 0 0.04 X CoP position [m]
+
+-0.05 -0.04 0 0.04 X CoP position [m]
+
+Fig. 4. This figure shows the recovery of desired CoG position, linear and angular momentum after a push from the front. X points in the robot right direction, Y in the forward direction and Z in the vertical direction. The change in CoP for each leg is also plotted in the lower graph. The plot has the same ratio than the feet and the horizontal dashed line shows the position of the passive joint at the front of the foot.
+
+we demonstrated in our experiments, for the first time, that this approach could successfully be implemented on a real robot. B. Extension to arbitrary operational space tasks A very important aspect of this paper is the use of decoupled equations of motion, where Eq. (9) is used as the only constraint on the dynamics while Eq. (10) is merely used to account for torque limitations and to compute the torque commands after optimization. Using such decoupling made us realize that it is only necessary to optimize accelerations and contact forces and that the torque commands were in fact redundant and did not need to be explicitly accounted for. It allowed us to significantly reduce our optimization problem. Recently, [7], [8] showed in an inverse dynamics context that given desired accelerations it was possible to compute inverse dynamics torques without explicitly optimizing for contact forces. Optimization of contact forces and inclusion
+
+(a) Push with balance control
+
+(b) Push without balance control Fig. 3. These snapshots represent the typical behavior of the robot when subject to pushes. A comparison with a simple inverse dynamics controller is also shown. Each picture is taken at a 0.24s interval.
+
+of linear constraints on them was also possible. It is interesting to note that it seems that it is indeed never necessary to optimize for accelerations, external forces and torque commands at the same time. We conjecture that it is only necessary to pick two optimization variables, the other one being determined through the dynamics constraint. Using such an idea, it is therefore straightforward to reformulate algorithms for stack of tasks (or hierarchical operational space control) [5], [6] by using Eq. (9) as a dynamics constraint and eliminating the explicit optimization of torque commands. The number of optimization variables is then reduced from 2njoints +6+ncontacts to njoints +6+ncontacts and the dimension of the dynamics constraint is reduced from n + 6 to 6. We assume that such a simplification should lead to a significant speed up of the algorithms, allowing to do more complicated tasks with current computing power. The implementation of a stack of task using ideas similar to [5] with the momentum-based controller as an operational task is a future research direction. VII. CONCLUSION In this paper, we have presented a reformulation of a momentum-based controller originally presented in [13]. Our reformulation allowed us to solve a simple optimization problem to compute torque commands while improving guarantees on the consistency of the solutions. Then, we have demonstrated that momentum-based control approaches could successfully be implemented on torque controlled robot and have demonstrated robust balance. An interesting aspect of our implementation is that it was a pure torque control implementation without any joint space position control, which is still rare in practical implementations. ACKNOWLEDGMENT We would like to thank Ambarish Goswami and Seungkook Yun for hosting us at the Honda Research Institute
+
+for one week and for their precious help in understanding the original momentum-based controller. We would also like to thank Ambarish Goswami and Sung-Hee Lee for giving us an early access to their publication. We are also grateful to Daniel Kappler for helping us with the videos, Nick Rotella for helping with the data acquisition from the IMU and Sean Mason for the help with the inertial parameters of the robot. R EFERENCES
+[1] M. Hutter, M. A. Hoepflinger, C. Gehring, M. Bloesch, C. D. Remy, and R. Siegwart, "Hybrid Operational Space Control for Compliant Legged Systems," in Robotics: Science and Systems (R:SS), 2012. [2] G. Cheng, H. Sang-Ho, A. Ude, J. Morimoto, J. G. Hale, J. Hart, J. Nakanishi, D. Bentivegna, J. Hodgins, C. Atkeson, M. Mistry, S. Schaal, and M. Kawato, "CB: Exploring Neuroscience with a Humanoid Research Platform," in IEEE Intl Conf on Robotics and Automation, 2008, pp. 17721773. [3] T. Boaventura, C. Semini, J. Buchli, M. Frigerio, M. Focchi, and D. Caldwell, "Dynamic Torque Control of a Hydraulic Quadruped Robot," in IEEE Intl Conf on Robotics and Automation, 2012, pp. 16. [4] M. Kalakrishnan, J. Buchli, P. Pastor, M. Mistry, and S. Schaal, "Learning, Planning, and Control for Quadruped Locomotion over Challenging Terrain," The Intl Journal of Robotics Research, vol. 30, no. 2, pp. 236258, 2011. [5] L. Saab, O. Ramos, N. Mansard, P. Soueres, and J.-Y. Fourquet, "Generic Dynamic Motion Generation with Multiple Unilateral Constraints," in IEEE/RSJ Intl Conf on Intelligent Robots and Systems, 2011, pp. 41274133. [6] J. Salini, V. Padois, and P. Bidaud, "Synthesis of Complex Humanoid Whole-Body Behavior: A Focus on Sequencing and Tasks Transitions," in IEEE Intl Conf on Robotics and Automation, 2011, pp. 12831290. [7] L. Righetti and S. Schaal, "Quadratic programming for inverse dynamics with optimal distribution of contact forces," in IEEE-RAS Intl Conf on Humanoid Robots, 2012, pp. 538543. [8] L. Righetti, J. Buchli, M. Mistry, M. Kalakrishnan, and S. Schaal, "Optimal distribution of contact forces with inverse-dynamics control," The Intl Journal of Robotics Research, vol. 32, no. 3, pp. 280298, 2013. [9] S.-H. Hyon, J. G. Hale, and G. Cheng, "Full-Body Compliant Human Humanoid Interaction: Balancing in the Presence of Unknown External Forces," IEEE Transactions on Robotics, vol. 23, no. 5, pp. 884898, 2007.
+
+compensation in high-performance force control," in IEEE/RSJ Intl Conf on Intelligent Robots and Systems, 2012, pp. 40664071. [17] M. Mistry, S. Schaal, and K. Yamane, "Inertial Parameter Estimation of Floating Base Humanoid Systems using Partial Force Sensing," in IEEE-RAS Intl Conf on Humanoid Robots, 2009, pp. 492497. [18] J. Pratt, T. Koolen, T. De Boer, J. Rebula, S. Cotton, J. Carff, M. Johnson, and P. Neuhaus, "Capturability-based analysis and control of legged locomotion, Part 2: Application to M2V2, a lower-body humanoid," The Intl Journal of Robotics Research, vol. 31, no. 10, 2012. [19] J. Urata, K. Nshiwaki, Y. Nakanishi, K. Okada, S. Kagami, and M. Inaba, "Online Walking Pattern Generation for Push Recovery and Minimum Delay to Commanded Change of Direction and Speed," in IEEE/RSJ Intl Conf on Intelligent Robots and Systems, 2012, pp. 34113416.
+
+Predicted CoP Measured CoP 0.15 0.15
+
+Predicted CoP Measured CoP
+
+Y CoP position [m]
+
+0.1
+
+Y CoP position [m]
+
+0.1
+
+0.05
+
+0.05
+
+0
+
+0
+
+-0.05 -0.04 0 0.04 X CoP position [m]
+
+-0.05 -0.04 0 0.04 X CoP position [m]
+
+Fig. 5. This figure shows the recovery of desired CoG position, linear and angular momentum during the balance board experiment. X points in the robot right direction, Y in the forward direction and Z in the vertical direction. The grey shades are the moments when the board is moving, first up, then down. The total angle motion is from -9.5 to 9.5 with respect to horizontal.
+
+[10] S.-H. Lee and A. Goswami, "A momentum-based balance controller for humanoid robots on non-level and non-stationary ground," Autonomous Robots, vol. 33, pp. 399414, 2012. [11] C. Ott, M. A. Roa, and G. Hirzinger, "Posture and balance control for biped robots based on contact force optimization," in IEEE-RAS Intl Conf on Humanoid Robots, 2011. [12] B. J. Stephens and C. G. Atkeson, "Dynamic Balance Force Control for compliant humanoid robots," in IEEE/RSJ Intl Conf on Intelligent Robots and Systems, 2010, pp. 12481255. [13] S.-H. Lee and A. Goswami, "Ground reaction force control at each foot: A momentum-based humanoid balance controller for non-level and non-stationary ground," in IEEE/RSJ Intl Conf on Intelligent Robots and Systems, 2010, pp. 31573162. [14] P. Wieber, "Holonomy and nonholonomy in the dynamics of articulated motion," Fast motions in biomechanics and robotics, pp. 411 425, 2006. [15] D. E. Orin and A. Goswami, "Centroidal Momentum Matrix of a humanoid robot: Structure and Properties," in IEEE/RSJ Intl Conf on Intelligent Robots and Systems, 2008, pp. 653659. [16] T. Boaventura, M. Focchi, M. Frigerio, J. Buchli, C. Semini, G. A. Medrano-Cerda, and D. Caldwell, "On the role of load motion
+

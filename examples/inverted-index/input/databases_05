@@ -1,0 +1,488 @@
+Probabilistic Nearest Neighbor Queries on Uncertain Moving Object Trajectories
+Submitted for Peer Review 01.05.2013
+
+Johannes Niedermayer , Andreas Zufle   , Tobias Emrich ,  o Matthias Renz , Nikos Mamoulis , Lei Chen+ , Hans-Peter Kriegel
+
+
+Institute for Informatics, Ludwig-Maximilians-Universit at M unchen
+o
+
+{niedermayer,zuefle,emrich,kriegel,renz}@dbs.ifi.lmu.de
+
+arXiv:1305.3407v1 [cs.DB] 15 May 2013
+
+Department of Computer Science, University of Hong Kong
+nikos@cs.hku.hk
+
++
+
+Department of Computer Science and Engineering, Hong Kong University of Science and Technology
+leichen@cse.ust.hk
+
+ABSTRACT
+Nearest neighbor (NN) queries in trajectory databases have received significant attention in the past, due to their application in spatiotemporal data analysis. Recent work has considered the realistic case where the trajectories are uncertain; however, only simple uncertainty models have been proposed, which do not allow for accurate probabilistic search. In this paper, we fill this gap by addressing probabilistic nearest neighbor queries in databases with uncertain trajectories modeled by stochastic processes, specifically the Markov chain model. We study three nearest neighbor query semantics that take as input a query state or trajectory q and a time interval. For some queries, we show that no polynomial time solution can be found. For problems that can be solved in PTIME, we present exact query evaluation algorithms, while for the general case, we propose a sophisticated sampling approach, which uses Bayesian inference to guarantee that sampled trajectories conform to the observation data stored in the database. This sampling approach can be used in Monte-Carlo based approximation solutions. We include an extensive experimental study to support our theoretical results.
+
+1.
+
+INTRODUCTION
+
+With the wide availability of satellite, RFID, GPS, and sensor technologies, spatio-temporal data can be collected in a massive scale. The efficient management of such data is of great interest in a plethora of application domains: from structural and environmental monitoring and weather forecasting, through disaster/rescue management and remediation, to Geographic Information Systems (GIS) and traffic control and information systems. In most current research however, each acquired trajectory, i.e., the function of a spatio-temporal object that maps each point in time to a position in space, is assumed to be known entirely without any uncertainty.
+
+.
+
+However, the physical limitations of the sensing devices or limitations of the data collection process introduce sources of uncertainty. Specifically, it is usually not possible to continuously capture the position of an object for each point of time. In an indoor tracking environment where the movement of a person is captured using static RFID sensors, the position of the people in-between two successive tracking events is also not available; the same holds for geo-social applications such as FourSquare. Also, the frequency of data collection is often decreased to save resources such as battery power and wireless network traffic. In such scenarios, for a given moving object, only a limited set of (location, time) observations is available. In-between these observations the exact values are not explicitly stored in the database and are thus uncertain. In this work, we consider a database D of uncertain moving object trajectories, where for each trajectory there is a set of observations for only some of the history timestamps. Thus, the entire trajectory of an object is described by a time-dependent random variable, i.e., a stochastic process. Given a reference state or trajectory q and a time interval T , we define probabilistic nearest-neighbor (PNN) query semantics, which are extensions of nearest neighbor queries in trajectory databases [1, 2, 3, 4]. Specifically, a PNN (PNN) query retrieves all objects in D, which have sufficiently high probability to be the NN of q at one time (at the entire set of times) in T ; a probabilistic continuous NN (PCNN) query finds for each object o  D the time subsets Ti of T , wherein o has high enough probability to be the NN of q at the entire set of times in Ti . PNN queries find several applications in analyzing historical trajectory data. For example, consider a geo-social network where users can publish their current spatial position at any time by socalled check-ins. For a historical event, users might want to find their nearest friends during this event, e.g. to share pictures and experiences. As another application example, consider a collection D of uncertain animal movements. PNN queries can be used to analyze animal behavior according to how they moved relatively to a reference animal or object (e.g., identify the defender of a herd who moves closely to and repulses an attacking animal). The main contributions of our work are as follows:  A thorough theoretical complexity analysis for variants of probabilistic NN query problems and the identification of such problems that are computationally hard.	Efficient algorithms for the introduced PNN query problems that can be solved in polynomial time.  A sampling-based approximate solution for classes of hard
+
+PNN problems which is based on Bayesian inference.  Hierarchical pruning strategies to speed-up PNN queries exploiting the UST tree index [5].	Thorough experimental evaluation of the proposed concepts on real and synthetic data. The rest of the paper is structured as follows. Section 2 reviews existing work related to NN search on uncertain trajectories. Section 3 reviews the Markov model used to describe uncertain trajectories. Variants of NN search semantics based on this model are also formally presented in this section. Section 4 gives a theoretical analysis for each variant, identifying computationally hard variants, while Section 5 sketches polynomial solutions for the remaining ones. An approximate solution is presented in Section 6 that can be efficiently applied to any NN variant, yielding very accurate results. This approach is based on Bayesian inference which adapts the Markov model by conditioning its probabilities to observations in the future. The adaption is necessary in order to obtain sample trajectories that are guaranteed to conform with all observations. In Section 7, we present a hierarchical pruning strategy for NN queries on uncertain trajectories, which utilizes an index structure proposed in our previous work. An experimental evaluation of the efficiency and effectiveness of the proposed techniques is presented in Section 8. Section 9 briefly discusses how the presented solutions can be easily adapted for the case of kNN queries having k > 1 and shows the complexity of such queries. Finally, Section 10 concludes this work.
+
+2.
+
+RELATED WORK
+
+Within the last decade, a considerable amount of research effort has been put into query processing in trajectory databases (e.g. [4, 6, 7, 8, 2]). In these works, the trajectories have been assumed to be certain, by employing linear [4] or more complex [6] types of interpolation to supplement sparse observational data. However, employing linear interpolation between consecutive observations might create impossible patterns of movement, such as cars travelling through lakes or similar impossible-to-cross terrain. Furthermore, treating the data as uncertain and answering probabilistic queries over them offers better insights1 . Uncertain Trajectory Modeling. Several models of uncertainty paired with appropriate query evaluation techniques have been proposed for moving object trajectories (e.g. [9, 10, 11, 12]). Many of these techniques aim at providing conservative bounds for the positions of uncertain objects. This can be achieved by employing geometric objects such as cylinders [10, 11] or beads [13] as trajectory approximations. While these approaches allow to answer queries such as "is it possible for object o to intersect a query window q ", they are not able to assign probabilities to these events. Other approaches use independent probability density functions (pdf) at each point of time to model the uncertain positions of an object [14, 15, 9]. However, as shown in [12], this may produce wrong results (not in accordance with possible world semantics) for queries referring to a time interval because they ignore the temporal dependence between consecutive object positions in time. To capture such dependencies, recent approaches model the uncertain movement of objects based on stochastic processes. In particular, in [16, 12, 17, 18], trajectories are modeled based on Markov chains. This approach permits correct consideration of possible world semantics in the trajectory domain. Similar to our algorithm for adapting transition matrices is the Baum-Welch algorithm for hidden Markov models (HMMs). This algorithm aims at estimating time-invariant transition matrices and
+1 http://infoblog.stanford.edu/2008/07/why-uncertainty-in-data-isgreat-posted.html
+
+emission probabilities of a hidden Markov model. In contrast, we assume this underlying model to be given, however we aim at adapting it by computing time-variant transition matrices. Related to our algorithm is also the Forward-Backward-Algorithm for HMMs that aims at computing the state distribution of an HMM for each point in time. In contrast, we aim at computing transition matrices for each point in time, given a set of observations. Nearest Neighbor Queries in Trajectory Databases. In the context of certain trajectory databases there is not a common definition of nearest neighbor queries, but rather a set of different interpretations. In [1], given a query trajectory (or spatial point) q and a time interval T , a NN query returns either the trajectory from the database which is closest to q during T or for each t	T the trajectory which is closest to q . The latter problem has also been addressed in [2]. Similarly, in [19], all trajectories which are nearest neighbors to q for at least one point of time t are computed. Other approaches consider continuous nearest neighbor (CNN) semantics. In [3], CNN queries were defined taking as input a static spatial query point q and a trajectory database and returning for each point in time the trajectory closest to q . Other approaches [20, 4] define the CNN problem differently: Given an input trajectory q and a database consisting of spatial points, a CNN query segments q such that for each segment qi  q exactly one object from the database is the nearest neighbor of qi . This approach was extended for objects with uncertain velocity and direction (thus considering a predictive setting rather than historical data) in [21]; the solutions proposed only find possible results, but not result probabilities. Solutions for road network data were also proposed for the case where the velocities of objects are unknown [22]. Furthermore, [11, 23] extended the problem of continuous kNN queries (on historical search) to an uncertain setting, serving as important preliminary work, however, based on a model which is not capable to return answers according to possible world semantics. Still, to date, there is no previous work addressing probabilistic NN queries over trajectory databases, considering possible world semantics.
+
+3.
+
+PROBLEM DEFINITION
+
+A spatio-temporal database D stores triples (oi , time, location), where oi is a unique object identifier, time  T is a point in time and location  S is a position in space. Semantically, each such triple corresponds to an observation that object oi has been seen at some location at some time. In D, an object oi can be described by a function oi (t) : T  S that maps each point in time to a location in space; this function is called trajectory. In this work, we assume a discrete time domain T = {0, . . . , n}. Thus, a trajectory becomes a sequence, i.e., a function on a discrete and ordinal scaled domain. Furthermore, we assume a discrete state space of possible locations (states): S = {s1 , ..., s|S| }  Rd , i.e., we use a finite alphabet of possible locations in a d-dimensional space. The way of discretizing space is application-dependent: for example, in traffic applications we may use road crossings, in indoor tracking applications we may use the positions of RFID trackers and rooms, and for free-space movement we may use a simple grid for discretization.
+
+3.1
+
+Uncertain Trajectory Model
+
+Let D = {o1 , ..., o|D| } be a database containing the trajectories of |D| uncertain moving objects. For each object o	D we store o o o o o a set of observations o = { to 1 , 1 , t2 , 2 , . . . , t|o | , |o | } o o where ti  T denotes the time and i  S the location of observao o o tion o i . W.l.o.g. let t1 < t2 < . . . < t|o | . Note that the location of an observation is assumed to be certain, while the location of an object between two observations is uncertain.
+
+According to [12], we can interpret the location of an uncertain moving object o  D at time t as a realization of a random variable o(t). Given a time interval [ts , te ], the sequence of uncertain locations of an object is a family of correlated random variables, i.e., a stochastic process. This definition allows us to assess the probability of a possible trajectory, i.e., the realization of the corresponding stochastic process. In this work we follow the approaches from [12, 5, 18] and employ the first-order Markov chain model as a specific instance of a stochastic process. The state space of the model is the spatial domain S . State transitions are defined over the time domain T . In addition, the Markov chain model is based on the assumption that the position o(t + 1) of an uncertain object o at time t + 1 only depends on the position o(t) of o at time t. Please note that our proposed techniques can be easily applied to Markov chains of arbitrary order without any further adaption of the algorithms. The conditional probability
+o Mij (t) := P (o(t + 1) = sj |o(t) = si )
+
+In addition to the  and  semantics for probabilistic nearest neighbor queries we now introduce a continuous query type which intuitively extends the spatio-temporal continuous nearest-neighbor query [20, 4] to apply on uncertain trajectories. D EFINITION 3 (PCNN Q UERY ). A probabilistic continuous nearest neighbor query retrieves all objects o  D together with the set of timesets {Ti } where in each Ti the object has a sufficiently high probability to be always the nearest neighbor of q (t), formally: P CN N Q(q, D, T,  ) = {(o, Ti ) : o  D, Ti  T, P N N (o, q, D, Ti )   }. Analogously to the CNN query definition [20, 4], in order to reduce redundant answers it makes sense to redefine the PCNN Query where we focus on results that maximize |Ti |, formally: P CN N Q(q, D, T,  ) = {(o, Ti ) : o  D,Ti  T, P N N (o, q, D, Ti )    Tj  Ti : P N N (o, q, D, Ti ) <  }. Note that according to this definition result sets Ti  T do not have to be connected.
+
+is the transition probability of o from state si to state sj at a given time t. Transition probabilities are stored in a matrix M o (t), called transition matrix of object o at time t. Let so (t) = (s1 , . . . , s|S| )T be the distribution vector of an object o at time t, where so i (t) = P (o(t) = si ). Without any further knowledge (from observations) the distribution vector so (t + 1) can be inferred from so (t): so (t + 1) = M o (t)T  so (t) The traditional Markov model [12] uses forward probabilities only. In Section 6, we propose a Bayesian inference approach, to condition this a-priori Markov chain to an adapted a-posteriori Markov chain which also considers all observations of an object.
+
+3.3
+
+Query Evaluation Framework and Roadmap
+
+3.2
+
+Nearest Neighbor Queries
+
+In this work we consider three types of time-parameterized nearestneighbor queries that take as input a certain reference state or trajectory q and a set of timesteps T . D EFINITION 1 (PNN Q UERY ). A probabilistic  nearest neighbor query retrieves all objects o  D which have a sufficiently high probability (P N N ) to be the nearest neighbor of q for at least one point of time t  T , formally: P N N Q(q, D, T,  ) = {o  D : P N N (o, q, D, T )   } where P N N (o, q, D, T ) = P (t  T : o  D \ o : d(q (t), o(t))  d(q (t), o (t))) and d(x, y ) is a distance function defined on spatial points, typically the Euclidean distance. This definition is a straightforward extension of the spatio-temporal query proposed in [1]. In addition, we consider NN queries with the  quantifier (introduced in [12] for range queries). D EFINITION 2 (PNN Q UERY ). A probabilistic  nearest neighbor query retrieves all objects o  D which have a sufficiently high probability (P N N ) to be the nearest neighbor of q for the entire set of timestamps T , formally: P N N Q(q, D, T,  ) = {o  D : P N N (o, q, D, T )   } where P N N (o, q, D, T ) = P (t  T : o	D \ o : d(q (t), o(t))	d(q (t), o (t)))
+
+An intuitive way to evaluate a PNN query is to compute for each o  D the probability that o is the NN of q in at least one or in all timestamps of a time interval T . However, to speed up query evaluation, in Section 7, we show that it is possible to prune some objects from consideration using an index over D. Then, for each remaining object o, we have to compute a probability (i.e., P N N (o, q, D, T ) or P N N (o, q, D, T )) and compare it to the threshold	. In Section 4, we show that while computing P N N (o, q, D, T ) is computationally hard, P N N (o, q, D, T ) can be computed in PTIME. Therefore, in Section 5, we present an algorithm for computing P N N (o, q, D, T ) exactly and a technique that uses the algorithm as a module for the computation of PCNN queries. As discussed in Section 6, the harder case of retrieving P N N (o, q, D, T ) (and also P N N (o, q, D, T )) can be approximated by Monte-Carlo simulation: for each object o  D a trajectory is generated which conforms to both the Markov chain model M o and the observations o and all these trajectories are used to model a possible world. By performing the NN query in all these possible worlds and averaging the results, we are able to derive an approximate value for P N N (o, q, D, T ).
+
+4.
+
+THEORETICAL ANALYSIS
+
+In this section, we formally show that PNN queries cannot be computed efficiently, in contrast to PNN and PCNN queries.
+
+The PNN Query In a PNN query, for any candidate object o  D, we should consider the probability P N N (o, q, D, T ). However, the following lemma shows that this probability is hard to compute.
+L EMMA 1. The computation of P N N (o, q, D, T ) is NP-hard in |D|. P ROOF. P N N (o, q, D, T ) is equal to 1 - P (t  T, o  D : d(q (t), o(t))	d(q (t), o (t))). We will show that deciding if there exists a possible world for which the expression: t  T, o  D : d(q (t), o(t))  d(q (t), o (t)) (1)
+
+4.1
+
+is satisfied is an NP-hard problem. (Note that this is a much easier problem than computing the actual probability.) Specifically, we will reduce the well-known NP-hard k-SAT problem to the problem of deciding on the existence of a possible world for which Expression 1 holds. For this purpose, we provide a mapping to convert a boolean formula in conjunctive normal form to a Markov chain modeling the decision problem of Expression 1 in polynomial time. Thus, if the decision problem could be computed in PTIME, then k-SAT could also be solved in PTIME, which would only be possible if P=NP. A k-SAT expression E is based on a set of variables X = {x1 , x2 , . . . , xn }. The literal li of a variable xi is either xi or li is a disjunction of literals where xi and a clause c =
+xi C
+
+dist t(q)
+
+s4 s3 o s2 s1 q
+1 2 3
+
+x1
+
+x2
+
+t
+
+x3
+
+x4
+
+C  X and |C| < k. Then E is a conjunction of clauses: E = c1  c2  . . .  cm . For our mapping, we will consider a simplified version of the PNN problem, specifically (1) q is a certain point, (2) o is a certain point and (3) the state space S of possible locations only includes 4 states. As illustrated in Figure 1, compared to o, states s1 and s2 are closer to q and states s3 and s4 are further from q .2 Therefore, if an uncertain object is at states s1 or s2 then o is not the NN of q . In our mapping, each variable xi  X is equivalent to one uncertain object oi  D \ o. Furthermore each disjunctive clause cj is interpreted as an event happening at time t = j , i.e., the event c1 happens at time t = 1, c2 happens at time t = 2 etc. Each clause cj can be seen as a disjunctive event that at least one object oi at time t = j is closer to q than o (in this case, cj is true). Therefore, the conjunction of all these events, i.e. expression E = cj ,
+1j m
+
+Figure 1: An example instance of our mapping of the 3-SAT problem to a set of Markov chains. Therefore, we have c1 = (x1  x2  x3 ), c2 = (x2  x3  x4 ) and c3 = (x1  x2 ) By employing the mapping discussed above, we get the four inhomogeneous Markov chains illustrated in Figure 1. For instance, under the condition that x1 is set to true, the value of the literal x1 is false at t = 1 (in clause c1 ) such that o1 starts in the state s4 . On the other hand, if x1 is set to f alse, then o1 starts in the state s1 . In the second clause c2 , since x1  C2 , the position of o1 must not affect the result. Therefore, for both cases x1 = f alse and x1 = true, o1 must be behind o. In the last clause c3 , if x1 = true the object moves to state s2 . On the other hand, if x1 = f alse, the object moves to state s3 .
+
+becomes true if the set of variables is chosen in a way that at each point in time, compared to o, at least one object is closer to q ; this directly represents Expression 1. However, in k-SAT, not every variable xi (corresponding to oi ) is contained in each term cj which does not correspond to our setting, since an uncertain object has to be somewhere at each point in time. To solve this problem, we extend each clause cj , such that each variable xi is contained in cj , without varying the semantics of cj . Let us assume that xi is not contained in cj . Then cj = cj	f alse = cj  (xi  xi ). This means that we can assume that object oi is definitely not closer to q than o at time t. j Let li be the literal of variable xi in clause cj . Based on the above discussion, we are able to construct for each object oi two possible trajectories (worlds). The first one, based on the assumpj tion that xi is true, transitions between states s2 (if li = true) and j s4 (if li = false). The second one, based on the assumption that j xi is set to false, transitions between states s1 (if li = true) and j s3 (if li = false). Since these two trajectories can never be in the same state it is straightforward to construct a time-inhomogeneous Markov chain M o (t) for each object oi and each timestamp j . After the Markov chains for each uncertain object oi in D have been determined, we would just have to traverse them and compute the probability P N N (o, q, D, T ). If this probability is < 1, there would exist a solution to the corresponding k-SAT formula. However it is not possible to achieve this efficiently in the general case as long as P = N P . Therefore solving P N N in subexponential time is impossible. Example: Consider a set of boolean variables X = {x1 , . . . , x4 } and the following formula: E = (x1	x2  x3 )  (x2  x3  x4 )  (x1  x2 )
+2
+
+4.2
+
+The PNN Query
+
+Again we start our analysis by considering the single object probability P N N (o, q, D, T ). The following lemma shows that this probability can be computed in PTIME. L EMMA 2. The probability P N N (o, q, D, T ) can be computed by considering each object o  D independently, specifically P N N (o, q, D, T ) = P N N (o, q, {o }, T )
+o D
+
+P ROOF. P N N (o, q, D, T ) P (t  T, o	D \ o : d(q (t), o(t))	d(q (t), o (t))) P (t  T : d(q (t), o(t))  d(q (t), o1 (t))  . . . . . .  d(q (t), o(t))  d(q (t), o|D| (t)) P N N (o, q, {o }, T )
+o D
+
+= = =
+
+The last step follows from stochastic independence of objects and the resulting stochastic independence of events Ai = t  T : d(q (t), o(t))  d(q (t), oi (t)). Lemma 2 allows us to further simplify the problem and we now only have to show how to compute P N N (o, q, {o }, T ). This probability depends on two objects only and, thus, the computational complexity to compute P N N (o, q, {o }, T ) is constant in |D|. In Section 5.1 we provide an algorithm which computes P N N (o, q, {o }, T ) in O(|S |3  |T |) in the worst case, and in O(|S |2  |T |) if the branching factor of the transition matrix is constant. This proves the polynomial complexity of the PNN query.
+
+The states of o and q are omitted for the sake of simplicity.
+
+4.3
+
+The PCNN Query
+
+The traditional CNN query [20, 4], retrieves the nearest neighbor of every point on a given query trajectory in a time interval T . This basic definition usually returns m << |T |) time intervals together having the same nearest neighbor. The main issue when considering uncertain trajectories and extending the query definition is the possibly large number of results due to highly overlapping and alternating result intervals. In particular, considering Definition 3, a PCNN query may produce an exponential number of results. This is because in the worst case each Ti  T can be associated with an object o for which the probability P N N (o, q, D, Ti )   , i.e., 2T different Ti 's occur in the result set. To alleviate this issue, in Section 5.2 we propose a technique based on Apriori pattern mining to return the subsets of T that have a probability greater than  .
+
+5.
+
+PNN ALGORITHMS
+
+In this section we present evaluation algorithms for PNN and PCNN queries. Specifically, we focus on the computation of P N N (o, q, D, T ) and P CN N (o, q, D, T ), respectively. For PNN queries no efficient algorithm exists as shown in Section 4.1, thus an approximate (numerical) solution is presented in Section 6.
+
+time t, o is located in state si and o is located in state sj and o has been closer to q than o during the whole interval [ts , t]. Thus, the so-called Hit-Matrix H (t)ij holds the probabilities of all possible worlds of o and o where o has always been closer to q than o . In addition to H (t)ij , we further have to maintain a Drop-Matrix D(t), such that each cell D(t)i,j holds the probability that o is located in state si and o is located in state sj and o was not closer to q than o at any time in [ts , t]. These matrices partition all possible worlds into two classes: H (t) represents all worlds still satisfying the query predicate at time t, and D(t) contains all worlds that have already been pruned. Thus, for the first timestamp ts , matrices H (ts ) and D(ts )) are computed; for the timestamps that follow, (1) H (ts ) and D(ts )) must be transitioned according to both transition matrices M o and M o and (2) possible worlds have to be shifted into the correct matrix using C (t). For each entry Hij (t) we have to aggregate over all states both objects o and o can come from at the previous time step t - 1: Hij (t) =
+k l o o (Hkl (t - 1)  Mki (t - 1)  Mlj (t - 1))  Ci,j (t),
+
+(5) which is equal to: H tmp (t) = [M o (t - 1)T  H (t - 1)  M o (t - 1)] H (t) = H tmp (t)  C (t) (6) (7)
+
+5.1
+
+The PNN Query Note that Lemma 2 allows us to compute P N N (o, q, D, T ) by considering the probabilities P N N (o, q, {o }, T ) for each o  D separately. To derive an algorithm for PNN queries, we start by computing the probability that a candidate object o is the NN of query state or trajectory q at a single point of time t in the query time window T . Let J (t) be the joint probability matrix of o and o , i.e., Jij (t) = P (o(t) = si  o (t) = sj ), denoting the probability that object o is in state si at time t and object o is in state sj at time t. The matrix J (t) can be computed by J (t) = so (t)  so (t)T due to independence of objects. From this joint probability matrix, we can derive the probability that o is closer to q than o at time t as follows. We first define an indicator matrix C (t) with
+Cij (t) = 1, if d(si , q (t))  d(sj , q (t)) 0, otherwise
+
+A similar transformation has to be done for the Drop-Matrix D(t) whereas shifting the possible worlds into D(t) that have been hits in previous iterations but become drops at the current time t, computed by H tmp (t) - H tmp (t)  C (t): Dtmp (t) = M o (t - 1)T  D(t - 1)	M o (t - 1) D(t) = Dtmp (t) + (H tmp (t) - H tmp (t)  C (t)) (8) (9)
+
+The matrix C (t) describes for each state pair which state is closer to q . Therefore, we can determine the aggregated probability of o being closer to q than o by evaluating H (t) = J (t)  C (t) (2)
+
+Until now, we did not consider observations for the computation of the result probability P N N (o, q, {o }, T ). At each obo servation o t and/or t , the joint probabilities H (t) have to be o o reweighed according to the observation vectors t and/or t reo spectively. Specifically, given an observation x of object o at time t = to x , the probabilities in H (t) have to be conditioned to the o event of the observation (o(t) = x ), which means H (t) (H (t) after inferring the observation) should ultimately have the following form:
+o H (t)ij = P (o(t) = si  o (t) = sj  H |o(t) = x )
+
+where  is the element-wise matrix multiplication. Then the following holds: P N N (o, q, {o }, t) =
+i j
+
+(Hij (t))
+
+(3)
+
+This formula removes all possible worlds where o is closer to q than o from the matrix J (t) (Equality 2) and sums up the remaining probabilities to get the result probability (Equality 3). To correctly incorporate later observations, we also have to consider all possible worlds not contributing to P N N (o, q, {o }, t). These possible worlds are stored in a drop matrix D(t): D(t) = J (t) - (J (t)  C (t)) (4)
+
+This expression denotes the probability that o and o are in their respective states si and sj and the set of possible worlds described by this probability being a hit under the condition that o was observed o at time t in state x . Clearly, the probability of o being in state si o can only be non-zero if it is in state x . We can express this by o introducing an indicator variable I (si = x ):
+o o H (t)ij = I (si = x )  P (o(t) = si  o (t) = sj  H |o(t) = x ) o o = I (si = x )  P (o (t) = sj  H |o(t) = x )
+
+By applying the law of conditional probability, we get: H (t)ij =
+o o I (si = x )  P (o (t) = sj	H  o(t) = x ) . p(o(t) = si )
+
+Based on the probability that o is the NN of q at a single time t  T , we can compute the total probability that o is the NN of q during the complete time window T = [ts , te ] by induction. The main idea is to maintain the matrix H (t) over all times t  T = [ts , te ], which, contains, in each cell H (t)ij the probability that at
+
+While the nominator of this expression is already completely deo fined by H (t) and the observation x , for the denominator we also
+
+have to consider all possible worlds where o is not a result of the NN query: H (t)ij =
+o I (si = x )  Hij |S | |S | o) Xkl I (si = x X {D,H } k=1 l=1 o Inferring an observation of object o (o (t) = x ) can be derived similarly and results in the following formula: o I (sj = x |S | |S | X {D,H } k=0 l=0
+
+(10)
+
+Algorithm 2 P C N N (q , o, D, T,  ) 1: L1 = {({t}, P )|t  T  P N N (o, q, D \ {o}, {t})   } 2: for k = 2; Lk-1 = ; k + + do 3: T k = {Tk  T ||Tk | = k  Tk-1  Tk (Tk-1 , p)  Lk-1 } 4: Lk = {(Tk , p)|Tk  T k	P N N (o, q, D \ {o}, Tk )   } 5: end for 6: return
+
+k
+
+Lk
+
+H (t)ij =
+
+)  Hij
+
+(11) Apriori pattern-mining approach from [24] to solve the problem as follows. We start by computing the probabilities of all single points of time to be query results (line 1). Then, we iteratively consider the set T k of all timestamp sets with k points of time by extending timestamp sets Tk-1 with an additional point of time t  T \ Tk-1 , such that all Tk-1  Tk have qualified at the previous iteration, i.e., we have P N N (o, q, D \ {o}, Tk-1 ))	(line 3). The probability resulting from a PNN query is monotonically decreasing with the number of points in time considered, i.e., PNN(o, q, D \ {o}, Tk )  PNN(q, D, Tk+1 ) where Tk  Tk+1 . Therefore we do not have to further consider the set of points of time Tk that do not qualify for the next iterations during the iterative construction of sets of time points. Based on the sets of points in time Tk constructed in each iteration we compute the corresponding probability P N N (o, q, D\{o}, Tk ) to build the set of results of length k (line 4) that are finally collected and reported as result in line 6. The basic algorithm can be sped up by employing the property that given PNN(o, q, D\{o}, T1 ) = 1 the probability of PNN(o, q, D \ {o}, T1  T2 ) = PNN(o, q, D \ {o}, T2 ). Based on Algorithm 2 it is possible to define a straightforward algorithm for processing PCNN queries (by considering each object o from the database). Again this approach can be improved by the use of an appropriate index-structure (cf. Section 7).
+
+o ) Xkl I (sj = x
+
+Additionally, the same procedure has to be applied to D(t). It can be further shown (by simple mathematical transformation) that both observations can be incorporated into H (t) and D(t) at the same time. Algorithm 1 is a pseudocode summarizing the findings of this section. First, it computes the initial joint distribution of o and o (line 2) and the corresponding hit and drop matrices (lines 3-4). Transitioning, shifting and reweighting is performed for each point in time in lines 6 to 12. The result probability is computed in line 14. The algorithm can be easily extended for the case where T is a set of disjoint intervals. In this case, for each point in time that does not have to be considered as a query timestamp, the shifting operation (based on matrix C (t)) needs not be evaluated. The remainder of the algorithm is not affected by this extension. Using Algorithm 1, we are now able to compute P N N (o, q, {o }, [ts , te ]). For computing P N N (o, q, D, [ts , te ]), an approach could apply this algorithm for all objects o  D. Algorithm 1 P N N (o, q, {o }, [ts , te ]) 1: Generate C (ti ) for all ti  [ts , te ] 2: J = so (ts )  so (ts )T 3: H (t) = J (t)  C (t) {Eq. 2} 4: D(t) = J (t) - (J (t)  C (t)) {Eq. 4} 5: for t = ts + 1; t  te ; t + + do 6: H tmp (t) = [M o (t - 1)T  H (t - 1)  M o (t - 1)] {Eq. 6} 7: H (t) = H tmp (t)  C (t) {Eq. 7} 8: Dtmp (t) = M o (t - 1)T  D(t - 1)  M o (t - 1) {Eq. 8} 9: D(t) = Dtmp + (t)(H tmp (t) - H tmp (t)  C (t)) {Eq. 9} o o o 10: if to i : ti = t	tj : tj = t then 11: reweigh according to Eq. 10 or 11, respectively 12: end if 13: end for 14: p = (Hij (te )) {Eq. 3}
+i j
+
+6.
+
+SAMPLING POSSIBLE TRAJECTORIES
+
+15: return p
+
+5.2
+
+The PCNN Query
+
+Based on the discussion in the previous sections, it is clear that answering probabilistic queries over uncertain trajectory databases has high run-time cost. Therefore, like previous work [25], we study sampling-based approximate solutions to improve query efficiency. In this section, we first show that a traditional sampling approach is not applicable for uncertain trajectory data as defined in Section 3.1, as it does not account for all observations of an object, resulting in a very large number of sample paths, which are impossible given all observations. To tackle this issue, we employ an approach that incorporates information about observations directly into the Markov model, following a forward-backward paradigm. Based on the resulting a-posteriori models, traditional sampling approaches can be used to efficiently and accurately estimate P N N probabilities. On these samples, traditional NN algorithms for (certain) trajectories ([1, 2, 19, 3, 20, 4]) can be used to estimate NN probabilities.
+
+Algorithm 2 shows how to compute, for a query trajectory q , a time interval T , a probability threshold  , and an uncertain trajectory o  D all Ti  T for which o is the nearest neighbor to q at all timestamps in Ti with probability of at least  , and the corresponding probabilities. We take advantage of the Apriori principle that for a Ti to qualify as a result of the PCNN query, all proper subsets of Ti should satisfy a PNN query. In other words if o is the PNN of q in Ti with probability at least  , then for all Tj  Ti o should be the PNN of q in Tj with probability at least  . Thus, we adapt the
+
+6.1
+
+Traditional Sampling
+
+To sample possible trajectories of an object, a traditional MonteCarlo approach would start by taking the first observation of the object, and then perform forward transitions using the a-priori transition matrix. This approach however, cannot directly account for additional observations for latter timestamps. Figure 2 illustrates a total of 1000 samples drawn in a one-dimensional space. Starting at the first observation time t = 0, transitions are performed using the a-priori Markov chain. At the second observation at time t = 20, the great majority of trajectories becomes inconsistent.
+
+6.2.1
+
+Forward-Phase
+
+To obtain the backward transition matrix Ro (t), we can apply the theorem of Bayes as follows: Ro (t)ij := P (o(t - 1) = sj |o(t) = si ) = P (o(t) = si |o(t - 1) = sj )  P (o(t - 1) = sj ) P (o(t) = si ) Computing Ro (t)ij is based on the a-priori Markov chain only, and does not consider any information provided by observations. To incorporate knowledge about past observations into Ro (t)ij , let o o pasto (t) := {i |ti < t} denote the set of observation temporally o preceding t. Also, let prev o (t) := argmaxo to denote i past (t) i the most recent observation of o at time t. Given all past observations, Equation 13 becomes conditioned as follows: L EMMA 3. Ro (t)ij := P (o(t - 1) = sj |o(t) = si , pasto (t)) =
+o
+
+(13)
+
+Figure 2: Traditional MC-Sampling.
+
+Figure 3: An overview over our forward-backward-algorithm. Such impossible trajectories have to be dropped. At time t = 40, even more trajectories become invalid; After this observation, only one out of a thousand samples remains possible and useful. Clearly, the number of trajectory generations required to obtain a single valid trajectory sample increases exponentially in the number of observations of an object, making this traditional MonteCarlo approach inappropriate in obtaining a sufficient number of valid samples within acceptable time.
+
+(14)
+
+P (o(t) = si |o(t - 1) = sj , past (t))  P (o(t - 1) = sj |pasto (t)) P (o(t) = si |pasto (t)) P ROOF. Equation 14 uses the conditional theorem of Bayes )P (A|C ) , the correctness of which is shown P (A|B, C ) = P (B |A,C P (B |C ) in the extended version of this paper ([26]). The conditional probability P (o(t) = si |o(t - 1) = sj , pasto (t)) can be rewritten as P (o(t) = si |o(t - 1) = sj ), exploiting the Markov property. Both priors P (o(t-1) = sj |pasto (t)) and P (o(t) = si |pasto (t)) can be rewritten as P (o(t - 1) = sj |prev o (t)) and P (o(t) = si |prev o (t)) respectively, by exploiting the Markov property; i.e., given the position at some time t, the position at a time t+ > t is conditionally independent of the position at any time t- < t. Thus, Equation 14 can be rewritten as Ro (t)ij = P (o(t) = si |o(t - 1) = sj )  P (o(t - 1) = sj |prev o (t)) (15) P (o(t) = si |prev o (t)) The probability P (o(t) = si |o(t - 1) = sj ) is given directly by the definition of the a-priori Markov chain M o (t) of o. Both priors P (o(t - 1) = sj |prev o (t)) and P (o(t) = si |prev o (t)) can be computed by performing time transitions from observation prev o (t), also using the a-priori Markov chain M o (t). For each element rij  Ro (t)ij , and each point of time t  [t1 , t|o | ], these priors can be computed in a single run, iteratively performing transitions from t1 to t|o | . During this run, all backward probabilities P (o(t - 1) = sj |o(t) = si , pasto (t)) are computed using Equation 15 and memorized in the inhomogeneous matrix Ro (t). During any iteration of the forward algorithm, where a new obsero vation presento (t) := o t   is reached, the information of this observation has to be incorporated into the model. This is done trivially, by setting P (o(t) = si |pasto (t), presento (t)) to one if si is the state  observed by presento (t) and to zero otherwise.
+
+6.2
+
+Efficient and Appropriate Sampling
+
+o In a nutshell, our approach starts with the initial observation 1 at time to 1 , and performs transitions for object o using the a-priori o Markov chain of o until the final observation | o | at time t|o | is reached. During this Forward-run phase, Bayesian inference is used to construct a time-reversed Markov-model Ro (t) of o at time t given observations in the past, i.e., a model that describes the probability o o o Rij (t) := P (o(t - 1) = sj |o(t) = si , {i |ti < t})
+
+of coming from a state sj at time t-1, given being at state si at time t and the observations in the past. Then, in a second Backwardrun phase, our approach traverses time backwards, from time t|o | to t1 , by employing the time-reversed Markov-model Ro (t) constructed in the forward phase. Again, Bayesian inference is used to construct a new Markov model F o (t - 1) that is further adapted to incorporate knowledge about observations in the future. This new Markov model contains the transition probabilities
+o Fij (t - 1) := P (o(t) = sj |o(t - 1) = si , o ).
+
+(12)
+
+for each point of time t, given all observations, i.e., in the past, the present and the future. As an illustration, Figure 3(a) shows the initial model given by the a-priori Markov chain, using the first observation only. In this case, a large set of (time, location) pairs can be reached with a probability greater than zero. The adapted model after the forward phase (given by the a-priori Markov chain and all observations), depicted in Figure 3(b), significantly reduces the space of reachable (time, location) pairs and adapts respective probabilities. The main goal of the forward-phase is to construct the necessary data structures for efficient implementation of the backward-phase, i.e., Ro (t). This task is not trivial, since the Markov property does not hold for the future, i.e., the past is not conditionally independent of the future given the present. Figure 3(c) shows the resulting model after the backward phase. Next, both phases are elaborated in detail.
+
+6.2.2
+
+Backward Phase
+
+During the backward phase, we traverse time backwards using the reverse transition matrix Ro (t), to propagate information about future observations back to past points of time, as depicted in Figure 3(c). During this traversal, we again obtain a time reversed matrix F o (t), describing state transitions between adjacent points of time, given observations in the future. Due to this second reversal of time, matrix F o (t) also contains adapted transition probabilities in the forward direction of time. Thus, matrix F o (t) represents a Markov model which corresponds to the desired a-posteriori
+
+model: It contains the probabilities of performing a state transition between state si and sj at time t to time t +1, incorporating knowledge of observations in both the past and the future. In contrast, the a-priori Markov model M o (t) only considers past observations. We now discuss the details of this phase. By definition of Ro (t) as the reverse transition matrix, the folo lowing reverse Markov property holds for each element Rij of Ro : P (o(t) = sj |o(t+1) = si , o(t+2) = st+2 , ..., o(t+k) = st+k ) = P (o(t) = sj |o(t + 1) = si ) (16)
+
+Algorithm 3 AdaptTransitionMatrices(o) 1: {Forward-Phase} o 2: so (to 1 ) = 1 o 3: for t = to 1 + 1; t	t|o | ; t++ do o 4: X (t) = M (t - 1)T	diag (so (t - 1))
+|S |
+
+5:
+
+i  {1 . . . |S|} : so (t)i =
+j =1
+
+Xij (t)
+X (t)
+
+As an initial state for the backward phase, we use the state vector o corresponding to the final observation o |o | at time t|o | at state o |o | . This way, we take the final observation as given, making any further probabilities that are being computed conditioned to this observation. At each point of time t  [t|o | , t1 ] and each state si  S , we compute the probability that o is located at state si at time t given (conditioned to the event) that the observations o o f utureo (t) := {i |ti > t)} at times later than t are made. In o the following, let nexto (t) = argmino (to ) denote i f uture (t) i o the soonest observation of o after time t. To obtain F (t), we once again exploit the theorem of Bayes:
+o Fij (t) := P (o(t + 1) = sj |o(t) = si , o ) =
+
+ij 6: i, j  {1 . . . |S|} : Ro (t)ij = so (t)i 7: if t	o then o {Incorporate observation} 8: so (t) = t 9: end if 10: end for 11: {Backward-Phase} 12: for t = to - 1; t  to 1 ; t -- do |o | 13: X (t) = Ro (t + 1)T	diag (so (t + 1))
+
+|S |
+
+14:
+
+i  {1 . . . |S|} : so (t)i =
+j =1
+
+Xij (t)
+Xij (t) so (t)i
+
+15: i, j  {1 . . . |S|} : F o (t)ij = 16: end for 17: return F o
+
+P (o(t) = si |o(t + 1) = sj , o )  P (o(t + 1) = sj |o ) P (o(t) = si |o )
+
+(17)
+
+By exploiting the reverse Markov property (c.f. Equation 16), we can rewrite P (o(t) = si |o(t + 1) = sj , o ) = P (o(t) = si |o(t + 1) = sj , past(t + 1)) which is given by matrix Ro (t). Both priors P (o(t + 1) = sj |o ) and P (o(t) = si |o ) can be rewritten as P (o(t +1) = sj |prev o (t +1), presento (t +1), nexto (t +1)) and P (o(t) = si |prev o (t), presento (t), nexto (t)), exploiting the traditional Markov property in forward and Equation 16 in backward direction. These probabilities can be computed as follows: We start at t = t|o | , performing transitions backwards using backward transition matrix Ro (t) until time t = t|o |-1 is reached. For each intermediate point of time t, the distribution vector so (t) is obtained. Each probability so (t)i in this vector corresponds to the probability of o being located at state si at time t. These probabilo ities are conditioned to o || = next (t), due to being started ac. Furthermore, these probabilities are conditioned cording to o || to prev o (t)	pasto (t) due to usage of matrix Ro (t). At time to ||-1 , the state vector is adapted using this observation. This procedure is iterated until the first observation o 1 is reached to derive the probabilities P (o(t + 1) = sj |o ) and P (o(t) = si |o ).
+
+6.2.3
+
+Sampling Process
+
+Algorithm 3 summarizes the construction of the transition model for a given object o. In the forward phase, the new distribution vector so (t) of o at time t and backward probability matrix Ro (t) at time t can be efficiently derived from the temporary matrix X (t), computed in Line 4. The equation is equivalent to a simple transition at time t, except that the state vector is converted to a diagonal matrix first. This trick allows to obtain a matrix describing the joint distribution of the position of o at time t - 1 and t. Formally, each entry X (t)i,j corresponds to the probability P (o(t - 1) = sj  o(t) = si |pasto (t)) which is equivalent to the numerator of Equation 14.3 To obtain the denominator of Eq. 14 we first compute the row-wise sum of X (t) in Line 5. The
+3 The proof for this transformation P (A  B |C ) = P (A|C )  P (B |A, C ) can be derived analogously to Lemma 3.
+
+resulting vector directly corresponds to so (t), since for any matrix A and vector x it holds that A  x = rowsum(A  diag (x)). By employing this rowsum operation, only one matrix multiplication is required for computing Ro (t) and so (t). Next, the elements of the temporary matrix X (t) and the elements of o.s(t) are normalized in Equation 14, as shown in Line 6 of the algorithm. Finally, possible observations at time t are integrated in Line 8. In Lines 12 to 15, the same procedure is followed in time-reversed direction, using the backward transition matrix Ro (t) to compute the a-posteriori matrix F o (t). The overall complexity of this algorithm is O(|T |  |S|2 ). The initial matrix multiplication requires |S|2 multiplications. While the complexity of a matrix multiplication is in O(|S|3 ), the multiplication of a matrix with a diagonal matrix, i.e., M T  s can be rewritten as MiT  sii , which is actually a multiplication of a vector with a scalar, resulting in an overall complexity of O(|S|2 ). Rediagonalization needs |S|2 additions as well, such as re-normalizing the transition matrix, yielding 3	|T |  |S|2 for the forward phase. The backward phase has the same complexity as the forward phase, leading to an overall complexity of O(|T |  |S|2 ). Once the transition matrices F o (t) for each point of time t have been computed, the actual sampling process is simple: For each o object o, each sampling iteration starts at the initial position 1 at o o time t1 . Then, random transitions are performed, using F (t) until the final observation of o is reached. Doing this for each object o  D, yields a (certain) trajectory database, on which exact NNqueries can be answered using previous work. Since the event that an object o is a -NN (-NN) of q is a binomial distributed random variable, we can use methods from statistics, such as the Hoeffding's inequality ([27]) to give a bound of the estimation error, for a given number of samples.
+
+7.
+
+SPATIAL PRUNING
+
+Pruning objects in probabilistic NN search can be achieved by employing appropriate index structures for querying uncertain spatiotemporal data. In this work, we use the UST-tree [5]. In this section, we briefly summarize the index and show how it can be employed to efficiently prune irrelevant database objects, identify result candidates, and find influence objects that might affect the NN prob-
+
+ability of a candidate object. The UST-Tree. Given an uncertain spatio-temporal object o, the main idea of the UST-tree is to conservatively approximate the set of possible (location, time) pairs that o could have possibly visited, given its observations o . In a first approximation step, these (location, time) pairs, as well as the possible (location, time) o pairs defined by o i and i+1 are minimally bounded by rectano gles. Such a rectangle, for observations o i and i+1 is defined o by the time interval [to , t ] , as well as the minimal and maximal i i+1 longitude and latitude values of all reachable states. E XAMPLE 1. Consider Figure 4, where four objects objects A, B , C and D are given by three observations at time 0, 5 and 10. For each object, the set of possible states in the corresponding time intervals [0, 5] and [5, 10] is approximated by two minimum bounding rectangles. For illustration, the set of possible states at each point of time is also depicted by dashed rectangles. The UST-tree indexes the resulting rectangles using an R -tree ([28]). We now discuss how such an index structure can be used for the evaluation of PNN and PNN queries. Pruning candidates of PNN queries. For a PNN query, an object must have a non-zero probability of being the closest object to q , for each timestamp falling into the query interval. As a consequence, to find candidate objects for the PNN query, we have to consider for all objects o	D whether for each t  q.T there does not exist another object o  D such that dmin (o(t), q (t)) > dmax (o (t), q (t)). Here, dmin (o(t), q (t)) (dmax (o(t), q (t))) denotes the minimum (maximum) distance between the possible states of o(t) and q (t). Thus, the set of candidates C (q ) of a PNN is defined as: C (q ) = {o  D|t	q.T : dmin (o, q )  mino
+D dmax (o
+
+Figure 4: Spatio-Temporal Pruning Example. dmin smaller than the pruning distance has to be refined. The remaining procedure of the PNN-algorithm is equivalent to PNNpruning.
+
+8.
+
+EXPERIMENTAL EVALUATION
+
+, q )}
+
+Applying spatial pruning on the leaf level of the UST-tree, we have to apply the dmin and dmax distance computations on the minimum bounding rectangles on the leaf level in consideration of the time intervals associated with these leaf entries. In our example, given the query point q with q.T = [2, 8], only object A is a candidate, since dmin (q (t), A(t))	dmax (q (t), o(t)) for all o  D in the time intervals [0,5] and [5,10], both together covering q.T . Objects B , C and D can be safely pruned. It is important to note that pruned objects, i.e., objects not contained in C (q ) may still affect the NN probability of other objects and even may prune other objects. For example, though object B is not a candidate, it affects the NN probability of all other objects and contributes to prune possible worlds of object A, because dmin (q (t), A(t)) < dmax (q (t), B (t)) t  [5, 10]. All objects having at at least one timestamp t	q.T a non-zero probability being the NN of q may influence the NN probability of other objects. Since we need these objects for the verification step of both the exact and the sampling algorithms, we have to maintain them in an additional list I (q ) = {o  D|t  T : dmin (o(t), q (t))  mino
+D dmax (o
+
+Setup Our experimental evaluation focuses on PNN and PCNN queries, which have an efficient exact solution. We conducted a set of experiments to verify both the effectiveness and efficiency of the proposed solutions, using a desktop computer having an Intel i7-870 CPU at 2.93 GHz and 8GB of RAM. All algorithms were implemented in C++ and integrated into the UST framework. The framework and a video illustrating the datasets can be found on the project page [29]. Artificial Data. Artificial data for our experiments was created in three steps: state space generation, transition matrix construction and object creation. First, the data generator constructs a twodimensional Euclidean state space, consisting of n states. Each of these states is drawn uniformly from the [0, 1]2 square. Then, in order to construct a transition matrix, we derive a graph by introducing edges between any point p and its neighbors having a
+b with b denoting the average branchdistance less than r = n  ing factor of the underlying network. This parameter ensures that the degree of a node does not depend on the number of states in the network. Each edge in the resulting network represents a non-zero entry in the transition matrix. We then set the transition probability of this entry indirectly proportional to the distance between the two connected vertices. Real Data. We also generate a data set is generated from a set of GPS trajectories of taxis in the city of Beijing [30] and has been provided by [5]. The data set was generated using the techniques of [31] to obtain both a set of possible states (corresponding to crossroads) and a transition matrix reflecting the possible movements of the cabs. This process yields a state space consisting of about 3000 states and the corresponding transition matrices and direct edges between states. We assume that a-priori, all objects utilize the same Markov model M . Observation Data. To create observations of an object o, we sample a sequence of states and compute the shortest paths between them, modeling the motion of o during its whole lifetime (which we set to 100 steps by default). To add uncertainty to the resulting path, every lth node, l = i  v , v  [0, 1], of this trajectory is used as
+
+(t), q (t))}
+
+To perform spatial pruning at the non-leaf level of the UST-tree, we can analogously apply dmin and dmax on the MBRs of the nonleaf level. Pruning for the PNN query. Pruning for the PNN query is very similar to that for the PNN query. However, we have to consider that an object being the nearest neighbor for a single point in time is already a valid query result. Therefore, no distinction is made between candidates and influence objects. Every pruner can be a valid result of the PNN query, such that each object with a
+
+350 300 250 200 150 100 50 0
+
+|C(q)| and |I(q)|
+
+|C(q)| and |I(q)|
+
+CPU Time (s)
+
+CPU Time (s)
+
+TS SA EX
+
+10000 100000500000 N
+
+60 50 40 30 20 10 0 10k 100k N
+
+|C(q)| |I(q)|
+
+350 300 250 200 150 100 50 0
+
+TS SA EX
+
+20 15 10 5
+
+|C(q)| |I(q)|
+
+500k
+
+1000 10000 20000 |D|
+
+0 1000
+
+10000 |D|
+
+20000
+
+Figure 5: Varying the Number of States
+250 CPU Time (s) 200 150 100 50 0 6.0 8.0 b 10.0 TS SA EX 12 10 8 6 4 2 0 6 |C(q)| |I(q)|
+
+Figure 7: Varying the Number of Objects
+
+|C(q)| and |I(q)|
+
+8 b
+
+10
+
+Figure 6: Varying the Branching Factor an observed state. i denotes the time between consecutive observations and v denotes a lag parameter describing the extra time that o requires due to deviation from the shortest path; the smaller v , the more lag is introduced to o's motion. The resulting uncertain trajectories were distributed over the database time horizon (default: 1000 timestamps) and indexed by a UST-tree [5]. As a pruning step for query evaluation, we employed the UST-tree's MBR filtering approach described in Section 7. Query states were uniformly drawn from the underlying state space. Figure 8: Efficiency and Effectiveness of Sampling shows that an increasing branching factor yields a higher run-time of all approaches due to a higher number of non-zero values in vectors and matrices, making computations more costly. Furthermore, in our setting, a larger branching factor also increases the number of influence objects, as shown in Figure 6 (right). Varying |D|. The number of objects (Figure 7) leads to a decreasing performance as well. The more objects stored in a database with the same underlying motion model, the more candidates and influence objects are found during the filter step. This leads to an increasing number of probability calculations during refinement, and hence a higher query cost. Sampling Efficiency. In the next experiment we evaluate the overhead of the traditional sampling approach (using the a-priori Markov model only) compared to the approach presented in Section 6 which uses the a-posteriori model. The first, traditional approach (TS1) discards any trajectory not visiting all observations. As discussed in Section 6.1, the expected number of attempts required to draw one sample that hits all observations, increases exponentially in the number of observations. This increase is shown in Figure 8 (left), where the expected number of samples is depicted with respect to the number of observations. This approach can be improved, by segment-wise sampling between observations. Once the first observation is hit, the corresponding trajectory is memorized, and further samples from the current observation are drawn until the next observation is hit. The number of trajectories required to be drawn in order to obtain one possible trajectory is linear to the number of observations when using this approach (TS2). We note in Figure 8 (left), that in either approach, 100k samples are required even in the case of having only two observations. The reason is that by generation, trajectories follow a near-shortest path, which is a highly unlikely scenario using the a-priori Markov model. Using the approach presented in Section 6, the number of trajectories that need to be sampled, in order to obtain a trajectory that hits all observations, is always one. Sampling Precision and Effectiveness. Next, we evaluate the precision of our approximate PNN query and an aspect of a competitor approach proposed in [18]. The latter approach has been tailored for reverse NN queries, but can easily be adapted to NN query processing. Essentially, this approach performs a snapshot query, i.e., P N N (o, q, D, t) for each t  T . P N N (o, q, D, T ) is then estimated by tT P N N (o, q, D, t). The scatterplot in
+
+Evaluation: PNN Queries For performance analysis, the sampling approach (Section 6) is divided into two phases. In the first phase the trajectory sampler (TS) is initialized (the adapted transition matrices are computed according to Algorithm 3). This phase can be performed once and used for all queries. In the second phase, the actual sampling (SA) of 10k trajectories (per object) is performed. The exact approach is denoted as EX. In our default setting during efficiency analysis we set the number of objects |D| = 10k, the number of states N = |S| = 100k, average branching factor of the synthetic graph b = 6, probability threshold  = 0 and the length of the query interval |T | = 10. These parameters lead to a total of 110k observations (11 per object) and 100k diamonds for the UST-index. Varying N . In the first experiment (Figure 5) we investigate the effect of an increasing state space size N , while keeping a constant average branching factor of network nodes. This effect corresponds to expanding the underlying state space, e.g., from a single country to a whole continent. In Figure 5 (left) we can see that increasing N leads to a sublinear increase in the run-time of both the sampling approaches and the exact solution. This effect can be mostly explained by two aspects. First, the size of the a-priori model increases linearly with N , since the number of non-zero elements of the sparse matrix M increases linearly with N . This leads to an increase of the time complexity of matrix operations. At the same time, the number of candidates |C (t)| and influence objects I (t) decreases significantly as seen in Figure 5 (right) because the degree of intersection between objects decreases with a higher number of states, making pruning more effective. The actual sampling cost SA, which is too small to be noticeable in Figure 5 (left) decreases from 4s for 10k states to 0.7s for 500k states due to the smaller number of candidates and influence objects. Varying b. Figure 6 evaluates the branching factor b, i.e., the average degree of each network node. As expected, Figure 6 (left)
+
+8.1
+
+140 120 100 80 60 40 20 0
+
+200 150 100 50 0 1000
+
+EX
+
+1000 10000 20000 |D|
+
+10000 |D|
+
+20000
+
+Frequent Itemsets
+
+|C(q)| and |I(q)|
+
+CPU Time (s)
+
+CPU Time (s)
+
+TS SA
+
+250
+
+|C(q)| |I(q)|
+
+160 140 120 100 80 60 40 20 0
+
+TS SA
+
+1400 1200 1000 800 600 400 200 0
+
+#Itemsets
+
+1000
+
+10000 20000 |D|
+
+1000 10000 20000 |D|
+
+Figure 9: Realdata: Varying the number of objects
+relative number n  of hits
+1 0,9 0,8 0,7 0,6 0,5 , 0,4 0,3 0,2 0,1 0 0.0  0.1
+
+Figure 11: Continuous Queries: Varying the number of objects model. Therefore, our first aim is to generate interesting trajectories, as we expect them to appear in real applications. The trajectories must not follow an (unrealistic) Markov random walk (corresponding to our a-priori model). At the same time, trajectories should not move on the perfect shortest paths, as then only one trajectory may be possible between two observations, leading to a perfect a-posteriori model. Thus we generate "near-shortest paths" from shortest paths, by adding a wrong turn in every ten states. This deviation simulates random errors of moving objects, e.g., due to human error. Observations are taken from these trajectories at every i = 10 states. We perform 2500 PNN queries using the sampling approach. For each result object o having a non-zero, non-one result probability, a tuple is generated containing the computed probability, as well as an indicator variable that is one if o is a true NN of q and zero otherwise. This ground truth is obtained by utilizing the full trajectory information of all generated objects. The resulting tuples are grouped by probability, with the fraction of NNs being aggregated. The result of this experiment is shown in Figure 10. Here, result probabilities are grouped into ten intervals. For each probability interval, the expected number of hits, assuming that the estimated probability is correct is depicted by a straight line. The observed number of hits, evaluated on the ground truth is shown by bars. For each bucket, a small deviation can be explained by random deviation, due to the fact, that fewer tuples were derived in the probability interval [0.2, 0.8]. This result implies that our computed a-posteriori Markov model, which is adapted to existing observations, is able to effectively model the generated uncertain trajectories. This is notable, because the generated trajectories do not, as the a-priori model assumes, perform a weighted random walk. In fact, these trajectories are generated such that they are close to the shortest path.
+
+observed expected
+
+Figure 10: Quality Figure 8(right) illustrates the results of a series of N N queries (v = 0.2, |T | = 5). At each experiment, we estimate probabilities by our sampling approach (SA) (Section 6) and by the adapted approach of [18] (SS). We model each case as a (x,y) point, where x models the actual and y the estimated probability. For the exact method (EX) (Section 5.1) the results always lie on the diagonal identity function depicted by a straight line, showing that our sampling solution tightly approximates the results of the exact PNN query. Concerning the snapshot approach, a strong bias towards underestimating probabilities can be observed. This bias is a result of treating points of time mutually independent. In reality, the position at time t must be in vicinity of the position at time t - 1, due to maximum speed constraints. This positive correlation in space directly leads to a nearest neighbor correlation: If o is close to q at time t - 1, then o is likely close to q at time t. And clearly, if o is more likely to be close to q at time t, then o is more likely to be the NN of q at time t. This correlation is ignored by snapshot approaches. The number of samples required to obtain an accurate approximation of the probability of a binomial distributed random event such as the event that o is the NN of q for each time t  T has been studied extensively in statistics [27]. Thus the required number of samples is not explicitly evaluated here. Real Dataset. We conducted additional experiments to evaluate PNN queries on the taxi dataset (Figure 9). Since the underlying state space consisting of 3000 states is very small, we set i = 5 and v = 0.6 in order to prevent uncertainty regions of objects to cover the whole network. Based on this dataset, we ran an experiment varying the number of objects between 1000 and 20000. The small size of the state space leads to a higher objects density, leading to a larger number of candidates and influence objects than the corresponding experiment on the artificial dataset. On the other hand, a smaller state space and the lower level of uncertainty decreases the complexity of matrix and vector operations. Additionally, a higher number of candidates and influence objects also decrease the probability that an object is a result of the PNN query, i.e., candidates are often pruned after considering only a small number of influence objects. As a result, the runtime cost on the real dataset is generally lower than on the synthetic dataset. Model Quality. In the next experiment, we evaluate the quality of the result probabilities of PNN queries using the Markov
+
+0.1  0.2
+
+estimated probability
+
+0.2  0.3
+
+0.3  0.4
+
+0.4  0.5
+
+0.5  0.6
+
+0.6  0.7
+
+0.7  0.8
+
+0.8  0.9
+
+0.9  1.0
+
+8.2
+
+Continuous Queries
+
+In our experimental evaluation on continuous queries we compare the runtime cost and the size of the (unprocessed) result set for various sizes of the database and values of the threshold  . Increasing the number of objects stored in the database leads to an increase in the time T S to compute the a-posteriori Markov model for each object (cf. Figure 11 (left)). This result is equivalent to the result for PNN queries, since a-posteriori models have to be computed for either query semantics. However, the time required to obtain a sufficient number of samples (SA) is much higher, since probabilities have to be estimated for a number of sets of time intervals, rather than for the single interval T . This increase in run-time is alleviated by the effect that the number of candidates obtained in the candidate generation step of our Apriori-like algorithm decreases (Figure 11 (right)). This effect follows from the fact that more objects lead to more pruners, leading to smaller probabilities of intervals, leading to fewer candidates. The results of varying  can be found in Figure 12. Clearly an increasing probability threshold decreases the average size of the result (Figure 12 (right)). Consequently, at the same time, the computational complexity of the query decreases as fewer candidates
+
+140 120 100 80 60 40 20 0 0.1 0.5
+
+Frequent Itemsets
+
+CPU Time (s)
+
+TS SA
+
+900 800 700 600 500 400 300 200 100 0 0.1 0.5
+
+#Itemsets
+
+11.
+
+REFERENCES
+
+0.9
+
+0.9
+
+Figure 12: Continuous Queries: Varying	are generated. Figure 12(left) shows that the run-time of the sampling approach becomes very large for low values of  , since samples have to be evaluated for each generated candidate set. Similar to the Apriori-algorithm, the number of such candidates grows exponentially with T , if  is small. K -NEAREST-NEIGHBOR QUERIES To answer PkNN queries, PkNN queries and PCkNN queries approximately in the case of k > 1, we can again utilize the model adaptation and sampling technique presented in Section 6. Therefore, possible worlds are sampled using the a-posteriori models of all objects, given their observations. On each such (certain) world an existing solution for kNN search on certain trajectories (e.g. [1, 2, 3, 4]) is applied. The results of these deterministic queries can again be used to estimate the distribution of the probabilistic result. Here, we briefly discuss the complexity of computing exact results of PkNN queries, PkNN queries and PCkNN queries. A formal definition of these queries, as well as a more detailed discussion can be found in our technical report ([26]). The PkNN query is NP-hard in k. The proof of this statement can be found in our technical report [26]. To summarize, the proof shows that for the special case where |D| = k + 1 the problem can be reduced to an PNN query which has been shown to be NP-hard in |D| in Section 4.1. We then extend this proof for arbitrary sizes of the database D, and show that, as long as |D| > k, the run-time of a PkNN query is at least exponential in k. The NP-hardness of the PkNN query is shown in a similar fashion in [26]. Finally, the continuous kNN which is based on the kNN query, is also shown to be hard in k.
+
+9.
+
+10.
+
+CONCLUSIONS
+
+In this paper, we addressed the problem of answering NN queries in uncertain spatio-temporal databases under temporal dependencies. We proposed three different semantics of NN queries: PNN queries, PNN queries and PCNN queries. We have shown that the PNN query can be solved in polynomial time, while the PNN query is NP-hard. These results provide insights about the complexity of NN search over uncertain data in general since the Markov chain model is one of the simplest models that consider temporal dependencies. More complex models are expected to be at least as hard. To mitigate the problems of computational complexity, we propose a sampling-based approach based on Bayesian inference. For the query problems that can be solved in PTIME, we presented exact query evaluation algorithms. Specifically, for the PCNN query we proposed to reduce the cardinality of the result set by means of an Apriori pattern mining approach. To cope with large trajectory databases, we introduced a pruning strategy to speed-up PNN queries exploiting the UST tree, an index for uncertain trajectory data. The experimental evaluation shows that our adapted a-posteriori model allows to effectively and efficiently answer probabilistic NN queries despite the strong a-priori Markov assumption.
+
+[1] E. Frentzos, K. Gratsias, N. Pelekis, and Y. Theodoridis, "Algorithms for nearest neighbor search on moving object trajectories," Geoinformatica, vol. 11, no. 2, pp. 159193, 2007. [2] R. H. G uting, T. Behr, and J. Xu, "Efficient k-nearest neighbor search on moving object trajectories," VLDB J., vol. 19, no. 5, pp. 687714, 2010. [3] G. S. Iwerks, H. Samet, and K. Smith, "Continuous k-nearest neighbor queries for continuously moving points with updates," in Proc. VLDB. VLDB Endowment, 2003, pp. 512523. [4] Y. Tao, D. Papadias, and Q. Shen, "Continuous nearest neighbor search," in VLDB, 2002, pp. 287298. [5] T. Emrich, H.-P. Kriegel, N. Mamoulis, M. Renz, and A. Z ufle, "Indexing uncertain spatio-temporal data," in Proc. CIKM, 2012, pp. 395404. [6] Y. Tao, C. Faloutsos, D. Papadias, and B. Liu, "Prediction and indexing of moving objects with unknown motion patterns," in SIGMOD Conference, 2004, pp. 611622. [7] X. Yu, K. Q. Pu, and N. Koudas, "Monitoring k-nearest neighbor queries over moving objects," in ICDE, 2005, pp. 631642. [8] X. Xiong, M. F. Mokbel, and W. G. Aref, "Sea-cnn: Scalable processing of continuous k-nearest neighbor queries in spatio-temporal databases," in ICDE, 2005, pp. 643654. [9] H. Mokhtar and J. Su, "Universal trajectory queries for moving object databases," in Proc. MDM, 2004, pp. 133144. [10] G. Trajcevski, O. Wolfson, K. Hinrichs, and S. Chamberlain, "Managing uncertainty in moving objects databases," ACM Trans. Database Syst., vol. 29, no. 3, pp. 463507, 2004. [11] G. Trajcevski, R. Tamassia, H. Ding, P. Scheuermann, and I. F. Cruz, "Continuous probabilistic nearest-neighbor queries for uncertain trajectories," in Proc. EDBT, 2009, pp. 874885. [12] T. Emrich, H.-P. Kriegel, N. Mamoulis, M. Renz, and A. Z ufle, "Querying uncertain spatio-temporal data," in Proc. ICDE, 2012, pp. 354365. [13] G. Trajcevski, A. N. Choudhary, O. Wolfson, L. Ye, and G. Li, "Uncertain range queries for necklaces," in Proc. MDM, 2010, pp. 199208. [14] R. Cheng, D. Kalashnikov, and S. Prabhakar, "Querying imprecise data in moving object environments," in IEEE TKDE, vol. 16, no. 9, 2004, pp. 11121127. [15] G. Trajcevski, R. Tamassia, H. Ding, P. Scheuermann, and I. F. Cruz, "Continuous probabilistic nearest-neighbor queries for uncertain trajectories," in Proc. EDBT, 2009, pp. 874885. [16] S. Qiao, C. Tang, H. Jin, T. Long, S. Dai, Y. Ku, and M. Chau, "Putmode: prediction of uncertain trajectories in moving objects databases," Appl. Intell., vol. 33, no. 3, pp. 370386, 2010. [17] C. R e, J. Letchner, M. Balazinksa, and D. Suciu, "Event queries on correlated probabilistic streams," in Proc. SIGMOD, 2008, pp. 715728. [18] C. Xu, Y. Gu, L. Chen, J. Qiao, and G. Yu, "Interval reverse nearest neighbor queries on uncertain data with markov correlations," in Proc. ICDE, 2013. [19] G. Kollios, D. Gunopulos, and V. Tsotras, "Nearest neighbor queries in a mobile environment," in Spatio-Temporal Database Management. Springer, 1999, pp. 119134. [20] A. Prasad Sistla, O. Wolfson, S. Chamberlain, and S. Dao, "Modeling and querying moving objects," in Proc. ICDE. IEEE, 1997, pp. 422432. [21] Y.-K. Huang, S.-J. Liao, and C. Lee, "Efficient continuous k-nearest neighbor query processing over moving objects with uncertain speed and direction," in SSDBM, 2008, pp. 549557. [22] G. Li, Y. Li, L. Shu, and P. Fan, "Cknn query processing over moving objects with uncertain speeds in road networks," in APWeb, 2011, pp. 6576. [23] G. Trajcevski, R. Tamassia, I. F. Cruz, P. Scheuermann, D. Hartglass, and C. Zamierowski, "Ranking continuous nearest neighbors for uncertain trajectories," VLDB J., vol. 20, no. 5, pp. 767791, 2011. [24] R. Agrawal and R. Srikant, "Fast algorithms for mining association rules," in Proc. VLDB, 1994, pp. 487499. [25] R. Jampani, F. Xu, M. Wu, L. L. Perez, C. M. Jermaine, and P. J. Haas, "Mcdb: a monte carlo approach to managing uncertain data," in Proc. SIGMOD, 2008, pp. 687700. [26] J. Niedermayer, A. Z ufle, T. Emrich, M. Renz, N. Mamoulis, L. Chen, and H.-P. Kriegel, "Probabilistic nearest neighbor queries on uncertain moving object trajectories (technical report)," 2013, http://www.dbs.ifi.lmu.de/Publikationen/Papers/TR PNN.pdf. [27] W. Hoeffding, "Probability inequalities for sums of bounded random variables," Journal of the American Statistical Association, pp. 1330, 1963. [28] N. Beckmann, H.-P. Kriegel, R. Schneider, and B. Seeger, "The R*-Tree: An efficient and robust access method for points and rectangles," in Proc. SIGMOD, 1990. [29] The ust project page. [Online]. Available: http://www.dbs.ifi.lmu.de/cms/Publications/UncertainSpatioTemporal [30] J. Yuan, Y. Zheng, X. Xie, and G. Sun, "Driving with knowledge from the physical world," in Proc. KDD, 2011, pp. 316324. [31] Z. Chen, H. T. Shen, and X. Zhou, "Discovering popular routes from trajectories," in Proc. ICDE, 2011, pp. 900911.
+

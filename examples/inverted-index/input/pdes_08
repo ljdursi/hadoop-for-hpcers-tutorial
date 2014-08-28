@@ -1,0 +1,1890 @@
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+~ OSCAR AGUDELO AND ANDRES ZUNIGA
+
+arXiv:1305.5573v1 [math.AP] 23 May 2013
+
+Abstract. In this work we construct a family of entire bounded solution for the singulary perturbed Inhomogeneous Allen-Cahn Equation 2 div (a(x)u) - a(x)F (u) = 0 in R2 , where   0. The nodal set of these solutions is close to a "nondegenerate" curve which is asymptotically two non paralell straight lines. Here F is a double-well potential and a is a smooth positive function. We also provide example of curves and functions a where our result applies. This work is in connection with the results found in [9], [7] and [12] handling the compact case.
+
+1. Introduction In this paper, we consider the singularly perturbed Inhomogeneous Allen-Cahn equation 2 div(a(x)u(x)) - a(x)F (u) = 0, To fix ideas we can think of equation (1.1) as the 2 g u(x) - F (u) = 0, in M (1.2) in R2 (1.1)
+
+where (M, g ) is the whole plane endowed with a planar metric induced by the potential a. In this setting g denotes the Laplace Beltrami operator on M and the function F : R  R is a smooth double-well potential, i.e a function satisfying F (s) > 0, F (1) = 0,
+2
+
+s = 1,
+
+(1.3) (1.4) (1.5)
+
+:= F (1) > 0.
+
+The typical example for F corresponds to the balanced and bi-stable twin-pit F (u) = and  =  2. 1 (1 - u2 )2 , 4 -F (u) = u - u3
+
+Equation (1.2) arises in the Gradient Theory of Phase Transitions [1]. In this physical model, there are two different states of a material represented by the values u = 1. It is of interest to study nontrivial configurations in which these two states try to coexist. Hence, the function u represents a smooth realization of the phase, which except for a narrow region, is expected to take values close to 1, namely the global minima of F . Let us consider the energy functional J (u) =
+M
+
+1  |u|2 + F (u) dVg . 2
+
+(1.6)
+
+We are interested in critical points of (1.6), which correspond to solutions of (1.2). For any set   M the function u  :=  - M \ ,
+1
+
+in
+
+M
+
+(1.7)
+
+2
+
+~ O. AGUDELO AND A. ZUNIGA
+
+minimizes the second term in (1.6), however, it is not a smooth solution. By considering an -regularization of u  , say u, , it can be checked that J (u, )
+
+
+1dSg
+
+(1.8)
+
+for  > 0 small, where dSg denotes the area element in  . Relation (1.8) entails that, transitions varying from -1 to +1 must be selected, for instance, in such way that   minimizes the perimeter functional 1dSg
+
+
+(1.9)
+
+In the case that   is also a smooth submanifold of M , we say that   is a minimal submanifold of M if	is critical for the area functional (1.9). In particular, it is easy to see that minimizing submanifolds are critical for (1.9), and therefore they are minimal submanifolds of M . The intuition behind the previous remarks, was first observed by Modica in [11], based upon the fact that when   is a smooth submanifold of M , then transitions varying from -1 to +1 take place along the normal direction of   in M , having a 1-dimensional profile in this direction. This profile corresponds to a function w, which is the heteroclinic solution to the ODE w (t) - F (w(t)) = 0, w() = 1 connecting the two states. The existence of w is ensured by conditions (1.3)-(1.4)-(1.5) of F . As for the twin pit nonlinearity, we have that t  , t  R. 2 This intuition gave a great impulse to the Calculus of Variations, and the theory of the -Convergence in the 70th's. Modica stated that if M =   RN is a smooth Euclidean domain and {u }>0 is a family of local minimizers of (1.6) with uniformly bounded energy, then up to subsequence, u converges  in a L1 loc ()-sense to some limit u of the form (1.7). w(t) = tanh There are a number of important works regarding existence and asymptotic behavior of solutions to (1.2), under a variety of different settings. In [12] Pacard and Ritore studied equation (1.2) in the case that (M, g ) is a compact Riemannian Manifold, they construct a family of solutions {u }>0 to (1.2) having transition from -1 to +1 on a region -close to a compact minimal submanifold N , with positive Ricci-curvature kN := |AN |2 + Ric(N , N ) > 0. Under the same conditions del Pino, Kowalczyk, Wei and Yang constructed in [5] a sequence of solutions with multiple clustered layers collapsing onto N . A gap condition is needed, related with the interaction between interfaces. There are related other results under a similar setting for M and N , regarding the equation 2 g u - V (z )F (u) = 0, in M in R
+
+done by B.Lai and Z.Du in [9] where a family of solutions with a single transition is constructed. Additionally L.Wang and Z.Du dealt in [8] with the same problem, considering multiple transitions this time. In both works the minimal character and nondegeneracy properties of N , are with respect to the weighted area functional M V 1/2 . In the same line, it is worth to mention a recent work due to Z.Du and C.Gui [7] where they build a smooth solution to the Neumann problem u = 0 on	 n having a single transition near a smooth closed curve   , nondegenerate geodesic relative to the arclength  V 1/2 . Here,  is a smooth bounded domain in R2 , and V is an uniformly positive smooth potential. 2 u - V (z )F (u) = 0 in ,
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+3
+
+As for the noncompact case, recently in [4] the authors considered equation (1.2) when M = R3 . Here the authors build for any small  > 0 a family of solutions with transitions close to a non-degenerate complete embedded minimal surface with finite total curvature. 1.1. The Main Result. We consider equation (1.2) in a slightly general form, but we restrict ourselves to dimension N = 2. More precisely, let us consider the equation 2 div(a(x)u(x)) - a(x)F (u) = 0, where the function a(x) is a smooth positive function. As far as our knowledge goes, little is known about entire solutions to (1.10) having a single transition close to a noncompact curve, in the case that a(x) is not identically constant. In this work, we will consider a smooth noncompact curve  =  (R), where  : R    R2 is parameterized by arc-length. We denote by  :	 R2 the choice of the normal vector to , so that the curve is positively oriented. In order to state the main result, let us first list our set of assumptions on the function a(x) and the curve . As for the function a : R2	R, we assume that a  C 5 (R2 ), 0 < m < a ( x)	M (1.11) in R2 (1.10)
+
+for some positive constants m, M . We also assume that the curvature k (s) of  in arch-length variable satisfies C (1.12) |k (s)| + |k (s)| + |k (s)|  (1 + |s|)1+ for some  > 0. In particular, condition (1.12) implies that	  := lim   (s)
+s
+
+are well defined directions in R . We must assume further some non-parallelism condition, namely -1 +	 - < 1.
+2
+
+2
+
+(1.13)
+
+Points x  R that are  -close to this curve, with  small, can be represented using Fermi coordinates as follows x =  (s) + z (s) =: X (s, z ), |z | < , s  R. Condition (1.13) implies that the mapping x = X (s, z ) provides local coordinates in a region of the form N := {x = X (s, z ) : |z | <  + c0 |s|} for some fixed constant c0 and the mapping x  (s, z ) defines a local diffeomorphism. Finally, abusing notation, by setting a(s, z ) = a(X (s, z )), we assume that |s,z a(s, z )|  where  > 0 is as in (1.12). Any smooth curve  -close to  in a C m -topology can be parameterized by h (s) =  (s) + h(s) (s) where h is a small C m -function. The weighted length of h , where h : R  h is given by
++
+
+C , (1 + |s|)1+
+
+2 |Ds,z a(s, z )|
+
+C (1 + |s|)2+
+
+(1.14)
+
+l (h) := =
+-
+
+a(x)dr =
+h + -
+
+a (h (s)) |  h (s)|ds
+
+a(s, h(s))|  + h  + h  |ds.
+
+4
+
+~ O. AGUDELO AND A. ZUNIGA
+
+Since |  | = 1 and   (s) = k (s)  (s), where k is the signed curvature of , we find that
++
+
+lh (h) =
+-
+
+a(s, h(s))[(1 + kh)2 + |h |2 ]1/2 ds.
+
+We say that  is a stationary (or a critical) curve respect to the function a(x), if and only if, l [h] =
+h
+
+(z a(s, 0) - a(s, 0)k (s))h(s)ds = 0,
+
+ h  Cc (R)
+
+which is equivalent to say that the curve  satisfies z a(s, 0) = k (s)a(s, 0), s  R. (1.15)
+
+Regarding the stability properties of the stationary curve  and the second variation of the length functional l ,
++
+
+l (h, h) =
+-
+
+a(s, 0)|h (s)|2 + [zz a(s, 0) - 2k 2 (s)]h2 (s) ds
+
+we have the Jacobi operator of , corresponding to the linear differential operator Ja, (h) = h (s) + s a(s, 0) h (s) - zz a(s, 0) - 2k 2 (s) h(s). a(s, 0) (1.16)
+
+We say that the stationary curve  is also nondegenerate respect to the potential a(x), if the bounded kernel of Ja, is the trivial one. The nondegeneracy condition basically implies that Ja, has an appropriate right inverse, so that the curve is isolated in a properly chosen topology. Next, we proceed to state the main result. Theorem 1. Assume that a(x) is a smooth potential and let  be a smooth stationary and nondegenerate curve respect to the length functional  a(x)dr. Assume also that conditions (1.11)-(1.14) are satisfied. Then for any  > 0 small enough, there exists a smooth bounded solution u to the inhomogeneous Allen-Cahn equation (1.10), such that u (x) = w where the function h satisfies h
+C 1 (R)
+
+z - h(s)
+
++ O (2 ),
+
+for
+
+x = X (s, z ),
+
+|z | <
+
+ C.
+
+This solution converges to 1, away from , namely u2  (x)  1, dist(, x)	.
+
+Remark 1.1. Throughout the proof of this theorem, we obtain an explicit description for u and its derivatives. We apply infinite dimensional reduction method in the spirit of the pioneering work due to Floer and Weinstein [10]. The paper is organized as follows. Section 2 deals with the geometrical setting need to set up the proof of theorem 1. In section 3 we present the invertibility theory for the Jacobi operator of the curve  while in section 4 we give some examples of the function a(x) and the curve , for which our result applies. Section 5 is devoted to find a good approximation of a solution to (1.10). Next,we sketch the proof of theorem 1 in section 6, while leaving complete details for subsequent sections.
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+5
+
+2. Geometrical background In this section we write the differential operator x a  x u a involved in equation (1.10), in some appropriate coordinate system.
+2  2 x u +
+
+(2.1)
+
+First, observe that the obvious scaling x  = x and setting v (x) := u(x), transforms (2.1) into x a x v +   x v (2.2) a Let us consider a large dilation of the curve , namely	:= -1 , for  > 0 small. Next, we introduce local translated Fermi coordinates near  = X (s, t + h(s)) 1 =  (s) + (t + h(s))  (s)  where h  C 2 (R) is a bounded smooth function. From assumption (1.13), we see that the mapping X,h (s, t) gives local coordinates in the region N,h = x = X,h (s, t)	R2 : |t + h(s)| <  + c0 |s|  X,h (s, t)
+
+which is a dilated tubular neighborhood around	translated in h. Now, we give an expression for the euclidean laplacian in terms of the coordinates X,h . A detailed proof of this fact can be found in the Appendix. Lemma 2.1. On the open neighborhood N,h of  , the euclidean laplacian has the following expression when is computed in the coordinate x = X,h (s, t), which reads as X,h = tt + ss - 2h (s)st - 2 h (s)t + 2 |h (s)|2 tt - [k (s) + (t + h(s))k 2 (s)]t + D,h (s, t) where D,h (s, t) := (t + h)A0 (s, (t + h))[ss - 2h (s)ts - 2 h (s)t + 2 |h (s)|2 tt ] + 2 (t + h)B0 (s, (t + h))[s - h (s)t ] + 3 (t + h)2 C0 (s, (t + h))t for which A0 (s, [t + h(s)]) = 2k (s) + O (|[t + h(s)]k 2 (s)|)	(s) + O (|(t + h(s))k  (s)  k 2 (s)|) B0 (s, [t + h(s)]) = k C0 (s, [t + h(s)]) = k (s) + O (|(t + h(s))k (s)|) are smooth functions and these relations can be differentiated. Next, we derive an expression for the second term in equation (2.2), in terms of the Fermi coordinates. We collect the computations in the following lemma, whose proof can be found also in the Appendix. Lemma 2.2. In the open neighborhood N,h of  , we have the validity of the following expression  t a X a  X,h =  (s, 0) + (t + h(s)) a a + tt a t a (s, 0) - (s, 0) a a
+2 3 4
+
+(2.3)
+
+(2.4) (2.5) (2.6)
+
+t
+
+s a (s, 0)[s - h (s)t ] + E,h (s, t) a
+
+6
+
+~ O. AGUDELO AND A. ZUNIGA
+
+where E,h (s, t) := 2 (t + h(s))D0 (s, (t + h))[s - h (s)t ] + 3 (t + h(s))2 F0 (s, (t + h))t and for which the next functions are smooth D0 (s, (t + h)) = t s a t a (s, 0) + O (t + h(s))tt a a s a (s, (t + h)) a (2.7)
+
++ A0 (s, (t + h)) F0 (s, (t + h)) =
+
+1 t a t a tt (s, 0) + O (t + h(s))ttt 2 a a
+
+and where A0 (s, (t + h)) given in (2.4). Further, these relations can be differentiated. Using lemmas 2.1 and 2.2, the fact that the curve  satisfies condition (1.15), we can write expression (2.2) in coordinates x = X,h (s, t) as X,h +  X a(x)  X,h = a(x) s a (s, 0)s a
+
+tt + ss +  - 2 h (s) + -2 k 2 (s) -
+
+tt a s a (s, 0) h (s) + 2 k 2 (s) - (s, 0) h(s) t a a
+2
+
+tt a t a (s, 0) + (s, 0) a a
+
+t t - 2h (s)st + 2 |h (s)|2 tt
+
++ (t + h(s))A0 (s, (t + h))[ss - 2h (s)ts - 2 h (s)t + 2 |h (s)|2 tt ~0 (s, (t + h))[s - h (s)t ] + 3 (t + h(s))2 C ~0 (s, (t + h))t + 2 (t + h(s))B where (2.10) We postpone detailed computations to the Appendix, in order to keep the presentation as clear as possible. 3. The Jacobi Operator Ja, This section is meant to provide a complete proof of proposition 6.4. Recall that the Jacobi operator of the curve  associated to the potential a, corresponds to the linear operator Ja, [h](s) = h (s) + where we recall that Q(s) := tt a(s, 0) - 2k 2 (s) a(s, 0) (3.2) s a(s, 0) h (s) - Q(s)h(s) a(s, 0) (3.1) ~0 (s, (t + h)) := B0 (s, (t + h)) + D0 (s, (t + h)) B ~0 (s, (t + h)) := C0 (s, (t + h)) + F0 (s, (t + h)). C (2.9) (2.8)
+
+Recall also that we are assuming the curve  to be nondegenerate, which means that the only bounded solution to Ja, [h](s) = 0, s  R is the trivial one.
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+7
+
+3.1. The kernel of Ja, . In order to find accurate information on the kernel of (3.1), we consider the auxiliary equation d ds p(s) d h - q (s)h = 0, in R ds (3.3)
+
+where we assume that p, q : R  R satisfy the following p  C 1 [0, )  L [0, ), q  C 1 [0, ) p(s)  p0 > 0,
+s
+
+(3.4) (3.5) (3.6)
+
+s  0
+
+lim p(s) =: p() > 0 s  0
+
+|p(s)| + (1 + |s|)2+ |p (s)|  C, |q (s)| + |q (s)|  C , 1 + |s|2+
+
+(3.7) (3.8)
+
+s  0
+
+for some constants  > -1, 0 > 0 and C > 0. The first result concerns the decay for the derivative of a solution to the auxiliary equation, provided that p and q decay sufficiently fast. Lemma 3.1. Suppose  > -1, and consider a one-sided bounded solution h  L [0, ) of (3.3), for which functions p and q fulfill (3.4) to (3.8). Then there is a constant C = C (p, q, , h) > 0 such that |h (s)|  where C (p, q, , h) = p-1
+L [0,)
+
+C , |s|1+
+
+s > 0
+L [0,) .
+
+h
+
+L [0,)
+
+(1 + |s|)2+ q
+
+Proof. Observe first that thanks to assumptions (3.4)-(3.6), it holds
++
+
+p(s) = p(+) -
+s
+
+p ( )d
+
+(3.9)
+
+Now, since h solves the equation, then for s1 > s2 > 0 we have
+s1
+
+|p(s1 )h (s1 ) - p(s2 )h (s2 )|
+s2
+
+|q (s)h(s)|
+s1 L [0,)
+
+ h
+
+(1 + |s|)2+ q
+
+L [0,) s2
+
+1 d 1 + | |2+
+
+ C (q, h)
+
+1 1 - 1+  |s2 | |s1 |1+
+
+where C (q, h) := C h L [0,) (1 + |s|)2+ q L [0,) <  is fixed. In particular using that 1 +  > 0, it follows that
+s1 +
+
+lim |p(s1 )h (s1 )|  |p(s2 )h (s2 )| + C (q, h)
+
+1 < + |s2 |1+
+
+which implies that p(+)h ()  R. From this, we can rewrite equation (3.3) in its integral form
++
+
+p(s)h (s) = p(+)h (+) -
+s
+
+q ( )h( )d.
+
+(3.10)
+
+but using (3.9), we find that
++ +
+
+p(+)h (s) - h (s)
+s
+
+p ( )d = p(+)h (+) -
+s
+
+q ( )h( )d
+
+8
+
+~ O. AGUDELO AND A. ZUNIGA
+
+and so
++ +
+
+p(+)h (s) = p(+)h (+) + h (s)
+s
+
+p ( )d -
+s
+
+q ( )h( )d.
+
+Integrating again between 0 and s, we obtain an expression for the solution h of (3.3) p(+)h(s) = p(+)h(0) + p()h (+)s
+s + s +
+
++
+0
+
+h ( )
+ I
+
+p ( )d d -
+0
+
+q ( )h( )d d
+II
+
+(3.11)
+
+Let us estimate these integrals. We first estimate integral I
+s +
+
+|I |
+0
+
+|h ( )|
+ L [0,) s
+
+|p ( )|d
+s +
+
+C h
+
+(1 + |s|2+ )p
+
+L [0,) 0
+
+1 d d 1 + | |2+
+
+ Ch ,p ,
+0
+
+1 d = O (1 + |s|- ) 1 + | |1+
+L [0,) .
+
+where Ch ,p , := C h
+
+L [0,)
+
+(1 + |s|2+ )p
+
+In the same way, we estimate II
+s +
+
+|II |
+0
+
+|q ( )| |h( )|d d
+s +  L [0,)
+
+C h
+
+(1 + |s|2+ )q
+
+L [0,) 0
+
+d d 1 + | |2+
+
+ Ch,q, (1 + |s|)- with Ch,q, := C h
+L [0,)
+
+(1 + |s|)2+ q
+
+L [0,) .
+
+Since h is bounded, we deduce from (3.11) that O (1) = p(+)h(0) + p(+)h (+)s + O (1 + |s|- ). Dividing (3.12) by s > 0 and taking s  +, we get that 0 = p(+)h (+) provided that  > -1. From (3.6), it follows that h (+) = 0. In particular, the latter fact together with formula (3.10), imply that
+
+
+(3.12)
+
+p(s)h (s) =
+s
+
+q ( )h( )d
+
+and consequently |h (s)|  C p-1
+L [0,)
+
+h
+
+L [0,)
+
+(1 + |s|2+ )q
+
+L [0,)
+
+1 1 + |s|1+
+
+which completes the proof of the estimate. The core of this section is reflected in the next result.
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+9
+
+Lemma 3.2. Let	> 0, and suppose function q satisfies (3.4)-(3.8). Then the equation u (s) - q (s)u(s) = 0, u(s) = s + O (1) + O (|s|-1- ), u (s) = 1 + O (|s|-1 + |s|- ), in R (3.13)
+
+has two linearly independent smooth solutions u, u ~, so that as s  + u ~(s) = 1 + O (|s|-1 + |s|- ) u ~ (s) = O (|s|-1 + |s|-1- )
+
+Proof. To begin with, we look for a solution u(s) = sv (s), so that, multiplying equation (3.13) by s, we find that v satisfies d s2 v (s) - q (s)s2 v (s) = 0 (3.14) ds Now, consider the functions x(s) := s2 v (s), y (s) := v (s)
+
+so that, equation (3.14) becomes the linear system of differential equations  2  x (s) = q (s)s y (s) , s  [s0 , +)  y (s) = 1 x(s) s2 Integrating this system between s0 and s we obtain the identities
+s
+
+y (s) = y (s0 ) +
+s0 s
+
+1 x( )d 2 q ( ) 2 y ( )d (3.15)
+
+x(s) = x(s0 ) +
+s0
+
+In particular, we deduce an explicit formula for y (s), given by y (s) = y (s0 ) + x(s0 ) 1 1 - s0 s 1 1 - s0 s
+s
+
++
+s0
+
+y ( )q ( ) 2
+
+1 1 -  s
+
+d
+
+(3.16)
+
+In this way, we can estimate y (s) for s  s0 as
+s
+
+|y (s)|  |y (s0 )| + |x(s0 )|
+
++
+s0
+
+|y ( )| |q ( )| 1 -
+
+ d. s
+
+From Gronwall's inequality we find the estimate |y (s)|  |y (s0 )| + 2|x(s0 )| s0
+ s s
+
+exp
+s0
+
+|q ( )| 1 -
+
+ d s
+
+Notice that, for any s	 > s0 :  1 - q (s), leads to
+
+ 2 = O ( ). This fact combined with the decay of 2 |x(s0 )|) s0
+
+|y (s)|  Cq, (|y (s0 )| + where Cq, := C (1 + |s|)2+ q L [s0 ,+) s0 | |-1- d . From (3.16) it follows that for any s1 > s2  s0 > 0: |y (s1 ) - y (s2 )|  |x(s0 )|
+
+
+(3.17)
+
+1 1 - s2 s1
+
+s1
+
++C
+s2
+
+|q ( )| d
+
+implying that y (+)  R. Moreover, same formula (3.16) yields y (+) = y (s0 ) + x(s0 ) + s0
++
+
+y ( )q ( ) d
+s0
+
+10
+
+~ O. AGUDELO AND A. ZUNIGA
+
+which allows us to write y (s) - y (+) = - x(s0 ) - s0
+s s
+
+y ( )q ( )
+s0
+
+2 d - s
++
+
++
+
+y ( )q ( ) d
+s
+
+In particular, by choosing the constants to be y (+) = 1, x(s0 ) = 0, we finally deduce y (s) = 1 -
+s0
+
+y ( )q ( )
+
+2 d - s
+s
+
+y ( )q ( ) d
+s
+
+(3.18)
+
+Additionally, the derivative y (s) = v (s) can be obtained from x(s) using relation (3.15), as v (s) = x(s) 0 1 = 2+ 2 2 s s s q ( ) 2 y ( )d.
+s0
+
+(3.19)
+
+Now that y (s) is bounded in [s0 , +), similar arguments as shown in (3.17) imply the same estimates for the integrals in (3.18)-(3.19), since
++ s
+
+y ( )q ( ) d = O (|s| ),
+s s0
+
+y ( )q ( )
+
+2 d = O (|s|-1 + |s|- ) s
+
+From these estimates, we conclude that v (s) = y (s) = 1 + O (|s|-1 + |s|- ) v (s) = O (|s|-2 + |s|-1- ) So the asymptotic behavior of the first solution follows, as  > 0 and by definition of u: u(s) = s 1 + O (|s|-1 + |s|- ) = s + O (1 + |s|1- ) , u (s) = v (s) + sv (s) = 1 + O (|s|-1 + |s|- ) s  s0
+
+which finishes the analysis of the profile of the first solution to equation (3.13). To conclude, we find u ~ using reduction of order formula, to find that
+
+
+u ~(s) =
+s
+
+u-2 ( )d
+
+ u(s)
+
+and directly from this, one gets u ~(s) = C (s)u(s) = 1 + O (|s|-1 + |s|- ) u ~ (s) = C (s)u(s) + C (s)u (s) = O (|s|-1 + |s|-2 + |s|-1- ) which concludes the proof of lemma 3.2. Now proceed to state the main result of this section, which characterize the profile of the kernel of the Jacobi operator. Proposition 3.1. Let   R2 be a stationary non-degenerate curve as in respect to a. Assume also that conditions (1.11)-(1.14) are satisfied, for  > 0 and additionally the potential stabilizes on the curve at infinity, namely a(, 0) := lim a(s, 0) > 0  R.
+s
+
+,
+
+for s >> s0
+
+Then, there are two linearly independent elements in the kernel of h1 , h2 of (3.1) satisfying that hi (s) = |s| + O (1) + O (|s|-1 + |s|- ) hi (s) = O (1) + O (|s|-1 + |s|-1- ) , as (-1)i s	+ (3.20)
+
+and they are bounded functions as (-1)i+1 s  . Furthermore, in the region where the latter happens, it holds |hi (s)| + (1 + |s|1+ )|hi (s)|  C, as (-1)i+1 s  + (3.21)
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+11
+
+Proof. We look for solutions h(s) = a(s, 0)-1/2  u(s) to (3.1), which means that u solves the auxiliary equation u (s) - q ~(s)u(s) = 0, in R where q ~(s) : = tt a(s, 0) 1 ss a(s, 0) 1 s a(s, 0) - 2k 2 (s) + - a(s, 0) 2 a(s, 0) 4 a(s, 0) (1 + |s|)2+ |q ~(s)|  C. Therefore, applying lemma 3.2 on the region [0, ), we deduce the existence of two solutions linearly independent of equation (3.1) in R, denoted by u(s) and u ~(s), which satisfies the right-sided asymptotic behavior as s  + u(s) = s + O (1) + O (|s|1- ), u (s) = 1 + O (|s|-1 + |s|- ), u ~(s) = 1 + O (|s|-1 + |s|- ) u ~ (s) = O (|s|-1 + |s|-1- )
+2
+
+Now, thanks to the assumptions we have made on a(s, t) and , it follows that
+
+Applying Lemma 3.2 again, but this time on the region (-, 0], we obtain two other solutions v (s) and v ~(s) linearly independent of equation (3.1) in R, that now satisfy the left-sided asymptotic behavior as s  - v (s) = |s| + O (1) + O (|s|1- ), v ~(s) = 1 + O (|s|-1 + |s|- ) v (s) = 1 + O (|s|-1 + |s|- ), v ~ (s) = O (|s|-1 + |s|-1- ) We remark that the non-degeneracy of curve , implies that u ~(s) cannot be bounded on (-, 0]. Recall also that {u, u ~} and {v, v ~} represent two different basis of the vector space of solutions to the equation (3.1). So that, for some constats i , for i = 1, . . . , 4, we have that s  R : u(s) = 1 v (s) + 2 v ~(s), u ~(s) = 3 v (s) + 4 v ~(s)
+
+From the previous discussion about u ~, we observe that not only that u ~ grows at most at a linear rate on (-, 0], but also that the non-degeneracy property implies 3 = 0. Hence, the function -1 h1 (s) := 3 a(s, 0)-1/2 u ~(s) belongs to the kernel of Ja, , satisfying (3.20)-(3.21) for i = 1. Likewise, the same argument can be applied to v ~(s) to find the function h2 (s) := a(s, 0)-1/2 u(s) behaving as predicted and clearly, being linear independent with h1 . This completes the proof of the proposition. Once we have described the kernel of (3.1), it is straightforward to check the following proposition, whose proof is left to the readers. Proposition 3.2. Under the same set of assumptions as in proposition 3.1 and given  > 0,   (0, 1) and a function f with f C 0, (R) < , then the equation
+2+,
+
+Ja [h](s) = f (s),
+s
+
+sR
++
+
+has a unique bounded solution, given by the variation of parameters formula h(s) = -h1 (s)
+-
+
+a(, 0)h2 ( )f ( )d - h2 (s)
+s
+
+a(, 0)h1 ( )f ( )d
+
+In addition, there is some positive constant C = C (a, , ) such that h where h
+2, C2+ , (R) 2, C2+ , (R)
+
+C f
+
+0, C2+ , (R)
+
+:= h
+
+L  ( R)
+
++ (1 + |s|)1+ h
+
+L  ( R)
+
++ sup(1 + |s|)2+ h
+sR
+
+C 0, (s-1,s+1)
+
+12
+
+~ O. AGUDELO AND A. ZUNIGA
+
+4. Examples: It is of interest to mention that Theorem 1 relies on a very important fact, whose nature is essentially geometrical. This concerns the existence of a curve   R2 , given a fixed suitable potential a(x) of the Allen-Cahn equation (1.10), that be a stationary curve with respect to the weighted length functional la, in the sense of (1.15) and also be a non-degenerate curve as in definition (1.16). To get a better understanding of the geometrical settings of this problem, it would be useful to present some examples that portray the nature of the curves and of the potentials we are thinking of and how they interact in order for this configuration to be admissible. The following section is devoted to provide concrete examples of such curves associated to some nontrivial potential a(x), in a way that they meet all the hypothesis of Theorem 1. 4.1. Characterization of Non-degeneracy. Now we state a result that provides precise conditions on a and , where in such case the non-degeneracy property of the curve holds. Corollary 4.1. Non-degeneracy in the minimizing case Let  > -1/2,  be a stationary curve with respect to la, as in (1.15), and let the potential a( s, t) along with  be such that Q( s) := tt a( s, 0)/a( s, 0) - 2k 2 ( s) satisfies the following conditions Q( s)  0, and the asymptotic polinomial decay |Q( s)|  C , (1 + |s |)2+ for |s | >> s 0 (4.2) and Q( s)  0 (4.1)
+
+then the curve	is non-degenerate, in the sense of (1.16). Proof. Let h be a bounded element in the kernel of the Jacobi operator, so that h  L (R) solves Ja [h]( s) = 0 in R. Lemma 3.1 assures the existence of a constant C > 0 such that C |h ( s)|  , s  R (4.3) 1 + |s |1+ which implies h  L2 (R), as  > -1/2. Furthermore, condition (4.2) plus  > -1/2 imply the integrability of Q(s) in R since ds	|Q( s)|ds = Q( s)ds + Q( s)ds  C + Q( s)ds  |2+ R |s |>s 0 |s |s 0 |s |>s 0 1 + |s |s |s 0 In particular, the foregoing guarantees that the following expression is well defined s a( s, 0) h Q := Ja [h], h L2 (a(s,0)) = [h ( s) + h ( s) - Q( s)h( s)]h( s)a( s, 0)ds  a ( s , 0) R
+s =+
+
+= a( s, 0)h ( s)h( s)
+s =-
+
+-
+R
+
+a( s, 0)[|h ( s)|2 + Q( s)h2 ( s)]ds
+
+where the boundary value terms at infinity vanishes, as h is bounded and from the decay (4.3). Finally as h solves Ja [h] = 0, the latter together with hypothesis (4.1) imply 0=
+R
+
+a( s, 0)[|h ( s)|2 + Q( s)h2 ( s)]ds
+R
+
+a( s, 0)|h ( s)|2 ds
+
+As a( s, 0) > 0, we deduce that h = 0 a.e. in R. Moreover, the smoothness of h guarantees that h  0 in R. Using again the last inequality we get that 0=
+R
+
+Q( s)h2 ( s)ds
+
+However, condition (4.1) on Q assures that Q( s) > 0 on a neighborhood of some point s 0  R. Therefore, last equality gives that h( s) = 0 in this neighborhood, but as h  C is a constant function in the entire space, we conclude h = 0, which concludes the proof of Corollary 4.1.
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+13
+
+4.2. Geodesics for la, in Euclidean coordinates. In what follows, we will consider a curve  that can be represented as the graph of some function. Let us consider a smooth function f : R  R, f = f (x), and a parametrized curve  := { (x)/ x  R}  R2 such that  (x) = (x, f (x)),   (x) = (1, f (x)) (4.4)
+
+In addition, let the normal field  of  be oriented negatively, meaning that vector   (x)   (x) points in the opposite direction than e3 , the generator of the z -axis in R3 . This forces  (x) = 1 1 + |f (x)|2 (f (x), -1)
+
+Let us also consider a potential defined in Euclidean coordinates a = a(x, y ). Recall from the criticality condition (1.15), that in order for  to be a stationary curve with respect to the weighted arc-length la, , is necessary that the potential a and the curvature k satisfy the equation t a(s, 0) = k (s)  a(s, 0) , a.e. s	R (4.5)
+
+Denoting X (x, t) :=  (x) + t (x), we can now set the potential written in this coordinates as a ~(x, t) := a  X (x, t) = a x + tf (x) 1 + |f (x)|2 , f (x) - t 1 + |f (x)|2 (4.6)
+
+Accordingly, relation (4.6) implies that the criticality condition (4.5) amounts to the following equation in Euclidean coordinates x a(x, f (x))f (x) 1 + |f (x)|2 - y a(x, f (x)) 1 + |f (x)|2 = f (x)  a(x, f (x)) (1 + |f (x)|2 )3/2 (4.7)
+
+where it has been used the classical formula for the curvature of  as given in (4.4), k (x) = f (x)(1 + |f (x)|2 )-3/2 Example 1: The x-axis. We consider   R2 to be the x-axis. Nonetheless, the stationarity of this line must be with respect to some nontrivial potential a(x, y )	1 that does not represent the classic Euclidean metric in R2 , case in which all straight lines are trivially known as stationary curves. -  With this purpose, let us set the function f (x)  0 in (4.4), implying that  = 0X . In particular, we have that  (x)  e2 , thus the Fermi coordinates are reduced simply to the Euclidean coordinates, namely X (x, t) = xe1 + te2 = (x, t). In this simplified context, it turns out that the criticality condition (4.7) is reduced to y a(x, 0) = 0, x	R. (4.8)
+
+Therefore, we only need to find a nontrivial potential a ~(x, t) = a(x, y ) in such way the x-axis becomes a stationary curve, and also a nondegenerate curve as in the sense of 1.16. Claim 4.1. Given any  > 0, the following potential a(x, y ) := 1 + 1  (1 + |x|)2+ y2 cosh(y ) (4.9)
+
+-  satisfies all the requirements previously indicated, in relation with the curve  = 0X . See Figure 1. Proof. Let us note that a(x, y ) is smooth, globally bounded, and bounded below far away from zero. -	Further, it is direct that 0X is a stationary curve relative to la, since solves equation (4.8) y a(x, y ) = 1 (1 + |x|)2+ 2y - y 2 sinh(y ) cosh2 (y )  y a(x, 0) = 0, x  R
+
+14
+
+~ O. AGUDELO AND A. ZUNIGA
+
+-  Now to see that 0X is a nondegenerate curve, just note that the potential achieves it minimum exactly on the region defined by the x-axis, and moreover, around this curve the potential is strictly convex in the y -direction. The latter translates in the fact that yy a(x, 0) > 0, since yy a(x, y ) = and yy a(x, 0) = 2 > 0, (1 + |x|)2+ x  R 1 (1 + |x|)2+ 2 - 2y sinh(y ) - y 2 cosh(y ) 2(2y - y 2 sinh(y )) sinh(y ) - cosh2 (y ) cosh3 (y )
+
+Taking this into account, note that a(x, y ) and k (x)	0 are such that term Q(x) := fulfills the following conditions 2 , x  R (1 + |x|)2+ -  Hence we deduce from Corollary 4.1 that	= 0X is a nondegenerate curve with respect to the potential a(x, y ) given in (4.9), finishing the proof of the claim. Q(x) > 0, and |Q(x)|  yy a(x, 0) - 2k 2 (x) a(x, 0)
+
+2
+
+1.8
+
+1.6 a(x,y)
+
+1.4
+
+1.2
+
+1
+
+0.8 10 5 0 y-direction -5 -10 -10 0 -5 x-direction 5 10
+
+Figure 1. Potential a(x, y ) (4.9) with geodesic  = 0X , for  = 0.01.  Example 2: Asymptotic straight line. This time we consider the function f (x) := 1 +  2 x2 , so that  converges asymptotically to straight lines as |x|	. We have to exhibit some nontrivial potential a(x, y ) for which  is a nondegenerate geodesic relative to the arclength  a(x). We will assume a weaker dependence of the potential in Euclidean variables, namely a = a(y ), so that criticality condition (4.7) amounts to a (f (x)) -f (x) = = g (f (x)) a(f (x)) 1 + |f (x)|2 with g (y ) := - 2 [(1 +  2 )y 3 -  2 y ]-1 . We can solve directly this ordinary differential equation (4.10), for a in y -variable. log(a(y )) = g (y )dy + M  a(y ) = M exp - 2 dy (1 +  2 )y 3 -	2 y (4.10)
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+15
+
+This integral can be computed using partial fraction decomposition, that leads to  M 1 + 2 y a(y ) = (1 +  2 )y 2 -  2 For this construction, we will need to consider a slight modification of function a as follows. We say that the potential a ^ : R2  R is an admissible left-extension of function a(x, y ), provided that  a ^ be smooth bounded function, of at least C 2 (R2 ) class.	a ^(x, y ) = a(x, y ) for points with y   2 /(1 +  2 ).  a ^ is uniformly positive, bounded below away from zero. We state the following  Claim 4.2. Given | |	1/ 2, any admissible left-extension of the potential given below  1 + 2 y a(x, y ) := (4.11) (1 +  2 )y 2 -  2	induces a metric in R2 for which  = (x, 1 +  2 x2 ) xR is a nondegenerate geodesic. See Figure 2. Proof. Regardless the value of the parameter	= 0, it can be readily checked that within the region  y  2/ 1 +  2 , function (4.11) is smooth, bounded, and uniformly positive. Moreover, this potential satisfies the asymptotic stability on the curve , since f (x)  + as |x|  + and additionally lim a(x, y ) = 1, x  R. The previous construction of a(x, y ) was intended to build a potential y +  satisfying the criticality condition (4.10) for the curve generated by f (x) = 1 +	2 x2 . Thus  is a geodesic for the arclength  a(x). All these features of a ensure that any admissible left-extension will provide a potential with the desired properties to induce a smooth metric in R2 , fulfilling hypothesis (1.15) of Theorem 1. Moreover, a tedious but simple calculation shows that  3 2 (1 +  2 )3/2 y - 2 1 +  2 , a ( y ) = a (y ) = 2 (y +  2 (y 2 - 1))3/2 [(1 +  2 )y 2 -  2 ]5/2 Therefore, taking into account the decay of the derivatives of f (x), it follows that this potential satisfies condition (1.14) of Theorem 1, for  = 2 > 0. It only remains to prove the nondegeneracy property of the curve , and to do this, we will make use of Corollary 4.1. It can be checked the positiveness of the term Q(x), in fact 2k 2 (x) = 2 2 , (1 + ( 2 +  4 )x2 )3 tt a ~(x, 0) = a (f (x)) 1 +  2 x2 1 + ( 2 +  4 )x2
+
+so by the definition Q(x) = tt a ~(x, 0)/a ~(x, 0) - 2k 2 (x) we obtain Q(x)  Ca  Ca 3 2 (1 +  2 )3/2 (1 +  2 x2 )1/2 2 2 - 2 2 5 / 2 2 2 5 / 2 (1 + ( +  4 )x2 )3 (1 +  ) (1 +  x )
+
+3 2 2 2 - (1 +	2 )(1 +  2 x2 )2 (1 +  2 x2 )3 2 Ca  3 2 = - . 2 2 2 2 (1 +  x ) 1+ 1 +  2 x2  Hence, choosing	 R \ {0} with | |  1/ 2, we get that Q(x) > 0 in the entire domain R. Finally, the term Q(x) decays polynomially at a rate O ((1 + |x|)-4 ) as a consequence of the decay of the potential and the squared curvature, which finishes the proof of Claim 4.2. Remark 4.1. We emphasize the fact that the criticality condition for  and the nondegeneracy property are tested only within the semi-space y  1, which involve only the part (4.11) of the admissible left-extension, since a ^(x, y ) = a(y ) in this region and the curve complies |f (x)|  1.
+
+16
+
+~ O. AGUDELO AND A. ZUNIGA
+
+1.6 1.4 a(x,y) 1.2 1 -10 0.8 0.6 -10 0 -5 5 0 y-direction 5 10 10 x-direction -5
+
+Figure 2. Potential a ^(x, y ) (4.11) with  as nondegenerate geodesic, for  = 1/2. 5. Approximation of the solution and preliminary discussion Here and after we assume -F (s) := s(1 - s2 ), sR but we remark that the developments we make follows, for a general double well potential F satisfying (1.3)-(1.4)-(1.5), with no significant changes. 5.1. The approximation local Approximation. To begin with, let us consider the parameter function h  C 2 (R), for which we assume further h = h(s) satisfies the apriori estimate h
+2, C2+ , (R)
+
+:= h
+
+L (R)
+
++ (1 + | s |)1+ h
+
+L  ( R) +
+
+sup(1 + | s |)2+ h
+sR
+
+C 0, (s-1,s+1)
+
+ K
+
+(5.1)
+
+for a certain constant K > 0 that will be chosen later, but independent of  > 0. Let us consider w(t), the solution to the ODE w (t) - F (w(t)) = 0, w (t) > 0, w() = 1.
+
+As mentioned in the previous section, by an obvious rescaling, equation (1.10) becomes x a x v + v (1 - v 2 ) = 0, in R2 a Let us choose in the region N,h , as first approximate for a solution to (1.10), the function S (v ) := x v +  v0 (x) := w(z - h(s)) = w(t), x = X,h (s, t)	N,h where z = t + h(s) designates the normal coordinate to  = -1 . Using expression (2.8) we compute the error S (v0 ) in the region N,h to find that S (v0 ) = -2 Ja [h](s)w (t) - 2 2k 2 (s) - tt a (s, 0) tw (t) + 2 |h (s)|2 w (t) a
+
++ (t + h(s))A0 (s, (t + h))[-2 h (s)w (t) + 2 |h (s)|2 w (t)] ~0 (s, (t + h)) (-h (s)w (t)) + 2 (t + h(s))B
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+17
+
+~0 (s, (t + h))w (t) + 3 (t + h(s))2 C
+
+(5.2)
+
+~0 , C ~0 are given in (2.4)-(2.9) -(2.10), respectively. We emphasize that we have broken formula with A0 , B (5.2) into powers of , keeping in mind that h = O (). For every fixed s	R, let us consider the L2 -projection, given by
++
+
+(s) :=
+-
+
+S (v0 )(s, t)w (t)dt
+
+where for simplicity we are assuming that coordinates are defined for all t, since the difference with the integration taken in all the actual domain for t, produces only exponentially small terms. From (5.2), we observe that (s) = -2 Ja [h](s)
+R
+
+w (t)2 dt
+
+- 3
+R
+
+(t + h)A0 (s, (t + h)) h (s) |w (t)|2 - |h (s)|2 w (t)w (t) dt ~0 (s, (t + h))h (s) - (t + h)2 C ~0 (s, (t + h)) |w (t)|2 dt (t + h)B (5.3)
+
+- 3
+R
+
+where we used that
+
++ -
+
+tw (t)2 dt = 0,
+
++ -
+
+w (t)w (t)dt = 0, to get rid of the terms of order 2 .
+
+Making this projection equal to zero is equivalent to the nonlinear differential equation for h Ja, [h] = h (s) + where we have set tt a(s, 0) - 2k 2 (s) a(s, 0) and G0 consists in the remaining terms of (5.3). Q(s) = G0 is easily checked to be a Lipschitz in h, with small Lipschitz constant. Here is where the nondegeneracy condition on the curve  makes its appearance, as we need to invert the operator Ja, , in such way that equation (5.4) can be set as a fixed problem for a contraction mapping of a ball of the form (5.1). It will be necessary to pay attention to the size of S (v0 ) up to O (2 ), because the solvability of the nonlinear Jacobi equation (5.4) depends strongly on the fact that the error created by our choice of the approximation, is sufficiently small in  > 0. We improve our choice of the approximation throughout the following argument. Let us consider the ODE 0 (t) - F (w(t))0 (t) = tw (t) which has a unique bounded solution with 0 (0) = 0, given explicitly by the variation of parameters formula
+t
+
+s a(s, 0) h (s) - Q(s)h(s) = G0 [h] , s  R a(s, 0)
+
+(5.4)
+
+0 (t) = w (t)
+0
+
+w ( )-2
+-
+
+sw (s)2 dsd.
+
+Since
+
+sw (s)2 ds = 0, the function 0 (s) satisfies that R e|t|  j 0
+L (R)
+
+ Cj, ,
+
+j = 1, 2, . . . , t a a
+
+0<
+
+2.
+
+Due to the finer topology we are considering for h, we must also improve the term 1 -3 k 3 (s) + tt 2 (s, 0) t2 w (t)
+
+~0 (s, (t + h))w (t) in expression (5.2). Hence, let us consider g (t) := t2 w (t) present in 3 (t + h(s))2 C and note that we can write g = Cg w + g
+
+18
+
+~ O. AGUDELO AND A. ZUNIGA
+
+where g denotes the orthogonal projection of g onto w in L2 (R), given by g (t) := t2 w (t) - Thus by setting
+t  R
+
+ 2 w ( )2 d w (t). w ( )2 d R g (s)w (s)dsd
+-
+
+1 (t) = w (t)
+0
+
+w ( )-2
+
+this formula provides a bounded smooth solution to 1 (t)F (w(t))1 (t) = g (t) with  e|t|  j 1 L (R)  Cj, , j = 1, 2, . . . , 0	 < 2. Hence, we choose as new approximation, the function v1 (s, t) := v0 (s, t) + 1 (s, t) = w(t) + 1 (s, t) where 1 (s, t) := 2 2k 2 (s) - tt a(s, 0) 0 (t) a(s, 0) t a a (s, 0) 1 (t) (5.5)
+
+ and which can be easily seen to behave like 1 (s, t) = O (2 (1+ |s|)-2- e-|t| ), for sigma 0 <  < 2. This is due to the assumptions (1.12)-(1.14) we have made on the curve  and the potential a, and to the previous observation on 0 (t), 1 (t). Now, to analyze the error term S (v1 ), notice that x a S (v0 + 1 ) = S (v0 ) + x 1 +  x 1 - F (v0 )1 + N0 (1 ) a where N0 (1 ) = -F (v0 + 1 ) + F (v0 ) + F (v0 )1 From the definition of 1 , we find that S ( v1 ) = S (v0 ) + 2 2k 2 (s) - tt a(s, 0) tw (t) a(s, 0) t a (s, 0) g (t) a (5.7) (5.6)
+
+1 -3 k 3 (s) + tt 2
+
+1 - 3 k 3 (s) + tt 2 x a x - tt 1 + N0 (1 ). + x +  a
+
+Analyzing the new error created by 1 , we readily check using the expansions for the differential operators (2.3)-(2.7) and the definition (5.6), that x +  x a x - tt 1 + N0 (1 ) = a
+
+-4 Q (s)0 + 4 Ja [h](s) - tQ(s) Q(s)0 - 4 s a(s, 0) Q (s)0 + 2h1 (-Q (s)0 ) + |h1 |2 Q(s)0 a(s, 0) +O (4 (1 + |s|)-4- e-|t| ) where we recall the convention Q(s) = tt a(s, 0) - 2k 2 (s), a(s, 0) sR (5.8)
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+19
+
+and have used that the error terms in the differential operator evaluated in 1 , associated to A0 (s, (t+  5 -4-2 - 2|t| ~ ~ h)), B0 (s, (t + h)), C0 (s, (t + h)) behave like O ( (1+ |s|) e ), given that h has a bounded size is s by (5.1), and since 1 (s, t) has smooth dependence in s with size O (2 (1 + |s|)-2- e-|t| ). Therefore, the error (5.8) is can be written as x +	x a x - tt 1 + N0 (1 ) = 4 Q(s)0 (t)h (s) + R0 (s, t, h) a
+
+where the function R0 = R0 (s, t, h(s), h (s)) has Lipschitz dependence in variables h, h on the ball h L (R) + h L (R)  K. Moreover, under our set of assumptions and the observation made on 0 , it turns out that for any   (0, 1): R0 (s, t, h) C 0, (B1 (s,t))  C4 (1 + |s|)-4- e-|t| . With this remarks, we can write the error created by v1 in (5.7), as 1 S (v1 ) = -2 Ja [h](s)w (t) + 3 k 3 (s) + tt 2 t a a (s, 0)
+R
+
+ 2 w ( )2 d w (t) w ( )2 d R (5.9)
+
++ 4 Q(s)0 (t)h (s) - 3 (t + h)A0 (s, (t + h))h (s)w (t) + R1 (s, t, h(s), h (s)) where R1 = 2 |h |2 w (t) + R0 (s, t) + 3 (t + h)A0 (s, (t + h))|h |2 w (t) ~0 (s, (t + h))h w (t) + 4 (t + h)O ttt - 3 (t + h)B Furthermore, R1 = R1 (s, t, h(s), h (s)) satisfies that |i R1 (s, t, i, )| + | R1 (s, t, i, )| + |R1 (s, t, i, )|  C4 (1 + |s|)-2-2 e-
+ 2|t|
+
+t a a
+
++ k 4 t2 w (t).
+
+(5.10)
+
+with the constant C above depending on the number K of condition (5.1), but independent of  > 0. We can summarize this discussion by saying that S (v1 ) + 2 Ja [h](s)w (t) 1 - 3 k 3 (s) + tt 2 for x = X,h (s, t)  N,h . 5.2. The global approximation. The approximation v1 (x) in (5.5) will be sufficient for our purposes. However, it is defined only in the region N,h = x = X,h (s, t)  R2 / |t + h(s)| <  + c0 |s| =:  (s)  (5.11) t a a (s, 0)
+R
+
+ 2 w ( )2 d w (t) w ( )2 d R = O (4 (1 + |s|)-2- e-|t| )
+
+Since we are assuming that  is a connected and simple and that it also possesses two ends departing from each other, it follows that R2 \  consists of precisely two components S+ and S- . Let us use the convention that  points towards S+ . The previous comments allow us to define in R2 \  the function +1 if x	S+ H(x) := -1 if x  S- Let us consider	(s) a smooth cut-off function with  (s) = 1 for s < 1 and = 0 for s > 2, and define 3 (x) :=  (|t + h(s)| -  (s) + 3) 0 if x  N,h if x	/ N,h
+
+20
+
+~ O. AGUDELO AND A. ZUNIGA
+
+where  is defined in (5.11). Next, we consider as global approximation the function w(x) defined as w := 3  v1 + (1 - 3 )  H where u1 (x) is given by (5.5). Using that H(-1 x ) is an exact solution to (1.10) in R2 \ , the error of global approximation can be computed as x a S (w) = x w +  x w - F (w) = 3 S (v1 ) + E (5.13) a where S (v1 ) is computed in (5.9) and the term E is given by E = x 3 (v1 - H) + 2x 3 x (v1 - H) + (v1 - H) x a x  3 a - F 3 v1 + (1 - 3 )H + 3 F (v1 ) (5.12)
+
+(5.14)
+
+It is worth to mention that the from the form of the neighborhood N,h in (5.11), and from the choice of v1 , one can readily check that for every x = X,h  N,h |v1 (x) - H(x)|	e- and therefore for some 0 <  <  |E |	C e-
+ 2|t+h(s)|
+
+,
+
+ - 2 < |t + h(s)| <  - 1
+ 2/
+
+
+
+2|t+h(s)|
+
+ Ce-
+
+ e-c|s| e-|t|
+
+2 and c > 0 small. 6. The proof of Theorem 1
+
+In this section we sketch the proof of Theorem 1 leaving the detailed proofs of every proposition mentioned here for subsequent sections. We look for a solution u of the inhomogeneous Allen-Cahn equation (2.2) in the form u=w+ where w is the global approximation defined in (5.12) and  is small in some suitable sense. We find that  must solve the following nonlinear equation x  +  where S (w) := x w +  x a x w - F (w) a (6.2) (6.3) x a x  - F (w) = -S (w) - N1 () a (6.1)
+
+N1 () := -F (w + ) + F (w) + F (w)
+
+We introduce several norms that will allow us to set up an appropriate functional scheme to solve (6.1). Let us consider  (s), a cut-off function with	(s) = 1 for s < 1 and  = 0 for s > 2, we define n (x) := where	and N,h are set in (5.11).  2 Let us consider	(0, 1), b1 , b2 > 0 fixed and satisfying that b2 1 + b2 < ( 2 -  )/2 for  > 0. Define the weight function K (x), for x = (x1 , x2 )  R2 , as follows K (x) := 2 (x) e|t|/2 (1 + |s|) + (1 - 2 (x))eb1 |x1 |+b2 |x2 | . (6.5)  (|t + h(s)| -  (s) + n) 0 if x  N,h if x	/ N,h (6.4)
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+21
+
+For a function g (x) defined in R2 , we set the norms g g
+2 L K (R )
+
+:= sup K (x) g
+xR2
+
+L (B1 (x))
+
+(6.6) (6.7)
+
+0, CK (R2 )
+
+:= sup K (x) g
+xR2
+
+C 0, (B1 (x))
+
+On the other hand, consider  > 0,   0 and 0 <  < in whole R  R, we set g
+0, C, (R2 )
+
+
+
+2. For functions g (s, t) and (s, t) defined
+C 0, (B1 (s,t))
+
+:=
+
+sup
+
+(1 + |s|) e|t| g
+0, C, ( R2 )
+
+(6.8) (6.9)
+
+(s,t)RR
+
+2, C, (R2 )
+
+:= D2
+
++ D
+
+2 L , (R )
+
++
+
+2 L , (R )
+
+Finally, given	> 0 and   (0, 1), consider,for a function f defined in R, the norm f
+0, C2+ , (R)
+
+:= sup(1 + |s|)2+ f
+sR
+
+C 0, (s-1,s+1) .
+
+(6.10)
+
+Recall also that the parameter function h( s) satisfies for some   (0, 1) h where h
+2, C2+ , (R) 2, C2+ , (R)
+
+ K
+
+:= h
+
+L (R)
+
++ (1 + |s|)1+ h
+
+L (R)
+
++ h
+
+. 0, C2+ , (R)
+
+(6.11)
+
+4.1 The gluing procedure. In order to solve (6.1), let us look for a solution  of problem, having the form (x) = 3 (x)(s, t) +	(x), for x  R2 where  is defined in   R and  is defined in entire R2 . Using that 3  4 = 4 , we get that (6.1) reads as x a x  + f (u1 ) S ( w +  ) =  3 x  +  a + 4 [ [f (u1 ) - f (H (t))] + N1 ( + ) + S (u1 )] x a +x  +  x  + [(1 - 4 )f (u1 ) + 4 f (H (t))] + (1 - 3 )S (w) a x a x  3 +(1 - 4 )N1 ( + 3 ) + 2x 3 x  + x 3 +  a where H (t) is some increasing smooth function satisfying H (t) = +1 -1 if t > 1 if t < -1. (6.12)
+
+In this way, we will have constructed a solution  = 3  +  to problem (6.1) if we require that the pair (,  ) satisfies the coupled system below x  +  x a x  + f (u1 ) a + 4 [f (u1 ) - f (H (t))] + 4 N1 ( + ) + S (v1 ) = 0 for |t| < x a x  + [(1 - 4 )f (u1 ) + 4 f (H (t))] + (1 - 3 )S (w) a x a + (1 - 4 )N1 ( + 3 ) + 2x 3 x  + x 3 +  x 3 = 0, a Next, we will extend equation (6.13) to entire R  R. To do so, let us set ~0 () := 0 [x - tt - ss ] B() = 0 B   (6.13)
+
+x  +
+
+in
+
+R2
+
+(6.14)
+
+(6.15)
+
+22
+
+~ O. AGUDELO AND A. ZUNIGA
+
+where x is expressed in local coordinates, using formula (2.3), and B() is understood to be zero for |t + h(s)| >  (s, t) - 2. Thus equation (6.13) is extended as tt +ss  +  x a ~(u1 ) x  + B() + f (w(t)) = -S a (6.16)
+
+- {[f (u1 ) - f (w)] + 4 [f (u1 ) - f (H (t))] + 4 N1 ( + )} , in R  R where we have denoted ~(u1 )(s, t) = -2 Ja [h](s)w (t) - 3 k 3 (s) + 1 tt S 2 t a a (s, 0)
+R
+
+ 2 w ( )2 d w (t) w ( )2 d R (6.17)
+
++ 4 Q(s)0 (t)  h (s) + 0 3 (t + h)A0 (s, (t + h))h (s)	w (t) + R1 . Recall from (5.10) that R1 = R1 (s, t, h(s), h (s)) satisfies |i R1 (s, t, i, )| + | R1 (s, t, i, )| + |R1 (s, t, i, )|  C4 (1 + |s|)-2-2 e-
+ 2|t|
+
+(6.18)
+
+In order to solve the resulting system (6.14)-(6.16), we focus first on solving equation (6.14) in  for a fixed and small . We make use of the important observation that the term [(1 - 4 )f (u1 )+ 4 f (H )], is uniformly negative and so the operator in (6.14) is qualitatively similar to x + x  a/a  x - 2. A direct application of the contraction mapping principle lead us to the existence of a solution  = (), according to the next proposition whose detailed proof is carried out in Section 5.	Proposition 6.1. Let   (0, 1),	 (0, 2),   (0, 2 + ). There is 0 > 0, such that for any small	(0, 0 ) the following holds. Given  with  C, 2, (R2 )  1, there is a unique solution  = () to equation (6.14) with
+X
+
+:= D2
+
+0, ( R2 ) CK
+
++ D
+
+2 L K (R )
+
++
+
+2 L K (R )
+
+ Ce-/2
+
+Besides,  satisfies the Lipschitz condition (1 ) - (2 )
+X
+
+ Ce-/2 1 - 2
+
+2, C, (R2 )
+
+(6.19)
+
+0, 2, where the norms L K , CK , C, are defined in (6.6)-(6.7)-(6.9).
+
+4.2 Solving the Nonlinear Projected Problem. Using proposition 6.1, we solve (6.16) replacing  with the nonlocal operator  = (). Setting x a x	+ [f (u1 ) - f (w)] + 4 [f (u1 ) - f (H )]() + 4 N1 (() + ) a our problem is reduced to find a solution  to the following nonlinear, nonlocal problem N() := B() +  ~(u1 ) - N() in R  R. tt  + ss  + f (w) = -S (6.20)
+
+Before solving (6.20), we consider the problem of finding a (, c) a solution to the following nonlinear projected problem
+  tt
+
+~(u1 ) - N() + c(s)w (t) in R  R + ss  + f (w) = -S (6.21) s  R.
+
+(N P P )
+
+(s, t)w (t)dt = 0,
+R
+
+Solving problem (6.21) amounts to eliminate the part of the right hand side in (6.20), that do not ~(u1 ) + N ()]w (t)dt. contribute to the projections onto w (t), namely R [S
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+23
+
+Since, we have that ~(u1 ) + 2 Ja [h](s)  w (t) - 3 k 3 (s) + 1 tt S 2 where c ^= w
+-2 L2 (R)
+
+t a a
+
+(s, 0) c ^w (t)
+0, C, (R2 )
+
+ C4
+
+t2 w (t)2 dt
+R
+
+and due to the fact that N() defines a contraction within a ball centered at zero with radius O (4 ) in norm C 1 , we conclude the existence of a unique small solution of problem (6.21) whose size is O (4 ) in this norm. This solution  turns out to define an operator in h, namely  = (h), which exhibits a Lipschitz character in norms	C, 2, (R2 ) . We collect the discussion in the following proposition.  Proposition 6.2. Given	(0, 1),   (0, 2 + ] and   (0, 2), there exists a constant K > 0 such that the nonlinear projected problem (6.21) has a unique solution	= (h) with
+2, C, (R2 )
+
+ K4
+
+Besides  has small a Lipschitz dependence on h satisfying condition (5.1), in the sense (h1 ) - (h2 )
+2, for any h1 , h2  Cloc (R) with hi
+2, C,  (R) 2, C, ( R2 )
+
+ C3 h1 - h2
+
+2, C,  (R)
+
+(6.22)
+
+ K .
+
+The proof of this proposition is left to section 5, where a complete study of the linear theory needed to solve is discussed. 4.3 Adjusting the nodal set. In order to conclude the proof of Theorem 1, we have to adjust the parameter function h so that the nonlocal term c(s)
+R
+
+|w (t)|2 dt =
+R
+
+~(u1 )(s, t)w (t)dt + S
+R
+
+N((h))(s, t)w (t)dt
+
+(6.23)
+
+becomes identically zero, and consequently we obtain a genuine solution to equation (1.10). Setting c := R |w (t)|2 dt, using expression (6.17), and carrying out the same computation we did in (5.3), we obtain that ~(u1 )(s, t)w (t)dt = -c 2 Ja [h](s) + c 2 G1 (h)(s) S
+R
+
+where 1 c G1 (h)(s) := - k 3 (s) + tt 2 + h (s)
+R
+
+t a a
+
+(s, 0)
+
+R
+
+ 2 w ( )2 d w (t) w ( )2 d R
+
+0 (t + h)A0 (s, (t + h))w (t)w (t)dt 0 (t)w (t)dt + -2
+R R
+
++ 2 Q(s)h (s)
+
+0 R1 (s, t, h, h )w (t)dt
+
+(6.24)
+
+and we recall that R1 is of size O(4 ) in the sense of (6.18). Thus setting c G2 (h)(s) := -2
+R
+
+N((h))(s, t)w (t)dt,
+
+G(h)(s) := G1 (h)(s) + G2 (h)(s)
+
+(6.25)
+
+it turns out that equation (6.23) is equivalent to c(s)  c = -c 2 Ja, [h](s) + c 2 G1 (h)(s) + c 2 G2 (h)(s) Therefore the condition c(s) = 0 is equivalent to the following nonlinear problem on h Ja, [h](s) = h (s) + s a(s, 0) h (s) - Q(s)h(s) = G[h](s), a(s, 0) in R (6.26)
+
+Consequently, we will have proved Theorem 1, if we find a function h, solving equation (6.26).
+
+24
+
+~ O. AGUDELO AND A. ZUNIGA
+
+Hence, we need to devise a corresponding solvability theory for the linear problem Ja [h](s) = f (s), The next result addresses this matter. Proposition 6.3. Given  > 0,   (0, 1), and a function f with f
+0, C2+ , (R)
+
+in R.
+
+(6.27)
+
+< , assume that
+
+is a smooth curve satisfying (1.15). If,  is nondegenerate respect to the potential a and conditions (1.11)-(1.14) hold, then there exists a unique bounded solution h of problem (6.27), and there exists a positive constant C = C (a, , ) such that h with the norms defined in (6.10)-(6.11). In section 6, we study in detail the proof of this proposition. For the time being, let us note that, G is a small operator of size O () uniformly on functions h satisfying (5.1). Hence Proposition 6.3 plus the contraction mapping principle yield the next result, which ensures the solvability of the nonlinear Jacobi equation. Its detailed proof can be found in section 7. Proposition 6.4. Given	> 0 and   (0, 1), there exist a positive constant K > 0 such that for any  > 0 small enough the following holds. There is a unique solution h of (6.26) on the region (6.11), namely h C 2, (R)  K.
+2+, 2, C2+ , (R)
+
+C f
+
+0, C2+ , (R)
+
+and this concludes the proof of Theorem 1. The rest of the paper is devoted to give fairly detailed proofs of every result stated in this section. 7. Gluing reduction and solution to the projected problem This section is devoted to give fairly detailed proves of propositions 6.1 and 6.2. In what follows, we refer to the notation and to the objects introduced in sections 3 and 4. 7.1. The proof of proposition 6.1. In this part we prove proposition 6.1. To do so, let us first consider the linear problem x  +  where -W (x) := [(1 - 4 )f (u1 ) + 4 f (H (t))]. Observe that the dependence in  is implicit on the cut-off function 4 , defined in (6.4). Let us observe that for any  > 0 small enough, the term W satisfies the global estimate 0 < 1 <  W (x) < 2 for a certain positive constants 1 , 2 . In fact, we can chose 1 := 2 -	for any arbitrary small  > 0. To address the study of this equation, recall the definition of the weighted norms: g
+2 L K (R )
+
+x a x  - W (x) = g (x), a
+
+in
+
+R2
+
+(7.1)
+
+:= sup K (x) g
+x R2
+
+L (B1 (x)) ,
+
+g
+
+0, CK (R2 )
+
+:= sup K (x) g
+xR2
+
+C 0, (B1 (x))
+
+with K is given by (6.5). Lemma 7.1. For any   (0, 1), there are numbers C > 0, and 0 > 0 small enough, such that for 0 <  < 0 and any given continuous function g = g (x) with g C 0, (R2 ) < +, the equation (7.1) has K a unique solution  = () satisfying the a priori estimate:
+X
+
+:= D2
+
+0, CK (R2 )
+
++ D
+
+2 L K (R )
+
++
+
+2 L K (R )
+
+C g
+
+0, CK (R2 )
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+25
+
+The proof of this lemma follows the same lines of lemma 7.1 in [4] with no significant changes. We leave details to the reader, but we do comment on the estimate
+2 L K (R )
+
+C g
+
+0, CK (R2 )
+
+(7.2)
+
+for  > 0 small enough and any bounded  solution  of (7.1). It follows directly from a sub2 supersolution scheme, using that b2 1 + b2 < ( 2 -  )/2 and the fact that the function 0 (x) := eR0
+
+
+ 3 (x)[e-|t|/2 (1 + |s|)- ] + (1 - 3 (x))e-b1 |x1 |-b2 |x2 |
+
+ca be readily checked to be a positive supersolution of (7.1), provided that R0 > 0 sufficiently large. Hence, we can use the maximum principle within the annulus BR1 (0) \ BR0 (0) with a barrier function of the form 0 + e 1 /2(|x1 |+|x2 |) for  > 0 small, to find that K (x)| (x)|  M
+L  ( R2 )
+
+~ g M
+
+0, CK (R2 ) ,
+
+x  R2 .
+
+from which estimate (7.2) follows. Now we have all the ingredients need for the proof of proposition 6.1. Let us set  := (g ) the solution of equation (7.1) predicted by lemma 7.1. We can write problem (6.14) as a fixed point 2, problem in the space X of functions   Cloc (R2 ) with  X < , as  = (g1 + G( )), where g1 := (1 - 3 )S (w) + 2x 3 x  + x 3 +  x a x  3 , a X (7.3)
+
+G( ) := (1 - 4 )N1 ( + 3 ).  Consider	(0, 2 + ),   (0, 2) and  > 0 fixed and a function h satisfying (6.11). Consider also a function  = (s, t), satisfying  C, 2, (R2 )  1. Note that the derivatives of 3 are nontrivial only within the region  - 2 < |t + h(s)| <  - 1, with  defined in (5.11). Taking into account the weight K (x) (6.5), we find that K (x) 2x 3 x  + x 3 +  x a x 3	Ca K (x)e-|t| (1 + |s|)-  a
+2, C, (R2 )
+
+ Ca e-/2 e/2(-c0 |s|+2+|h|)  provided that
+
+2, C, (R2 )
+
+c0  b2	,  b2 a2 1- conditions that holds, since we can take c0 > 0 small enough,independent of  > 0 and  small ~ > 0, depending on  and depending maybe on c0 . At the end, there are some constants c ~0 and	a(x, y ), such that the right hand side satisfies for x  R2 c0 < 2x 3 x  + x 3 +  x a x 3 a
+~0 |x|	Ca, e-/ e-c  C 0, B (x,1) ~
+2, (R2 ) C,
+
+~ :=  - c0 a2 /b2 , c where these constants are explicitly  ~0 := c0 /b2 , and where we emphasize that Ca, does not depend on . Expressions (5.13)-(5.14) for S (w) imply that S (w) C 0,  C3 . In particular, the exponential	(R2 )
+, 2
+
+decay exhibited by w , w , 0 , 1 in t-variable imply |(1 - 3 )S (w)| = |(1 - 3 )3 S (u1 ) + (1 - 3 )E |  Ca e-|t| (1 + |s|)-2-
+
+26
+
+~ O. AGUDELO AND A. ZUNIGA
+
+Now since this error term is vanishing everywhere but on the region  - 2 < |t + h(s)| <  - 1, we can use the definition (6.5) of the weight function K (x) to prove that K (x)|(1 - 3 )S (w)(x)|  e|t|/2 (1 + |s|)-2- Ca e-|t|/2 e-(  Ca e
+ -( 2-/2)(/+c0 |s|-|h|-2)  2-/2)|t| ~
+
+ Ce-/
+
+ ~ := ( 2/ - 1/2) >> /2. where we have used the expression (5.11) for  , and we set  Further, the regularity in the s-variable of the functions involved in g1 , imply that g1
+0, CK (R2 )
+
+ Ce-/2
+
+On the other hand, consider the set for A > 0 large  = {  X :
+X
+
+ A  e-/2 }
+
+(7.4)
+
+The definitions of N1 in (6.3) and G in (7.1), lead us to the following computations (1 - 4 )|N1 ((1 ) + 3 1 ) - N1 ((2 ) + 3 2 )|  Cw (1 - 4 ) sup |t(1 ) + (1 - t)(2 ) + 3 (t1 + (1 - t)2 )|	|(1 ) - (2 )|
+t(0,1)
+
+together with |G(1 ) - G(2 )|  (1 - 4 ) sup |DN1 (1 + (1 -  )2 + 3 )[1 - 2 ]|
+ (0,1)
+
+ C f (w)
+
+ (1
+
+- 4 ) sup |1 + (1 -  )2 + 3 |  |1 - 2 |
+ (0,1)
+
+The latter, plus the regularity in the s-variable leads the Lipschitz character of G: G(1 ) - G(2 ) while G(0)
+0, CK (R2 ) 0, CK (R2 )
+
+ C A e-/ 1 - 2
+
+0, CK (R2 )
+
+2 2  Cw (1 - 4 )3
+
+0, CK ( R2 )
+
+ Ce-/
+
+In order to use the fixed point theorem, we need to estimate the size of the nonlinear operator (g1 + G( ))
+X
+
+ (g1 + G( ) - G(0))  C ( g1
+0, ( R2 ) CK
+
+X
+
++ (G(0))
+
+X
+
++ G( ) - G(0)
+
+0, (R2 ) CK
+
++ G(0)
+
+0, (R2 ) ) CK
+
+ C (Ca e-/2 + e-/   Ce-/2 (1 +	additionally, we also have (g1 + G(1 )) - (g1 + G(2 ))
+X X)
+
+0, CK (R2 ) )
+
+ C G(1 ) - G(2 )  Ce-/ 1 - 2
+
+0, CK (R2 )
+
+X
+
+where in both inequalities we used that  is a linear and bounded operator. This means that the right hand side of equation (7.3) defines a contraction mapping on  into itself, provided that the number A in definition (7.4) is taken large enough and  C, 2,  1. Hence applying Banach fixed point theorem follows the existence of a unique solution  = ()	. In addition, it is direct to check that (1 ) - (2 )
+X
+
+ Ca e-/2 1 - 2
+
+2, C, (R)
+
++ C e-/ (1 ) - (2 )
+
+X
+
+from where the Lipschitz dependence (6.19) of () follows and this concludes the proof of Lemma 6.1
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+27
+
+7.2. The proof of proposition 6.2. The purpose of the whole section is to give a proof of proposition 6.2, which deals with the solvability of the nonlinear projected problem (6.21) for . At the core of the proof of proposition 6.2, is the fact that the heteroclinic solution w(t) of the ODE w (t) + w(t)(1 - w2 (t)) = 0,
+
+
+w (t) > 0,
+
+w() = 1
+
+is L -nondegenerate in the sense of the following lemma. Lemma 7.2. Let  be a bounded and smooth solution of the problem L() = 0, in R2 Then necessarily (s, t) = Cw (t), with C  R. For a detailed proof of this lemma we refer the reader to [4] and references there in. Next, let us consider the linear projected problem	  + ss	+ f (w) = g (s, t) + c(s)w (t) in R  R	 tt   (s, t)w (t)dt = 0,
+R
+
+(7.5)
+
+s  R
+
+Assuming that the corresponding operations can be carried out, for every fixed s, we can multiply the equation by w (t) and integrate by parts, to find that c(s) = -
+R
+
+g (s, t)w (t)dt |w (t)|2 dt R
+
+(7.6)
+
+Hence, if  solves problem (7.5), then  eliminates the part of g which does not contribute to the projection onto w (t). This means, that  solves the same equation, but with g replaced by g ~, where g ~(s, t) = g (s, t) -
+R
+
+g (s,  )w ( )d w (t) |w ( )|2 d R
+
+Observe that the term c(s) in problem (6.21) has a similar role, except that we cannot find it so explicitly, since this time the PDE in  is nonlinear and nonlocal. Now, we show that the linear problem (7.5) has a unique solution , which respects the size of g in norm (6.8), up to its second derivatives. We collect the discussion in the following proposition, whose proof is basically that contained in [6], [4].	Proposition 7.1. Given	 0 and 0 <  < 2, there is a constant C > 0 such that for all sufficiently small  > 0 the following holds. For any g with g C, 0, (R2 ) < , the problem (7.5) with c(s) defined in (7.6), has a unique solution	with  C, <  . Furthermore, this solution satisfies the estimate 2, (R2 )
+2, (R2 ) C,
+
+C g
+
+0, C, ( R2 )
+
+Now, we are in a position to proof proposition 6.2. Recall from section 4, that proposition 6.2 refers to the solvability of the projected problem  ~	tt  + ss  + f (w) = -S (u1 ) - N() + c(s)w (t) in R  R (7.7)   (s, t)w (t)dt = 0, for all s  R.
+R
+
+where we recall that N() is made out of the operators H (t) and B, given in (6.3)-(6.15), like N() := B() + [f (u1 ) - f (w)] + x  a/a	x  +
+N1 ()
+
+4 [f (u1 ) - f (H (t))]() + 4 N1 (() + ) (7.8)
+N2 () N3 ()
+
+28
+
+~ O. AGUDELO AND A. ZUNIGA
+
+Let us define  := T (g ) as the operator providing the solution predicted in proposition 7.1. Then (7.7) can be recast as the fixed point problem ~(u1 ) - 2 Ja, [h] w (t) - N()) =: T (),  = T ( -S
+2, C, (R2 )
+
+ K4
+
+(7.9)
+
+ Claim 7.1. Given  > 0, 0 <  < 2 +  and 0 <  < 2, there is some constant C > 0, possibly depending on the constant K of (6.11) but independent of , such that for M > 0 and 1 , 2 satisfying i
+2, C, (R2 )
+
+ M 4 ,
+
+i = 1, 2.
+
+then the nonlinearity N behaves locally Lipschitz, as N(1 ) - N(2 ) where the operator N is given in (7.8). To prove this claim, we analyze each of its components Ni from (7.8). Let us start with N1 . Note that its first term corresponds to a second order linear operator with coefficients of order  plus a ~0 , where in decay of order at least O ((1 + |s|)-1- ). In particular, recall from (6.15) that B = 0 B coordinates [x - tt - ss ] amounts ~0 = - 2hst - [k (s) + (t + h)k 2 (s)]t + (t + h)A0 (s, (t + h)) B  [ss - 2h t + 2 |h |2 tt ] + 2 (t + h)B0 (s, (t + h))[s - h t ] - 2 h t + 2 |h |2 tt + 3 (t + h)2 C0 (s, (t + h))t Analyzing each term, leads to B() Thus, N1 satisfies N1 ()
+0, C, (R2 ) 0, C, (R2 ) 0, C, (R2 )
+
+ C 1 - 2
+
+2, C, ( R2 )
+
+(7.10)
+
+ C
+
+2, C, (R2 )
+
+ C
+
+2, C, (R2 ) .
+
+(7.11)
+
+On the other hand, consider functions i , with i
+2, C, (R2 )
+
+ M 3 ,
+
+i = 1, 2
+
+Now, let us analyze N2 , by noting that for any (s, t)	R2 the definition (5.5) implies that N3 (1 ) - N3 (2 )
+0, C, (R2 )
+
+ C sup e(/2-
+(s,t)R2
+
+
+
+2)|t|
+
+sup K (x) (1 ) - (2 )
+xR2
+
+C 0, (B1 (x))
+
+ C (1 ) - (2 )
+
+0, CK (R2 )
+
+= Ce-/2 1 - 2
+
+2, C, (R2 )
+
+(7.12)
+
+In order to analyze N4 , note that the definition (6.3) of N1 also implies |N4 (1 ) - N4 (2 )|	|4 N1 ((1 ) + 1 ) - 4 N1 ((2 ) + 2 )|  C4 sup | ((1 ) + 1 ) + (1 -  )((2 ) + 2 )|  (|1 - 2 | + |(1 ) - (2 )|)
+ (0,1)
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+29
+
+taking into account the region of R2 we are considering, it is possible to make appear de weight K (x) in (6.5). Therefore thanks to the hypothesis on i and Lemma 6.1, we obtain N4 (1 ) - N4 (2 )  C sup
+(s,t)R2
+0, C, ( R2 )
+
+e|t|/2 [ 1
+
+C 0, (B1 (s,t))
+
++ 2
+
+C 0, (B1 (s,t))
+
++ (1 )
+
+C 0, (B1 (x))
+
++ (2 )
+
+C 0, (B1 (x)) ]
+
+ e|t|/2 (1 + |s|) [ 1 - 2  C sup
+(s,t)R2
+
+C 0, (B1 (s,t))
+
++ (1 ) - (2 )
+
+C 0, (B1 (x)) ]
+
+1
+
+2, C, (R2 )
+
++ 2
+
+2, C, (R2 )
+
++ K (x)( (1 )
+
+C 0, (B1 (x))
+
++ (2 )
+
+C 0, (B1 (x)) )
+
+(e-|t|/2 1 - 2	C ( 1
+2, C, ( R2 )
+
+0, C, ( R2 )
+
++ K (x) (1 ) - (2 )
+X
+
+C 0, (B1 (x)) )
+
++ 2
+
+2, C, (R2 )
+
++ (1 )
+
++ (2 )
+
+X )[
+
+1 - 2
+
+0, C,
+
++ (1 ) - (1 )
+
+X]
+
+ 2C (3 + e-/2 )
+
+1 - 2
+
+2, C, (R2 )
+
++ e-/2 1 - 2
+
+2, C, (R2 )
+
+(7.13)
+
+To reach a conclusion, we note from (7.11)-(7.12) and (7.13) that choosing  > 0 small enough we obtain the validity of inequality (7.10). The proof of Claim 7.1 is concluded. In order to conclude the proof of proposition6.2,we make the  observation that the formula (6.17) and estimate (6.18) ensure that, for any 0 <	2 + ,	(0, 2) and   (0, 1) it holds ~(u1 ) + 2 Ja [h](s)  w (t) - 3 k 3 (s) + 1 tt S 2 Let us assume now that 1 , 2  B , where
+2, B := {  Cloc (R2 ) /
+2, C, ( R2 )
+
+t a a
+
+(s, 0) c ^w (t)
+0, C, (R2 )
+
+
+
+C4
+
+(7.14)
+
+ K4 }
+
+for a constant K to be chosen. Note that using Claim 7.1, we are able to estimate the size of N() for any  > 0 sufficiently small, as follows N()
+0, C, (R2 )
+
+ C N(0)
+
+0, C, (R2 )
+
++ C
+
+2, C, (R2 ) 0, C, (R2 )
+
+= C 4 [f (u1 ) - f (H )](0) + 4 N1 ((0))  C sup e-/2  (0)
+tR X
+
++ C
+
+2, C, (R2 )
+
++ (0)
+
+2 X
+
++ C  K4 (7.15)
+
+~ 5  C
+
+   B
+
+~ , independent of K . for some constant C Then from the estimates (7.14)-(7.15) follows that the right hand side of the projected problem (7.7) defines an operator T applying the ball B into itself, provided K is fixed sufficiently large and independent of  > 0. Indeed using the definition of T from (7.9), and Proposition 7.1, we can easily find an estimate for the size of , through T ()
+2, C, (R2 )
+
+~(u1 ) - 2 Ja [h]w - N()) = T ( -S ~(u1 ) + 2 Ja [h]w  T ( S
+0, C, ( R2 )
+
+2, C, ( R2 )
+
++ N()
+
+0, C, (R2 ) )
+
+ C4
+
+30
+
+~ O. AGUDELO AND A. ZUNIGA
+
+2, Further, T is also a contraction mapping of B in norm C, provided that   2 + , since Claim (7.1) asserts that N has Lipschitz dependence in :
+
+T (1 ) - T (2 )
+
+2, C, (R2 )
+
+= - T (N(1 ) - N(2 ))  C N(1 ) - N(2 )
+
+2, C, ( R2 )
+
+0, C, (R2 )
+
+ C 1 - 2
+
+2, C, (R2 )
+
+So by taking  > 0 small, we can use the contraction mapping principle to deduce the existence of a unique fixed point  to equation (7.9), and thus  turns out to be the only solution of problem (7.7). This justify the existence of , as required. On the other hand, the Lipschitz dependence (6.22) of  in h, follows from the fact that T ((h1 )) - T ((h2 ))
+2, C, ( R2 )
+
+~(u1 , h1 ) - S ~(u1 , h2 )  C( S
+
+0, C, (R2 )
+
++ N(1 ) - N(1 )
+
+0, C, (R2 ) )
+
+A series of lengthy but straightforward computations, leads to (6.22) and so the proof is complete. 8. The proof of proposition 6.4 In this section, we will finish the proof of Theorem 1 by proving proposition 6.4. Recall that the reduced problem (6.26) reads as Ja [h](s) := h (s) + s a(s, 0) h (s) - Q(s)h(s) = G(h)(s) a(s, 0) in R (8.1)
+
+where Q(s) was defined in (3.2), and the operator G = G1 + G2 was given in (6.24)-(6.25). We will make use of the following technical lemma, whose proof is left to the reader. Lemma 8.1.  Let  = (s, t) be a function defined in R  R, such that, for any   (0, 1),	(1, 2+ ] and   (0, 2)
+0, C, (R2 )
+
+:=
+
+sup
+(s,t)RR
+
+e|t| (1 + |s|)
+
+C 0, (B1 (s,t))
+
+< +
+
+Then the function defined in R as Z (s) :=
+R
+
+(s, t)w (t)dt
+
+satisfies for some constant C = C (w, ,  ) > 0 the following estimate: Z
+0, C,  ( R)
+
+ C-1
+
+0, C, (R2 )
+
+(8.2)
+
+Let us apply Lemma 8.1 to the function (s, t) := N((h))(s, t), to estimate the size of the operator G2 in (6.25), where we recall that
+1 -2 G2 (h)(s) := c-   R
+
+N((h))(s, t)w (t)dt
+
+We can estimate the size of the projection of N using the previous estimate (8.2), and the bound (7.15) for the size of N: G2 (h)
+0, C,  (R)
+
+ C-3 N((h))
+
+0, C, (R2 )
+
+ C2
+
+(8.3)
+
+Likewise, for i = (hi ), i = 1, 2 it holds similarly that G2 (h1 ) - G2 (h2 )
+0, C,  (R)
+
+ C-3 N(1 ) - N(2 )  C4 h1 - h2
+
+0, C, (R2 )
+
+Nonetheless, using (7.10) and proposition 6.2, it follows that N(1 ) - N(1 )
+0, C, (R2 )
+
+. 2, C,  (R)
+
+The previous estimates allow us to deduce G2 (h1 ) - G2 (h2 )
+0, C, (R2 )
+
+ C h1 - h2
+
+2, C,  ( R)
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+31
+
+Furthermore, from (8.3) we also have that G2 (0) for some C > 0 possibly depending on K. Next, we consider 1 c G1 (h1 ) = - k 3 (s) + tt 2 + h1 (s)
+R
+0, C,  (R)
+
+ C2
+
+(8.4)
+
+t a a
+
+(s, 0) c c ^w (t)
+
+0 (t + h1 )A0 (s, (t + h1 ))w (t)w (t)dt 0 (t)w (t)dt + -2
+R R
+
++ 2 Q(s)h1 (s)
+
+0 R1 (s, t, h1 , h1 )w (t)dt
+
+It is direct to check, from (2.4) and (5.10) the following estimate on the Lipschitz character for G1 (h) G1 (h1 ) - G1 (h2 )
+0, C,  (R)
+
+ C h1 - h2
+
+. 2, C,  ( R)
+
+Now, a simple but crucial observation we make is that c G1 (0) = -2
+R
+
+0 R1 (s, t, 0, 0)w (t)dt
+
+has the size G1 (0)
+0, C,  ( R)
+
+ C-2  -1 R1
+
+0, C, (R)
+
+ C2
+
+(8.5)
+
+for some universal constant C2 > 0. Therefore, the entire operator G(h) inherits a Lipschitz character in h, from those of G1 , G2 : G(h1 ) - G(h2 )
+0, C,  ( R)
+
+ C h1 - h2
+
+. 2, C,  (R)
+
+(8.6)
+
+Moreover, estimates (8.4)-(8.5) imply that G is such G(0)
+2, C,  ( R)
+
+ 2C2
+
+(8.7)
+
+Now let h = T (f ) be the linear operator defined in Proposition 6.3, and let G be the nonlinear operator given in (6.25). Consider the Jacobi nonlinear equation (8.1), but this time written as a fixed point problem: Find some h such that h = T (G(h)), Observe that T (G(h))
+2, C2+ , (R)
+
+h
+
+2, C2+ , (R)
+
+ K
+
+(8.8)
+
+C
+
+G(h) - G(0)
+
+0, C2+ , (R)
+
++ G(0)
+
+0, C2+ , (R)
+
+C 1+ h
+
+2, C2+ , (R)
+
+where we made use of (8.6)-(8.7). Observe also that T (G(h1 )) - T (G(h2 ))
+2, C2+ , (R)
+
+ C G(h1 ) - G(h2 )
+
+0, C2+ , (R)
+
+ C h1 - h2
+
+2, C2+ , (R)
+
+Hence choosing K > 0, large enough but independent of  > 0, we find that if  is small, the operator T  G is a contraction on the ball h C 2, (R)  K. As a consequence of the Banach's fixed point
+2+,
+
+theorem, obtain the existence of a unique fixed point of the problem (8.8). This finishes the proof of Proposition 6.4 and consequently, the proof of our theorem.
+
+32
+
+~ O. AGUDELO AND A. ZUNIGA
+
+9. Appendix This section is mainly oriented in finding expressions for each one of the terms in the Allen-Cahn equation (1.10) written in Fermi coordinates, that are suitable for the geometrical study of this equation. Since they define a local change of variables in a neighborhood of , our effort will focus on finding an equivalent form of (1.10) in these coordinates. 9.1. Laplacian in Fermi Coordinates: Proof of Lemma 2.1. In order to characterize the Euclidean Laplacian x,y in dilated and translated Fermi coordinates, we will follow the scheme from the appendix in [4]. For any  > 0 small but fixed, and a curve   R2 parameterized by   C 2 (R, R2 ), let us consider first the local Fermi coordinates induced by  X : R	(-,  )	N , X (s, t) =	(s) + t (s)
+
+where  (s) denotes the normal vector to the curve  at the point  (s). It can be seen that X defines a local change of variables on the tubular open neighborhood N := {( x, y ) =  (s) + t (s) / s  R, |t| <  +   2c0 |s|} of , where c0 > 0 is a fixed number, and |t| = dist(( x, y ), ) for every ( x, y ) = X (s, t). Given that X (N )  R2 is a 2-dimensional manifold, we can employ a formula from Differential Geometry that allow us to compute the Euclidean Laplacian in terms of Fermi coordinates, for points ( x, y ) = X (s, t)	N as follows X = 1 det(g (s, t)) i det(g (s, t))  g ij (s, t) j , i, j = s, t (9.1)
+
+where gij (s, t) = < i X (s, t), j X (s, t) > corresponds to the ij th entry of metric g of , and we regard g ij = (g -1 )i,j as the respective entry for the inverse of the metric. Performing explicit calculations, and using the relations between the tangent and the normal to the curve , it follows s X (s, t) =   (s) + t  (s), And so by (9.2), the metric g can be computed as gss (s, t) = |  (s)|2 + 2t  (s)    (s) + t2 |  (s)|2 = (1 - tk (s))2 gst (s, t) = gts (s, t) = 0, Hence, the components of the g -1 are g ss (s, t) = 1 , g st (s, t) = g ts (s, t) = 0, g tt (s, t) = 1 (1 - tk (s))2 (9.3) gtt (s, t) = 1 t X (s, t) =  (s) (9.2)
+
+Replacing formula (9.1) and using values obtained in (9.3), we get x = tt + g ss ss +  where  det g = 1 - tk (s), and with  1 -k (s) t ( det g ) = , 1 - tk (s) det g	(s) 1 tk s ( det g  g ss ) = (1 - tk (s))3 det g 1 1 t ( det g )t +  s ( det g	g ss )s det g det g (9.4)
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+33
+
+Since k vanishes at infinity, we can make an approximation of this operator at main order, 1 = (1 - tk )2
+ 2
+
+(tk )
+m=0
+
+m
+
+= [1 + tk + t2 (k 2 )]2 = [1 + 2tk + t2 (k 2 )]
+
+t small
+
+1 = (1 - tk )3
+
+
+
+3
+
+(tk )
+m=0
+
+m
+
+= [1 + tk + t2 (k 2 )]3 = [1 + 3tk + t2 (k 2 )].
+
+t small
+
+In this way, we deduce the expansion g ss = 1 + tA0 (s, t)   1 t ( det g ) = -k (s) - tk 2 (s) + t2 C0 (s, t) det g (9.5) (9.6) (9.7)
+
+1 s ( det g  g ss ) = tB0 (s, t) det g
+
+where A0 (s, t), B0 (s, t) and C0 (s, t) are are the smooth functions described in (2.4), (2.5) and (2.6). So using relations (9.4) to (9.7), we get the Euclidean Laplacian in Fermi coordinates X = tt + ss - [k (s) + tk 2 (s)]t + tA0 (s, t)ss + tB0 (s, t)s + t2 C0 (s, t)t (9.8)
+
+Next, we consider the dilated curve  = -1  by  : s  -1	(s), and we define associated local dilated Fermi coordinates in R2 by X (s, t) := 1 1 X (s, t) =  (s) + t (s)
+
+on a dilated tubular neighborhood -1 N of the curve  N = (x, y ) = X (s, t)  R2 / s  R, |t| <  + 2c0 |s|)
+
+where c0 > 0 is a fixed number, and in such way that X defines a local change of variables. Consequently, scaling formula (9.8) yields the expression X := tt + ss - [k (s) + tk 2 (s)]t + tA0 (s, t)ss + 2 tB0 (s, t)s + 3 t2 C0 (s, t)t Setting z = t - h(s), it is possible to compute x,y in terms of dilated and translated Fermi coordinates (s, t), as X,h = tt + ss - 2h (s)st - 2 h (s)t - [k (s) + (t + h(s))k 2 (s)]t + 2 |h (s)|2 tt + D,h (s, t) where D,h (s, t) := (t + h(s))A0 (s, (t + h))[ss v  - 2h (s)ts v	- 2 h (s)t v  + 2 |h (s)|2 tt v  ] + 2 (t + h(s))B0 (s, (t + h))[s v  (s, t) - h (s)t v  (s, t)] + 3 (t + h(s))2 C0 (s, (t + h))t v  (s, t) thus finishing the proof of Lemma 2.1
+
+34
+
+~ O. AGUDELO AND A. ZUNIGA
+
+9.2. Proof of Lemma 2.2. Analogously to what performed in the last section, our main goal is finding a characterization for the product x  a/a	x u in Fermi coordinates. To achieve this we will follow a scheme in 3 steps, for which the analysis is simplified. Hereinafter, once again we adopt the convention a = a( x, y ) and u = u( x, y ), where ( x, y ) denotes the non-dilated Euclidean coordinates of the space. We had that X (s, t) =	(s) + t (s) provided a local change of variables, implying that ( x, y ) = X (X -1 ( x, y )), x  ,y  = s,t  Ds,t X (X Therefore, we obtain that 1 x  ,y a x ,y	= a (1 - tk (s))2 = s a  s vu a + t a  t vu a for ( x, y )  N
+-1
+
+( x, y ))
+
+-1
+
+s a t a s a  s +  t + tA0 (s, t)  s a a a
+
+where we have made use of the expansion (9.5) of entry g ss of the metric. Further, using the above expression in the Taylor expansion for a/a around the curve , we find s a s a (s, t) = (s, 0) + t t a a t a t a (s, t) = (s, 0) + t a a s a a (s, 0) + O t2 tt
+2
+
+t a a + t2 tt 2 t a (s, 0) + O t3 ttt a t a a
+
+t a tt a (s, 0) - (s, 0) a a
+
+Replacing these expansions in the above equation we obtain X a s a t a X = (s, 0)s + (s, 0) + t a a a + tD0 (s, t)s + t2 F0 (s, t)t for which D0 (s, t) = t s a s a t a (s, t) (s, 0) + O ttt + A0 (s, t) a a a 1 t a t a F0 (s, t) = tt (s, 0) + O tttt 2 a a tt a t a (s, 0) - (s, 0) a a
+2
+
+t (9.9)
+
+and A0 (s, t) given by (2.4). Let us recall the convention ( x, y ) := (x, y ), (s, t) := (s, t) and observe that x,y = x  ,y  Directly from a this scaling and formula (9.9) we find that  X a s a t a ( x, y )X = 2 (s, 0)s + (s, 0) + t a a a + tD0 (s, t)s + t2 F0 (s, t)t tt a t a (s, 0) - (s, 0) a a
+2
+
+t
+
+A TWO END FAMILY OF SOLUTIONS FOR THE INHOMOGENEOUS ALLEN-CAHN EQUATION IN R2
+
+35
+
+which can be written in terms of dilated Fermi coordinates (s, t)  X a s a ( x, y )X =	(s, 0)s a a t a (s, 0) + t + a
+
+t a tt a (s, 0) - (s, 0) a a
+
+2
+
+t + E (s, t)
+
+where the derivatives of function a are with respect to shrink Fermi variables (s, t), and with E (s, t) := 2 tD0 (s, t)  s + 3 t2 F0 (s, t)  t for which D0 (s, t) = t s a t a s a (s, 0) + O ttt + A0 (s, t) (s, t) a a a 1 t a t a F0 (s, t) = tt (s, 0) + O tttt 2 a a
+
+and the function A0 (s, t) given by (2.4) Next, we observe that for z = t - h(s), this product in dilated and translated Fermi coordinates amounts to  X a s a (x, y )X,h =  (s, 0)[s - h (s)t ] a a t a + (s, 0) + (t + h(s)) a + E,h (s, t) where E,h is a small operator for  > 0 small enough, and of the form
+  E,h (s, t) := 2 (t + h(s))D0 (s, (t + h(s)))[s vu (s, t) - h (s)t vu (s, t)]	+ 3 (t + h(s))2 F0 (s, (t + h(s)))t vu (s, t)
+
+t a tt a (s, 0) - (s, 0) a a
+
+2
+
+t
+
+such that the following functions are smooth, and these relations can be derived. D0 (s, (t + h)) = t s a t a (s, 0) + O (t + h(s))tt a a s a (s, (t + h)) + A0 (s, (t + h)) a 1 t a t a F0 (s, (t + h)) = tt (s, 0) + O (t + h(s))ttt 2 a a
+
+this completes the proof of Lemma 2.2. Acknowledgements: This work has been partially supported by the research grant Fondecyt 1110181. References
+[1] S. Allen and J. W. Cahn, A microscopic theory for antiphase boundary motion and its application to antiphase domain coarsening, Acta. Metall. 27 (1979), 1084-1095. [2] M. del Pino, M. Kowalczyk, F. Pacard, J. Wei, Multiple end solutions to the Allen-Cahn equation in R2 , 2008 [3] M. del Pino, M. Kowalczyk, J. Wei, The Toda system and clustering interfaces in the Allen-Cahn equation, Arch. Rat. Mech. Anal. 190 (2008), 141-187. [4] M. del Pino, Manuel,M. Kowalczyk, J, Wei, Entire solutions of the Allen-Cahn equation and complete embedded minimal surfaces. J. Differential Geom. 93 (2013), no. 1, 67-131. 35J91 (35B08 53A10) [5] M. del Pino, M. Kowalczyk, J.C. Wei, J. Yang, Interface foliations of a positively curved manifold near a closed geodesic. Geom. Funct. Anal. 20 (2010), no. 4, 918-957.
+
+36
+
+~ O. AGUDELO AND A. ZUNIGA
+
+[6] M. del Pino, M. Kowalczyk, J. Wei, On De Giorgi Conjecture in Dimensions N	9 (final version) Annals of Mathematics 174 (2011), no.3, 1485-1569. [7] , Z.Du and C.Gui, Interior layers for an inhomogeneous Allen-Cahn equation,J. Differential Equations, 249, pp 215239 2010. [8] Z.Du and L.Wang, Interface foliation for an inhomogeneous Allen-Cahn equation in Riemmanian Manifolds, Calc. Var, DOI 10.1007, March s00526-012-0521-4, 2012 [9] Z.Du and B.Lai, Transition layers for an inhomogeneus Allen-Cahn equation in Riemannian Manifolds, preprint. [10] A. Floer, A. Weinstein, Nonspreading wave packets for the cubic Schr odinger equation with a bounded potential. J.Funct. Anal. 69 (1986), no. 3, 397-408. [11] L. Modica, Convergence to minimal surfaces problem and global solutions of u = 2(u3 - u). Proceedings of the International Meeting on Recent Methods in Nonlinear Analysis (Rome, 1978), pp. 223-244, Pitagora, Bologna,(1979). , From the constant mean curvature hypersurfaces to the gradient theory of phase [12] F. Pacard and M. Ritore transitions, J. Differential Geom. 64 (2003), no. 3, 359-423.  tica and CMM, Universidad de Chile, Casilla 170 O. Agudelo - Departamento de Ingenier ia Matema Correo 3, Santiago, Chile. E-mail address : oagudelo@dim.uchile.cl ~ iga - Departamento de Ingenier  tica and CMM, Universidad de Chile, Casilla 170 Correo A. Zun ia Matema 3, Santiago, Chile. E-mail address : azuniga@dim.uchile.cl
+
