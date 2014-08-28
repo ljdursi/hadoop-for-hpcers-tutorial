@@ -2,7 +2,7 @@
 export PATH=${HOME}/bin:${PATH}
 
 export JAVA_HOME=/usr/lib/jvm/default-java
-export HADOOP_VERSION=2.3.0
+export HADOOP_VERSION=2.5.0
 export HADOOP_PREFIX=$HOME/hadoop-${HADOOP_VERSION}
 export HADOOP_INSTALL=${HADOOP_PREFIX}
 export PATH=$PATH:${HADOOP_PREFIX}/bin

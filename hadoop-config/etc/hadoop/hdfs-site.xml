@@ -23,10 +23,10 @@
 	</property>
 	<property>
 		<name>dfs.namdenode.name.dir</name>
-		<value>file:/home/hadoop-user/hdfs-data/hdfs/namenode</value>
+		<value>file:/home/vagrant/hdfs-data/hdfs/namenode</value>
 	</property>
 	<property>
 		<name>dfs.datanode.data.dir</name>
-		<value>file:/home/hadoop-user/hdfs-data/hdfs/datanode</value>
+		<value>file:/home/vagrant/hdfs-data/hdfs/datanode</value>
 	</property>
 </configuration>
