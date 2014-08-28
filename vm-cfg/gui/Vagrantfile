@@ -11,7 +11,11 @@ apt-get update
 apt-get install -y default-jdk
 apt-get install -y git
 apt-get install -y make
-apt-get install -y wcanadian-large  #to satisfy virtual dependency for wordlist
+apt-get install -y python-pip python-dev
+pip install numpy
+pip install pywebhdfs
+
+apt-get install -y wcanadian #to satisfy virtual dependency for wordlist
 apt-get install -y xfce4 lightdm
 apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils 
 apt-get install -y virtualbox-guest-x11
