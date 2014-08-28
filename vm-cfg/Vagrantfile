@@ -1,0 +1,126 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$script = <<SCRIPT
+HADOOP_VERSION=2.5.0
+PIG_VERSION=0.13.0
+SPARK_VERSION=1.0.2
+APACHE_MIRROR=mirror.csclub.uwaterloo.ca/apache
+
+apt-get update
+apt-get install -y default-jdk
+apt-get install -y git
+apt-get install -y make
+
+if [ ! -f .ssh/id_dsa ]; then
+    ssh-keygen -t dsa -P '' -f .ssh/id_dsa
+    cat .ssh/id_dsa.pub >> .ssh/authorized_keys
+    chown vagrant.vagrant .ssh/id_dsa*
+fi
+
+if [ ! -d hadoop-${HADOOP_VERSION} ]; then
+  HADOOP_TAR_GZ=hadoop-$HADOOP_VERSION.tar.gz
+  wget -q --tries=1 --timeout=15 http://${APACHE_MIRROR}/hadoop/common/hadoop-${HADOOP_VERSION}/$HADOOP_TAR_GZ
+  tar xzf $HADOOP_TAR_GZ
+  chown -R vagrant.vagrant hadoop-${HADOOP_VERSION}
+  rm $HADOOP_TAR_GZ
+fi
+
+if [ ! -d pig-${PIG_VERSION} ]; then
+  PIG_TAR_GZ=pig-${PIG_VERSION}.tar.gz
+  wget -q --tries=1 --timeout=15 http://${APACHE_MIRROR}/pig/pig-${PIG_VERSION}/${PIG_TAR_GZ}
+  tar xzf ${PIG_TAR_GZ}
+  chown -R vagrant.vagrant pig-${PIG_VERSION}
+  rm ${PIG_TAR_GZ}
+fi
+
+if [ ! -d spark-${SPARK_VERSION}-bin-hadoop2 ]; then
+  SPARK_TAR_GZ=spark-${SPARK_VERSION}-bin-hadoop2.tgz
+  wget -q --tries=1 --timeout=15 http://${APACHE_MIRROR}/spark/spark-${SPARK_VERSION}/${SPARK_TAR_GZ}
+  tar xzf ${SPARK_TAR_GZ} 2> /dev/null
+  chown -R vagrant.vagrant spark-${SPARK_VERSION}-bin-hadoop2
+  rm ${SPARK_TAR_GZ}
+fi
+
+git clone https://github.com/ljdursi/hadoop-for-hpcers-tutorial.git
+chown -R vagrant.vagrant hadoop-for-hpcers-tutorial
+for dir in bin examples hadoop-config vm-cfg
+do
+   mv hadoop-for-hpcers-tutorial/${dir} .
+   chown -R vagrant.vagrant ${dir}
+done
+rm -rf hadoop-for-hpcers-tutorial
+
+cat >> ~vagrant/.bashrc <<EOF
+
+source ~/bin/setup.sh
+EOF
+
+for file in hadoop-config/etc/hadoop/* ; do mv $file hadoop-2.5.0/etc/hadoop/; done
+rm -rf hadoop-config
+
+sed -i'' 's|export JAVA_HOME=${JAVA_HOME}|export JAVA_HOME=/usr/lib/jvm/default-java|' hadoop-${HADOOP_VERSION}/etc/hadoop/hadoop-env.sh
+SCRIPT
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # All Vagrant configuration is done here. The most common configuration
+  # options are documented and commented below. For a complete reference,
+  # please see the online documentation at vagrantup.com.
+
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "hashicorp/precise64"
+  config.vm.hostname = "scinet-hadoop"
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network :forwarded_port, guest: 50070, host: 50070
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network "public_network"
+
+  # If true, then any SSH connections made will enable agent forwarding.
+  # Default value: false
+  config.ssh.forward_agent = true
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  # config.vm.provider "virtualbox" do |vb|
+  #   # Don't boot with headless mode
+  #   vb.gui = true
+  #
+  #   # Use VBoxManage to customize the VM. For example to change memory:
+  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
+  # end
+  
+  # More memory for VM
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+  end
+
+  config.vm.provision "shell" do |s|
+    s.inline = $script
+  end
+end
