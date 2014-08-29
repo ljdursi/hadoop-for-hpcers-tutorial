@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 import sys
 
+fdfda = 0
 fdfdb = 0
 dfda2= 0
 dfdb2= 0
 dfdadb= 0
-f = 0
 
 for line in sys.stdin:
     line = line.strip()

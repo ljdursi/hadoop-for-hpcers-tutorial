@@ -13,15 +13,11 @@ f.close()
 
 scale = 0.99  # scale factor to prevent overshoot
 
-count = 0
-dfda = 0
-dfdb = 0
 fdfda = 0
 fdfdb = 0
 dfda2= 0
 dfdb2= 0
 dfdadb= 0
-f = 0
 
 for line in sys.stdin:
     line = line.strip()
