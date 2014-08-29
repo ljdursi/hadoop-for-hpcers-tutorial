@@ -16,7 +16,11 @@ pip install numpy
 pip install pywebhdfs
 
 apt-get install -y wcanadian #to satisfy virtual dependency for wordlist
+/usr/share/debconf/fix_db.pl
+apt-get install -y dictionaries-common
+
 apt-get install -y xfce4 lightdm
+apt-get install -y gnuplot
 apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils 
 apt-get install -y virtualbox-guest-x11
 apt-get install -y terminator
