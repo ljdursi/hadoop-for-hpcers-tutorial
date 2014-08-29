@@ -1,9 +1,0 @@
-#!/bin/bash
-cp orig.params params.0
-cat params
-for iter in `seq 40`
-do
-	cat ../input/small-data.dat | ./map.py  | ./combine.py | ./reduce.py  > params.${iter}
-	cp -f params.${iter} params
-	cat params
-done

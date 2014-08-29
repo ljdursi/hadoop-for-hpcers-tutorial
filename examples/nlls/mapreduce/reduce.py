@@ -25,9 +25,9 @@ for line in sys.stdin:
 
     fdfda = fdfda + float(pfdfda)
     fdfdb = fdfdb + float(pfdfdb)
-    dfda2 = dfda  + float(pdfda2)
+    dfda2 = dfda2 + float(pdfda2)
     dfdadb= dfdadb  + float(pdfdadb)
-    dfdb2 = dfdb  + float(pdfdb2)
+    dfdb2 = dfdb2 + float(pdfdb2)
 
 JtJ = numpy.array( [[dfda2, dfdadb],[dfdadb, dfdb2]] )
 gradf = numpy.array( [fdfda, fdfdb] )
