@@ -62,38 +62,24 @@ do
    mv hadoop-for-hpcers-tutorial/${dir} .
    chown -R vagrant.vagrant ${dir}
 done
+mv vm-cfg/gui/xfce4 ~/.config/xfce4
 rm -rf hadoop-for-hpcers-tutorial
-
 
 
 cat >> ~vagrant/.bashrc <<EOF
 
 source ~/bin/setup.sh
 
-if [ ! -f ~/.done-gui-setup ]
+if [ ! -f ~vagrant/.done-gui-setup ]
 then
-    xfdesktop --reload
-    xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s ~/vm-cfg/gui/wallpaper.png
-    xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-style -s 1
-    xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/color1 -s 52428 -s 52428 -s 52428 -s 65535
-
     mkdir -p ~/.config/autostart
 
     touch ~/.done-gui-setup
 fi
 EOF
 
-mkdir -p ~/.config/autostart
-cat>~/.config/autostart/xterm.desktop<<EOF
-[Desktop Entry]
-Type=Application
-Name=Terminal
-Exec=terminator
-X-GNOME-Autostart-enabled=true
-EOF
-
-mkdir -p ~/.config/terminator
-cat>~/.config/terminator/config<<EOF
+mkdir -p ~vagrant/.config/terminator
+cat>~vagrant/.config/terminator/config<<EOF
 [global_config]
 [profiles]
   [[default]]
@@ -101,7 +87,7 @@ cat>~/.config/terminator/config<<EOF
     foreground_color = "#000000"
 EOF
 
-chown -R vagrant.vagrant ~/.config/
+chown -R vagrant.vagrant ~vagrant/.config/
 
 for file in hadoop-config/etc/hadoop/* ; do mv $file hadoop-2.5.0/etc/hadoop/; done
 rm -rf hadoop-config
