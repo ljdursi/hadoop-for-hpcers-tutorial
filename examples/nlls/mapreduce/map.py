@@ -26,4 +26,4 @@ for line in sys.stdin:
 
     key = "1"
     count = 1
-    print '%s\t%d\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f' % (key, count, f, dfda, dfdb, f*dfda, f*dfdb, dfda*dfda, dfda*dfdb, dfdb*dfdb)
+    print '%s\t%f\t%f\t%f\t%f\t%f' % (key, f*dfda, f*dfdb, dfda*dfda, dfda*dfdb, dfdb*dfdb)

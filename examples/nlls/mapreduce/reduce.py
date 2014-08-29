@@ -25,12 +25,8 @@ f = 0
 
 for line in sys.stdin:
     line = line.strip()
-    key, pcount, pf, pdfda, pdfdb, pfdfda, pfdfdb, pdfda2, pdfdadb, pdfdb2 = line.split('\t')
+    key, pfdfda, pfdfdb, pdfda2, pdfdadb, pdfdb2 = line.split('\t')
 
-    count = count + float(pcount)
-    f = f + float(pf)
-    dfda  = dfda  + float(pdfda)
-    dfdb  = dfdb  + float(pdfdb)
     fdfda = fdfda + float(pfdfda)
     fdfdb = fdfdb + float(pfdfdb)
     dfda2 = dfda  + float(pdfda2)
