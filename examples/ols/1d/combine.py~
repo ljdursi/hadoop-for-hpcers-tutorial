@@ -6,6 +6,7 @@ sumx  = 0
 sumy  = 0
 sumxy = 0
 sumxx = 0
+count = 0
 
 for line in sys.stdin:
     line = line.strip()
