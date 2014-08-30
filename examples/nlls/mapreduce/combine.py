@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 import sys
 
-fdfda = 0
-fdfdb = 0
-dfda2= 0
-dfdb2= 0
-dfdadb= 0
+fdfda = fdfdb = 0
+dfda2 = dfdb2 = dfdadb = 0
 
 for line in sys.stdin:
     line = line.strip()
@@ -14,7 +11,7 @@ for line in sys.stdin:
     fdfda = fdfda + float(pfdfda)
     fdfdb = fdfdb + float(pfdfdb)
     dfda2 = dfda2 + float(pdfda2)
-    dfdadb= dfdadb  + float(pdfdadb)
+    dfdadb= dfdadb+ float(pdfdadb)
     dfdb2 = dfdb2 + float(pdfdb2)
 
 key = "1" 

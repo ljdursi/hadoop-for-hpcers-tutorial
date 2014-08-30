@@ -13,17 +13,16 @@ f.close()
 # process input data
 for line in sys.stdin:
     line = line.strip()
-
     words = line.split()
+
     ti = float(words[0])
     yi = float(words[1])
 
     expbt  = numpy.exp(b*ti)
 
     f    = (yi-a*expbt)
-    dfda = -2*expbt*(yi-a*expbt)
-    dfdb = -2*a*ti*expbt*(yi-a*expbt)
+    dfda = -expbt
+    dfdb = -a*ti*expbt
 
     key = "1"
-    count = 1
     print '%s\t%f\t%f\t%f\t%f\t%f' % (key, f*dfda, f*dfdb, dfda*dfda, dfda*dfdb, dfdb*dfdb)
