@@ -14,7 +14,7 @@ run: inputs
 		-mapper ./mmm-map.py  -combiner ./mmm-combine.py \
 	        -reducer ./mmm-reduce.py \
 		-input $(INPUT_DIR) \
-		-output  $(OUTPUT_DIR) ; \
+		-output  $(OUTPUT_DIR)
 	hdfs dfs -cat $(OUTPUT_FILE) > mmm
 	cat mmm 
 	hdfs dfs -rm -f -r $(OUTPUT_DIR) 
@@ -23,7 +23,7 @@ run: inputs
 		-mapper ./hist-map.py  -combiner ./hist-combine-reduce.py \
 	        -reducer ./hist-combine-reduce.py \
 		-input $(INPUT_DIR) \
-		-output  $(OUTPUT_DIR) ; \
+		-output  $(OUTPUT_DIR) 
 	hdfs dfs -cat $(OUTPUT_FILE) | sort -n > hist
 	cat hist
 
