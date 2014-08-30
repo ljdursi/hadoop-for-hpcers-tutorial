@@ -51,5 +51,6 @@ clean:
 	-rm -f params
 	-rm -f ../input/small-data.dat
 	-rm -f ../input/data.dat
+	-rm -f params.out
 
 .PHONY: directories inputs clean run run-test
