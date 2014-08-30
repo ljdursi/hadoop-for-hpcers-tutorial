@@ -1,9 +1,9 @@
 EXAMPLE_DIR = /user/$(USER)/nlls-spark/
 INPUT_DIR   = $(EXAMPLE_DIR)/input
-NITERS=10
+NITERS=25
 
-run: inputs ../input/data.dat
-	spark-submit --master yarn[2] ./nlls-spark.py $(INPUT_DIR)/data.dat 1.0 1.0 $(NITERS)
+run: inputs 
+	spark-submit --master yarn[2] ./nlls-spark.py $(INPUT_DIR)/data.dat 1.5 2.0 $(NITERS)
 
 run-local: ../input/data.dat
 	 unset HADOOP_CONF_DIR; \
@@ -21,7 +21,7 @@ directories:
 ../input/small-data.dat: ../data.py
 	../data.py --npts=5000 > $@
 
-inputs: directories
+inputs: directories ../input/data.dat
 	hdfs dfs -test -e $(INPUT_DIR)/data.dat \
 	  || hdfs dfs -put ../input/data.dat $(INPUT_DIR)/data.dat
 

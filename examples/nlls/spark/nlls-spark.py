@@ -54,12 +54,12 @@ if __name__ == "__main__":
         Y = matrix[:, 1]
 
         expbt = np.exp(w[1]*X)
-	f = Y - w[0]*expbt
-	dfda = -2.*expbt*f
-	dfdb = -2.*w[0]*X*expbt*f
+        f = Y - w[0]*expbt
+        dfda = -expbt
+        dfdb = -w[0]*X*expbt
 
-	grad = np.array([np.sum(f*dfda), np.sum(f*dfdb)])
-	JtJ  = np.array([[np.sum(dfda*dfda), np.sum(dfda*dfdb)],
+        grad = np.array([np.sum(f*dfda), np.sum(f*dfdb)])
+        JtJ  = np.array([[np.sum(dfda*dfda), np.sum(dfda*dfdb)],
                             [np.sum(dfda*dfdb), np.sum(dfdb*dfdb)]])
         return (grad, JtJ)
 
@@ -67,9 +67,9 @@ if __name__ == "__main__":
         return (x[0]+y[0], x[1]+y[1])
 
     for i in range(iterations):
-	grad,JtJ = points.map(lambda m: gradient(m,w)).reduce(add)
-	dw = np.linalg.solve(JtJ, -grad)
-        w += dw*0.99
+        grad,JtJ = points.map(lambda m: gradient(m,w)).reduce(add)
+        dw = np.linalg.solve(JtJ, -grad)
+        w += dw*0.5
         print i, w
 
     print "Final w: " + str(w)

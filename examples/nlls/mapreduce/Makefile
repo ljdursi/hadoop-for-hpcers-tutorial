@@ -5,7 +5,7 @@ OUTPUT_FILE = $(OUTPUT_DIR)/part-00000
 PARAMS_FILE = $(EXAMPLE_DIR)/params
 
 TOOLLIBS_DIR=$(HADOOP_PREFIX)/share/hadoop/tools/lib/
-NITERS=10
+NITERS=25
 
 run: inputs
 	cp orig.params params
