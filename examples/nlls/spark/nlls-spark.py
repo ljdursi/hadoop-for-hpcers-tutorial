@@ -44,11 +44,9 @@ if __name__ == "__main__":
     paramb = float(sys.argv[3])
     iterations = int(sys.argv[4])
 
-    # Initialize w to a random value
     w = np.array([parama, paramb])
     print "Initial w: " + str(w)
 
-    # Compute logistic regression gradient for a matrix of data points
     def gradient(matrix, w):
         X = matrix[:, 0]
         Y = matrix[:, 1]
