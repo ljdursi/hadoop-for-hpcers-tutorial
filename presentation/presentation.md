@@ -1,5 +1,5 @@
 % Hadoop for HPCers:A Hands-On Introduction
-% Jonathan Dursi,SciNet
+% Jonathan Dursi, SciNet and Mike Nolta, CITA
 % Part I: Overview,HDFS
 
 
